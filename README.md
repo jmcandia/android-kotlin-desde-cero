@@ -88,6 +88,11 @@ El curso avanza en nueve partes: primero el lenguaje Kotlin de forma sólida, lu
  9. [Pulido: estados de UI, Material 3 y accesibilidad](/chapter48.md)
 10. [Cierre: testing básico, buenas prácticas y próximos pasos](/chapter49.md)
 
+### Anexos
+
+- A. [Principios de diseño: DRY, SRP y KISS](/appendix-design-principle.md)
+- B. [Entrada estándar con `Scanner` de Java](/appendix-java-scanner.md)
+
 ## Autor
 
 - José Miguel Candia — [GitHub](https://github.com/jmcandia)

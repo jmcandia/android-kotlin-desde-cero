@@ -360,7 +360,8 @@ un
 buen Kotlin
 ```
 
-<!-- NOTA INTERNA (autor): aquí iba la sección "Entrada estándar con el Scanner de Java" (Scanner, useDelimiter, hasNext, close). Se retira de este capítulo porque: (1) los ejemplos de hasNext() usan `if`, que aún no se enseña (control de flujo, capítulo 8); (2) es interoperabilidad con Java poco relevante para el objetivo del curso (en Android no se usa Scanner para entrada estándar); y (3) agrega complejidad a un capítulo introductorio. Si se desea conservar, ubicarla como sección opcional o anexo después de haber visto if/when y el manejo de excepciones. -->
+> [!NOTE]
+> Para tareas de lectura más avanzadas —leer palabra por palabra, usar delimitadores personalizados o comprobar si quedan más datos—, Kotlin también puede apoyarse en la clase `Scanner` de Java. Como es interoperabilidad con Java y requiere conceptos que veremos más adelante (`if` y excepciones), la tratamos aparte en el [Anexo B: Entrada estándar con `Scanner` de Java](/appendix-java-scanner.md).
 
 ---
 
