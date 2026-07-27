@@ -16,8 +16,8 @@ El curso avanza en nueve partes: primero el lenguaje Kotlin de forma sólida, lu
 
 1. [El entorno de desarrollo (IDE e IntelliJ IDEA)](/chapter01.md)
 2. [Un primer vistazo a Kotlin](/chapter02.md)
-3. [Variables y constantes: `val`, `var`, `const`](/chapter03.md)
-4. [Tipos de datos básicos y conversión](/chapter04.md)
+3. [Conceptos básicos de Kotlin](/chapter03.md)
+4. [Tipos de datos básicos](/chapter04.md)
 5. [Operadores: aritméticos, de comparación y lógicos](/chapter05.md)
 6. [Entrada y salida estándar y plantillas de cadena](/chapter06.md)
 7. [Trabajar con cadenas: longitud, concatenación y `repeat`](/chapter07.md)
