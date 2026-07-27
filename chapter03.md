@@ -6,11 +6,16 @@
   - [Caracteres](#caracteres)
   - [Cadenas de caracteres (*Strings*)](#cadenas-de-caracteres-strings)
 - [Variables y constantes](#variables-y-constantes)
+  - [¿Qué es una variable?](#qué-es-una-variable)
   - [Declaración de variables](#declaración-de-variables)
-  - [`val` frente a `var`](#val-frente-a-var)
-  - [Una variable `var` conserva su tipo](#una-variable-var-conserva-su-tipo)
-  - [Constantes: la palabra clave `const`](#constantes-la-palabra-clave-const)
-  - [`val` no significa inmutable](#val-no-significa-inmutable)
+  - [Uso de `val`](#uso-de-val)
+    - [¿Qué ocurre cuando intento cambiar un `val`?](#qué-ocurre-cuando-intento-cambiar-un-val)
+  - [Variables `var`](#variables-var)
+    - [¿Cuándo debo usar `var`?](#cuándo-debo-usar-var)
+  - [Comparación entre `val` y `var`](#comparación-entre-val-y-var)
+  - [Regla práctica: usar `val` por defecto](#regla-práctica-usar-val-por-defecto)
+  - [Conservación del tipo de una variable](#conservación-del-tipo-de-una-variable)
+  - [Constantes (`const`)](#constantes-const)
   - [Convenciones de nomenclatura](#convenciones-de-nomenclatura)
   - [Números mágicos](#números-mágicos)
 - [Comentarios](#comentarios)
@@ -68,124 +73,155 @@ Una cadena también puede contener un solo carácter, como `"A"`. No lo confunda
 
 ## Variables y constantes
 
-Una variable es un espacio de almacenamiento para un valor, que puede ser una cadena, un número o cualquier otra cosa. Cada variable tiene un nombre (o identificador) que la distingue de las demás, y mediante ese nombre accedemos a su valor. Son uno de los elementos más utilizados en cualquier programa.
+Las variables son uno de los elementos más utilizados en cualquier programa. En esta sección las conoceremos paso a paso: primero qué son y cómo se crean, luego cómo declarar una variable cuyo valor no cambia (`val`) y otra cuyo valor sí puede cambiar (`var`), cuándo conviene cada una, y por último cómo declarar constantes y cómo nombrar todo esto siguiendo las convenciones de Kotlin.
 
-En esta sección veremos cómo declarar variables con `val` y `var`, en qué se diferencian, cómo declarar constantes con `const`, qué significa realmente la mutabilidad en Kotlin y cómo nombrar todo esto siguiendo las convenciones del lenguaje.
+### ¿Qué es una variable?
+
+Cuando un programa se ejecuta, necesita guardar valores para usarlos más adelante: un nombre, un número, un mensaje. Una **variable** es precisamente eso: un espacio con nombre donde el programa guarda un valor.
+
+Piensa en una variable como una **caja etiquetada**: la etiqueta es el nombre y, dentro, está el valor que guardaste. Cuando necesitas ese valor, no tienes que recordar dónde quedó; basta con nombrar la caja.
+
+Gracias a ese nombre, podemos guardar un valor una vez y reutilizarlo tantas veces como queramos a lo largo del programa.
 
 ### Declaración de variables
 
-Antes de poder utilizar una variable, debes declararla. Para ello, Kotlin ofrece dos palabras clave principales, más un modificador:
+Antes de usar una variable hay que **declararla**, es decir, crearla. En Kotlin, declarar una variable tiene esta forma: una palabra clave, el nombre que le damos, el signo `=` y el valor que queremos guardar.
 
-- **`val`** (de *value*) declara una variable de **solo lectura**: una vez inicializada, no se puede reasignar.
-- **`var`** (de *variable*) declara una variable **mutable**, que se puede reasignar tantas veces como necesites.
-- **`const`** se usa junto a `val` para declarar constantes cuyo valor se conoce en tiempo de compilación (lo veremos más adelante).
-
-> [!NOTE]
-> Dos términos que usaremos seguido: **mutable** significa que algo *puede cambiar* después de creado, e **inmutable** significa que *no puede cambiar*. Aquí lo aplicaremos a las variables: una `var` es mutable (su valor se puede reasignar) y una `val`, en ese sentido, es inmutable (no se puede reasignar). Más adelante veremos que esa palabra tiene un matiz interesante.
-
-Al declarar una variable, escribes su nombre después de la palabra clave. Ten cuidado: el nombre no puede empezar por un dígito y conviene que sea significativo y legible. Para asignarle un valor, usamos el operador de asignación `=`.
-
-Declaremos una variable de solo lectura llamada `language` e inicialicémosla con la cadena `"Kotlin"`:
+Empecemos por la palabra clave más recomendable (más adelante verás por qué): `val`. Declaremos una variable llamada `language` que guarde el texto `"Kotlin"`:
 
 ```kotlin
 val language = "Kotlin"
-println(language) // muestra "Kotlin" sin comillas
 ```
+
+Para leer el valor guardado, usamos el nombre de la variable. Por ejemplo, para mostrarlo en pantalla:
+
+```kotlin
+println(language) // muestra: Kotlin
+```
+
+Al elegir el nombre, ten en cuenta un par de cosas: no puede empezar por un dígito y conviene que describa lo que guarda (`language` se entiende mucho mejor que `x`). Volveremos sobre las reglas de nomenclatura al final de esta sección.
 
 > [!IMPORTANT]
 > Los nombres distinguen entre mayúsculas y minúsculas: `language` no es lo mismo que `Language`.
 
-Ahora declaremos una variable mutable llamada `dayOfWeek` e imprimamos su valor antes y después de modificarla:
+### Uso de `val`
+
+La palabra clave `val` (de *value*, "valor") crea una variable de **solo lectura**: le asignas un valor **una sola vez** y, a partir de ahí, puedes leerlo cuantas veces quieras, pero no cambiarlo.
 
 ```kotlin
-var dayOfWeek = "Monday"
-println(dayOfWeek) // imprime Monday
+val pi = 3.1415
+val saludo = "Hola"
 
-dayOfWeek = "Tuesday"
-println(dayOfWeek) // imprime Tuesday
+println(pi)     // 3.1415
+println(saludo) // Hola
 ```
 
-Primero inicializamos `dayOfWeek` con `"Monday"` y mostramos su valor; luego lo cambiamos a `"Tuesday"` y volvemos a mostrarlo.
+En la mayoría de los programas, muchos datos no necesitan cambiar una vez definidos, así que `val` será tu opción por defecto.
+
+#### ¿Qué ocurre cuando intento cambiar un `val`?
+
+Como un `val` es de solo lectura, si intentas asignarle un nuevo valor, el programa **no compilará**. Veámoslo:
+
+```kotlin
+val language = "Kotlin"
+language = "Java" // error de compilación: Val cannot be reassigned
+```
+
+El compilador detiene la compilación y muestra el mensaje `Val cannot be reassigned` ("no se puede reasignar un val"). Lejos de ser una molestia, esto es una **protección**: te avisa de inmediato si por error intentas modificar un valor que debía permanecer fijo.
+
+### Variables `var`
+
+Hasta ahora, los valores que guardamos no cambiaban. Pero en muchos programas hay datos que **sí cambian mientras el programa se ejecuta**. Por ejemplo:
+
+- el **puntaje** de un jugador, que sube a medida que avanza;
+- la **edad** de una persona, que aumenta con el tiempo;
+- la **cantidad** de productos en un carrito de compras;
+- la **página actual** que se está leyendo en una aplicación.
+
+Para todos estos casos, `val` se queda corto: apenas intentáramos actualizar el valor, obtendríamos el error `Val cannot be reassigned`. Necesitamos una variable que **sí** podamos modificar, y para eso existe `var` (de *variable*).
+
+Veamos un puntaje que va cambiando:
+
+```kotlin
+var puntaje = 0
+puntaje = 10
+puntaje = 25
+println(puntaje) // 25
+```
+
+A una variable que puede cambiar de valor se le llama **mutable**; a una que no cambia (como `val`), **inmutable**.
 
 > [!NOTE]
-> No es necesario volver a declarar una variable para cambiar su valor. Basta con asignarle un nuevo valor con el operador `=`.
+> No hace falta volver a declarar la variable para cambiar su valor. Basta con asignarle uno nuevo con el operador `=`.
 
-### `val` frente a `var`
+#### ¿Cuándo debo usar `var`?
 
-Ya viste ambas palabras clave en acción (`val language` y `var dayOfWeek`), así que dejemos la diferencia lo más clara posible, porque es una decisión que tomarás en casi cada línea que escribas.
+La respuesta es simple: usa `var` **solo cuando el valor realmente necesite cambiar** durante la ejecución del programa.
 
-La regla, en una frase:
+Ante cada variable, hazte una pregunta: *¿este dato va a cambiar mientras el programa corre?* Si la respuesta es sí (un puntaje, un contador, una edad), usa `var`. Si es no (el número pi, un nombre fijo, un mensaje), usa `val`.
 
-- Una variable **`val`** se asigna **una sola vez**; después, su nombre queda amarrado a ese valor y **no** puedes reasignarlo.
-- Una variable **`var`** se puede **reasignar** tantas veces como necesites.
+### Comparación entre `val` y `var`
 
-Una forma fácil de recordarlo: un `val` es como tu fecha de nacimiento, se fija una vez y ya no cambia; un `var` es como tu edad, que va cambiando con el tiempo.
+Pongamos las dos, una al lado de la otra. Fíjate en que los ejemplos son casi idénticos: lo **único** que cambia es la palabra clave.
 
-Míralas lado a lado. Lo único que cambia entre un bloque y el otro es la palabra clave:
+Con `val`, el valor no se puede reemplazar:
 
 ```kotlin
-// Con val: solo se puede asignar una vez
-val nombre = "Ana"
-nombre = "Beatriz" // error de compilación: Val cannot be reassigned
-
-// Con var: se puede reasignar cuantas veces quieras
-var ciudad = "Madrid"
-ciudad = "Lima" // correcto
+val a = 1
+a = 2 // error de compilación: Val cannot be reassigned
 ```
 
-Ambas se declaran e inicializan igual; la diferencia aparece cuando intentas **cambiar** el valor. Con `val`, el compilador detiene la compilación con el mensaje `Val cannot be reassigned`; con `var`, la reasignación funciona sin problemas.
+Con `var`, sí se puede:
 
-El siguiente cuadro resume el contraste:
+```kotlin
+var b = 1
+b = 2 // correcto
+```
+
+Para recordarlo, volvamos a la caja etiquetada: con `val`, una vez que pones algo dentro, la caja queda **sellada**; puedes mirar el contenido cuantas veces quieras, pero no reemplazarlo. Con `var`, la caja queda **abierta**: puedes sacar lo que hay y poner otra cosa en su lugar.
+
+Este cuadro resume la diferencia:
 
 | | `val` | `var` |
 | :--- | :--- | :--- |
 | ¿Se puede reasignar? | No | Sí |
 | ¿Cuántas veces se le asigna un valor? | Una sola vez | Las que necesites |
 | Equivalente aproximado en Java | `final` | variable normal |
-| ¿Cuándo usarla? | Por defecto | Solo cuando el valor deba cambiar |
+| ¿Cuándo usarla? | Por defecto | Cuando el valor deba cambiar |
+
+### Regla práctica: usar `val` por defecto
 
 > [!TIP]
-> Empieza siempre con `val`. Si más adelante el código realmente necesita cambiar el valor, recién ahí conviértela en `var`. Mientras menos variables mutables tengas, más fácil será leer y entender tu programa: cada `var` que aparece es una señal de "ojo, esto cambia".
+> La recomendación oficial en el ecosistema Kotlin es empezar siempre con `val` y cambiar a `var` solo cuando de verdad necesites modificar el valor. Preferir `val` produce código más **seguro**, más **predecible** y más **fácil de mantener**, porque limita la cantidad de datos que pueden cambiar y, además, cada `var` que aparece funciona como una señal de "ojo, esto cambia".
 
-### Una variable `var` conserva su tipo
+### Conservación del tipo de una variable
 
-Una variable puede almacenar distintos tipos de valores: números, cadenas, caracteres y otros que veremos en el próximo capítulo.
-
-```kotlin
-val ten = 10
-val greeting = "Hola"
-val firstLetter = 'A'
-
-println(ten)         // 10
-println(greeting)    // Hola
-println(firstLetter) // A
-```
-
-Ahora bien, cuando una variable `var` ya tiene un valor, al reasignarla solo puedes usar valores **del mismo tipo** que el inicial. Por eso el siguiente código no compila:
+Cuando guardas un valor en una variable, Kotlin **recuerda su tipo** (un número, un texto, un carácter…). A partir de ese momento, esa variable solo puede contener valores de ese mismo tipo. Esto importa sobre todo con `var`, que es la que reasignamos:
 
 ```kotlin
-var number = 10
-number = 11     // correcto
-number = "doce" // ¡aquí hay un error!
+var numero = 10
+numero = 11     // correcto: sigue siendo un número
+numero = "doce" // error: no puedes guardar texto donde había un número
 ```
 
-Esto también aplica al copiar valores: puedes copiar el valor de un `val` a un `var` sin problema; lo que no puedes es reasignar el `val`.
+En cambio, sí puedes **copiar** el valor de un `val` a un `var` sin problema; lo que no puedes es reasignar el `val`:
 
 ```kotlin
-val count = 10
-var cnt = count
-cnt = 20 // correcto: cnt es var, no una constante
+val base = 10
+var contador = base
+contador = 20 // correcto: contador es var, no una variable de solo lectura
 ```
 
-### Constantes: la palabra clave `const`
+### Constantes (`const`)
 
-Un `val` es una variable de solo lectura: su valor se fija una sola vez, aunque ese valor puede calcularse mientras el programa se ejecuta (por ejemplo, a partir de datos que ingresa el usuario).
-
-A veces necesitas algo más estricto: un valor que se conozca **en tiempo de compilación**, es decir, antes de que el programa siquiera se ejecute. Para eso, Kotlin ofrece el modificador `const`, que se antepone a `val`:
+Ya sabes que un `val` no se puede reasignar. Sin embargo, su valor todavía puede **calcularse mientras el programa se ejecuta** (por ejemplo, a partir de un dato que escribe el usuario). A veces necesitas algo distinto: un valor que se conozca **antes** de ejecutar el programa, en lo que se denomina *tiempo de compilación*. Para eso, Kotlin ofrece el modificador `const`, que se antepone a `val`:
 
 ```kotlin
 const val MY_STRING = "Esta es una cadena constante"
 ```
+
+> [!NOTE]
+> No confundas ambas ideas: `val` controla **si** una variable se puede reasignar (no se puede); `const` controla **cuándo** se conoce su valor (al compilar). Por eso `const` siempre acompaña a `val`; no se trata de "un `val` más estricto", sino de algo diferente.
 
 Como su valor debe conocerse al compilar, no puede provenir de una función ni de la entrada del usuario:
 
@@ -213,29 +249,7 @@ fun main() {
 }
 ```
 
-### `val` no significa inmutable
-
-Hay un matiz importante: que un `val` no se pueda **reasignar** no quiere decir que su contenido sea **inmutable**. Veámoslo con una `MutableList`, una lista ordenada de elementos del mismo tipo (si quieres adelantarte puedes investigarla, pero no es imprescindible por ahora).
-
-No puedes reasignar la variable:
-
-```kotlin
-val myMutableList = mutableListOf(1, 2, 3, 4, 5)
-myMutableList = mutableListOf(1, 2, 3, 4, 5, 6) // línea de error
-```
-
-Pero sí puedes modificar su **estado interno**:
-
-```kotlin
-val myMutableList = mutableListOf(1, 2, 3, 4, 5)
-myMutableList.add(6)   // funciona
-println(myMutableList) // [1, 2, 3, 4, 5, 6]
-```
-
-Al invocar `add()` no modificamos la variable en sí (sigue apuntando a la misma lista), sino el contenido de esa lista.
-
-> [!NOTE]
-> Si vienes de Java, puedes pensar en un `val` de Kotlin como una variable `final`: en ambos casos no puedes reasignar la variable, pero sí puedes modificar el estado interno del objeto al que apunta.
+<!-- NOTA INTERNA (autor): aquí iba la subsección "`val` no significa inmutable", que muestra que un `val` puede tener un estado interno modificable (ejemplo con MutableList y .add()). Se pospone a propósito porque depende de objetos, referencias y colecciones mutables que el estudiante todavía no conoce. Reincorporarla en un capítulo posterior, una vez introducidos objetos / referencias / listas / colecciones mutables. -->
 
 ### Convenciones de nomenclatura
 
@@ -293,7 +307,7 @@ A veces necesitas un valor fijo en tu código: por ejemplo, los días de la sema
 println(7)
 ```
 
-¿Qué es ese `7`? ¿Por qué necesitamos que se imprima? Ni idea. A estos valores sueltos, sin nombre ni contexto, se les llama **números mágicos**, y conviene evitarlos.
+¿Qué es ese `7`? ¿Por qué debemos imprimirla? Ni idea. A estos valores sueltos, sin nombre ni contexto, se les llama **números mágicos**, y conviene evitarlos.
 
 En su lugar, guárdalos en una constante con un nombre significativo, declarada como `const val` fuera de cualquier función:
 
