@@ -31,7 +31,7 @@ El curso avanza en nueve partes: primero el lenguaje Kotlin de forma sólida, lu
 ### Parte III · Colecciones y código robusto
 
  1. [Colecciones I: `List`, `Set` y `Map`](/chapter11.md)
- 2. [Colecciones II: operaciones funcionales (`map`, `filter`…)](/chapter12.md)
+ 2. [Colecciones II: operaciones funcionales (`map`, `filter`, `forEach`)](/chapter12.md)
  3. [Null safety: manejo seguro de valores nulos](/chapter13.md)
  4. [Manejo de excepciones: `try`, `catch` y `Result`](/chapter14.md)
  5. [Formato de cadenas con `String.format`](/chapter15.md) *(opcional)*
