@@ -7,6 +7,7 @@
   - [Concatenar caracteres y números](#concatenar-caracteres-y-números)
 - [Repetir una cadena](#repetir-una-cadena)
 - [Cadenas sin formato](#cadenas-sin-formato)
+- [Resumen](#resumen)
 
 ---
 
@@ -211,6 +212,15 @@ Este texto se muestra así:
 
 En el primer caso, las tres líneas comparten una sangría mínima de 8 espacios, que `trimIndent()` recorta por igual. En el segundo, la primera línea (`123`) va pegada a las comillas triples, sin sangría, por lo que la sangría común es cero y las demás líneas conservan sus espacios.
 
+## Resumen
+
+En este capítulo trabajaste de cerca con el tipo `String`:
+
+- La propiedad `.length` devuelve la cantidad de caracteres de una cadena.
+- La **concatenación** con `+` une cadenas (y otros valores) en una cadena nueva; el orden importa, y para varias variables suelen ser más claras las plantillas de cadena.
+- La función `repeat` repite una cadena varias veces.
+- Las **cadenas sin formato** (comillas triples `"""`) permiten texto multilínea y caracteres especiales sin escaparlos, y `.trimIndent()` recorta la sangría común.
+
 ---
 
 <!-- markdownlint-disable MD033 -->
@@ -218,6 +228,9 @@ En el primer caso, las tres líneas comparten una sangría mínima de 8 espacios
     <tr>
         <td style="text-align: left;">
             <a href="/chapter06.md">← Anterior</a>
+        </td>
+        <td style="text-align: center;">
+            <a href="/README.md">Ir al índice</a>
         </td>
         <td style="text-align: right;">
             <a href="/chapter08.md">Siguiente →</a>

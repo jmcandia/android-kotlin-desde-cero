@@ -6,6 +6,7 @@
 - [Una función de ejemplo en Kotlin](#una-función-de-ejemplo-en-kotlin)
 - [Plataformas de aplicación para Kotlin: JVM, Android, JS, nativo](#plataformas-de-aplicación-para-kotlin-jvm-android-js-nativo)
 - [Características: programación funcional, programación orientada a objetos y mucho más](#características-programación-funcional-programación-orientada-a-objetos-y-mucho-más)
+- [Resumen](#resumen)
 
 ---
 
@@ -72,6 +73,15 @@ También es importante destacar que Kotlin admite múltiples paradigmas de progr
 
 Por último, pero no por ello menos importante, Kotlin es un lenguaje compatible con numerosas herramientas, lo que significa que todos los tipos de herramientas de desarrollo más populares, como IntelliJ IDEA, Eclipse y Android Studio, son compatibles con él.
 
+## Resumen
+
+En este capítulo conociste el lenguaje que usarás durante todo el curso:
+
+- **Kotlin** es un lenguaje moderno, conciso y seguro, desarrollado por JetBrains.
+- Nació en 2011 y hoy es el lenguaje preferido para el desarrollo Android (*Kotlin-first*, desde 2019).
+- Es **interoperable con Java**, lo que facilita mucho la transición desde ese lenguaje.
+- Funciona en múltiples plataformas (JVM, Android, JavaScript, nativo y multiplataforma) y admite varios paradigmas de programación.
+
 ---
 
 <!-- markdownlint-disable MD033 -->
@@ -79,6 +89,9 @@ Por último, pero no por ello menos importante, Kotlin es un lenguaje compatible
     <tr>
         <td style="text-align: left;">
             <a href="/chapter01.md">← Anterior</a>
+        </td>
+        <td style="text-align: center;">
+            <a href="/README.md">Ir al índice</a>
         </td>
         <td style="text-align: right;">
             <a href="/chapter03.md">Siguiente →</a>

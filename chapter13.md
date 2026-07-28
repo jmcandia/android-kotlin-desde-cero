@@ -181,6 +181,9 @@ En el próximo capítulo veremos cómo reaccionar ante situaciones inesperadas c
         <td style="text-align: left;">
             <a href="/chapter12.md">← Anterior</a>
         </td>
+        <td style="text-align: center;">
+            <a href="/README.md">Ir al índice</a>
+        </td>
         <td style="text-align: right;">
             <a href="/chapter14.md">Siguiente →</a>
         </td>

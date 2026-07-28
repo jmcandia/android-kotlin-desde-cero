@@ -9,6 +9,7 @@
   - [Escribe tu primer código](#escribe-tu-primer-código)
 - [Un atajo sin instalar nada: Kotlin Playground](#un-atajo-sin-instalar-nada-kotlin-playground)
 - [¿Y Android Studio?](#y-android-studio)
+- [Resumen](#resumen)
 
 ---
 
@@ -153,6 +154,16 @@ Como el objetivo final de este curso es desarrollar aplicaciones móviles, segur
 La razón es pedagógica: **primero conviene dominar el lenguaje Kotlin** con una herramienta liviana y directa, y recién después entrar al mundo de Android, que agrega muchos conceptos nuevos (Gradle, el `AndroidManifest`, el ciclo de vida de una `Activity`, la interfaz con Compose, etcétera). Mezclar todo desde el inicio suele abrumar.
 
 Por eso, la instalación de Android Studio, la creación de tu primer proyecto Android y el recorrido por su interfaz los veremos en la **Parte VI (Capítulo 25)**. Cuando lleguemos ahí, todo lo que aprendiste en IntelliJ IDEA te resultará familiar, porque Android Studio se basa en el mismo motor.
+
+## Resumen
+
+En este capítulo preparaste tu entorno para programar en Kotlin:
+
+- Un **IDE** integra en un solo programa el editor, el compilador, las herramientas de compilación y el depurador.
+- **IntelliJ IDEA** es el IDE recomendado para aprender Kotlin; su edición Community, gratuita, es más que suficiente para el curso.
+- Creaste tu primer proyecto y ejecutaste un "¡Hola, mundo!".
+- Para experimentos rápidos sin instalar nada, tienes el **Kotlin Playground**.
+- **Android Studio** (el IDE oficial de Android) lo instalaremos más adelante, en la Parte VI, cuando empecemos a desarrollar la aplicación.
 
 ---
 

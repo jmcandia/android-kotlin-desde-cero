@@ -216,6 +216,9 @@ En el próximo capítulo daremos un gran salto: aprenderás a **transformar y fi
         <td style="text-align: left;">
             <a href="/chapter10.md">← Anterior</a>
         </td>
+        <td style="text-align: center;">
+            <a href="/README.md">Ir al índice</a>
+        </td>
         <td style="text-align: right;">
             <a href="/chapter12.md">Siguiente →</a>
         </td>

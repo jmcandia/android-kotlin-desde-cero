@@ -22,6 +22,7 @@
   - [Coerción de tipos](#coerción-de-tipos)
     - [Ejemplos](#ejemplos)
   - [Los tipos `Short` y `Byte` son una excepción](#los-tipos-short-y-byte-son-una-excepción)
+- [Resumen](#resumen)
 
 ---
 
@@ -448,6 +449,16 @@ fun main() {
 }
 ```
 
+## Resumen
+
+En este capítulo profundizaste en cómo Kotlin representa la información:
+
+- Cada valor tiene un **tipo**, que Kotlin puede **inferir** o que puedes indicar de forma explícita.
+- Para enteros, usa `Int` (y `Long` para números muy grandes); para decimales, `Double`.
+- La **conversión de tipos** se hace con funciones como `toInt()`, `toDouble()` o `toString()`, y hay que hacerla siempre, incluso hacia tipos más grandes.
+- Convertir de un tipo mayor a uno menor puede truncar el valor (**desbordamiento**).
+- En una expresión con tipos distintos, Kotlin aplica la **coerción** hacia el tipo más amplio (con `Byte` y `Short` como excepción, que pasan a `Int`).
+
 ---
 
 <!-- markdownlint-disable MD033 -->
@@ -455,6 +466,9 @@ fun main() {
     <tr>
         <td style="text-align: left;">
             <a href="/chapter03.md">← Anterior</a>
+        </td>
+        <td style="text-align: center;">
+            <a href="/README.md">Ir al índice</a>
         </td>
         <td style="text-align: right;">
             <a href="/chapter05.md">Siguiente →</a>

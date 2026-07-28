@@ -308,6 +308,9 @@ Los operadores de comparación y lógicos serán especialmente importantes en el
         <td style="text-align: left;">
             <a href="/chapter04.md">← Anterior</a>
         </td>
+        <td style="text-align: center;">
+            <a href="/README.md">Ir al índice</a>
+        </td>
         <td style="text-align: right;">
             <a href="/chapter06.md">Siguiente →</a>
         </td>

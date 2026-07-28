@@ -329,9 +329,6 @@ Estos principios se refuerzan entre sí y te acompañarán durante todo el curso
         <td style="text-align: left;">
             <a href="/README.md">← Volver al índice</a>
         </td>
-        <td style="text-align: right;">
-            <a href="/chapter10.md">Capítulo 10: Funciones →</a>
-        </td>
     </tr>
 </table>
 <!-- markdownlint-enable MD033 -->

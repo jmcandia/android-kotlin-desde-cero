@@ -300,6 +300,9 @@ Con las funciones completas los fundamentos de la programación en Kotlin. En la
         <td style="text-align: left;">
             <a href="/chapter09.md">← Anterior</a>
         </td>
+        <td style="text-align: center;">
+            <a href="/README.md">Ir al índice</a>
+        </td>
         <td style="text-align: right;">
             <a href="/chapter11.md">Siguiente →</a>
         </td>

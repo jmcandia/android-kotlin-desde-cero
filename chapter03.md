@@ -28,6 +28,7 @@
   - [Terminología básica](#terminología-básica)
   - [El programa "Hola, mundo" al detalle](#el-programa-hola-mundo-al-detalle)
   - [Programas con varias instrucciones](#programas-con-varias-instrucciones)
+- [Resumen](#resumen)
 
 ---
 
@@ -497,6 +498,17 @@ Hola
 Mundo
 ```
 
+## Resumen
+
+En este capítulo diste tus primeros pasos escribiendo código Kotlin:
+
+- Los **literales** básicos son números, caracteres (comillas simples) y cadenas (comillas dobles).
+- Una **variable** guarda un valor: `val` es de solo lectura (no se reasigna) y `var` es mutable.
+- Prefiere `val` por defecto y usa `var` solo cuando el valor deba cambiar.
+- `const val` declara constantes cuyo valor se conoce en tiempo de compilación.
+- Sigue las **convenciones de nomenclatura** (`camelCase` para variables, `SCREAMING_SNAKE_CASE` para constantes) y evita los números mágicos.
+- Escribiste y analizaste el programa **"¡Hola, mundo!"**.
+
 ---
 
 <!-- markdownlint-disable MD033 -->
@@ -504,6 +516,9 @@ Mundo
     <tr>
         <td style="text-align: left;">
             <a href="/chapter02.md">← Anterior</a>
+        </td>
+        <td style="text-align: center;">
+            <a href="/README.md">Ir al índice</a>
         </td>
         <td style="text-align: right;">
             <a href="/chapter04.md">Siguiente →</a>

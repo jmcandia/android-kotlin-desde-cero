@@ -170,6 +170,9 @@ Con esto cierras la parte de código robusto de Kotlin. El siguiente capítulo, 
         <td style="text-align: left;">
             <a href="/chapter13.md">← Anterior</a>
         </td>
+        <td style="text-align: center;">
+            <a href="/README.md">Ir al índice</a>
+        </td>
         <td style="text-align: right;">
             <a href="/chapter15.md">Siguiente →</a>
         </td>

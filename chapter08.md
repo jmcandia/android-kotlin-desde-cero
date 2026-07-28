@@ -187,6 +187,9 @@ En el próximo capítulo veremos cómo **repetir** instrucciones con los bucles.
         <td style="text-align: left;">
             <a href="/chapter07.md">← Anterior</a>
         </td>
+        <td style="text-align: center;">
+            <a href="/README.md">Ir al índice</a>
+        </td>
         <td style="text-align: right;">
             <a href="/chapter09.md">Siguiente →</a>
         </td>

@@ -11,6 +11,7 @@
     - [Leer valores `Double` y `Boolean`](#leer-valores-double-y-boolean)
   - [Entradas múltiples](#entradas-múltiples)
   - [Lectura de varios valores en una sola línea](#lectura-de-varios-valores-en-una-sola-línea)
+- [Resumen](#resumen)
 
 ---
 
@@ -363,6 +364,16 @@ buen Kotlin
 > [!NOTE]
 > Para tareas de lectura más avanzadas —leer palabra por palabra, usar delimitadores personalizados o comprobar si quedan más datos—, Kotlin también puede apoyarse en la clase `Scanner` de Java. Como es interoperabilidad con Java y requiere conceptos que veremos más adelante (`if` y excepciones), la tratamos aparte en el [Anexo B: Entrada estándar con `Scanner` de Java](/appendix-java-scanner.md).
 
+## Resumen
+
+En este capítulo aprendiste a comunicar tu programa con el usuario:
+
+- La **salida estándar** se muestra con `print` (sin salto de línea) y `println` (con salto de línea).
+- Las **plantillas de cadena** insertan valores en un texto con `$variable` o `${expresión}`.
+- La **entrada estándar** se lee con `readln()`, que devuelve un `String`.
+- Para trabajar con otros tipos, conviertes lo leído con `toInt()`, `toDouble()`, `toBoolean()`, etc.
+- Para un control más avanzado de la lectura, existe la clase `Scanner` de Java (Anexo B).
+
 ---
 
 <!-- markdownlint-disable MD033 -->
@@ -370,6 +381,9 @@ buen Kotlin
     <tr>
         <td style="text-align: left;">
             <a href="/chapter05.md">← Anterior</a>
+        </td>
+        <td style="text-align: center;">
+            <a href="/README.md">Ir al índice</a>
         </td>
         <td style="text-align: right;">
             <a href="/chapter07.md">Siguiente →</a>

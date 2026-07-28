@@ -186,6 +186,9 @@ En el próximo capítulo daremos un paso importante para organizar y reutilizar 
         <td style="text-align: left;">
             <a href="/chapter08.md">← Anterior</a>
         </td>
+        <td style="text-align: center;">
+            <a href="/README.md">Ir al índice</a>
+        </td>
         <td style="text-align: right;">
             <a href="/chapter10.md">Siguiente →</a>
         </td>
