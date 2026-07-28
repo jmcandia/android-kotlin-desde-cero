@@ -33,7 +33,7 @@ Antes de seguir, vale la pena detenerse en *por qué* las funciones son tan impo
 - **Dividir un problema grande en partes pequeñas.** En lugar de un `main` enorme y difícil de seguir, repartes el trabajo en varias funciones, cada una con una responsabilidad clara. Es mucho más fácil resolver (y corregir) problemas pequeños que uno gigante.
 
 > [!TIP]
-> Como buena práctica, dale a cada función un nombre que describa su acción (a menudo empezando por un verbo: `calcularTotal`, `mostrarMenu`, `validarEdad`) y procura que haga **una sola cosa**. Que cada función tenga una única responsabilidad se conoce como principio **SRP** (*Single Responsibility Principle*), el primero de los cinco principios **SOLID**. Junto con DRY, KISS y el resto de SOLID, los definimos con más calma en el [anexo de principios de diseño](/appendix-design-principle.md).
+> Como buena práctica, dale a cada función un nombre que describa su acción (a menudo empezando por un verbo: `calcularTotal`, `mostrarMenu`, `validarEdad`) y procura que haga **una sola cosa**. Que cada función tenga una única responsabilidad se conoce como principio **SRP** (*Single Responsibility Principle*), el primero de los cinco principios **SOLID**. Junto con DRY, KISS y el resto de SOLID, los definimos con más calma en el [anexo de principios de diseño](/anexo-principios-diseno.md).
 
 ## Invocar una función
 
@@ -150,12 +150,39 @@ Las funciones que reciben datos y devuelven un resultado se parecen mucho a las 
 
 ## `Unit`: cuando una función no devuelve nada
 
-¿Y qué pasa con funciones como `saludar`, que no devuelven ningún resultado? En realidad, en Kotlin **todas** las funciones devuelven algo. Cuando una función no devuelve un valor útil, devuelve un valor especial llamado `Unit`, que en la práctica significa "no hay resultado".
+¿Y qué pasa con funciones como `saludar`, que no devuelven ningún resultado? Para entenderlo, compara dos tipos de funciones: algunas son como una calculadora —les das datos y te **devuelven** un valor, como `sumar`—, mientras que otras son como un interruptor de la luz: **hacen** algo (mostrar un mensaje, en el caso de `saludar`), pero no te entregan ningún valor a cambio.
 
-No necesitas escribir `Unit` ni `return`: si no indicas un tipo de retorno, Kotlin asume que la función devuelve `Unit`. Por eso `saludar` funciona sin ninguno de los dos.
+En Kotlin, incluso estas últimas devuelven algo: un valor especial llamado `Unit`. Es la manera que tiene el lenguaje de decir "la función terminó su trabajo, pero no hay ningún valor que valga la pena devolver".
 
-> [!NOTE]
-> Si vienes de Java o C#, puedes pensar en `Unit` como el equivalente de `void`.
+```kotlin
+/*
+Acá se utiliza Unit como tipo de retorno porque
+no necesita hacer una devolución
+*/
+fun saludar(nombre: String = "invitado"): Unit {
+    println("¡Hola, $nombre!")
+}
+
+/*
+Acá se utiliza Int como tipo de retorno porque
+la función devuelve un valor de ese tipo
+*/
+fun sumar(a: Int, b: Int): Int {
+    return a + b
+}
+```
+
+No necesitas escribir `Unit` ni `return`: si no indicas un tipo de retorno, Kotlin asume que la función devuelve `Unit`. Por eso `saludar` funciona sin ninguno de los dos. Si vienes de Java o C#, puedes pensar en `Unit` como el equivalente de `void`.
+
+```kotlin
+// Infiere el tipo Unit, porque no tiene el tipo ni la palabra return
+fun saludar(nombre: String = "invitado") {
+    println("¡Hola, $nombre!")
+}
+```
+
+> [!IMPORTANT]
+> `Unit` es un valor **real y concreto**: siempre está ahí, indicando que la función se ejecutó pero no produjo un valor útil. No es un valor vacío ni inexistente, y **no** es lo mismo que `null`, que representa la *ausencia* de un valor. `null` es un concepto distinto que veremos más adelante; por ahora, basta con que no los confundas: una función que devuelve `Unit` sí devolvió algo.
 
 ## Funciones de una sola expresión
 
