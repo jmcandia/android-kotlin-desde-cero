@@ -1,0 +1,3508 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Un curso que lleva a programadores con base en Java desde los fundamentos de Kotlin hasta una aplicación Android completa con Jetpack Compose.">
+      
+      
+      
+      
+        <link rel="prev" href="../chapter02/">
+      
+      
+        <link rel="next" href="../chapter04/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>3. Conceptos básicos de Kotlin - Android con Kotlin desde cero</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#capitulo-3-conceptos-basicos-de-kotlin" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Android con Kotlin desde cero
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3. Conceptos básicos de Kotlin
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jmcandia/android-kotlin-desde-cero" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Android con Kotlin desde cero
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jmcandia/android-kotlin-desde-cero" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte I · Fundamentos de Kotlin
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte I · Fundamentos de Kotlin
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. El entorno de desarrollo (IDE e IntelliJ IDEA)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Un primer vistazo a Kotlin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Conceptos básicos de Kotlin
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Conceptos básicos de Kotlin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literales-basicos-numeros-cadenas-y-caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Literales básicos: números, cadenas y caracteres
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Literales básicos: números, cadenas y caracteres">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#numeros-enteros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Números enteros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracteres
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cadenas-de-caracteres-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cadenas de caracteres (Strings)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables-y-constantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables y constantes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variables y constantes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-una-variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es una variable?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#declaracion-de-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Declaración de variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-de-val" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso de val
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Uso de val">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-ocurre-cuando-intento-cambiar-un-val" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué ocurre cuando intento cambiar un val?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables-var" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables var
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variables var">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cuando-debo-usar-var" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Cuándo debo usar var?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparacion-entre-val-y-var" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparación entre val y var
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regla-practica-usar-val-por-defecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regla práctica: usar val por defecto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conservacion-del-tipo-de-una-variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conservación del tipo de una variable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constantes-const" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constantes (const)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convenciones-de-nomenclatura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Convenciones de nomenclatura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#numeros-magicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Números mágicos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comentarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comentarios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comentarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comentarios-de-fin-de-linea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comentarios de fin de línea
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comentarios-de-varias-lineas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comentarios de varias líneas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comentarios-de-documentacion-comentarios-doc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comentarios de documentación (comentarios "doc")
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guia-de-estilo-de-kotlin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Guía de estilo de Kotlin
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escribiendo-nuestro-primer-programa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escribiendo nuestro primer programa
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Escribiendo nuestro primer programa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hola-mundo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hola, mundo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terminologia-basica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Terminología básica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-programa-hola-mundo-al-detalle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El programa "Hola, mundo" al detalle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#programas-con-varias-instrucciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Programas con varias instrucciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Tipos de datos básicos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Operadores: aritméticos, de comparación y lógicos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Entrada y salida estándar y plantillas de cadena
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Trabajar con cadenas: longitud, concatenación y <code>repeat</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte II · Estructuras de control y funciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte II · Estructuras de control y funciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Control de flujo: <code>if</code> y <code>when</code> como expresión
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Bucles: <code>for</code>, <code>while</code> y <code>do-while</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Funciones: definición, parámetros y valores de retorno
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte III · Colecciones y código robusto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte III · Colecciones y código robusto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Colecciones I: <code>List</code>, <code>Set</code> y <code>Map</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Colecciones II: operaciones funcionales (<code>map</code>, <code>filter</code> y <code>forEach</code>)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Null safety: manejo seguro de valores nulos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Manejo de excepciones: <code>try</code>, <code>catch</code> y <code>Result</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Formato de cadenas con <code>String.format</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte IV · Programación orientada a objetos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte IV · Programación orientada a objetos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. Clases, propiedades y constructores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17. Herencia, interfaces y clases abstractas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18. <code>data class</code>, <code>copy</code> y desestructuración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19. <code>object</code>, <code>companion object</code> y singletons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20. <code>enum</code> y <code>sealed class</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21. Genéricos, funciones de extensión y lambdas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte V · Asincronía con Coroutines
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte V · Asincronía con Coroutines
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22. ¿Por qué asincronía? El hilo principal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23. <code>suspend</code>, <code>launch</code>, <code>async</code>, scopes y dispatchers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24. <code>Flow</code>, <code>StateFlow</code> y <code>SharedFlow</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte VI · Introducción a Android con Jetpack Compose
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte VI · Introducción a Android con Jetpack Compose
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25. Android Studio y anatomía de un proyecto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26. Ciclo de vida de una <code>Activity</code> y tu primer <code>@Composable</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    27. Fundamentos de Compose: composables, recomposición y <code>Modifier</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. Layouts y listas: <code>Column</code>, <code>Row</code>, <code>LazyColumn</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Material 3: tema, color, tipografía y componentes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. Navegación con Navigation Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte VII · Arquitectura MVVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte VII · Arquitectura MVVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter32/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. Qué es MVVM y por qué usarlo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter33/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter34/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    34. Repositorio y separación de capas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter35/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    35. Inyección de dependencias (manual y con Hilt)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte VIII · Consumo de API REST con Retrofit
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte VIII · Consumo de API REST con Retrofit
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter36/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    36. HTTP, REST y JSON: explorando la PokeAPI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter37/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    37. Retrofit: configuración, interfaces y endpoints
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter38/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    38. Serialización JSON y modelos de datos (DTO)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter39/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    39. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte IX · Proyecto final: PokéDex con PokeAPI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte IX · Proyecto final: PokéDex con PokeAPI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter40/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    40. Diseño de la app: pantallas, navegación y arquitectura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter41/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    41. Setup del proyecto y dependencias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter42/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    42. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter43/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    43. Pantalla de lista con paginación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter44/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    44. Carga de sprites con Coil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter45/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    45. Pantalla de detalle: stats, tipos y habilidades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter46/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    46. Búsqueda y filtrado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter47/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    47. Persistencia local con Room: favoritos y caché offline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter48/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    48. Pulido: estados de UI, Material 3 y accesibilidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter49/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    49. Cierre: testing básico, buenas prácticas y próximos pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Anexos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix-design-principle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A. Principios de diseño (SOLID, DRY y KISS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix-java-scanner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B. Entrada estándar con Scanner de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#literales-basicos-numeros-cadenas-y-caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Literales básicos: números, cadenas y caracteres
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Literales básicos: números, cadenas y caracteres">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#numeros-enteros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Números enteros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracteres
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cadenas-de-caracteres-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cadenas de caracteres (Strings)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables-y-constantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables y constantes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variables y constantes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-una-variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es una variable?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#declaracion-de-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Declaración de variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-de-val" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso de val
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Uso de val">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-ocurre-cuando-intento-cambiar-un-val" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué ocurre cuando intento cambiar un val?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables-var" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables var
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variables var">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cuando-debo-usar-var" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Cuándo debo usar var?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparacion-entre-val-y-var" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparación entre val y var
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regla-practica-usar-val-por-defecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regla práctica: usar val por defecto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conservacion-del-tipo-de-una-variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conservación del tipo de una variable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constantes-const" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constantes (const)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convenciones-de-nomenclatura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Convenciones de nomenclatura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#numeros-magicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Números mágicos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comentarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comentarios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comentarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comentarios-de-fin-de-linea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comentarios de fin de línea
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comentarios-de-varias-lineas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comentarios de varias líneas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comentarios-de-documentacion-comentarios-doc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comentarios de documentación (comentarios "doc")
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guia-de-estilo-de-kotlin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Guía de estilo de Kotlin
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escribiendo-nuestro-primer-programa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escribiendo nuestro primer programa
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Escribiendo nuestro primer programa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hola-mundo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hola, mundo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terminologia-basica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Terminología básica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-programa-hola-mundo-al-detalle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El programa "Hola, mundo" al detalle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#programas-con-varias-instrucciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Programas con varias instrucciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="capitulo-3-conceptos-basicos-de-kotlin">Capítulo 3: Conceptos básicos de Kotlin<a class="headerlink" href="#capitulo-3-conceptos-basicos-de-kotlin" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>En el capítulo anterior conociste qué es Kotlin, cuál es su historia y por qué se ha convertido en uno de los lenguajes más utilizados para el desarrollo de aplicaciones Android. Ahora ha llegado el momento de comenzar a escribir nuestros primeros programas y aprender los conceptos fundamentales que utilizarás a lo largo de todo el curso.</p>
+<p>En este capítulo descubrirás cómo representar información mediante números, caracteres y cadenas de texto, cómo declarar variables y constantes, y cuáles son las diferencias entre <code>val</code>, <code>var</code> y <code>const</code>. También aprenderás a escribir comentarios, seguir las convenciones de estilo de Kotlin y aplicar buenas prácticas de programación desde el comienzo.</p>
+<p>Finalmente, escribirás y analizarás el clásico programa <strong>"¡Hola, mundo!"</strong>, que te permitirá comprender la estructura básica de un programa en Kotlin y familiarizarte con algunos de los conceptos y términos que utilizarás de forma permanente durante el desarrollo de aplicaciones.</p>
+<p>No te preocupes si algunos conceptos resultan nuevos al principio. El objetivo de este capítulo es construir una base sólida sobre la que desarrollarás tus conocimientos en los siguientes capítulos, incorporando gradualmente nuevas herramientas y características del lenguaje.</p>
+<h2 id="literales-basicos-numeros-cadenas-y-caracteres">Literales básicos: números, cadenas y caracteres<a class="headerlink" href="#literales-basicos-numeros-cadenas-y-caracteres" title="Permanent link">&para;</a></h2>
+<p>Independientemente de su complejidad, todos los programas realizan, en esencia, operaciones con números, cadenas de caracteres y otros valores. Estos valores se denominan <strong>literales</strong>, es decir, el sentido o significado más básico del símbolo. Antes de empezar a escribir nuestros primeros programas, veamos cuáles son los literales básicos en Kotlin: números enteros, caracteres y cadenas de caracteres. Estos literales se pueden encontrar en todas partes en la vida cotidiana.</p>
+<h3 id="numeros-enteros">Números enteros<a class="headerlink" href="#numeros-enteros" title="Permanent link">&para;</a></h3>
+<p>Utilizamos los números enteros para contar cosas en el mundo real. También los usaremos a menudo en Kotlin.</p>
+<p>A continuación se muestran varios ejemplos de literales de números enteros válidos separados por comas: <code>0</code>, <code>1</code>, <code>2</code>, <code>10</code>, <code>11</code>, <code>100</code>.</p>
+<p>Si un valor entero contiene muchos dígitos, podemos añadir guiones bajos (<code>_</code>) para dividir los dígitos en bloques y hacer que el número sea más legible: por ejemplo, <code>1_000_000</code> es mucho más fácil de leer que <code>1000000</code>.</p>
+<p>Puedes añadir tantos guiones bajos como quieras: <code>1__000_000</code>, <code>1_2_3</code>. Recuerda que los guiones bajos no pueden aparecer al principio ni al final del número. Si escribes <code>_10</code> o <code>100_</code>, obtendrás un error.</p>
+<h3 id="caracteres">Caracteres<a class="headerlink" href="#caracteres" title="Permanent link">&para;</a></h3>
+<p>Un solo carácter puede representar un dígito, una letra u otro símbolo. Para escribir un solo carácter, se coloca el símbolo entre <strong>comillas simples</strong>, de la siguiente manera: <code>'A'</code>, <code>'B'</code>, <code>'C'</code>, <code>'x'</code>, <code>'y'</code>, <code>'z'</code>, <code>'0'</code>, <code>'1'</code>, <code>'2'</code>, <code>'9'</code>. Los <strong>literales de caracteres</strong> pueden representar letras del alfabeto, dígitos del <code>'0'</code> al <code>'9'</code>, espacios en blanco (<code>' '</code>) u otros símbolos (por ejemplo, <code>'$'</code>).</p>
+<p>No hay que confundir los caracteres que representan números (por ejemplo, <code>'9'</code>) con los propios números (por ejemplo, <code>9</code>).</p>
+<p>Un carácter no puede incluir dos o más dígitos o letras, ya que representa un único símbolo. Los dos ejemplos siguientes son <strong>incorrectos</strong>: <code>'abc'</code>, <code>'543'</code>, ya que estos literales tienen demasiados caracteres.</p>
+<h3 id="cadenas-de-caracteres-strings">Cadenas de caracteres (<em>Strings</em>)<a class="headerlink" href="#cadenas-de-caracteres-strings" title="Permanent link">&para;</a></h3>
+<p>Las cadenas de caracteres o <em>strings</em> representan información de texto, como el texto de un anuncio, la dirección de una página web o los datos de inicio de sesión en un sitio web. Una cadena es una secuencia de cualquier tipo de caracteres.</p>
+<p>Para escribir cadenas, se colocan los caracteres entre <strong>comillas dobles</strong> en lugar de comillas simples. Estos son algunos ejemplos válidos: <code>"texto"</code>, <code>"Quiero aprender Kotlin"</code>, <code>"123456"</code>, <code>"e-mail@gmail.com"</code>. Así pues, las cadenas pueden incluir letras, dígitos, espacios en blanco y otros caracteres.</p>
+<p>Una cadena también puede contener un solo carácter, como <code>"A"</code>. No lo confundas con el carácter <code>'A'</code>, que no es una cadena.</p>
+<h2 id="variables-y-constantes">Variables y constantes<a class="headerlink" href="#variables-y-constantes" title="Permanent link">&para;</a></h2>
+<p>Las variables son uno de los elementos más utilizados en cualquier programa. En esta sección las conoceremos paso a paso: primero qué son y cómo se crean, luego cómo declarar una variable cuyo valor no cambia (<code>val</code>) y otra cuyo valor sí puede cambiar (<code>var</code>), cuándo conviene cada una, y por último cómo declarar constantes y cómo nombrar todo esto siguiendo las convenciones de Kotlin.</p>
+<h3 id="que-es-una-variable">¿Qué es una variable?<a class="headerlink" href="#que-es-una-variable" title="Permanent link">&para;</a></h3>
+<p>Cuando un programa se ejecuta, necesita guardar valores para usarlos más adelante: un nombre, un número, un mensaje. Una <strong>variable</strong> es precisamente eso: un espacio con nombre donde el programa guarda un valor.</p>
+<p>Piensa en una variable como una <strong>caja etiquetada</strong>: la etiqueta es el nombre y, dentro, está el valor que guardaste. Cuando necesitas ese valor, no tienes que recordar dónde quedó; basta con nombrar la caja.</p>
+<p>Gracias a ese nombre, podemos guardar un valor una vez y reutilizarlo tantas veces como queramos a lo largo del programa.</p>
+<h3 id="declaracion-de-variables">Declaración de variables<a class="headerlink" href="#declaracion-de-variables" title="Permanent link">&para;</a></h3>
+<p>Antes de usar una variable hay que <strong>declararla</strong>, es decir, crearla. En Kotlin, declarar una variable tiene esta forma: una palabra clave, el nombre que le damos, el signo <code>=</code> y el valor que queremos guardar.</p>
+<p>Empecemos por la palabra clave más recomendable (más adelante verás por qué): <code>val</code>. Declaremos una variable llamada <code>language</code> que guarde el texto <code>"Kotlin"</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">language</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Kotlin&quot;</span>
+</code></pre></div>
+<p>Para leer el valor guardado, usamos el nombre de la variable. Por ejemplo, para mostrarlo en pantalla:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">println</span><span class="p">(</span><span class="n">language</span><span class="p">)</span><span class="w"> </span><span class="c1">// muestra: Kotlin</span>
+</code></pre></div>
+<p>Al elegir el nombre, ten en cuenta un par de cosas: no puede empezar por un dígito y conviene que describa lo que guarda (<code>language</code> se entiende mucho mejor que <code>x</code>). Volveremos sobre las reglas de nomenclatura al final de esta sección.</p>
+<div class="admonition tip">
+<p class="admonition-title">Important</p>
+<p>Los nombres distinguen entre mayúsculas y minúsculas: <code>language</code> no es lo mismo que <code>Language</code>.</p>
+</div>
+<h3 id="uso-de-val">Uso de <code>val</code><a class="headerlink" href="#uso-de-val" title="Permanent link">&para;</a></h3>
+<p>La palabra clave <code>val</code> (de <em>value</em>, "valor") crea una variable de <strong>solo lectura</strong>: le asignas un valor <strong>una sola vez</strong> y, a partir de ahí, puedes leerlo cuantas veces quieras, pero no cambiarlo.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.1415</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">saludo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hola&quot;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">println</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span><span class="w">     </span><span class="c1">// 3.1415</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">println</span><span class="p">(</span><span class="n">saludo</span><span class="p">)</span><span class="w"> </span><span class="c1">// Hola</span>
+</code></pre></div>
+<p>En la mayoría de los programas, muchos datos no necesitan cambiar una vez definidos, así que <code>val</code> será tu opción por defecto.</p>
+<h4 id="que-ocurre-cuando-intento-cambiar-un-val">¿Qué ocurre cuando intento cambiar un <code>val</code>?<a class="headerlink" href="#que-ocurre-cuando-intento-cambiar-un-val" title="Permanent link">&para;</a></h4>
+<p>Como un <code>val</code> es de solo lectura, si intentas asignarle un nuevo valor, el programa <strong>no compilará</strong>. Veámoslo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">language</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Kotlin&quot;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">language</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Java&quot;</span><span class="w"> </span><span class="c1">// error de compilación: Val cannot be reassigned</span>
+</code></pre></div>
+<p>El compilador detiene la compilación y muestra el mensaje <code>Val cannot be reassigned</code> ("no se puede reasignar un val"). Lejos de ser una molestia, esto es una <strong>protección</strong>: te avisa de inmediato si por error intentas modificar un valor que debía permanecer fijo.</p>
+<h3 id="variables-var">Variables <code>var</code><a class="headerlink" href="#variables-var" title="Permanent link">&para;</a></h3>
+<p>Hasta ahora, los valores que guardamos no cambiaban. Pero en muchos programas hay datos que <strong>sí cambian mientras el programa se ejecuta</strong>. Por ejemplo:</p>
+<ul>
+<li>el <strong>puntaje</strong> de un jugador, que sube a medida que avanza;</li>
+<li>la <strong>edad</strong> de una persona, que aumenta con el tiempo;</li>
+<li>la <strong>cantidad</strong> de productos en un carrito de compras;</li>
+<li>la <strong>página actual</strong> que se está leyendo en una aplicación.</li>
+</ul>
+<p>Para todos estos casos, <code>val</code> se queda corto: apenas intentáramos actualizar el valor, obtendríamos el error <code>Val cannot be reassigned</code>. Necesitamos una variable que <strong>sí</strong> podamos modificar, y para eso existe <code>var</code> (de <em>variable</em>).</p>
+<p>Veamos un puntaje que va cambiando:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">var</span><span class="w"> </span><span class="nv">puntaje</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">puntaje</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">puntaje</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">25</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">println</span><span class="p">(</span><span class="n">puntaje</span><span class="p">)</span><span class="w"> </span><span class="c1">// 25</span>
+</code></pre></div>
+<p>A una variable que puede cambiar de valor se le llama <strong>mutable</strong>; a una que no cambia (como <code>val</code>), <strong>inmutable</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>No hace falta volver a declarar la variable para cambiar su valor. Basta con asignarle uno nuevo con el operador <code>=</code>.</p>
+</div>
+<h4 id="cuando-debo-usar-var">¿Cuándo debo usar <code>var</code>?<a class="headerlink" href="#cuando-debo-usar-var" title="Permanent link">&para;</a></h4>
+<p>La respuesta es simple: usa <code>var</code> <strong>solo cuando el valor realmente necesite cambiar</strong> durante la ejecución del programa.</p>
+<p>Ante cada variable, hazte una pregunta: <em>¿este dato va a cambiar mientras el programa corre?</em> Si la respuesta es sí (un puntaje, un contador, una edad), usa <code>var</code>. Si es no (el número pi, un nombre fijo, un mensaje), usa <code>val</code>.</p>
+<h3 id="comparacion-entre-val-y-var">Comparación entre <code>val</code> y <code>var</code><a class="headerlink" href="#comparacion-entre-val-y-var" title="Permanent link">&para;</a></h3>
+<p>Pongamos las dos, una al lado de la otra. Fíjate en que los ejemplos son casi idénticos: lo <strong>único</strong> que cambia es la palabra clave.</p>
+<p>Con <code>val</code>, el valor no se puede reemplazar:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="c1">// error de compilación: Val cannot be reassigned</span>
+</code></pre></div>
+<p>Con <code>var</code>, sí se puede:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">var</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="c1">// correcto</span>
+</code></pre></div>
+<p>Para recordarlo, volvamos a la caja etiquetada: con <code>val</code>, una vez que pones algo dentro, la caja queda <strong>sellada</strong>; puedes mirar el contenido cuantas veces quieras, pero no reemplazarlo. Con <code>var</code>, la caja queda <strong>abierta</strong>: puedes sacar lo que hay y poner otra cosa en su lugar.</p>
+<p>Este cuadro resume la diferencia:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><code>val</code></th>
+<th style="text-align: left;"><code>var</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">¿Se puede reasignar?</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Sí</td>
+</tr>
+<tr>
+<td style="text-align: left;">¿Cuántas veces se le asigna un valor?</td>
+<td style="text-align: left;">Una sola vez</td>
+<td style="text-align: left;">Las que necesites</td>
+</tr>
+<tr>
+<td style="text-align: left;">Equivalente aproximado en Java</td>
+<td style="text-align: left;"><code>final</code></td>
+<td style="text-align: left;">variable normal</td>
+</tr>
+<tr>
+<td style="text-align: left;">¿Cuándo usarla?</td>
+<td style="text-align: left;">Por defecto</td>
+<td style="text-align: left;">Cuando el valor deba cambiar</td>
+</tr>
+</tbody>
+</table>
+<h3 id="regla-practica-usar-val-por-defecto">Regla práctica: usar <code>val</code> por defecto<a class="headerlink" href="#regla-practica-usar-val-por-defecto" title="Permanent link">&para;</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>La recomendación oficial en el ecosistema Kotlin es empezar siempre con <code>val</code> y cambiar a <code>var</code> solo cuando de verdad necesites modificar el valor. Preferir <code>val</code> produce código más <strong>seguro</strong>, más <strong>predecible</strong> y más <strong>fácil de mantener</strong>, porque limita la cantidad de datos que pueden cambiar y, además, cada <code>var</code> que aparece funciona como una señal de "ojo, esto cambia".</p>
+</div>
+<h3 id="conservacion-del-tipo-de-una-variable">Conservación del tipo de una variable<a class="headerlink" href="#conservacion-del-tipo-de-una-variable" title="Permanent link">&para;</a></h3>
+<p>Cuando guardas un valor en una variable, Kotlin <strong>recuerda su tipo</strong> (un número, un texto, un carácter…). A partir de ese momento, esa variable solo puede contener valores de ese mismo tipo. Esto importa sobre todo con <code>var</code>, que es la que reasignamos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">var</span><span class="w"> </span><span class="nv">numero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">numero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">11</span><span class="w">     </span><span class="c1">// correcto: sigue siendo un número</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">numero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;doce&quot;</span><span class="w"> </span><span class="c1">// error: no puedes guardar texto donde había un número</span>
+</code></pre></div>
+<p>En cambio, sí puedes <strong>copiar</strong> el valor de un <code>val</code> a un <code>var</code> sin problema; lo que no puedes es reasignar el <code>val</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kd">var</span><span class="w"> </span><span class="nv">contador</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">contador</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="c1">// correcto: contador es var, no una variable de solo lectura</span>
+</code></pre></div>
+<h3 id="constantes-const">Constantes (<code>const</code>)<a class="headerlink" href="#constantes-const" title="Permanent link">&para;</a></h3>
+<p>Ya sabes que un <code>val</code> no se puede reasignar. Sin embargo, su valor todavía puede <strong>calcularse mientras el programa se ejecuta</strong> (por ejemplo, a partir de un dato que escribe el usuario). A veces necesitas algo distinto: un valor que se conozca <strong>antes</strong> de ejecutar el programa, en lo que se denomina <em>tiempo de compilación</em>. Para eso, Kotlin ofrece el modificador <code>const</code>, que se antepone a <code>val</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">MY_STRING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Esta es una cadena constante&quot;</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>No confundas ambas ideas: <code>val</code> controla <strong>si</strong> una variable se puede reasignar (no se puede); <code>const</code> controla <strong>cuándo</strong> se conoce su valor (al compilar). Por eso <code>const</code> siempre acompaña a <code>val</code>; no se trata de "un <code>val</code> más estricto", sino de algo diferente.</p>
+</div>
+<p>Como su valor debe conocerse al compilar, no puede provenir de una función ni de la entrada del usuario:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">MY_STRING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">readln</span><span class="p">()</span><span class="w"> </span><span class="c1">// ¡¡¡No es una constante en tiempo de compilación!!!</span>
+</code></pre></div>
+<p>Existen algunas restricciones para usar <code>const</code>. En primer lugar, solo se puede aplicar a variables de tipo <code>String</code> o de tipo primitivo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">CONST_INT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">127</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">CONST_DOUBLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.14</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">CONST_CHAR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;c&#39;</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">CONST_STRING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Soy una constante&quot;</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">CONST_ARRAY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arrayOf</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// error: tipo no permitido</span>
+</code></pre></div>
+<p>Además, las variables <code>const</code> deben declararse en el nivel superior, fuera de cualquier función:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">MY_INT_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1024</span><span class="w"> </span><span class="c1">// línea correcta</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">MY_INT_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2048</span><span class="w"> </span><span class="c1">// error: no es aplicable a una variable local</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="p">}</span>
+</code></pre></div>
+<!-- NOTA INTERNA (autor): aquí iba la subsección "`val` no significa inmutable", que muestra que un `val` puede tener un estado interno modificable (ejemplo con MutableList y .add()). Se pospone a propósito porque depende de objetos, referencias y colecciones mutables que el estudiante todavía no conoce. Reincorporarla en un capítulo posterior, una vez introducidos objetos / referencias / listas / colecciones mutables. -->
+
+<h3 id="convenciones-de-nomenclatura">Convenciones de nomenclatura<a class="headerlink" href="#convenciones-de-nomenclatura" title="Permanent link">&para;</a></h3>
+<p>Elegir buenos nombres para tus variables parece trivial, pero no lo es: pasarás más tiempo leyendo código (tuyo y de otros) que escribiéndolo, y los nombres claros hacen toda la diferencia. Hay dos conjuntos de reglas: las <strong>obligatorias</strong>, que el compilador exige, y las <strong>convenciones</strong>, que son recomendaciones de estilo.</p>
+<p><strong>Reglas obligatorias</strong>:</p>
+<ul>
+<li>Los nombres distinguen entre mayúsculas y minúsculas (<code>number</code> no es lo mismo que <code>Number</code>).</li>
+<li>Un nombre solo puede incluir letras, dígitos y guiones bajos.</li>
+<li>Un nombre no puede empezar por un dígito.</li>
+<li>Un nombre no puede ser una palabra clave (<code>val</code>, <code>var</code>, <code>fun</code>, etc.).</li>
+</ul>
+<p>Por lo tanto, no se permiten espacios en los nombres, salvo que uses comillas invertidas:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">`buen nombre`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">mal</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="c1">// no funcionará</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Si incumples estas reglas, tu programa no compilará.</p>
+</div>
+<p>Ejemplos de nombres <strong>válidos</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">score</span><span class="p">,</span><span class="w"> </span><span class="n">level</span><span class="p">,</span><span class="w"> </span><span class="n">fruitType</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">abc</span><span class="p">,</span><span class="w"> </span><span class="n">_cost</span><span class="p">,</span><span class="w"> </span><span class="n">number1</span><span class="p">,</span><span class="w"> </span><span class="n">`nombre con espacio`</span>
+</code></pre></div>
+<p>Ejemplos de nombres <strong>incorrectos</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nd">@pple</span><span class="p">,</span><span class="w"> </span><span class="err">$</span><span class="n">dollar</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="n">number</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="n">ab</span><span class="p">,</span><span class="w"> </span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">var</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">espacio</span>
+</code></pre></div>
+<p><strong>Convenciones de estilo</strong>:</p>
+<ul>
+<li>Para variables <code>val</code> y <code>var</code>, usa <code>lowerCamelCase</code>: la primera palabra en minúscula y las siguientes con mayúscula inicial (<code>numberOfCoins</code>). Si es una sola palabra, va en minúsculas (<code>number</code>, <code>value</code>).</li>
+<li>Para variables <code>const</code>, usa <code>SCREAMING_SNAKE_CASE</code>: todo en mayúsculas y con guiones bajos separando palabras (<code>MAX_USER_COUNT</code>).</li>
+<li>Elige nombres significativos: <code>score</code> comunica mucho más que <code>s</code>, aunque ambos sean válidos.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">numberOfWheels</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">isConnectionAvailable</span><span class="p">:</span><span class="w"> </span><span class="kt">Boolean</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">userFirstName</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">MAX_USER_COUNT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">COMPANY_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;TechCorp&quot;</span>
+</code></pre></div>
+<h3 id="numeros-magicos">Números mágicos<a class="headerlink" href="#numeros-magicos" title="Permanent link">&para;</a></h3>
+<p>A veces necesitas un valor fijo en tu código: por ejemplo, los días de la semana, que siempre son 7. Sin embargo, escribirlo directamente no le dice nada a quien lo lee (ni a ti mismo tiempo después):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">println</span><span class="p">(</span><span class="m">7</span><span class="p">)</span>
+</code></pre></div>
+<p>¿Qué es ese <code>7</code>? ¿Por qué debemos imprimirla? Ni idea. A estos valores sueltos, sin nombre ni contexto, se les llama <strong>números mágicos</strong>, y conviene evitarlos.</p>
+<p>En su lugar, guárdalos en una constante con un nombre significativo, declarada como <code>const val</code> fuera de cualquier función:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">DAYS_OF_THE_WEEK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">DAYS_OF_THE_WEEK</span><span class="p">)</span><span class="w"> </span><span class="c1">// 7</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>Así el código se explica solo. Compara un mal nombre con uno bueno:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="w">        </span><span class="c1">// ¿qué es &quot;s&quot;?</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">SEASONS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="w">  </span><span class="c1">// mucho más claro</span>
+</code></pre></div>
+<h2 id="comentarios">Comentarios<a class="headerlink" href="#comentarios" title="Permanent link">&para;</a></h2>
+<p>Entonces, ¿qué son exactamente esos comentarios y para qué los necesitamos? Básicamente, es un texto especial que el compilador ignora. Los comentarios te permiten aclarar una parte del código o excluirla del proceso de compilación (es decir, desactivarla). A lo largo de este curso, utilizaremos comentarios para explicar cómo y por qué funciona nuestro código.</p>
+<p>Hay tres tipos de comentarios en Kotlin. Echemos un vistazo a ellos.</p>
+<h3 id="comentarios-de-fin-de-linea">Comentarios de fin de línea<a class="headerlink" href="#comentarios-de-fin-de-linea" title="Permanent link">&para;</a></h3>
+<p>Después de <code>//</code>, el compilador ignora cualquier texto restante en la línea.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">    </span><span class="c1">// La línea siguiente se ignorará</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">    </span><span class="c1">// println(&quot;Hola, Mundo&quot;)</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">    </span><span class="c1">// Esto imprime la cadena &quot;Hola, Kotlin&quot;</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hola, Kotlin&quot;</span><span class="p">)</span><span class="w">  </span><span class="c1">// Aquí puede haber cualquier comentario</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">    </span><span class="c1">/// Comentario válido de una sola línea</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="comentarios-de-varias-lineas">Comentarios de varias líneas<a class="headerlink" href="#comentarios-de-varias-lineas" title="Permanent link">&para;</a></h3>
+<p>El compilador ignora cualquier texto que se encuentre entre los símbolos <code>/*</code> y <code>*/</code>. Puedes utilizarlos para escribir tanto comentarios de una sola línea como de varias líneas:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">    </span><span class="cm">/* Este es un comentario de una sola línea */</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">    </span><span class="cm">/*  Este es un ejemplo de</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="cm">        un comentario de varias líneas */</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="w">    </span><span class="cm">/*** Comentario de varias líneas válido</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="cm">        println(&quot;Hola&quot;)</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="cm">        println(&quot;Mundo&quot;)</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="cm">    **/</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="p">}</span>
+</code></pre></div>
+<p>También puedes incluir comentarios dentro de otros comentarios. Al escribir comentarios de varias líneas anidados, asegúrate de que los símbolos de apertura <code>/*</code> y de cierre <code>*/</code> formen pares.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="cm">/*</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="cm">    System.out.println(&quot;Hola&quot;)  // imprime &quot;Hola&quot;</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="cm">    System.out.println(&quot;Kotlin&quot;) /* imprime &quot;Kotlin&quot; */</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">    </span><span class="o">*/</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="comentarios-de-documentacion-comentarios-doc">Comentarios de documentación (comentarios "doc")<a class="headerlink" href="#comentarios-de-documentacion-comentarios-doc" title="Permanent link">&para;</a></h3>
+<p>El compilador ignora cualquier texto situado entre los signos <code>/**</code> y <code>*/</code>, del mismo modo que ignora todo el texto de los comentarios de varias líneas. Este tipo de comentarios se denominan comentarios de documentación (comentarios "doc"). La documentación es un texto que ayuda a otros a comprender qué hace tu código. Puedes utilizar este tipo de comentarios para generar automáticamente documentación sobre tu código fuente mediante una herramienta especial.</p>
+<p>Normalmente, estos comentarios se colocan encima de las declaraciones de los respectivos elementos del programa. Además, en este caso, se utilizan algunas etiquetas especiales, como <code>@param</code>, <code>@return</code> y otras, para controlar la herramienta.</p>
+<p>Echemos un vistazo al ejemplo siguiente.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="cm">/**</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="cm"> * La función `main` acepta argumentos de tipo cadena desde el exterior.</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="cm"> *</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="cm"> * @param args argumentos de la línea de comandos.</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="cm"> */</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">    </span><span class="c1">// hacer algo</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="guia-de-estilo-de-kotlin">Guía de estilo de Kotlin<a class="headerlink" href="#guia-de-estilo-de-kotlin" title="Permanent link">&para;</a></h2>
+<p>Además de los nombres, existen <strong>convenciones de estilo</strong> que estandarizan el código y lo hacen más fácil de leer, sobre todo cuando se trabaja en equipo. Son recomendaciones, no reglas estrictas, pero conviene seguirlas desde el principio. No hace falta memorizarlas todas de una vez; puedes consultarlas a medida que avanzas. Estas son algunas de las más habituales en Kotlin:</p>
+<ol>
+<li>Usa <strong>4 espacios</strong> para la sangría, en lugar de tabulaciones (una tabulación no siempre equivale a cuatro espacios según el sistema o el IDE).</li>
+<li>Omite el punto y coma (<code>;</code>). Kotlin no lo necesita.</li>
+<li>Coloca la llave de apertura al final de la línea.</li>
+<li>Coloca la llave de cierre al principio de la línea siguiente.</li>
+</ol>
+<p>Por ejemplo, este programa sigue esas reglas:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// llave de apertura al final de la línea</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hola&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// sangría de 4 espacios y sin `;` al final</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="p">}</span><span class="w"> </span><span class="c1">// llave de cierre al inicio de su propia línea</span>
+</code></pre></div>
+<p>También es buena práctica dejar un espacio antes de la llave de apertura tras <code>main()</code>.</p>
+<h2 id="escribiendo-nuestro-primer-programa">Escribiendo nuestro primer programa<a class="headerlink" href="#escribiendo-nuestro-primer-programa" title="Permanent link">&para;</a></h2>
+<p>En esta lección, escribirás tu primer programa en Kotlin, que muestra el mensaje <code>"¡Hola, mundo!"</code>. Este es el primer paso que todo principiante debe dar. Aunque el programa en sí es muy sencillo, se trata de un programa que funciona y muestra la sintaxis básica del lenguaje de programación.</p>
+<h3 id="hola-mundo">Hola, mundo<a class="headerlink" href="#hola-mundo" title="Permanent link">&para;</a></h3>
+<p>Aquí lo tienes. A continuación se muestra el código fuente de este programa:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;¡Hola, mundo!&quot;</span><span class="p">)</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>Si ya tienes instalado un entorno de programación en tu computador, puedes ejecutar el programa desde allí. Si no es así, no te preocupes. Volveremos sobre este tema más adelante.</p>
+<h3 id="terminologia-basica">Terminología básica<a class="headerlink" href="#terminologia-basica" title="Permanent link">&para;</a></h3>
+<p>Ahora, aprendamos la terminología básica y luego intentemos comprender nuestro programa.</p>
+<ul>
+<li>Un <strong>programa</strong> es una secuencia de instrucciones (denominadas <strong>sentencias</strong>), que se ejecutan una tras otra de forma predecible. El flujo secuencial es la situación más habitual y sencilla, en la que las sentencias se ejecutan en el orden en que están escritas, es decir, de arriba abajo, una tras otra;</li>
+<li>Una <strong>sentencia</strong> (o <strong>sentencia de programación</strong>) es un comando único que debe ejecutarse (como imprimir un texto);</li>
+<li>Una <strong>expresión</strong> es un fragmento de código que produce un único valor (por ejemplo, <code>2*2</code> es una expresión);</li>
+<li>Un <strong>bloque</strong> es un grupo de cero o más instrucciones encerradas entre un <strong>par de llaves</strong> <code>{...}</code>;</li>
+<li>Una <strong>palabra clave</strong> es una palabra que tiene un significado especial en el lenguaje de programación. Los nombres de las palabras clave no se pueden cambiar;</li>
+<li>Un <strong>identificador</strong> (o <strong>nombre</strong>) es una palabra escrita por el programador para identificar algo;</li>
+<li>Un <strong>comentario</strong> es un fragmento de texto que se ignora al ejecutar el programa; simplemente explica una parte del código. Los comentarios comienzan por <code>//</code>;</li>
+<li>Un <strong>espacio en blanco</strong> es un espacio, una tabulación o un salto de línea; se utiliza para separar palabras en el programa y mejorar la legibilidad.</li>
+</ul>
+<h3 id="el-programa-hola-mundo-al-detalle">El programa "Hola, mundo" al detalle<a class="headerlink" href="#el-programa-hola-mundo-al-detalle" title="Permanent link">&para;</a></h3>
+<p>El programa <strong>"Hola, mundo"</strong> ilustra el uso de los elementos básicos de cualquier programa en Kotlin. Por ahora, nos centraremos únicamente en los más importantes.</p>
+<p><strong>El punto de entrada:</strong></p>
+<p>La palabra clave <code>fun</code> define una función que contiene un fragmento de código que se va a ejecutar. Esta función tiene un nombre especial: <code>main</code>. Indica el punto de entrada de un programa en Kotlin. El cuerpo de la función está entre llaves <code>{...}</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">    </span><span class="c1">// ...</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>No te preocupes por las funciones, ya que hablaremos de ellas en profundidad más adelante.</p>
+</div>
+<p>El nombre de esta función debe ser siempre el mismo: <code>main</code>. Si la llamas <code>Main</code>, <code>MAIN</code> o cualquier otra cosa, el programa no se iniciará.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>El texto que aparece después de <code>//</code> es solo un comentario, no forma parte del código. Más adelante aprenderemos a escribir comentarios.</p>
+</div>
+<p><strong>Imprimir <code>"¡Hola, mundo!"</code>:</strong></p>
+<p>El cuerpo de esta función está formado por instrucciones de programación que definen lo que debe hacer el programa. Nuestro programa imprime la cadena <code>"¡Hola, mundo!"</code> mediante la siguiente instrucción:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">println</span><span class="p">(</span><span class="s">&quot;¡Hola, mundo!&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Esta es una de las cosas más importantes que hay que entender sobre el programa <strong>"Hola, mundo"</strong>. Llamamos a la función <code>println</code> para mostrar una cadena seguida de una nueva línea en la pantalla. A menudo utilizaremos este método para mostrar algo en pantalla.</p>
+<div class="admonition tip">
+<p class="admonition-title">Important</p>
+<p>Recuerda que <code>"¡Hola, mundo!"</code> no es una palabra clave ni un nombre. Es simplemente una cadena literal que se muestra en pantalla.</p>
+</div>
+<h3 id="programas-con-varias-instrucciones">Programas con varias instrucciones<a class="headerlink" href="#programas-con-varias-instrucciones" title="Permanent link">&para;</a></h3>
+<p>Por regla general, un programa contiene varias instrucciones. Debes empezar una nueva línea para escribir cada instrucción. Por ejemplo, el programa siguiente tiene dos instrucciones:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hola&quot;</span><span class="p">)</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Mundo&quot;</span><span class="p">)</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="p">}</span>
+</code></pre></div>
+<p>Si ejecutas el programa, verás que muestra lo siguiente:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>Hola
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>Mundo
+</code></pre></div>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo diste tus primeros pasos escribiendo código Kotlin:</p>
+<ul>
+<li>Los <strong>literales</strong> básicos son números, caracteres (comillas simples) y cadenas (comillas dobles).</li>
+<li>Una <strong>variable</strong> guarda un valor: <code>val</code> es de solo lectura (no se reasigna) y <code>var</code> es mutable.</li>
+<li>Prefiere <code>val</code> por defecto y usa <code>var</code> solo cuando el valor deba cambiar.</li>
+<li><code>const val</code> declara constantes cuyo valor se conoce en tiempo de compilación.</li>
+<li>Sigue las <strong>convenciones de nomenclatura</strong> (<code>camelCase</code> para variables, <code>SCREAMING_SNAKE_CASE</code> para constantes) y evita los números mágicos.</li>
+<li>Escribiste y analizaste el programa <strong>"¡Hola, mundo!"</strong>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../chapter02/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 2. Un primer vistazo a Kotlin">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                2. Un primer vistazo a Kotlin
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../chapter04/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 4. Tipos de datos básicos">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                4. Tipos de datos básicos
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

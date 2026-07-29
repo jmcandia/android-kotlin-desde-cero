@@ -1,0 +1,9 @@
+[data-md-color-scheme="default"] .md-typeset code,
+[data-md-color-scheme="default"] .md-ellipsis code {
+  color: #c7254e;
+}
+
+[data-md-color-scheme="slate"] .md-typeset code,
+[data-md-color-scheme="slate"] .md-ellipsis code {
+  color: #478be6;
+}

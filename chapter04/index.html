@@ -1,0 +1,3307 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Un curso que lleva a programadores con base en Java desde los fundamentos de Kotlin hasta una aplicación Android completa con Jetpack Compose.">
+      
+      
+      
+      
+        <link rel="prev" href="../chapter03/">
+      
+      
+        <link rel="next" href="../chapter05/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>4. Tipos de datos básicos - Android con Kotlin desde cero</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#capitulo-4-tipos-de-datos-basicos" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Android con Kotlin desde cero
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4. Tipos de datos básicos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jmcandia/android-kotlin-desde-cero" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Android con Kotlin desde cero
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jmcandia/android-kotlin-desde-cero" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte I · Fundamentos de Kotlin
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte I · Fundamentos de Kotlin
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. El entorno de desarrollo (IDE e IntelliJ IDEA)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Un primer vistazo a Kotlin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Conceptos básicos de Kotlin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Tipos de datos básicos
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Tipos de datos básicos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de datos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-un-tipo-de-dato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es un tipo de dato?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inferencia-de-tipos-y-tipo-explicito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inferencia de tipos y tipo explícito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incompatibilidad-de-tipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Incompatibilidad de tipos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-datos-basicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de datos básicos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de datos básicos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#numeros-enteros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Números enteros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#numeros-decimales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Números decimales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limites-y-tamano-de-un-tipo-numerico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Límites y tamaño de un tipo numérico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracteres
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#booleanos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Booleanos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cadenas-de-caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cadenas de caracteres
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conversion-de-tipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conversión de tipos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conversión de tipos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conversion-entre-tipos-numericos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conversión entre tipos numéricos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversion-a-short-y-byte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conversión a Short y Byte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversion-a-cadena" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conversión a cadena
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problemas-con-la-conversion-de-tipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problemas con la conversión de tipos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demostracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Demostración
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuando-se-encuentran-tipos-diferentes-la-coercion-de-tipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuando se encuentran tipos diferentes: la coerción de tipos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cuando se encuentran tipos diferentes: la coerción de tipos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#coercion-de-tipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coerción de tipos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Coerción de tipos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#los-tipos-short-y-byte-son-una-excepcion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Los tipos Short y Byte son una excepción
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Operadores: aritméticos, de comparación y lógicos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Entrada y salida estándar y plantillas de cadena
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Trabajar con cadenas: longitud, concatenación y <code>repeat</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte II · Estructuras de control y funciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte II · Estructuras de control y funciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Control de flujo: <code>if</code> y <code>when</code> como expresión
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Bucles: <code>for</code>, <code>while</code> y <code>do-while</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Funciones: definición, parámetros y valores de retorno
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte III · Colecciones y código robusto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte III · Colecciones y código robusto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11. Colecciones I: <code>List</code>, <code>Set</code> y <code>Map</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12. Colecciones II: operaciones funcionales (<code>map</code>, <code>filter</code> y <code>forEach</code>)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Null safety: manejo seguro de valores nulos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14. Manejo de excepciones: <code>try</code>, <code>catch</code> y <code>Result</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Formato de cadenas con <code>String.format</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte IV · Programación orientada a objetos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte IV · Programación orientada a objetos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    16. Clases, propiedades y constructores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    17. Herencia, interfaces y clases abstractas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    18. <code>data class</code>, <code>copy</code> y desestructuración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    19. <code>object</code>, <code>companion object</code> y singletons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    20. <code>enum</code> y <code>sealed class</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter21/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21. Genéricos, funciones de extensión y lambdas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte V · Asincronía con Coroutines
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte V · Asincronía con Coroutines
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter22/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22. ¿Por qué asincronía? El hilo principal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter23/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23. <code>suspend</code>, <code>launch</code>, <code>async</code>, scopes y dispatchers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter24/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24. <code>Flow</code>, <code>StateFlow</code> y <code>SharedFlow</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte VI · Introducción a Android con Jetpack Compose
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte VI · Introducción a Android con Jetpack Compose
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter25/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25. Android Studio y anatomía de un proyecto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter26/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    26. Ciclo de vida de una <code>Activity</code> y tu primer <code>@Composable</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter27/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    27. Fundamentos de Compose: composables, recomposición y <code>Modifier</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. Layouts y listas: <code>Column</code>, <code>Row</code>, <code>LazyColumn</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Material 3: tema, color, tipografía y componentes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. Navegación con Navigation Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte VII · Arquitectura MVVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte VII · Arquitectura MVVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter32/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. Qué es MVVM y por qué usarlo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter33/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter34/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    34. Repositorio y separación de capas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter35/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    35. Inyección de dependencias (manual y con Hilt)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte VIII · Consumo de API REST con Retrofit
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte VIII · Consumo de API REST con Retrofit
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter36/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    36. HTTP, REST y JSON: explorando la PokeAPI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter37/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    37. Retrofit: configuración, interfaces y endpoints
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter38/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    38. Serialización JSON y modelos de datos (DTO)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter39/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    39. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte IX · Proyecto final: PokéDex con PokeAPI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte IX · Proyecto final: PokéDex con PokeAPI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter40/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    40. Diseño de la app: pantallas, navegación y arquitectura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter41/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    41. Setup del proyecto y dependencias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter42/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    42. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter43/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    43. Pantalla de lista con paginación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter44/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    44. Carga de sprites con Coil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter45/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    45. Pantalla de detalle: stats, tipos y habilidades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter46/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    46. Búsqueda y filtrado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter47/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    47. Persistencia local con Room: favoritos y caché offline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter48/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    48. Pulido: estados de UI, Material 3 y accesibilidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter49/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    49. Cierre: testing básico, buenas prácticas y próximos pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Anexos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix-design-principle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A. Principios de diseño (SOLID, DRY y KISS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix-java-scanner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B. Entrada estándar con Scanner de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de datos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-un-tipo-de-dato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es un tipo de dato?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inferencia-de-tipos-y-tipo-explicito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inferencia de tipos y tipo explícito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incompatibilidad-de-tipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Incompatibilidad de tipos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-datos-basicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de datos básicos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de datos básicos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#numeros-enteros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Números enteros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#numeros-decimales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Números decimales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limites-y-tamano-de-un-tipo-numerico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Límites y tamaño de un tipo numérico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracteres
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#booleanos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Booleanos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cadenas-de-caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cadenas de caracteres
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conversion-de-tipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conversión de tipos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conversión de tipos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conversion-entre-tipos-numericos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conversión entre tipos numéricos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversion-a-short-y-byte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conversión a Short y Byte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversion-a-cadena" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conversión a cadena
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problemas-con-la-conversion-de-tipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problemas con la conversión de tipos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demostracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Demostración
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuando-se-encuentran-tipos-diferentes-la-coercion-de-tipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuando se encuentran tipos diferentes: la coerción de tipos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cuando se encuentran tipos diferentes: la coerción de tipos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#coercion-de-tipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coerción de tipos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Coerción de tipos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#los-tipos-short-y-byte-son-una-excepcion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Los tipos Short y Byte son una excepción
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="capitulo-4-tipos-de-datos-basicos">Capítulo 4: Tipos de datos básicos<a class="headerlink" href="#capitulo-4-tipos-de-datos-basicos" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>En los capítulos anteriores aprendiste a configurar el entorno de desarrollo y a escribir tu primer programa en Kotlin. También conociste conceptos fundamentales como las variables, las constantes y las convenciones de programación. Ahora es momento de profundizar en uno de los pilares de cualquier lenguaje de programación: los <strong>tipos de datos</strong>.</p>
+<p>En este capítulo descubrirás qué son los tipos de datos y por qué son tan importantes para escribir programas correctos y seguros. Aprenderás cómo Kotlin identifica el tipo de una variable, cuándo conviene dejar que el compilador lo infiera automáticamente y en qué situaciones es preferible especificarlo de forma explícita. También conocerás qué ocurre cuando intentas utilizar un valor incompatible con el tipo de una variable y cómo el sistema de tipos de Kotlin ayuda a detectar este tipo de errores antes de ejecutar el programa.</p>
+<p>Finalmente, estudiarás los principales tipos de datos básicos que ofrece Kotlin, incluyendo números, caracteres, valores booleanos y cadenas de texto. Comprenderás las características de cada uno de ellos y aprenderás a elegir el tipo más adecuado según la información que necesites representar en tus programas.</p>
+<p>No te preocupes si algunos conceptos parecen similares a los vistos en el capítulo anterior. El objetivo de este capítulo es comprender con mayor profundidad cómo Kotlin representa y administra la información, ya que estos conocimientos serán esenciales para trabajar posteriormente con operadores, estructuras de control y otros elementos fundamentales del lenguaje.</p>
+<h2 id="tipos-de-datos">Tipos de datos<a class="headerlink" href="#tipos-de-datos" title="Permanent link">&para;</a></h2>
+<h3 id="que-es-un-tipo-de-dato">¿Qué es un tipo de dato?<a class="headerlink" href="#que-es-un-tipo-de-dato" title="Permanent link">&para;</a></h3>
+<p>Todos sabemos que un número y un fragmento de texto son cosas muy diferentes. ¿Cómo lo sabemos? Pues bien, se pueden realizar operaciones aritméticas (como la multiplicación) con números, pero no con textos. Kotlin también lo sabe. Por eso, cada variable tiene un <strong>tipo</strong> que determina qué valores se pueden almacenar en ella y qué operaciones se pueden realizar.</p>
+<h3 id="inferencia-de-tipos-y-tipo-explicito">Inferencia de tipos y tipo explícito<a class="headerlink" href="#inferencia-de-tipos-y-tipo-explicito" title="Permanent link">&para;</a></h3>
+<p>El tipo de una variable se establece al declararla:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hola, ahora mismo estoy estudiando Kotlin.&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+<p>En este caso, Kotlin sabe que <code>text</code> es una cadena y que <code>n</code> es un número. Kotlin determina los tipos de ambas variables automáticamente. Este mecanismo se denomina <strong>inferencia de tipos</strong>.</p>
+<p>Así es como declaramos una variable dejando que Kotlin infiera el tipo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>val/var identificador = inicialización
+</code></pre></div>
+<p>También puedes especificar el tipo de una variable al declararla, escribiéndolo después de dos puntos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>val/var identificador: Tipo = inicialización
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ten en cuenta que el nombre del tipo siempre empieza por una letra mayúscula (<code>Int</code>, <code>String</code>, <code>Boolean</code>…).</p>
+</div>
+<p>Declaremos las mismas variables que en el ejemplo anterior y especifiquemos sus tipos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">text</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hola, ahora estoy estudiando Kotlin.&quot;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">n</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+<p>El tipo <code>Int</code> significa que la variable almacena un número entero (<code>0</code>, <code>1</code>, <code>2</code>, ..., <code>100_000_000</code>, ...). El tipo <code>String</code> significa que la variable almacena una cadena de caracteres (<code>"Hola"</code>, <code>"John Smith"</code>). Más adelante aprenderás más sobre estos y otros tipos de datos.</p>
+<p>En la práctica se utilizan ambas formas. Cuando usas la inferencia de tipos, tu código resulta más conciso y legible; pero en algunos casos conviene especificar el tipo. Por ejemplo, si necesitas declarar una variable e inicializarla más tarde, la inferencia no tiene con qué trabajar:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">greeting</span><span class="w"> </span><span class="c1">// error: Kotlin no puede inferir el tipo</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hello&quot;</span>
+</code></pre></div>
+<p>El ejemplo anterior es incorrecto porque Kotlin no puede inferir el tipo cuando la variable solo se declara, y toda variable debe tener un tipo. En cambio, el ejemplo siguiente sí funciona porque especificamos el tipo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">greeting</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="c1">// correcto</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hello&quot;</span>
+</code></pre></div>
+<h3 id="incompatibilidad-de-tipos">Incompatibilidad de tipos<a class="headerlink" href="#incompatibilidad-de-tipos" title="Permanent link">&para;</a></h3>
+<p>Una de las funciones más importantes de los tipos de datos es evitar que se asigne un valor inadecuado a una variable. Echa un vistazo a este ejemplo de código que no funciona:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">n</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;abc&quot;</span><span class="w"> </span><span class="c1">// Discrepancia de tipos: el tipo inferido es String, pero se esperaba Int</span>
+</code></pre></div>
+<p>Por lo tanto, si ves un error de incompatibilidad de tipos, significa que has asignado algo inadecuado a una variable. El mismo problema se produce cuando intentas asignar un valor inadecuado a una variable mutable declarada con inferencia de tipos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">var</span><span class="w"> </span><span class="nv">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="c1">// el tipo inferido es Int</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;31 years old&quot;</span><span class="w"> </span><span class="c1">// Discrepancia de tipos</span>
+</code></pre></div>
+<h2 id="tipos-de-datos-basicos">Tipos de datos básicos<a class="headerlink" href="#tipos-de-datos-basicos" title="Permanent link">&para;</a></h2>
+<p>En este tema aprenderemos sobre la clasificación y las propiedades de los tipos básicos en Kotlin. Es posible que ya conozcas algunos de ellos. Los tipos básicos se agrupan según su significado: los de un mismo grupo funcionan de manera similar, pero tienen tamaños diferentes y, por lo tanto, representan distintos rangos de valores.</p>
+<h3 id="numeros-enteros">Números enteros<a class="headerlink" href="#numeros-enteros" title="Permanent link">&para;</a></h3>
+<p>Un <strong>número entero</strong> es un número sin parte decimal (<code>0</code>, <code>1</code>, <code>2</code>, <code>-5</code>, <code>100</code>…). En la práctica, para guardar enteros casi siempre usarás el tipo <code>Int</code>, y ocasionalmente <code>Long</code> cuando el número sea muy grande.</p>
+<p>¿Por qué existe más de un tipo para lo mismo? Porque cada uno ocupa un tamaño distinto en memoria y, por eso, admite un rango de valores diferente. Kotlin ofrece cuatro:</p>
+<ul>
+<li><code>Byte</code>: 8 bits (1 byte); rango de -128 a 127.</li>
+<li><code>Short</code>: 16 bits (2 bytes); rango de -32 768 a 32 767.</li>
+<li><code>Int</code>: 32 bits (4 bytes); rango de -2 147 483 648 a 2 147 483 647.</li>
+<li><code>Long</code>: 64 bits (8 bytes); rango de -9 223 372 036 854 775 808 a 9 223 372 036 854 775 807.</li>
+</ul>
+<p>El tamaño de cada tipo es fijo: no depende del sistema operativo ni del hardware.</p>
+<p>En el día a día, <code>Int</code> cubre la gran mayoría de los casos. Si un número se sale de su rango, usa <code>Long</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">zero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w">               </span><span class="c1">// Int</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">oneMillion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="n">_000_000</span><span class="w"> </span><span class="c1">// Int</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="kd">val</span><span class="w"> </span><span class="nv">twoMillion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="n">_000_000L</span><span class="w">           </span><span class="c1">// Long, por la etiqueta L</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="kd">val</span><span class="w"> </span><span class="nv">bigNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="n">_000_000_000_000_000</span><span class="w"> </span><span class="c1">// Long: Kotlin lo elige porque no cabe en un Int</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="kd">val</span><span class="w"> </span><span class="nv">ten</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="w">                    </span><span class="c1">// Long, porque especificamos el tipo</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="kd">val</span><span class="w"> </span><span class="nv">shortNumber</span><span class="p">:</span><span class="w"> </span><span class="kt">Short</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">15</span><span class="w"> </span><span class="c1">// Short, porque especificamos el tipo</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="kd">val</span><span class="w"> </span><span class="nv">byteNumber</span><span class="p">:</span><span class="w"> </span><span class="kt">Byte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">15</span><span class="w">   </span><span class="c1">// Byte, porque especificamos el tipo</span>
+</code></pre></div>
+<h3 id="numeros-decimales">Números decimales<a class="headerlink" href="#numeros-decimales" title="Permanent link">&para;</a></h3>
+<p>Para números con parte decimal (<code>3.14</code>, <code>-0.5</code>, <code>100.0</code>), Kotlin ofrece dos tipos de <strong>coma flotante</strong>: <code>Double</code> (64 bits) y <code>Float</code> (32 bits). <code>Double</code> es más preciso (unos 14-16 dígitos decimales frente a los 6-7 de <code>Float</code>) y es el que usarás casi siempre:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.1415</span><span class="w">             </span><span class="c1">// Double</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.71828f</span><span class="w">            </span><span class="c1">// Float, por la etiqueta f</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">fraction</span><span class="p">:</span><span class="w"> </span><span class="kt">Float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.51f</span><span class="w"> </span><span class="c1">// Float, porque especificamos el tipo</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Regla práctica: para enteros usa <code>Int</code> y para decimales usa <code>Double</code>. Recurre a <code>Long</code>, <code>Short</code>, <code>Byte</code> o <code>Float</code> solo cuando tengas una razón concreta, como un número que no cabe en un <code>Int</code>.</p>
+</div>
+<h3 id="limites-y-tamano-de-un-tipo-numerico">Límites y tamaño de un tipo numérico<a class="headerlink" href="#limites-y-tamano-de-un-tipo-numerico" title="Permanent link">&para;</a></h3>
+<p>Si necesitas consultar desde el código el valor mínimo o máximo de un tipo numérico, escribe el nombre del tipo, un punto <code>.</code> y luego <code>MIN_VALUE</code> o <code>MAX_VALUE</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">println</span><span class="p">(</span><span class="kt">Int</span><span class="p">.</span><span class="na">MIN_VALUE</span><span class="p">)</span><span class="w">  </span><span class="c1">// -2147483648</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">println</span><span class="p">(</span><span class="kt">Int</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">)</span><span class="w">  </span><span class="c1">// 2147483647</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">println</span><span class="p">(</span><span class="kt">Long</span><span class="p">.</span><span class="na">MIN_VALUE</span><span class="p">)</span><span class="w"> </span><span class="c1">// -9223372036854775808</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">println</span><span class="p">(</span><span class="kt">Long</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">)</span><span class="w"> </span><span class="c1">// 9223372036854775807</span>
+</code></pre></div>
+<p>También puedes obtener el tamaño de un tipo entero en bytes o bits (1 byte = 8 bits):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">println</span><span class="p">(</span><span class="kt">Int</span><span class="p">.</span><span class="na">SIZE_BYTES</span><span class="p">)</span><span class="w"> </span><span class="c1">// 4</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">println</span><span class="p">(</span><span class="kt">Int</span><span class="p">.</span><span class="na">SIZE_BITS</span><span class="p">)</span><span class="w">  </span><span class="c1">// 32</span>
+</code></pre></div>
+<h3 id="caracteres">Caracteres<a class="headerlink" href="#caracteres" title="Permanent link">&para;</a></h3>
+<p>Kotlin cuenta con el tipo <code>Char</code> para representar caracteres alfabéticos (mayúsculas y minúsculas), dígitos y otros símbolos. Cada carácter se escribe entre comillas simples. Su tamaño es similar al del tipo <code>Short</code> (2 bytes = 16 bits):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">lowerCaseLetter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;a&#39;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">upperCaseLetter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;Q&#39;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;1&#39;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="kd">val</span><span class="w"> </span><span class="nv">space</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39; &#39;</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="kd">val</span><span class="w"> </span><span class="nv">dollar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;$&#39;</span>
+</code></pre></div>
+<p>Los caracteres pueden representar símbolos de muchos alfabetos, incluidos jeroglíficos y algunos símbolos especiales, que veremos más adelante.</p>
+<h3 id="booleanos">Booleanos<a class="headerlink" href="#booleanos" title="Permanent link">&para;</a></h3>
+<p>Kotlin ofrece un tipo denominado <code>Boolean</code>. Solo puede almacenar dos valores: <code>true</code> y <code>false</code>. Representa un único bit de información:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">bugFound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+</code></pre></div>
+<p>A menudo utilizaremos este tipo en instrucciones condicionales.</p>
+<h3 id="cadenas-de-caracteres">Cadenas de caracteres<a class="headerlink" href="#cadenas-de-caracteres" title="Permanent link">&para;</a></h3>
+<p>El tipo <code>String</code> representa una secuencia de caracteres entre comillas dobles. Es uno de los tipos más habituales:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">creditCardNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1234 5678 9012 3456&quot;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Estoy aprendiendo Kotlin.&quot;</span>
+</code></pre></div>
+<h2 id="conversion-de-tipos">Conversión de tipos<a class="headerlink" href="#conversion-de-tipos" title="Permanent link">&para;</a></h2>
+<p>La conversión de tipos, o <em>type casting</em>, consiste en cambiar un valor de un tipo de datos a otro. Esto resulta especialmente importante en Kotlin, ya que se trata de un lenguaje de tipado estático, lo que significa que los tipos se identifican y se aplican de forma estricta en tiempo de compilación.</p>
+<h3 id="conversion-entre-tipos-numericos">Conversión entre tipos numéricos<a class="headerlink" href="#conversion-entre-tipos-numericos" title="Permanent link">&para;</a></h3>
+<p>Los tres tipos numéricos más comunes son: <code>Int</code>, <code>Long</code> y <code>Double</code>. En ocasiones necesitarás asignar un valor de un tipo numérico a una variable de otro tipo. Para eso, llamas a una función especial de conversión, por ejemplo <code>toInt()</code>, <code>toLong()</code>, <code>toDouble()</code>, etc.</p>
+<p>Imagina que tienes una variable llamada <code>num</code>, de tipo <code>Int</code>, y quieres pasarla a una función <code>sqrt()</code> que calcula la raíz cuadrada. Esa función requiere un valor <code>Double</code>, no <code>Int</code>, por lo que debes convertirlo con <code>toDouble()</code> para evitar un error de incompatibilidad:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">num</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">res</span><span class="p">:</span><span class="w"> </span><span class="kt">Double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">num</span><span class="p">.</span><span class="na">toDouble</span><span class="p">())</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="n">println</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="w"> </span><span class="c1">// 10.0</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="n">println</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="c1">// 100, no se modifica</span>
+</code></pre></div>
+<p>En el ejemplo anterior, los tipos de las variables se han especificado para simplificar la explicación.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>toDouble()</code> no modifica el tipo de la variable. Esta función genera un nuevo valor de tipo <code>Double</code>.</p>
+</div>
+<p>Ten en cuenta que debes realizar estas conversiones incluso cuando el tipo de destino sea mayor que el de origen. Por ejemplo, para pasar de <code>Int</code> a <code>Long</code>. Esto distingue a Kotlin de otros lenguajes como Java y C#, que permiten asignar números de un tipo menor a variables de un tipo mayor sin acciones adicionales:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">num</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">bigNum</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">num</span><span class="p">.</span><span class="na">toLong</span><span class="p">()</span><span class="w"> </span><span class="c1">// 100</span>
+</code></pre></div>
+<p><code>Char</code> no es un tipo numérico, pero puedes convertir un número en un carácter y viceversa según el código del carácter (un número entero que puedes consultar en la tabla <em>Unicode</em>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">n1</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">65</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">ch</span><span class="p">:</span><span class="w"> </span><span class="kt">Char</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n1</span><span class="p">.</span><span class="na">toChar</span><span class="p">()</span><span class="w"> </span><span class="c1">// &#39;A&#39;</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">n2</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch</span><span class="p">.</span><span class="na">code</span><span class="w">      </span><span class="c1">// 65</span>
+</code></pre></div>
+<h3 id="conversion-a-short-y-byte">Conversión a <code>Short</code> y <code>Byte</code><a class="headerlink" href="#conversion-a-short-y-byte" title="Permanent link">&para;</a></h3>
+<p>Los tipos <code>Short</code> y <code>Byte</code> se usan muy poco; si necesitas guardar un entero, lo normal es <code>Int</code>. Aun así, veamos cómo convertir a ellos, porque hay un detalle importante.</p>
+<p>Existen las funciones <code>toShort()</code> y <code>toByte()</code>, pero <strong>evita</strong> aplicarlas directamente sobre un <code>Double</code> o un <code>Float</code>: desde Kotlin 1.4 esa conversión quedó obsoleta (y ya se eliminó en las versiones actuales), porque puede dar resultados inesperados debido al menor tamaño de estos tipos.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">floatNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10f</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">shortNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">floatNumber</span><span class="p">.</span><span class="na">toShort</span><span class="p">()</span><span class="w"> </span><span class="c1">// evita esto</span>
+</code></pre></div>
+<p>La forma correcta es convertir primero a <code>Int</code> y, desde ahí, a <code>Short</code> o <code>Byte</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">floatNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10f</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">shortNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">floatNumber</span><span class="p">.</span><span class="na">toInt</span><span class="p">().</span><span class="na">toShort</span><span class="p">()</span><span class="w"> </span><span class="c1">// forma correcta</span>
+</code></pre></div>
+<h3 id="conversion-a-cadena">Conversión a cadena<a class="headerlink" href="#conversion-a-cadena" title="Permanent link">&para;</a></h3>
+<p>A veces necesitas obtener la representación en forma de cadena de un valor de otro tipo. Kotlin ofrece la función <code>toString()</code> para ello, que puede convertir un valor de cualquier tipo en una cadena:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="w">     </span><span class="c1">// Int</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10.09</span><span class="w"> </span><span class="c1">// Double</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;@&#39;</span><span class="w">   </span><span class="c1">// Char</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="kd">val</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">  </span><span class="c1">// Boolean</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="kd">val</span><span class="w"> </span><span class="nv">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="na">toString</span><span class="p">()</span><span class="w"> </span><span class="c1">// &quot;8&quot;</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="kd">val</span><span class="w"> </span><span class="nv">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="na">toString</span><span class="p">()</span><span class="w"> </span><span class="c1">// &quot;10.09&quot;</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="kd">val</span><span class="w"> </span><span class="nv">s3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="na">toString</span><span class="p">()</span><span class="w"> </span><span class="c1">// &quot;@&quot;</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="kd">val</span><span class="w"> </span><span class="nv">s4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="na">toString</span><span class="p">()</span><span class="w"> </span><span class="c1">// &quot;true&quot;</span>
+</code></pre></div>
+<p>Una cadena se puede convertir en un número o incluso en un valor booleano, pero no en un solo carácter:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;8&quot;</span><span class="p">.</span><span class="na">toInt</span><span class="p">()</span><span class="w">        </span><span class="c1">// Int</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;10.09&quot;</span><span class="p">.</span><span class="na">toDouble</span><span class="p">()</span><span class="w"> </span><span class="c1">// Double</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="p">.</span><span class="na">toBoolean</span><span class="p">()</span><span class="w"> </span><span class="c1">// Boolean</span>
+</code></pre></div>
+<p>Si la representación en forma de cadena tiene un formato no válido, se producirá un error y el programa se detendrá, a menos que se tomen medidas especiales. Hablaremos de ellas más adelante.</p>
+<p>Sin embargo, al convertir una cadena en un valor booleano no se produce ningún error. Si la cadena es <code>"true"</code> (sin distinguir mayúsculas y minúsculas), se obtiene <code>true</code>; en caso contrario, <code>false</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">b1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;false&quot;</span><span class="p">.</span><span class="na">toBoolean</span><span class="p">()</span><span class="w"> </span><span class="c1">// false</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">b2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tru&quot;</span><span class="p">.</span><span class="na">toBoolean</span><span class="p">()</span><span class="w">   </span><span class="c1">// false</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">b3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="p">.</span><span class="na">toBoolean</span><span class="p">()</span><span class="w">  </span><span class="c1">// true</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="kd">val</span><span class="w"> </span><span class="nv">b4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;TRUE&quot;</span><span class="p">.</span><span class="na">toBoolean</span><span class="p">()</span><span class="w">  </span><span class="c1">// true</span>
+</code></pre></div>
+<h3 id="problemas-con-la-conversion-de-tipos">Problemas con la conversión de tipos<a class="headerlink" href="#problemas-con-la-conversion-de-tipos" title="Permanent link">&para;</a></h3>
+<p>Si tienes un valor de tipo flotante, por ejemplo un <code>Double</code>, puedes convertirlo a un tipo entero como <code>Int</code> o <code>Long</code>. Veamos qué ocurre:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">d</span><span class="p">:</span><span class="w"> </span><span class="kt">Double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12.5</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">n</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="na">toLong</span><span class="p">()</span><span class="w"> </span><span class="c1">// 12</span>
+</code></pre></div>
+<p>Como puedes ver, la parte fraccionaria simplemente se descarta. Obtienes un resultado, pero pierdes precisión. ¡Ten cuidado con esta conversión!</p>
+<p>Puede surgir otro problema al convertir un número de un tipo más grande a uno más pequeño (de <code>Long</code> o <code>Double</code> a <code>Int</code>). Si los valores son pequeños, funciona bien:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">d</span><span class="p">:</span><span class="w"> </span><span class="kt">Double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10.2</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">n</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">15</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="kd">val</span><span class="w"> </span><span class="nv">res1</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="na">toInt</span><span class="p">()</span><span class="w"> </span><span class="c1">// 10</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="kd">val</span><span class="w"> </span><span class="nv">res2</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="p">.</span><span class="na">toInt</span><span class="p">()</span><span class="w"> </span><span class="c1">// 15</span>
+</code></pre></div>
+<p>Sin embargo, esta conversión puede truncar el valor, ya que <code>Long</code> y <code>Double</code> pueden almacenar números mayores que los que cabe en un <code>Int</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">bigNum</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="n">_000_000_000_000</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">n</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bigNum</span><span class="p">.</span><span class="na">toInt</span><span class="p">()</span><span class="w"> </span><span class="c1">// 276447232</span>
+</code></pre></div>
+<p>Como resultado, obtenemos un valor truncado. Este problema se conoce como <strong>desbordamiento de tipo</strong> (<em>overflow</em>). Lo mismo puede ocurrir al convertir un <code>Int</code> a <code>Short</code> o <code>Byte</code>. Por lo tanto, si conviertes un valor de un tipo mayor a uno menor, asegúrate de que el truncamiento no afecte al funcionamiento de tu programa.</p>
+<h3 id="demostracion">Demostración<a class="headerlink" href="#demostracion" title="Permanent link">&para;</a></h3>
+<p>El programa siguiente ilustra las funciones que vimos. Lee la representación en forma de cadena de un número, la convierte a varios tipos diferentes y muestra los resultados:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">something</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">readln</span><span class="p">()</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">something</span><span class="p">.</span><span class="na">toDouble</span><span class="p">()</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="na">toFloat</span><span class="p">()</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="na">toInt</span><span class="p">()</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">.</span><span class="na">toByte</span><span class="p">()</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">something</span><span class="p">.</span><span class="na">toBoolean</span><span class="p">())</span>
+<a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a><span class="p">}</span>
+</code></pre></div>
+<p>Imagina que tenemos los siguientes datos de entrada:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>1000.0123456789
+</code></pre></div>
+<p>El programa mostrará el siguiente resultado:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>1000.0123456789
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>1000.0123
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>1000
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>-24
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>false
+</code></pre></div>
+<p>Analicémoslo con más detalle. El número representado por la cadena se convierte correctamente a <code>Double</code>, ya que tiene un formato adecuado. A continuación se convierte a <code>Float</code>, y aquí hay una pérdida, porque este tipo almacena menos decimales. La conversión a <code>Int</code> elimina la parte fraccionaria. El número <code>1000</code> es mayor de lo que puede almacenar un <code>Byte</code> (de -128 a 127), por lo que se produce un desbordamiento de tipo (<code>-24</code>). Y el resultado de convertir la cadena a <code>Boolean</code> es <code>false</code>, porque el valor no es <code>"true"</code>.</p>
+<h2 id="cuando-se-encuentran-tipos-diferentes-la-coercion-de-tipos">Cuando se encuentran tipos diferentes: la coerción de tipos<a class="headerlink" href="#cuando-se-encuentran-tipos-diferentes-la-coercion-de-tipos" title="Permanent link">&para;</a></h2>
+<p>Ya sabes cómo realizar una conversión de tipos de forma manual. Pero surge una pregunta: sabes que no puedes asignar directamente un <code>Int</code> a una variable <code>Long</code>… ¿qué ocurre entonces si calculamos la <strong>suma</strong> de un <code>Int</code> y un <code>Long</code>? En ese caso, el tipo se deduce del contexto.</p>
+<h3 id="coercion-de-tipos">Coerción de tipos<a class="headerlink" href="#coercion-de-tipos" title="Permanent link">&para;</a></h3>
+<p>En estos casos, el compilador convierte automáticamente todos los operandos (esto se denomina <strong>coerción de tipos</strong>) y el resultado al tipo más amplio de la expresión. La imagen siguiente ilustra la dirección de esta conversión:</p>
+<p><img alt="Coerción de tipos" src="../assets/images/chapter04/type-coercion.png" /></p>
+<p>Como el tipo del resultado es más amplio que el de los operandos, no se produce ninguna pérdida de información.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>La coerción de tipos es poco habitual en Kotlin. Solo funciona con números y cadenas.</p>
+</div>
+<h4 id="ejemplos">Ejemplos<a class="headerlink" href="#ejemplos" title="Permanent link">&para;</a></h4>
+<p>La teoría parece bastante clara, así que veamos algunos ejemplos.</p>
+<ul>
+<li>De <code>Int</code> a <code>Long</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">num</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">longNum</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1000</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">longNum</span><span class="w"> </span><span class="c1">// 1100, Long</span>
+</code></pre></div>
+<p>Aunque <code>result</code> es simplemente <code>1100</code>, se trata de la suma de un <code>Long</code> y un <code>Int</code>, por lo que el tipo se convierte automáticamente a <code>Long</code>. Si intentaras declarar el resultado como <code>Int</code>, obtendrías un error, porque no se puede asignar un <code>Long</code> a una variable <code>Int</code>.</p>
+<ul>
+<li>De <code>Long</code> a <code>Double</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">bigNum</span><span class="p">:</span><span class="w"> </span><span class="kt">Long</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100000</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">doubleNum</span><span class="p">:</span><span class="w"> </span><span class="kt">Double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.0</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">bigFraction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bigNum</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">doubleNum</span><span class="w"> </span><span class="c1">// 100000.0, Double</span>
+</code></pre></div>
+<h3 id="los-tipos-short-y-byte-son-una-excepcion">Los tipos <code>Short</code> y <code>Byte</code> son una excepción<a class="headerlink" href="#los-tipos-short-y-byte-son-una-excepcion" title="Permanent link">&para;</a></h3>
+<p>Vimos que el resultado de una expresión con variables de distintos tipos se convierte al tipo más amplio. Sin embargo, <code>Byte</code> y <code>Short</code> son una excepción: si operas con ellos, el resultado será de tipo <code>Int</code>:</p>
+<ul>
+<li><code>Byte</code> y <code>Byte</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">one</span><span class="p">:</span><span class="w"> </span><span class="kt">Byte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">two</span><span class="p">:</span><span class="w"> </span><span class="kt">Byte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">three</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">two</span><span class="w"> </span><span class="c1">// 3, Int</span>
+</code></pre></div>
+<ul>
+<li><code>Short</code> y <code>Short</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">fourteen</span><span class="p">:</span><span class="w"> </span><span class="kt">Short</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">14</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">ten</span><span class="p">:</span><span class="w"> </span><span class="kt">Short</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">four</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fourteen</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ten</span><span class="w"> </span><span class="c1">// 4, Int</span>
+</code></pre></div>
+<ul>
+<li><code>Short</code> y <code>Byte</code>:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">hundred</span><span class="p">:</span><span class="w"> </span><span class="kt">Short</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">five</span><span class="p">:</span><span class="w"> </span><span class="kt">Byte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">zero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hundred</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">five</span><span class="w"> </span><span class="c1">// 0, Int</span>
+</code></pre></div>
+<p>Entonces, ¿qué hacemos si queremos sumar dos variables <code>Byte</code> y obtener un resultado <code>Byte</code>? En ese caso, hay que convertir el resultado manualmente:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">one</span><span class="p">:</span><span class="w"> </span><span class="kt">Byte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">five</span><span class="p">:</span><span class="w"> </span><span class="kt">Byte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">six</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">one</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">five</span><span class="p">).</span><span class="na">toByte</span><span class="p">()</span><span class="w"> </span><span class="c1">// 6, Byte</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Important</p>
+<p>Recuerda que un <code>Byte</code> solo puede almacenar valores en el rango de <code>-128</code> a <code>127</code>.</p>
+</div>
+<p>Echa un vistazo al siguiente ejemplo para ver cómo se produce el desbordamiento de tipo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">a</span><span class="p">:</span><span class="w"> </span><span class="kt">Byte</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">120</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="w">    </span><span class="n">println</span><span class="p">((</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span><span class="p">).</span><span class="na">toByte</span><span class="p">())</span><span class="w"> </span><span class="c1">// muestra -16 porque 120 + 120 &gt; 127</span>
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo profundizaste en cómo Kotlin representa la información:</p>
+<ul>
+<li>Cada valor tiene un <strong>tipo</strong>, que Kotlin puede <strong>inferir</strong> o que puedes indicar de forma explícita.</li>
+<li>Para enteros, usa <code>Int</code> (y <code>Long</code> para números muy grandes); para decimales, <code>Double</code>.</li>
+<li>La <strong>conversión de tipos</strong> se hace con funciones como <code>toInt()</code>, <code>toDouble()</code> o <code>toString()</code>, y hay que hacerla siempre, incluso hacia tipos más grandes.</li>
+<li>Convertir de un tipo mayor a uno menor puede truncar el valor (<strong>desbordamiento</strong>).</li>
+<li>En una expresión con tipos distintos, Kotlin aplica la <strong>coerción</strong> hacia el tipo más amplio (con <code>Byte</code> y <code>Short</code> como excepción, que pasan a <code>Int</code>).</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../chapter03/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 3. Conceptos básicos de Kotlin">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                3. Conceptos básicos de Kotlin
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../chapter05/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 5. Operadores: aritméticos, de comparación y lógicos">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                5. Operadores: aritméticos, de comparación y lógicos
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
