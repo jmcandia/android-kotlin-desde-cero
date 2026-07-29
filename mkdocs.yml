@@ -1,0 +1,124 @@
+site_name: Android con Kotlin desde cero
+site_description: >-
+  Un curso que lleva a programadores con base en Java desde los fundamentos de
+  Kotlin hasta una aplicación Android completa con Jetpack Compose.
+# site_url: https://jmcandia.github.io/android-kotlin-desde-cero/
+
+repo_url: https://github.com/jmcandia/android-kotlin-desde-cero
+repo_name: GitHub
+
+theme:
+  name: material
+  language: es
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Cambiar a modo oscuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Cambiar a modo claro
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+extra_css:
+  - assets/css/custom.css
+
+plugins:
+  - search:
+      lang: es
+  - callouts
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+nav:
+  - Inicio: index.md
+  - "Parte I · Fundamentos de Kotlin":
+      - "1. El entorno de desarrollo (IDE e IntelliJ IDEA)": chapter01.md
+      - "2. Un primer vistazo a Kotlin": chapter02.md
+      - "3. Conceptos básicos de Kotlin": chapter03.md
+      - "4. Tipos de datos básicos": chapter04.md
+      - "5. Operadores: aritméticos, de comparación y lógicos": chapter05.md
+      - "6. Entrada y salida estándar y plantillas de cadena": chapter06.md
+      - "7. Trabajar con cadenas: longitud, concatenación y <code>repeat</code>": chapter07.md
+  - "Parte II · Estructuras de control y funciones":
+      - "8. Control de flujo: <code>if</code> y <code>when</code> como expresión": chapter08.md
+      - "9. Bucles: <code>for</code>, <code>while</code> y <code>do-while</code>": chapter09.md
+      - "10. Funciones: definición, parámetros y valores de retorno": chapter10.md
+  - "Parte III · Colecciones y código robusto":
+      - "11. Colecciones I: <code>List</code>, <code>Set</code> y <code>Map</code>": chapter11.md
+      - "12. Colecciones II: operaciones funcionales (<code>map</code>, <code>filter</code> y <code>forEach</code>)": chapter12.md
+      - "13. Null safety: manejo seguro de valores nulos": chapter13.md
+      - "14. Manejo de excepciones: <code>try</code>, <code>catch</code> y <code>Result</code>": chapter14.md
+      - "15. Formato de cadenas con <code>String.format</code>": chapter15.md
+  - "Parte IV · Programación orientada a objetos":
+      - "16. Clases, propiedades y constructores": chapter16.md
+      - "17. Herencia, interfaces y clases abstractas": chapter17.md
+      - "18. <code>data class</code>, <code>copy</code> y desestructuración": chapter18.md
+      - "19. <code>object</code>, <code>companion object</code> y singletons": chapter19.md
+      - "20. <code>enum</code> y <code>sealed class</code>": chapter20.md
+      - "21. Genéricos, funciones de extensión y lambdas": chapter21.md
+  - "Parte V · Asincronía con Coroutines":
+      - "22. ¿Por qué asincronía? El hilo principal": chapter22.md
+      - "23. <code>suspend</code>, <code>launch</code>, <code>async</code>, scopes y dispatchers": chapter23.md
+      - "24. <code>Flow</code>, <code>StateFlow</code> y <code>SharedFlow</code>": chapter24.md
+  - "Parte VI · Introducción a Android con Jetpack Compose":
+      - "25. Android Studio y anatomía de un proyecto": chapter25.md
+      - "26. Ciclo de vida de una <code>Activity</code> y tu primer <code>@Composable</code>": chapter26.md
+      - "27. Fundamentos de Compose: composables, recomposición y <code>Modifier</code>": chapter27.md
+      - "28. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>": chapter28.md
+      - "29. Layouts y listas: <code>Column</code>, <code>Row</code>, <code>LazyColumn</code>": chapter29.md
+      - "30. Material 3: tema, color, tipografía y componentes": chapter30.md
+      - "31. Navegación con Navigation Compose": chapter31.md
+  - "Parte VII · Arquitectura MVVM":
+      - "32. Qué es MVVM y por qué usarlo": chapter32.md
+      - "33. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)": chapter33.md
+      - "34. Repositorio y separación de capas": chapter34.md
+      - "35. Inyección de dependencias (manual y con Hilt)": chapter35.md
+  - "Parte VIII · Consumo de API REST con Retrofit":
+      - "36. HTTP, REST y JSON: explorando la PokeAPI": chapter36.md
+      - "37. Retrofit: configuración, interfaces y endpoints": chapter37.md
+      - "38. Serialización JSON y modelos de datos (DTO)": chapter38.md
+      - "39. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>": chapter39.md
+  - "Parte IX · Proyecto final: PokéDex con PokeAPI":
+      - "40. Diseño de la app: pantallas, navegación y arquitectura": chapter40.md
+      - "41. Setup del proyecto y dependencias": chapter41.md
+      - "42. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>": chapter42.md
+      - "43. Pantalla de lista con paginación": chapter43.md
+      - "44. Carga de sprites con Coil": chapter44.md
+      - "45. Pantalla de detalle: stats, tipos y habilidades": chapter45.md
+      - "46. Búsqueda y filtrado": chapter46.md
+      - "47. Persistencia local con Room: favoritos y caché offline": chapter47.md
+      - "48. Pulido: estados de UI, Material 3 y accesibilidad": chapter48.md
+      - "49. Cierre: testing básico, buenas prácticas y próximos pasos": chapter49.md
+  - Anexos:
+      - "A. Principios de diseño (SOLID, DRY y KISS)": appendix-design-principle.md
+      - "B. Entrada estándar con Scanner de Java": appendix-java-scanner.md
