@@ -1375,6 +1375,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1391,6 +1409,102 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-problema-una-variable-normal-no-basta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El problema: una variable normal no basta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mutablestateof-y-remember" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mutableStateOf y remember
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-sintaxis-by" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La sintaxis by
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sobrevivir-a-la-rotacion-remembersaveable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sobrevivir a la rotación: rememberSaveable
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-hoisting-elevar-el-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State hoisting: elevar el estado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2284,6 +2398,91 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-problema-una-variable-normal-no-basta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El problema: una variable normal no basta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mutablestateof-y-remember" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mutableStateOf y remember
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-sintaxis-by" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La sintaxis by
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sobrevivir-a-la-rotacion-remembersaveable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sobrevivir a la rotación: rememberSaveable
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-hoisting-elevar-el-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State hoisting: elevar el estado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2303,10 +2502,103 @@
 
 
 <h1 id="capitulo-28-estado-en-compose-remember-mutablestateof-y-state-hoisting">Capítulo 28: Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em><a class="headerlink" href="#capitulo-28-estado-en-compose-remember-mutablestateof-y-state-hoisting" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>En el capítulo anterior aprendiste la <strong>recomposición</strong>: cuando cambian los datos que un composable lee, Compose lo vuelve a ejecutar y actualiza la interfaz. Pero quedó una pregunta pendiente: ¿cómo se declaran esos datos que, al cambiar, disparan la recomposición?</p>
+<p>La respuesta es el <strong>estado</strong> (<em>state</em>). En este capítulo aprenderás a crear estado con <code>mutableStateOf</code>, a conservarlo entre recomposiciones con <code>remember</code>, a mantenerlo incluso al girar el dispositivo con <code>rememberSaveable</code>, y una técnica fundamental para organizar bien tu interfaz: el <strong><em>state hoisting</em></strong> o "elevación del estado".</p>
+<h2 id="el-problema-una-variable-normal-no-basta">El problema: una variable normal no basta<a class="headerlink" href="#el-problema-una-variable-normal-no-basta" title="Permanent link">&para;</a></h2>
+<p>Intentemos algo sencillo: un contador que aumenta cada vez que tocas un botón. Con lo que sabes, podrías intentar una variable normal:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Composable</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">Contador</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">contador</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">Button</span><span class="p">(</span><span class="n">onClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">contador</span><span class="o">++</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Has tocado </span><span class="si">$</span><span class="n">contador</span><span class="s"> veces&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">}</span>
+</code></pre></div>
+<p>Pero esto <strong>no funciona</strong>: por más que toques el botón, el número no cambia en pantalla. Y hay dos razones:</p>
+<ol>
+<li>Compose <strong>no sabe</strong> que <code>contador</code> cambió, así que no recompone: la interfaz nunca se entera de la actualización.</li>
+<li>Aunque recompusiera, <code>contador</code> es una variable normal que se <strong>reinicia a 0</strong> cada vez que la función se vuelve a ejecutar.</li>
+</ol>
+<p>Necesitamos algo que Compose pueda <strong>observar</strong> y que, además, <strong>sobreviva</strong> a las recomposiciones. Esas dos necesidades las resuelven <code>mutableStateOf</code> y <code>remember</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Contenido en construcción</p>
+<p><code>Button</code> es un componente de Material, que veremos en detalle más adelante. Por ahora basta con saber que su parámetro <code>onClick</code> recibe la acción que se ejecuta al tocarlo.</p>
 </div>
+<h2 id="mutablestateof-y-remember"><code>mutableStateOf</code> y <code>remember</code><a class="headerlink" href="#mutablestateof-y-remember" title="Permanent link">&para;</a></h2>
+<p>La solución tiene dos partes que trabajan juntas.</p>
+<p><strong><code>mutableStateOf</code></strong> crea un valor <strong>observable</strong>: un contenedor de estado que Compose vigila. Cuando su contenido cambia, Compose recompone los composables que lo leen.</p>
+<p><strong><code>remember</code></strong> le dice a Compose que <strong>recuerde</strong> ese valor entre recomposiciones, en lugar de recrearlo cada vez.</p>
+<p>Combinándolos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Composable</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">Contador</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">contador</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">remember</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">mutableStateOf</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">Button</span><span class="p">(</span><span class="n">onClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">contador</span><span class="p">.</span><span class="na">value</span><span class="o">++</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Has tocado </span><span class="si">${</span><span class="n">contador</span><span class="p">.</span><span class="na">value</span><span class="si">}</span><span class="s"> veces&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">}</span>
+</code></pre></div>
+<p>Ahora sí funciona. Al leer <code>contador.value</code> dentro del <code>Text</code>, Compose registra que ese texto <strong>depende</strong> de ese estado. Cuando tocas el botón y haces <code>contador.value++</code>, el estado cambia, Compose recompone y el texto se actualiza con el nuevo número. Y gracias a <code>remember</code>, el valor no se pierde entre recomposiciones.</p>
+<h2 id="la-sintaxis-by">La sintaxis <code>by</code><a class="headerlink" href="#la-sintaxis-by" title="Permanent link">&para;</a></h2>
+<p>Escribir <code>.value</code> cada vez es un poco engorroso. Kotlin ofrece una forma más limpia mediante una <strong>propiedad delegada</strong>, con la palabra clave <code>by</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Composable</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">Contador</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">contador</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">remember</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">mutableStateOf</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="n">Button</span><span class="p">(</span><span class="n">onClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">contador</span><span class="o">++</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Has tocado </span><span class="si">$</span><span class="n">contador</span><span class="s"> veces&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p">}</span>
+</code></pre></div>
+<p>Con <code>by</code>, usas <code>contador</code> directamente, como si fuera una variable normal: lo lees sin <code>.value</code> y lo modificas con <code>contador++</code>. Por detrás sigue siendo el mismo estado observable. Fíjate en que ahora se declara con <code>var</code>, porque lo vas a modificar. Esta es la forma que verás con más frecuencia.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Esta sintaxis necesita importar <code>getValue</code> y <code>setValue</code> de Compose; Android Studio agrega esos imports por ti automáticamente.</p>
+</div>
+<h2 id="sobrevivir-a-la-rotacion-remembersaveable">Sobrevivir a la rotación: <code>rememberSaveable</code><a class="headerlink" href="#sobrevivir-a-la-rotacion-remembersaveable" title="Permanent link">&para;</a></h2>
+<p>¿Recuerdas que, al girar el dispositivo, Android <strong>destruye y recrea</strong> la <code>Activity</code>, perdiendo su estado? Ese problema también afecta a <code>remember</code>: como la recreación empieza todo de cero, el valor guardado con <code>remember</code> se <strong>pierde</strong> al rotar.</p>
+<p>Para esos casos existe <strong><code>rememberSaveable</code></strong>, que funciona igual que <code>remember</code>, pero <strong>guarda</strong> el estado y lo <strong>restaura</strong> tras una recreación por cambio de configuración:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">var</span><span class="w"> </span><span class="nv">contador</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">rememberSaveable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">mutableStateOf</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Con este simple cambio, tu contador conserva su valor aunque gires el teléfono. Úsalo cuando quieras que un estado sobreviva a la rotación (por ejemplo, lo que el usuario escribió en un formulario).</p>
+<h2 id="state-hoisting-elevar-el-estado">State hoisting: elevar el estado<a class="headerlink" href="#state-hoisting-elevar-el-estado" title="Permanent link">&para;</a></h2>
+<p>Hasta ahora, nuestro <code>Contador</code> guarda su propio estado dentro de sí mismo. Funciona, pero tiene inconvenientes: nadie desde fuera puede conocer el valor actual ni controlarlo, y el composable es difícil de reutilizar y de previsualizar con distintos valores.</p>
+<p>La solución es el <strong><em>state hoisting</em></strong> ("elevación del estado"): <strong>sacar el estado del composable y moverlo hacia quien lo llama</strong>. El composable queda <strong>sin estado</strong> (<em>stateless</em>): recibe el valor a mostrar y una <strong>función</strong> para avisar de los cambios.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@Composable</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">Contador</span><span class="p">(</span><span class="n">valor</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">onIncrementar</span><span class="p">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">Unit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">Button</span><span class="p">(</span><span class="n">onClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">onIncrementar</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Has tocado </span><span class="si">$</span><span class="n">valor</span><span class="s"> veces&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>Ahora <code>Contador</code> no guarda nada: solo muestra el <code>valor</code> que recibe y, al tocarlo, invoca <code>onIncrementar</code>. El estado vive en el composable <strong>padre</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@Composable</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">Pantalla</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">contador</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">remember</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">mutableStateOf</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="n">Contador</span><span class="p">(</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">        </span><span class="n">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">contador</span><span class="p">,</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">        </span><span class="n">onIncrementar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">contador</span><span class="o">++</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="p">)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="p">}</span>
+</code></pre></div>
+<p>Fíjate en el patrón: el <strong>estado baja</strong> (el padre le pasa <code>valor</code> al hijo) y los <strong>eventos suben</strong> (el hijo avisa al padre con <code>onIncrementar</code>). A este flujo en una sola dirección se le llama <strong>flujo de datos unidireccional</strong>:</p>
+<pre class="mermaid"><code>flowchart TD
+    P["Composable padre&lt;br/&gt;(tiene el estado)"] -- "el estado baja: valor" --&gt; H["Composable hijo&lt;br/&gt;(sin estado)"]
+    H -- "los eventos suben: onIncrementar" --&gt; P</code></pre>
+<p>Este patrón trae grandes ventajas: el composable <code>Contador</code> es <strong>reutilizable</strong> (sirve con cualquier valor y cualquier acción), fácil de <strong>previsualizar</strong> (le pasas un valor fijo) y hay una <strong>única fuente de verdad</strong> para el estado. Es, además, la misma idea que viste con <code>StateFlow</code> y que sostiene la arquitectura MVVM: el estado vive en un solo lugar, la interfaz lo observa y le comunica los eventos.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo aprendiste a manejar el estado en Compose:</p>
+<ul>
+<li>El <strong>estado</strong> son los datos que, al cambiar, provocan la recomposición.</li>
+<li><strong><code>mutableStateOf</code></strong> crea un valor <strong>observable</strong> por Compose; <strong><code>remember</code></strong> lo <strong>conserva</strong> entre recomposiciones. Juntos: <code>remember { mutableStateOf(...) }</code>.</li>
+<li>La sintaxis <strong><code>by</code></strong> te deja usar el estado como una variable normal, sin <code>.value</code>.</li>
+<li><strong><code>rememberSaveable</code></strong> conserva el estado también tras una recreación por cambio de configuración (como girar el dispositivo).</li>
+<li>El <strong><em>state hoisting</em></strong> consiste en <strong>elevar el estado</strong> al composable padre, dejando al hijo <strong>sin estado</strong>: recibe el valor y una función para los eventos. Esto sigue el <strong>flujo de datos unidireccional</strong> (el estado baja, los eventos suben) y hace tus composables reutilizables.</li>
+</ul>
+<p>En el próximo capítulo aprenderás a <strong>organizar varios elementos</strong> en la pantalla con los <em>layouts</em> (<code>Column</code>, <code>Row</code>, <code>Box</code>) y a mostrar listas con <code>LazyColumn</code>.</p>
 
 
 

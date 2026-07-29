@@ -1347,6 +1347,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    27. Fundamentos de Compose: composables, recomposición y <code>Modifier</code>
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1363,6 +1381,97 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#composables-con-parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Composables con parámetros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-recomposicion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La recomposición
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modificadores-modifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modificadores (Modifier)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modificadores (Modifier)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-convencion-del-parametro-modifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La convención del parámetro modifier
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2284,6 +2393,86 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#composables-con-parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Composables con parámetros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-recomposicion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La recomposición
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modificadores-modifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modificadores (Modifier)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modificadores (Modifier)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-convencion-del-parametro-modifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La convención del parámetro modifier
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2303,10 +2492,150 @@
 
 
 <h1 id="capitulo-27-fundamentos-de-compose-composables-recomposicion-y-modifier">Capítulo 27: Fundamentos de Compose: composables, recomposición y <code>Modifier</code><a class="headerlink" href="#capitulo-27-fundamentos-de-compose-composables-recomposicion-y-modifier" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>En el capítulo anterior escribiste tu primer <code>@Composable</code> y viste que Compose es <strong>declarativo</strong>: describes la interfaz y Compose la dibuja. Ahora profundizaremos en los tres fundamentos que sostienen todo lo que construirás con Compose:</p>
+<ul>
+<li>Los <strong>composables con parámetros</strong>, que los hacen reutilizables.</li>
+<li>La <strong>recomposición</strong>, el mecanismo por el que la interfaz se actualiza sola cuando cambian los datos.</li>
+<li>El <strong><code>Modifier</code></strong>, la herramienta para ajustar la apariencia y el comportamiento de cada componente.</li>
+</ul>
+<p>Con estas tres ideas entenderás el "cómo" y el "porqué" de Compose, y estarás listo para construir interfaces reales.</p>
+<h2 id="composables-con-parametros">Composables con parámetros<a class="headerlink" href="#composables-con-parametros" title="Permanent link">&para;</a></h2>
+<p>Un composable es una función, así que —como cualquier función— puede recibir <strong>parámetros</strong>. Esto es lo que los hace reutilizables. En vez de un saludo fijo, podemos parametrizar el nombre:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Composable</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">Saludo</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;¡Hola, </span><span class="si">$</span><span class="n">nombre</span><span class="s">!&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
+</code></pre></div>
+<p>Ahora el mismo composable sirve para saludar a cualquiera:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Saludo</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">)</span><span class="w">   </span><span class="c1">// muestra: ¡Hola, Ana!</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">Saludo</span><span class="p">(</span><span class="s">&quot;Diego&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// muestra: ¡Hola, Diego!</span>
+</code></pre></div>
+<p>Y, tal como una función puede llamar a otras, un composable puede llamar a <strong>otros composables</strong>. Así se construye una interfaz en Compose: componiendo piezas pequeñas para formar pantallas complejas.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Contenido en construcción</p>
+<p>Por ahora combinaremos composables de a uno. Para <strong>organizar varios elementos</strong> en pantalla (uno debajo de otro, en fila, etc.) necesitarás los <em>layouts</em>, que veremos en un capítulo próximo.</p>
 </div>
+<h2 id="la-recomposicion">La recomposición<a class="headerlink" href="#la-recomposicion" title="Permanent link">&para;</a></h2>
+<p>Aquí está la idea central de Compose. En la interfaz tradicional, cuando un dato cambiaba, tenías que buscar el elemento de pantalla y actualizarlo tú a mano. En Compose no: cuando cambian los datos que un composable <strong>lee</strong>, Compose <strong>vuelve a ejecutar</strong> ese composable con los datos nuevos y actualiza lo que se muestra. A ese "volver a ejecutar" se le llama <strong>recomposición</strong>.</p>
+<p>Piénsalo así: un composable no es un dibujo fijo, sino una <strong>descripción</strong> de cómo debe verse la interfaz <em>para unos datos dados</em>. Si los datos cambian, Compose recalcula la descripción y redibuja solo lo necesario.</p>
+<pre class="mermaid"><code>flowchart TD
+    A["Cambian los datos"] --&gt; B["Compose vuelve a ejecutar&lt;br/&gt;el composable (recomposición)"]
+    B --&gt; C["El composable describe la interfaz&lt;br/&gt;con los datos nuevos"]
+    C --&gt; D["La pantalla se actualiza"]</code></pre>
+<p>Esto es justo lo que anticipamos al hablar de <code>StateFlow</code>: la interfaz <strong>observa</strong> los datos y <strong>reacciona</strong> a sus cambios, sin que tengas que actualizarla manualmente. En el próximo capítulo verás cómo se declaran esos datos que, al cambiar, provocan la recomposición (el <strong>estado</strong>).</p>
+<div class="admonition tip">
+<p class="admonition-title">Important</p>
+<p>Como un composable puede ejecutarse muchas veces (una por cada recomposición) y en cualquier orden, no debes poner dentro de él acciones con efectos secundarios (como modificar una variable externa o escribir en un archivo). Un composable solo debería <strong>describir</strong> la interfaz a partir de los datos que recibe.</p>
+</div>
+<h2 id="modificadores-modifier">Modificadores (<code>Modifier</code>)<a class="headerlink" href="#modificadores-modifier" title="Permanent link">&para;</a></h2>
+<p>Un <code>Text</code> por sí solo es solo texto pegado a la esquina. ¿Cómo le das espacio alrededor, un tamaño, un color de fondo, o haces que responda a un toque? Con un <strong><code>Modifier</code></strong> ("modificador").</p>
+<p>Un <code>Modifier</code> es un objeto que le pasas a un composable para <strong>ajustar su apariencia o su comportamiento</strong>. Casi todos los composables aceptan un parámetro <code>modifier</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Text</span><span class="p">(</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;¡Hola!&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">padding</span><span class="p">(</span><span class="m">16.</span><span class="n">dp</span><span class="p">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">)</span>
+</code></pre></div>
+<p>Aquí <code>Modifier.padding(16.dp)</code> le agrega un espacio de 16 alrededor del texto.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>dp</code> significa <em>density-independent pixels</em> (píxeles independientes de la densidad). Es la unidad de medida de Compose para tamaños y espacios, y se adapta sola a pantallas de distinta densidad, para que tu interfaz se vea consistente en cualquier dispositivo.</p>
+</div>
+<p>Los modificadores se <strong>encadenan</strong>, uno tras otro, y cada uno se aplica en orden:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">Text</span><span class="p">(</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;¡Hola!&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="p">.</span><span class="na">padding</span><span class="p">(</span><span class="m">16.</span><span class="n">dp</span><span class="p">)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="p">.</span><span class="na">background</span><span class="p">(</span><span class="n">Color</span><span class="p">.</span><span class="na">Yellow</span><span class="p">)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">)</span>
+</code></pre></div>
+<p>El <strong>orden importa</strong>. No es lo mismo poner primero el espaciado y luego el fondo, que al revés: en el ejemplo de arriba, el fondo amarillo se pinta <em>dentro</em> del espaciado; si invirtieras las llamadas, el amarillo cubriría también ese espacio.</p>
+<p>A continuación, algunos de los modificadores más usados:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Modificador</th>
+<th style="text-align: left;">Qué hace</th>
+<th style="text-align: left;">Parámetros</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>padding(...)</code></td>
+<td style="text-align: left;">Agrega espacio alrededor del elemento.</td>
+<td style="text-align: left;">Un <code>Dp</code> para todos los lados, o valores por lado (<code>horizontal</code>/<code>vertical</code>, o <code>start</code>/<code>top</code>/<code>end</code>/<code>bottom</code>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>size(...)</code></td>
+<td style="text-align: left;">Fija un ancho y un alto concretos.</td>
+<td style="text-align: left;">Un <code>Dp</code> (cuadrado), o <code>width</code> y <code>height</code> en <code>Dp</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>width(...)</code> / <code>height(...)</code></td>
+<td style="text-align: left;">Fija solo el ancho o solo el alto.</td>
+<td style="text-align: left;">Un <code>Dp</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>fillMaxWidth()</code></td>
+<td style="text-align: left;">Hace que el elemento ocupe todo el ancho disponible.</td>
+<td style="text-align: left;">Opcional: una fracción <code>Float</code> (0f–1f); por defecto, todo el ancho.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>fillMaxHeight()</code></td>
+<td style="text-align: left;">Ocupa todo el alto disponible.</td>
+<td style="text-align: left;">Opcional: una fracción <code>Float</code>; por defecto, todo el alto.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>fillMaxSize()</code></td>
+<td style="text-align: left;">Ocupa todo el ancho y el alto disponibles.</td>
+<td style="text-align: left;">Opcional: una fracción <code>Float</code>; por defecto, todo el espacio.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>background(...)</code></td>
+<td style="text-align: left;">Aplica un color (o degradado) de fondo.</td>
+<td style="text-align: left;">Un <code>Color</code> (o un <code>Brush</code> para degradados) y, opcionalmente, una <code>Shape</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>border(...)</code></td>
+<td style="text-align: left;">Dibuja un borde alrededor del elemento.</td>
+<td style="text-align: left;">El grosor (<code>Dp</code>), un <code>Color</code> y, opcionalmente, una <code>Shape</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>clip(...)</code></td>
+<td style="text-align: left;">Recorta el elemento a una forma (por ejemplo, esquinas redondeadas).</td>
+<td style="text-align: left;">Una <code>Shape</code> (p. ej., <code>RoundedCornerShape</code> o <code>CircleShape</code>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>clickable { ... }</code></td>
+<td style="text-align: left;">Hace que el elemento responda a los toques.</td>
+<td style="text-align: left;">Una lambda <code>onClick</code> que se ejecuta al tocar.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Existen además modificadores que solo están disponibles <strong>dentro de ciertos layouts</strong> (como <code>weight</code>, para repartir el espacio en una fila o columna, o <code>align</code>, para alinear dentro de un contenedor). Los verás cuando lleguemos a los layouts.</p>
+</div>
+<h3 id="la-convencion-del-parametro-modifier">La convención del parámetro <code>modifier</code><a class="headerlink" href="#la-convencion-del-parametro-modifier" title="Permanent link">&para;</a></h3>
+<p>Cuando crees tus propios composables, es una buena práctica que reciban un parámetro <code>modifier</code> y lo apliquen a su elemento principal, con este patrón:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@Composable</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">Saludo</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">modifier</span><span class="p">:</span><span class="w"> </span><span class="n">Modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;¡Hola, </span><span class="si">$</span><span class="n">nombre</span><span class="s">!&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">modifier</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="p">)</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>Al darle el valor por defecto <code>Modifier</code> (un modificador vacío), quien use <code>Saludo</code> puede pasarle ajustes desde fuera o no pasarle ninguno. Esto hace tus composables mucho más flexibles y reutilizables, y es la convención que sigue todo Compose.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo asentaste los fundamentos de Jetpack Compose:</p>
+<ul>
+<li>Los <strong>composables</strong> son funciones que pueden recibir <strong>parámetros</strong> y llamarse entre sí; así se construye la interfaz componiendo piezas.</li>
+<li>La <strong>recomposición</strong> es el mecanismo por el que Compose <strong>vuelve a ejecutar</strong> un composable cuando cambian los datos que lee, actualizando la interfaz automáticamente. Un composable describe la UI para unos datos dados y no debe tener efectos secundarios.</li>
+<li>Un <strong><code>Modifier</code></strong> ajusta la apariencia y el comportamiento de un composable (<code>padding</code>, <code>background</code>, <code>fillMaxWidth</code>, <code>clickable</code>…). Se <strong>encadena</strong>, el <strong>orden importa</strong>, y usa la unidad <strong><code>dp</code></strong> para los tamaños.</li>
+<li>Por convención, tus composables deberían recibir un parámetro <code>modifier</code> con valor por defecto <code>Modifier</code> y aplicarlo a su elemento principal.</li>
+</ul>
+<p>En el próximo capítulo verás el <strong>estado en Compose</strong>: cómo declarar los datos que, al cambiar, disparan la recomposición, con <code>remember</code> y <code>mutableStateOf</code>.</p>
 
 
 
