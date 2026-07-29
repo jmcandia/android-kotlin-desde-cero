@@ -2,7 +2,7 @@ site_name: Android con Kotlin desde cero
 site_description: >-
   Un curso que lleva a programadores con base en Java desde los fundamentos de
   Kotlin hasta una aplicación Android completa con Jetpack Compose.
-# site_url: https://jmcandia.github.io/android-kotlin-desde-cero/
+site_url: https://jmcandia.github.io/android-kotlin-desde-cero/
 
 repo_url: https://github.com/jmcandia/android-kotlin-desde-cero
 repo_name: GitHub
