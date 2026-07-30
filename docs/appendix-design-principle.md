@@ -67,7 +67,7 @@ Ahora `saludo()` vive en un solo lugar.
 
 El problema: es tentador escribir soluciones "ingeniosas" o llenas de opciones "por si acaso", pero ese código termina siendo difícil de leer, de corregir y de explicar.
 
-El principio **KISS** (*Keep It Simple, Stupid*, "mantenlo simple, estúpido") aconseja **preferir siempre la solución más sencilla que resuelva el problema** y desconfiar de la complejidad innecesaria. En la práctica, significa cosas como: no agregar abstracciones que aún no necesitas, elegir nombres claros y resistir la tentación de complicar algo que se resuelve de forma directa. Un código simple es más fácil de mantener y de entender para otra persona (o para tu yo del futuro).
+El principio **KISS** (*Keep It Simple, Stupid*, "mantenlo simple, estúpido") aconseja **preferir siempre la solución más sencilla que resuelva el problema** y desconfiar de la complejidad innecesaria.
 
 Este concepto nació en la década de 1960 en el ámbito de la ingeniería aeronáutica militar de EE. UU., acuñado por Kelly Johnson, diseñador principal de aviones espía en Lockheed. La palabra "estúpido" no buscaba insultar a nadie, sino recordar que en el mundo real las cosas fallan bajo presión y de formas absurdas. Johnson exigía a sus ingenieros que los aviones debían ser reparables en pleno combate por un mecánico promedio usando solo herramientas básicas. Si el diseño era complejo, costaría vidas.
 
