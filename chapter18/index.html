@@ -1857,7 +1857,7 @@
   <span class="md-ellipsis">
     
   
-    36. HTTP, REST y JSON: explorando la PokeAPI
+    36. HTTP, REST y JSON: cómo se comunican las apps con un servidor
   
 
     
@@ -2561,7 +2561,7 @@
 <h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
 <p>En los capítulos anteriores creaste clases con datos y comportamiento. Pero muy a menudo necesitarás clases cuyo <strong>único propósito</strong> es <strong>guardar datos</strong>: un usuario con su nombre y su correo, un punto con sus coordenadas, un producto con su precio. No tienen lógica compleja; solo agrupan información.</p>
 <p>Para esos casos, escribir una clase normal resulta más trabajoso de lo necesario. Kotlin ofrece un atajo pensado justo para esto: la <strong><code>data class</code></strong> (clase de datos), que genera automáticamente varias funciones útiles. En este capítulo verás qué te regala una <code>data class</code>, cómo crear copias modificadas con <code>copy</code> y cómo repartir sus datos en variables mediante la <strong>desestructuración</strong> (que veníamos anunciando desde capítulos anteriores).</p>
-<p>Este tema es especialmente importante para la aplicación: los datos que lleguen de la PokeAPI los modelaremos, precisamente, como <code>data class</code>.</p>
+<p>Este tema es muy común en el desarrollo Android: los datos que recibes de una API, de una base de datos o de un formulario suelen modelarse, precisamente, como <code>data class</code>.</p>
 <h2 id="el-problema-clases-que-solo-guardan-datos">El problema: clases que solo guardan datos<a class="headerlink" href="#el-problema-clases-que-solo-guardan-datos" title="Permanent link">&para;</a></h2>
 <p>Supongamos una clase normal para representar un usuario:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Usuario</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">edad</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span>

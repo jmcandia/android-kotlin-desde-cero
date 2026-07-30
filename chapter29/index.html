@@ -1851,7 +1851,7 @@
   <span class="md-ellipsis">
     
   
-    36. HTTP, REST y JSON: explorando la PokeAPI
+    36. HTTP, REST y JSON: cómo se comunican las apps con un servidor
   
 
     
@@ -2547,7 +2547,7 @@
 
 <h1 id="capitulo-29-layouts-y-listas-column-row-lazycolumn">Capítulo 29: Layouts y listas: <code>Column</code>, <code>Row</code>, <code>LazyColumn</code><a class="headerlink" href="#capitulo-29-layouts-y-listas-column-row-lazycolumn" title="Permanent link">&para;</a></h1>
 <h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
-<p>Hasta ahora has mostrado composables de a uno. Pero una pantalla real combina <strong>muchos</strong> elementos: textos, imágenes, botones, unos debajo de otros o en fila. En este capítulo aprenderás a <strong>organizarlos</strong> con los layouts de Compose —<code>Column</code>, <code>Row</code> y <code>Box</code>—, a controlar cómo se distribuyen y alinean, y a mostrar <strong>listas</strong> de forma eficiente con <code>LazyColumn</code>, que será la base de la lista de Pokémon de la aplicación.</p>
+<p>Hasta ahora has mostrado composables de a uno. Pero una pantalla real combina <strong>muchos</strong> elementos: textos, imágenes, botones, unos debajo de otros o en fila. En este capítulo aprenderás a <strong>organizarlos</strong> con los layouts de Compose —<code>Column</code>, <code>Row</code> y <code>Box</code>—, a controlar cómo se distribuyen y alinean, y a mostrar <strong>listas</strong> de forma eficiente con <code>LazyColumn</code>, imprescindible para presentar listas largas de datos.</p>
 <h2 id="el-problema-los-elementos-se-superponen">El problema: los elementos se superponen<a class="headerlink" href="#el-problema-los-elementos-se-superponen" title="Permanent link">&para;</a></h2>
 <p>Si colocas dos composables juntos sin más, Compose los dibuja en el <strong>mismo lugar</strong>, uno encima del otro:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Composable</span>
@@ -2609,23 +2609,23 @@
 </code></pre></div>
 <p>Aquí ambos textos reciben el mismo peso (<code>1f</code>), así que se reparten el ancho <strong>a la mitad</strong>. Si a uno le dieras <code>weight(2f)</code> y al otro <code>weight(1f)</code>, el primero ocuparía el doble de espacio que el segundo.</p>
 <h2 id="lazycolumn-listas-eficientes"><code>LazyColumn</code>: listas eficientes<a class="headerlink" href="#lazycolumn-listas-eficientes" title="Permanent link">&para;</a></h2>
-<p>Un <code>Column</code> dibuja <strong>todos</strong> sus hijos de una vez. Eso está bien para unos pocos elementos, pero ¿y si tienes una lista de cientos de Pokémon? Dibujarlos todos a la vez sería lento y desperdiciaría memoria, sobre todo porque la mayoría ni siquiera caben en la pantalla.</p>
+<p>Un <code>Column</code> dibuja <strong>todos</strong> sus hijos de una vez. Eso está bien para unos pocos elementos, pero ¿y si tienes una lista de cientos o miles de elementos? Dibujarlos todos a la vez sería lento y desperdiciaría memoria, sobre todo porque la mayoría ni siquiera caben en la pantalla.</p>
 <p>Para eso está el <strong><code>LazyColumn</code></strong>: una columna con desplazamiento (<em>scroll</em>) que solo compone los elementos <strong>visibles</strong> en cada momento, y los va reutilizando a medida que te desplazas. Así puede mostrar listas enormes sin problemas.</p>
 <p>En vez de escribir cada hijo a mano, le pasas la lista con la función <code>items</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">pokemones</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span><span class="s">&quot;Bulbasaur&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Charmander&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Squirtle&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">nombres</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Diego&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Elena&quot;</span><span class="p">)</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">LazyColumn</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="n">items</span><span class="p">(</span><span class="n">pokemones</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="n">items</span><span class="p">(</span><span class="n">nombres</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="o">-&gt;</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="p">}</span>
 </code></pre></div>
-<p><code>items(pokemones)</code> recorre la lista y, por cada elemento, ejecuta la lambda que describe cómo mostrarlo (aquí, un <code>Text</code> con su nombre). El desplazamiento funciona automáticamente. También existe <code>LazyRow</code>, su equivalente horizontal.</p>
+<p><code>items(nombres)</code> recorre la lista y, por cada elemento, ejecuta la lambda que describe cómo mostrarlo (aquí, un <code>Text</code> con su nombre). El desplazamiento funciona automáticamente. También existe <code>LazyRow</code>, su equivalente horizontal.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Si vienes del desarrollo Android tradicional, <code>LazyColumn</code> cumple el papel del antiguo <code>RecyclerView</code>, pero con muchísimo menos código: no necesitas adaptadores ni <em>view holders</em>.</p>
 </div>
-<p>Este es, precisamente, el componente con el que mostraremos la lista de Pokémon que llegue de la PokeAPI: una <code>LazyColumn</code> con un <code>items</code> que recorre los resultados.</p>
+<p>Este es, precisamente, el componente con el que se muestran listas largas de datos en una app: una <code>LazyColumn</code> con un <code>items</code> que recorre los elementos.</p>
 <h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
 <p>En este capítulo aprendiste a organizar la interfaz:</p>
 <ul>

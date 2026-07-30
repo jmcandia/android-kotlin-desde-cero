@@ -1862,7 +1862,7 @@
   <span class="md-ellipsis">
     
   
-    36. HTTP, REST y JSON: explorando la PokeAPI
+    36. HTTP, REST y JSON: cómo se comunican las apps con un servidor
   
 
     
@@ -2584,9 +2584,9 @@
 <p>Cuando el asistente termine, verás la pantalla de bienvenida de Android Studio, lista para crear un proyecto.</p>
 <h2 id="crear-tu-primer-proyecto">Crear tu primer proyecto<a class="headerlink" href="#crear-tu-primer-proyecto" title="Permanent link">&para;</a></h2>
 <p>Desde la pantalla de bienvenida de Android Studio, haz clic en <strong>New Project</strong>.</p>
-<p><img alt="Pantalla de bienvenida de Android Studio" src="../assets/images/chapter25/android-studio-welcome.png" /></p>
+<p><img alt="Pantalla de bienvenida de Android Studio" src="/resources/chapter25/android-studio-welcome.png" /></p>
 <p>Android Studio te mostrará una lista de <strong>plantillas</strong> (proyectos de ejemplo que sirven de punto de partida). En la pestaña <strong>Phone and Tablet</strong>, selecciona <strong>Empty Activity</strong>: crea un proyecto sencillo, de una sola pantalla, ya preparado para usar <strong>Jetpack Compose</strong> (el sistema moderno de interfaces que usaremos en todo el curso). Luego pulsa <strong>Next</strong>.</p>
-<p><img alt="Selección de la plantilla Empty Activity" src="../assets/images/chapter25/android-studio-new-project.png" /></p>
+<p><img alt="Selección de la plantilla Empty Activity" src="/resources/chapter25/android-studio-new-project.png" /></p>
 <p>En la siguiente pantalla configuras el proyecto:</p>
 <ul>
 <li><strong>Name</strong>: el nombre de tu app (por ejemplo, <code>MiPrimeraApp</code>).</li>
@@ -2595,7 +2595,7 @@
 <li><strong>Build configuration language</strong>: déjalo en <strong>Kotlin DSL (<code>build.gradle.kts</code>)</strong>, la opción recomendada.</li>
 </ul>
 <p>El <strong>lenguaje</strong> de programación ya viene fijado en Kotlin, porque Compose solo funciona con Kotlin.</p>
-<p><img alt="Configuración del nuevo proyecto" src="../assets/images/chapter25/android-studio-new-project-settings.png" /></p>
+<p><img alt="Configuración del nuevo proyecto" src="/resources/chapter25/android-studio-new-project-settings.png" /></p>
 <p>Al pulsar <strong>Finish</strong>, Android Studio generará el proyecto y <strong>Gradle</strong> (la herramienta de construcción, que veremos más abajo) sincronizará todo por primera vez. Al terminar, se abrirá el archivo <code>MainActivity.kt</code> y podrás ejecutar una app que muestra un simple "Hello Android!".</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -2616,7 +2616,7 @@
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    ├── build.gradle.kts (Module :app)← dependencias y config del módulo app
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    └── libs.versions.toml            ← catálogo de versiones
 </code></pre></div>
-<p><img alt="El proyecto recién creado, abierto en Android Studio" src="../assets/images/chapter25/android-studio-new-project-summary.png" /></p>
+<p><img alt="El proyecto recién creado, abierto en Android Studio" src="/resources/chapter25/android-studio-new-project-summary.png" /></p>
 <p>No te abrumes: casi todo tu trabajo ocurrirá dentro de <code>kotlin+java/</code> (tu código) y <code>res/</code> (los recursos). Los demás archivos son de configuración, y los tocarás pocas veces. Veamos los más importantes uno por uno.</p>
 <h2 id="el-androidmanifest">El AndroidManifest<a class="headerlink" href="#el-androidmanifest" title="Permanent link">&para;</a></h2>
 <p>El archivo <code>AndroidManifest.xml</code> es la <strong>cédula de identidad</strong> de la aplicación. En él se declara información esencial que el sistema Android necesita saber <strong>antes</strong> de ejecutar la app: su nombre, su ícono, su tema, qué pantallas (<code>Activity</code>) tiene y cuál es la de inicio, y qué <strong>permisos</strong> requiere.</p>
@@ -2640,7 +2640,7 @@
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="nt">&lt;/manifest&gt;</span>
 </code></pre></div>
 <p>El bloque <code>&lt;intent-filter&gt;</code> con <code>MAIN</code> y <code>LAUNCHER</code> es el que marca a <code>MainActivity</code> como la <strong>pantalla de inicio</strong>: la que se abre cuando el usuario toca el ícono de la app.</p>
-<p>Aquí también se declaran los <strong>permisos</strong>. Por ejemplo, para que la app pueda acceder a internet —algo que necesitaremos para consultar la PokeAPI—, se agrega esta línea:</p>
+<p>Aquí también se declaran los <strong>permisos</strong>. Por ejemplo, para que la app pueda acceder a internet (algo necesario si va a consumir datos de la red), se agrega esta línea:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">&lt;uses-permission</span><span class="w"> </span><span class="na">android:name=</span><span class="s">&quot;android.permission.INTERNET&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div>
 <h2 id="el-codigo-y-mainactivity">El código y <code>MainActivity</code><a class="headerlink" href="#el-codigo-y-mainactivity" title="Permanent link">&para;</a></h2>
@@ -2658,7 +2658,7 @@
 <p>Reconocerás varias cosas del curso. <code>MainActivity : ComponentActivity()</code> es <strong>herencia</strong>: nuestra clase hereda de <code>ComponentActivity</code>, una clase base de Android que aporta todo el comportamiento de una pantalla. El método <code>onCreate</code> está marcado con <code>override</code>: se ejecuta cuando el sistema crea la pantalla (algo parecido a un bloque <code>init</code>, pero para una <code>Activity</code>). Y <code>setContent { }</code> es donde definiremos la interfaz con Jetpack Compose, el tema del próximo capítulo.</p>
 <p>En el proyecto real que generaste (visible en la captura de la sección anterior), ese <code>setContent</code> ya viene con un pequeño ejemplo: un <code>Scaffold</code>, una función <code>Greeting</code> que muestra un texto y una vista previa marcada con <code>@Preview</code>. No te preocupes si aún no los entiendes; los iremos desglosando en los próximos capítulos.</p>
 <p>Así, a grandes rasgos, arranca una app Android:</p>
-<pre class="mermaid"><code>flowchart TB
+<pre class="mermaid"><code>flowchart LR
     A[El usuario abre la app] --&gt; B[Android lee el AndroidManifest]
     B --&gt; C[Lanza la MainActivity de inicio]
     C --&gt; D[setContent muestra la interfaz]</code></pre>

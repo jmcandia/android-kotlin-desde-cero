@@ -1459,6 +1459,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. Navegación con Navigation Compose
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1475,6 +1493,102 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las-piezas-navcontroller-y-navhost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Las piezas: NavController y NavHost
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definir-las-pantallas-el-navhost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definir las pantallas: el NavHost
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#navegar-entre-pantallas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Navegar entre pantallas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#volver-atras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Volver atrás
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pasar-datos-entre-pantallas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pasar datos entre pantallas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1715,7 +1829,7 @@
   <span class="md-ellipsis">
     
   
-    36. HTTP, REST y JSON: explorando la PokeAPI
+    36. HTTP, REST y JSON: cómo se comunican las apps con un servidor
   
 
     
@@ -2284,6 +2398,91 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las-piezas-navcontroller-y-navhost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Las piezas: NavController y NavHost
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definir-las-pantallas-el-navhost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definir las pantallas: el NavHost
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#navegar-entre-pantallas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Navegar entre pantallas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#volver-atras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Volver atrás
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pasar-datos-entre-pantallas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pasar datos entre pantallas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2303,10 +2502,82 @@
 
 
 <h1 id="capitulo-31-navegacion-con-navigation-compose">Capítulo 31: Navegación con Navigation Compose<a class="headerlink" href="#capitulo-31-navegacion-con-navigation-compose" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>Hasta ahora, tu app ha vivido en una sola pantalla. Pero las aplicaciones reales tienen <strong>varias</strong>: una lista y su detalle, una pantalla de ajustes, un formulario… y el usuario se mueve entre ellas. En este capítulo aprenderás a hacer esa <strong>navegación</strong> entre pantallas con <strong>Navigation Compose</strong>, la biblioteca oficial para ello. Con esto cierras la parte de interfaz con Compose.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Contenido en construcción</p>
+<p>Navigation Compose no viene incluido en la plantilla del proyecto; es una dependencia que se agrega en el <code>build.gradle.kts</code>, a través del catálogo de versiones que viste al crear el proyecto.</p>
 </div>
+<h2 id="las-piezas-navcontroller-y-navhost">Las piezas: <code>NavController</code> y <code>NavHost</code><a class="headerlink" href="#las-piezas-navcontroller-y-navhost" title="Permanent link">&para;</a></h2>
+<p>Navigation Compose se apoya en dos piezas principales:</p>
+<ul>
+<li>El <strong><code>NavController</code></strong> es el objeto que <strong>controla</strong> la navegación: lleva la cuenta de las pantallas visitadas (la <em>pila de navegación</em>) y es a quien le pides ir a una pantalla o volver atrás.</li>
+<li>El <strong><code>NavHost</code></strong> es un composable que define el <strong>mapa de navegación</strong>: declara cuáles son las pantallas (los <em>destinos</em>) y con qué <strong>ruta</strong> se llega a cada una.</li>
+</ul>
+<p>Cada pantalla se identifica con una <strong>ruta</strong> (<em>route</em>), que no es más que un texto único, como <code>"inicio"</code> o <code>"detalle"</code>.</p>
+<h2 id="definir-las-pantallas-el-navhost">Definir las pantallas: el <code>NavHost</code><a class="headerlink" href="#definir-las-pantallas-el-navhost" title="Permanent link">&para;</a></h2>
+<p>Primero creas el <code>NavController</code> (con <code>remember</code>, para que sobreviva a las recomposiciones) y luego declaras el <code>NavHost</code> con sus destinos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Composable</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">App</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">navController</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rememberNavController</span><span class="p">()</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">NavHost</span><span class="p">(</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="n">navController</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">navController</span><span class="p">,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="n">startDestination</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;inicio&quot;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">        </span><span class="n">composable</span><span class="p">(</span><span class="s">&quot;inicio&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">            </span><span class="n">PantallaInicio</span><span class="p">()</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">        </span><span class="n">composable</span><span class="p">(</span><span class="s">&quot;detalle&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">            </span><span class="n">PantallaDetalle</span><span class="p">()</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="p">}</span>
+</code></pre></div>
+<p><code>startDestination</code> indica la pantalla que se muestra al abrir la app. Cada bloque <code>composable("ruta") { ... }</code> asocia una ruta con el composable que se dibuja cuando se navega a ella.</p>
+<h2 id="navegar-entre-pantallas">Navegar entre pantallas<a class="headerlink" href="#navegar-entre-pantallas" title="Permanent link">&para;</a></h2>
+<p>Para ir de una pantalla a otra, le pides al <code>NavController</code> que <strong>navegue</strong> a una ruta:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">navController</span><span class="p">.</span><span class="na">navigate</span><span class="p">(</span><span class="s">&quot;detalle&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Normalmente esto ocurre en respuesta a una acción del usuario, como tocar un botón:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Button</span><span class="p">(</span><span class="n">onClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">navController</span><span class="p">.</span><span class="na">navigate</span><span class="p">(</span><span class="s">&quot;detalle&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Ver detalle&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>Visualmente, el flujo entre dos pantallas se ve así:</p>
+<pre class="mermaid"><code>flowchart LR
+    A["Pantalla de inicio"] -- "navigate(detalle)" --&gt; B["Pantalla de detalle"]
+    B -- "botón de retroceso" --&gt; A</code></pre>
+<h2 id="volver-atras">Volver atrás<a class="headerlink" href="#volver-atras" title="Permanent link">&para;</a></h2>
+<p>¿Y para volver? La buena noticia es que el <strong>botón de retroceso</strong> del sistema ya funciona solo: al presionarlo, Navigation quita la pantalla actual de la pila y muestra la anterior. Si quieres volver atrás desde tu propio código (por ejemplo, con un botón "Cancelar"), usas:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">navController</span><span class="p">.</span><span class="na">popBackStack</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="pasar-datos-entre-pantallas">Pasar datos entre pantallas<a class="headerlink" href="#pasar-datos-entre-pantallas" title="Permanent link">&para;</a></h2>
+<p>Muchas veces, al navegar a un detalle, necesitas decirle <strong>qué</strong> elemento mostrar. Para eso, la ruta puede incluir <strong>argumentos</strong>, indicados entre llaves:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">composable</span><span class="p">(</span><span class="s">&quot;detalle/{id}&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">backStackEntry</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">backStackEntry</span><span class="p">.</span><span class="na">arguments</span><span class="o">?.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">PantallaDetalle</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">}</span>
+</code></pre></div>
+<p>Y, al navegar, incluyes el valor en la ruta:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">navController</span><span class="p">.</span><span class="na">navigate</span><span class="p">(</span><span class="s">&quot;detalle/42&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Así, la pantalla de detalle recibe el <code>id</code> (<code>"42"</code>) y puede mostrar el elemento correspondiente. Fíjate en que el argumento llega como texto; si necesitas un número, tendrás que convertirlo con <code>toInt()</code>, como viste al principio del curso.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Como buena práctica, en lugar de pasar el <code>NavController</code> a cada pantalla, es preferible que las pantallas reciban <strong>funciones</strong> de navegación (por ejemplo, <code>onVerDetalle: (String) -&gt; Unit</code>). Así quedan desacopladas de la navegación y son más fáciles de reutilizar y previsualizar, siguiendo la misma idea del <em>state hoisting</em> que viste con el estado.</p>
+</div>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo aprendiste a moverte entre pantallas:</p>
+<ul>
+<li><strong>Navigation Compose</strong> gestiona la navegación entre composables. Es una dependencia que se agrega al proyecto.</li>
+<li>El <strong><code>NavController</code></strong> controla la navegación (la pila de pantallas); el <strong><code>NavHost</code></strong> define el mapa de destinos, cada uno identificado por una <strong>ruta</strong>.</li>
+<li>Navegas con <code>navController.navigate("ruta")</code>, normalmente en respuesta a una acción del usuario.</li>
+<li>El <strong>botón de retroceso</strong> del sistema funciona automáticamente; también puedes volver con <code>popBackStack()</code>.</li>
+<li>Puedes <strong>pasar datos</strong> incluyendo argumentos en la ruta (<code>"detalle/{id}"</code>) y leerlos en el destino.</li>
+<li>Como buena práctica, pasa <strong>funciones</strong> de navegación a las pantallas en vez del <code>NavController</code>, para mantenerlas desacopladas.</li>
+</ul>
+<p>Con esto cierras la parte de <strong>interfaz con Jetpack Compose</strong>. En la próxima parte del curso darás un paso clave hacia las apps profesionales: la <strong>arquitectura MVVM</strong>, que organiza tu código separando la interfaz, la lógica y los datos.</p>
 
 
 

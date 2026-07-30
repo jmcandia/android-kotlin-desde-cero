@@ -1840,7 +1840,7 @@
   <span class="md-ellipsis">
     
   
-    36. HTTP, REST y JSON: explorando la PokeAPI
+    36. HTTP, REST y JSON: cómo se comunican las apps con un servidor
   
 
     
@@ -2526,7 +2526,7 @@
 <h1 id="capitulo-12-colecciones-ii-operaciones-funcionales">Capítulo 12: Colecciones II: operaciones funcionales<a class="headerlink" href="#capitulo-12-colecciones-ii-operaciones-funcionales" title="Permanent link">&para;</a></h1>
 <h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
 <p>En el capítulo anterior aprendiste a guardar varios valores en colecciones y a recorrerlos con un bucle <code>for</code>. Pero recorrer una colección es solo el principio: muy a menudo querrás <strong>transformar</strong> sus elementos (por ejemplo, aplicarles un descuento) o <strong>seleccionar</strong> solo algunos (los que cumplen cierta condición).</p>
-<p>Podrías hacerlo con bucles y listas mutables, como hasta ahora. Pero Kotlin ofrece un conjunto de <strong>operaciones funcionales</strong> que resuelven estas tareas de forma mucho más breve y expresiva. En este capítulo conocerás las más importantes: <code>map</code>, <code>filter</code>, <code>forEach</code> y algunas más. Estas operaciones serán muy útiles en la aplicación: por ejemplo, para convertir los datos que lleguen de la PokeAPI en la lista que se muestra en pantalla.</p>
+<p>Podrías hacerlo con bucles y listas mutables, como hasta ahora. Pero Kotlin ofrece un conjunto de <strong>operaciones funcionales</strong> que resuelven estas tareas de forma mucho más breve y expresiva. En este capítulo conocerás las más importantes: <code>map</code>, <code>filter</code>, <code>forEach</code> y algunas más. Estas operaciones son muy útiles en la práctica: por ejemplo, para transformar los datos que recibes de una fuente externa (una API, una base de datos) en la forma que necesitas mostrar en pantalla.</p>
 <h2 id="antes-de-empezar-las-lambdas">Antes de empezar: las lambdas<a class="headerlink" href="#antes-de-empezar-las-lambdas" title="Permanent link">&para;</a></h2>
 <p>Las operaciones que veremos necesitan que les digas <strong>qué hacer con cada elemento</strong> de la colección. Para eso, les pasas una pequeña función escrita en el momento y sin nombre, llamada <strong>lambda</strong>.</p>
 <p>Una lambda se escribe entre llaves <code>{ }</code>. Por ejemplo, esta toma un número y devuelve su doble:</p>
@@ -2612,7 +2612,7 @@
 <li>Otras operaciones útiles: <code>count</code>, <code>any</code>, <code>all</code>, <code>find</code>, <code>sorted</code> y <code>sortedBy</code>.</li>
 <li>Puedes <strong>encadenar</strong> operaciones para expresar transformaciones complejas paso a paso.</li>
 </ul>
-<p>Casi todas estas operaciones crean colecciones <strong>nuevas</strong> (o devuelven un valor), sin modificar la original. Las volverás a usar constantemente en la aplicación.</p>
+<p>Casi todas estas operaciones crean colecciones <strong>nuevas</strong> (o devuelven un valor), sin modificar la original. Las volverás a usar constantemente al trabajar con datos.</p>
 <p>En el próximo capítulo aprenderás sobre el <strong>null safety</strong> de Kotlin: cómo el lenguaje te ayuda a manejar de forma segura la <em>ausencia de un valor</em>, ese concepto que hemos ido mencionando a lo largo del curso.</p>
 
 

@@ -1160,10 +1160,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#la-conexion-con-la-aplicacion-estados-de-la-interfaz" class="md-nav__link">
+  <a href="#un-caso-practico-los-estados-de-una-interfaz" class="md-nav__link">
     <span class="md-ellipsis">
       
-        La conexión con la aplicación: estados de la interfaz
+        Un caso práctico: los estados de una interfaz
       
     </span>
   </a>
@@ -1851,7 +1851,7 @@
   <span class="md-ellipsis">
     
   
-    36. HTTP, REST y JSON: explorando la PokeAPI
+    36. HTTP, REST y JSON: cómo se comunican las apps con un servidor
   
 
     
@@ -2493,10 +2493,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#la-conexion-con-la-aplicacion-estados-de-la-interfaz" class="md-nav__link">
+  <a href="#un-caso-practico-los-estados-de-una-interfaz" class="md-nav__link">
     <span class="md-ellipsis">
       
-        La conexión con la aplicación: estados de la interfaz
+        Un caso práctico: los estados de una interfaz
       
     </span>
   </a>
@@ -2549,7 +2549,7 @@
 <h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
 <p>En los capítulos anteriores modelaste cosas con clases. Pero hay situaciones en las que un valor solo puede ser <strong>una de un conjunto fijo de opciones</strong>: los días de la semana, los puntos cardinales, el color de un semáforo, el estado de una descarga.</p>
 <p>Representar esas opciones con simples textos o números es frágil: es fácil escribir <code>"rojo"</code> en un lugar y <code>"Rojo"</code> en otro, y nada te avisa del error. Kotlin ofrece herramientas hechas a medida para estos casos: los <strong><code>enum</code></strong>, para un conjunto fijo de valores con nombre, y las <strong><code>sealed class</code></strong>, para cuando cada opción puede llevar además sus propios datos.</p>
-<p>Este capítulo es especialmente importante para la aplicación: usaremos una <code>sealed class</code> para representar los <strong>estados de la interfaz</strong> (cargando, éxito, error), que serán la base de la arquitectura que veremos más adelante.</p>
+<p>Este capítulo introduce dos herramientas muy útiles para modelar datos con un conjunto limitado de opciones. Además, verás cómo una <code>sealed class</code> es ideal para representar los <strong>estados de una interfaz</strong> (cargando, éxito, error), un patrón que retomaremos al estudiar la arquitectura.</p>
 <h2 id="enum-class"><code>enum class</code><a class="headerlink" href="#enum-class" title="Permanent link">&para;</a></h2>
 <p>Un <strong><code>enum</code></strong> (de <em>enumeration</em>, "enumeración") define un tipo con un conjunto <strong>fijo y limitado</strong> de valores con nombre. Por ejemplo, los colores de un semáforo:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">enum</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Color</span><span class="w"> </span><span class="p">{</span>
@@ -2610,11 +2610,11 @@
 <p class="admonition-title">Note</p>
 <p>El operador <code>is</code> comprueba si un objeto es de un tipo determinado (si vienes de Java, es como <code>instanceof</code>). Dentro de la rama <code>is Resultado.Exito</code>, Kotlin aplica <em>smart cast</em>: ya sabe que <code>resultado</code> es un <code>Exito</code>, y por eso puedes leer <code>resultado.datos</code> directamente, sin ninguna conversión.</p>
 </div>
-<h2 id="la-conexion-con-la-aplicacion-estados-de-la-interfaz">La conexión con la aplicación: estados de la interfaz<a class="headerlink" href="#la-conexion-con-la-aplicacion-estados-de-la-interfaz" title="Permanent link">&para;</a></h2>
-<p>Este patrón es exactamente el que usaremos en la aplicación. Cuando la app pida datos a la PokeAPI, su pantalla podrá estar en uno de tres estados: <strong>cargando</strong>, <strong>con datos</strong> (éxito) o <strong>con error</strong>. Lo modelaremos con una <code>sealed class</code>:</p>
+<h2 id="un-caso-practico-los-estados-de-una-interfaz">Un caso práctico: los estados de una interfaz<a class="headerlink" href="#un-caso-practico-los-estados-de-una-interfaz" title="Permanent link">&para;</a></h2>
+<p>Un caso muy común en el desarrollo de apps: una pantalla que carga datos desde una fuente externa (una red, una base de datos) puede estar en uno de tres estados: <strong>cargando</strong>, <strong>con datos</strong> (éxito) o <strong>con error</strong>. Es un ejemplo perfecto para una <code>sealed class</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">UiState</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="kd">object</span><span class="w"> </span><span class="nc">Cargando</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Exito</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">pokemones</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Exito</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">elementos</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Error</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">mensaje</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">}</span>
 </code></pre></div>
@@ -2627,7 +2627,7 @@
         &lt;&lt;object&gt;&gt;
     }
     class Exito {
-        +pokemones: List~String~
+        +elementos: List~String~
     }
     class Error {
         +mensaje: String
@@ -2638,7 +2638,7 @@
 <p>Luego, la interfaz decidirá qué mostrar según el estado, con un <code>when</code> exhaustivo:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="n">estado</span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">estado</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Mostrando indicador de carga...&quot;</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Exito</span><span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Mostrando </span><span class="si">${</span><span class="n">estado</span><span class="p">.</span><span class="na">pokemones</span><span class="p">.</span><span class="na">size</span><span class="si">}</span><span class="s"> Pokémon&quot;</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Exito</span><span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Mostrando </span><span class="si">${</span><span class="n">estado</span><span class="p">.</span><span class="na">elementos</span><span class="p">.</span><span class="na">size</span><span class="si">}</span><span class="s"> elementos&quot;</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Error</span><span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Mostrando mensaje: </span><span class="si">${</span><span class="n">estado</span><span class="p">.</span><span class="na">mensaje</span><span class="si">}</span><span class="s">&quot;</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">}</span>
 </code></pre></div>
@@ -2657,7 +2657,7 @@
 <li>Una <strong><code>sealed class</code></strong> define una jerarquía cerrada de subclases conocidas de antemano; cada una puede ser distinta y llevar sus propios datos.</li>
 <li>Con <code>when</code> y el operador <code>is</code>, manejas una <code>sealed class</code> de forma exhaustiva y con <em>smart cast</em> (accedes a los datos de cada caso sin conversiones).</li>
 <li>Usa <code>enum</code> para opciones con la misma forma y <code>sealed class</code> para opciones que cargan datos distintos.</li>
-<li>Este patrón es la base para modelar los <strong>estados de la interfaz</strong> (cargando, éxito, error) en la aplicación.</li>
+<li>Este patrón es la base para modelar los <strong>estados de una interfaz</strong> (cargando, éxito, error).</li>
 </ul>
 <p>Con esto casi cierras la parte de POO. En el próximo capítulo verás tres herramientas que hacen tu código más expresivo y reutilizable: los <strong>genéricos</strong>, las <strong>funciones de extensión</strong> y las <strong>lambdas</strong> (que ya usaste con las colecciones y que ahora estudiarás a fondo).</p>
 

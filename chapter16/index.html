@@ -1095,7 +1095,7 @@
   <a href="#mutabilidad-que-controla-val" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mutabilidad: ¿qué controla val?
+        Mutabilidad: qué controla val
       
     </span>
   </a>
@@ -1884,7 +1884,7 @@
   <span class="md-ellipsis">
     
   
-    36. HTTP, REST y JSON: explorando la PokeAPI
+    36. HTTP, REST y JSON: cómo se comunican las apps con un servidor
   
 
     
@@ -2573,7 +2573,7 @@
   <a href="#mutabilidad-que-controla-val" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Mutabilidad: ¿qué controla val?
+        Mutabilidad: qué controla val
       
     </span>
   </a>
@@ -2619,14 +2619,14 @@
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">correo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ana@ejemplo.com&quot;</span>
 </code></pre></div>
 <p>Funciona para una persona, pero ¿y si tienes muchas? ¿Y cómo agrupas, junto a esos datos, las acciones que se pueden hacer con ellos? Aquí empieza la <strong>programación orientada a objetos (POO)</strong>.</p>
-<p>La herramienta central de la POO es la <strong>clase</strong>. En este capítulo aprenderás a crear tus propias clases, a darles datos mediante <strong>propiedades</strong>, a construir objetos con <strong>constructores</strong> y a añadirles comportamiento con funciones. Es un paso fundamental: a partir de aquí modelarás las cosas de tu programa como objetos, tal como haremos con la aplicación (cada Pokémon, por ejemplo, será un objeto). Pero antes, veamos brevemente en qué consiste este estilo de programación.</p>
+<p>La herramienta central de la POO es la <strong>clase</strong>. En este capítulo aprenderás a crear tus propias clases, a darles datos mediante <strong>propiedades</strong>, a construir objetos con <strong>constructores</strong> y a añadirles comportamiento con funciones. Es un paso fundamental: a partir de aquí modelarás las cosas de tu programa como objetos. Pero antes, veamos brevemente en qué consiste este estilo de programación.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Si vienes de Java, ya conoces la POO. En este capítulo verás cómo Kotlin expresa las mismas ideas de forma mucho más concisa.</p>
 </div>
 <h2 id="que-es-la-programacion-orientada-a-objetos">¿Qué es la programación orientada a objetos?<a class="headerlink" href="#que-es-la-programacion-orientada-a-objetos" title="Permanent link">&para;</a></h2>
 <p>La <strong>programación orientada a objetos</strong> (POO) es un <em>paradigma</em>: una forma de organizar y estructurar el código. En lugar de entender un programa como una simple lista de instrucciones y funciones sueltas, la POO lo organiza en torno a <strong>objetos</strong>.</p>
-<p>Un objeto representa una "cosa" del problema que estás resolviendo —una persona, un producto, un Pokémon— y reúne en un solo lugar dos aspectos: sus <strong>datos</strong> (qué información contiene) y su <strong>comportamiento</strong> (qué puede hacer).</p>
+<p>Un objeto representa una "cosa" del problema que estás resolviendo —una persona, un producto, un pedido— y reúne en un solo lugar dos aspectos: sus <strong>datos</strong> (qué información contiene) y su <strong>comportamiento</strong> (qué puede hacer).</p>
 <p>Antes de la POO predominaba la <strong>programación estructurada</strong> (o procedural), en la que los datos y las funciones que los manipulaban vivían por separado. A medida que los programas crecían, esa separación se volvía difícil de mantener. La POO surgió para ordenar ese crecimiento, agrupando cada conjunto de datos con las operaciones que le corresponden. Sus ideas nacieron con lenguajes como <strong>Simula</strong> (en los años 60) y se popularizaron con <strong>Smalltalk</strong> durante las décadas de 1970 y 1980; hoy están presentes en la mayoría de los lenguajes modernos, incluidos Java y Kotlin.</p>
 <h2 id="los-pilares-de-la-poo">Los pilares de la POO<a class="headerlink" href="#los-pilares-de-la-poo" title="Permanent link">&para;</a></h2>
 <p>La POO se apoya en cuatro conceptos fundamentales, conocidos como sus <strong>cuatro pilares</strong>. Los presentamos aquí en su idea general; los iremos desarrollando en profundidad a lo largo de esta parte del curso.</p>
@@ -2639,7 +2639,7 @@
 <p>En este capítulo nos concentramos en la base sobre la que se apoyan todos estos pilares: las <strong>clases</strong> y los <strong>objetos</strong>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Escribir buen código orientado a objetos no consiste solo en usar clases, sino en organizarlas bien. Para eso existen principios de diseño como <strong>SOLID</strong>, que revisamos en el <a href="../appendix-design-principle/">anexo de principios de diseño</a>. Te será útil volver a él a medida que avances en esta parte del curso.</p>
+<p>Escribir buen código orientado a objetos no consiste solo en usar clases, sino en organizarlas bien. Para eso existen principios de diseño como <strong>SOLID</strong>, que revisamos en el <a href="/anexo-principios-diseno.md">anexo de principios de diseño</a>. Te será útil volver a él a medida que avances en esta parte del curso.</p>
 </div>
 <h2 id="que-es-una-clase">¿Qué es una clase?<a class="headerlink" href="#que-es-una-clase" title="Permanent link">&para;</a></h2>
 <p>Una <strong>clase</strong> es una <strong>plantilla</strong> (o molde) para crear objetos. Describe qué <strong>datos</strong> tendrá cada objeto y qué <strong>puede hacer</strong>. Un <strong>objeto</strong> es una instancia concreta creada a partir de esa plantilla.</p>
@@ -2749,7 +2749,7 @@
         +saludar()
         +esMayorDeEdad() Boolean
     }</code></pre>
-<h2 id="mutabilidad-que-controla-val">Mutabilidad: ¿qué controla <code>val</code>?<a class="headerlink" href="#mutabilidad-que-controla-val" title="Permanent link">&para;</a></h2>
+<h2 id="mutabilidad-que-controla-val">Mutabilidad: qué controla <code>val</code><a class="headerlink" href="#mutabilidad-que-controla-val" title="Permanent link">&para;</a></h2>
 <p>Una pregunta natural al declarar propiedades y objetos con <code>val</code> es: ¿eso los vuelve inmutables? Como viste al trabajar con colecciones, <code>val</code> <strong>impide reasignar</strong>, pero no necesariamente <strong>congela el contenido</strong>. Con las clases, esto se manifiesta en dos niveles.</p>
 <p><strong>A nivel de propiedad.</strong> Una propiedad <code>val</code> no se puede reasignar; una <code>var</code>, sí. Fíjate en que aquí declaramos <code>edad</code> como <code>var</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Persona</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">edad</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span>

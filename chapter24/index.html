@@ -1840,7 +1840,7 @@
   <span class="md-ellipsis">
     
   
-    36. HTTP, REST y JSON: explorando la PokeAPI
+    36. HTTP, REST y JSON: cómo se comunican las apps con un servidor
   
 
     
@@ -2585,7 +2585,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">estado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span><span class="p">)</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1">// Más tarde, cuando llegan los datos:</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">estado</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Exito</span><span class="p">(</span><span class="n">listOf</span><span class="p">(</span><span class="s">&quot;Pikachu&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Charmander&quot;</span><span class="p">))</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">estado</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Exito</span><span class="p">(</span><span class="n">listOf</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Diego&quot;</span><span class="p">))</span>
 </code></pre></div>
 <p>La pantalla, suscrita a <code>estado</code>, empieza mostrando el indicador de carga y, en cuanto el estado pasa a <code>Exito</code>, se <strong>redibuja sola</strong> con los datos.</p>
 <h2 id="sharedflow-para-eventos">SharedFlow: para eventos<a class="headerlink" href="#sharedflow-para-eventos" title="Permanent link">&para;</a></h2>
@@ -2594,12 +2594,12 @@
 <li>Un <strong><code>StateFlow</code></strong> representa un <strong>estado</strong>: siempre tiene un valor actual y responde a la pregunta "¿qué debo mostrar ahora?" (la pantalla está cargando, o con datos).</li>
 <li>Un <strong><code>SharedFlow</code></strong> representa <strong>eventos</strong> puntuales: cosas que ocurren una vez y no tienen un "valor actual", como "muestra un mensaje" o "navega a otra pantalla".</li>
 </ul>
-<p>La regla práctica: usa <code>StateFlow</code> para el <strong>estado</strong> de la interfaz y <code>SharedFlow</code> para <strong>eventos</strong> de una sola vez. En la aplicación, el estado de la pantalla será un <code>StateFlow</code>.</p>
+<p>La regla práctica: usa <code>StateFlow</code> para el <strong>estado</strong> de la interfaz y <code>SharedFlow</code> para <strong>eventos</strong> de una sola vez. En una app, el estado de una pantalla suele ser un <code>StateFlow</code>.</p>
 <h2 id="la-conexion-con-mvvm">La conexión con MVVM<a class="headerlink" href="#la-conexion-con-mvvm" title="Permanent link">&para;</a></h2>
-<p>Aquí se juntan varias piezas del curso y aparece el patrón que usaremos en la aplicación:</p>
+<p>Aquí se juntan varias piezas del curso y aparece un patrón muy habitual en las apps:</p>
 <ul>
 <li>El <strong>ViewModel</strong> (una clase que veremos en detalle en la parte de arquitectura) mantiene un <code>StateFlow&lt;UiState&gt;</code> con el estado de la pantalla.</li>
-<li>Lanza una coroutine (en su <code>viewModelScope</code>, del capítulo anterior) que pide los datos a la PokeAPI en el hilo de <code>IO</code>.</li>
+<li>Lanza una coroutine (en su <code>viewModelScope</code>, del capítulo anterior) que pide los datos a una fuente externa (por ejemplo, la red) en el hilo de <code>IO</code>.</li>
 <li>Cuando los datos llegan, actualiza el <code>.value</code> del <code>StateFlow</code>.</li>
 <li>La <strong>interfaz</strong> recolecta ese <code>StateFlow</code> y, ante cada cambio, se redibuja automáticamente.</li>
 </ul>
@@ -2610,7 +2610,7 @@
     participant UI as Interfaz
     UI-&gt;&gt;SF: collect (se suscribe)
     SF--&gt;&gt;UI: Estado actual: Cargando
-    Note over VM: Llegan los datos de la PokeAPI
+    Note over VM: Llegan los datos
     VM-&gt;&gt;SF: .value = Exito(datos)
     SF--&gt;&gt;UI: Nuevo estado: Exito
     Note over UI: Se redibuja con los datos</code></pre>
