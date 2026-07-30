@@ -26,11 +26,11 @@ Cuando el asistente termine, verás la pantalla de bienvenida de Android Studio,
 
 Desde la pantalla de bienvenida de Android Studio, haz clic en **New Project**.
 
-![Pantalla de bienvenida de Android Studio](assets/images/chapter25/android-studio-welcome.png)
+![Pantalla de bienvenida de Android Studio](/resources/chapter25/android-studio-welcome.png)
 
 Android Studio te mostrará una lista de **plantillas** (proyectos de ejemplo que sirven de punto de partida). En la pestaña **Phone and Tablet**, selecciona **Empty Activity**: crea un proyecto sencillo, de una sola pantalla, ya preparado para usar **Jetpack Compose** (el sistema moderno de interfaces que usaremos en todo el curso). Luego pulsa **Next**.
 
-![Selección de la plantilla Empty Activity](assets/images/chapter25/android-studio-new-project.png)
+![Selección de la plantilla Empty Activity](/resources/chapter25/android-studio-new-project.png)
 
 En la siguiente pantalla configuras el proyecto:
 
@@ -41,7 +41,7 @@ En la siguiente pantalla configuras el proyecto:
 
 El **lenguaje** de programación ya viene fijado en Kotlin, porque Compose solo funciona con Kotlin.
 
-![Configuración del nuevo proyecto](assets/images/chapter25/android-studio-new-project-settings.png)
+![Configuración del nuevo proyecto](/resources/chapter25/android-studio-new-project-settings.png)
 
 Al pulsar **Finish**, Android Studio generará el proyecto y **Gradle** (la herramienta de construcción, que veremos más abajo) sincronizará todo por primera vez. Al terminar, se abrirá el archivo `MainActivity.kt` y podrás ejecutar una app que muestra un simple "Hello Android!".
 
@@ -67,7 +67,7 @@ MiPrimeraApp/
     └── libs.versions.toml            ← catálogo de versiones
 ```
 
-![El proyecto recién creado, abierto en Android Studio](assets/images/chapter25/android-studio-new-project-summary.png)
+![El proyecto recién creado, abierto en Android Studio](/resources/chapter25/android-studio-new-project-summary.png)
 
 No te abrumes: casi todo tu trabajo ocurrirá dentro de `kotlin+java/` (tu código) y `res/` (los recursos). Los demás archivos son de configuración, y los tocarás pocas veces. Veamos los más importantes uno por uno.
 
@@ -99,7 +99,7 @@ Una versión simplificada se ve así:
 
 El bloque `<intent-filter>` con `MAIN` y `LAUNCHER` es el que marca a `MainActivity` como la **pantalla de inicio**: la que se abre cuando el usuario toca el ícono de la app.
 
-Aquí también se declaran los **permisos**. Por ejemplo, para que la app pueda acceder a internet —algo que necesitaremos para consultar la PokeAPI—, se agrega esta línea:
+Aquí también se declaran los **permisos**. Por ejemplo, para que la app pueda acceder a internet (algo necesario si va a consumir datos de la red), se agrega esta línea:
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
@@ -129,7 +129,7 @@ En el proyecto real que generaste (visible en la captura de la sección anterior
 Así, a grandes rasgos, arranca una app Android:
 
 ```mermaid
-flowchart TB
+flowchart LR
     A[El usuario abre la app] --> B[Android lee el AndroidManifest]
     B --> C[Lanza la MainActivity de inicio]
     C --> D[setContent muestra la interfaz]

@@ -2,7 +2,7 @@
 
 ## Introducción
 
-Hasta ahora has mostrado composables de a uno. Pero una pantalla real combina **muchos** elementos: textos, imágenes, botones, unos debajo de otros o en fila. En este capítulo aprenderás a **organizarlos** con los layouts de Compose —`Column`, `Row` y `Box`—, a controlar cómo se distribuyen y alinean, y a mostrar **listas** de forma eficiente con `LazyColumn`, que será la base de la lista de Pokémon de la aplicación.
+Hasta ahora has mostrado composables de a uno. Pero una pantalla real combina **muchos** elementos: textos, imágenes, botones, unos debajo de otros o en fila. En este capítulo aprenderás a **organizarlos** con los layouts de Compose —`Column`, `Row` y `Box`—, a controlar cómo se distribuyen y alinean, y a mostrar **listas** de forma eficiente con `LazyColumn`, imprescindible para presentar listas largas de datos.
 
 ## El problema: los elementos se superponen
 
@@ -97,28 +97,28 @@ Aquí ambos textos reciben el mismo peso (`1f`), así que se reparten el ancho *
 
 ## `LazyColumn`: listas eficientes
 
-Un `Column` dibuja **todos** sus hijos de una vez. Eso está bien para unos pocos elementos, pero ¿y si tienes una lista de cientos de Pokémon? Dibujarlos todos a la vez sería lento y desperdiciaría memoria, sobre todo porque la mayoría ni siquiera caben en la pantalla.
+Un `Column` dibuja **todos** sus hijos de una vez. Eso está bien para unos pocos elementos, pero ¿y si tienes una lista de cientos o miles de elementos? Dibujarlos todos a la vez sería lento y desperdiciaría memoria, sobre todo porque la mayoría ni siquiera caben en la pantalla.
 
 Para eso está el **`LazyColumn`**: una columna con desplazamiento (*scroll*) que solo compone los elementos **visibles** en cada momento, y los va reutilizando a medida que te desplazas. Así puede mostrar listas enormes sin problemas.
 
 En vez de escribir cada hijo a mano, le pasas la lista con la función `items`:
 
 ```kotlin
-val pokemones = listOf("Bulbasaur", "Charmander", "Squirtle")
+val nombres = listOf("Ana", "Diego", "Elena")
 
 LazyColumn {
-    items(pokemones) { nombre ->
+    items(nombres) { nombre ->
         Text(nombre)
     }
 }
 ```
 
-`items(pokemones)` recorre la lista y, por cada elemento, ejecuta la lambda que describe cómo mostrarlo (aquí, un `Text` con su nombre). El desplazamiento funciona automáticamente. También existe `LazyRow`, su equivalente horizontal.
+`items(nombres)` recorre la lista y, por cada elemento, ejecuta la lambda que describe cómo mostrarlo (aquí, un `Text` con su nombre). El desplazamiento funciona automáticamente. También existe `LazyRow`, su equivalente horizontal.
 
 > [!NOTE]
 > Si vienes del desarrollo Android tradicional, `LazyColumn` cumple el papel del antiguo `RecyclerView`, pero con muchísimo menos código: no necesitas adaptadores ni *view holders*.
 
-Este es, precisamente, el componente con el que mostraremos la lista de Pokémon que llegue de la PokeAPI: una `LazyColumn` con un `items` que recorre los resultados.
+Este es, precisamente, el componente con el que se muestran listas largas de datos en una app: una `LazyColumn` con un `items` que recorre los elementos.
 
 ## Resumen
 

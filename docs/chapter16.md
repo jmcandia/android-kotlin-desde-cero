@@ -12,7 +12,7 @@ val correo = "ana@ejemplo.com"
 
 Funciona para una persona, pero ¿y si tienes muchas? ¿Y cómo agrupas, junto a esos datos, las acciones que se pueden hacer con ellos? Aquí empieza la **programación orientada a objetos (POO)**.
 
-La herramienta central de la POO es la **clase**. En este capítulo aprenderás a crear tus propias clases, a darles datos mediante **propiedades**, a construir objetos con **constructores** y a añadirles comportamiento con funciones. Es un paso fundamental: a partir de aquí modelarás las cosas de tu programa como objetos, tal como haremos con la aplicación (cada Pokémon, por ejemplo, será un objeto). Pero antes, veamos brevemente en qué consiste este estilo de programación.
+La herramienta central de la POO es la **clase**. En este capítulo aprenderás a crear tus propias clases, a darles datos mediante **propiedades**, a construir objetos con **constructores** y a añadirles comportamiento con funciones. Es un paso fundamental: a partir de aquí modelarás las cosas de tu programa como objetos. Pero antes, veamos brevemente en qué consiste este estilo de programación.
 
 > [!NOTE]
 > Si vienes de Java, ya conoces la POO. En este capítulo verás cómo Kotlin expresa las mismas ideas de forma mucho más concisa.
@@ -21,7 +21,7 @@ La herramienta central de la POO es la **clase**. En este capítulo aprenderás 
 
 La **programación orientada a objetos** (POO) es un *paradigma*: una forma de organizar y estructurar el código. En lugar de entender un programa como una simple lista de instrucciones y funciones sueltas, la POO lo organiza en torno a **objetos**.
 
-Un objeto representa una "cosa" del problema que estás resolviendo —una persona, un producto, un Pokémon— y reúne en un solo lugar dos aspectos: sus **datos** (qué información contiene) y su **comportamiento** (qué puede hacer).
+Un objeto representa una "cosa" del problema que estás resolviendo —una persona, un producto, un pedido— y reúne en un solo lugar dos aspectos: sus **datos** (qué información contiene) y su **comportamiento** (qué puede hacer).
 
 Antes de la POO predominaba la **programación estructurada** (o procedural), en la que los datos y las funciones que los manipulaban vivían por separado. A medida que los programas crecían, esa separación se volvía difícil de mantener. La POO surgió para ordenar ese crecimiento, agrupando cada conjunto de datos con las operaciones que le corresponden. Sus ideas nacieron con lenguajes como **Simula** (en los años 60) y se popularizaron con **Smalltalk** durante las décadas de 1970 y 1980; hoy están presentes en la mayoría de los lenguajes modernos, incluidos Java y Kotlin.
 
@@ -37,7 +37,7 @@ La POO se apoya en cuatro conceptos fundamentales, conocidos como sus **cuatro p
 En este capítulo nos concentramos en la base sobre la que se apoyan todos estos pilares: las **clases** y los **objetos**.
 
 > [!NOTE]
-> Escribir buen código orientado a objetos no consiste solo en usar clases, sino en organizarlas bien. Para eso existen principios de diseño como **SOLID**, que revisamos en el [anexo de principios de diseño](appendix-design-principle.md). Te será útil volver a él a medida que avances en esta parte del curso.
+> Escribir buen código orientado a objetos no consiste solo en usar clases, sino en organizarlas bien. Para eso existen principios de diseño como **SOLID**, que revisamos en el [anexo de principios de diseño](/anexo-principios-diseno.md). Te será útil volver a él a medida que avances en esta parte del curso.
 
 ## ¿Qué es una clase?
 
@@ -206,7 +206,7 @@ classDiagram
     }
 ```
 
-## Mutabilidad: ¿qué controla `val`?
+## Mutabilidad: qué controla `val`
 
 Una pregunta natural al declarar propiedades y objetos con `val` es: ¿eso los vuelve inmutables? Como viste al trabajar con colecciones, `val` **impide reasignar**, pero no necesariamente **congela el contenido**. Con las clases, esto se manifiesta en dos niveles.
 

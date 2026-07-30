@@ -6,7 +6,7 @@ Hasta ahora, cada variable guardaba **un solo valor**: un número, un texto, un 
 
 Podrías crear una variable para cada uno (`nombre1`, `nombre2`, `nombre3`…), pero se vuelve inmanejable enseguida: ¿y si son cien? ¿y si no sabes cuántos habrá?
 
-Para eso existen las **colecciones**: estructuras que guardan varios valores bajo un mismo nombre. En este capítulo conocerás las tres más importantes de Kotlin —**listas**, **conjuntos** y **mapas**—, cuándo usar cada una y cómo trabajar con ellas. Más adelante te serán imprescindibles: por ejemplo, la lista de Pokémon que mostrará nuestra aplicación será, precisamente, una lista.
+Para eso existen las **colecciones**: estructuras que guardan varios valores bajo un mismo nombre. En este capítulo conocerás las tres más importantes de Kotlin —**listas**, **conjuntos** y **mapas**—, cuándo usar cada una y cómo trabajar con ellas. Más adelante te serán imprescindibles: casi cualquier aplicación necesita manejar conjuntos de datos (una lista de contactos, un carrito de compras, un conjunto de etiquetas), y las colecciones son la herramienta para ello.
 
 ## Listas
 
@@ -79,11 +79,11 @@ Cuando necesitas una lista que **cambie** con el tiempo —agregar un producto a
 
 ```kotlin
 val tareas = mutableListOf("Estudiar", "Cocinar")
-
+ 
 tareas.add("Dormir")     // agrega al final: [Estudiar, Cocinar, Dormir]
 tareas.remove("Cocinar") // quita un elemento: [Estudiar, Dormir]
 tareas[0] = "Programar"  // cambia el elemento de la posición 0: [Programar, Dormir]
-
+ 
 println(tareas) // [Programar, Dormir]
 ```
 
@@ -116,7 +116,7 @@ Como ves, el `"rojo"` repetido aparece una sola vez. Igual que con las listas, p
 
 ```kotlin
 println("verde" in colores) // true
-
+ 
 for (color in colores) {
     println(color)
 }

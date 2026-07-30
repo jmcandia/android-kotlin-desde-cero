@@ -104,7 +104,7 @@ nav:
       - "34. Repositorio y separación de capas": chapter34.md
       - "35. Inyección de dependencias (manual y con Hilt)": chapter35.md
   - "Parte VIII · Consumo de API REST con Retrofit":
-      - "36. HTTP, REST y JSON: explorando la PokeAPI": chapter36.md
+      - "36. HTTP, REST y JSON: cómo se comunican las apps con un servidor": chapter36.md
       - "37. Retrofit: configuración, interfaces y endpoints": chapter37.md
       - "38. Serialización JSON y modelos de datos (DTO)": chapter38.md
       - "39. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>": chapter39.md

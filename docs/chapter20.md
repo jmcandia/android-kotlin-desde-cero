@@ -6,7 +6,7 @@ En los capítulos anteriores modelaste cosas con clases. Pero hay situaciones en
 
 Representar esas opciones con simples textos o números es frágil: es fácil escribir `"rojo"` en un lugar y `"Rojo"` en otro, y nada te avisa del error. Kotlin ofrece herramientas hechas a medida para estos casos: los **`enum`**, para un conjunto fijo de valores con nombre, y las **`sealed class`**, para cuando cada opción puede llevar además sus propios datos.
 
-Este capítulo es especialmente importante para la aplicación: usaremos una `sealed class` para representar los **estados de la interfaz** (cargando, éxito, error), que serán la base de la arquitectura que veremos más adelante.
+Este capítulo introduce dos herramientas muy útiles para modelar datos con un conjunto limitado de opciones. Además, verás cómo una `sealed class` es ideal para representar los **estados de una interfaz** (cargando, éxito, error), un patrón que retomaremos al estudiar la arquitectura.
 
 ## `enum class`
 
@@ -101,14 +101,14 @@ Fíjate en que, igual que con los enums, **no hace falta `else`**: como la clase
 > [!NOTE]
 > El operador `is` comprueba si un objeto es de un tipo determinado (si vienes de Java, es como `instanceof`). Dentro de la rama `is Resultado.Exito`, Kotlin aplica *smart cast*: ya sabe que `resultado` es un `Exito`, y por eso puedes leer `resultado.datos` directamente, sin ninguna conversión.
 
-## La conexión con la aplicación: estados de la interfaz
+## Un caso práctico: los estados de una interfaz
 
-Este patrón es exactamente el que usaremos en la aplicación. Cuando la app pida datos a la PokeAPI, su pantalla podrá estar en uno de tres estados: **cargando**, **con datos** (éxito) o **con error**. Lo modelaremos con una `sealed class`:
+Un caso muy común en el desarrollo de apps: una pantalla que carga datos desde una fuente externa (una red, una base de datos) puede estar en uno de tres estados: **cargando**, **con datos** (éxito) o **con error**. Es un ejemplo perfecto para una `sealed class`:
 
 ```kotlin
 sealed class UiState {
     object Cargando : UiState()
-    data class Exito(val pokemones: List<String>) : UiState()
+    data class Exito(val elementos: List<String>) : UiState()
     data class Error(val mensaje: String) : UiState()
 }
 ```
@@ -124,7 +124,7 @@ classDiagram
         <<object>>
     }
     class Exito {
-        +pokemones: List~String~
+        +elementos: List~String~
     }
     class Error {
         +mensaje: String
@@ -139,7 +139,7 @@ Luego, la interfaz decidirá qué mostrar según el estado, con un `when` exhaus
 ```kotlin
 fun render(estado: UiState) = when (estado) {
     is UiState.Cargando -> "Mostrando indicador de carga..."
-    is UiState.Exito    -> "Mostrando ${estado.pokemones.size} Pokémon"
+    is UiState.Exito    -> "Mostrando ${estado.elementos.size} elementos"
     is UiState.Error    -> "Mostrando mensaje: ${estado.mensaje}"
 }
 ```
@@ -163,6 +163,6 @@ En este capítulo aprendiste a modelar conjuntos fijos de opciones:
 - Una **`sealed class`** define una jerarquía cerrada de subclases conocidas de antemano; cada una puede ser distinta y llevar sus propios datos.
 - Con `when` y el operador `is`, manejas una `sealed class` de forma exhaustiva y con *smart cast* (accedes a los datos de cada caso sin conversiones).
 - Usa `enum` para opciones con la misma forma y `sealed class` para opciones que cargan datos distintos.
-- Este patrón es la base para modelar los **estados de la interfaz** (cargando, éxito, error) en la aplicación.
+- Este patrón es la base para modelar los **estados de una interfaz** (cargando, éxito, error).
 
 Con esto casi cierras la parte de POO. En el próximo capítulo verás tres herramientas que hacen tu código más expresivo y reutilizable: los **genéricos**, las **funciones de extensión** y las **lambdas** (que ya usaste con las colecciones y que ahora estudiarás a fondo).

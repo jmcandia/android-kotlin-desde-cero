@@ -4,7 +4,7 @@
 
 En el capítulo anterior aprendiste a guardar varios valores en colecciones y a recorrerlos con un bucle `for`. Pero recorrer una colección es solo el principio: muy a menudo querrás **transformar** sus elementos (por ejemplo, aplicarles un descuento) o **seleccionar** solo algunos (los que cumplen cierta condición).
 
-Podrías hacerlo con bucles y listas mutables, como hasta ahora. Pero Kotlin ofrece un conjunto de **operaciones funcionales** que resuelven estas tareas de forma mucho más breve y expresiva. En este capítulo conocerás las más importantes: `map`, `filter`, `forEach` y algunas más. Estas operaciones serán muy útiles en la aplicación: por ejemplo, para convertir los datos que lleguen de la PokeAPI en la lista que se muestra en pantalla.
+Podrías hacerlo con bucles y listas mutables, como hasta ahora. Pero Kotlin ofrece un conjunto de **operaciones funcionales** que resuelven estas tareas de forma mucho más breve y expresiva. En este capítulo conocerás las más importantes: `map`, `filter`, `forEach` y algunas más. Estas operaciones son muy útiles en la práctica: por ejemplo, para transformar los datos que recibes de una fuente externa (una API, una base de datos) en la forma que necesitas mostrar en pantalla.
 
 ## Antes de empezar: las lambdas
 
@@ -135,6 +135,6 @@ En este capítulo aprendiste a trabajar con colecciones de forma expresiva:
 - Otras operaciones útiles: `count`, `any`, `all`, `find`, `sorted` y `sortedBy`.
 - Puedes **encadenar** operaciones para expresar transformaciones complejas paso a paso.
 
-Casi todas estas operaciones crean colecciones **nuevas** (o devuelven un valor), sin modificar la original. Las volverás a usar constantemente en la aplicación.
+Casi todas estas operaciones crean colecciones **nuevas** (o devuelven un valor), sin modificar la original. Las volverás a usar constantemente al trabajar con datos.
 
 En el próximo capítulo aprenderás sobre el **null safety** de Kotlin: cómo el lenguaje te ayuda a manejar de forma segura la *ausencia de un valor*, ese concepto que hemos ido mencionando a lo largo del curso.

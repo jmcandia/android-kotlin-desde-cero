@@ -130,7 +130,7 @@ println(numero) // 0
 ```
 
 > [!NOTE]
-> Este enfoque —tratar el éxito o el fallo como un valor— es muy común en aplicaciones reales. Lo usaremos, por ejemplo, al manejar las respuestas de la PokeAPI, que pueden llegar correctamente o fallar (por falta de conexión, un error del servidor, etc.).
+> Este enfoque —tratar el éxito o el fallo como un valor— es muy común en aplicaciones reales. Es habitual, por ejemplo, al manejar las respuestas de una petición de red, que pueden llegar correctamente o fallar (por falta de conexión, un error del servidor, etc.).
 
 ## ¿Cuál usar?
 

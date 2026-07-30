@@ -6,7 +6,7 @@ En los capítulos anteriores creaste clases con datos y comportamiento. Pero muy
 
 Para esos casos, escribir una clase normal resulta más trabajoso de lo necesario. Kotlin ofrece un atajo pensado justo para esto: la **`data class`** (clase de datos), que genera automáticamente varias funciones útiles. En este capítulo verás qué te regala una `data class`, cómo crear copias modificadas con `copy` y cómo repartir sus datos en variables mediante la **desestructuración** (que veníamos anunciando desde capítulos anteriores).
 
-Este tema es especialmente importante para la aplicación: los datos que lleguen de la PokeAPI los modelaremos, precisamente, como `data class`.
+Este tema es muy común en el desarrollo Android: los datos que recibes de una API, de una base de datos o de un formulario suelen modelarse, precisamente, como `data class`.
 
 ## El problema: clases que solo guardan datos
 

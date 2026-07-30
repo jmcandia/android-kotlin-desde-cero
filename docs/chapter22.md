@@ -6,7 +6,7 @@ Con el capítulo anterior completaste el lenguaje Kotlin. A partir de aquí, el 
 
 Descargar datos de internet, leer una base de datos o procesar un archivo grande no son operaciones instantáneas: pueden tardar segundos. Y si no las manejas bien, tu aplicación se **congela** y frustra al usuario.
 
-En este capítulo entenderás por qué ocurre eso, conocerás el concepto de **hilo** y, en especial, el **hilo principal**, y verás por qué necesitamos la **asincronía**. Es un capítulo más conceptual que de código, pero sienta las bases de las *coroutines*, la herramienta con la que —en los próximos capítulos— nuestra aplicación pedirá los datos de los Pokémon a la PokeAPI sin congelarse.
+En este capítulo entenderás por qué ocurre eso, conocerás el concepto de **hilo** y, en especial, el **hilo principal**, y verás por qué necesitamos la **asincronía**. Es un capítulo más conceptual que de código, pero sienta las bases de las *coroutines*, la herramienta con la que —en los próximos capítulos— podrás realizar tareas lentas (como pedir datos por la red) sin congelar la aplicación.
 
 ## ¿Qué es un hilo?
 
@@ -79,7 +79,7 @@ La idea suena simple, pero coordinar ese trabajo en segundo plano ha sido, hist�
 
 El enfoque tradicional eran los *callbacks*: le pasabas a la tarea lenta una función para que la ejecutara "cuando terminara". Funciona, pero cuando una tarea depende de otra, que a su vez depende de otra, terminas con funciones anidadas dentro de funciones, un código difícil de leer y mantener que se ganó el apodo de *callback hell* ("el infierno de los callbacks"). Además, gestionar hilos a mano es delicado: es fácil provocar errores, o incluso hacer que la app se caiga si intentas tocar la interfaz desde el hilo equivocado.
 
-Aquí es donde entran las **coroutines** de Kotlin, el tema de los próximos capítulos. Son la solución moderna y elegante de Kotlin para escribir código asíncrono que se lee casi como el código secuencial de siempre, sin caer en el infierno de los callbacks. Con ellas, pedir los datos de la PokeAPI sin congelar la app será sorprendentemente sencillo.
+Aquí es donde entran las **coroutines** de Kotlin, el tema de los próximos capítulos. Son la solución moderna y elegante de Kotlin para escribir código asíncrono que se lee casi como el código secuencial de siempre, sin caer en el infierno de los callbacks. Con ellas, tareas como pedir datos por la red sin congelar la app resultan sorprendentemente sencillas.
 
 ## Resumen
 

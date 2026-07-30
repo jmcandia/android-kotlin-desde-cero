@@ -89,7 +89,7 @@ Cualquiera que recolecte ese `StateFlow` recibe **de inmediato** el valor actual
 val estado = MutableStateFlow<UiState>(UiState.Cargando)
 
 // Más tarde, cuando llegan los datos:
-estado.value = UiState.Exito(listOf("Pikachu", "Charmander"))
+estado.value = UiState.Exito(listOf("Ana", "Diego"))
 ```
 
 La pantalla, suscrita a `estado`, empieza mostrando el indicador de carga y, en cuanto el estado pasa a `Exito`, se **redibuja sola** con los datos.
@@ -101,14 +101,14 @@ Falta mencionar al primo del `StateFlow`: el **`SharedFlow`**. Ambos son flujos 
 - Un **`StateFlow`** representa un **estado**: siempre tiene un valor actual y responde a la pregunta "¿qué debo mostrar ahora?" (la pantalla está cargando, o con datos).
 - Un **`SharedFlow`** representa **eventos** puntuales: cosas que ocurren una vez y no tienen un "valor actual", como "muestra un mensaje" o "navega a otra pantalla".
 
-La regla práctica: usa `StateFlow` para el **estado** de la interfaz y `SharedFlow` para **eventos** de una sola vez. En la aplicación, el estado de la pantalla será un `StateFlow`.
+La regla práctica: usa `StateFlow` para el **estado** de la interfaz y `SharedFlow` para **eventos** de una sola vez. En una app, el estado de una pantalla suele ser un `StateFlow`.
 
 ## La conexión con MVVM
 
-Aquí se juntan varias piezas del curso y aparece el patrón que usaremos en la aplicación:
+Aquí se juntan varias piezas del curso y aparece un patrón muy habitual en las apps:
 
 - El **ViewModel** (una clase que veremos en detalle en la parte de arquitectura) mantiene un `StateFlow<UiState>` con el estado de la pantalla.
-- Lanza una coroutine (en su `viewModelScope`, del capítulo anterior) que pide los datos a la PokeAPI en el hilo de `IO`.
+- Lanza una coroutine (en su `viewModelScope`, del capítulo anterior) que pide los datos a una fuente externa (por ejemplo, la red) en el hilo de `IO`.
 - Cuando los datos llegan, actualiza el `.value` del `StateFlow`.
 - La **interfaz** recolecta ese `StateFlow` y, ante cada cambio, se redibuja automáticamente.
 
@@ -121,7 +121,7 @@ sequenceDiagram
     participant UI as Interfaz
     UI->>SF: collect (se suscribe)
     SF-->>UI: Estado actual: Cargando
-    Note over VM: Llegan los datos de la PokeAPI
+    Note over VM: Llegan los datos
     VM->>SF: .value = Exito(datos)
     SF-->>UI: Nuevo estado: Exito
     Note over UI: Se redibuja con los datos
