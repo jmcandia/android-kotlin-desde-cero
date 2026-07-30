@@ -1597,6 +1597,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    34. Repositorio y separación de capas
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1613,6 +1631,102 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-problema-el-viewmodel-no-deberia-saberlo-todo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El problema: el ViewModel no debería saberlo todo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-capa-de-datos-el-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La capa de datos: el repositorio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las-capas-de-la-aplicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Las capas de la aplicación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#depender-de-una-abstraccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Depender de una abstracción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-llega-el-repositorio-al-viewmodel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Cómo llega el repositorio al ViewModel?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2284,6 +2398,91 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-problema-el-viewmodel-no-deberia-saberlo-todo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El problema: el ViewModel no debería saberlo todo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-capa-de-datos-el-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La capa de datos: el repositorio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#las-capas-de-la-aplicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Las capas de la aplicación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#depender-de-una-abstraccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Depender de una abstracción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-llega-el-repositorio-al-viewmodel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Cómo llega el repositorio al ViewModel?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2303,10 +2502,92 @@
 
 
 <h1 id="capitulo-34-repositorio-y-separacion-de-capas">Capítulo 34: Repositorio y separación de capas<a class="headerlink" href="#capitulo-34-repositorio-y-separacion-de-capas" title="Permanent link">&para;</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Contenido en construcción</p>
-</div>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>En el capítulo anterior, el <code>ViewModel</code> llamaba a una función <code>obtenerDatos()</code>, pero no dijimos <strong>de dónde</strong> salían esos datos. Ahí quedó un cabo suelto que este capítulo viene a resolver.</p>
+<p>Si el <code>ViewModel</code> se encargara él mismo de pedir los datos a la red, leer una base de datos y procesar las respuestas, acabaría haciendo demasiadas cosas. En este capítulo aprenderás a <strong>separar</strong> esa responsabilidad en su propia capa, con el patrón <strong>repositorio</strong>, y a organizar la app en capas bien delimitadas.</p>
+<h2 id="el-problema-el-viewmodel-no-deberia-saberlo-todo">El problema: el ViewModel no debería saberlo todo<a class="headerlink" href="#el-problema-el-viewmodel-no-deberia-saberlo-todo" title="Permanent link">&para;</a></h2>
+<p>Recuerda cuál es el trabajo del <code>ViewModel</code>: guardar el estado de la pantalla y su lógica de presentación. Si además lo cargamos con los detalles de <strong>cómo</strong> se obtienen los datos —abrir una conexión de red, interpretar la respuesta, consultar una base de datos—, aparecen dos problemas:</p>
+<ul>
+<li>El <code>ViewModel</code> asume <strong>demasiadas responsabilidades</strong> a la vez (otra vez, lo contrario del principio de responsabilidad única).</li>
+<li>Queda <strong>acoplado</strong> a una fuente de datos concreta: si mañana quieres cambiar de la red a una base de datos local, tendrías que reescribir el <code>ViewModel</code>.</li>
+</ul>
+<p>La solución es separar <strong>"cómo presentar los datos"</strong> (tarea del <code>ViewModel</code>) de <strong>"cómo obtener los datos"</strong> (una tarea aparte).</p>
+<h2 id="la-capa-de-datos-el-repositorio">La capa de datos: el repositorio<a class="headerlink" href="#la-capa-de-datos-el-repositorio" title="Permanent link">&para;</a></h2>
+<p>Esa nueva tarea vive en la <strong>capa de datos</strong>, y su pieza principal es el <strong>repositorio</strong>: una clase dedicada exclusivamente a <strong>proveer los datos</strong>. El repositorio es la <strong>fuente única</strong> de información: el <code>ViewModel</code> le pide los datos, y el repositorio decide cómo conseguirlos (de la red, de una base de datos local, de una caché, o de una combinación de todo eso).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">DatosRepository</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerDatos</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="c1">// aquí se decide de dónde vienen los datos</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="c1">// (una petición de red, una consulta a la base de datos, etc.)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>Ahora el <code>ViewModel</code> simplemente le pide los datos al repositorio, sin saber ni preocuparse por su origen:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MiViewModel</span><span class="p">(</span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">repository</span><span class="p">:</span><span class="w"> </span><span class="n">DatosRepository</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">_uiState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">uiState</span><span class="p">:</span><span class="w"> </span><span class="n">StateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_uiState</span><span class="p">.</span><span class="na">asStateFlow</span><span class="p">()</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">cargarDatos</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span><span class="n">viewModelScope</span><span class="p">.</span><span class="na">launch</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">            </span><span class="n">_uiState</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">datos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">repository</span><span class="p">.</span><span class="na">obtenerDatos</span><span class="p">()</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">            </span><span class="n">_uiState</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Exito</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="p">}</span>
+</code></pre></div>
+<p>El <code>ViewModel</code> recibe el repositorio por su <strong>constructor</strong> y lo usa. Su código no menciona la red ni la base de datos: esos detalles quedan encapsulados en el repositorio.</p>
+<h2 id="las-capas-de-la-aplicacion">Las capas de la aplicación<a class="headerlink" href="#las-capas-de-la-aplicacion" title="Permanent link">&para;</a></h2>
+<p>Con esta separación, la app queda organizada en <strong>capas</strong>, cada una con su responsabilidad, donde cada capa solo se comunica con la de abajo:</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph UI["Capa de interfaz"]
+        V["Vista (composables)"]
+        VM["ViewModel"]
+    end
+    subgraph Datos["Capa de datos"]
+        R["Repositorio"]
+        API["Red (API)"]
+        DB["Base de datos local"]
+    end
+    V --&gt; VM
+    VM --&gt; R
+    R --&gt; API
+    R --&gt; DB</code></pre>
+<ul>
+<li>La <strong>capa de interfaz</strong> (la Vista y el <code>ViewModel</code>) se ocupa de mostrar el estado y reaccionar al usuario.</li>
+<li>La <strong>capa de datos</strong> (el repositorio y sus fuentes) se ocupa de obtener y guardar la información.</li>
+</ul>
+<p>Cada capa tiene un trabajo claro, y ninguna se mete en el de las demás. Esto hace la app mucho más fácil de entender, probar y ampliar.</p>
+<h2 id="depender-de-una-abstraccion">Depender de una abstracción<a class="headerlink" href="#depender-de-una-abstraccion" title="Permanent link">&para;</a></h2>
+<p>Hay una mejora más, y es justo el principio de <strong>inversión de dependencias (DIP)</strong> que viste en el anexo. En el ejemplo anterior, el <code>ViewModel</code> depende de la clase concreta <code>DatosRepository</code>. Es preferible que dependa de una <strong>interfaz</strong>, y que la implementación concreta se defina aparte:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nc">DatosRepository</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerDatos</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kd">class</span><span class="w"> </span><span class="nc">DatosRepositoryImpl</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DatosRepository</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerDatos</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="c1">// la obtención real de los datos</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
+</code></pre></div>
+<p>El <code>ViewModel</code> no cambia: sigue recibiendo un <code>DatosRepository</code>, pero ahora es la <strong>interfaz</strong>, no una clase concreta. ¿Qué ganas con esto?</p>
+<ul>
+<li><strong>Testabilidad</strong>: para probar el <code>ViewModel</code>, puedes pasarle un repositorio <strong>falso</strong> que devuelva datos de prueba, sin tocar la red.</li>
+<li><strong>Flexibilidad</strong>: puedes cambiar la implementación (de la red a una base de datos, por ejemplo) sin modificar el <code>ViewModel</code>.</li>
+</ul>
+<p>Es exactamente lo que promete DIP: los componentes importantes dependen de <strong>abstracciones</strong>, no de detalles concretos.</p>
+<h2 id="como-llega-el-repositorio-al-viewmodel">¿Cómo llega el repositorio al ViewModel?<a class="headerlink" href="#como-llega-el-repositorio-al-viewmodel" title="Permanent link">&para;</a></h2>
+<p>Queda una pregunta: si el <code>ViewModel</code> recibe el repositorio por su constructor, <strong>¿quién crea el repositorio y se lo entrega?</strong> Alguien tiene que construir la implementación concreta (<code>DatosRepositoryImpl</code>) y pasársela.</p>
+<p>Podrías hacerlo a mano, pero en apps reales, con muchas dependencias entrelazadas, eso se vuelve engorroso. Para resolverlo existe la <strong>inyección de dependencias</strong>, el tema del próximo capítulo: una técnica (y una herramienta, Hilt) que se encarga de crear y entregar automáticamente cada pieza donde se necesita.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo separaste tu código en capas:</p>
+<ul>
+<li>El <code>ViewModel</code> no debería ocuparse de <strong>cómo</strong> se obtienen los datos; esa es una responsabilidad aparte.</li>
+<li>El <strong>repositorio</strong> es la clase de la <strong>capa de datos</strong> que provee la información, ocultando su origen (red, base de datos, caché). El <code>ViewModel</code> solo le pide los datos.</li>
+<li>La app se organiza en <strong>capas</strong> (interfaz y datos), donde cada una tiene una responsabilidad clara y solo se comunica con la de abajo.</li>
+<li>Siguiendo el principio <strong>DIP</strong>, el <code>ViewModel</code> depende de una <strong>interfaz</strong> de repositorio, no de una clase concreta, lo que mejora la testabilidad y la flexibilidad.</li>
+<li>El repositorio llega al <code>ViewModel</code> por su <strong>constructor</strong>; quién lo crea y lo entrega es el trabajo de la inyección de dependencias.</li>
+</ul>
+<p>En el próximo capítulo verás precisamente eso: la <strong>inyección de dependencias</strong> con <strong>Hilt</strong>, que arma y conecta todas estas piezas por ti.</p>
 
 
 

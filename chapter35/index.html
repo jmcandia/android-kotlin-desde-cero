@@ -1625,6 +1625,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    35. Inyección de dependencias (manual y con Hilt)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1641,6 +1659,91 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-la-inyeccion-de-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es la inyección de dependencias?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inyeccion-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inyección manual
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hilt-inyeccion-automatica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hilt: inyección automática
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lo-esencial-de-hilt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lo esencial de Hilt
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2284,6 +2387,80 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-la-inyeccion-de-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es la inyección de dependencias?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inyeccion-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inyección manual
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hilt-inyeccion-automatica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hilt: inyección automática
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lo-esencial-de-hilt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lo esencial de Hilt
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2303,10 +2480,82 @@
 
 
 <h1 id="capitulo-35-inyeccion-de-dependencias-manual-y-con-hilt">Capítulo 35: Inyección de dependencias (manual y con Hilt)<a class="headerlink" href="#capitulo-35-inyeccion-de-dependencias-manual-y-con-hilt" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>En el capítulo anterior quedó una pregunta abierta: si el <code>ViewModel</code> recibe el repositorio por su constructor, <strong>¿quién crea el repositorio y se lo entrega?</strong> La respuesta es la <strong>inyección de dependencias</strong> (<em>dependency injection</em>, o DI).</p>
+<p>En este capítulo entenderás qué es la inyección de dependencias, cómo hacerla <strong>a mano</strong>, y cómo <strong>Hilt</strong> —la herramienta recomendada para Android— la automatiza. Con esto cierras la parte de arquitectura.</p>
+<h2 id="que-es-la-inyeccion-de-dependencias">¿Qué es la inyección de dependencias?<a class="headerlink" href="#que-es-la-inyeccion-de-dependencias" title="Permanent link">&para;</a></h2>
+<p>Una <strong>dependencia</strong> es un objeto que una clase necesita para hacer su trabajo. El <code>ViewModel</code> depende de un repositorio; el repositorio, a su vez, podría depender de un cliente de red. La pregunta es: ¿cómo obtiene una clase sus dependencias?</p>
+<p>Hay dos opciones:</p>
+<ul>
+<li>Que la clase <strong>cree</strong> sus propias dependencias por dentro: <code>val repository = DatosRepositoryImpl()</code>. Esto la deja <strong>acoplada</strong> a esa implementación concreta.</li>
+<li>Que la clase <strong>reciba</strong> sus dependencias desde fuera, normalmente por su <strong>constructor</strong>. A esto se le llama <strong>inyección de dependencias</strong>.</li>
+</ul>
+<p>De hecho, ya estuviste inyectando dependencias sin ponerle nombre: cuando el <code>ViewModel</code> recibía el repositorio por su constructor, alguien de fuera se lo estaba <strong>inyectando</strong>. Las ventajas ya las conoces del principio DIP: desacoplamiento, y la posibilidad de pasar una implementación falsa para las pruebas.</p>
+<h2 id="inyeccion-manual">Inyección manual<a class="headerlink" href="#inyeccion-manual" title="Permanent link">&para;</a></h2>
+<p>La forma más directa de inyectar dependencias es <strong>a mano</strong>: creas los objetos y los vas pasando, empezando por los más básicos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">repository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DatosRepositoryImpl</span><span class="p">()</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">viewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MiViewModel</span><span class="p">(</span><span class="n">repository</span><span class="p">)</span>
+</code></pre></div>
+<p>Para una app pequeña, esto basta. Pero a medida que crece, la <strong>cadena de dependencias</strong> se alarga: el repositorio necesita un cliente de red, que necesita una configuración, y así sucesivamente.</p>
+<pre class="mermaid"><code>flowchart TD
+    VM["ViewModel"] --&gt; R["Repositorio"]
+    R --&gt; N["Cliente de red"]
+    N --&gt; C["Configuración"]</code></pre>
+<p>Tendrías que construir todo ese grafo a mano, en el orden correcto, y repetirlo en cada lugar donde se necesite. Se vuelve tedioso y propenso a errores. Aquí es donde una herramienta de inyección automática ayuda muchísimo.</p>
+<h2 id="hilt-inyeccion-automatica">Hilt: inyección automática<a class="headerlink" href="#hilt-inyeccion-automatica" title="Permanent link">&para;</a></h2>
+<p><strong>Hilt</strong> es la biblioteca de inyección de dependencias <strong>recomendada para Android</strong> (está construida sobre otra llamada Dagger). La idea es simple: le indicas <strong>una vez</strong> cómo crear cada pieza, y Hilt <strong>genera automáticamente</strong> todo el código para construirlas y conectarlas donde hagan falta. Tú ya no armas el grafo a mano.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Contenido en construcción</p>
+<p>Hilt requiere algo de configuración inicial en el proyecto (una dependencia y un <em>plugin</em> de Gradle) que se hace una sola vez.</p>
 </div>
+<h2 id="lo-esencial-de-hilt">Lo esencial de Hilt<a class="headerlink" href="#lo-esencial-de-hilt" title="Permanent link">&para;</a></h2>
+<p>Hilt funciona a base de <strong>anotaciones</strong>. Estas son las que necesitas para el caso típico.</p>
+<p>Primero, preparas la app anotando tu clase <code>Application</code> y tu <code>Activity</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@HiltAndroidApp</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MiApp</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Application</span><span class="p">()</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nd">@AndroidEntryPoint</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MainActivity</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ComponentActivity</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Luego, le dices a Hilt cómo <strong>crear</strong> una clase marcando su constructor con <code>@Inject</code>. Así, Hilt sabe construir el repositorio (y le inyectará, a su vez, lo que este necesite):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">DatosRepositoryImpl</span><span class="w"> </span><span class="nd">@Inject</span><span class="w"> </span><span class="k">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DatosRepository</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerDatos</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>Como el <code>ViewModel</code> depende de la <strong>interfaz</strong> <code>DatosRepository</code>, hay que decirle a Hilt qué implementación usar cuando alguien pida esa interfaz. Eso se hace en un <strong>módulo</strong>, con <code>@Binds</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Module</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nd">@InstallIn</span><span class="p">(</span><span class="n">SingletonComponent</span><span class="o">::</span><span class="n">class</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">DataModule</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nd">@Binds</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">bindRepository</span><span class="p">(</span><span class="n">impl</span><span class="p">:</span><span class="w"> </span><span class="n">DatosRepositoryImpl</span><span class="p">):</span><span class="w"> </span><span class="n">DatosRepository</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>El <code>ViewModel</code> se marca con <code>@HiltViewModel</code> y recibe sus dependencias por el constructor, también con <code>@Inject</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@HiltViewModel</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MiViewModel</span><span class="w"> </span><span class="nd">@Inject</span><span class="w"> </span><span class="k">constructor</span><span class="p">(</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">repository</span><span class="p">:</span><span class="w"> </span><span class="n">DatosRepository</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="c1">// ... la misma lógica de antes ...</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>Y, por último, en el composable obtienes el <code>ViewModel</code> con <code>hiltViewModel()</code> (en lugar del <code>viewModel()</code> que viste antes). Hilt se encarga de crear el <code>ViewModel</code> <strong>con su repositorio ya inyectado</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@Composable</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">Pantalla</span><span class="p">(</span><span class="n">viewModel</span><span class="p">:</span><span class="w"> </span><span class="n">MiViewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hiltViewModel</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">estado</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">uiState</span><span class="p">.</span><span class="na">collectAsStateWithLifecycle</span><span class="p">()</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="c1">// ... mostrar el estado ...</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>Fíjate en lo que logramos: en ningún lugar escribiste <code>DatosRepositoryImpl()</code> ni pasaste el repositorio a mano. Hilt lee las anotaciones, arma el grafo completo de dependencias y entrega cada pieza ya construida donde se necesita.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo aprendiste a conectar todas las piezas de tu arquitectura:</p>
+<ul>
+<li>Una <strong>dependencia</strong> es un objeto que una clase necesita. La <strong>inyección de dependencias</strong> consiste en <strong>recibirlas desde fuera</strong> (por el constructor) en lugar de crearlas internamente, lo que desacopla el código.</li>
+<li>La <strong>inyección manual</strong> (crear y pasar los objetos a mano) funciona en apps pequeñas, pero se vuelve tediosa cuando la cadena de dependencias crece.</li>
+<li><strong>Hilt</strong> es la herramienta recomendada para Android: con anotaciones, arma y entrega automáticamente el grafo de dependencias.</li>
+<li>Anotaciones esenciales: <code>@HiltAndroidApp</code> (en la <code>Application</code>), <code>@AndroidEntryPoint</code> (en la <code>Activity</code>), <code>@Inject constructor</code> (cómo crear una clase), <code>@Module</code> + <code>@Binds</code> (qué implementación usar para una interfaz) y <code>@HiltViewModel</code> (para los ViewModels).</li>
+<li>En el composable, obtienes el <code>ViewModel</code> con <code>hiltViewModel()</code>, ya con sus dependencias inyectadas.</li>
+</ul>
+<p>Con esto <strong>cierras la arquitectura MVVM</strong>: interfaz, ViewModel, repositorio y las dependencias que los conectan. En la próxima parte del curso aprenderás a traer datos reales desde internet con <strong>Retrofit</strong>, la pieza que faltaba en la capa de datos.</p>
 
 
 

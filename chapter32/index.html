@@ -1541,6 +1541,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. Qué es MVVM y por qué usarlo
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1557,6 +1575,102 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-problema-todo-junto-en-la-interfaz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El problema: todo junto en la interfaz
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-mvvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es MVVM?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-flujo-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El flujo de datos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-usar-mvvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Por qué usar MVVM?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-se-conecta-con-lo-que-ya-sabes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cómo se conecta con lo que ya sabes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2284,6 +2398,91 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-problema-todo-junto-en-la-interfaz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El problema: todo junto en la interfaz
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-mvvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es MVVM?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-flujo-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El flujo de datos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-usar-mvvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Por qué usar MVVM?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-se-conecta-con-lo-que-ya-sabes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cómo se conecta con lo que ya sabes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2303,10 +2502,67 @@
 
 
 <h1 id="capitulo-32-que-es-mvvm-y-por-que-usarlo">Capítulo 32: Qué es MVVM y por qué usarlo<a class="headerlink" href="#capitulo-32-que-es-mvvm-y-por-que-usarlo" title="Permanent link">&para;</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Contenido en construcción</p>
-</div>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>Ya sabes construir interfaces con Compose y manejar su estado. Pero, a medida que una app crece, surge una pregunta de fondo: ¿<strong>dónde</strong> debería vivir el estado y la lógica? ¿En los propios composables? Si metes todo ahí —los datos, las reglas, las llamadas a la red—, la interfaz se convierte en un enredo difícil de entender, probar y mantener.</p>
+<p>Para resolver esto existe la <strong>arquitectura</strong>: una forma de organizar el código en partes con responsabilidades claras. En esta parte del curso aprenderás <strong>MVVM</strong>, la arquitectura recomendada para Android. Este capítulo es conceptual: verás <strong>qué</strong> es MVVM y <strong>por qué</strong> conviene usarlo; el código vendrá en los capítulos siguientes.</p>
+<h2 id="el-problema-todo-junto-en-la-interfaz">El problema: todo junto en la interfaz<a class="headerlink" href="#el-problema-todo-junto-en-la-interfaz" title="Permanent link">&para;</a></h2>
+<p>Imagina un composable que lo hace todo: guarda el estado, contiene la lógica del negocio y, además, pide los datos a una fuente externa. Funciona para algo pequeño, pero trae problemas serios cuando la app crece:</p>
+<ul>
+<li>Es <strong>difícil de probar</strong>: la lógica está entrelazada con la interfaz, así que no puedes verificarla sin dibujar la pantalla.</li>
+<li>Es <strong>difícil de mantener</strong>: el composable se vuelve enorme y hace demasiadas cosas a la vez (justo lo contrario del principio de responsabilidad única que viste en el anexo).</li>
+<li><strong>Pierde el estado</strong>: como el composable vive dentro de una <code>Activity</code>, al girar el dispositivo se recrea y el estado se pierde (el problema que vimos con el ciclo de vida).</li>
+</ul>
+<p>La solución es <strong>separar responsabilidades</strong>: que cada parte del código se ocupe de una sola cosa. Eso es exactamente lo que propone MVVM.</p>
+<h2 id="que-es-mvvm">¿Qué es MVVM?<a class="headerlink" href="#que-es-mvvm" title="Permanent link">&para;</a></h2>
+<p><strong>MVVM</strong> son las siglas de <strong>Model-View-ViewModel</strong> ("Modelo-Vista-ViewModel"). Es un patrón que organiza el código en <strong>tres capas</strong>, cada una con una responsabilidad clara:</p>
+<ul>
+<li>La <strong>Vista</strong> (<em>View</em>) es la <strong>interfaz</strong>: tus composables. Su único trabajo es <strong>mostrar</strong> el estado y <strong>avisar</strong> de los eventos del usuario (un toque, un texto escrito). No contiene lógica; es "tonta" a propósito.</li>
+<li>El <strong>ViewModel</strong> es el <strong>intermediario</strong>. Guarda el <strong>estado</strong> de la pantalla y lo expone para que la Vista lo observe. Recibe los eventos de la Vista, ejecuta la lógica correspondiente y actualiza el estado.</li>
+<li>El <strong>Modelo</strong> (<em>Model</em>) son los <strong>datos y la lógica de negocio</strong>: de dónde vienen los datos (una red, una base de datos) y las reglas que los rigen.</li>
+</ul>
+<p>Gráficamente, las tres capas se relacionan así:</p>
+<pre class="mermaid"><code>flowchart TB
+    V["Vista&lt;br/&gt;(composables)"] -- "eventos" --&gt; VM["ViewModel&lt;br/&gt;(estado + lógica)"]
+    VM -- "estado (StateFlow)" --&gt; V
+    VM -- "pide datos" --&gt; M["Modelo&lt;br/&gt;(datos y lógica de negocio)"]
+    M -- "devuelve datos" --&gt; VM</code></pre>
+<p>Fíjate en las flechas: la Vista <strong>observa</strong> el estado del ViewModel y le <strong>envía</strong> eventos; el ViewModel, a su vez, pide y recibe datos del Modelo. La Vista nunca habla directamente con el Modelo: siempre pasa por el ViewModel.</p>
+<h2 id="el-flujo-de-datos">El flujo de datos<a class="headerlink" href="#el-flujo-de-datos" title="Permanent link">&para;</a></h2>
+<p>El patrón sigue un <strong>flujo de datos unidireccional</strong>, que ya conoces del <em>state hoisting</em>: el <strong>estado baja</strong> (del ViewModel a la Vista) y los <strong>eventos suben</strong> (de la Vista al ViewModel).</p>
+<ul>
+<li>El ViewModel expone el estado; para eso usaremos un <code>StateFlow</code>, como viste en la parte de asincronía.</li>
+<li>La Vista recolecta ese estado y, ante cada cambio, se <strong>recompone</strong> sola (la recomposición de Compose).</li>
+<li>Cuando el usuario hace algo, la Vista no lo resuelve por su cuenta: se lo <strong>comunica</strong> al ViewModel, que decide qué hacer.</li>
+</ul>
+<p>En otras palabras, MVVM es el <em>state hoisting</em> llevado al nivel de toda la pantalla: el estado se eleva hasta el ViewModel, la única fuente de verdad.</p>
+<h2 id="por-que-usar-mvvm">¿Por qué usar MVVM?<a class="headerlink" href="#por-que-usar-mvvm" title="Permanent link">&para;</a></h2>
+<p>Separar el código en estas tres capas trae ventajas concretas:</p>
+<ul>
+<li><strong>Separación de responsabilidades</strong>: cada capa hace una sola cosa, así el código es más fácil de entender y de modificar (el principio SRP en acción).</li>
+<li><strong>Testabilidad</strong>: como la lógica vive en el ViewModel, aislada de la interfaz, puedes probarla sin necesidad de dibujar ninguna pantalla.</li>
+<li><strong>Sobrevive a los cambios de configuración</strong>: el ViewModel está diseñado para <strong>vivir más</strong> que la <code>Activity</code>, así que, al girar el dispositivo, el estado <strong>no se pierde</strong> (resolviendo el problema que dejamos pendiente en el capítulo del ciclo de vida).</li>
+<li><strong>Única fuente de verdad</strong>: el estado vive en un solo lugar, lo que evita inconsistencias.</li>
+</ul>
+<p>Por todo esto, MVVM es la arquitectura que <strong>Google recomienda</strong> para las apps Android modernas.</p>
+<h2 id="como-se-conecta-con-lo-que-ya-sabes">Cómo se conecta con lo que ya sabes<a class="headerlink" href="#como-se-conecta-con-lo-que-ya-sabes" title="Permanent link">&para;</a></h2>
+<p>Quizás notaste que MVVM no introduce ideas nuevas, sino que <strong>junta</strong> varias que ya viste a lo largo del curso:</p>
+<ul>
+<li>El <em>state hoisting</em> (elevar el estado): el ViewModel es el lugar al que se eleva el estado de toda la pantalla.</li>
+<li>El <code>StateFlow</code>: el mecanismo con el que el ViewModel expone su estado a la Vista.</li>
+<li>La <code>sealed class UiState</code>: una forma habitual de representar ese estado (cargando, éxito, error).</li>
+<li>El <code>viewModelScope</code>: el <em>scope</em> donde el ViewModel lanza sus coroutines (por ejemplo, para pedir datos).</li>
+</ul>
+<p>En los próximos capítulos construiremos cada pieza: el ViewModel, la separación en capas y la conexión con la interfaz.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo conociste la arquitectura MVVM:</p>
+<ul>
+<li>Sin una arquitectura, poner el estado y la lógica dentro de los composables los vuelve difíciles de probar y mantener y, además, hace perder el estado al girar el dispositivo.</li>
+<li><strong>MVVM</strong> (Model-View-ViewModel) separa el código en tres capas: la <strong>Vista</strong> (los composables, que muestran el estado y avisan de eventos), el <strong>ViewModel</strong> (que guarda el estado y ejecuta la lógica) y el <strong>Modelo</strong> (los datos y la lógica de negocio).</li>
+<li>Sigue un <strong>flujo de datos unidireccional</strong>: el estado baja (del ViewModel a la Vista) y los eventos suben (de la Vista al ViewModel).</li>
+<li>Sus ventajas: separación de responsabilidades, testabilidad, supervivencia a los cambios de configuración y una única fuente de verdad.</li>
+<li>MVVM reúne varias piezas que ya conoces: <em>state hoisting</em>, <code>StateFlow</code>, <code>UiState</code> y <code>viewModelScope</code>.</li>
+</ul>
+<p>En el próximo capítulo pondrás esto en práctica: crearás tu primer <strong><code>ViewModel</code></strong>, expondrás su estado con <code>StateFlow</code> y lo conectarás con la interfaz.</p>
 
 
 

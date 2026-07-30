@@ -1569,6 +1569,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1585,6 +1603,102 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-clase-viewmodel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La clase ViewModel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exponer-el-estado-de-forma-segura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exponer el estado de forma segura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actualizar-el-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actualizar el estado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conectar-el-viewmodel-con-la-interfaz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conectar el ViewModel con la interfaz
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-flujo-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El flujo completo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2284,6 +2398,91 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-clase-viewmodel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La clase ViewModel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exponer-el-estado-de-forma-segura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exponer el estado de forma segura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actualizar-el-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actualizar el estado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conectar-el-viewmodel-con-la-interfaz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conectar el ViewModel con la interfaz
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-flujo-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El flujo completo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2303,10 +2502,105 @@
 
 
 <h1 id="capitulo-33-viewmodel-y-el-estado-de-la-interfaz-uistate">Capítulo 33: <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)<a class="headerlink" href="#capitulo-33-viewmodel-y-el-estado-de-la-interfaz-uistate" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>En el capítulo anterior conociste MVVM en teoría. Ahora lo pondrás en práctica construyendo su pieza central: el <strong><code>ViewModel</code></strong>, la clase que guarda el estado de la pantalla y ejecuta su lógica. Aprenderás a crear uno, a <strong>exponer</strong> su estado de forma segura con <code>StateFlow</code>, a <strong>actualizarlo</strong> y a <strong>conectarlo</strong> con la interfaz. Aquí se juntan, por fin, el <code>StateFlow</code>, el <code>UiState</code> y el <code>viewModelScope</code> que fuiste viendo por separado.</p>
+<h2 id="la-clase-viewmodel">La clase <code>ViewModel</code><a class="headerlink" href="#la-clase-viewmodel" title="Permanent link">&para;</a></h2>
+<p>Android ofrece una clase base llamada <strong><code>ViewModel</code></strong>. Para crear el tuyo, defines una clase que hereda de ella:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MiViewModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="c1">// estado y lógica de la pantalla</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>Su gran ventaja es la que anticipamos: un <code>ViewModel</code> está diseñado para <strong>vivir más que la <code>Activity</code></strong>. Cuando el dispositivo gira y la <code>Activity</code> se recrea, el <code>ViewModel</code> <strong>sigue existiendo</strong>, con su estado intacto. Ese problema del ciclo de vida queda resuelto sin que hagas nada especial.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Contenido en construcción</p>
+<p>La clase <code>ViewModel</code> viene en una biblioteca de Android (<code>lifecycle</code>), que se agrega como dependencia en el proyecto.</p>
 </div>
+<h2 id="exponer-el-estado-de-forma-segura">Exponer el estado de forma segura<a class="headerlink" href="#exponer-el-estado-de-forma-segura" title="Permanent link">&para;</a></h2>
+<p>El <code>ViewModel</code> guarda el estado de la pantalla. Usaremos para ello el <code>UiState</code> que viste en el capítulo de <code>sealed class</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">UiState</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">object</span><span class="w"> </span><span class="nc">Cargando</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Exito</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">elementos</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Error</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">mensaje</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>Ahora, aquí hay un detalle de diseño importante. El <code>ViewModel</code> necesita <strong>cambiar</strong> el estado, pero la interfaz solo debería <strong>leerlo</strong>, nunca modificarlo. Para lograrlo, se usa un patrón muy común: una propiedad <strong>mutable y privada</strong>, y otra <strong>de solo lectura y pública</strong>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MiViewModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">_uiState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">uiState</span><span class="p">:</span><span class="w"> </span><span class="n">StateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_uiState</span><span class="p">.</span><span class="na">asStateFlow</span><span class="p">()</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><code>_uiState</code> es un <code>MutableStateFlow</code> <strong>privado</strong>: solo el <code>ViewModel</code> puede cambiar su valor. Por convención, su nombre empieza con guion bajo.</li>
+<li><code>uiState</code> es un <code>StateFlow</code> <strong>público</strong> (de solo lectura), que la interfaz observará. El método <code>asStateFlow()</code> "expone" el estado sin permitir modificarlo.</li>
+</ul>
+<p>Así se cumple la <strong>encapsulación</strong>: el estado solo se modifica desde dentro del <code>ViewModel</code>, la única fuente de verdad.</p>
+<h2 id="actualizar-el-estado">Actualizar el estado<a class="headerlink" href="#actualizar-el-estado" title="Permanent link">&para;</a></h2>
+<p>Para cambiar el estado, el <code>ViewModel</code> asigna un nuevo valor a <code>_uiState.value</code>. Como esto suele implicar una tarea lenta (pedir datos), la lanzamos en una coroutine dentro del <strong><code>viewModelScope</code></strong>, el <em>scope</em> del capítulo de coroutines:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MiViewModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">_uiState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">uiState</span><span class="p">:</span><span class="w"> </span><span class="n">StateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_uiState</span><span class="p">.</span><span class="na">asStateFlow</span><span class="p">()</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">cargarDatos</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="n">viewModelScope</span><span class="p">.</span><span class="na">launch</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">            </span><span class="n">_uiState</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">datos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">obtenerDatos</span><span class="p">()</span><span class="w"> </span><span class="c1">// una función suspend que trae los datos</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">            </span><span class="n">_uiState</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Exito</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="p">}</span>
+</code></pre></div>
+<p>Usar <code>viewModelScope</code> es importante: si el <code>ViewModel</code> se destruye, sus coroutines se cancelan solas, evitando trabajo innecesario. (La función <code>obtenerDatos()</code> representa la capa de datos, el <strong>Modelo</strong>, que veremos en el próximo capítulo.)</p>
+<h2 id="conectar-el-viewmodel-con-la-interfaz">Conectar el ViewModel con la interfaz<a class="headerlink" href="#conectar-el-viewmodel-con-la-interfaz" title="Permanent link">&para;</a></h2>
+<p>Falta unir el <code>ViewModel</code> con la Vista. En el composable, obtienes el <code>ViewModel</code> con la función <code>viewModel()</code> y <strong>recolectas</strong> su estado para que la interfaz reaccione a los cambios:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@Composable</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">Pantalla</span><span class="p">(</span><span class="n">viewModel</span><span class="p">:</span><span class="w"> </span><span class="n">MiViewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">viewModel</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">estado</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">uiState</span><span class="p">.</span><span class="na">collectAsStateWithLifecycle</span><span class="p">()</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">estado</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Cargando...&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">        </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Exito</span><span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Se cargaron </span><span class="si">${</span><span class="n">estado</span><span class="p">.</span><span class="na">elementos</span><span class="p">.</span><span class="na">size</span><span class="si">}</span><span class="s"> elementos&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">        </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Error</span><span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Error: </span><span class="si">${</span><span class="n">estado</span><span class="p">.</span><span class="na">mensaje</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">}</span>
+</code></pre></div>
+<p>Analicemos las piezas nuevas:</p>
+<ul>
+<li><code>viewModel()</code> obtiene la instancia del <code>ViewModel</code> (la misma a través de las recomposiciones y de los giros de pantalla).</li>
+<li><code>collectAsStateWithLifecycle()</code> <strong>recolecta</strong> el <code>StateFlow</code> y lo convierte en un estado de Compose: cada vez que el <code>ViewModel</code> cambia <code>uiState</code>, este composable se <strong>recompone</strong> con el nuevo valor.</li>
+<li>El <code>when</code> decide qué mostrar según el estado, aprovechando el <em>smart cast</em> de la <code>sealed class</code>.</li>
+</ul>
+<p>Y para disparar la lógica, la Vista simplemente invoca las funciones del <code>ViewModel</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">Button</span><span class="p">(</span><span class="n">onClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">cargarDatos</span><span class="p">()</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Cargar&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>collectAsStateWithLifecycle()</code> es la forma recomendada de recolectar un <code>StateFlow</code> en Compose, porque solo recolecta mientras la pantalla está visible. Requiere una pequeña dependencia adicional (<code>lifecycle-runtime-compose</code>).</p>
+</div>
+<h2 id="el-flujo-completo">El flujo completo<a class="headerlink" href="#el-flujo-completo" title="Permanent link">&para;</a></h2>
+<p>Con todo junto, el ciclo de MVVM queda así: la Vista pide una acción, el <code>ViewModel</code> actualiza el estado, y la Vista se redibuja sola al observar ese cambio.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant V as Vista
+    participant VM as ViewModel
+    V-&gt;&gt;VM: cargarDatos()
+    Note over VM: _uiState.value = Cargando
+    VM--&gt;&gt;V: estado: Cargando
+    Note over V: Muestra "Cargando..."
+    Note over VM: Llegan los datos&lt;br/&gt;_uiState.value = Exito(datos)
+    VM--&gt;&gt;V: estado: Exito
+    Note over V: Muestra los datos</code></pre>
+<p>Fíjate en que la Vista nunca guarda ni calcula el estado: solo lo <strong>muestra</strong> y <strong>avisa</strong> de los eventos. Toda la lógica vive en el <code>ViewModel</code>.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo construiste el corazón de MVVM:</p>
+<ul>
+<li>Un <strong><code>ViewModel</code></strong> es una clase que hereda de <code>ViewModel</code> y guarda el estado y la lógica de una pantalla. <strong>Sobrevive</strong> a los cambios de configuración, como el giro de pantalla.</li>
+<li>El estado se expone con el patrón <strong><code>MutableStateFlow</code> privado + <code>StateFlow</code> público</strong> (<code>_uiState</code> / <code>uiState</code> con <code>asStateFlow()</code>), de modo que solo el <code>ViewModel</code> puede modificarlo.</li>
+<li>El <code>ViewModel</code> actualiza el estado asignando a <code>_uiState.value</code>, normalmente dentro de una coroutine en <strong><code>viewModelScope</code></strong>.</li>
+<li>La Vista obtiene el <code>ViewModel</code> con <code>viewModel()</code>, recolecta su estado con <strong><code>collectAsStateWithLifecycle()</code></strong> y decide qué mostrar con un <code>when</code> sobre el <code>UiState</code>.</li>
+<li>La Vista solo muestra el estado y avisa de eventos (invocando funciones del <code>ViewModel</code>); toda la lógica queda en el <code>ViewModel</code>.</li>
+</ul>
+<p>En el próximo capítulo separaremos aún más las responsabilidades creando la <strong>capa de datos</strong> (el Modelo): un <strong>repositorio</strong> que se encargue de obtener la información, para que el <code>ViewModel</code> no dependa de dónde vienen los datos.</p>
 
 
 
