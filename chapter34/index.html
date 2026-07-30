@@ -1692,6 +1692,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#la-estructura-del-proyecto-en-carpetas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La estructura del proyecto en carpetas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#depender-de-una-abstraccion" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2449,6 +2460,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#la-estructura-del-proyecto-en-carpetas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La estructura del proyecto en carpetas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#depender-de-una-abstraccion" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2557,17 +2579,38 @@
 <li>La <strong>capa de datos</strong> (el repositorio y sus fuentes) se ocupa de obtener y guardar la información.</li>
 </ul>
 <p>Cada capa tiene un trabajo claro, y ninguna se mete en el de las demás. Esto hace la app mucho más fácil de entender, probar y ampliar.</p>
+<h2 id="la-estructura-del-proyecto-en-carpetas">La estructura del proyecto en carpetas<a class="headerlink" href="#la-estructura-del-proyecto-en-carpetas" title="Permanent link">&para;</a></h2>
+<p>Estas capas no son solo un concepto: se reflejan en <strong>cómo organizas las carpetas</strong> (los <em>paquetes</em>) de tu proyecto. Una forma habitual y ordenada es agrupar el código <strong>por capa</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>com.ejemplo.miapp/
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>├── data/                      # capa de datos
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>│   ├── DatosRepository.kt          # la interfaz del repositorio
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>│   └── DatosRepositoryImpl.kt      # su implementación
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>├── model/                     # modelos de dominio (las clases que usa la app)
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>│   └── Usuario.kt
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>├── ui/                        # capa de interfaz
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>│   ├── PantallaUsuarios.kt         # composables (la Vista)
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>│   ├── UsuariosViewModel.kt        # el ViewModel
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>│   ├── UiState.kt                  # el estado de la interfaz
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>│   └── theme/                      # el tema de Material (generado por Android Studio)
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>└── MainActivity.kt            # el punto de entrada
+</code></pre></div>
+<p>La idea es simple: cada archivo vive en el paquete de la capa a la que pertenece. Un <code>ViewModel</code> va en <code>ui/</code>; el repositorio, en <code>data/</code>; los modelos que la app usa, en <code>model/</code>. Así, con solo mirar la ubicación de un archivo, sabes cuál es su responsabilidad.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Esta estructura irá creciendo con el curso. En el próximo capítulo añadiremos un paquete <code>di/</code> para la inyección de dependencias, y al llegar a Retrofit sumaremos, dentro de <code>data/</code>, un subpaquete <code>remote/</code> con el acceso a la red y los DTOs.</p>
+</div>
+<p>Existen otras maneras de organizar un proyecto —por ejemplo, <strong>por funcionalidad</strong>, agrupando en un mismo paquete todo lo relacionado con una pantalla—, pero organizar <strong>por capas</strong> es claro y más que suficiente para empezar.</p>
 <h2 id="depender-de-una-abstraccion">Depender de una abstracción<a class="headerlink" href="#depender-de-una-abstraccion" title="Permanent link">&para;</a></h2>
 <p>Hay una mejora más, y es justo el principio de <strong>inversión de dependencias (DIP)</strong> que viste en el anexo. En el ejemplo anterior, el <code>ViewModel</code> depende de la clase concreta <code>DatosRepository</code>. Es preferible que dependa de una <strong>interfaz</strong>, y que la implementación concreta se defina aparte:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nc">DatosRepository</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerDatos</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kd">class</span><span class="w"> </span><span class="nc">DatosRepositoryImpl</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DatosRepository</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerDatos</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="c1">// la obtención real de los datos</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nc">DatosRepository</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerDatos</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">}</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="kd">class</span><span class="w"> </span><span class="nc">DatosRepositoryImpl</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DatosRepository</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerDatos</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="c1">// la obtención real de los datos</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">}</span>
 </code></pre></div>
 <p>El <code>ViewModel</code> no cambia: sigue recibiendo un <code>DatosRepository</code>, pero ahora es la <strong>interfaz</strong>, no una clase concreta. ¿Qué ganas con esto?</p>
 <ul>
@@ -2584,6 +2627,7 @@
 <li>El <code>ViewModel</code> no debería ocuparse de <strong>cómo</strong> se obtienen los datos; esa es una responsabilidad aparte.</li>
 <li>El <strong>repositorio</strong> es la clase de la <strong>capa de datos</strong> que provee la información, ocultando su origen (red, base de datos, caché). El <code>ViewModel</code> solo le pide los datos.</li>
 <li>La app se organiza en <strong>capas</strong> (interfaz y datos), donde cada una tiene una responsabilidad clara y solo se comunica con la de abajo.</li>
+<li>Estas capas se reflejan en la <strong>estructura de carpetas</strong>: se organiza el código por capa (<code>data/</code>, <code>model/</code>, <code>ui/</code>), de modo que la ubicación de cada archivo revela su responsabilidad.</li>
 <li>Siguiendo el principio <strong>DIP</strong>, el <code>ViewModel</code> depende de una <strong>interfaz</strong> de repositorio, no de una clase concreta, lo que mejora la testabilidad y la flexibilidad.</li>
 <li>El repositorio llega al <code>ViewModel</code> por su <strong>constructor</strong>; quién lo crea y lo entrega es el trabajo de la inyección de dependencias.</li>
 </ul>
