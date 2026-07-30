@@ -73,6 +73,32 @@ flowchart TD
 
 Cada capa tiene un trabajo claro, y ninguna se mete en el de las demás. Esto hace la app mucho más fácil de entender, probar y ampliar.
 
+## La estructura del proyecto en carpetas
+
+Estas capas no son solo un concepto: se reflejan en **cómo organizas las carpetas** (los *paquetes*) de tu proyecto. Una forma habitual y ordenada es agrupar el código **por capa**:
+
+```text
+com.ejemplo.miapp/
+├── data/                      # capa de datos
+│   ├── DatosRepository.kt          # la interfaz del repositorio
+│   └── DatosRepositoryImpl.kt      # su implementación
+├── model/                     # modelos de dominio (las clases que usa la app)
+│   └── Usuario.kt
+├── ui/                        # capa de interfaz
+│   ├── PantallaUsuarios.kt         # composables (la Vista)
+│   ├── UsuariosViewModel.kt        # el ViewModel
+│   ├── UiState.kt                  # el estado de la interfaz
+│   └── theme/                      # el tema de Material (generado por Android Studio)
+└── MainActivity.kt            # el punto de entrada
+```
+
+La idea es simple: cada archivo vive en el paquete de la capa a la que pertenece. Un `ViewModel` va en `ui/`; el repositorio, en `data/`; los modelos que la app usa, en `model/`. Así, con solo mirar la ubicación de un archivo, sabes cuál es su responsabilidad.
+
+> [!NOTE]
+> Esta estructura irá creciendo con el curso. En el próximo capítulo añadiremos un paquete `di/` para la inyección de dependencias, y al llegar a Retrofit sumaremos, dentro de `data/`, un subpaquete `remote/` con el acceso a la red y los DTOs.
+
+Existen otras maneras de organizar un proyecto —por ejemplo, **por funcionalidad**, agrupando en un mismo paquete todo lo relacionado con una pantalla—, pero organizar **por capas** es claro y más que suficiente para empezar.
+
 ## Depender de una abstracción
 
 Hay una mejora más, y es justo el principio de **inversión de dependencias (DIP)** que viste en el anexo. En el ejemplo anterior, el `ViewModel` depende de la clase concreta `DatosRepository`. Es preferible que dependa de una **interfaz**, y que la implementación concreta se defina aparte:
@@ -109,6 +135,7 @@ En este capítulo separaste tu código en capas:
 - El `ViewModel` no debería ocuparse de **cómo** se obtienen los datos; esa es una responsabilidad aparte.
 - El **repositorio** es la clase de la **capa de datos** que provee la información, ocultando su origen (red, base de datos, caché). El `ViewModel` solo le pide los datos.
 - La app se organiza en **capas** (interfaz y datos), donde cada una tiene una responsabilidad clara y solo se comunica con la de abajo.
+- Estas capas se reflejan en la **estructura de carpetas**: se organiza el código por capa (`data/`, `model/`, `ui/`), de modo que la ubicación de cada archivo revela su responsabilidad.
 - Siguiendo el principio **DIP**, el `ViewModel` depende de una **interfaz** de repositorio, no de una clase concreta, lo que mejora la testabilidad y la flexibilidad.
 - El repositorio llega al `ViewModel` por su **constructor**; quién lo crea y lo entrega es el trabajo de la inyección de dependencias.
 
