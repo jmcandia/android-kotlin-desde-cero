@@ -1735,6 +1735,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    37. Retrofit: configuración, interfaces y endpoints
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1751,6 +1769,113 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-retrofit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es Retrofit?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalar-y-configurar-retrofit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instalar y configurar Retrofit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definir-la-interfaz-de-la-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definir la interfaz de la API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints-con-parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints con parámetros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construir-la-instancia-de-retrofit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Construir la instancia de Retrofit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usar-la-api-desde-el-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar la API desde el repositorio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2284,6 +2409,102 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-retrofit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es Retrofit?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalar-y-configurar-retrofit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instalar y configurar Retrofit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definir-la-interfaz-de-la-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definir la interfaz de la API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints-con-parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints con parámetros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construir-la-instancia-de-retrofit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Construir la instancia de Retrofit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usar-la-api-desde-el-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar la API desde el repositorio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2303,10 +2524,106 @@
 
 
 <h1 id="capitulo-37-retrofit-configuracion-interfaces-y-endpoints">Capítulo 37: Retrofit: configuración, interfaces y endpoints<a class="headerlink" href="#capitulo-37-retrofit-configuracion-interfaces-y-endpoints" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>En el capítulo anterior entendiste cómo se comunican una app y un servidor con HTTP, REST y JSON. Hacer todo eso a mano —abrir la conexión, construir la petición, esperar la respuesta, interpretar el JSON— sería tedioso y propenso a errores.</p>
+<p>Aquí entra <strong>Retrofit</strong>: una biblioteca que hace ese trabajo por ti. Tú describes la API como una <strong>interfaz de Kotlin</strong>, y Retrofit genera automáticamente el código para hacer las peticiones. En este capítulo aprenderás a configurar Retrofit, a declarar los <em>endpoints</em> en una interfaz y a hacer tu primera llamada.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Contenido en construcción</p>
+<p>Retrofit es una biblioteca externa; en la siguiente sección la agregamos al proyecto.</p>
 </div>
+<h2 id="que-es-retrofit">¿Qué es Retrofit?<a class="headerlink" href="#que-es-retrofit" title="Permanent link">&para;</a></h2>
+<p><strong>Retrofit</strong> convierte una API REST en una <strong>interfaz de Kotlin</strong>. La idea es elegante: en lugar de escribir código de red, <strong>declaras</strong> qué endpoints existen y qué devuelven, usando una interfaz con <strong>anotaciones</strong>. Retrofit lee esa interfaz y crea, por detrás, la implementación que hace las peticiones reales.</p>
+<p>Además, se integra a la perfección con las <strong>coroutines</strong> (puedes declarar los endpoints como funciones <code>suspend</code>) y convierte automáticamente el <strong>JSON</strong> de la respuesta en objetos de Kotlin.</p>
+<h2 id="instalar-y-configurar-retrofit">Instalar y configurar Retrofit<a class="headerlink" href="#instalar-y-configurar-retrofit" title="Permanent link">&para;</a></h2>
+<p>Retrofit es una biblioteca externa, así que primero hay que <strong>agregarla al proyecto</strong>. Al momento de escribir este curso, la última versión estable es la <strong>3.0.0</strong>. Necesitarás dos dependencias: <strong>Retrofit</strong> en sí, y un <strong>convertidor</strong> que transforme el JSON en objetos de Kotlin (usaremos el de <code>kotlinx.serialization</code>).</p>
+<p>Siguiendo el catálogo de versiones que viste al crear el proyecto, primero declaras la versión y las bibliotecas en <code>libs.versions.toml</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">[versions]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">retrofit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;3.0.0&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">[libraries]</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">retrofit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;com.squareup.retrofit2&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;retrofit&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;retrofit&quot;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">retrofit-kotlinx-serialization</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;com.squareup.retrofit2&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;converter-kotlinx-serialization&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;retrofit&quot;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Y luego las agregas al <code>build.gradle.kts</code> del módulo <code>app</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">dependencies</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="na">retrofit</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="na">retrofit</span><span class="p">.</span><span class="na">kotlinx</span><span class="p">.</span><span class="na">serialization</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="c1">// ...otras dependencias</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>Tras sincronizar Gradle, Retrofit queda listo para usar.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Retrofit requiere como mínimo <strong>Java 8</strong> o <strong>Android API 21+</strong>, algo que cualquier proyecto reciente ya cumple. Es un proyecto de código abierto de Square; su documentación oficial está en <a href="https://square.github.io/retrofit/">square.github.io/retrofit</a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>El convertidor de <code>kotlinx.serialization</code> necesita, además, el <em>plugin</em> de serialización y que tus clases de datos estén marcadas como <code>@Serializable</code>. Eso lo completaremos en el próximo capítulo, al hablar de serialización y DTOs.</p>
+</div>
+<h2 id="definir-la-interfaz-de-la-api">Definir la interfaz de la API<a class="headerlink" href="#definir-la-interfaz-de-la-api" title="Permanent link">&para;</a></h2>
+<p>El corazón de Retrofit es una interfaz donde <strong>cada método representa un endpoint</strong>. Se anota con el método HTTP y la ruta:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nc">ApiService</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nd">@GET</span><span class="p">(</span><span class="s">&quot;usuarios&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerUsuarios</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Usuario</span><span class="o">&gt;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
+</code></pre></div>
+<p>Analicémoslo:</p>
+<ul>
+<li><code>@GET("usuarios")</code> indica que este método hace una petición <code>GET</code> al endpoint <code>usuarios</code> (relativo a la URL base que configuraremos más abajo).</li>
+<li><code>suspend fun</code> aprovecha las coroutines: la llamada se suspende mientras espera la respuesta, sin bloquear el hilo.</li>
+<li>El tipo de retorno, <code>List&lt;Usuario&gt;</code>, es lo que Retrofit te entregará ya convertido: toma el JSON de la respuesta y lo transforma en objetos. Aquí <code>Usuario</code> es una <code>data class</code> que describe la forma de los datos (algo que detallaremos en el próximo capítulo).</li>
+</ul>
+<h2 id="endpoints-con-parametros">Endpoints con parámetros<a class="headerlink" href="#endpoints-con-parametros" title="Permanent link">&para;</a></h2>
+<p>Muchos endpoints necesitan parámetros. Retrofit los maneja con más anotaciones.</p>
+<p>Para un valor que va <strong>dentro de la ruta</strong> (como un id), usas <code>@Path</code>, y lo referencias entre llaves en la URL:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@GET</span><span class="p">(</span><span class="s">&quot;usuarios/{id}&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerUsuario</span><span class="p">(</span><span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">):</span><span class="w"> </span><span class="n">Usuario</span>
+</code></pre></div>
+<p>Al llamar <code>obtenerUsuario(42)</code>, Retrofit construye la petición a <code>usuarios/42</code>.</p>
+<p>Para un parámetro de <strong>consulta</strong> (los que van después del <code>?</code> en la URL), usas <code>@Query</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@GET</span><span class="p">(</span><span class="s">&quot;usuarios&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">buscarUsuarios</span><span class="p">(</span><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;nombre&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">):</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Usuario</span><span class="o">&gt;</span>
+</code></pre></div>
+<p>Al llamar <code>buscarUsuarios("Ana")</code>, Retrofit genera la petición a <code>usuarios?nombre=Ana</code>.</p>
+<h2 id="construir-la-instancia-de-retrofit">Construir la instancia de Retrofit<a class="headerlink" href="#construir-la-instancia-de-retrofit" title="Permanent link">&para;</a></h2>
+<p>Con la interfaz definida, falta crear la instancia de Retrofit y, a partir de ella, el objeto que implementa tu interfaz. Se usa <code>Retrofit.Builder</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">retrofit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Retrofit</span><span class="p">.</span><span class="na">Builder</span><span class="p">()</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="p">.</span><span class="na">baseUrl</span><span class="p">(</span><span class="s">&quot;https://api.ejemplo.com/&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="p">.</span><span class="na">addConverterFactory</span><span class="p">(</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">        </span><span class="n">Json</span><span class="p">.</span><span class="na">asConverterFactory</span><span class="p">(</span><span class="s">&quot;application/json&quot;</span><span class="p">.</span><span class="na">toMediaType</span><span class="p">())</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="p">)</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="p">.</span><span class="na">build</span><span class="p">()</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="kd">val</span><span class="w"> </span><span class="nv">apiService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">retrofit</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">ApiService</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="p">)</span>
+</code></pre></div>
+<p>Las piezas clave:</p>
+<ul>
+<li><code>baseUrl(...)</code> es la parte común de todas las URLs. Se combina con la ruta de cada endpoint (por ejemplo, <code>usuarios</code>) para formar la dirección completa. Debe terminar en <code>/</code>.</li>
+<li><code>addConverterFactory(...)</code> le indica a Retrofit cómo <strong>convertir</strong> el JSON en objetos. Aquí usamos el convertidor de <code>kotlinx.serialization</code> (<code>Json.asConverterFactory(...)</code>) que instalamos más arriba. Los detalles de cómo tus <code>data class</code> se conectan con el JSON son el tema del próximo capítulo.</li>
+<li><code>retrofit.create(ApiService::class.java)</code> genera la implementación de tu interfaz. El resultado, <code>apiService</code>, ya está listo para usarse.</li>
+</ul>
+<h2 id="usar-la-api-desde-el-repositorio">Usar la API desde el repositorio<a class="headerlink" href="#usar-la-api-desde-el-repositorio" title="Permanent link">&para;</a></h2>
+<p>¿Dónde encaja todo esto? En la <strong>capa de datos</strong> que armaste en la parte de arquitectura. El repositorio recibe el <code>ApiService</code> y lo usa para obtener los datos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">DatosRepositoryImpl</span><span class="p">(</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">apiService</span><span class="p">:</span><span class="w"> </span><span class="n">ApiService</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DatosRepository</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerDatos</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Usuario</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">apiService</span><span class="p">.</span><span class="na">obtenerUsuarios</span><span class="p">()</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="p">}</span>
+</code></pre></div>
+<p>Fíjate en lo limpio que queda: el repositorio solo invoca <code>apiService.obtenerUsuarios()</code>, una función <code>suspend</code>, sin ver ni un detalle de red. Y como el <code>ViewModel</code> depende de la interfaz del repositorio, nada más arriba se entera de que los datos vienen de Retrofit. Cada capa cumple su papel, tal como planeamos.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo configuraste Retrofit para consumir una API:</p>
+<ul>
+<li><strong>Retrofit</strong> convierte una API REST en una <strong>interfaz de Kotlin</strong>: declaras los endpoints y Retrofit genera el código que hace las peticiones.</li>
+<li>Cada método de la interfaz es un endpoint, anotado con su método HTTP (<code>@GET</code>, <code>@POST</code>, …) y su ruta. Al declararlo <code>suspend</code>, se integra con las coroutines.</li>
+<li>Los parámetros se pasan con <code>@Path</code> (dentro de la ruta) y <code>@Query</code> (después del <code>?</code>).</li>
+<li>Creas la instancia con <code>Retrofit.Builder</code>, indicando la <code>baseUrl</code> y un <strong>convertidor</strong> de JSON, y obtienes la implementación con <code>retrofit.create(...)</code>.</li>
+<li>El <code>ApiService</code> se usa desde el <strong>repositorio</strong>, encajando de forma natural en la arquitectura por capas.</li>
+</ul>
+<p>En el próximo capítulo verás la pieza que quedó pendiente: la <strong>serialización</strong>, es decir, cómo se convierte el JSON en tus <code>data class</code> mediante los <strong>DTOs</strong>.</p>
 
 
 

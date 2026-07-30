@@ -1791,6 +1791,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    39. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1807,6 +1825,91 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#los-tres-estados-de-una-peticion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Los tres estados de una petición
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-viewmodel-orquestar-los-tres-estados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El ViewModel: orquestar los tres estados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-interfaz-reaccionar-a-cada-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La interfaz: reaccionar a cada estado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-flujo-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El flujo completo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2284,6 +2387,80 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#los-tres-estados-de-una-peticion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Los tres estados de una petición
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-viewmodel-orquestar-los-tres-estados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El ViewModel: orquestar los tres estados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-interfaz-reaccionar-a-cada-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La interfaz: reaccionar a cada estado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-flujo-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El flujo completo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2303,10 +2480,104 @@
 
 
 <h1 id="capitulo-39-estados-de-red-loading-success-y-error">Capítulo 39: Estados de red: <em>loading</em>, <em>success</em> y <em>error</em><a class="headerlink" href="#capitulo-39-estados-de-red-loading-success-y-error" title="Permanent link">&para;</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Contenido en construcción</p>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>Ya tienes todas las piezas: <strong>Retrofit</strong> para pedir los datos, un <strong>repositorio</strong> que los provee, un <strong><code>ViewModel</code></strong> con su <code>UiState</code>, y una interfaz que reacciona al estado. En este capítulo las <strong>unes</strong> en el flujo completo de una petición de red, manejando sus tres estados —<strong>cargando</strong>, <strong>éxito</strong> y <strong>error</strong>— de principio a fin. Con esto cierras la parte de red y completas la arquitectura que venías construyendo.</p>
+<h2 id="los-tres-estados-de-una-peticion">Los tres estados de una petición<a class="headerlink" href="#los-tres-estados-de-una-peticion" title="Permanent link">&para;</a></h2>
+<p>Una petición de red tiene dos características que no puedes ignorar: <strong>toma tiempo</strong> y <strong>puede fallar</strong> (por falta de conexión, un error del servidor, datos mal formados…). Por eso, en todo momento, tu pantalla estará en uno de tres estados:</p>
+<ul>
+<li><strong>Cargando</strong>: la petición está en curso. Muestra un indicador de progreso.</li>
+<li><strong>Éxito</strong>: los datos llegaron. Muéstralos.</li>
+<li><strong>Error</strong>: algo salió mal. Muestra un mensaje (y, idealmente, una opción para reintentar).</li>
+</ul>
+<p>Ya modelaste exactamente esto con una <code>sealed class</code>, en la parte de POO. Ahora la usamos con un modelo de dominio real:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">UiState</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">object</span><span class="w"> </span><span class="nc">Cargando</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Exito</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">usuarios</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Usuario</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Error</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">mensaje</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="el-viewmodel-orquestar-los-tres-estados">El ViewModel: orquestar los tres estados<a class="headerlink" href="#el-viewmodel-orquestar-los-tres-estados" title="Permanent link">&para;</a></h2>
+<p>El <code>ViewModel</code> es el director de orquesta: pide los datos al repositorio y va cambiando el estado según lo que ocurra.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@HiltViewModel</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">class</span><span class="w"> </span><span class="nc">UsuariosViewModel</span><span class="w"> </span><span class="nd">@Inject</span><span class="w"> </span><span class="k">constructor</span><span class="p">(</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">repository</span><span class="p">:</span><span class="w"> </span><span class="n">UsuariosRepository</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">_uiState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span><span class="p">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">uiState</span><span class="p">:</span><span class="w"> </span><span class="n">StateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_uiState</span><span class="p">.</span><span class="na">asStateFlow</span><span class="p">()</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">cargarUsuarios</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="n">viewModelScope</span><span class="p">.</span><span class="na">launch</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">            </span><span class="n">_uiState</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">                </span><span class="kd">val</span><span class="w"> </span><span class="nv">usuarios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">repository</span><span class="p">.</span><span class="na">obtenerUsuarios</span><span class="p">()</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">                </span><span class="n">_uiState</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Exito</span><span class="p">(</span><span class="n">usuarios</span><span class="p">)</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="n">Exception</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">                </span><span class="n">_uiState</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Error</span><span class="p">(</span><span class="s">&quot;No se pudieron cargar los datos&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="p">}</span>
+</code></pre></div>
+<p>Sigue la secuencia:</p>
+<ol>
+<li>Antes de empezar, pone el estado en <strong><code>Cargando</code></strong>.</li>
+<li>Dentro de un <strong><code>try</code></strong>, pide los datos al repositorio. Si todo va bien, pasa a <strong><code>Exito</code></strong> con la lista.</li>
+<li>Si la petición <strong>lanza una excepción</strong> (recuerda el manejo de excepciones que viste antes), el <strong><code>catch</code></strong> la atrapa y pone el estado en <strong><code>Error</code></strong>.</li>
+</ol>
+<p>Así, cualquier fallo de la red —que en Retrofit se manifiesta como una excepción— se convierte en un estado de <code>Error</code> que la interfaz sabrá mostrar, en lugar de tumbar la app.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>En vez de <code>try/catch</code>, también puedes usar <code>runCatching</code>, que viste en el capítulo de excepciones y encaja muy bien aquí. Y si quisieras distinguir tipos de error (sin conexión, servidor caído, etc.), podrías atrapar excepciones más específicas y dar mensajes distintos.</p>
 </div>
+<h2 id="la-interfaz-reaccionar-a-cada-estado">La interfaz: reaccionar a cada estado<a class="headerlink" href="#la-interfaz-reaccionar-a-cada-estado" title="Permanent link">&para;</a></h2>
+<p>La interfaz observa el estado y decide qué mostrar en cada caso, con el <code>when</code> exhaustivo que ya conoces:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Composable</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">PantallaUsuarios</span><span class="p">(</span><span class="n">viewModel</span><span class="p">:</span><span class="w"> </span><span class="n">UsuariosViewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hiltViewModel</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">estado</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">uiState</span><span class="p">.</span><span class="na">collectAsStateWithLifecycle</span><span class="p">()</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">estado</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">CircularProgressIndicator</span><span class="p">()</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Exito</span><span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ListaUsuarios</span><span class="p">(</span><span class="n">actual</span><span class="p">.</span><span class="na">usuarios</span><span class="p">)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Error</span><span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">MensajeError</span><span class="p">(</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">            </span><span class="n">mensaje</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actual</span><span class="p">.</span><span class="na">mensaje</span><span class="p">,</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">            </span><span class="n">onReintentar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">cargarUsuarios</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span><span class="p">)</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>En <strong><code>Cargando</code></strong>, muestra un <code>CircularProgressIndicator</code> (el indicador de progreso circular de Material).</li>
+<li>En <strong><code>Exito</code></strong>, muestra la lista con los datos (por ejemplo, en una <code>LazyColumn</code>).</li>
+<li>En <strong><code>Error</code></strong>, muestra el mensaje y un botón para <strong>reintentar</strong>, que simplemente vuelve a llamar a <code>cargarUsuarios()</code>.</li>
+</ul>
+<p>La interfaz no sabe nada de red ni de excepciones: solo reacciona al estado que le entrega el <code>ViewModel</code>.</p>
+<h2 id="el-flujo-completo">El flujo completo<a class="headerlink" href="#el-flujo-completo" title="Permanent link">&para;</a></h2>
+<p>Este es el recorrido completo, uniendo todo lo que aprendiste en las últimas partes del curso:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant UI as Interfaz
+    participant VM as ViewModel
+    participant Repo as Repositorio
+    participant API as API (Retrofit)
+    UI-&gt;&gt;VM: cargarUsuarios()
+    Note over VM: estado = Cargando
+    VM-&gt;&gt;Repo: obtenerUsuarios()
+    Repo-&gt;&gt;API: GET /usuarios
+    API--&gt;&gt;Repo: JSON (o excepción)
+    Repo--&gt;&gt;VM: List~Usuario~ (o excepción)
+    Note over VM: estado = Exito (o Error)
+    VM--&gt;&gt;UI: nuevo estado
+    Note over UI: se recompone</code></pre>
+<p>Cuando la interfaz pide cargar, el <code>ViewModel</code> marca <code>Cargando</code>, le pide los datos al repositorio, que a su vez usa Retrofit para llamar a la API. Según el resultado —datos o excepción—, el <code>ViewModel</code> pasa a <code>Exito</code> o a <code>Error</code>, y la interfaz se recompone para mostrar lo que corresponda. Cada capa hace su parte, y el usuario siempre ve un estado claro.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo uniste todas las piezas para manejar una petición de red:</p>
+<ul>
+<li>Una petición de red <strong>toma tiempo</strong> y <strong>puede fallar</strong>, así que la pantalla siempre está en uno de tres estados: <strong>cargando</strong>, <strong>éxito</strong> o <strong>error</strong>, modelados con tu <code>UiState</code>.</li>
+<li>El <strong><code>ViewModel</code></strong> orquesta esos estados: pone <code>Cargando</code>, pide los datos al repositorio dentro de un <code>try</code>, pasa a <code>Exito</code> si llegan y a <code>Error</code> (en el <code>catch</code>) si algo falla.</li>
+<li>Las excepciones de red se <strong>convierten en un estado de <code>Error</code></strong>, en lugar de tumbar la app.</li>
+<li>La <strong>interfaz</strong> observa el estado y, con un <code>when</code>, muestra el indicador de carga, los datos o el mensaje de error (con opción de reintentar).</li>
+</ul>
+<p>Con esto <strong>cierras la arquitectura completa</strong> de una app moderna: interfaz declarativa con Compose, estado en un <code>ViewModel</code>, datos desde un repositorio con Retrofit y un manejo claro de los estados de red. En la próxima parte del curso pondrás en práctica absolutamente todo lo aprendido, construyendo una aplicación completa de principio a fin.</p>
 
 
 

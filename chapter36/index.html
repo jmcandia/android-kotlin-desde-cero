@@ -1707,6 +1707,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    36. HTTP, REST y JSON: cómo se comunican las apps con un servidor
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1723,6 +1741,102 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-modelo-cliente-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El modelo cliente-servidor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-el-protocolo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTP: el protocolo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rest-el-estilo-de-la-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REST: el estilo de la API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#json-el-formato-de-los-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON: el formato de los datos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#todo-junto-una-peticion-de-principio-a-fin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Todo junto: una petición de principio a fin
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2284,6 +2398,91 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-modelo-cliente-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El modelo cliente-servidor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-el-protocolo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTP: el protocolo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rest-el-estilo-de-la-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REST: el estilo de la API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#json-el-formato-de-los-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON: el formato de los datos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#todo-junto-una-peticion-de-principio-a-fin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Todo junto: una petición de principio a fin
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2303,10 +2502,76 @@
 
 
 <h1 id="capitulo-36-http-rest-y-json-como-se-comunican-las-apps-con-un-servidor">Capítulo 36: HTTP, REST y JSON: cómo se comunican las apps con un servidor<a class="headerlink" href="#capitulo-36-http-rest-y-json-como-se-comunican-las-apps-con-un-servidor" title="Permanent link">&para;</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Contenido en construcción</p>
-</div>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>Las aplicaciones rara vez trabajan aisladas. La mayoría obtienen sus datos de un <strong>servidor</strong> a través de internet: la lista de publicaciones de una red social, el clima de tu ciudad, el catálogo de una tienda. Antes de aprender a hacer eso con Retrofit, necesitas entender <strong>cómo</strong> se comunican una app y un servidor.</p>
+<p>En este capítulo, más conceptual, verás los tres pilares de esa comunicación: <strong>HTTP</strong> (el protocolo que usan para hablar), <strong>REST</strong> (la forma en que suele organizarse la API) y <strong>JSON</strong> (el formato en que viajan los datos). Con esta base, en los próximos capítulos usarás Retrofit para ponerlo todo en práctica.</p>
+<h2 id="el-modelo-cliente-servidor">El modelo cliente-servidor<a class="headerlink" href="#el-modelo-cliente-servidor" title="Permanent link">&para;</a></h2>
+<p>La comunicación por internet sigue el modelo <strong>cliente-servidor</strong>. Tu app es el <strong>cliente</strong>: envía una <strong>petición</strong> (<em>request</em>) pidiendo algo. Del otro lado, un <strong>servidor</strong> recibe esa petición, hace su trabajo y devuelve una <strong>respuesta</strong> (<em>response</em>).</p>
+<p>Es como pedir en un restaurante: tú (el cliente) haces un pedido al mesero, la cocina (el servidor) lo prepara y te devuelve el plato. Ni tú entras a la cocina ni la cocina decide por ti: cada uno cumple su rol, y se comunican mediante pedidos y entregas.</p>
+<h2 id="http-el-protocolo">HTTP: el protocolo<a class="headerlink" href="#http-el-protocolo" title="Permanent link">&para;</a></h2>
+<p>Para que el cliente y el servidor se entiendan, usan un <strong>protocolo</strong>: un conjunto de reglas comunes. En la web, ese protocolo es <strong>HTTP</strong> (<em>HyperText Transfer Protocol</em>). Toda la comunicación funciona en pares de <strong>petición</strong> y <strong>respuesta</strong>.</p>
+<p>Una <strong>petición</strong> HTTP incluye, principalmente:</p>
+<ul>
+<li>Una <strong>URL</strong>: la dirección de aquello que pides (por ejemplo, <code>https://api.ejemplo.com/usuarios</code>).</li>
+<li>Un <strong>método</strong>, que indica <strong>qué</strong> quieres hacer. Los más comunes son:</li>
+<li><code>GET</code>: <strong>obtener</strong> datos.</li>
+<li><code>POST</code>: <strong>crear</strong> algo nuevo.</li>
+<li><code>PUT</code> (o <code>PATCH</code>): <strong>modificar</strong> algo existente.</li>
+<li><code>DELETE</code>: <strong>eliminar</strong> algo.</li>
+</ul>
+<p>La <strong>respuesta</strong> del servidor incluye:</p>
+<ul>
+<li>Un <strong>código de estado</strong>, que resume cómo fue todo:</li>
+<li><code>2xx</code> (como <code>200 OK</code>): éxito.</li>
+<li><code>4xx</code> (como <code>404 Not Found</code>): error del cliente; por ejemplo, pediste algo que no existe.</li>
+<li><code>5xx</code> (como <code>500</code>): error del servidor.</li>
+<li>Un <strong>cuerpo</strong> (<em>body</em>) con los datos solicitados, normalmente en formato JSON.</li>
+</ul>
+<h2 id="rest-el-estilo-de-la-api">REST: el estilo de la API<a class="headerlink" href="#rest-el-estilo-de-la-api" title="Permanent link">&para;</a></h2>
+<p>Un servidor expone sus funciones a través de una <strong>API</strong> (interfaz de programación de aplicaciones): el conjunto de URLs a las que tu app puede llamar. <strong>REST</strong> es el <strong>estilo</strong> más común para diseñar esas APIs.</p>
+<p>La idea central de REST son los <strong>recursos</strong>: las "cosas" que la API maneja (usuarios, productos, publicaciones). Cada recurso tiene su propia <strong>URL</strong> (llamada <em>endpoint</em>), y operas sobre él combinándola con un método HTTP:</p>
+<ul>
+<li><code>GET /usuarios</code> → obtener la lista de usuarios.</li>
+<li><code>GET /usuarios/42</code> → obtener el usuario con id 42.</li>
+<li><code>POST /usuarios</code> → crear un usuario nuevo.</li>
+<li><code>DELETE /usuarios/42</code> → eliminar el usuario 42.</li>
+</ul>
+<p>Así, la <strong>URL dice sobre qué</strong> actúas y el <strong>método dice qué haces</strong>. Esta forma ordenada y predecible es lo que hace tan cómodas a las APIs REST.</p>
+<h2 id="json-el-formato-de-los-datos">JSON: el formato de los datos<a class="headerlink" href="#json-el-formato-de-los-datos" title="Permanent link">&para;</a></h2>
+<p>Cuando el servidor responde con datos, necesita un formato que ambos lados entiendan. El más usado es <strong>JSON</strong> (<em>JavaScript Object Notation</em>): un formato de texto, legible tanto para máquinas como para personas.</p>
+<p>JSON representa los datos con dos estructuras básicas. Un <strong>objeto</strong>, entre llaves <code>{ }</code>, es un conjunto de pares <strong>clave-valor</strong> (te recordará a un mapa):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ana&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">&quot;activo&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>Y un <strong>arreglo</strong>, entre corchetes <code>[ ]</code>, es una <strong>lista</strong> de elementos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">[</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ana&quot;</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Diego&quot;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">]</span>
+</code></pre></div>
+<p>Fíjate en lo natural que resulta: un objeto JSON se parece muchísimo a una <code>data class</code> de Kotlin, y un arreglo, a una <code>List</code>. Esa cercanía es la que aprovecharemos para convertir el JSON en objetos de Kotlin, como verás al hablar de serialización.</p>
+<h2 id="todo-junto-una-peticion-de-principio-a-fin">Todo junto: una petición de principio a fin<a class="headerlink" href="#todo-junto-una-peticion-de-principio-a-fin" title="Permanent link">&para;</a></h2>
+<p>Reuniendo las tres piezas, así se ve una comunicación típica: tu app envía una petición HTTP a un <em>endpoint</em> REST, y el servidor responde con un código de estado y datos en JSON, que la app convierte en objetos.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant App as App (cliente)
+    participant Srv as Servidor
+    App-&gt;&gt;Srv: GET /usuarios (petición HTTP)
+    Note over Srv: Busca los datos
+    Srv--&gt;&gt;App: 200 OK + datos en JSON (respuesta)
+    Note over App: Convierte el JSON en objetos Kotlin</code></pre>
+<p>Todo esto —abrir la conexión, enviar la petición, esperar la respuesta, interpretar el JSON— es trabajo que, por suerte, no tendrás que hacer a mano: de eso se encarga <strong>Retrofit</strong>, la biblioteca que veremos a continuación.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo, más conceptual, entendiste cómo se comunican las apps con un servidor:</p>
+<ul>
+<li>Las apps siguen el modelo <strong>cliente-servidor</strong>: el cliente (tu app) envía una <strong>petición</strong> y el servidor devuelve una <strong>respuesta</strong>.</li>
+<li><strong>HTTP</strong> es el protocolo de esa comunicación. Una petición lleva una <strong>URL</strong> y un <strong>método</strong> (<code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>); la respuesta trae un <strong>código de estado</strong> (<code>200</code>, <code>404</code>, <code>500</code>) y, a menudo, un cuerpo de datos.</li>
+<li><strong>REST</strong> es el estilo más común de API: expone <strong>recursos</strong> con su <strong>URL</strong> (<em>endpoint</em>), sobre los que operas según el método HTTP.</li>
+<li><strong>JSON</strong> es el formato habitual de los datos: <strong>objetos</strong> (<code>{ }</code>, clave-valor) y <strong>arreglos</strong> (<code>[ ]</code>, listas), que se parecen mucho a las <code>data class</code> y <code>List</code> de Kotlin.</li>
+</ul>
+<p>En el próximo capítulo empezarás a poner esto en práctica con <strong>Retrofit</strong>: configurarás la biblioteca para hacer peticiones a una API con muy poco código.</p>
 
 
 

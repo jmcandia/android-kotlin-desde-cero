@@ -1763,6 +1763,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    38. Serialización JSON y modelos de datos (DTO)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1779,6 +1797,102 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serializacion-y-deserializacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serialización y deserialización
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelar-el-json-con-serializable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelar el JSON con @Serializable
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuando-los-nombres-no-coinciden-serialname" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuando los nombres no coinciden: @SerialName
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dtos-separar-los-datos-de-la-api-de-tu-modelo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DTOs: separar los datos de la API de tu modelo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-flujo-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El flujo completo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2284,6 +2398,91 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serializacion-y-deserializacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serialización y deserialización
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelar-el-json-con-serializable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelar el JSON con @Serializable
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuando-los-nombres-no-coinciden-serialname" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuando los nombres no coinciden: @SerialName
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dtos-separar-los-datos-de-la-api-de-tu-modelo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DTOs: separar los datos de la API de tu modelo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-flujo-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El flujo completo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2303,10 +2502,98 @@
 
 
 <h1 id="capitulo-38-serializacion-json-y-modelos-de-datos-dto">Capítulo 38: Serialización JSON y modelos de datos (DTO)<a class="headerlink" href="#capitulo-38-serializacion-json-y-modelos-de-datos-dto" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>En el capítulo anterior configuraste Retrofit con un convertidor de <code>kotlinx.serialization</code>, pero quedó una pregunta: ¿cómo se transforma exactamente el <strong>JSON</strong> que llega de la API en objetos de Kotlin? Ese proceso se llama <strong>serialización</strong> (más precisamente, <em>deserialización</em>).</p>
+<p>En este capítulo aprenderás a modelar el JSON con <code>kotlinx.serialization</code>, a manejar los casos en que los nombres no coinciden, y a organizar tus clases de datos con un patrón importante: los <strong>DTOs</strong>, que separan los datos tal como vienen de la API de los modelos que tu app realmente usa.</p>
+<h2 id="serializacion-y-deserializacion">Serialización y deserialización<a class="headerlink" href="#serializacion-y-deserializacion" title="Permanent link">&para;</a></h2>
+<p>Son dos conceptos, uno el inverso del otro:</p>
+<ul>
+<li><strong>Serializar</strong> es convertir un objeto en un formato de texto para enviarlo o guardarlo; por ejemplo, un objeto de Kotlin → un texto JSON.</li>
+<li><strong>Deserializar</strong> es lo contrario: tomar ese texto y reconstruir el objeto; un texto JSON → un objeto de Kotlin.</li>
+</ul>
+<p>Cuando consumes una API, casi siempre <strong>deserializas</strong>: la respuesta llega como texto JSON y necesitas convertirla en objetos con los que trabajar. (Por costumbre, se suele llamar "serialización" a todo el tema.)</p>
+<p>La biblioteca que hace esta magia en Kotlin es <strong><code>kotlinx.serialization</code></strong>, y Retrofit la usa a través del convertidor que instalaste.</p>
+<h2 id="modelar-el-json-con-serializable">Modelar el JSON con <code>@Serializable</code><a class="headerlink" href="#modelar-el-json-con-serializable" title="Permanent link">&para;</a></h2>
+<p>Para que <code>kotlinx.serialization</code> sepa cómo convertir un JSON en una clase, esa clase debe estar marcada con la anotación <strong><code>@Serializable</code></strong>, y sus propiedades deben <strong>coincidir</strong> con las claves del JSON.</p>
+<p>Supongamos que la API devuelve este JSON:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ana&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
+</code></pre></div>
+<p>La clase que lo representa es una <code>data class</code> marcada con <code>@Serializable</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Serializable</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">UsuarioDto</span><span class="p">(</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">id</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">)</span>
+</code></pre></div>
+<p>Con eso, <code>kotlinx.serialization</code> lee el JSON, empareja cada clave con la propiedad del mismo nombre y crea el objeto. Fíjate en lo directo que resulta: el JSON y la <code>data class</code> tienen prácticamente la misma forma.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Contenido en construcción</p>
+<p>Para usar <code>@Serializable</code> necesitas el <em>plugin</em> de serialización de Kotlin y la dependencia <code>kotlinx-serialization-json</code>, que se agregan al proyecto una sola vez.</p>
 </div>
+<h2 id="cuando-los-nombres-no-coinciden-serialname">Cuando los nombres no coinciden: <code>@SerialName</code><a class="headerlink" href="#cuando-los-nombres-no-coinciden-serialname" title="Permanent link">&para;</a></h2>
+<p>En la práctica, las APIs no siempre nombran sus campos como te gustaría. Es muy común que el JSON use <code>snake_case</code> (<code>nombre_completo</code>) mientras que en Kotlin prefieres <code>camelCase</code> (<code>nombreCompleto</code>). Para conectar ambos, usas la anotación <strong><code>@SerialName</code></strong>, indicando el nombre tal como aparece en el JSON:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Serializable</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">UsuarioDto</span><span class="p">(</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">id</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nd">@SerialName</span><span class="p">(</span><span class="s">&quot;nombre_completo&quot;</span><span class="p">)</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">nombreCompleto</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">)</span>
+</code></pre></div>
+<p>Así, la clave <code>nombre_completo</code> del JSON se asigna a tu propiedad <code>nombreCompleto</code>.</p>
+<p>Otro caso frecuente: la API devuelve <strong>más campos</strong> de los que te interesan. Por defecto, eso provocaría un error. Para evitarlo, se configura el lector de JSON para que <strong>ignore las claves desconocidas</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Json</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ignoreUnknownKeys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Es un ajuste habitual y muy recomendable al consumir APIs que no controlas.</p>
+<h2 id="dtos-separar-los-datos-de-la-api-de-tu-modelo">DTOs: separar los datos de la API de tu modelo<a class="headerlink" href="#dtos-separar-los-datos-de-la-api-de-tu-modelo" title="Permanent link">&para;</a></h2>
+<p>Fíjate en que a la clase de los ejemplos la llamamos <code>UsuarioDto</code>, no <code>Usuario</code>. Esa terminación <strong><code>Dto</code></strong> no es casual: indica que es un <strong>DTO</strong> (<em>Data Transfer Object</em>, "objeto de transferencia de datos"), una clase cuyo único propósito es <strong>reflejar la forma del JSON</strong> de la API.</p>
+<p>¿Por qué no usar ese DTO directamente en toda la app? Por dos razones:</p>
+<ul>
+<li>La forma en que la API entrega los datos no siempre es la más cómoda para tu aplicación (nombres raros, campos anidados, datos que no necesitas).</li>
+<li>Si la API <strong>cambia</strong>, no quieres que ese cambio se propague por todo tu código.</li>
+</ul>
+<p>Por eso es buena práctica <strong>separar</strong> los DTOs de tus <strong>modelos de dominio</strong>: las clases limpias que tu app realmente usa. El repositorio recibe los DTOs, los <strong>transforma</strong> (mapea) en modelos de dominio y, hacia arriba, solo entrega estos últimos.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// DTO: refleja el JSON de la API</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nd">@Serializable</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">UsuarioDto</span><span class="p">(</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">id</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nd">@SerialName</span><span class="p">(</span><span class="s">&quot;nombre_completo&quot;</span><span class="p">)</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">nombreCompleto</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">)</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1">// Modelo de dominio: lo que usa la app</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Usuario</span><span class="p">(</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">id</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="p">)</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1">// Mapeo de DTO a modelo de dominio</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="kd">fun</span><span class="w"> </span><span class="n">UsuarioDto</span><span class="p">.</span><span class="nf">aDominio</span><span class="p">():</span><span class="w"> </span><span class="n">Usuario</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Usuario</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nombreCompleto</span><span class="p">)</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="p">}</span>
+</code></pre></div>
+<p>Fíjate en que el mapeo es una <strong>función de extensión</strong> (de las que viste en la parte de POO): convierte un <code>UsuarioDto</code> en un <code>Usuario</code> de forma limpia. Así, si mañana la API renombra un campo, solo ajustas el DTO y su mapeo; el resto de la app, que trabaja con <code>Usuario</code>, ni se entera.</p>
+<h2 id="el-flujo-completo">El flujo completo<a class="headerlink" href="#el-flujo-completo" title="Permanent link">&para;</a></h2>
+<p>Reuniendo las piezas del capítulo anterior y de este, el recorrido de un dato desde la API hasta tu app es:</p>
+<pre class="mermaid"><code>flowchart LR
+    J["JSON&lt;br/&gt;(respuesta de la API)"] -- "deserializa" --&gt; D["DTO&lt;br/&gt;(refleja el JSON)"]
+    D -- "mapea" --&gt; M["Modelo de dominio&lt;br/&gt;(lo que usa la app)"]</code></pre>
+<ul>
+<li>Retrofit hace la petición y recibe el <strong>JSON</strong>.</li>
+<li>El convertidor de <code>kotlinx.serialization</code> lo <strong>deserializa</strong> en un <strong>DTO</strong>.</li>
+<li>El repositorio <strong>mapea</strong> el DTO a un <strong>modelo de dominio</strong>.</li>
+<li>El <code>ViewModel</code> y la interfaz trabajan con ese modelo limpio.</li>
+</ul>
+<p>Cada capa recibe los datos en la forma que le conviene, y los detalles de la API quedan contenidos en un solo lugar.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo aprendiste a convertir el JSON en objetos y a organizarlos bien:</p>
+<ul>
+<li><strong>Serializar</strong> es objeto → texto (JSON); <strong>deserializar</strong> es texto → objeto. Al consumir una API, deserializas.</li>
+<li><strong><code>kotlinx.serialization</code></strong> convierte el JSON en clases marcadas con <strong><code>@Serializable</code></strong>, cuyas propiedades coinciden con las claves del JSON.</li>
+<li>Con <strong><code>@SerialName</code></strong> conectas nombres que no coinciden (por ejemplo, el <code>snake_case</code> del JSON con el <code>camelCase</code> de Kotlin), y con <code>ignoreUnknownKeys = true</code> evitas errores cuando la API trae campos de más.</li>
+<li>Un <strong>DTO</strong> es una clase que refleja el JSON de la API. Conviene <strong>separarlo</strong> de tus <strong>modelos de dominio</strong> y mapear de uno a otro (con una función de extensión, por ejemplo), para que los cambios de la API no afecten a toda la app.</li>
+</ul>
+<p>En el próximo capítulo cerrarás la parte de red juntándolo todo: manejarás los <strong>estados de red</strong> (cargando, éxito, error) en el <code>ViewModel</code>, conectando Retrofit, el repositorio y la interfaz.</p>
 
 
 
