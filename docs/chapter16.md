@@ -37,7 +37,7 @@ La POO se apoya en cuatro conceptos fundamentales, conocidos como sus **cuatro p
 En este capítulo nos concentramos en la base sobre la que se apoyan todos estos pilares: las **clases** y los **objetos**.
 
 > [!NOTE]
-> Escribir buen código orientado a objetos no consiste solo en usar clases, sino en organizarlas bien. Para eso existen principios de diseño como **SOLID**, que revisamos en el [anexo de principios de diseño](/anexo-principios-diseno.md). Te será útil volver a él a medida que avances en esta parte del curso.
+> Escribir buen código orientado a objetos no consiste solo en usar clases, sino en organizarlas bien. Para eso existen principios de diseño como **SOLID**, que revisamos en el [anexo de principios de diseño](appendix-design-principle.md). Te será útil volver a él a medida que avances en esta parte del curso.
 
 ## ¿Qué es una clase?
 
