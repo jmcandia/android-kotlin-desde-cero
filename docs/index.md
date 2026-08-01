@@ -8,7 +8,7 @@ Está pensado para personas con base en **programación orientada a objetos** (p
 
 ## ¿Qué construiremos?
 
-El hilo conductor del curso es una aplicación **PokéDex** que consume la [PokeAPI](https://pokeapi.co): muestra una lista de Pokémon y sus detalles, y está construida con **MVVM**, **Jetpack Compose**, **Retrofit** y **Material 3**.
+El hilo conductor del curso es una **app de gestión de contactos** que consume una API REST con operaciones **CRUD** completas: listar contactos (con búsqueda y paginación), ver su detalle, y crearlos, editarlos y eliminarlos. Está construida con **MVVM**, **Jetpack Compose**, **Retrofit** y **Material 3**.
 
 ## ¿Cómo está organizado?
 
@@ -20,9 +20,9 @@ El curso avanza por partes, de lo más básico a lo más avanzado:
 - **Parte IV · Programación orientada a objetos en Kotlin** — clases, herencia, `data class`, `object`, `sealed class`, genéricos y lambdas.
 - **Parte V · Asincronía con Coroutines** — hilos, `suspend`, `launch`, `Flow` y `StateFlow`.
 - **Parte VI · Introducción a Android con Jetpack Compose** — Android Studio, componentes, estado, navegación y Material 3.
-- **Parte VII · Arquitectura MVVM** — `ViewModel`, `UiState`, repositorio, capas e inyección de dependencias.
-- **Parte VIII · Consumo de API REST con Retrofit** — HTTP, REST, JSON, Retrofit, serialización, y estados de red.
-- **Parte IX · Proyecto final: PokéDex con PokeAPI** — configuración, dependencias, DTOs, diseño, persistencia y testing básico.
+- **Parte VII · Arquitectura MVVM** — `ViewModel`, estado de la interfaz, repositorio, separación en capas e inyección de dependencias.
+- **Parte VIII · Consumo de APIs con Retrofit** — HTTP, REST y JSON, configuración de Retrofit, serialización con DTOs y estados de red.
+- **Parte IX · Proyecto final** — construir, de principio a fin, la app de gestión de contactos con CRUD completo.
 
 Al final encontrarás los **anexos** con material de referencia (principios de diseño y entrada estándar con `Scanner`).
 
