@@ -17,7 +17,7 @@ El objetivo de este capítulo es que prepares correctamente tu entorno de trabaj
 
 La mayoría de los IDE modernos son gráficos, aunque los primeros se utilizaban en una época en la que nadie soñaba con los gráficos. Se basaban en una interfaz de texto y solo se podían manejar mediante teclas de función y atajos de teclado para activar diversas funciones. Este era, por ejemplo, el caso de Turbo Pascal, creado por Borland:
 
-![Turbo Pascal](../assets/images/chapter01/turbo-pascal.png)
+![Turbo Pascal](../../assets/images/chapter01/turbo-pascal.png)
 
 Los primeros IDE se diseñaron para funcionar a través de una consola o terminal, que ya eran una novedad en sí mismas. De hecho, antes de eso, los programas se creaban generalmente en papel y se introducían en la máquina mediante soportes de papel preparados previamente, como tarjetas perforadas o cintas perforadas.
 
@@ -35,7 +35,7 @@ Existen muchos IDE para diferentes lenguajes de programación. Algunos solo admi
 
 A modo de ejemplo, así es como se ve el IDE IntelliJ IDEA:
 
-![IntelliJ](../assets/images/chapter01/intellij.png)
+![IntelliJ](../../assets/images/chapter01/intellij.png)
 
 Todos estos entornos pueden ejecutarse en Windows, macOS o GNU/Linux.
 
@@ -79,7 +79,7 @@ Veamos más detenidamente cómo funciona IntelliJ IDEA. Sigue los pasos que se i
 
 2. Si no hay ningún proyecto abierto actualmente, haz clic en *New Project* en la sección *Projects* de la pantalla de bienvenida. De lo contrario, selecciona *File* → *New* → *Project*.
 
-   ![Pantalla de bienvenida](../assets/images/chapter01/intellij-welcome.png)
+   ![Pantalla de bienvenida](../../assets/images/chapter01/intellij-welcome.png)
 
 3. En el asistente *New Project*, selecciona *New Project* en la lista de la izquierda.
 
@@ -89,7 +89,7 @@ Veamos más detenidamente cómo funciona IntelliJ IDEA. Sigue los pasos que se i
 
 6. Selecciona *Kotlin* en *Language* e *IntelliJ* en *Build system*.
 
-   ![Configuración del nuevo proyecto](../assets/images/chapter01/intellij-new-project-settings.png)
+   ![Configuración del nuevo proyecto](../../assets/images/chapter01/intellij-new-project-settings.png)
 
 7. Para desarrollar aplicaciones Kotlin en IntelliJ IDEA, necesitas el JetBrains Runtime (JBR). Tu IDE rellenará automáticamente el campo del JBR. No obstante, puedes modificarlo, añadir el JBR necesario desde tu computador o descargar uno.
 
@@ -104,15 +104,15 @@ Ahora vamos a escribir un fragmento sencillo de código **Kotlin** para el proye
 
 1. En la ventana de herramientas *Project*, haz clic con el botón derecho del ratón en el directorio `src`, selecciona *New* y, luego, *Kotlin Class/File*.
 
-   ![Nuevo archivo](../assets/images/chapter01/intellij-new-file-a.png)
+   ![Nuevo archivo](../../assets/images/chapter01/intellij-new-file-a.png)
 
 2. Selecciona la opción *File*. En el campo `Name`, escribe `Main` y pulsa *Intro*. Se creará un archivo llamado `Main.kt` (la extensión `.kt` identifica a los archivos de Kotlin).
 
-   ![Archivo Main.kt](../assets/images/chapter01/intellij-new-file-b.png)
+   ![Archivo Main.kt](../../assets/images/chapter01/intellij-new-file-b.png)
 
 3. A continuación, en el archivo `Main.kt`, escribamos la función `main` y llamemos a `println()`. Puedes empezar a escribir los símbolos y el IDE te sugerirá posibles variantes de código. Esta función se denomina *autocompletado de código*: IntelliJ IDEA analiza el contexto y sugiere las opciones a las que se puede acceder desde la posición actual del cursor.
 
-   ![Proyecto](../assets/images/chapter01/intellij-project.png)
+   ![Proyecto](../../assets/images/chapter01/intellij-project.png)
 
 4. Escribe la declaración de la función `main()`:
 
@@ -122,7 +122,7 @@ Ahora vamos a escribir un fragmento sencillo de código **Kotlin** para el proye
    }
    ```
 
-   ![Hola Mundo](../assets/images/chapter01/intellij-hello-world.png)
+   ![Hola Mundo](../../assets/images/chapter01/intellij-hello-world.png)
 
 5. Para ejecutar el programa, haz clic en el ícono de *play* (▶️) que aparece en el margen izquierdo, junto a la función `main`, y selecciona *Run 'MainKt'*. Verás el resultado en la ventana *Run*, en la parte inferior del IDE.
 

@@ -346,7 +346,7 @@ Ya sabes cómo realizar una conversión de tipos de forma manual. Pero surge una
 
 En estos casos, el compilador convierte automáticamente todos los operandos (esto se denomina **coerción de tipos**) y el resultado al tipo más amplio de la expresión. La imagen siguiente ilustra la dirección de esta conversión:
 
-![Coerción de tipos](../assets/images/chapter04/type-coercion.png)
+![Coerción de tipos](../../assets/images/chapter04/type-coercion.png)
 
 Como el tipo del resultado es más amplio que el de los operandos, no se produce ninguna pérdida de información.
 

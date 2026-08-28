@@ -20,7 +20,7 @@ println(string) // Hola Mundo
 
 La cadena `"%s %s"` es la **cadena de formato**: define cómo se van a formatear los argumentos `"Hola"` y `"Mundo"`. El símbolo `%s` (o `%S`) es un **especificador de formato** que representa cada argumento de tipo cadena. Cada especificador se sustituye por los argumentos siguientes, respectivamente (véase la imagen de abajo). En el ejemplo, cada argumento ocupa el espacio correspondiente a su longitud, y los dos quedan separados por un espacio.
 
-![String formatter](../assets/images/chapter15/format-string.png)
+![String formatter](../../assets/images/chapter15/format-string.png)
 
 Una sintaxis alternativa que ofrece el mismo resultado es:
 

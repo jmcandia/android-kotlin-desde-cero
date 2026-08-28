@@ -18,7 +18,7 @@ fun Pantalla() {
 
 Para arreglarlo, necesitas un **layout**: un composable cuyo trabajo es **organizar** a sus hijos. Compose ofrece tres básicos, que resuelven las tres formas fundamentales de disponer elementos:
 
-![Layout](../assets/images/chapter29/layout-column-row-box.svg)
+![Layout](../../assets/images/chapter29/layout-column-row-box.svg)
 
 ## `Column`: en vertical
 

@@ -85,7 +85,7 @@ Hay muchos más (`Icon`, `IconButton`, `TextField`, `Checkbox`, `Switch`…), y 
 
 La mayoría de las pantallas comparten una estructura: una barra arriba, el contenido en el medio, quizás una barra abajo o un botón flotante. En lugar de armar eso a mano, Material ofrece el **`Scaffold`** ("andamio"), un composable que provee **espacios** (*slots*) para cada una de esas partes:
 
-![Scaffold](../assets/images/chapter30/scaffold.svg)
+![Scaffold](../../assets/images/chapter30/scaffold.svg)
 
 Un uso típico, con una barra superior y el contenido:
 
