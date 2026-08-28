@@ -10,29 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/">
+        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/part06/chapter25/">
       
       
+        <link rel="prev" href="../../part05/chapter24/">
       
-        <link rel="next" href="part01/chapter01/">
+      
+        <link rel="next" href="../chapter26/">
       
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Android con Kotlin desde cero</title>
+        <title>25. Android Studio y anatomía de un proyecto - Android con Kotlin desde cero</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="assets/css/custom.css">
+      <link rel="stylesheet" href="../../assets/css/custom.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#android-con-kotlin-desde-cero" class="md-skip">
+        <a href="#capitulo-25-android-studio-y-anatomia-de-un-proyecto-android" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -94,7 +96,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../.." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Inicio
+              25. Android Studio y anatomía de un proyecto
             
           </span>
         </div>
@@ -232,7 +234,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../.." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -259,37 +261,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Inicio
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -305,59 +280,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#para-quien-es-este-curso" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Para quién es este curso?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#que-construiremos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Qué construiremos?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#como-esta-organizado" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Cómo está organizado?
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -416,7 +338,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter01/" class="md-nav__link">
+      <a href="../../part01/chapter01/" class="md-nav__link">
         
   
   
@@ -444,7 +366,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter02/" class="md-nav__link">
+      <a href="../../part01/chapter02/" class="md-nav__link">
         
   
   
@@ -472,7 +394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter03/" class="md-nav__link">
+      <a href="../../part01/chapter03/" class="md-nav__link">
         
   
   
@@ -500,7 +422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter04/" class="md-nav__link">
+      <a href="../../part01/chapter04/" class="md-nav__link">
         
   
   
@@ -528,7 +450,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter05/" class="md-nav__link">
+      <a href="../../part01/chapter05/" class="md-nav__link">
         
   
   
@@ -556,7 +478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter06/" class="md-nav__link">
+      <a href="../../part01/chapter06/" class="md-nav__link">
         
   
   
@@ -584,7 +506,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter07/" class="md-nav__link">
+      <a href="../../part01/chapter07/" class="md-nav__link">
         
   
   
@@ -612,7 +534,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/exercises/" class="md-nav__link">
+      <a href="../../part01/exercises/" class="md-nav__link">
         
   
   
@@ -694,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/chapter08/" class="md-nav__link">
+      <a href="../../part02/chapter08/" class="md-nav__link">
         
   
   
@@ -722,7 +644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/chapter09/" class="md-nav__link">
+      <a href="../../part02/chapter09/" class="md-nav__link">
         
   
   
@@ -750,7 +672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/chapter10/" class="md-nav__link">
+      <a href="../../part02/chapter10/" class="md-nav__link">
         
   
   
@@ -778,7 +700,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/exercises/" class="md-nav__link">
+      <a href="../../part02/exercises/" class="md-nav__link">
         
   
   
@@ -860,7 +782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter11/" class="md-nav__link">
+      <a href="../../part03/chapter11/" class="md-nav__link">
         
   
   
@@ -888,7 +810,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter12/" class="md-nav__link">
+      <a href="../../part03/chapter12/" class="md-nav__link">
         
   
   
@@ -916,7 +838,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter13/" class="md-nav__link">
+      <a href="../../part03/chapter13/" class="md-nav__link">
         
   
   
@@ -944,7 +866,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter14/" class="md-nav__link">
+      <a href="../../part03/chapter14/" class="md-nav__link">
         
   
   
@@ -972,7 +894,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter15/" class="md-nav__link">
+      <a href="../../part03/chapter15/" class="md-nav__link">
         
   
   
@@ -1000,7 +922,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/exercises/" class="md-nav__link">
+      <a href="../../part03/exercises/" class="md-nav__link">
         
   
   
@@ -1082,7 +1004,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter16/" class="md-nav__link">
+      <a href="../../part04/chapter16/" class="md-nav__link">
         
   
   
@@ -1110,7 +1032,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter17/" class="md-nav__link">
+      <a href="../../part04/chapter17/" class="md-nav__link">
         
   
   
@@ -1138,7 +1060,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter18/" class="md-nav__link">
+      <a href="../../part04/chapter18/" class="md-nav__link">
         
   
   
@@ -1166,7 +1088,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter19/" class="md-nav__link">
+      <a href="../../part04/chapter19/" class="md-nav__link">
         
   
   
@@ -1194,7 +1116,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter20/" class="md-nav__link">
+      <a href="../../part04/chapter20/" class="md-nav__link">
         
   
   
@@ -1222,7 +1144,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter21/" class="md-nav__link">
+      <a href="../../part04/chapter21/" class="md-nav__link">
         
   
   
@@ -1250,7 +1172,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/exercises/" class="md-nav__link">
+      <a href="../../part04/exercises/" class="md-nav__link">
         
   
   
@@ -1332,7 +1254,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part05/chapter22/" class="md-nav__link">
+      <a href="../../part05/chapter22/" class="md-nav__link">
         
   
   
@@ -1360,7 +1282,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part05/chapter23/" class="md-nav__link">
+      <a href="../../part05/chapter23/" class="md-nav__link">
         
   
   
@@ -1388,7 +1310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part05/chapter24/" class="md-nav__link">
+      <a href="../../part05/chapter24/" class="md-nav__link">
         
   
   
@@ -1420,18 +1342,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
           <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
@@ -1452,7 +1376,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1467,10 +1391,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="part06/chapter25/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    25. Android Studio y anatomía de un proyecto
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1486,6 +1437,136 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#android-studio-el-ide-oficial-de-android" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Android Studio, el IDE oficial de Android
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalar-android-studio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instalar Android Studio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-tu-primer-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear tu primer proyecto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anatomia-de-un-proyecto-android" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anatomía de un proyecto Android
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-androidmanifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El AndroidManifest
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-codigo-y-mainactivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El código y MainActivity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gradle-y-el-catalogo-de-versiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gradle y el catálogo de versiones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejecutar-la-aplicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejecutar la aplicación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1498,7 +1579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter26/" class="md-nav__link">
+      <a href="../chapter26/" class="md-nav__link">
         
   
   
@@ -1526,7 +1607,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter27/" class="md-nav__link">
+      <a href="../chapter27/" class="md-nav__link">
         
   
   
@@ -1554,7 +1635,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter28/" class="md-nav__link">
+      <a href="../chapter28/" class="md-nav__link">
         
   
   
@@ -1582,7 +1663,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter29/" class="md-nav__link">
+      <a href="../chapter29/" class="md-nav__link">
         
   
   
@@ -1610,7 +1691,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter30/" class="md-nav__link">
+      <a href="../chapter30/" class="md-nav__link">
         
   
   
@@ -1638,7 +1719,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter31/" class="md-nav__link">
+      <a href="../chapter31/" class="md-nav__link">
         
   
   
@@ -1720,7 +1801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter32/" class="md-nav__link">
+      <a href="../../part07/chapter32/" class="md-nav__link">
         
   
   
@@ -1748,7 +1829,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter33/" class="md-nav__link">
+      <a href="../../part07/chapter33/" class="md-nav__link">
         
   
   
@@ -1776,7 +1857,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter34/" class="md-nav__link">
+      <a href="../../part07/chapter34/" class="md-nav__link">
         
   
   
@@ -1804,7 +1885,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter35/" class="md-nav__link">
+      <a href="../../part07/chapter35/" class="md-nav__link">
         
   
   
@@ -1886,7 +1967,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter36/" class="md-nav__link">
+      <a href="../../part08/chapter36/" class="md-nav__link">
         
   
   
@@ -1914,7 +1995,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter37/" class="md-nav__link">
+      <a href="../../part08/chapter37/" class="md-nav__link">
         
   
   
@@ -1942,7 +2023,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter38/" class="md-nav__link">
+      <a href="../../part08/chapter38/" class="md-nav__link">
         
   
   
@@ -1970,7 +2051,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter39/" class="md-nav__link">
+      <a href="../../part08/chapter39/" class="md-nav__link">
         
   
   
@@ -2052,7 +2133,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter40/" class="md-nav__link">
+      <a href="../../part09/chapter40/" class="md-nav__link">
         
   
   
@@ -2080,7 +2161,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter41/" class="md-nav__link">
+      <a href="../../part09/chapter41/" class="md-nav__link">
         
   
   
@@ -2108,7 +2189,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter42/" class="md-nav__link">
+      <a href="../../part09/chapter42/" class="md-nav__link">
         
   
   
@@ -2136,7 +2217,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter43/" class="md-nav__link">
+      <a href="../../part09/chapter43/" class="md-nav__link">
         
   
   
@@ -2164,7 +2245,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter44/" class="md-nav__link">
+      <a href="../../part09/chapter44/" class="md-nav__link">
         
   
   
@@ -2192,7 +2273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter45/" class="md-nav__link">
+      <a href="../../part09/chapter45/" class="md-nav__link">
         
   
   
@@ -2220,7 +2301,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter46/" class="md-nav__link">
+      <a href="../../part09/chapter46/" class="md-nav__link">
         
   
   
@@ -2248,7 +2329,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter47/" class="md-nav__link">
+      <a href="../../part09/chapter47/" class="md-nav__link">
         
   
   
@@ -2276,7 +2357,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/chapter48/" class="md-nav__link">
         
   
   
@@ -2304,7 +2385,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter49/" class="md-nav__link">
+      <a href="../../part09/chapter49/" class="md-nav__link">
         
   
   
@@ -2386,7 +2467,7 @@
   
   
     <li class="md-nav__item">
-      <a href="appendix/design-principle/" class="md-nav__link">
+      <a href="../../appendix/design-principle/" class="md-nav__link">
         
   
   
@@ -2414,7 +2495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="appendix/java-scanner/" class="md-nav__link">
+      <a href="../../appendix/java-scanner/" class="md-nav__link">
         
   
   
@@ -2469,10 +2550,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#para-quien-es-este-curso" class="md-nav__link">
+  <a href="#introduccion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Para quién es este curso?
+        Introducción
       
     </span>
   </a>
@@ -2480,10 +2561,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#que-construiremos" class="md-nav__link">
+  <a href="#android-studio-el-ide-oficial-de-android" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué construiremos?
+        Android Studio, el IDE oficial de Android
       
     </span>
   </a>
@@ -2491,10 +2572,87 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#como-esta-organizado" class="md-nav__link">
+  <a href="#instalar-android-studio" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Cómo está organizado?
+        Instalar Android Studio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-tu-primer-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear tu primer proyecto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anatomia-de-un-proyecto-android" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anatomía de un proyecto Android
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-androidmanifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El AndroidManifest
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-codigo-y-mainactivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El código y MainActivity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gradle-y-el-catalogo-de-versiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gradle y el catálogo de versiones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejecutar-la-aplicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejecutar la aplicación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
       
     </span>
   </a>
@@ -2521,30 +2679,136 @@
   
 
 
-<h1 id="android-con-kotlin-desde-cero">Android con Kotlin desde cero<a class="headerlink" href="#android-con-kotlin-desde-cero" title="Permanent link">&para;</a></h1>
-<p>Bienvenido a <strong>Android con Kotlin desde cero</strong>: un recorrido que te lleva desde los fundamentos del lenguaje Kotlin hasta construir una aplicación Android completa con Jetpack Compose.</p>
-<h2 id="para-quien-es-este-curso">¿Para quién es este curso?<a class="headerlink" href="#para-quien-es-este-curso" title="Permanent link">&para;</a></h2>
-<p>Está pensado para personas con base en <strong>programación orientada a objetos</strong> (por ejemplo, quienes vienen de Java) que quieren aprender <strong>Kotlin</strong> y el <strong>desarrollo Android moderno</strong>. Cada concepto se apoya en el anterior, con ejemplos claros y sin dar nada por sabido.</p>
-<h2 id="que-construiremos">¿Qué construiremos?<a class="headerlink" href="#que-construiremos" title="Permanent link">&para;</a></h2>
-<p>El hilo conductor del curso es una <strong>app de gestión de contactos</strong> que consume una API REST con operaciones <strong>CRUD</strong> completas: listar contactos (con búsqueda y paginación), ver su detalle, y crearlos, editarlos y eliminarlos. Está construida con <strong>MVVM</strong>, <strong>Jetpack Compose</strong>, <strong>Retrofit</strong> y <strong>Material 3</strong>.</p>
-<h2 id="como-esta-organizado">¿Cómo está organizado?<a class="headerlink" href="#como-esta-organizado" title="Permanent link">&para;</a></h2>
-<p>El curso avanza por partes, de lo más básico a lo más avanzado:</p>
+<h1 id="capitulo-25-android-studio-y-anatomia-de-un-proyecto-android">Capítulo 25: Android Studio y anatomía de un proyecto Android<a class="headerlink" href="#capitulo-25-android-studio-y-anatomia-de-un-proyecto-android" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>¡Llegó el gran momento! Con toda la base de Kotlin dominada, en esta parte del curso empezamos a construir aplicaciones Android de verdad. Pero un proyecto Android es bastante más que un archivo <code>.kt</code> con una función <code>main</code>: tiene una estructura propia, herramientas de construcción y archivos de configuración que conviene entender antes de escribir código.</p>
+<p>En este capítulo instalarás <strong>Android Studio</strong>, crearás tu primer proyecto y recorrerás su <strong>anatomía</strong>: qué archivos lo componen, para qué sirve cada uno y cómo encajan entre sí. No escribiremos aún la interfaz (eso empieza en el próximo capítulo); el objetivo aquí es que sepas orientarte dentro de un proyecto Android.</p>
+<h2 id="android-studio-el-ide-oficial-de-android">Android Studio, el IDE oficial de Android<a class="headerlink" href="#android-studio-el-ide-oficial-de-android" title="Permanent link">&para;</a></h2>
+<p>En el primer capítulo usaste <strong>IntelliJ IDEA</strong> para aprender Kotlin, y mencionamos que Android Studio llegaría más adelante. Ese momento es ahora.</p>
+<p><strong>Android Studio</strong> es el entorno de desarrollo (IDE) <strong>oficial</strong> para Android, creado por Google y <strong>construido sobre IntelliJ IDEA</strong>. Por eso te resultará familiar: el editor, el autocompletado y la navegación funcionan igual que ya conoces. La diferencia es que Android Studio incluye, además, todo lo necesario para el desarrollo móvil: el <strong>SDK de Android</strong> (las bibliotecas del sistema), un <strong>emulador</strong> para probar apps sin un teléfono físico, y las herramientas de compilación.</p>
+<h2 id="instalar-android-studio">Instalar Android Studio<a class="headerlink" href="#instalar-android-studio" title="Permanent link">&para;</a></h2>
+<p>Instalar Android Studio es sencillo:</p>
+<ol>
+<li>Descarga el instalador desde el sitio oficial: <a href="https://developer.android.com/studio">developer.android.com/studio</a>.</li>
+<li>Ejecuta el instalador y sigue el asistente.</li>
+<li>La primera vez que lo abras, un <strong>asistente de configuración</strong> descargará automáticamente el SDK de Android y los componentes necesarios. Esto puede tardar, según tu conexión.</li>
+</ol>
+<p>Cuando el asistente termine, verás la pantalla de bienvenida de Android Studio, lista para crear un proyecto.</p>
+<h2 id="crear-tu-primer-proyecto">Crear tu primer proyecto<a class="headerlink" href="#crear-tu-primer-proyecto" title="Permanent link">&para;</a></h2>
+<p>Desde la pantalla de bienvenida de Android Studio, haz clic en <strong>New Project</strong>.</p>
+<p><img alt="Pantalla de bienvenida de Android Studio" src="../../assets/images/chapter25/android-studio-welcome.png" /></p>
+<p>Android Studio te mostrará una lista de <strong>plantillas</strong> (proyectos de ejemplo que sirven de punto de partida). En la pestaña <strong>Phone and Tablet</strong>, selecciona <strong>Empty Activity</strong>: crea un proyecto sencillo, de una sola pantalla, ya preparado para usar <strong>Jetpack Compose</strong> (el sistema moderno de interfaces que usaremos en todo el curso). Luego pulsa <strong>Next</strong>.</p>
+<p><img alt="Selección de la plantilla Empty Activity" src="../../assets/images/chapter25/android-studio-new-project.png" /></p>
+<p>En la siguiente pantalla configuras el proyecto:</p>
 <ul>
-<li><strong>Parte I · Fundamentos de Kotlin</strong> — variables, tipos, operadores, entrada/salida y cadenas.</li>
-<li><strong>Parte II · Estructuras de control y funciones</strong> — <code>if</code>, <code>when</code>, bucles y funciones.</li>
-<li><strong>Parte III · Colecciones y código robusto</strong> — listas, mapas, operaciones funcionales, <em>null safety</em> y excepciones.</li>
-<li><strong>Parte IV · Programación orientada a objetos en Kotlin</strong> — clases, herencia, <code>data class</code>, <code>object</code>, <code>sealed class</code>, genéricos y lambdas.</li>
-<li><strong>Parte V · Asincronía con Coroutines</strong> — hilos, <code>suspend</code>, <code>launch</code>, <code>Flow</code> y <code>StateFlow</code>.</li>
-<li><strong>Parte VI · Introducción a Android con Jetpack Compose</strong> — Android Studio, componentes, estado, navegación y Material 3.</li>
-<li><strong>Parte VII · Arquitectura MVVM</strong> — <code>ViewModel</code>, estado de la interfaz, repositorio, separación en capas e inyección de dependencias.</li>
-<li><strong>Parte VIII · Consumo de APIs con Retrofit</strong> — HTTP, REST y JSON, configuración de Retrofit, serialización con DTOs y estados de red.</li>
-<li><strong>Parte IX · Proyecto final</strong> — construir, de principio a fin, la app de gestión de contactos con CRUD completo.</li>
+<li><strong>Name</strong>: el nombre de tu app (por ejemplo, <code>MiPrimeraApp</code>).</li>
+<li><strong>Package name</strong>: un identificador único, normalmente en forma de dominio invertido (por ejemplo, <code>com.ejemplo.miprimeraapp</code>).</li>
+<li><strong>Minimum SDK</strong>: la versión mínima de Android que soportará tu app; la API 24 o superior es una elección razonable hoy en día (Android Studio te indica qué porcentaje de dispositivos cubre).</li>
+<li><strong>Build configuration language</strong>: déjalo en <strong>Kotlin DSL (<code>build.gradle.kts</code>)</strong>, la opción recomendada.</li>
 </ul>
-<p>Al final encontrarás los <strong>anexos</strong> con material de referencia (principios de diseño y entrada estándar con <code>Scanner</code>).</p>
-<div class="admonition tip">
-<p class="admonition-title">Sugerencia</p>
-<p>Si es tu primera vez, empieza por el <a href="part01/chapter01/">Capítulo 1</a> y avanza en orden: cada capítulo asume lo aprendido en los anteriores. Usa el menú lateral para desplazarte entre los capítulos.</p>
+<p>El <strong>lenguaje</strong> de programación ya viene fijado en Kotlin, porque Compose solo funciona con Kotlin.</p>
+<p><img alt="Configuración del nuevo proyecto" src="../../assets/images/chapter25/android-studio-new-project-settings.png" /></p>
+<p>Al pulsar <strong>Finish</strong>, Android Studio generará el proyecto y <strong>Gradle</strong> (la herramienta de construcción, que veremos más abajo) sincronizará todo por primera vez. Al terminar, se abrirá el archivo <code>MainActivity.kt</code> y podrás ejecutar una app que muestra un simple "Hello Android!".</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Android Studio se actualiza con frecuencia, así que los nombres de menús o botones pueden variar ligeramente respecto a lo descrito aquí. La idea general, en cambio, se mantiene entre versiones.</p>
 </div>
+<h2 id="anatomia-de-un-proyecto-android">Anatomía de un proyecto Android<a class="headerlink" href="#anatomia-de-un-proyecto-android" title="Permanent link">&para;</a></h2>
+<p>Al crear el proyecto, Android Studio genera muchos archivos. Vistos desde el panel de proyecto (en la vista <strong>Android</strong>), los más importantes son estos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>MiPrimeraApp/
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── app/
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│   ├── manifests/
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│   │   └── AndroidManifest.xml      ← la &quot;cédula de identidad&quot; de la app
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│   ├── kotlin+java/
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│   │   └── com.ejemplo.miprimeraapp/
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│   │       └── MainActivity.kt      ← el código (punto de entrada)
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│   └── res/                          ← recursos: imágenes, temas, textos
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>└── Gradle Scripts/
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    ├── build.gradle.kts (Project)    ← configuración del proyecto
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    ├── build.gradle.kts (Module :app)← dependencias y config del módulo app
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    └── libs.versions.toml            ← catálogo de versiones
+</code></pre></div>
+<p><img alt="El proyecto recién creado, abierto en Android Studio" src="../../assets/images/chapter25/android-studio-new-project-summary.png" /></p>
+<p>No te abrumes: casi todo tu trabajo ocurrirá dentro de <code>kotlin+java/</code> (tu código) y <code>res/</code> (los recursos). Los demás archivos son de configuración, y los tocarás pocas veces. Veamos los más importantes uno por uno.</p>
+<h2 id="el-androidmanifest">El AndroidManifest<a class="headerlink" href="#el-androidmanifest" title="Permanent link">&para;</a></h2>
+<p>El archivo <code>AndroidManifest.xml</code> es la <strong>cédula de identidad</strong> de la aplicación. En él se declara información esencial que el sistema Android necesita saber <strong>antes</strong> de ejecutar la app: su nombre, su ícono, su tema, qué pantallas (<code>Activity</code>) tiene y cuál es la de inicio, y qué <strong>permisos</strong> requiere.</p>
+<p>Una versión simplificada se ve así:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">&lt;manifest</span><span class="w"> </span><span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">&lt;application</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="na">android:label=</span><span class="s">&quot;MiPrimeraApp&quot;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">        </span><span class="na">android:icon=</span><span class="s">&quot;@mipmap/ic_launcher&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">        </span><span class="nt">&lt;activity</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">            </span><span class="na">android:name=</span><span class="s">&quot;.MainActivity&quot;</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">            </span><span class="na">android:exported=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">            </span><span class="nt">&lt;intent-filter&gt;</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">                </span><span class="nt">&lt;action</span><span class="w"> </span><span class="na">android:name=</span><span class="s">&quot;android.intent.action.MAIN&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">                </span><span class="nt">&lt;category</span><span class="w"> </span><span class="na">android:name=</span><span class="s">&quot;android.intent.category.LAUNCHER&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">            </span><span class="nt">&lt;/intent-filter&gt;</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">        </span><span class="nt">&lt;/activity&gt;</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="nt">&lt;/application&gt;</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="nt">&lt;/manifest&gt;</span>
+</code></pre></div>
+<p>El bloque <code>&lt;intent-filter&gt;</code> con <code>MAIN</code> y <code>LAUNCHER</code> es el que marca a <code>MainActivity</code> como la <strong>pantalla de inicio</strong>: la que se abre cuando el usuario toca el ícono de la app.</p>
+<p>Aquí también se declaran los <strong>permisos</strong>. Por ejemplo, para que la app pueda acceder a internet (algo necesario si va a consumir datos de la red), se agrega esta línea:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">&lt;uses-permission</span><span class="w"> </span><span class="na">android:name=</span><span class="s">&quot;android.permission.INTERNET&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</code></pre></div>
+<h2 id="el-codigo-y-mainactivity">El código y <code>MainActivity</code><a class="headerlink" href="#el-codigo-y-mainactivity" title="Permanent link">&para;</a></h2>
+<p><code>MainActivity.kt</code> es el <strong>punto de entrada</strong> de la app, el equivalente al <code>main</code> de tus programas Kotlin. Es una <strong><code>Activity</code></strong>: una pantalla de la aplicación.</p>
+<p>Su versión inicial, simplificada, se ve así:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MainActivity</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ComponentActivity</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span><span class="w"> </span><span class="n">Bundle?)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="k">super</span><span class="p">.</span><span class="na">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="n">setContent</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">            </span><span class="c1">// Aquí se define la interfaz con Jetpack Compose</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">}</span>
+</code></pre></div>
+<p>Reconocerás varias cosas del curso. <code>MainActivity : ComponentActivity()</code> es <strong>herencia</strong>: nuestra clase hereda de <code>ComponentActivity</code>, una clase base de Android que aporta todo el comportamiento de una pantalla. El método <code>onCreate</code> está marcado con <code>override</code>: se ejecuta cuando el sistema crea la pantalla (algo parecido a un bloque <code>init</code>, pero para una <code>Activity</code>). Y <code>setContent { }</code> es donde definiremos la interfaz con Jetpack Compose, el tema del próximo capítulo.</p>
+<p>En el proyecto real que generaste (visible en la captura de la sección anterior), ese <code>setContent</code> ya viene con un pequeño ejemplo: un <code>Scaffold</code>, una función <code>Greeting</code> que muestra un texto y una vista previa marcada con <code>@Preview</code>. No te preocupes si aún no los entiendes; los iremos desglosando en los próximos capítulos.</p>
+<p>Así, a grandes rasgos, arranca una app Android:</p>
+<pre class="mermaid"><code>flowchart LR
+    A[El usuario abre la app] --&gt; B[Android lee el AndroidManifest]
+    B --&gt; C[Lanza la MainActivity de inicio]
+    C --&gt; D[setContent muestra la interfaz]</code></pre>
+<h2 id="gradle-y-el-catalogo-de-versiones">Gradle y el catálogo de versiones<a class="headerlink" href="#gradle-y-el-catalogo-de-versiones" title="Permanent link">&para;</a></h2>
+<p><strong>Gradle</strong> es la <strong>herramienta de construcción</strong> de Android: se encarga de compilar tu código, empaquetar la app y, muy importante, gestionar sus <strong>dependencias</strong> (las bibliotecas externas que usa tu proyecto, como Compose, Retrofit o Coil).</p>
+<p>Las dependencias se declaran en el <code>build.gradle.kts</code> del módulo <code>app</code>, dentro de un bloque <code>dependencies</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">dependencies</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="na">androidx</span><span class="p">.</span><span class="na">core</span><span class="p">.</span><span class="na">ktx</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="na">androidx</span><span class="p">.</span><span class="na">activity</span><span class="p">.</span><span class="na">compose</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="c1">// ...más dependencias</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>¿Y de dónde salen las <strong>versiones</strong> de cada biblioteca? De un archivo aparte, el <strong>catálogo de versiones</strong> (<code>libs.versions.toml</code>), donde se centralizan todas. Así, si necesitas actualizar una versión, la cambias en un solo lugar:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">[versions]</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">coreKtx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.13.1&quot;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="k">[libraries]</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">androidx-core-ktx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;androidx.core&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;core-ktx&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;coreKtx&quot;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>(Las versiones exactas cambian con el tiempo; estas son solo un ejemplo.) A lo largo del curso agregaremos aquí las bibliotecas que la aplicación necesite.</p>
+<h2 id="ejecutar-la-aplicacion">Ejecutar la aplicación<a class="headerlink" href="#ejecutar-la-aplicacion" title="Permanent link">&para;</a></h2>
+<p>Para ver tu app funcionando tienes dos opciones:</p>
+<ul>
+<li>Un <strong>emulador</strong>: un teléfono Android virtual que corre en tu computador. Se crea desde el <strong>Device Manager</strong> de Android Studio.</li>
+<li>Un <strong>dispositivo físico</strong>: tu propio teléfono, conectado por cable y con las <em>opciones de desarrollador</em> activadas.</li>
+</ul>
+<p>Elige el dispositivo en la barra superior y pulsa el botón de <strong>Run</strong> (el triángulo verde ▶). Gradle compilará el proyecto, instalará la app en el dispositivo y la abrirá. Verás la pantalla con el texto "Hello Android!".</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo diste tus primeros pasos en el desarrollo Android:</p>
+<ul>
+<li><strong>Android Studio</strong> es el IDE oficial de Android, construido sobre IntelliJ IDEA, e incluye el SDK, un emulador y las herramientas de compilación.</li>
+<li>Los proyectos se crean con la plantilla <strong>Empty Activity</strong>, ya preparada para <strong>Jetpack Compose</strong> y con Kotlin como lenguaje.</li>
+<li>Un proyecto Android se organiza en el <strong>código</strong> (<code>kotlin+java/</code>), los <strong>recursos</strong> (<code>res/</code>) y archivos de <strong>configuración</strong> (Manifest y Gradle).</li>
+<li>El <strong><code>AndroidManifest.xml</code></strong> declara la app, su pantalla de inicio y sus permisos (como el de internet, que necesitaremos).</li>
+<li><strong><code>MainActivity</code></strong> es el punto de entrada: una <code>Activity</code> que hereda de <code>ComponentActivity</code>, cuyo <code>setContent { }</code> contendrá la interfaz.</li>
+<li><strong>Gradle</strong> construye la app y gestiona sus dependencias, cuyas versiones se centralizan en el <strong>catálogo de versiones</strong> (<code>libs.versions.toml</code>).</li>
+</ul>
+<p>En el próximo capítulo empezaremos a llenar ese <code>setContent { }</code>: conocerás el ciclo de vida de una <code>Activity</code> y escribirás tu primer componente con Jetpack Compose.</p>
 
 
 
@@ -2579,15 +2843,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
+          
+          <a href="../../part05/chapter24/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 24. &lt;code&gt;Flow&lt;/code&gt;, &lt;code&gt;StateFlow&lt;/code&gt; y &lt;code&gt;SharedFlow&lt;/code&gt;">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                24. <code>Flow</code>, <code>StateFlow</code> y <code>SharedFlow</code>
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="part01/chapter01/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 1. El entorno de desarrollo (IDE e IntelliJ IDEA)">
+          <a href="../chapter26/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 26. Ciclo de vida de una &lt;code&gt;Activity&lt;/code&gt; y tu primer &lt;code&gt;@Composable&lt;/code&gt;">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                1. El entorno de desarrollo (IDE e IntelliJ IDEA)
+                26. Ciclo de vida de una <code>Activity</code> y tu primer <code>@Composable</code>
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2624,10 +2904,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

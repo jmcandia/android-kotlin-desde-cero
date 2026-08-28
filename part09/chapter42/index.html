@@ -10,29 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/">
+        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/part09/chapter42/">
       
       
+        <link rel="prev" href="../chapter41/">
       
-        <link rel="next" href="part01/chapter01/">
+      
+        <link rel="next" href="../chapter43/">
       
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Android con Kotlin desde cero</title>
+        <title>42. Capa de datos: DTOs, ApiService y Repository - Android con Kotlin desde cero</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="assets/css/custom.css">
+      <link rel="stylesheet" href="../../assets/css/custom.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#android-con-kotlin-desde-cero" class="md-skip">
+        <a href="#capitulo-42-capa-de-datos-dtos-apiservice-y-repository" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -94,7 +96,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../.." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Inicio
+              42. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>
             
           </span>
         </div>
@@ -232,7 +234,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../.." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -259,37 +261,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Inicio
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -305,59 +280,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#para-quien-es-este-curso" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Para quién es este curso?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#que-construiremos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Qué construiremos?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#como-esta-organizado" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Cómo está organizado?
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -416,7 +338,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter01/" class="md-nav__link">
+      <a href="../../part01/chapter01/" class="md-nav__link">
         
   
   
@@ -444,7 +366,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter02/" class="md-nav__link">
+      <a href="../../part01/chapter02/" class="md-nav__link">
         
   
   
@@ -472,7 +394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter03/" class="md-nav__link">
+      <a href="../../part01/chapter03/" class="md-nav__link">
         
   
   
@@ -500,7 +422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter04/" class="md-nav__link">
+      <a href="../../part01/chapter04/" class="md-nav__link">
         
   
   
@@ -528,7 +450,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter05/" class="md-nav__link">
+      <a href="../../part01/chapter05/" class="md-nav__link">
         
   
   
@@ -556,7 +478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter06/" class="md-nav__link">
+      <a href="../../part01/chapter06/" class="md-nav__link">
         
   
   
@@ -584,7 +506,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter07/" class="md-nav__link">
+      <a href="../../part01/chapter07/" class="md-nav__link">
         
   
   
@@ -612,7 +534,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/exercises/" class="md-nav__link">
+      <a href="../../part01/exercises/" class="md-nav__link">
         
   
   
@@ -694,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/chapter08/" class="md-nav__link">
+      <a href="../../part02/chapter08/" class="md-nav__link">
         
   
   
@@ -722,7 +644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/chapter09/" class="md-nav__link">
+      <a href="../../part02/chapter09/" class="md-nav__link">
         
   
   
@@ -750,7 +672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/chapter10/" class="md-nav__link">
+      <a href="../../part02/chapter10/" class="md-nav__link">
         
   
   
@@ -778,7 +700,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/exercises/" class="md-nav__link">
+      <a href="../../part02/exercises/" class="md-nav__link">
         
   
   
@@ -860,7 +782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter11/" class="md-nav__link">
+      <a href="../../part03/chapter11/" class="md-nav__link">
         
   
   
@@ -888,7 +810,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter12/" class="md-nav__link">
+      <a href="../../part03/chapter12/" class="md-nav__link">
         
   
   
@@ -916,7 +838,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter13/" class="md-nav__link">
+      <a href="../../part03/chapter13/" class="md-nav__link">
         
   
   
@@ -944,7 +866,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter14/" class="md-nav__link">
+      <a href="../../part03/chapter14/" class="md-nav__link">
         
   
   
@@ -972,7 +894,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter15/" class="md-nav__link">
+      <a href="../../part03/chapter15/" class="md-nav__link">
         
   
   
@@ -1000,7 +922,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/exercises/" class="md-nav__link">
+      <a href="../../part03/exercises/" class="md-nav__link">
         
   
   
@@ -1082,7 +1004,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter16/" class="md-nav__link">
+      <a href="../../part04/chapter16/" class="md-nav__link">
         
   
   
@@ -1110,7 +1032,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter17/" class="md-nav__link">
+      <a href="../../part04/chapter17/" class="md-nav__link">
         
   
   
@@ -1138,7 +1060,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter18/" class="md-nav__link">
+      <a href="../../part04/chapter18/" class="md-nav__link">
         
   
   
@@ -1166,7 +1088,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter19/" class="md-nav__link">
+      <a href="../../part04/chapter19/" class="md-nav__link">
         
   
   
@@ -1194,7 +1116,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter20/" class="md-nav__link">
+      <a href="../../part04/chapter20/" class="md-nav__link">
         
   
   
@@ -1222,7 +1144,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter21/" class="md-nav__link">
+      <a href="../../part04/chapter21/" class="md-nav__link">
         
   
   
@@ -1250,7 +1172,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/exercises/" class="md-nav__link">
+      <a href="../../part04/exercises/" class="md-nav__link">
         
   
   
@@ -1332,7 +1254,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part05/chapter22/" class="md-nav__link">
+      <a href="../../part05/chapter22/" class="md-nav__link">
         
   
   
@@ -1360,7 +1282,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part05/chapter23/" class="md-nav__link">
+      <a href="../../part05/chapter23/" class="md-nav__link">
         
   
   
@@ -1388,7 +1310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part05/chapter24/" class="md-nav__link">
+      <a href="../../part05/chapter24/" class="md-nav__link">
         
   
   
@@ -1470,7 +1392,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter25/" class="md-nav__link">
+      <a href="../../part06/chapter25/" class="md-nav__link">
         
   
   
@@ -1498,7 +1420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter26/" class="md-nav__link">
+      <a href="../../part06/chapter26/" class="md-nav__link">
         
   
   
@@ -1526,7 +1448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter27/" class="md-nav__link">
+      <a href="../../part06/chapter27/" class="md-nav__link">
         
   
   
@@ -1554,7 +1476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter28/" class="md-nav__link">
+      <a href="../../part06/chapter28/" class="md-nav__link">
         
   
   
@@ -1582,7 +1504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter29/" class="md-nav__link">
+      <a href="../../part06/chapter29/" class="md-nav__link">
         
   
   
@@ -1610,7 +1532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter30/" class="md-nav__link">
+      <a href="../../part06/chapter30/" class="md-nav__link">
         
   
   
@@ -1638,7 +1560,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter31/" class="md-nav__link">
+      <a href="../../part06/chapter31/" class="md-nav__link">
         
   
   
@@ -1720,7 +1642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter32/" class="md-nav__link">
+      <a href="../../part07/chapter32/" class="md-nav__link">
         
   
   
@@ -1748,7 +1670,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter33/" class="md-nav__link">
+      <a href="../../part07/chapter33/" class="md-nav__link">
         
   
   
@@ -1776,7 +1698,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter34/" class="md-nav__link">
+      <a href="../../part07/chapter34/" class="md-nav__link">
         
   
   
@@ -1804,7 +1726,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter35/" class="md-nav__link">
+      <a href="../../part07/chapter35/" class="md-nav__link">
         
   
   
@@ -1886,7 +1808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter36/" class="md-nav__link">
+      <a href="../../part08/chapter36/" class="md-nav__link">
         
   
   
@@ -1914,7 +1836,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter37/" class="md-nav__link">
+      <a href="../../part08/chapter37/" class="md-nav__link">
         
   
   
@@ -1942,7 +1864,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter38/" class="md-nav__link">
+      <a href="../../part08/chapter38/" class="md-nav__link">
         
   
   
@@ -1970,7 +1892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter39/" class="md-nav__link">
+      <a href="../../part08/chapter39/" class="md-nav__link">
         
   
   
@@ -2002,18 +1924,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
         
           
           <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
@@ -2034,7 +1958,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2052,7 +1976,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter40/" class="md-nav__link">
+      <a href="../chapter40/" class="md-nav__link">
         
   
   
@@ -2080,7 +2004,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter41/" class="md-nav__link">
+      <a href="../chapter41/" class="md-nav__link">
         
   
   
@@ -2105,10 +2029,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="part09/chapter42/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2124,6 +2057,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -2136,7 +2070,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter43/" class="md-nav__link">
+      <a href="../chapter43/" class="md-nav__link">
         
   
   
@@ -2164,7 +2098,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter44/" class="md-nav__link">
+      <a href="../chapter44/" class="md-nav__link">
         
   
   
@@ -2192,7 +2126,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter45/" class="md-nav__link">
+      <a href="../chapter45/" class="md-nav__link">
         
   
   
@@ -2220,7 +2154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter46/" class="md-nav__link">
+      <a href="../chapter46/" class="md-nav__link">
         
   
   
@@ -2248,7 +2182,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter47/" class="md-nav__link">
+      <a href="../chapter47/" class="md-nav__link">
         
   
   
@@ -2276,7 +2210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter48/" class="md-nav__link">
+      <a href="../chapter48/" class="md-nav__link">
         
   
   
@@ -2304,7 +2238,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter49/" class="md-nav__link">
+      <a href="../chapter49/" class="md-nav__link">
         
   
   
@@ -2386,7 +2320,7 @@
   
   
     <li class="md-nav__item">
-      <a href="appendix/design-principle/" class="md-nav__link">
+      <a href="../../appendix/design-principle/" class="md-nav__link">
         
   
   
@@ -2414,7 +2348,7 @@
   
   
     <li class="md-nav__item">
-      <a href="appendix/java-scanner/" class="md-nav__link">
+      <a href="../../appendix/java-scanner/" class="md-nav__link">
         
   
   
@@ -2462,47 +2396,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#para-quien-es-este-curso" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Para quién es este curso?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#que-construiremos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Qué construiremos?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#como-esta-organizado" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Cómo está organizado?
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -2521,29 +2414,10 @@
   
 
 
-<h1 id="android-con-kotlin-desde-cero">Android con Kotlin desde cero<a class="headerlink" href="#android-con-kotlin-desde-cero" title="Permanent link">&para;</a></h1>
-<p>Bienvenido a <strong>Android con Kotlin desde cero</strong>: un recorrido que te lleva desde los fundamentos del lenguaje Kotlin hasta construir una aplicación Android completa con Jetpack Compose.</p>
-<h2 id="para-quien-es-este-curso">¿Para quién es este curso?<a class="headerlink" href="#para-quien-es-este-curso" title="Permanent link">&para;</a></h2>
-<p>Está pensado para personas con base en <strong>programación orientada a objetos</strong> (por ejemplo, quienes vienen de Java) que quieren aprender <strong>Kotlin</strong> y el <strong>desarrollo Android moderno</strong>. Cada concepto se apoya en el anterior, con ejemplos claros y sin dar nada por sabido.</p>
-<h2 id="que-construiremos">¿Qué construiremos?<a class="headerlink" href="#que-construiremos" title="Permanent link">&para;</a></h2>
-<p>El hilo conductor del curso es una <strong>app de gestión de contactos</strong> que consume una API REST con operaciones <strong>CRUD</strong> completas: listar contactos (con búsqueda y paginación), ver su detalle, y crearlos, editarlos y eliminarlos. Está construida con <strong>MVVM</strong>, <strong>Jetpack Compose</strong>, <strong>Retrofit</strong> y <strong>Material 3</strong>.</p>
-<h2 id="como-esta-organizado">¿Cómo está organizado?<a class="headerlink" href="#como-esta-organizado" title="Permanent link">&para;</a></h2>
-<p>El curso avanza por partes, de lo más básico a lo más avanzado:</p>
-<ul>
-<li><strong>Parte I · Fundamentos de Kotlin</strong> — variables, tipos, operadores, entrada/salida y cadenas.</li>
-<li><strong>Parte II · Estructuras de control y funciones</strong> — <code>if</code>, <code>when</code>, bucles y funciones.</li>
-<li><strong>Parte III · Colecciones y código robusto</strong> — listas, mapas, operaciones funcionales, <em>null safety</em> y excepciones.</li>
-<li><strong>Parte IV · Programación orientada a objetos en Kotlin</strong> — clases, herencia, <code>data class</code>, <code>object</code>, <code>sealed class</code>, genéricos y lambdas.</li>
-<li><strong>Parte V · Asincronía con Coroutines</strong> — hilos, <code>suspend</code>, <code>launch</code>, <code>Flow</code> y <code>StateFlow</code>.</li>
-<li><strong>Parte VI · Introducción a Android con Jetpack Compose</strong> — Android Studio, componentes, estado, navegación y Material 3.</li>
-<li><strong>Parte VII · Arquitectura MVVM</strong> — <code>ViewModel</code>, estado de la interfaz, repositorio, separación en capas e inyección de dependencias.</li>
-<li><strong>Parte VIII · Consumo de APIs con Retrofit</strong> — HTTP, REST y JSON, configuración de Retrofit, serialización con DTOs y estados de red.</li>
-<li><strong>Parte IX · Proyecto final</strong> — construir, de principio a fin, la app de gestión de contactos con CRUD completo.</li>
-</ul>
-<p>Al final encontrarás los <strong>anexos</strong> con material de referencia (principios de diseño y entrada estándar con <code>Scanner</code>).</p>
-<div class="admonition tip">
-<p class="admonition-title">Sugerencia</p>
-<p>Si es tu primera vez, empieza por el <a href="part01/chapter01/">Capítulo 1</a> y avanza en orden: cada capítulo asume lo aprendido en los anteriores. Usa el menú lateral para desplazarte entre los capítulos.</p>
+<h1 id="capitulo-42-capa-de-datos-dtos-apiservice-y-repository">Capítulo 42: Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code><a class="headerlink" href="#capitulo-42-capa-de-datos-dtos-apiservice-y-repository" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Contenido en construcción</p>
 </div>
 
 
@@ -2579,15 +2453,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
+          
+          <a href="../chapter41/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 41. Setup del proyecto y dependencias">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                41. Setup del proyecto y dependencias
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="part01/chapter01/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 1. El entorno de desarrollo (IDE e IntelliJ IDEA)">
+          <a href="../chapter43/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 43. Pantalla de lista con paginación">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                1. El entorno de desarrollo (IDE e IntelliJ IDEA)
+                43. Pantalla de lista con paginación
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2624,10 +2514,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

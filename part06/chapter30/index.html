@@ -10,29 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/">
+        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/part06/chapter30/">
       
       
+        <link rel="prev" href="../chapter29/">
       
-        <link rel="next" href="part01/chapter01/">
+      
+        <link rel="next" href="../chapter31/">
       
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Android con Kotlin desde cero</title>
+        <title>30. Material 3: tema, color, tipografía y componentes - Android con Kotlin desde cero</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="assets/css/custom.css">
+      <link rel="stylesheet" href="../../assets/css/custom.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#android-con-kotlin-desde-cero" class="md-skip">
+        <a href="#capitulo-30-material-3-tema-color-tipografia-y-componentes" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -94,7 +96,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../.." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Inicio
+              30. Material 3: tema, color, tipografía y componentes
             
           </span>
         </div>
@@ -232,7 +234,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../.." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -259,37 +261,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Inicio
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -305,59 +280,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#para-quien-es-este-curso" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Para quién es este curso?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#que-construiremos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Qué construiremos?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#como-esta-organizado" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Cómo está organizado?
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -416,7 +338,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter01/" class="md-nav__link">
+      <a href="../../part01/chapter01/" class="md-nav__link">
         
   
   
@@ -444,7 +366,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter02/" class="md-nav__link">
+      <a href="../../part01/chapter02/" class="md-nav__link">
         
   
   
@@ -472,7 +394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter03/" class="md-nav__link">
+      <a href="../../part01/chapter03/" class="md-nav__link">
         
   
   
@@ -500,7 +422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter04/" class="md-nav__link">
+      <a href="../../part01/chapter04/" class="md-nav__link">
         
   
   
@@ -528,7 +450,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter05/" class="md-nav__link">
+      <a href="../../part01/chapter05/" class="md-nav__link">
         
   
   
@@ -556,7 +478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter06/" class="md-nav__link">
+      <a href="../../part01/chapter06/" class="md-nav__link">
         
   
   
@@ -584,7 +506,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter07/" class="md-nav__link">
+      <a href="../../part01/chapter07/" class="md-nav__link">
         
   
   
@@ -612,7 +534,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/exercises/" class="md-nav__link">
+      <a href="../../part01/exercises/" class="md-nav__link">
         
   
   
@@ -694,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/chapter08/" class="md-nav__link">
+      <a href="../../part02/chapter08/" class="md-nav__link">
         
   
   
@@ -722,7 +644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/chapter09/" class="md-nav__link">
+      <a href="../../part02/chapter09/" class="md-nav__link">
         
   
   
@@ -750,7 +672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/chapter10/" class="md-nav__link">
+      <a href="../../part02/chapter10/" class="md-nav__link">
         
   
   
@@ -778,7 +700,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/exercises/" class="md-nav__link">
+      <a href="../../part02/exercises/" class="md-nav__link">
         
   
   
@@ -860,7 +782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter11/" class="md-nav__link">
+      <a href="../../part03/chapter11/" class="md-nav__link">
         
   
   
@@ -888,7 +810,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter12/" class="md-nav__link">
+      <a href="../../part03/chapter12/" class="md-nav__link">
         
   
   
@@ -916,7 +838,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter13/" class="md-nav__link">
+      <a href="../../part03/chapter13/" class="md-nav__link">
         
   
   
@@ -944,7 +866,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter14/" class="md-nav__link">
+      <a href="../../part03/chapter14/" class="md-nav__link">
         
   
   
@@ -972,7 +894,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter15/" class="md-nav__link">
+      <a href="../../part03/chapter15/" class="md-nav__link">
         
   
   
@@ -1000,7 +922,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/exercises/" class="md-nav__link">
+      <a href="../../part03/exercises/" class="md-nav__link">
         
   
   
@@ -1082,7 +1004,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter16/" class="md-nav__link">
+      <a href="../../part04/chapter16/" class="md-nav__link">
         
   
   
@@ -1110,7 +1032,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter17/" class="md-nav__link">
+      <a href="../../part04/chapter17/" class="md-nav__link">
         
   
   
@@ -1138,7 +1060,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter18/" class="md-nav__link">
+      <a href="../../part04/chapter18/" class="md-nav__link">
         
   
   
@@ -1166,7 +1088,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter19/" class="md-nav__link">
+      <a href="../../part04/chapter19/" class="md-nav__link">
         
   
   
@@ -1194,7 +1116,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter20/" class="md-nav__link">
+      <a href="../../part04/chapter20/" class="md-nav__link">
         
   
   
@@ -1222,7 +1144,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter21/" class="md-nav__link">
+      <a href="../../part04/chapter21/" class="md-nav__link">
         
   
   
@@ -1250,7 +1172,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/exercises/" class="md-nav__link">
+      <a href="../../part04/exercises/" class="md-nav__link">
         
   
   
@@ -1332,7 +1254,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part05/chapter22/" class="md-nav__link">
+      <a href="../../part05/chapter22/" class="md-nav__link">
         
   
   
@@ -1360,7 +1282,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part05/chapter23/" class="md-nav__link">
+      <a href="../../part05/chapter23/" class="md-nav__link">
         
   
   
@@ -1388,7 +1310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part05/chapter24/" class="md-nav__link">
+      <a href="../../part05/chapter24/" class="md-nav__link">
         
   
   
@@ -1420,18 +1342,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
           <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
@@ -1452,7 +1376,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1470,7 +1394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter25/" class="md-nav__link">
+      <a href="../chapter25/" class="md-nav__link">
         
   
   
@@ -1498,7 +1422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter26/" class="md-nav__link">
+      <a href="../chapter26/" class="md-nav__link">
         
   
   
@@ -1526,7 +1450,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter27/" class="md-nav__link">
+      <a href="../chapter27/" class="md-nav__link">
         
   
   
@@ -1554,7 +1478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter28/" class="md-nav__link">
+      <a href="../chapter28/" class="md-nav__link">
         
   
   
@@ -1582,7 +1506,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter29/" class="md-nav__link">
+      <a href="../chapter29/" class="md-nav__link">
         
   
   
@@ -1607,10 +1531,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="part06/chapter30/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Material 3: tema, color, tipografía y componentes
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1626,6 +1577,114 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-material-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es Material Design?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-tema-materialtheme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El tema: MaterialTheme
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#colores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Colores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipografia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipografía
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#componentes-listos-para-usar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Componentes listos para usar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scaffold-el-esqueleto-de-una-pantalla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scaffold: el esqueleto de una pantalla
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1638,7 +1697,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter31/" class="md-nav__link">
+      <a href="../chapter31/" class="md-nav__link">
         
   
   
@@ -1720,7 +1779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter32/" class="md-nav__link">
+      <a href="../../part07/chapter32/" class="md-nav__link">
         
   
   
@@ -1748,7 +1807,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter33/" class="md-nav__link">
+      <a href="../../part07/chapter33/" class="md-nav__link">
         
   
   
@@ -1776,7 +1835,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter34/" class="md-nav__link">
+      <a href="../../part07/chapter34/" class="md-nav__link">
         
   
   
@@ -1804,7 +1863,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter35/" class="md-nav__link">
+      <a href="../../part07/chapter35/" class="md-nav__link">
         
   
   
@@ -1886,7 +1945,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter36/" class="md-nav__link">
+      <a href="../../part08/chapter36/" class="md-nav__link">
         
   
   
@@ -1914,7 +1973,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter37/" class="md-nav__link">
+      <a href="../../part08/chapter37/" class="md-nav__link">
         
   
   
@@ -1942,7 +2001,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter38/" class="md-nav__link">
+      <a href="../../part08/chapter38/" class="md-nav__link">
         
   
   
@@ -1970,7 +2029,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter39/" class="md-nav__link">
+      <a href="../../part08/chapter39/" class="md-nav__link">
         
   
   
@@ -2052,7 +2111,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter40/" class="md-nav__link">
+      <a href="../../part09/chapter40/" class="md-nav__link">
         
   
   
@@ -2080,7 +2139,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter41/" class="md-nav__link">
+      <a href="../../part09/chapter41/" class="md-nav__link">
         
   
   
@@ -2108,7 +2167,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter42/" class="md-nav__link">
+      <a href="../../part09/chapter42/" class="md-nav__link">
         
   
   
@@ -2136,7 +2195,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter43/" class="md-nav__link">
+      <a href="../../part09/chapter43/" class="md-nav__link">
         
   
   
@@ -2164,7 +2223,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter44/" class="md-nav__link">
+      <a href="../../part09/chapter44/" class="md-nav__link">
         
   
   
@@ -2192,7 +2251,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter45/" class="md-nav__link">
+      <a href="../../part09/chapter45/" class="md-nav__link">
         
   
   
@@ -2220,7 +2279,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter46/" class="md-nav__link">
+      <a href="../../part09/chapter46/" class="md-nav__link">
         
   
   
@@ -2248,7 +2307,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter47/" class="md-nav__link">
+      <a href="../../part09/chapter47/" class="md-nav__link">
         
   
   
@@ -2276,7 +2335,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/chapter48/" class="md-nav__link">
         
   
   
@@ -2304,7 +2363,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter49/" class="md-nav__link">
+      <a href="../../part09/chapter49/" class="md-nav__link">
         
   
   
@@ -2386,7 +2445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="appendix/design-principle/" class="md-nav__link">
+      <a href="../../appendix/design-principle/" class="md-nav__link">
         
   
   
@@ -2414,7 +2473,7 @@
   
   
     <li class="md-nav__item">
-      <a href="appendix/java-scanner/" class="md-nav__link">
+      <a href="../../appendix/java-scanner/" class="md-nav__link">
         
   
   
@@ -2469,10 +2528,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#para-quien-es-este-curso" class="md-nav__link">
+  <a href="#introduccion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Para quién es este curso?
+        Introducción
       
     </span>
   </a>
@@ -2480,10 +2539,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#que-construiremos" class="md-nav__link">
+  <a href="#que-es-material-design" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué construiremos?
+        ¿Qué es Material Design?
       
     </span>
   </a>
@@ -2491,10 +2550,65 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#como-esta-organizado" class="md-nav__link">
+  <a href="#el-tema-materialtheme" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Cómo está organizado?
+        El tema: MaterialTheme
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#colores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Colores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipografia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipografía
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#componentes-listos-para-usar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Componentes listos para usar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scaffold-el-esqueleto-de-una-pantalla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scaffold: el esqueleto de una pantalla
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
       
     </span>
   </a>
@@ -2521,30 +2635,85 @@
   
 
 
-<h1 id="android-con-kotlin-desde-cero">Android con Kotlin desde cero<a class="headerlink" href="#android-con-kotlin-desde-cero" title="Permanent link">&para;</a></h1>
-<p>Bienvenido a <strong>Android con Kotlin desde cero</strong>: un recorrido que te lleva desde los fundamentos del lenguaje Kotlin hasta construir una aplicación Android completa con Jetpack Compose.</p>
-<h2 id="para-quien-es-este-curso">¿Para quién es este curso?<a class="headerlink" href="#para-quien-es-este-curso" title="Permanent link">&para;</a></h2>
-<p>Está pensado para personas con base en <strong>programación orientada a objetos</strong> (por ejemplo, quienes vienen de Java) que quieren aprender <strong>Kotlin</strong> y el <strong>desarrollo Android moderno</strong>. Cada concepto se apoya en el anterior, con ejemplos claros y sin dar nada por sabido.</p>
-<h2 id="que-construiremos">¿Qué construiremos?<a class="headerlink" href="#que-construiremos" title="Permanent link">&para;</a></h2>
-<p>El hilo conductor del curso es una <strong>app de gestión de contactos</strong> que consume una API REST con operaciones <strong>CRUD</strong> completas: listar contactos (con búsqueda y paginación), ver su detalle, y crearlos, editarlos y eliminarlos. Está construida con <strong>MVVM</strong>, <strong>Jetpack Compose</strong>, <strong>Retrofit</strong> y <strong>Material 3</strong>.</p>
-<h2 id="como-esta-organizado">¿Cómo está organizado?<a class="headerlink" href="#como-esta-organizado" title="Permanent link">&para;</a></h2>
-<p>El curso avanza por partes, de lo más básico a lo más avanzado:</p>
-<ul>
-<li><strong>Parte I · Fundamentos de Kotlin</strong> — variables, tipos, operadores, entrada/salida y cadenas.</li>
-<li><strong>Parte II · Estructuras de control y funciones</strong> — <code>if</code>, <code>when</code>, bucles y funciones.</li>
-<li><strong>Parte III · Colecciones y código robusto</strong> — listas, mapas, operaciones funcionales, <em>null safety</em> y excepciones.</li>
-<li><strong>Parte IV · Programación orientada a objetos en Kotlin</strong> — clases, herencia, <code>data class</code>, <code>object</code>, <code>sealed class</code>, genéricos y lambdas.</li>
-<li><strong>Parte V · Asincronía con Coroutines</strong> — hilos, <code>suspend</code>, <code>launch</code>, <code>Flow</code> y <code>StateFlow</code>.</li>
-<li><strong>Parte VI · Introducción a Android con Jetpack Compose</strong> — Android Studio, componentes, estado, navegación y Material 3.</li>
-<li><strong>Parte VII · Arquitectura MVVM</strong> — <code>ViewModel</code>, estado de la interfaz, repositorio, separación en capas e inyección de dependencias.</li>
-<li><strong>Parte VIII · Consumo de APIs con Retrofit</strong> — HTTP, REST y JSON, configuración de Retrofit, serialización con DTOs y estados de red.</li>
-<li><strong>Parte IX · Proyecto final</strong> — construir, de principio a fin, la app de gestión de contactos con CRUD completo.</li>
-</ul>
-<p>Al final encontrarás los <strong>anexos</strong> con material de referencia (principios de diseño y entrada estándar con <code>Scanner</code>).</p>
-<div class="admonition tip">
-<p class="admonition-title">Sugerencia</p>
-<p>Si es tu primera vez, empieza por el <a href="part01/chapter01/">Capítulo 1</a> y avanza en orden: cada capítulo asume lo aprendido en los anteriores. Usa el menú lateral para desplazarte entre los capítulos.</p>
+<h1 id="capitulo-30-material-3-tema-color-tipografia-y-componentes">Capítulo 30: Material 3: tema, color, tipografía y componentes<a class="headerlink" href="#capitulo-30-material-3-tema-color-tipografia-y-componentes" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>Tu interfaz ya funciona, pero se ve bastante sosa: texto negro sobre fondo blanco, sin estilo. Las apps reales lucen pulidas porque siguen un <strong>sistema de diseño</strong>: un conjunto coherente de colores, tipografías y componentes.</p>
+<p>Compose incluye <strong>Material 3</strong>, el sistema de diseño de Google, con <strong>componentes listos para usar</strong> (botones, tarjetas, barras) y un sistema de <strong>temas</strong> que le da a toda tu app una apariencia consistente. En este capítulo verás el tema, los colores, la tipografía y los componentes clave. Esto es lo que hace que una app se vea pulida y profesional.</p>
+<h2 id="que-es-material-design">¿Qué es Material Design?<a class="headerlink" href="#que-es-material-design" title="Permanent link">&para;</a></h2>
+<p><strong>Material Design</strong> es el sistema de diseño creado por Google: una serie de guías y componentes para construir interfaces atractivas y coherentes en Android (y otras plataformas). Su versión más reciente es <strong>Material 3</strong> (también llamado <em>Material You</em>), que introduce, entre otras cosas, colores capaces de adaptarse al fondo de pantalla del usuario.</p>
+<p>Compose viene con una biblioteca que implementa Material 3, así que obtienes sus componentes y su sistema de temas <strong>gratis</strong>, sin tener que diseñarlos desde cero.</p>
+<h2 id="el-tema-materialtheme">El tema: <code>MaterialTheme</code><a class="headerlink" href="#el-tema-materialtheme" title="Permanent link">&para;</a></h2>
+<p>Cuando creaste el proyecto, Android Studio generó un <strong>tema</strong> para tu app: un composable, normalmente llamado <code>NombreDeTuAppTheme</code>, que envuelve toda la interfaz. Lo viste en <code>MainActivity</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">setContent</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">MiAppTheme</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="c1">// toda tu interfaz va aquí</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>Ese tema (que por dentro usa <code>MaterialTheme</code>) les proporciona a todos los composables de su interior tres cosas: un <strong>esquema de colores</strong>, una <strong>tipografía</strong> y unas <strong>formas</strong>. Gracias a él, los componentes de Material saben qué colores y estilos usar sin que tengas que indicárselos uno por uno. El tema se define en los archivos de la carpeta <code>ui/theme/</code> de tu proyecto, que puedes personalizar.</p>
+<h2 id="colores">Colores<a class="headerlink" href="#colores" title="Permanent link">&para;</a></h2>
+<p>El tema define un <strong>esquema de colores</strong> (<em>color scheme</em>) con roles con nombre, no colores sueltos. Los principales son <code>primary</code> (el color de marca de tu app), <code>secondary</code>, <code>background</code> (el fondo), <code>surface</code> (superficies como las tarjetas) y sus variantes "on" (<code>onPrimary</code>, <code>onBackground</code>…), que indican el color del contenido que va <strong>encima</strong> de cada uno.</p>
+<p>Los componentes de Material usan estos colores automáticamente, pero tú también puedes acceder a ellos a través de <code>MaterialTheme.colorScheme</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Text</span><span class="p">(</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hola&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MaterialTheme</span><span class="p">.</span><span class="na">colorScheme</span><span class="p">.</span><span class="na">primary</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">)</span>
+</code></pre></div>
+<p>La gran ventaja de usar roles (en vez de colores fijos) es que tu app se adapta sola: si defines un tema <strong>oscuro</strong>, todos esos roles cambian de valor y la interfaz entera se ve bien en modo oscuro, sin que toques cada componente.</p>
+<h2 id="tipografia">Tipografía<a class="headerlink" href="#tipografia" title="Permanent link">&para;</a></h2>
+<p>Igual que con los colores, el tema define una <strong>tipografía</strong>: un conjunto de estilos de texto predefinidos y coherentes, como <code>displayLarge</code> (títulos grandes), <code>titleLarge</code>, <code>bodyLarge</code> (texto normal) o <code>labelSmall</code> (etiquetas pequeñas).</p>
+<p>Aplicas un estilo con el parámetro <code>style</code> de <code>Text</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Text</span><span class="p">(</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mi aplicación&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MaterialTheme</span><span class="p">.</span><span class="na">typography</span><span class="p">.</span><span class="na">headlineMedium</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">)</span>
+</code></pre></div>
+<p>Usar estos estilos, en lugar de fijar tamaños de letra a mano, mantiene la jerarquía visual consistente en toda la app.</p>
+<h2 id="componentes-listos-para-usar">Componentes listos para usar<a class="headerlink" href="#componentes-listos-para-usar" title="Permanent link">&para;</a></h2>
+<p>Material 3 trae muchos componentes ya construidos. Estos son algunos de los que más usarás.</p>
+<p>Un <strong><code>Button</code></strong> (que ya usaste) muestra un botón con el estilo de Material:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">Button</span><span class="p">(</span><span class="n">onClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* acción */</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Aceptar&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>Una <strong><code>Card</code></strong> es una superficie con elevación y esquinas redondeadas, ideal para agrupar información relacionada; es perfecta, por ejemplo, para cada elemento de una lista:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">Card</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">Column</span><span class="p">(</span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">padding</span><span class="p">(</span><span class="m">16.</span><span class="n">dp</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Ana López&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MaterialTheme</span><span class="p">.</span><span class="na">typography</span><span class="p">.</span><span class="na">titleLarge</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Diseñadora gráfica&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>Hay muchos más (<code>Icon</code>, <code>IconButton</code>, <code>TextField</code>, <code>Checkbox</code>, <code>Switch</code>…), y todos comparten el estilo del tema, así que combinan entre sí de forma coherente.</p>
+<h2 id="scaffold-el-esqueleto-de-una-pantalla"><code>Scaffold</code>: el esqueleto de una pantalla<a class="headerlink" href="#scaffold-el-esqueleto-de-una-pantalla" title="Permanent link">&para;</a></h2>
+<p>La mayoría de las pantallas comparten una estructura: una barra arriba, el contenido en el medio, quizás una barra abajo o un botón flotante. En lugar de armar eso a mano, Material ofrece el <strong><code>Scaffold</code></strong> ("andamio"), un composable que provee <strong>espacios</strong> (<em>slots</em>) para cada una de esas partes:</p>
+<p><img alt="Scaffold" src="../../assets/images/chapter30/scaffold.svg" /></p>
+<p>Un uso típico, con una barra superior y el contenido:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">Scaffold</span><span class="p">(</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="n">topBar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">        </span><span class="n">TopAppBar</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Mi aplicación&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">})</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">innerPadding</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="n">LazyColumn</span><span class="p">(</span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">padding</span><span class="p">(</span><span class="n">innerPadding</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">        </span><span class="c1">// una lista de elementos</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="p">}</span>
+</code></pre></div>
+<p>Fíjate en el <code>innerPadding</code>: el <code>Scaffold</code> te entrega el espacio que ocupan las barras para que <strong>apartes</strong> el contenido y no quede tapado por ellas. Por eso se lo pasas como <code>padding</code> al contenido. (Ya habías visto este patrón en el <code>MainActivity</code> que generó Android Studio.)</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Algunos componentes de Material 3, como <code>TopAppBar</code>, están marcados todavía como <em>experimentales</em>, lo que obliga a añadir la anotación <code>@OptIn(ExperimentalMaterial3Api::class)</code> sobre la función que los usa. Android Studio te avisa y la agrega por ti.</p>
 </div>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo le diste estilo a la interfaz con Material 3:</p>
+<ul>
+<li><strong>Material Design</strong> es el sistema de diseño de Google; <strong>Material 3</strong> es su versión actual, y Compose lo incluye con componentes y temas listos para usar.</li>
+<li>El <strong>tema</strong> (<code>MaterialTheme</code>, envuelto en el <code>NombreAppTheme</code> de tu proyecto) le da a toda la app un <strong>esquema de colores</strong>, una <strong>tipografía</strong> y unas <strong>formas</strong> coherentes.</li>
+<li>Accedes a los colores por su <strong>rol</strong> (<code>MaterialTheme.colorScheme.primary</code>) y a los estilos de texto por su nombre (<code>MaterialTheme.typography.titleLarge</code>), lo que hace que la app se adapte sola a modo claro u oscuro y mantenga la jerarquía visual.</li>
+<li>Material trae <strong>componentes listos</strong>: <code>Button</code>, <code>Card</code>, <code>Icon</code>, <code>TextField</code> y muchos más.</li>
+<li>El <strong><code>Scaffold</code></strong> ofrece la estructura básica de una pantalla, con espacios para la barra superior (<code>TopAppBar</code>), el contenido, una barra inferior y un botón flotante.</li>
+</ul>
+<p>En el próximo capítulo cerrarás la parte de Compose con la <strong>navegación</strong>: cómo moverte entre distintas pantallas de la app, por ejemplo, de una lista a la pantalla de detalle.</p>
 
 
 
@@ -2579,15 +2748,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
+          
+          <a href="../chapter29/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 29. Layouts y listas: &lt;code&gt;Column&lt;/code&gt;, &lt;code&gt;Row&lt;/code&gt;, &lt;code&gt;LazyColumn&lt;/code&gt;">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                29. Layouts y listas: <code>Column</code>, <code>Row</code>, <code>LazyColumn</code>
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="part01/chapter01/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 1. El entorno de desarrollo (IDE e IntelliJ IDEA)">
+          <a href="../chapter31/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 31. Navegación con Navigation Compose">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                1. El entorno de desarrollo (IDE e IntelliJ IDEA)
+                31. Navegación con Navigation Compose
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2624,10 +2809,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

@@ -10,29 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/">
+        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/part03/chapter13/">
       
       
+        <link rel="prev" href="../chapter12/">
       
-        <link rel="next" href="part01/chapter01/">
+      
+        <link rel="next" href="../chapter14/">
       
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Android con Kotlin desde cero</title>
+        <title>13. Null safety: manejo seguro de valores nulos - Android con Kotlin desde cero</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="assets/css/custom.css">
+      <link rel="stylesheet" href="../../assets/css/custom.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#android-con-kotlin-desde-cero" class="md-skip">
+        <a href="#capitulo-13-null-safety-manejo-seguro-de-valores-nulos" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -94,7 +96,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../.." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Inicio
+              13. Null safety: manejo seguro de valores nulos
             
           </span>
         </div>
@@ -232,7 +234,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../.." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -259,37 +261,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Inicio
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -305,59 +280,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#para-quien-es-este-curso" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Para quién es este curso?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#que-construiremos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Qué construiremos?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#como-esta-organizado" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Cómo está organizado?
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -416,7 +338,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter01/" class="md-nav__link">
+      <a href="../../part01/chapter01/" class="md-nav__link">
         
   
   
@@ -444,7 +366,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter02/" class="md-nav__link">
+      <a href="../../part01/chapter02/" class="md-nav__link">
         
   
   
@@ -472,7 +394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter03/" class="md-nav__link">
+      <a href="../../part01/chapter03/" class="md-nav__link">
         
   
   
@@ -500,7 +422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter04/" class="md-nav__link">
+      <a href="../../part01/chapter04/" class="md-nav__link">
         
   
   
@@ -528,7 +450,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter05/" class="md-nav__link">
+      <a href="../../part01/chapter05/" class="md-nav__link">
         
   
   
@@ -556,7 +478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter06/" class="md-nav__link">
+      <a href="../../part01/chapter06/" class="md-nav__link">
         
   
   
@@ -584,7 +506,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter07/" class="md-nav__link">
+      <a href="../../part01/chapter07/" class="md-nav__link">
         
   
   
@@ -612,7 +534,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/exercises/" class="md-nav__link">
+      <a href="../../part01/exercises/" class="md-nav__link">
         
   
   
@@ -694,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/chapter08/" class="md-nav__link">
+      <a href="../../part02/chapter08/" class="md-nav__link">
         
   
   
@@ -722,7 +644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/chapter09/" class="md-nav__link">
+      <a href="../../part02/chapter09/" class="md-nav__link">
         
   
   
@@ -750,7 +672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/chapter10/" class="md-nav__link">
+      <a href="../../part02/chapter10/" class="md-nav__link">
         
   
   
@@ -778,7 +700,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/exercises/" class="md-nav__link">
+      <a href="../../part02/exercises/" class="md-nav__link">
         
   
   
@@ -810,18 +732,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -842,7 +766,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -860,7 +784,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter11/" class="md-nav__link">
+      <a href="../chapter11/" class="md-nav__link">
         
   
   
@@ -888,7 +812,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter12/" class="md-nav__link">
+      <a href="../chapter12/" class="md-nav__link">
         
   
   
@@ -913,10 +837,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="part03/chapter13/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13. Null safety: manejo seguro de valores nulos
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -932,6 +883,170 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-null" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es null?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="¿Qué es null?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#null-no-es-lo-mismo-que-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        null no es lo mismo que Unit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-que-aceptan-null" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos que aceptan null
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-compilador-te-protege" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El compilador te protege
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#herramientas-para-manejar-null" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Herramientas para manejar null
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Herramientas para manejar null">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-llamada-segura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La llamada segura ?.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-operador-elvis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El operador Elvis ?:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprobar-con-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprobar con if
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-asercion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La aserción !!
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#de-donde-salen-los-valores-null" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿De dónde salen los valores null?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -944,7 +1059,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter14/" class="md-nav__link">
+      <a href="../chapter14/" class="md-nav__link">
         
   
   
@@ -972,7 +1087,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter15/" class="md-nav__link">
+      <a href="../chapter15/" class="md-nav__link">
         
   
   
@@ -1000,7 +1115,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/exercises/" class="md-nav__link">
+      <a href="../exercises/" class="md-nav__link">
         
   
   
@@ -1082,7 +1197,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter16/" class="md-nav__link">
+      <a href="../../part04/chapter16/" class="md-nav__link">
         
   
   
@@ -1110,7 +1225,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter17/" class="md-nav__link">
+      <a href="../../part04/chapter17/" class="md-nav__link">
         
   
   
@@ -1138,7 +1253,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter18/" class="md-nav__link">
+      <a href="../../part04/chapter18/" class="md-nav__link">
         
   
   
@@ -1166,7 +1281,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter19/" class="md-nav__link">
+      <a href="../../part04/chapter19/" class="md-nav__link">
         
   
   
@@ -1194,7 +1309,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter20/" class="md-nav__link">
+      <a href="../../part04/chapter20/" class="md-nav__link">
         
   
   
@@ -1222,7 +1337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter21/" class="md-nav__link">
+      <a href="../../part04/chapter21/" class="md-nav__link">
         
   
   
@@ -1250,7 +1365,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/exercises/" class="md-nav__link">
+      <a href="../../part04/exercises/" class="md-nav__link">
         
   
   
@@ -1332,7 +1447,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part05/chapter22/" class="md-nav__link">
+      <a href="../../part05/chapter22/" class="md-nav__link">
         
   
   
@@ -1360,7 +1475,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part05/chapter23/" class="md-nav__link">
+      <a href="../../part05/chapter23/" class="md-nav__link">
         
   
   
@@ -1388,7 +1503,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part05/chapter24/" class="md-nav__link">
+      <a href="../../part05/chapter24/" class="md-nav__link">
         
   
   
@@ -1470,7 +1585,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter25/" class="md-nav__link">
+      <a href="../../part06/chapter25/" class="md-nav__link">
         
   
   
@@ -1498,7 +1613,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter26/" class="md-nav__link">
+      <a href="../../part06/chapter26/" class="md-nav__link">
         
   
   
@@ -1526,7 +1641,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter27/" class="md-nav__link">
+      <a href="../../part06/chapter27/" class="md-nav__link">
         
   
   
@@ -1554,7 +1669,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter28/" class="md-nav__link">
+      <a href="../../part06/chapter28/" class="md-nav__link">
         
   
   
@@ -1582,7 +1697,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter29/" class="md-nav__link">
+      <a href="../../part06/chapter29/" class="md-nav__link">
         
   
   
@@ -1610,7 +1725,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter30/" class="md-nav__link">
+      <a href="../../part06/chapter30/" class="md-nav__link">
         
   
   
@@ -1638,7 +1753,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter31/" class="md-nav__link">
+      <a href="../../part06/chapter31/" class="md-nav__link">
         
   
   
@@ -1720,7 +1835,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter32/" class="md-nav__link">
+      <a href="../../part07/chapter32/" class="md-nav__link">
         
   
   
@@ -1748,7 +1863,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter33/" class="md-nav__link">
+      <a href="../../part07/chapter33/" class="md-nav__link">
         
   
   
@@ -1776,7 +1891,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter34/" class="md-nav__link">
+      <a href="../../part07/chapter34/" class="md-nav__link">
         
   
   
@@ -1804,7 +1919,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter35/" class="md-nav__link">
+      <a href="../../part07/chapter35/" class="md-nav__link">
         
   
   
@@ -1886,7 +2001,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter36/" class="md-nav__link">
+      <a href="../../part08/chapter36/" class="md-nav__link">
         
   
   
@@ -1914,7 +2029,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter37/" class="md-nav__link">
+      <a href="../../part08/chapter37/" class="md-nav__link">
         
   
   
@@ -1942,7 +2057,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter38/" class="md-nav__link">
+      <a href="../../part08/chapter38/" class="md-nav__link">
         
   
   
@@ -1970,7 +2085,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter39/" class="md-nav__link">
+      <a href="../../part08/chapter39/" class="md-nav__link">
         
   
   
@@ -2052,7 +2167,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter40/" class="md-nav__link">
+      <a href="../../part09/chapter40/" class="md-nav__link">
         
   
   
@@ -2080,7 +2195,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter41/" class="md-nav__link">
+      <a href="../../part09/chapter41/" class="md-nav__link">
         
   
   
@@ -2108,7 +2223,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter42/" class="md-nav__link">
+      <a href="../../part09/chapter42/" class="md-nav__link">
         
   
   
@@ -2136,7 +2251,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter43/" class="md-nav__link">
+      <a href="../../part09/chapter43/" class="md-nav__link">
         
   
   
@@ -2164,7 +2279,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter44/" class="md-nav__link">
+      <a href="../../part09/chapter44/" class="md-nav__link">
         
   
   
@@ -2192,7 +2307,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter45/" class="md-nav__link">
+      <a href="../../part09/chapter45/" class="md-nav__link">
         
   
   
@@ -2220,7 +2335,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter46/" class="md-nav__link">
+      <a href="../../part09/chapter46/" class="md-nav__link">
         
   
   
@@ -2248,7 +2363,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter47/" class="md-nav__link">
+      <a href="../../part09/chapter47/" class="md-nav__link">
         
   
   
@@ -2276,7 +2391,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/chapter48/" class="md-nav__link">
         
   
   
@@ -2304,7 +2419,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter49/" class="md-nav__link">
+      <a href="../../part09/chapter49/" class="md-nav__link">
         
   
   
@@ -2386,7 +2501,7 @@
   
   
     <li class="md-nav__item">
-      <a href="appendix/design-principle/" class="md-nav__link">
+      <a href="../../appendix/design-principle/" class="md-nav__link">
         
   
   
@@ -2414,7 +2529,7 @@
   
   
     <li class="md-nav__item">
-      <a href="appendix/java-scanner/" class="md-nav__link">
+      <a href="../../appendix/java-scanner/" class="md-nav__link">
         
   
   
@@ -2469,10 +2584,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#para-quien-es-este-curso" class="md-nav__link">
+  <a href="#introduccion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Para quién es este curso?
+        Introducción
       
     </span>
   </a>
@@ -2480,10 +2595,38 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#que-construiremos" class="md-nav__link">
+  <a href="#que-es-null" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué construiremos?
+        ¿Qué es null?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="¿Qué es null?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#null-no-es-lo-mismo-que-unit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        null no es lo mismo que Unit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-que-aceptan-null" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos que aceptan null
       
     </span>
   </a>
@@ -2491,10 +2634,93 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#como-esta-organizado" class="md-nav__link">
+  <a href="#el-compilador-te-protege" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Cómo está organizado?
+        El compilador te protege
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#herramientas-para-manejar-null" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Herramientas para manejar null
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Herramientas para manejar null">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-llamada-segura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La llamada segura ?.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-operador-elvis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El operador Elvis ?:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprobar-con-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comprobar con if
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-asercion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La aserción !!
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#de-donde-salen-los-valores-null" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿De dónde salen los valores null?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
       
     </span>
   </a>
@@ -2521,30 +2747,127 @@
   
 
 
-<h1 id="android-con-kotlin-desde-cero">Android con Kotlin desde cero<a class="headerlink" href="#android-con-kotlin-desde-cero" title="Permanent link">&para;</a></h1>
-<p>Bienvenido a <strong>Android con Kotlin desde cero</strong>: un recorrido que te lleva desde los fundamentos del lenguaje Kotlin hasta construir una aplicación Android completa con Jetpack Compose.</p>
-<h2 id="para-quien-es-este-curso">¿Para quién es este curso?<a class="headerlink" href="#para-quien-es-este-curso" title="Permanent link">&para;</a></h2>
-<p>Está pensado para personas con base en <strong>programación orientada a objetos</strong> (por ejemplo, quienes vienen de Java) que quieren aprender <strong>Kotlin</strong> y el <strong>desarrollo Android moderno</strong>. Cada concepto se apoya en el anterior, con ejemplos claros y sin dar nada por sabido.</p>
-<h2 id="que-construiremos">¿Qué construiremos?<a class="headerlink" href="#que-construiremos" title="Permanent link">&para;</a></h2>
-<p>El hilo conductor del curso es una <strong>app de gestión de contactos</strong> que consume una API REST con operaciones <strong>CRUD</strong> completas: listar contactos (con búsqueda y paginación), ver su detalle, y crearlos, editarlos y eliminarlos. Está construida con <strong>MVVM</strong>, <strong>Jetpack Compose</strong>, <strong>Retrofit</strong> y <strong>Material 3</strong>.</p>
-<h2 id="como-esta-organizado">¿Cómo está organizado?<a class="headerlink" href="#como-esta-organizado" title="Permanent link">&para;</a></h2>
-<p>El curso avanza por partes, de lo más básico a lo más avanzado:</p>
-<ul>
-<li><strong>Parte I · Fundamentos de Kotlin</strong> — variables, tipos, operadores, entrada/salida y cadenas.</li>
-<li><strong>Parte II · Estructuras de control y funciones</strong> — <code>if</code>, <code>when</code>, bucles y funciones.</li>
-<li><strong>Parte III · Colecciones y código robusto</strong> — listas, mapas, operaciones funcionales, <em>null safety</em> y excepciones.</li>
-<li><strong>Parte IV · Programación orientada a objetos en Kotlin</strong> — clases, herencia, <code>data class</code>, <code>object</code>, <code>sealed class</code>, genéricos y lambdas.</li>
-<li><strong>Parte V · Asincronía con Coroutines</strong> — hilos, <code>suspend</code>, <code>launch</code>, <code>Flow</code> y <code>StateFlow</code>.</li>
-<li><strong>Parte VI · Introducción a Android con Jetpack Compose</strong> — Android Studio, componentes, estado, navegación y Material 3.</li>
-<li><strong>Parte VII · Arquitectura MVVM</strong> — <code>ViewModel</code>, estado de la interfaz, repositorio, separación en capas e inyección de dependencias.</li>
-<li><strong>Parte VIII · Consumo de APIs con Retrofit</strong> — HTTP, REST y JSON, configuración de Retrofit, serialización con DTOs y estados de red.</li>
-<li><strong>Parte IX · Proyecto final</strong> — construir, de principio a fin, la app de gestión de contactos con CRUD completo.</li>
-</ul>
-<p>Al final encontrarás los <strong>anexos</strong> con material de referencia (principios de diseño y entrada estándar con <code>Scanner</code>).</p>
-<div class="admonition tip">
-<p class="admonition-title">Sugerencia</p>
-<p>Si es tu primera vez, empieza por el <a href="part01/chapter01/">Capítulo 1</a> y avanza en orden: cada capítulo asume lo aprendido en los anteriores. Usa el menú lateral para desplazarte entre los capítulos.</p>
+<h1 id="capitulo-13-null-safety-manejo-seguro-de-valores-nulos">Capítulo 13: Null safety: manejo seguro de valores nulos<a class="headerlink" href="#capitulo-13-null-safety-manejo-seguro-de-valores-nulos" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>A lo largo del curso hemos mencionado varias veces la "ausencia de un valor". Ha llegado el momento de abordarla de frente.</p>
+<p>En la vida real, muchos datos pueden simplemente <strong>no existir</strong>: una persona puede no tener segundo nombre, una búsqueda puede no encontrar resultados, una clave puede no estar en un mapa. Para representar esa ausencia, los lenguajes de programación usan un valor especial: <strong><code>null</code></strong> ("nada" o "ningún valor").</p>
+<p>El problema es que <code>null</code> ha causado incontables errores a lo largo de la historia de la programación: si intentas usar como un dato normal algo que en realidad es <code>null</code>, el programa se cae. Kotlin fue diseñado para evitar precisamente eso, con un sistema llamado <strong>null safety</strong> ("seguridad frente a nulos") que te obliga a manejar la posible ausencia de valor <strong>antes</strong> de que cause un problema.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Si vienes de Java, seguramente conoces el temido <code>NullPointerException</code>. El null safety de Kotlin existe justamente para prevenir ese tipo de error, y lo hace en el momento de compilar, no cuando el programa ya está corriendo.</p>
 </div>
+<p>En este capítulo aprenderás qué es <code>null</code>, cómo Kotlin distingue los valores que pueden ser nulos de los que no, y las herramientas que ofrece para trabajar con ellos de forma segura.</p>
+<h2 id="que-es-null">¿Qué es <code>null</code>?<a class="headerlink" href="#que-es-null" title="Permanent link">&para;</a></h2>
+<p><code>null</code> es un valor especial que representa la <strong>ausencia de un valor</strong>. Cuando una variable es <code>null</code>, significa que no contiene ningún dato: no es un cero, ni una cadena vacía, sino literalmente "nada".</p>
+<p>Por ejemplo, si guardas el segundo nombre de una persona y esa persona no tiene, tendría sentido que ese dato fuera <code>null</code>: no es que su segundo nombre sea un texto vacío, es que no existe.</p>
+<h3 id="null-no-es-lo-mismo-que-unit"><code>null</code> no es lo mismo que <code>Unit</code><a class="headerlink" href="#null-no-es-lo-mismo-que-unit" title="Permanent link">&para;</a></h3>
+<p>En el capítulo de funciones conociste <code>Unit</code>, el valor que devuelve una función cuando no produce un resultado útil (como una función que solo imprime algo). Es fácil confundirlo con <code>null</code>, pero son cosas muy distintas:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><code>Unit</code></th>
+<th style="text-align: left;"><code>null</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">¿Qué es?</td>
+<td style="text-align: left;">Un valor real</td>
+<td style="text-align: left;">La ausencia de un valor</td>
+</tr>
+<tr>
+<td style="text-align: left;">¿Cuándo aparece?</td>
+<td style="text-align: left;">Una función que no devuelve nada útil</td>
+<td style="text-align: left;">Un dato que podría no existir</td>
+</tr>
+<tr>
+<td style="text-align: left;">¿Hay "algo"?</td>
+<td style="text-align: left;">Sí, el propio valor <code>Unit</code></td>
+<td style="text-align: left;">No, no hay ningún valor</td>
+</tr>
+</tbody>
+</table>
+<p>En pocas palabras: <code>Unit</code> <strong>es</strong> un valor (que significa "listo, sin resultado útil"), mientras que <code>null</code> es la <strong>ausencia</strong> de un valor ("aquí no hay nada").</p>
+<h2 id="tipos-que-aceptan-null">Tipos que aceptan null<a class="headerlink" href="#tipos-que-aceptan-null" title="Permanent link">&para;</a></h2>
+<p>Aquí está la primera gran idea del null safety de Kotlin: <strong>por defecto, las variables no pueden ser <code>null</code></strong>. Un tipo normal como <code>String</code> solo puede contener una cadena de verdad, nunca <code>null</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="c1">// error: null no puede asignarse a un String</span>
+</code></pre></div>
+<p>Para permitir que una variable sea <code>null</code>, debes marcar su tipo como <strong>anulable</strong> (<em>nullable</em>), añadiéndole un signo de interrogación <code>?</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">segundoNombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="c1">// correcto: String? sí acepta null</span>
+</code></pre></div>
+<p>Con esa <code>?</code>, le dices a Kotlin —y a quien lea tu código— que ese valor podría no existir. Esta distinción es la base de todo: el propio tipo indica si algo puede ser <code>null</code> o no.</p>
+<h2 id="el-compilador-te-protege">El compilador te protege<a class="headerlink" href="#el-compilador-te-protege" title="Permanent link">&para;</a></h2>
+<p>¿Por qué es tan útil esta distinción? Porque el compilador la aprovecha para protegerte. Sobre un tipo normal, puedes usar los valores con total confianza:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Ana&quot;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">println</span><span class="p">(</span><span class="n">nombre</span><span class="p">.</span><span class="na">length</span><span class="p">)</span><span class="w"> </span><span class="c1">// 3, sin problemas</span>
+</code></pre></div>
+<p>Pero sobre un tipo anulable, Kotlin <strong>no te deja</strong> acceder directamente, porque el valor podría ser <code>null</code> (y usar algo que es <code>null</code> provocaría un error):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">segundoNombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">println</span><span class="p">(</span><span class="n">segundoNombre</span><span class="p">.</span><span class="na">length</span><span class="p">)</span><span class="w"> </span><span class="c1">// error: segundoNombre podría ser null</span>
+</code></pre></div>
+<p>En lugar de permitir que tu programa se caiga cuando ya está en ejecución, Kotlin te avisa en el momento de compilar y te obliga a decidir qué hacer si el valor es <code>null</code>. Veamos las herramientas para eso.</p>
+<h2 id="herramientas-para-manejar-null">Herramientas para manejar null<a class="headerlink" href="#herramientas-para-manejar-null" title="Permanent link">&para;</a></h2>
+<h3 id="la-llamada-segura">La llamada segura <code>?.</code><a class="headerlink" href="#la-llamada-segura" title="Permanent link">&para;</a></h3>
+<p>La <strong>llamada segura</strong> <code>?.</code> accede a una propiedad o método solo si el valor <strong>no</strong> es <code>null</code>. Si es <code>null</code>, toda la expresión vale <code>null</code>, sin provocar ningún error:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">segundoNombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">println</span><span class="p">(</span><span class="n">segundoNombre</span><span class="o">?.</span><span class="na">length</span><span class="p">)</span><span class="w"> </span><span class="c1">// null (no se cae)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="kd">val</span><span class="w"> </span><span class="nv">otro</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Luis&quot;</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">println</span><span class="p">(</span><span class="n">otro</span><span class="o">?.</span><span class="na">length</span><span class="p">)</span><span class="w"> </span><span class="c1">// 4</span>
+</code></pre></div>
+<h3 id="el-operador-elvis">El operador Elvis <code>?:</code><a class="headerlink" href="#el-operador-elvis" title="Permanent link">&para;</a></h3>
+<p>A menudo, cuando un valor es <code>null</code>, quieres usar un <strong>valor por defecto</strong> en su lugar. Para eso está el operador <strong>Elvis</strong> <code>?:</code> (se llama así porque, girado de lado, recuerda al peinado de Elvis). Devuelve el valor de la izquierda si no es <code>null</code>, o el de la derecha si lo es:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">segundoNombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">nombreAMostrar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">segundoNombre</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s">&quot;(sin segundo nombre)&quot;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">println</span><span class="p">(</span><span class="n">nombreAMostrar</span><span class="p">)</span><span class="w"> </span><span class="c1">// (sin segundo nombre)</span>
+</code></pre></div>
+<p>Se combina muy bien con la llamada segura. Por ejemplo, para obtener la longitud, o <code>0</code> si el valor es <code>null</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">longitud</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">segundoNombre</span><span class="o">?.</span><span class="na">length</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="m">0</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">println</span><span class="p">(</span><span class="n">longitud</span><span class="p">)</span><span class="w"> </span><span class="c1">// 0</span>
+</code></pre></div>
+<h3 id="comprobar-con-if">Comprobar con <code>if</code><a class="headerlink" href="#comprobar-con-if" title="Permanent link">&para;</a></h3>
+<p>También puedes comprobar explícitamente si un valor es <code>null</code> con un <code>if</code>. Lo interesante es que, dentro del bloque donde ya verificaste que no es <code>null</code>, Kotlin te permite usarlo como un tipo normal:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">segundoNombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Elena&quot;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">segundoNombre</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">segundoNombre</span><span class="p">.</span><span class="na">length</span><span class="p">)</span><span class="w"> </span><span class="c1">// 5, aquí Kotlin ya sabe que no es null</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>A esta comodidad se le llama <em>smart cast</em> ("conversión inteligente"): tras comprobar que algo no es <code>null</code>, Kotlin lo trata como no anulable dentro de ese bloque, sin que tengas que hacer nada más.</p>
+<h3 id="la-asercion">La aserción <code>!!</code><a class="headerlink" href="#la-asercion" title="Permanent link">&para;</a></h3>
+<p>Por último, existe el operador <code>!!</code>, que le dice a Kotlin: "confía en mí, esto no es <code>null</code>". Convierte un tipo anulable en no anulable, pero si te equivocas y el valor <strong>sí</strong> es <code>null</code>, el programa se cae con un error:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">segundoNombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Diego&quot;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">println</span><span class="p">(</span><span class="n">segundoNombre</span><span class="o">!!</span><span class="p">.</span><span class="na">length</span><span class="p">)</span><span class="w"> </span><span class="c1">// 5</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="kd">val</span><span class="w"> </span><span class="nv">vacio</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">println</span><span class="p">(</span><span class="n">vacio</span><span class="o">!!</span><span class="p">.</span><span class="na">length</span><span class="p">)</span><span class="w"> </span><span class="c1">// error en tiempo de ejecución: el valor era null</span>
+</code></pre></div>
+<p>Ya te habías cruzado con <code>!!</code> en el capítulo de entrada y salida, con <code>readLine()!!</code>. Úsalo con cuidado y solo cuando estés completamente seguro de que el valor no puede ser <code>null</code>; en la mayoría de los casos, <code>?.</code> y <code>?:</code> son opciones más seguras.</p>
+<h2 id="de-donde-salen-los-valores-null">¿De dónde salen los valores null?<a class="headerlink" href="#de-donde-salen-los-valores-null" title="Permanent link">&para;</a></h2>
+<p>Ya te has topado con <code>null</code> sin darte cuenta. Por ejemplo, cuando accedes a un mapa con una clave que <strong>no</strong> existe, obtienes <code>null</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">edades</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapOf</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="m">30</span><span class="p">)</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">println</span><span class="p">(</span><span class="n">edades</span><span class="o">[</span><span class="s">&quot;Ana&quot;</span><span class="o">]</span><span class="p">)</span><span class="w">   </span><span class="c1">// 30</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">println</span><span class="p">(</span><span class="n">edades</span><span class="o">[</span><span class="s">&quot;Pedro&quot;</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="c1">// null (esa clave no está)</span>
+</code></pre></div>
+<p>Por eso, el acceso a un mapa por clave devuelve un tipo anulable. Lo mismo ocurre con operaciones como <code>find</code>, que devuelve <code>null</code> si ningún elemento cumple la condición. Ahora ya tienes las herramientas para manejar esos casos de forma segura; por ejemplo, con el operador Elvis:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">edad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edades</span><span class="o">[</span><span class="s">&quot;Pedro&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="m">0</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">println</span><span class="p">(</span><span class="n">edad</span><span class="p">)</span><span class="w"> </span><span class="c1">// 0</span>
+</code></pre></div>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo aprendiste a manejar la ausencia de valores de forma segura:</p>
+<ul>
+<li><code>null</code> representa la <strong>ausencia de un valor</strong>. No es lo mismo que <code>Unit</code>, que es un valor real que significa "sin resultado útil".</li>
+<li>Por defecto, en Kotlin los tipos <strong>no</strong> aceptan <code>null</code>. Para permitirlo, marca el tipo con <code>?</code> (por ejemplo, <code>String?</code>).</li>
+<li>El compilador no te deja usar directamente un valor anulable, lo que evita errores en tiempo de ejecución.</li>
+<li>Herramientas para manejar nulos:</li>
+<li><code>?.</code> (llamada segura): accede solo si el valor no es <code>null</code>.</li>
+<li><code>?:</code> (Elvis): usa un valor por defecto cuando algo es <code>null</code>.</li>
+<li><code>if (x != null)</code>: comprueba y, dentro del bloque, trata el valor como no anulable (<em>smart cast</em>).</li>
+<li><code>!!</code>: fuerza el valor como no nulo, pero se cae si era <code>null</code> (úsalo con cuidado).</li>
+</ul>
+<p>El null safety es una de las grandes ventajas de Kotlin: convierte una fuente clásica de errores en algo que el compilador te ayuda a controlar.</p>
+<p>En el próximo capítulo veremos cómo reaccionar ante situaciones inesperadas con el <strong>manejo de excepciones</strong> (<code>try</code>, <code>catch</code>).</p>
 
 
 
@@ -2579,15 +2902,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
+          
+          <a href="../chapter12/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 12. Colecciones II: operaciones funcionales (&lt;code&gt;map&lt;/code&gt;, &lt;code&gt;filter&lt;/code&gt; y &lt;code&gt;forEach&lt;/code&gt;)">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                12. Colecciones II: operaciones funcionales (<code>map</code>, <code>filter</code> y <code>forEach</code>)
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="part01/chapter01/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 1. El entorno de desarrollo (IDE e IntelliJ IDEA)">
+          <a href="../chapter14/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 14. Manejo de excepciones: &lt;code&gt;try&lt;/code&gt;, &lt;code&gt;catch&lt;/code&gt; y &lt;code&gt;Result&lt;/code&gt;">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                1. El entorno de desarrollo (IDE e IntelliJ IDEA)
+                14. Manejo de excepciones: <code>try</code>, <code>catch</code> y <code>Result</code>
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2624,10 +2963,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

@@ -10,29 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/">
+        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/part05/chapter23/">
       
       
+        <link rel="prev" href="../chapter22/">
       
-        <link rel="next" href="part01/chapter01/">
+      
+        <link rel="next" href="../chapter24/">
       
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Android con Kotlin desde cero</title>
+        <title>23. suspend, launch, async, scopes y dispatchers - Android con Kotlin desde cero</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="assets/css/custom.css">
+      <link rel="stylesheet" href="../../assets/css/custom.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#android-con-kotlin-desde-cero" class="md-skip">
+        <a href="#capitulo-23-suspend-launch-async-scopes-y-dispatchers" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -94,7 +96,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../.." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Inicio
+              23. <code>suspend</code>, <code>launch</code>, <code>async</code>, scopes y dispatchers
             
           </span>
         </div>
@@ -232,7 +234,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../.." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -259,37 +261,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Inicio
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -305,59 +280,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#para-quien-es-este-curso" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Para quién es este curso?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#que-construiremos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Qué construiremos?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#como-esta-organizado" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Cómo está organizado?
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -416,7 +338,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter01/" class="md-nav__link">
+      <a href="../../part01/chapter01/" class="md-nav__link">
         
   
   
@@ -444,7 +366,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter02/" class="md-nav__link">
+      <a href="../../part01/chapter02/" class="md-nav__link">
         
   
   
@@ -472,7 +394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter03/" class="md-nav__link">
+      <a href="../../part01/chapter03/" class="md-nav__link">
         
   
   
@@ -500,7 +422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter04/" class="md-nav__link">
+      <a href="../../part01/chapter04/" class="md-nav__link">
         
   
   
@@ -528,7 +450,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter05/" class="md-nav__link">
+      <a href="../../part01/chapter05/" class="md-nav__link">
         
   
   
@@ -556,7 +478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter06/" class="md-nav__link">
+      <a href="../../part01/chapter06/" class="md-nav__link">
         
   
   
@@ -584,7 +506,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/chapter07/" class="md-nav__link">
+      <a href="../../part01/chapter07/" class="md-nav__link">
         
   
   
@@ -612,7 +534,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part01/exercises/" class="md-nav__link">
+      <a href="../../part01/exercises/" class="md-nav__link">
         
   
   
@@ -694,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/chapter08/" class="md-nav__link">
+      <a href="../../part02/chapter08/" class="md-nav__link">
         
   
   
@@ -722,7 +644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/chapter09/" class="md-nav__link">
+      <a href="../../part02/chapter09/" class="md-nav__link">
         
   
   
@@ -750,7 +672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/chapter10/" class="md-nav__link">
+      <a href="../../part02/chapter10/" class="md-nav__link">
         
   
   
@@ -778,7 +700,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part02/exercises/" class="md-nav__link">
+      <a href="../../part02/exercises/" class="md-nav__link">
         
   
   
@@ -860,7 +782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter11/" class="md-nav__link">
+      <a href="../../part03/chapter11/" class="md-nav__link">
         
   
   
@@ -888,7 +810,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter12/" class="md-nav__link">
+      <a href="../../part03/chapter12/" class="md-nav__link">
         
   
   
@@ -916,7 +838,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter13/" class="md-nav__link">
+      <a href="../../part03/chapter13/" class="md-nav__link">
         
   
   
@@ -944,7 +866,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter14/" class="md-nav__link">
+      <a href="../../part03/chapter14/" class="md-nav__link">
         
   
   
@@ -972,7 +894,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/chapter15/" class="md-nav__link">
+      <a href="../../part03/chapter15/" class="md-nav__link">
         
   
   
@@ -1000,7 +922,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part03/exercises/" class="md-nav__link">
+      <a href="../../part03/exercises/" class="md-nav__link">
         
   
   
@@ -1082,7 +1004,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter16/" class="md-nav__link">
+      <a href="../../part04/chapter16/" class="md-nav__link">
         
   
   
@@ -1110,7 +1032,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter17/" class="md-nav__link">
+      <a href="../../part04/chapter17/" class="md-nav__link">
         
   
   
@@ -1138,7 +1060,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter18/" class="md-nav__link">
+      <a href="../../part04/chapter18/" class="md-nav__link">
         
   
   
@@ -1166,7 +1088,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter19/" class="md-nav__link">
+      <a href="../../part04/chapter19/" class="md-nav__link">
         
   
   
@@ -1194,7 +1116,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter20/" class="md-nav__link">
+      <a href="../../part04/chapter20/" class="md-nav__link">
         
   
   
@@ -1222,7 +1144,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/chapter21/" class="md-nav__link">
+      <a href="../../part04/chapter21/" class="md-nav__link">
         
   
   
@@ -1250,7 +1172,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part04/exercises/" class="md-nav__link">
+      <a href="../../part04/exercises/" class="md-nav__link">
         
   
   
@@ -1282,18 +1204,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -1314,7 +1238,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1332,7 +1256,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part05/chapter22/" class="md-nav__link">
+      <a href="../chapter22/" class="md-nav__link">
         
   
   
@@ -1357,10 +1281,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="part05/chapter23/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    23. <code>suspend</code>, <code>launch</code>, <code>async</code>, scopes y dispatchers
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1376,6 +1327,114 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-una-coroutine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es una coroutine?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-suspend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones suspend
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launch-lanzar-una-coroutine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        launch: lanzar una coroutine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-y-await-obtener-un-resultado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        async y await: obtener un resultado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coroutinescope-donde-viven-las-coroutines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CoroutineScope: dónde viven las coroutines
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dispatchers-en-que-hilo-se-ejecutan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dispatchers: en qué hilo se ejecutan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1388,7 +1447,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part05/chapter24/" class="md-nav__link">
+      <a href="../chapter24/" class="md-nav__link">
         
   
   
@@ -1470,7 +1529,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter25/" class="md-nav__link">
+      <a href="../../part06/chapter25/" class="md-nav__link">
         
   
   
@@ -1498,7 +1557,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter26/" class="md-nav__link">
+      <a href="../../part06/chapter26/" class="md-nav__link">
         
   
   
@@ -1526,7 +1585,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter27/" class="md-nav__link">
+      <a href="../../part06/chapter27/" class="md-nav__link">
         
   
   
@@ -1554,7 +1613,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter28/" class="md-nav__link">
+      <a href="../../part06/chapter28/" class="md-nav__link">
         
   
   
@@ -1582,7 +1641,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter29/" class="md-nav__link">
+      <a href="../../part06/chapter29/" class="md-nav__link">
         
   
   
@@ -1610,7 +1669,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter30/" class="md-nav__link">
+      <a href="../../part06/chapter30/" class="md-nav__link">
         
   
   
@@ -1638,7 +1697,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part06/chapter31/" class="md-nav__link">
+      <a href="../../part06/chapter31/" class="md-nav__link">
         
   
   
@@ -1720,7 +1779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter32/" class="md-nav__link">
+      <a href="../../part07/chapter32/" class="md-nav__link">
         
   
   
@@ -1748,7 +1807,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter33/" class="md-nav__link">
+      <a href="../../part07/chapter33/" class="md-nav__link">
         
   
   
@@ -1776,7 +1835,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter34/" class="md-nav__link">
+      <a href="../../part07/chapter34/" class="md-nav__link">
         
   
   
@@ -1804,7 +1863,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part07/chapter35/" class="md-nav__link">
+      <a href="../../part07/chapter35/" class="md-nav__link">
         
   
   
@@ -1886,7 +1945,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter36/" class="md-nav__link">
+      <a href="../../part08/chapter36/" class="md-nav__link">
         
   
   
@@ -1914,7 +1973,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter37/" class="md-nav__link">
+      <a href="../../part08/chapter37/" class="md-nav__link">
         
   
   
@@ -1942,7 +2001,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter38/" class="md-nav__link">
+      <a href="../../part08/chapter38/" class="md-nav__link">
         
   
   
@@ -1970,7 +2029,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part08/chapter39/" class="md-nav__link">
+      <a href="../../part08/chapter39/" class="md-nav__link">
         
   
   
@@ -2052,7 +2111,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter40/" class="md-nav__link">
+      <a href="../../part09/chapter40/" class="md-nav__link">
         
   
   
@@ -2080,7 +2139,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter41/" class="md-nav__link">
+      <a href="../../part09/chapter41/" class="md-nav__link">
         
   
   
@@ -2108,7 +2167,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter42/" class="md-nav__link">
+      <a href="../../part09/chapter42/" class="md-nav__link">
         
   
   
@@ -2136,7 +2195,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter43/" class="md-nav__link">
+      <a href="../../part09/chapter43/" class="md-nav__link">
         
   
   
@@ -2164,7 +2223,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter44/" class="md-nav__link">
+      <a href="../../part09/chapter44/" class="md-nav__link">
         
   
   
@@ -2192,7 +2251,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter45/" class="md-nav__link">
+      <a href="../../part09/chapter45/" class="md-nav__link">
         
   
   
@@ -2220,7 +2279,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter46/" class="md-nav__link">
+      <a href="../../part09/chapter46/" class="md-nav__link">
         
   
   
@@ -2248,7 +2307,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter47/" class="md-nav__link">
+      <a href="../../part09/chapter47/" class="md-nav__link">
         
   
   
@@ -2276,7 +2335,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/chapter48/" class="md-nav__link">
         
   
   
@@ -2304,7 +2363,7 @@
   
   
     <li class="md-nav__item">
-      <a href="part09/chapter49/" class="md-nav__link">
+      <a href="../../part09/chapter49/" class="md-nav__link">
         
   
   
@@ -2386,7 +2445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="appendix/design-principle/" class="md-nav__link">
+      <a href="../../appendix/design-principle/" class="md-nav__link">
         
   
   
@@ -2414,7 +2473,7 @@
   
   
     <li class="md-nav__item">
-      <a href="appendix/java-scanner/" class="md-nav__link">
+      <a href="../../appendix/java-scanner/" class="md-nav__link">
         
   
   
@@ -2469,10 +2528,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#para-quien-es-este-curso" class="md-nav__link">
+  <a href="#introduccion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Para quién es este curso?
+        Introducción
       
     </span>
   </a>
@@ -2480,10 +2539,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#que-construiremos" class="md-nav__link">
+  <a href="#que-es-una-coroutine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué construiremos?
+        ¿Qué es una coroutine?
       
     </span>
   </a>
@@ -2491,10 +2550,65 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#como-esta-organizado" class="md-nav__link">
+  <a href="#funciones-suspend" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Cómo está organizado?
+        Funciones suspend
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launch-lanzar-una-coroutine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        launch: lanzar una coroutine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-y-await-obtener-un-resultado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        async y await: obtener un resultado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coroutinescope-donde-viven-las-coroutines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CoroutineScope: dónde viven las coroutines
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dispatchers-en-que-hilo-se-ejecutan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dispatchers: en qué hilo se ejecutan
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
       
     </span>
   </a>
@@ -2521,30 +2635,114 @@
   
 
 
-<h1 id="android-con-kotlin-desde-cero">Android con Kotlin desde cero<a class="headerlink" href="#android-con-kotlin-desde-cero" title="Permanent link">&para;</a></h1>
-<p>Bienvenido a <strong>Android con Kotlin desde cero</strong>: un recorrido que te lleva desde los fundamentos del lenguaje Kotlin hasta construir una aplicación Android completa con Jetpack Compose.</p>
-<h2 id="para-quien-es-este-curso">¿Para quién es este curso?<a class="headerlink" href="#para-quien-es-este-curso" title="Permanent link">&para;</a></h2>
-<p>Está pensado para personas con base en <strong>programación orientada a objetos</strong> (por ejemplo, quienes vienen de Java) que quieren aprender <strong>Kotlin</strong> y el <strong>desarrollo Android moderno</strong>. Cada concepto se apoya en el anterior, con ejemplos claros y sin dar nada por sabido.</p>
-<h2 id="que-construiremos">¿Qué construiremos?<a class="headerlink" href="#que-construiremos" title="Permanent link">&para;</a></h2>
-<p>El hilo conductor del curso es una <strong>app de gestión de contactos</strong> que consume una API REST con operaciones <strong>CRUD</strong> completas: listar contactos (con búsqueda y paginación), ver su detalle, y crearlos, editarlos y eliminarlos. Está construida con <strong>MVVM</strong>, <strong>Jetpack Compose</strong>, <strong>Retrofit</strong> y <strong>Material 3</strong>.</p>
-<h2 id="como-esta-organizado">¿Cómo está organizado?<a class="headerlink" href="#como-esta-organizado" title="Permanent link">&para;</a></h2>
-<p>El curso avanza por partes, de lo más básico a lo más avanzado:</p>
-<ul>
-<li><strong>Parte I · Fundamentos de Kotlin</strong> — variables, tipos, operadores, entrada/salida y cadenas.</li>
-<li><strong>Parte II · Estructuras de control y funciones</strong> — <code>if</code>, <code>when</code>, bucles y funciones.</li>
-<li><strong>Parte III · Colecciones y código robusto</strong> — listas, mapas, operaciones funcionales, <em>null safety</em> y excepciones.</li>
-<li><strong>Parte IV · Programación orientada a objetos en Kotlin</strong> — clases, herencia, <code>data class</code>, <code>object</code>, <code>sealed class</code>, genéricos y lambdas.</li>
-<li><strong>Parte V · Asincronía con Coroutines</strong> — hilos, <code>suspend</code>, <code>launch</code>, <code>Flow</code> y <code>StateFlow</code>.</li>
-<li><strong>Parte VI · Introducción a Android con Jetpack Compose</strong> — Android Studio, componentes, estado, navegación y Material 3.</li>
-<li><strong>Parte VII · Arquitectura MVVM</strong> — <code>ViewModel</code>, estado de la interfaz, repositorio, separación en capas e inyección de dependencias.</li>
-<li><strong>Parte VIII · Consumo de APIs con Retrofit</strong> — HTTP, REST y JSON, configuración de Retrofit, serialización con DTOs y estados de red.</li>
-<li><strong>Parte IX · Proyecto final</strong> — construir, de principio a fin, la app de gestión de contactos con CRUD completo.</li>
-</ul>
-<p>Al final encontrarás los <strong>anexos</strong> con material de referencia (principios de diseño y entrada estándar con <code>Scanner</code>).</p>
-<div class="admonition tip">
-<p class="admonition-title">Sugerencia</p>
-<p>Si es tu primera vez, empieza por el <a href="part01/chapter01/">Capítulo 1</a> y avanza en orden: cada capítulo asume lo aprendido en los anteriores. Usa el menú lateral para desplazarte entre los capítulos.</p>
+<h1 id="capitulo-23-suspend-launch-async-scopes-y-dispatchers">Capítulo 23: <code>suspend</code>, <code>launch</code>, <code>async</code>, scopes y dispatchers<a class="headerlink" href="#capitulo-23-suspend-launch-async-scopes-y-dispatchers" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>En el capítulo anterior entendiste el problema: no podemos bloquear el hilo principal con tareas lentas, y los enfoques tradicionales para evitarlo eran engorrosos. Ahora conocerás la solución de Kotlin: las <strong>coroutines</strong>.</p>
+<p>Las coroutines te permiten escribir código asíncrono que se lee de arriba abajo, casi como el código secuencial de siempre, pero sin congelar la aplicación. En este capítulo verás qué es una coroutine, las funciones <code>suspend</code>, cómo lanzarlas con <code>launch</code> y <code>async</code>, dónde viven (los <em>scopes</em>) y cómo elegir en qué hilo se ejecutan (los <em>dispatchers</em>).</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Las coroutines vienen de una biblioteca oficial de Kotlin llamada <code>kotlinx.coroutines</code>. En un proyecto Android ya viene incluida; en los ejemplos usaremos <code>import kotlinx.coroutines.*</code>.</p>
 </div>
+<h2 id="que-es-una-coroutine">¿Qué es una coroutine?<a class="headerlink" href="#que-es-una-coroutine" title="Permanent link">&para;</a></h2>
+<p>Una <strong>coroutine</strong> es una tarea que puede ejecutarse de forma concurrente (a la vez que otras) y que, a diferencia de un hilo, puede <strong>suspenderse</strong> (pausarse) y <strong>reanudarse</strong> más tarde <strong>sin bloquear</strong> el hilo en el que corre.</p>
+<p>Esa es su magia. Cuando una coroutine llega a una operación lenta (una descarga), en lugar de quedarse esperando y bloquear el hilo, se <strong>suspende</strong> y libera el hilo para que haga otras cosas. Cuando la operación termina, la coroutine se <strong>reanuda</strong> donde quedó.</p>
+<p>Suele decirse que las coroutines son "hilos ligeros": puedes lanzar miles de ellas sobre unos pocos hilos reales, porque casi no consumen recursos. Piénsalo como un cocinero que, mientras algo está en el horno, no se queda mirándolo: aprovecha para picar verduras y vuelve al horno cuando suena el temporizador. La coroutine hace lo mismo con el hilo: no lo desperdicia esperando.</p>
+<h2 id="funciones-suspend">Funciones <code>suspend</code><a class="headerlink" href="#funciones-suspend" title="Permanent link">&para;</a></h2>
+<p>Una función que puede <strong>suspenderse</strong> se marca con la palabra clave <code>suspend</code>. Dentro de ella puedes llamar a otras funciones suspend, como <code>delay</code>, que "espera" una cantidad de tiempo <strong>sin bloquear</strong> el hilo (es la versión coroutine de una pausa):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">descargar</span><span class="p">():</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">delay</span><span class="p">(</span><span class="m">2000</span><span class="p">)</span><span class="w"> </span><span class="c1">// simula una descarga de 2 segundos, sin bloquear el hilo</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;datos descargados&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
+</code></pre></div>
+<p>La diferencia con una pausa normal es clave: mientras <code>delay</code> "espera", el hilo queda libre para atender otras coroutines.</p>
+<p>Una función <code>suspend</code> solo puede llamarse desde otra función <code>suspend</code> o desde dentro de una coroutine; no puedes llamarla directamente desde una función normal como <code>main</code>. Por eso necesitamos una forma de <strong>iniciar</strong> una coroutine.</p>
+<h2 id="launch-lanzar-una-coroutine"><code>launch</code>: lanzar una coroutine<a class="headerlink" href="#launch-lanzar-una-coroutine" title="Permanent link">&para;</a></h2>
+<p>Para iniciar una coroutine se usa un <strong>constructor de coroutines</strong>. El más común es <code>launch</code>, que lanza una coroutine y <strong>sigue adelante</strong> sin esperar su resultado (lo que se llama "dispara y olvida").</p>
+<p><code>launch</code> necesita ejecutarse dentro de un <em>scope</em> (lo veremos en detalle más abajo). Para poder probar los ejemplos en un programa normal, usaremos <code>runBlocking</code>, que crea un scope y sirve de puente entre el mundo normal y el de las coroutines:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.coroutines.*</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runBlocking</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Inicio&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="n">launch</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">        </span><span class="n">delay</span><span class="p">(</span><span class="m">1000</span><span class="p">)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Tarea terminada&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Fin de main&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Salida:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Inicio
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Fin de main
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Tarea terminada
+</code></pre></div>
+<p>Fíjate en el orden: "Fin de main" aparece <strong>antes</strong> que "Tarea terminada". Esto demuestra que <code>launch</code> no bloquea: lanza la coroutine (que se suspende durante el <code>delay</code>) y continúa de inmediato con el resto del código. Un segundo después, la coroutine se reanuda e imprime su mensaje.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p><code>runBlocking</code> sí bloquea el hilo hasta que terminan sus coroutines, por lo que se usa sobre todo para pruebas y para el <code>main</code>, no en el código real de una app. En Android usaremos <em>scopes</em> que no bloquean, como verás más adelante.</p>
+</div>
+<h2 id="async-y-await-obtener-un-resultado"><code>async</code> y <code>await</code>: obtener un resultado<a class="headerlink" href="#async-y-await-obtener-un-resultado" title="Permanent link">&para;</a></h2>
+<p><code>launch</code> no devuelve un resultado. Cuando sí necesitas el valor que produce una coroutine, usas <code>async</code>, que devuelve un objeto <code>Deferred</code> ("diferido": una promesa de un valor futuro). Para obtener el valor, llamas a <code>await()</code>, que espera (suspendiéndose) hasta que esté listo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runBlocking</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">tarea</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">async</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">descargar</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tarea</span><span class="p">.</span><span class="na">await</span><span class="p">()</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">resultado</span><span class="p">)</span><span class="w"> </span><span class="c1">// datos descargados</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>La gran ventaja de <code>async</code> es que puedes lanzar <strong>varias tareas en paralelo</strong> y esperar sus resultados. Por ejemplo, dos descargas a la vez:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runBlocking</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">tarea1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">async</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">descargar</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">tarea2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">async</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">descargar</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">tarea1</span><span class="p">.</span><span class="na">await</span><span class="p">())</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">tarea2</span><span class="p">.</span><span class="na">await</span><span class="p">())</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>Como ambas descargas empiezan casi al mismo tiempo, el total tarda alrededor de <strong>2 segundos</strong> (lo que dura una), no 4. Si las hubieras hecho una tras otra, habrían tardado el doble.</p>
+<h2 id="coroutinescope-donde-viven-las-coroutines">CoroutineScope: dónde viven las coroutines<a class="headerlink" href="#coroutinescope-donde-viven-las-coroutines" title="Permanent link">&para;</a></h2>
+<p>Toda coroutine vive dentro de un <strong>scope</strong> (ámbito), que <strong>controla su ciclo de vida</strong>. Un scope agrupa las coroutines que lanzas en él, y si el scope se cancela, <strong>todas</strong> sus coroutines se cancelan con él.</p>
+<p>Esto es muy importante: evita que queden coroutines "huérfanas" ejecutándose cuando ya no se necesitan (por ejemplo, una descarga que sigue en marcha después de que el usuario cerró la pantalla). A este manejo ordenado se le llama <strong>concurrencia estructurada</strong>.</p>
+<p>En Android no crearás los scopes a mano: usarás scopes que ya vienen atados al ciclo de vida de los componentes. El más habitual es <code>viewModelScope</code>, que cancela automáticamente sus coroutines cuando su pantalla desaparece. Lo veremos al construir la arquitectura MVVM. Por ahora, quédate con la idea: <strong>cada coroutine pertenece a un scope, y el scope se encarga de limpiarla cuando corresponde</strong>.</p>
+<h2 id="dispatchers-en-que-hilo-se-ejecutan">Dispatchers: en qué hilo se ejecutan<a class="headerlink" href="#dispatchers-en-que-hilo-se-ejecutan" title="Permanent link">&para;</a></h2>
+<p>Falta la pieza que conecta todo con el capítulo anterior: ¿en qué <strong>hilo</strong> corre una coroutine? De eso se encarga el <strong>dispatcher</strong> ("despachador"). Kotlin ofrece tres principales:</p>
+<ul>
+<li><strong><code>Dispatchers.Main</code></strong>: el hilo principal. Se usa para actualizar la interfaz.</li>
+<li><strong><code>Dispatchers.IO</code></strong>: pensado para operaciones de entrada/salida lentas (red, disco, base de datos). Aquí harás las descargas.</li>
+<li><strong><code>Dispatchers.Default</code></strong>: para trabajo intensivo de CPU (cálculos pesados).</li>
+</ul>
+<p>Para ejecutar un bloque de código en un dispatcher concreto, usas <code>withContext</code>, que <strong>cambia de hilo</strong> durante ese bloque y vuelve al original al terminar:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">cargarDatos</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="c1">// Estamos en el hilo principal</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">datos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">withContext</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="na">IO</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">        </span><span class="n">descargar</span><span class="p">()</span><span class="w"> </span><span class="c1">// esto corre en un hilo de IO, sin bloquear el principal</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="c1">// De vuelta en el hilo principal, con el resultado ya listo</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Recibidos: </span><span class="si">$</span><span class="n">datos</span><span class="s">&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="p">}</span>
+</code></pre></div>
+<p>Este es exactamente el patrón que resuelve el problema del capítulo anterior: la descarga ocurre en un hilo de IO (sin congelar la app) y, cuando termina, el código vuelve al hilo principal para mostrar el resultado. Visto en el tiempo:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant Main as Hilo principal
+    participant IO as Hilo de IO
+    Note over Main: cargarDatos() se ejecuta
+    Main-&gt;&gt;IO: withContext(Dispatchers.IO)
+    activate IO
+    Note over IO: Descarga datos (lento)
+    IO--&gt;&gt;Main: Devuelve el resultado
+    deactivate IO
+    Note over Main: Muestra el resultado en la UI</code></pre>
+<p>Y lo mejor es que el código se lee de arriba abajo, sin callbacks anidados: primero descarga, luego muestra. Esa es la gran promesa de las coroutines cumplida.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo empezaste a escribir código asíncrono con coroutines:</p>
+<ul>
+<li>Una <strong>coroutine</strong> es una tarea que puede <strong>suspenderse y reanudarse</strong> sin bloquear el hilo; son tan ligeras que puedes lanzar miles.</li>
+<li>Una función <code>suspend</code> puede pausarse; dentro de ella puedes llamar a otras suspend, como <code>delay</code> (una espera que no bloquea).</li>
+<li><strong><code>launch</code></strong> lanza una coroutine sin esperar su resultado ("dispara y olvida"); <strong><code>async</code></strong> + <strong><code>await</code></strong> lanzan una coroutine y obtienen su valor, ideal para ejecutar tareas en paralelo.</li>
+<li>Toda coroutine vive en un <strong>scope</strong>, que controla su ciclo de vida y cancela sus coroutines cuando ya no se necesitan (concurrencia estructurada). En Android usarás scopes como <code>viewModelScope</code>.</li>
+<li>Un <strong>dispatcher</strong> decide en qué hilo corre la coroutine: <code>Main</code> para la interfaz, <code>IO</code> para red y disco, <code>Default</code> para cálculos. Con <code>withContext</code> cambias de hilo para un bloque.</li>
+</ul>
+<p>En el próximo capítulo verás <code>Flow</code>, <code>StateFlow</code> y <code>SharedFlow</code>: la forma de trabajar con <strong>secuencias de valores asíncronos</strong> que van llegando con el tiempo, la base para que la interfaz reaccione automáticamente a los cambios de datos.</p>
 
 
 
@@ -2579,15 +2777,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
+          
+          <a href="../chapter22/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 22. ¿Por qué asincronía? El hilo principal">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                22. ¿Por qué asincronía? El hilo principal
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="part01/chapter01/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 1. El entorno de desarrollo (IDE e IntelliJ IDEA)">
+          <a href="../chapter24/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 24. &lt;code&gt;Flow&lt;/code&gt;, &lt;code&gt;StateFlow&lt;/code&gt; y &lt;code&gt;SharedFlow&lt;/code&gt;">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                1. El entorno de desarrollo (IDE e IntelliJ IDEA)
+                24. <code>Flow</code>, <code>StateFlow</code> y <code>SharedFlow</code>
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2624,10 +2838,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
