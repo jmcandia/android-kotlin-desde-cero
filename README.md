@@ -41,20 +41,22 @@ mkdocs build
 
 ```text
 android-kotlin-desde-cero/
-├── code/                 # todo el código del curso
-│   ├── contact-list-api/ # la API REST (Maven + Java + Spring Boot + H2)
-│   └── contact-list-app/ # la app Android NyContactListApp (Parte IX)
-├── docs/                 # todo el contenido del curso
-│   ├── assets/           # recursos del contenido
-|   |   ├── css/          # estilos personalizados
-|   |   ├── images/       # imágenes, organizadas por capítulo
-|   │   └── js/           # scripts personalizados
-│   ├── index.md          # página de inicio del sitio
-│   ├── chapterNN.md      # capítulos
-│   └── appendix-*.md     # anexos
-├── LICENSE               # licencia del proyecto
-├── mkdocs.yml            # configuración de MkDocs
-└── README.md             # este archivo
+├── code/                   # todo el código del curso
+│   ├── contact-list-api/   # la API REST (Maven + Java + Spring Boot + H2)
+│   └── contact-list-app/   # la app Android NyContactListApp (Parte IX)
+├── docs/                   # todo el contenido del curso
+│   ├── appendix            # anexos
+│   │   └── *.md            # contenido adicional
+│   ├── assets/             # recursos del contenido
+|   |   ├── css/            # estilos personalizados
+|   |   ├── images/         # imágenes, organizadas por capítulo
+|   │   └── js/             # scripts personalizados
+│   ├── partNN/             # partes del curso
+│   │   └── chapterNN.md    # capítulos
+│   └── index.md            # página de inicio del sitio
+├── LICENSE                 # licencia del proyecto
+├── mkdocs.yml              # configuración de MkDocs
+└── README.md               # este archivo
 ```
 
 ## Autor

@@ -26,5 +26,5 @@ El curso avanza por partes, de lo más básico a lo más avanzado:
 
 Al final encontrarás los **anexos** con material de referencia (principios de diseño y entrada estándar con `Scanner`).
 
-> [!TIP]
-> Si es tu primera vez, empieza por el [Capítulo 1](chapter01.md) y avanza en orden: cada capítulo asume lo aprendido en los anteriores. Usa el menú lateral para desplazarte entre los capítulos.
+> [!TIP]Sugerencia
+> Si es tu primera vez, empieza por el [Capítulo 1](part01/chapter01.md) y avanza en orden: cada capítulo asume lo aprendido en los anteriores. Usa el menú lateral para desplazarte entre los capítulos.
