@@ -10,25 +10,31 @@
       
       
       
+        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/content/part01/chapter02/">
       
+      
+        <link rel="prev" href="../chapter01/">
+      
+      
+        <link rel="next" href="../chapter03/">
       
       
         
       
       
-      <link rel="icon" href="/android-kotlin-desde-cero/assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Android con Kotlin desde cero</title>
+        <title>2. Un primer vistazo a Kotlin - Android con Kotlin desde cero</title>
       
     
     
-      <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -47,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/css/custom.css">
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
     
-    <script>__md_scope=new URL("/android-kotlin-desde-cero/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -73,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#capitulo-2-un-primer-vistazo-a-kotlin" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -85,9 +96,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="/android-kotlin-desde-cero/." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../../.." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
-  <img src="/android-kotlin-desde-cero/assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -104,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              2. Un primer vistazo a Kotlin
             
           </span>
         </div>
@@ -222,9 +233,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/android-kotlin-desde-cero/." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../../.." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
-  <img src="/android-kotlin-desde-cero/assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     Android con Kotlin desde cero
@@ -251,7 +262,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -275,18 +286,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -307,7 +320,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -325,7 +338,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter01/" class="md-nav__link">
+      <a href="../chapter01/" class="md-nav__link">
         
   
   
@@ -350,10 +363,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter02/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Un primer vistazo a Kotlin
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -369,6 +409,103 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-kotlin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es Kotlin?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breve-historia-de-kotlin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breve historia de Kotlin
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#una-funcion-de-ejemplo-en-kotlin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Una función de ejemplo en Kotlin
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plataformas-de-aplicacion-para-kotlin-jvm-android-js-nativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plataformas de aplicación para Kotlin: JVM, Android, JS, nativo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caracteristicas-programacion-funcional-programacion-orientada-a-objetos-y-mucho-mas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Características: programación funcional, programación orientada a objetos y mucho más
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -381,7 +518,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter03/" class="md-nav__link">
+      <a href="../chapter03/" class="md-nav__link">
         
   
   
@@ -409,7 +546,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter04/" class="md-nav__link">
+      <a href="../chapter04/" class="md-nav__link">
         
   
   
@@ -437,7 +574,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter05/" class="md-nav__link">
+      <a href="../chapter05/" class="md-nav__link">
         
   
   
@@ -465,7 +602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter06/" class="md-nav__link">
+      <a href="../chapter06/" class="md-nav__link">
         
   
   
@@ -493,7 +630,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter07/" class="md-nav__link">
+      <a href="../chapter07/" class="md-nav__link">
         
   
   
@@ -521,7 +658,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/exercises/" class="md-nav__link">
+      <a href="../exercises/" class="md-nav__link">
         
   
   
@@ -603,7 +740,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter08/" class="md-nav__link">
+      <a href="../../part02/chapter08/" class="md-nav__link">
         
   
   
@@ -631,7 +768,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter09/" class="md-nav__link">
+      <a href="../../part02/chapter09/" class="md-nav__link">
         
   
   
@@ -659,7 +796,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter10/" class="md-nav__link">
+      <a href="../../part02/chapter10/" class="md-nav__link">
         
   
   
@@ -687,7 +824,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/exercises/" class="md-nav__link">
+      <a href="../../part02/exercises/" class="md-nav__link">
         
   
   
@@ -769,7 +906,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter11/" class="md-nav__link">
+      <a href="../../part03/chapter11/" class="md-nav__link">
         
   
   
@@ -797,7 +934,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter12/" class="md-nav__link">
+      <a href="../../part03/chapter12/" class="md-nav__link">
         
   
   
@@ -825,7 +962,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter13/" class="md-nav__link">
+      <a href="../../part03/chapter13/" class="md-nav__link">
         
   
   
@@ -853,7 +990,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter14/" class="md-nav__link">
+      <a href="../../part03/chapter14/" class="md-nav__link">
         
   
   
@@ -881,7 +1018,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter15/" class="md-nav__link">
+      <a href="../../part03/chapter15/" class="md-nav__link">
         
   
   
@@ -909,7 +1046,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/exercises/" class="md-nav__link">
+      <a href="../../part03/exercises/" class="md-nav__link">
         
   
   
@@ -991,7 +1128,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter16/" class="md-nav__link">
+      <a href="../../part04/chapter16/" class="md-nav__link">
         
   
   
@@ -1019,7 +1156,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter17/" class="md-nav__link">
+      <a href="../../part04/chapter17/" class="md-nav__link">
         
   
   
@@ -1047,7 +1184,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter18/" class="md-nav__link">
+      <a href="../../part04/chapter18/" class="md-nav__link">
         
   
   
@@ -1075,7 +1212,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter19/" class="md-nav__link">
+      <a href="../../part04/chapter19/" class="md-nav__link">
         
   
   
@@ -1103,7 +1240,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter20/" class="md-nav__link">
+      <a href="../../part04/chapter20/" class="md-nav__link">
         
   
   
@@ -1131,7 +1268,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter21/" class="md-nav__link">
+      <a href="../../part04/chapter21/" class="md-nav__link">
         
   
   
@@ -1159,7 +1296,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/exercises/" class="md-nav__link">
+      <a href="../../part04/exercises/" class="md-nav__link">
         
   
   
@@ -1241,7 +1378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter22/" class="md-nav__link">
+      <a href="../../part05/chapter22/" class="md-nav__link">
         
   
   
@@ -1269,7 +1406,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter23/" class="md-nav__link">
+      <a href="../../part05/chapter23/" class="md-nav__link">
         
   
   
@@ -1297,7 +1434,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter24/" class="md-nav__link">
+      <a href="../../part05/chapter24/" class="md-nav__link">
         
   
   
@@ -1379,7 +1516,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter25/" class="md-nav__link">
+      <a href="../../part06/chapter25/" class="md-nav__link">
         
   
   
@@ -1407,7 +1544,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter26/" class="md-nav__link">
+      <a href="../../part06/chapter26/" class="md-nav__link">
         
   
   
@@ -1435,7 +1572,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter27/" class="md-nav__link">
+      <a href="../../part06/chapter27/" class="md-nav__link">
         
   
   
@@ -1463,7 +1600,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter28/" class="md-nav__link">
+      <a href="../../part06/chapter28/" class="md-nav__link">
         
   
   
@@ -1491,7 +1628,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter29/" class="md-nav__link">
+      <a href="../../part06/chapter29/" class="md-nav__link">
         
   
   
@@ -1519,7 +1656,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter30/" class="md-nav__link">
+      <a href="../../part06/chapter30/" class="md-nav__link">
         
   
   
@@ -1547,7 +1684,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter31/" class="md-nav__link">
+      <a href="../../part06/chapter31/" class="md-nav__link">
         
   
   
@@ -1629,7 +1766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter32/" class="md-nav__link">
+      <a href="../../part07/chapter32/" class="md-nav__link">
         
   
   
@@ -1657,7 +1794,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter33/" class="md-nav__link">
+      <a href="../../part07/chapter33/" class="md-nav__link">
         
   
   
@@ -1685,7 +1822,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter34/" class="md-nav__link">
+      <a href="../../part07/chapter34/" class="md-nav__link">
         
   
   
@@ -1713,7 +1850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter35/" class="md-nav__link">
+      <a href="../../part07/chapter35/" class="md-nav__link">
         
   
   
@@ -1795,7 +1932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter36/" class="md-nav__link">
+      <a href="../../part08/chapter36/" class="md-nav__link">
         
   
   
@@ -1823,7 +1960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter37/" class="md-nav__link">
+      <a href="../../part08/chapter37/" class="md-nav__link">
         
   
   
@@ -1851,7 +1988,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter38/" class="md-nav__link">
+      <a href="../../part08/chapter38/" class="md-nav__link">
         
   
   
@@ -1879,7 +2016,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter39/" class="md-nav__link">
+      <a href="../../part08/chapter39/" class="md-nav__link">
         
   
   
@@ -1961,7 +2098,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter40/" class="md-nav__link">
+      <a href="../../part09/chapter40/" class="md-nav__link">
         
   
   
@@ -1989,7 +2126,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter41/" class="md-nav__link">
+      <a href="../../part09/chapter41/" class="md-nav__link">
         
   
   
@@ -2017,7 +2154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter42/" class="md-nav__link">
+      <a href="../../part09/chapter42/" class="md-nav__link">
         
   
   
@@ -2045,7 +2182,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter43/" class="md-nav__link">
+      <a href="../../part09/chapter43/" class="md-nav__link">
         
   
   
@@ -2073,7 +2210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter44/" class="md-nav__link">
+      <a href="../../part09/chapter44/" class="md-nav__link">
         
   
   
@@ -2101,7 +2238,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter45/" class="md-nav__link">
+      <a href="../../part09/chapter45/" class="md-nav__link">
         
   
   
@@ -2129,7 +2266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter46/" class="md-nav__link">
+      <a href="../../part09/chapter46/" class="md-nav__link">
         
   
   
@@ -2157,7 +2294,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter47/" class="md-nav__link">
+      <a href="../../part09/chapter47/" class="md-nav__link">
         
   
   
@@ -2185,7 +2322,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/chapter48/" class="md-nav__link">
         
   
   
@@ -2213,7 +2350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter49/" class="md-nav__link">
+      <a href="../../part09/chapter49/" class="md-nav__link">
         
   
   
@@ -2295,7 +2432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/appendix/design-principle/" class="md-nav__link">
+      <a href="../../appendix/design-principle/" class="md-nav__link">
         
   
   
@@ -2323,7 +2460,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/appendix/java-scanner/" class="md-nav__link">
+      <a href="../../appendix/java-scanner/" class="md-nav__link">
         
   
   
@@ -2368,6 +2505,93 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-kotlin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es Kotlin?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breve-historia-de-kotlin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breve historia de Kotlin
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#una-funcion-de-ejemplo-en-kotlin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Una función de ejemplo en Kotlin
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plataformas-de-aplicacion-para-kotlin-jvm-android-js-nativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plataformas de aplicación para Kotlin: JVM, Android, JS, nativo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caracteristicas-programacion-funcional-programacion-orientada-a-objetos-y-mucho-mas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Características: programación funcional, programación orientada a objetos y mucho más
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2380,8 +2604,74 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="capitulo-2-un-primer-vistazo-a-kotlin">Capítulo 2: Un primer vistazo a Kotlin<a class="headerlink" href="#capitulo-2-un-primer-vistazo-a-kotlin" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>En el capítulo anterior conociste el entorno de desarrollo que utilizarás durante el curso y realizaste la configuración necesaria para comenzar a programar. Ahora es momento de dar el siguiente paso: aprender el lenguaje que utilizarás para desarrollar aplicaciones móviles modernas para Android.</p>
+<p>En este capítulo descubrirás qué es <strong>Kotlin</strong>, por qué se ha convertido en uno de los lenguajes más populares para el desarrollo de aplicaciones y cuáles son las principales características que lo diferencian de otros lenguajes. También conocerás brevemente su historia, las distintas plataformas donde puede utilizarse y verás tus primeras líneas de código en Kotlin.</p>
+<p>El objetivo de este capítulo no es que domines el lenguaje de inmediato, sino que comprendas su propósito, sus fortalezas y el ecosistema en el que se desarrolla. Estos conceptos servirán como base para los siguientes capítulos, donde comenzarás a escribir programas cada vez más complejos y a construir tus primeras aplicaciones móviles para Android.</p>
+<h2 id="que-es-kotlin">¿Qué es Kotlin?<a class="headerlink" href="#que-es-kotlin" title="Permanent link">&para;</a></h2>
+<p>Kotlin es un lenguaje de programación moderno y muy eficaz desarrollado por JetBrains. Cuenta con una sintaxis muy clara y concisa, lo que hace que el código sea fácil de leer.</p>
+<p>Kotlin se utiliza ampliamente en todo el mundo y su popularidad entre los desarrolladores no deja de crecer. Muchos desarrolladores que utilizan Kotlin señalan que les permite trabajar más rápido y de forma más cómoda.</p>
+<p>La <strong>sintaxis básica</strong> de Kotlin es similar a la de Java, pero presenta numerosas diferencias importantes. Una de estas características son las funciones de extensión, que ofrecen a los desarrolladores la posibilidad de ampliar la funcionalidad de las clases sin tener que recurrir a la herencia. Además, Kotlin ofrece <strong>inferencia de tipos</strong>, lo que permite al compilador determinar el tipo de una variable en función del contexto, lo que simplifica la programación y reduce el número de errores en programas complejos.</p>
+<h2 id="breve-historia-de-kotlin">Breve historia de Kotlin<a class="headerlink" href="#breve-historia-de-kotlin" title="Permanent link">&para;</a></h2>
+<p>En julio de 2011, JetBrains presentó el Proyecto Kotlin, un nuevo lenguaje para la plataforma Java que llevaba un año en desarrollo. El nombre proviene de la isla de Kotlin, situada cerca de San Petersburgo, en Rusia. El objetivo principal de este proyecto era ofrecer una alternativa más segura y concisa a Java en todos los contextos en los que se utiliza actualmente este lenguaje.</p>
+<p>En 2016 se lanzó la primera versión estable oficial (Kotlin v1.0). La comunidad de desarrolladores ya mostraba interés en utilizar este lenguaje, especialmente en Android.</p>
+<p>En la conferencia <strong>Google I/O 2017</strong>, Google anunció soporte oficial de primer nivel para Kotlin en el desarrollo de Android e invitó a la comunidad a adoptarlo. Dos años más tarde, en <strong>Google I/O 2019</strong>, fue un paso más allá y declaró Android como <em>"Kotlin-first"</em>: a partir de ese momento, Kotlin pasó a ser el lenguaje preferido y recomendado para crear aplicaciones Android.</p>
+<p>En la actualidad, Kotlin se considera un lenguaje de propósito general para numerosas plataformas, no solo para Android. El lenguaje cuenta con varias versiones al año. La última versión se puede encontrar en la <a href="https://kotlinlang.org">página web oficial</a>.</p>
+<h2 id="una-funcion-de-ejemplo-en-kotlin">Una función de ejemplo en Kotlin<a class="headerlink" href="#una-funcion-de-ejemplo-en-kotlin" title="Permanent link">&para;</a></h2>
+<p>Aquí tienes un ejemplo de un programa sencillo en el lenguaje de programación Kotlin que muestra el mensaje "¡Hola, Kotlin!".</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;¡Hola, Kotlin!&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>Por ahora, no hace falta que entiendas cómo funciona este código, ¡simplemente disfrútalo!</p>
+<h2 id="plataformas-de-aplicacion-para-kotlin-jvm-android-js-nativo">Plataformas de aplicación para Kotlin: JVM, Android, JS, nativo<a class="headerlink" href="#plataformas-de-aplicacion-para-kotlin-jvm-android-js-nativo" title="Permanent link">&para;</a></h2>
+<p>Kotlin se puede utilizar en diversas plataformas de aplicación, como JVM (Máquina Virtual de Java), Android, JavaScript y nativo. Destaca por su flexibilidad y facilidad de uso a la hora de desarrollar software para diferentes plataformas.</p>
+<p>Por ejemplo, los desarrolladores que estén familiarizados con Java pueden aprender fácilmente a utilizar Kotlin en dispositivos Android. Lo mismo ocurre con los desarrolladores que estén familiarizados con JavaScript y quieran desarrollar aplicaciones web utilizando Kotlin.</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/specs/jvms/se8/html/">JVM</a>: Kotlin es totalmente interoperable con Java, lo que significa que funciona a la perfección con todo el código fuente y las bibliotecas de Java existentes. Además, permite a las empresas realizar una migración gradual de Java a Kotlin, ya que el código Java también puede acceder al código Kotlin. Al mismo tiempo, los desarrolladores pueden utilizar Kotlin como único lenguaje para sus proyectos, sin necesidad de recurrir a Java en absoluto.</li>
+<li><a href="https://www.android.com/">Android</a>: utilizando la sintaxis de Kotlin, puedes crear aplicaciones móviles para Android, el sistema operativo más utilizado del mundo.</li>
+<li><a href="https://kotlinlang.org/docs/js-overview.html">JS</a>: Kotlin también es compatible con JavaScript, lo que permite desarrollar aplicaciones web del lado del cliente y ejecutarlas en un navegador.</li>
+<li><a href="https://kotlinlang.org/docs/native-overview.html">Nativo</a>: Kotlin/Native es una tecnología que permite compilar código Kotlin en binarios nativos que pueden ejecutarse en cualquier sistema operativo, como Windows, Linux, iOS y macOS.</li>
+<li><a href="https://kotlinlang.org/docs/multiplatform.html">Multiplataforma</a>: con Kotlin Multiplatform, puedes crear aplicaciones multiplataforma que compartan código entre proyectos de Android e iOS para implementar funciones de red, almacenamiento y validación de datos, análisis, cálculos y otra lógica de aplicación.</li>
+</ul>
+<p>Entre todas estas oportunidades, los programadores actuales prefieren el desarrollo para dispositivos móviles y el desarrollo del lado del servidor, pero otras áreas también están ganando popularidad.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>La <strong>interoperabilidad con Java</strong> es una de las razones por las que Kotlin se adoptó tan rápido en el mundo profesional. Si ya sabes Java, puedes seguir usando tus librerías favoritas e incluso mezclar clases de Java y Kotlin en el mismo proyecto. Esto hace que la transición desde Java sea muy suave, algo que aprovecharemos a lo largo del curso.</p>
+</div>
+<h2 id="caracteristicas-programacion-funcional-programacion-orientada-a-objetos-y-mucho-mas">Características: programación funcional, programación orientada a objetos y mucho más<a class="headerlink" href="#caracteristicas-programacion-funcional-programacion-orientada-a-objetos-y-mucho-mas" title="Permanent link">&para;</a></h2>
+<p>Kotlin está diseñado como un lenguaje pragmático, lo que significa que su objetivo principal es resolver problemas del mundo real, más que servir a fines de investigación.</p>
+<p>También es importante destacar que Kotlin admite múltiples paradigmas de programación, como la programación imperativa, la programación orientada a objetos, la programación genérica, la programación funcional y muchos más. Kotlin también ofrece herramientas como las funciones anónimas y las funciones de orden superior, que permiten a los desarrolladores crear fácilmente abstracciones sobre el código existente.</p>
+<p>Por último, pero no por ello menos importante, Kotlin es un lenguaje compatible con numerosas herramientas, lo que significa que todos los tipos de herramientas de desarrollo más populares, como IntelliJ IDEA, Eclipse y Android Studio, son compatibles con él.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo conociste el lenguaje que usarás durante todo el curso:</p>
+<ul>
+<li><strong>Kotlin</strong> es un lenguaje moderno, conciso y seguro, desarrollado por JetBrains.</li>
+<li>Nació en 2011 y hoy es el lenguaje preferido para el desarrollo Android (<em>Kotlin-first</em>, desde 2019).</li>
+<li>Es <strong>interoperable con Java</strong>, lo que facilita mucho la transición desde ese lenguaje.</li>
+<li>Funciona en múltiples plataformas (JVM, Android, JavaScript, nativo y multiplataforma) y admite varios paradigmas de programación.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -2399,6 +2689,44 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../chapter01/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 1. El entorno de desarrollo (IDE e IntelliJ IDEA)">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                1. El entorno de desarrollo (IDE e IntelliJ IDEA)
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../chapter03/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 3. Conceptos básicos de Kotlin">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                3. Conceptos básicos de Kotlin
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -2426,12 +2754,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/android-kotlin-desde-cero/", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "/android-kotlin-desde-cero/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="/android-kotlin-desde-cero/assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="/android-kotlin-desde-cero/assets/js/custom.js"></script>
+        <script src="../../../assets/js/custom.js"></script>
       
     
   </body>

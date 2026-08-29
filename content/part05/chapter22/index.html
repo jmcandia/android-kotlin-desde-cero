@@ -10,25 +10,31 @@
       
       
       
+        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/content/part05/chapter22/">
       
+      
+        <link rel="prev" href="../../part04/exercises/">
+      
+      
+        <link rel="next" href="../chapter23/">
       
       
         
       
       
-      <link rel="icon" href="/android-kotlin-desde-cero/assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Android con Kotlin desde cero</title>
+        <title>22. ¿Por qué asincronía? El hilo principal - Android con Kotlin desde cero</title>
       
     
     
-      <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -47,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/css/custom.css">
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
     
-    <script>__md_scope=new URL("/android-kotlin-desde-cero/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -73,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#capitulo-22-por-que-asincronia-el-hilo-principal" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -85,9 +96,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="/android-kotlin-desde-cero/." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../../.." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
-  <img src="/android-kotlin-desde-cero/assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -104,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              22. ¿Por qué asincronía? El hilo principal
             
           </span>
         </div>
@@ -222,9 +233,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/android-kotlin-desde-cero/." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../../.." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
-  <img src="/android-kotlin-desde-cero/assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     Android con Kotlin desde cero
@@ -251,7 +262,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -325,7 +336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter01/" class="md-nav__link">
+      <a href="../../part01/chapter01/" class="md-nav__link">
         
   
   
@@ -353,7 +364,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter02/" class="md-nav__link">
+      <a href="../../part01/chapter02/" class="md-nav__link">
         
   
   
@@ -381,7 +392,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter03/" class="md-nav__link">
+      <a href="../../part01/chapter03/" class="md-nav__link">
         
   
   
@@ -409,7 +420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter04/" class="md-nav__link">
+      <a href="../../part01/chapter04/" class="md-nav__link">
         
   
   
@@ -437,7 +448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter05/" class="md-nav__link">
+      <a href="../../part01/chapter05/" class="md-nav__link">
         
   
   
@@ -465,7 +476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter06/" class="md-nav__link">
+      <a href="../../part01/chapter06/" class="md-nav__link">
         
   
   
@@ -493,7 +504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter07/" class="md-nav__link">
+      <a href="../../part01/chapter07/" class="md-nav__link">
         
   
   
@@ -521,7 +532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/exercises/" class="md-nav__link">
+      <a href="../../part01/exercises/" class="md-nav__link">
         
   
   
@@ -603,7 +614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter08/" class="md-nav__link">
+      <a href="../../part02/chapter08/" class="md-nav__link">
         
   
   
@@ -631,7 +642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter09/" class="md-nav__link">
+      <a href="../../part02/chapter09/" class="md-nav__link">
         
   
   
@@ -659,7 +670,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter10/" class="md-nav__link">
+      <a href="../../part02/chapter10/" class="md-nav__link">
         
   
   
@@ -687,7 +698,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/exercises/" class="md-nav__link">
+      <a href="../../part02/exercises/" class="md-nav__link">
         
   
   
@@ -769,7 +780,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter11/" class="md-nav__link">
+      <a href="../../part03/chapter11/" class="md-nav__link">
         
   
   
@@ -797,7 +808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter12/" class="md-nav__link">
+      <a href="../../part03/chapter12/" class="md-nav__link">
         
   
   
@@ -825,7 +836,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter13/" class="md-nav__link">
+      <a href="../../part03/chapter13/" class="md-nav__link">
         
   
   
@@ -853,7 +864,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter14/" class="md-nav__link">
+      <a href="../../part03/chapter14/" class="md-nav__link">
         
   
   
@@ -881,7 +892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter15/" class="md-nav__link">
+      <a href="../../part03/chapter15/" class="md-nav__link">
         
   
   
@@ -909,7 +920,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/exercises/" class="md-nav__link">
+      <a href="../../part03/exercises/" class="md-nav__link">
         
   
   
@@ -991,7 +1002,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter16/" class="md-nav__link">
+      <a href="../../part04/chapter16/" class="md-nav__link">
         
   
   
@@ -1019,7 +1030,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter17/" class="md-nav__link">
+      <a href="../../part04/chapter17/" class="md-nav__link">
         
   
   
@@ -1047,7 +1058,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter18/" class="md-nav__link">
+      <a href="../../part04/chapter18/" class="md-nav__link">
         
   
   
@@ -1075,7 +1086,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter19/" class="md-nav__link">
+      <a href="../../part04/chapter19/" class="md-nav__link">
         
   
   
@@ -1103,7 +1114,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter20/" class="md-nav__link">
+      <a href="../../part04/chapter20/" class="md-nav__link">
         
   
   
@@ -1131,7 +1142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter21/" class="md-nav__link">
+      <a href="../../part04/chapter21/" class="md-nav__link">
         
   
   
@@ -1159,7 +1170,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/exercises/" class="md-nav__link">
+      <a href="../../part04/exercises/" class="md-nav__link">
         
   
   
@@ -1191,18 +1202,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -1223,7 +1236,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1238,10 +1251,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter22/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    22. ¿Por qué asincronía? El hilo principal
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1257,6 +1297,103 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-un-hilo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es un hilo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-hilo-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El hilo principal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-problema-bloquear-el-hilo-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El problema: bloquear el hilo principal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-solucion-la-asincronia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La solución: la asincronía
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-desafio-coordinar-el-trabajo-en-segundo-plano" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El desafío: coordinar el trabajo en segundo plano
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1269,7 +1406,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter23/" class="md-nav__link">
+      <a href="../chapter23/" class="md-nav__link">
         
   
   
@@ -1297,7 +1434,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter24/" class="md-nav__link">
+      <a href="../chapter24/" class="md-nav__link">
         
   
   
@@ -1379,7 +1516,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter25/" class="md-nav__link">
+      <a href="../../part06/chapter25/" class="md-nav__link">
         
   
   
@@ -1407,7 +1544,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter26/" class="md-nav__link">
+      <a href="../../part06/chapter26/" class="md-nav__link">
         
   
   
@@ -1435,7 +1572,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter27/" class="md-nav__link">
+      <a href="../../part06/chapter27/" class="md-nav__link">
         
   
   
@@ -1463,7 +1600,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter28/" class="md-nav__link">
+      <a href="../../part06/chapter28/" class="md-nav__link">
         
   
   
@@ -1491,7 +1628,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter29/" class="md-nav__link">
+      <a href="../../part06/chapter29/" class="md-nav__link">
         
   
   
@@ -1519,7 +1656,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter30/" class="md-nav__link">
+      <a href="../../part06/chapter30/" class="md-nav__link">
         
   
   
@@ -1547,7 +1684,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter31/" class="md-nav__link">
+      <a href="../../part06/chapter31/" class="md-nav__link">
         
   
   
@@ -1629,7 +1766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter32/" class="md-nav__link">
+      <a href="../../part07/chapter32/" class="md-nav__link">
         
   
   
@@ -1657,7 +1794,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter33/" class="md-nav__link">
+      <a href="../../part07/chapter33/" class="md-nav__link">
         
   
   
@@ -1685,7 +1822,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter34/" class="md-nav__link">
+      <a href="../../part07/chapter34/" class="md-nav__link">
         
   
   
@@ -1713,7 +1850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter35/" class="md-nav__link">
+      <a href="../../part07/chapter35/" class="md-nav__link">
         
   
   
@@ -1795,7 +1932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter36/" class="md-nav__link">
+      <a href="../../part08/chapter36/" class="md-nav__link">
         
   
   
@@ -1823,7 +1960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter37/" class="md-nav__link">
+      <a href="../../part08/chapter37/" class="md-nav__link">
         
   
   
@@ -1851,7 +1988,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter38/" class="md-nav__link">
+      <a href="../../part08/chapter38/" class="md-nav__link">
         
   
   
@@ -1879,7 +2016,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter39/" class="md-nav__link">
+      <a href="../../part08/chapter39/" class="md-nav__link">
         
   
   
@@ -1961,7 +2098,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter40/" class="md-nav__link">
+      <a href="../../part09/chapter40/" class="md-nav__link">
         
   
   
@@ -1989,7 +2126,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter41/" class="md-nav__link">
+      <a href="../../part09/chapter41/" class="md-nav__link">
         
   
   
@@ -2017,7 +2154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter42/" class="md-nav__link">
+      <a href="../../part09/chapter42/" class="md-nav__link">
         
   
   
@@ -2045,7 +2182,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter43/" class="md-nav__link">
+      <a href="../../part09/chapter43/" class="md-nav__link">
         
   
   
@@ -2073,7 +2210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter44/" class="md-nav__link">
+      <a href="../../part09/chapter44/" class="md-nav__link">
         
   
   
@@ -2101,7 +2238,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter45/" class="md-nav__link">
+      <a href="../../part09/chapter45/" class="md-nav__link">
         
   
   
@@ -2129,7 +2266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter46/" class="md-nav__link">
+      <a href="../../part09/chapter46/" class="md-nav__link">
         
   
   
@@ -2157,7 +2294,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter47/" class="md-nav__link">
+      <a href="../../part09/chapter47/" class="md-nav__link">
         
   
   
@@ -2185,7 +2322,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/chapter48/" class="md-nav__link">
         
   
   
@@ -2213,7 +2350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter49/" class="md-nav__link">
+      <a href="../../part09/chapter49/" class="md-nav__link">
         
   
   
@@ -2295,7 +2432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/appendix/design-principle/" class="md-nav__link">
+      <a href="../../appendix/design-principle/" class="md-nav__link">
         
   
   
@@ -2323,7 +2460,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/appendix/java-scanner/" class="md-nav__link">
+      <a href="../../appendix/java-scanner/" class="md-nav__link">
         
   
   
@@ -2368,6 +2505,93 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-un-hilo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es un hilo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-hilo-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El hilo principal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-problema-bloquear-el-hilo-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El problema: bloquear el hilo principal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-solucion-la-asincronia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La solución: la asincronía
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-desafio-coordinar-el-trabajo-en-segundo-plano" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El desafío: coordinar el trabajo en segundo plano
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2380,8 +2604,86 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="capitulo-22-por-que-asincronia-el-hilo-principal">Capítulo 22: ¿Por qué asincronía? El hilo principal<a class="headerlink" href="#capitulo-22-por-que-asincronia-el-hilo-principal" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>Con el capítulo anterior completaste el lenguaje Kotlin. A partir de aquí, el curso empieza a mirar hacia <strong>Android</strong>. Pero antes de escribir una sola pantalla, necesitas entender un desafío que enfrenta <strong>toda</strong> aplicación: algunas tareas <strong>toman tiempo</strong>.</p>
+<p>Descargar datos de internet, leer una base de datos o procesar un archivo grande no son operaciones instantáneas: pueden tardar segundos. Y si no las manejas bien, tu aplicación se <strong>congela</strong> y frustra al usuario.</p>
+<p>En este capítulo entenderás por qué ocurre eso, conocerás el concepto de <strong>hilo</strong> y, en especial, el <strong>hilo principal</strong>, y verás por qué necesitamos la <strong>asincronía</strong>. Es un capítulo más conceptual que de código, pero sienta las bases de las <em>coroutines</em>, la herramienta con la que —en los próximos capítulos— podrás realizar tareas lentas (como pedir datos por la red) sin congelar la aplicación.</p>
+<h2 id="que-es-un-hilo">¿Qué es un hilo?<a class="headerlink" href="#que-es-un-hilo" title="Permanent link">&para;</a></h2>
+<p>Todos los programas que has escrito hasta ahora ejecutaban sus instrucciones <strong>una tras otra</strong>, de arriba abajo. A esa secuencia de ejecución se le llama <strong>hilo</strong> (en inglés, <em>thread</em>).</p>
+<p>Puedes imaginar un hilo como un <strong>trabajador</strong> que sigue una lista de tareas, una por una: termina la primera, pasa a la segunda, y así sucesivamente. Hasta ahora, todos tus programas tenían <strong>un solo</strong> trabajador.</p>
+<p>Un programa puede tener <strong>varios hilos</strong> ejecutándose a la vez (varios trabajadores en paralelo). Esto se llama <strong>concurrencia</strong>, y es justo lo que necesitaremos para no congelar la aplicación.</p>
+<h2 id="el-hilo-principal">El hilo principal<a class="headerlink" href="#el-hilo-principal" title="Permanent link">&para;</a></h2>
+<p>En una aplicación con interfaz gráfica, como las de Android, hay un hilo muy especial: el <strong>hilo principal</strong> (o <em>hilo de la interfaz</em>, <em>UI thread</em>).</p>
+<p>Este hilo tiene una responsabilidad crítica: <strong>dibujar la interfaz</strong> y <strong>responder a las interacciones</strong> del usuario (los toques, el desplazamiento, los botones). Para que la app se sienta fluida, redibuja la pantalla decenas de veces por segundo.</p>
+<p>La regla de oro es simple: <strong>el hilo principal debe mantenerse libre</strong>. Si se ocupa en otra cosa, deja de dibujar y de responder, y la app se siente trabada.</p>
+<h2 id="el-problema-bloquear-el-hilo-principal">El problema: bloquear el hilo principal<a class="headerlink" href="#el-problema-bloquear-el-hilo-principal" title="Permanent link">&para;</a></h2>
+<p>¿Qué pasa si ejecutas una tarea lenta —por ejemplo, descargar datos, que puede tardar dos segundos— en el hilo principal?</p>
+<p>Durante esos dos segundos, el hilo principal está <strong>ocupado</strong> con la descarga y no puede hacer su trabajo: no redibuja la pantalla ni responde a los toques. La aplicación se <strong>congela</strong>. Si el bloqueo dura demasiado, Android incluso muestra un aviso de que la app "no responde" (<em>Application Not Responding</em>, o ANR) y ofrece cerrarla.</p>
+<p>Una analogía: imagina una tienda con <strong>un solo cajero</strong> que, además de cobrar, tiene que saludar a cada cliente. Si ese cajero se detiene a hacer un inventario largo (una tarea lenta), toda la fila se detiene: nadie avanza hasta que termine. El hilo principal es ese cajero, y no queremos que se ponga a hacer inventarios.</p>
+<p>Visto en el tiempo, así se comporta el hilo principal cuando lo bloqueamos con una tarea lenta:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant U as Usuario
+    participant P as Hilo principal
+    U-&gt;&gt;P: Toca "Cargar"
+    activate P
+    Note over P: Descargando datos (2 s)...
+    U-&gt;&gt;P: Toca otro botón
+    Note over P: Ocupado: no responde
+    P-&gt;&gt;U: Muestra los datos
+    deactivate P</code></pre>
+<h2 id="la-solucion-la-asincronia">La solución: la asincronía<a class="headerlink" href="#la-solucion-la-asincronia" title="Permanent link">&para;</a></h2>
+<p>La solución es no hacer el trabajo lento en el hilo principal. En su lugar, se realiza <strong>en segundo plano</strong> (en otro hilo) y, cuando termina, se vuelve al hilo principal para <strong>actualizar la interfaz</strong> con el resultado.</p>
+<p>A esta forma de trabajar se le llama <strong>asincronía</strong>: iniciar una tarea y <strong>seguir adelante</strong> sin quedarse esperando a que termine, para luego reaccionar cuando esté lista.</p>
+<p>Volviendo a la tienda: en lugar de hacer el inventario él mismo, el cajero se lo encarga a un <strong>reponedor</strong> (otro hilo) y sigue atendiendo la fila con normalidad. Cuando el reponedor termina, le avisa. Nadie se queda esperando: el trabajo lento ocurre "por detrás", sin frenar la atención.</p>
+<p>Con la asincronía, en cambio, la secuencia se ve así:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant U as Usuario
+    participant P as Hilo principal
+    participant S as Segundo plano
+    U-&gt;&gt;P: Toca "Cargar"
+    P-&gt;&gt;S: Encarga la descarga
+    activate S
+    Note over P: Libre para seguir respondiendo
+    U-&gt;&gt;P: Toca otro botón
+    P-&gt;&gt;U: Responde al instante
+    S--&gt;&gt;P: Descarga lista (2 s después)
+    deactivate S
+    P-&gt;&gt;U: Muestra los datos</code></pre>
+<h2 id="el-desafio-coordinar-el-trabajo-en-segundo-plano">El desafío: coordinar el trabajo en segundo plano<a class="headerlink" href="#el-desafio-coordinar-el-trabajo-en-segundo-plano" title="Permanent link">&para;</a></h2>
+<p>La idea suena simple, pero coordinar ese trabajo en segundo plano ha sido, históricamente, complicado.</p>
+<p>El enfoque tradicional eran los <em>callbacks</em>: le pasabas a la tarea lenta una función para que la ejecutara "cuando terminara". Funciona, pero cuando una tarea depende de otra, que a su vez depende de otra, terminas con funciones anidadas dentro de funciones, un código difícil de leer y mantener que se ganó el apodo de <em>callback hell</em> ("el infierno de los callbacks"). Además, gestionar hilos a mano es delicado: es fácil provocar errores, o incluso hacer que la app se caiga si intentas tocar la interfaz desde el hilo equivocado.</p>
+<p>Aquí es donde entran las <strong>coroutines</strong> de Kotlin, el tema de los próximos capítulos. Son la solución moderna y elegante de Kotlin para escribir código asíncrono que se lee casi como el código secuencial de siempre, sin caer en el infierno de los callbacks. Con ellas, tareas como pedir datos por la red sin congelar la app resultan sorprendentemente sencillas.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo, más conceptual, entendiste por qué necesitamos la asincronía:</p>
+<ul>
+<li>Un <strong>hilo</strong> (<em>thread</em>) es una secuencia de ejecución; hasta ahora tus programas usaban uno solo.</li>
+<li>En una app con interfaz, el <strong>hilo principal</strong> dibuja la pantalla y responde al usuario, y debe mantenerse <strong>libre</strong>.</li>
+<li>Ejecutar una tarea <strong>lenta</strong> (como una descarga) en el hilo principal lo <strong>bloquea</strong>: la app se congela y puede aparecer el aviso de "no responde" (ANR).</li>
+<li>La <strong>asincronía</strong> resuelve esto haciendo el trabajo lento <strong>en segundo plano</strong> y actualizando la interfaz al terminar.</li>
+<li>Los enfoques tradicionales (<em>callbacks</em>) eran engorrosos; las <strong>coroutines</strong> de Kotlin son la solución moderna, y son el tema de los próximos capítulos.</li>
+</ul>
+<p>En el próximo capítulo empezarás a escribir código asíncrono de verdad con las coroutines: <code>suspend</code>, <code>launch</code>, <code>async</code> y los conceptos que las rodean.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -2399,6 +2701,44 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../../part04/exercises/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Ejercicios de repaso">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Ejercicios de repaso
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../chapter23/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 23. &lt;code&gt;suspend&lt;/code&gt;, &lt;code&gt;launch&lt;/code&gt;, &lt;code&gt;async&lt;/code&gt;, scopes y dispatchers">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                23. <code>suspend</code>, <code>launch</code>, <code>async</code>, scopes y dispatchers
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -2426,12 +2766,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/android-kotlin-desde-cero/", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "/android-kotlin-desde-cero/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="/android-kotlin-desde-cero/assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="/android-kotlin-desde-cero/assets/js/custom.js"></script>
+        <script src="../../../assets/js/custom.js"></script>
       
     
   </body>

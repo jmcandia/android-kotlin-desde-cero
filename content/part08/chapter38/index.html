@@ -10,25 +10,31 @@
       
       
       
+        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/content/part08/chapter38/">
       
+      
+        <link rel="prev" href="../chapter37/">
+      
+      
+        <link rel="next" href="../chapter39/">
       
       
         
       
       
-      <link rel="icon" href="/android-kotlin-desde-cero/assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Android con Kotlin desde cero</title>
+        <title>38. Serialización JSON y modelos de datos (DTO) - Android con Kotlin desde cero</title>
       
     
     
-      <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -47,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/css/custom.css">
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
     
-    <script>__md_scope=new URL("/android-kotlin-desde-cero/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -73,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#capitulo-38-serializacion-json-y-modelos-de-datos-dto" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -85,9 +96,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="/android-kotlin-desde-cero/." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../../.." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
-  <img src="/android-kotlin-desde-cero/assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -104,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              38. Serialización JSON y modelos de datos (DTO)
             
           </span>
         </div>
@@ -222,9 +233,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/android-kotlin-desde-cero/." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../../.." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
-  <img src="/android-kotlin-desde-cero/assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     Android con Kotlin desde cero
@@ -251,7 +262,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -325,7 +336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter01/" class="md-nav__link">
+      <a href="../../part01/chapter01/" class="md-nav__link">
         
   
   
@@ -353,7 +364,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter02/" class="md-nav__link">
+      <a href="../../part01/chapter02/" class="md-nav__link">
         
   
   
@@ -381,7 +392,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter03/" class="md-nav__link">
+      <a href="../../part01/chapter03/" class="md-nav__link">
         
   
   
@@ -409,7 +420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter04/" class="md-nav__link">
+      <a href="../../part01/chapter04/" class="md-nav__link">
         
   
   
@@ -437,7 +448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter05/" class="md-nav__link">
+      <a href="../../part01/chapter05/" class="md-nav__link">
         
   
   
@@ -465,7 +476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter06/" class="md-nav__link">
+      <a href="../../part01/chapter06/" class="md-nav__link">
         
   
   
@@ -493,7 +504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter07/" class="md-nav__link">
+      <a href="../../part01/chapter07/" class="md-nav__link">
         
   
   
@@ -521,7 +532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/exercises/" class="md-nav__link">
+      <a href="../../part01/exercises/" class="md-nav__link">
         
   
   
@@ -603,7 +614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter08/" class="md-nav__link">
+      <a href="../../part02/chapter08/" class="md-nav__link">
         
   
   
@@ -631,7 +642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter09/" class="md-nav__link">
+      <a href="../../part02/chapter09/" class="md-nav__link">
         
   
   
@@ -659,7 +670,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter10/" class="md-nav__link">
+      <a href="../../part02/chapter10/" class="md-nav__link">
         
   
   
@@ -687,7 +698,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/exercises/" class="md-nav__link">
+      <a href="../../part02/exercises/" class="md-nav__link">
         
   
   
@@ -769,7 +780,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter11/" class="md-nav__link">
+      <a href="../../part03/chapter11/" class="md-nav__link">
         
   
   
@@ -797,7 +808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter12/" class="md-nav__link">
+      <a href="../../part03/chapter12/" class="md-nav__link">
         
   
   
@@ -825,7 +836,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter13/" class="md-nav__link">
+      <a href="../../part03/chapter13/" class="md-nav__link">
         
   
   
@@ -853,7 +864,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter14/" class="md-nav__link">
+      <a href="../../part03/chapter14/" class="md-nav__link">
         
   
   
@@ -881,7 +892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter15/" class="md-nav__link">
+      <a href="../../part03/chapter15/" class="md-nav__link">
         
   
   
@@ -909,7 +920,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/exercises/" class="md-nav__link">
+      <a href="../../part03/exercises/" class="md-nav__link">
         
   
   
@@ -991,7 +1002,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter16/" class="md-nav__link">
+      <a href="../../part04/chapter16/" class="md-nav__link">
         
   
   
@@ -1019,7 +1030,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter17/" class="md-nav__link">
+      <a href="../../part04/chapter17/" class="md-nav__link">
         
   
   
@@ -1047,7 +1058,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter18/" class="md-nav__link">
+      <a href="../../part04/chapter18/" class="md-nav__link">
         
   
   
@@ -1075,7 +1086,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter19/" class="md-nav__link">
+      <a href="../../part04/chapter19/" class="md-nav__link">
         
   
   
@@ -1103,7 +1114,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter20/" class="md-nav__link">
+      <a href="../../part04/chapter20/" class="md-nav__link">
         
   
   
@@ -1131,7 +1142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter21/" class="md-nav__link">
+      <a href="../../part04/chapter21/" class="md-nav__link">
         
   
   
@@ -1159,7 +1170,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/exercises/" class="md-nav__link">
+      <a href="../../part04/exercises/" class="md-nav__link">
         
   
   
@@ -1241,7 +1252,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter22/" class="md-nav__link">
+      <a href="../../part05/chapter22/" class="md-nav__link">
         
   
   
@@ -1269,7 +1280,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter23/" class="md-nav__link">
+      <a href="../../part05/chapter23/" class="md-nav__link">
         
   
   
@@ -1297,7 +1308,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter24/" class="md-nav__link">
+      <a href="../../part05/chapter24/" class="md-nav__link">
         
   
   
@@ -1379,7 +1390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter25/" class="md-nav__link">
+      <a href="../../part06/chapter25/" class="md-nav__link">
         
   
   
@@ -1407,7 +1418,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter26/" class="md-nav__link">
+      <a href="../../part06/chapter26/" class="md-nav__link">
         
   
   
@@ -1435,7 +1446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter27/" class="md-nav__link">
+      <a href="../../part06/chapter27/" class="md-nav__link">
         
   
   
@@ -1463,7 +1474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter28/" class="md-nav__link">
+      <a href="../../part06/chapter28/" class="md-nav__link">
         
   
   
@@ -1491,7 +1502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter29/" class="md-nav__link">
+      <a href="../../part06/chapter29/" class="md-nav__link">
         
   
   
@@ -1519,7 +1530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter30/" class="md-nav__link">
+      <a href="../../part06/chapter30/" class="md-nav__link">
         
   
   
@@ -1547,7 +1558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter31/" class="md-nav__link">
+      <a href="../../part06/chapter31/" class="md-nav__link">
         
   
   
@@ -1629,7 +1640,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter32/" class="md-nav__link">
+      <a href="../../part07/chapter32/" class="md-nav__link">
         
   
   
@@ -1657,7 +1668,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter33/" class="md-nav__link">
+      <a href="../../part07/chapter33/" class="md-nav__link">
         
   
   
@@ -1685,7 +1696,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter34/" class="md-nav__link">
+      <a href="../../part07/chapter34/" class="md-nav__link">
         
   
   
@@ -1713,7 +1724,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter35/" class="md-nav__link">
+      <a href="../../part07/chapter35/" class="md-nav__link">
         
   
   
@@ -1745,18 +1756,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
         
           
           <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
@@ -1777,7 +1790,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1795,7 +1808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter36/" class="md-nav__link">
+      <a href="../chapter36/" class="md-nav__link">
         
   
   
@@ -1823,7 +1836,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter37/" class="md-nav__link">
+      <a href="../chapter37/" class="md-nav__link">
         
   
   
@@ -1848,10 +1861,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter38/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    38. Serialización JSON y modelos de datos (DTO)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1867,6 +1907,103 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serializacion-y-deserializacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serialización y deserialización
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelar-el-json-con-serializable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelar el JSON con @Serializable
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuando-los-nombres-no-coinciden-serialname" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuando los nombres no coinciden: @SerialName
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dtos-separar-los-datos-de-la-api-de-tu-modelo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DTOs: separar los datos de la API de tu modelo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-flujo-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El flujo completo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1879,7 +2016,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter39/" class="md-nav__link">
+      <a href="../chapter39/" class="md-nav__link">
         
   
   
@@ -1961,7 +2098,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter40/" class="md-nav__link">
+      <a href="../../part09/chapter40/" class="md-nav__link">
         
   
   
@@ -1989,7 +2126,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter41/" class="md-nav__link">
+      <a href="../../part09/chapter41/" class="md-nav__link">
         
   
   
@@ -2017,7 +2154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter42/" class="md-nav__link">
+      <a href="../../part09/chapter42/" class="md-nav__link">
         
   
   
@@ -2045,7 +2182,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter43/" class="md-nav__link">
+      <a href="../../part09/chapter43/" class="md-nav__link">
         
   
   
@@ -2073,7 +2210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter44/" class="md-nav__link">
+      <a href="../../part09/chapter44/" class="md-nav__link">
         
   
   
@@ -2101,7 +2238,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter45/" class="md-nav__link">
+      <a href="../../part09/chapter45/" class="md-nav__link">
         
   
   
@@ -2129,7 +2266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter46/" class="md-nav__link">
+      <a href="../../part09/chapter46/" class="md-nav__link">
         
   
   
@@ -2157,7 +2294,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter47/" class="md-nav__link">
+      <a href="../../part09/chapter47/" class="md-nav__link">
         
   
   
@@ -2185,7 +2322,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/chapter48/" class="md-nav__link">
         
   
   
@@ -2213,7 +2350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter49/" class="md-nav__link">
+      <a href="../../part09/chapter49/" class="md-nav__link">
         
   
   
@@ -2295,7 +2432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/appendix/design-principle/" class="md-nav__link">
+      <a href="../../appendix/design-principle/" class="md-nav__link">
         
   
   
@@ -2323,7 +2460,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/appendix/java-scanner/" class="md-nav__link">
+      <a href="../../appendix/java-scanner/" class="md-nav__link">
         
   
   
@@ -2368,6 +2505,93 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serializacion-y-deserializacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serialización y deserialización
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelar-el-json-con-serializable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelar el JSON con @Serializable
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuando-los-nombres-no-coinciden-serialname" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuando los nombres no coinciden: @SerialName
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dtos-separar-los-datos-de-la-api-de-tu-modelo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DTOs: separar los datos de la API de tu modelo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-flujo-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El flujo completo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2380,8 +2604,119 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="capitulo-38-serializacion-json-y-modelos-de-datos-dto">Capítulo 38: Serialización JSON y modelos de datos (DTO)<a class="headerlink" href="#capitulo-38-serializacion-json-y-modelos-de-datos-dto" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>En el capítulo anterior configuraste Retrofit con un convertidor de <code>kotlinx.serialization</code>, pero quedó una pregunta: ¿cómo se transforma exactamente el <strong>JSON</strong> que llega de la API en objetos de Kotlin? Ese proceso se llama <strong>serialización</strong> (más precisamente, <em>deserialización</em>).</p>
+<p>En este capítulo aprenderás a modelar el JSON con <code>kotlinx.serialization</code>, a manejar los casos en que los nombres no coinciden, y a organizar tus clases de datos con un patrón importante: los <strong>DTOs</strong>, que separan los datos tal como vienen de la API de los modelos que tu app realmente usa.</p>
+<h2 id="serializacion-y-deserializacion">Serialización y deserialización<a class="headerlink" href="#serializacion-y-deserializacion" title="Permanent link">&para;</a></h2>
+<p>Son dos conceptos, uno el inverso del otro:</p>
+<ul>
+<li><strong>Serializar</strong> es convertir un objeto en un formato de texto para enviarlo o guardarlo; por ejemplo, un objeto de Kotlin → un texto JSON.</li>
+<li><strong>Deserializar</strong> es lo contrario: tomar ese texto y reconstruir el objeto; un texto JSON → un objeto de Kotlin.</li>
+</ul>
+<p>Cuando consumes una API, casi siempre <strong>deserializas</strong>: la respuesta llega como texto JSON y necesitas convertirla en objetos con los que trabajar. (Por costumbre, se suele llamar "serialización" a todo el tema.)</p>
+<p>La biblioteca que hace esta magia en Kotlin es <strong><code>kotlinx.serialization</code></strong>, y Retrofit la usa a través del convertidor que instalaste.</p>
+<h2 id="modelar-el-json-con-serializable">Modelar el JSON con <code>@Serializable</code><a class="headerlink" href="#modelar-el-json-con-serializable" title="Permanent link">&para;</a></h2>
+<p>Para que <code>kotlinx.serialization</code> sepa cómo convertir un JSON en una clase, esa clase debe estar marcada con la anotación <strong><code>@Serializable</code></strong>, y sus propiedades deben <strong>coincidir</strong> con las claves del JSON.</p>
+<p>Supongamos que la API devuelve este JSON:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ana&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
+</code></pre></div>
+<p>La clase que lo representa es una <code>data class</code> marcada con <code>@Serializable</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@Serializable</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">UsuarioDto</span><span class="p">(</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">id</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">)</span>
+</code></pre></div>
+<p>Con eso, <code>kotlinx.serialization</code> lee el JSON, empareja cada clave con la propiedad del mismo nombre y crea el objeto. Fíjate en lo directo que resulta: el JSON y la <code>data class</code> tienen prácticamente la misma forma.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Para usar <code>@Serializable</code> necesitas el <em>plugin</em> de serialización de Kotlin y la dependencia <code>kotlinx-serialization-json</code>, que se agregan al proyecto una sola vez.</p>
+</div>
+<h2 id="cuando-los-nombres-no-coinciden-serialname">Cuando los nombres no coinciden: <code>@SerialName</code><a class="headerlink" href="#cuando-los-nombres-no-coinciden-serialname" title="Permanent link">&para;</a></h2>
+<p>En la práctica, las APIs no siempre nombran sus campos como te gustaría. Es muy común que el JSON use <code>snake_case</code> (<code>nombre_completo</code>) mientras que en Kotlin prefieres <code>camelCase</code> (<code>nombreCompleto</code>). Para conectar ambos, usas la anotación <strong><code>@SerialName</code></strong>, indicando el nombre tal como aparece en el JSON:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@Serializable</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">UsuarioDto</span><span class="p">(</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">id</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nd">@SerialName</span><span class="p">(</span><span class="s">&quot;nombre_completo&quot;</span><span class="p">)</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">nombreCompleto</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">)</span>
+</code></pre></div>
+<p>Así, la clave <code>nombre_completo</code> del JSON se asigna a tu propiedad <code>nombreCompleto</code>.</p>
+<p>Otro caso frecuente: la API devuelve <strong>más campos</strong> de los que te interesan. Por defecto, eso provocaría un error. Para evitarlo, se configura el lector de JSON para que <strong>ignore las claves desconocidas</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Json</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ignoreUnknownKeys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Es un ajuste habitual y muy recomendable al consumir APIs que no controlas.</p>
+<h2 id="dtos-separar-los-datos-de-la-api-de-tu-modelo">DTOs: separar los datos de la API de tu modelo<a class="headerlink" href="#dtos-separar-los-datos-de-la-api-de-tu-modelo" title="Permanent link">&para;</a></h2>
+<p>Fíjate en que a la clase de los ejemplos la llamamos <code>UsuarioDto</code>, no <code>Usuario</code>. Esa terminación <strong><code>Dto</code></strong> no es casual: indica que es un <strong>DTO</strong> (<em>Data Transfer Object</em>, "objeto de transferencia de datos"), una clase cuyo único propósito es <strong>reflejar la forma del JSON</strong> de la API.</p>
+<p>¿Por qué no usar ese DTO directamente en toda la app? Por dos razones:</p>
+<ul>
+<li>La forma en que la API entrega los datos no siempre es la más cómoda para tu aplicación (nombres raros, campos anidados, datos que no necesitas).</li>
+<li>Si la API <strong>cambia</strong>, no quieres que ese cambio se propague por todo tu código.</li>
+</ul>
+<p>Por eso es buena práctica <strong>separar</strong> los DTOs de tus <strong>modelos de dominio</strong>: las clases limpias que tu app realmente usa. El repositorio recibe los DTOs, los <strong>transforma</strong> (mapea) en modelos de dominio y, hacia arriba, solo entrega estos últimos.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// DTO: refleja el JSON de la API</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nd">@Serializable</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">UsuarioDto</span><span class="p">(</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">id</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nd">@SerialName</span><span class="p">(</span><span class="s">&quot;nombre_completo&quot;</span><span class="p">)</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">nombreCompleto</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">)</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1">// Modelo de dominio: lo que usa la app</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Usuario</span><span class="p">(</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">id</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="p">)</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1">// Mapeo de DTO a modelo de dominio</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="kd">fun</span><span class="w"> </span><span class="n">UsuarioDto</span><span class="p">.</span><span class="nf">aDominio</span><span class="p">():</span><span class="w"> </span><span class="n">Usuario</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Usuario</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nombreCompleto</span><span class="p">)</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="p">}</span>
+</code></pre></div>
+<p>Fíjate en que el mapeo es una <strong>función de extensión</strong> (de las que viste en la parte de POO): convierte un <code>UsuarioDto</code> en un <code>Usuario</code> de forma limpia. Así, si mañana la API renombra un campo, solo ajustas el DTO y su mapeo; el resto de la app, que trabaja con <code>Usuario</code>, ni se entera.</p>
+<h2 id="el-flujo-completo">El flujo completo<a class="headerlink" href="#el-flujo-completo" title="Permanent link">&para;</a></h2>
+<p>Reuniendo las piezas del capítulo anterior y de este, el recorrido de un dato desde la API hasta tu app es:</p>
+<pre class="mermaid"><code>flowchart LR
+    J["JSON&lt;br/&gt;(respuesta de la API)"] -- "deserializa" --&gt; D["DTO&lt;br/&gt;(refleja el JSON)"]
+    D -- "mapea" --&gt; M["Modelo de dominio&lt;br/&gt;(lo que usa la app)"]</code></pre>
+<ul>
+<li>Retrofit hace la petición y recibe el <strong>JSON</strong>.</li>
+<li>El convertidor de <code>kotlinx.serialization</code> lo <strong>deserializa</strong> en un <strong>DTO</strong>.</li>
+<li>El repositorio <strong>mapea</strong> el DTO a un <strong>modelo de dominio</strong>.</li>
+<li>El <code>ViewModel</code> y la interfaz trabajan con ese modelo limpio.</li>
+</ul>
+<p>Cada capa recibe los datos en la forma que le conviene, y los detalles de la API quedan contenidos en un solo lugar.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo aprendiste a convertir el JSON en objetos y a organizarlos bien:</p>
+<ul>
+<li><strong>Serializar</strong> es objeto → texto (JSON); <strong>deserializar</strong> es texto → objeto. Al consumir una API, deserializas.</li>
+<li><strong><code>kotlinx.serialization</code></strong> convierte el JSON en clases marcadas con <strong><code>@Serializable</code></strong>, cuyas propiedades coinciden con las claves del JSON.</li>
+<li>Con <strong><code>@SerialName</code></strong> conectas nombres que no coinciden (por ejemplo, el <code>snake_case</code> del JSON con el <code>camelCase</code> de Kotlin), y con <code>ignoreUnknownKeys = true</code> evitas errores cuando la API trae campos de más.</li>
+<li>Un <strong>DTO</strong> es una clase que refleja el JSON de la API. Conviene <strong>separarlo</strong> de tus <strong>modelos de dominio</strong> y mapear de uno a otro (con una función de extensión, por ejemplo), para que los cambios de la API no afecten a toda la app.</li>
+</ul>
+<p>En el próximo capítulo cerrarás la parte de red juntándolo todo: manejarás los <strong>estados de red</strong> (cargando, éxito, error) en el <code>ViewModel</code>, conectando Retrofit, el repositorio y la interfaz.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -2399,6 +2734,44 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../chapter37/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 37. Retrofit: configuración, interfaces y endpoints">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                37. Retrofit: configuración, interfaces y endpoints
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../chapter39/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 39. Estados de red: &lt;em&gt;loading&lt;/em&gt;, &lt;em&gt;success&lt;/em&gt; y &lt;em&gt;error&lt;/em&gt;">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                39. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -2426,12 +2799,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/android-kotlin-desde-cero/", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "/android-kotlin-desde-cero/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="/android-kotlin-desde-cero/assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="/android-kotlin-desde-cero/assets/js/custom.js"></script>
+        <script src="../../../assets/js/custom.js"></script>
       
     
   </body>

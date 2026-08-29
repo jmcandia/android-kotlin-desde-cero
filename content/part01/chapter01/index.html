@@ -10,25 +10,31 @@
       
       
       
+        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/content/part01/chapter01/">
       
+      
+        <link rel="prev" href="../../..">
+      
+      
+        <link rel="next" href="../chapter02/">
       
       
         
       
       
-      <link rel="icon" href="/android-kotlin-desde-cero/assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Android con Kotlin desde cero</title>
+        <title>1. El entorno de desarrollo (IDE e IntelliJ IDEA) - Android con Kotlin desde cero</title>
       
     
     
-      <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -47,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/css/custom.css">
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
     
-    <script>__md_scope=new URL("/android-kotlin-desde-cero/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -73,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#capitulo-1-el-entorno-de-desarrollo-integrado-ide" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -85,9 +96,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="/android-kotlin-desde-cero/." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../../.." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
-  <img src="/android-kotlin-desde-cero/assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -104,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              1. El entorno de desarrollo (IDE e IntelliJ IDEA)
             
           </span>
         </div>
@@ -222,9 +233,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/android-kotlin-desde-cero/." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../../.." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
-  <img src="/android-kotlin-desde-cero/assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     Android con Kotlin desde cero
@@ -251,7 +262,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -275,18 +286,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -307,7 +320,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -322,10 +335,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter01/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. El entorno de desarrollo (IDE e IntelliJ IDEA)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -341,6 +381,142 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breve-resena-historica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breve reseña histórica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-un-ide-moderno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es un IDE moderno?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#componentes-del-ide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Componentes del IDE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#intellij-idea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IntelliJ IDEA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IntelliJ IDEA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crea-tu-primer-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crea tu primer proyecto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escribe-tu-primer-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escribe tu primer código
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#un-atajo-sin-instalar-nada-kotlin-playground" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Un atajo sin instalar nada: Kotlin Playground
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#y-android-studio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Y Android Studio?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -353,7 +529,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter02/" class="md-nav__link">
+      <a href="../chapter02/" class="md-nav__link">
         
   
   
@@ -381,7 +557,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter03/" class="md-nav__link">
+      <a href="../chapter03/" class="md-nav__link">
         
   
   
@@ -409,7 +585,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter04/" class="md-nav__link">
+      <a href="../chapter04/" class="md-nav__link">
         
   
   
@@ -437,7 +613,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter05/" class="md-nav__link">
+      <a href="../chapter05/" class="md-nav__link">
         
   
   
@@ -465,7 +641,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter06/" class="md-nav__link">
+      <a href="../chapter06/" class="md-nav__link">
         
   
   
@@ -493,7 +669,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter07/" class="md-nav__link">
+      <a href="../chapter07/" class="md-nav__link">
         
   
   
@@ -521,7 +697,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/exercises/" class="md-nav__link">
+      <a href="../exercises/" class="md-nav__link">
         
   
   
@@ -603,7 +779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter08/" class="md-nav__link">
+      <a href="../../part02/chapter08/" class="md-nav__link">
         
   
   
@@ -631,7 +807,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter09/" class="md-nav__link">
+      <a href="../../part02/chapter09/" class="md-nav__link">
         
   
   
@@ -659,7 +835,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter10/" class="md-nav__link">
+      <a href="../../part02/chapter10/" class="md-nav__link">
         
   
   
@@ -687,7 +863,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/exercises/" class="md-nav__link">
+      <a href="../../part02/exercises/" class="md-nav__link">
         
   
   
@@ -769,7 +945,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter11/" class="md-nav__link">
+      <a href="../../part03/chapter11/" class="md-nav__link">
         
   
   
@@ -797,7 +973,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter12/" class="md-nav__link">
+      <a href="../../part03/chapter12/" class="md-nav__link">
         
   
   
@@ -825,7 +1001,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter13/" class="md-nav__link">
+      <a href="../../part03/chapter13/" class="md-nav__link">
         
   
   
@@ -853,7 +1029,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter14/" class="md-nav__link">
+      <a href="../../part03/chapter14/" class="md-nav__link">
         
   
   
@@ -881,7 +1057,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter15/" class="md-nav__link">
+      <a href="../../part03/chapter15/" class="md-nav__link">
         
   
   
@@ -909,7 +1085,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/exercises/" class="md-nav__link">
+      <a href="../../part03/exercises/" class="md-nav__link">
         
   
   
@@ -991,7 +1167,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter16/" class="md-nav__link">
+      <a href="../../part04/chapter16/" class="md-nav__link">
         
   
   
@@ -1019,7 +1195,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter17/" class="md-nav__link">
+      <a href="../../part04/chapter17/" class="md-nav__link">
         
   
   
@@ -1047,7 +1223,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter18/" class="md-nav__link">
+      <a href="../../part04/chapter18/" class="md-nav__link">
         
   
   
@@ -1075,7 +1251,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter19/" class="md-nav__link">
+      <a href="../../part04/chapter19/" class="md-nav__link">
         
   
   
@@ -1103,7 +1279,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter20/" class="md-nav__link">
+      <a href="../../part04/chapter20/" class="md-nav__link">
         
   
   
@@ -1131,7 +1307,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter21/" class="md-nav__link">
+      <a href="../../part04/chapter21/" class="md-nav__link">
         
   
   
@@ -1159,7 +1335,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/exercises/" class="md-nav__link">
+      <a href="../../part04/exercises/" class="md-nav__link">
         
   
   
@@ -1241,7 +1417,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter22/" class="md-nav__link">
+      <a href="../../part05/chapter22/" class="md-nav__link">
         
   
   
@@ -1269,7 +1445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter23/" class="md-nav__link">
+      <a href="../../part05/chapter23/" class="md-nav__link">
         
   
   
@@ -1297,7 +1473,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter24/" class="md-nav__link">
+      <a href="../../part05/chapter24/" class="md-nav__link">
         
   
   
@@ -1379,7 +1555,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter25/" class="md-nav__link">
+      <a href="../../part06/chapter25/" class="md-nav__link">
         
   
   
@@ -1407,7 +1583,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter26/" class="md-nav__link">
+      <a href="../../part06/chapter26/" class="md-nav__link">
         
   
   
@@ -1435,7 +1611,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter27/" class="md-nav__link">
+      <a href="../../part06/chapter27/" class="md-nav__link">
         
   
   
@@ -1463,7 +1639,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter28/" class="md-nav__link">
+      <a href="../../part06/chapter28/" class="md-nav__link">
         
   
   
@@ -1491,7 +1667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter29/" class="md-nav__link">
+      <a href="../../part06/chapter29/" class="md-nav__link">
         
   
   
@@ -1519,7 +1695,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter30/" class="md-nav__link">
+      <a href="../../part06/chapter30/" class="md-nav__link">
         
   
   
@@ -1547,7 +1723,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter31/" class="md-nav__link">
+      <a href="../../part06/chapter31/" class="md-nav__link">
         
   
   
@@ -1629,7 +1805,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter32/" class="md-nav__link">
+      <a href="../../part07/chapter32/" class="md-nav__link">
         
   
   
@@ -1657,7 +1833,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter33/" class="md-nav__link">
+      <a href="../../part07/chapter33/" class="md-nav__link">
         
   
   
@@ -1685,7 +1861,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter34/" class="md-nav__link">
+      <a href="../../part07/chapter34/" class="md-nav__link">
         
   
   
@@ -1713,7 +1889,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter35/" class="md-nav__link">
+      <a href="../../part07/chapter35/" class="md-nav__link">
         
   
   
@@ -1795,7 +1971,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter36/" class="md-nav__link">
+      <a href="../../part08/chapter36/" class="md-nav__link">
         
   
   
@@ -1823,7 +1999,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter37/" class="md-nav__link">
+      <a href="../../part08/chapter37/" class="md-nav__link">
         
   
   
@@ -1851,7 +2027,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter38/" class="md-nav__link">
+      <a href="../../part08/chapter38/" class="md-nav__link">
         
   
   
@@ -1879,7 +2055,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter39/" class="md-nav__link">
+      <a href="../../part08/chapter39/" class="md-nav__link">
         
   
   
@@ -1961,7 +2137,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter40/" class="md-nav__link">
+      <a href="../../part09/chapter40/" class="md-nav__link">
         
   
   
@@ -1989,7 +2165,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter41/" class="md-nav__link">
+      <a href="../../part09/chapter41/" class="md-nav__link">
         
   
   
@@ -2017,7 +2193,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter42/" class="md-nav__link">
+      <a href="../../part09/chapter42/" class="md-nav__link">
         
   
   
@@ -2045,7 +2221,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter43/" class="md-nav__link">
+      <a href="../../part09/chapter43/" class="md-nav__link">
         
   
   
@@ -2073,7 +2249,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter44/" class="md-nav__link">
+      <a href="../../part09/chapter44/" class="md-nav__link">
         
   
   
@@ -2101,7 +2277,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter45/" class="md-nav__link">
+      <a href="../../part09/chapter45/" class="md-nav__link">
         
   
   
@@ -2129,7 +2305,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter46/" class="md-nav__link">
+      <a href="../../part09/chapter46/" class="md-nav__link">
         
   
   
@@ -2157,7 +2333,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter47/" class="md-nav__link">
+      <a href="../../part09/chapter47/" class="md-nav__link">
         
   
   
@@ -2185,7 +2361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/chapter48/" class="md-nav__link">
         
   
   
@@ -2213,7 +2389,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter49/" class="md-nav__link">
+      <a href="../../part09/chapter49/" class="md-nav__link">
         
   
   
@@ -2295,7 +2471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/appendix/design-principle/" class="md-nav__link">
+      <a href="../../appendix/design-principle/" class="md-nav__link">
         
   
   
@@ -2323,7 +2499,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/appendix/java-scanner/" class="md-nav__link">
+      <a href="../../appendix/java-scanner/" class="md-nav__link">
         
   
   
@@ -2368,6 +2544,132 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breve-resena-historica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Breve reseña histórica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-un-ide-moderno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es un IDE moderno?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#componentes-del-ide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Componentes del IDE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#intellij-idea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IntelliJ IDEA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IntelliJ IDEA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crea-tu-primer-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crea tu primer proyecto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escribe-tu-primer-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escribe tu primer código
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#un-atajo-sin-instalar-nada-kotlin-playground" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Un atajo sin instalar nada: Kotlin Playground
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#y-android-studio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Y Android Studio?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2380,8 +2682,157 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="capitulo-1-el-entorno-de-desarrollo-integrado-ide">Capítulo 1: El Entorno de Desarrollo Integrado (IDE)<a class="headerlink" href="#capitulo-1-el-entorno-de-desarrollo-integrado-ide" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>Escribir un solo programa implica toda una serie de tareas: escribes el código, localizas y corriges los errores que inevitablemente surgen, y luego hay que compilar, ejecutar y documentar el código. Y adivina qué: todo esto hay que hacerlo una y otra vez. Con programas pequeños como <strong>Hola Mundo</strong>, puedes realizar estas tareas utilizando un sencillo editor de texto para escribir el código fuente y un conjunto de herramientas para compilar y ejecutar los programas. Algunos editores de texto pueden incluso resaltar la sintaxis, lo que simplifica el proceso de escritura, pero esto puede no ser suficiente para trabajar en algo más grande y complejo.</p>
+<p>Como desarrollador profesional, necesitas una herramienta especializada para navegar por tus programas de varios archivos, modificarlos, compilarlos, ejecutarlos y depurarlos, mostrar los errores de sintaxis, etcétera. Un <strong>Entorno de Desarrollo Integrado</strong> (en inglés <strong>Integrated Development Environment</strong>, y sus siglas <strong>IDE</strong>) es precisamente eso: ofrece un único programa en el que los desarrolladores pueden realizar todas estas tareas habituales.</p>
+<p>En este capítulo conocerás qué es un IDE, cómo ha evolucionado a lo largo de la historia y cuáles son los componentes que lo convierten en una herramienta indispensable para el desarrollo de software moderno. Además, aprenderás a utilizar <strong>IntelliJ IDEA</strong>, el entorno de desarrollo recomendado para aprender <strong>Kotlin</strong>, donde crearás tu primer proyecto y escribirás tus primeras líneas de código.</p>
+<p>El objetivo de este capítulo es que prepares correctamente tu entorno de trabajo para programar en Kotlin, de modo que puedas concentrarte en aprender el lenguaje sin preocuparte por la configuración.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Más adelante, en la <strong>Parte VI</strong>, instalaremos <strong>Android Studio</strong> (el IDE oficial para Android) y crearemos nuestro primer proyecto móvil. Por ahora nos enfocamos en Kotlin puro, así que basta con IntelliJ IDEA.</p>
+</div>
+<h2 id="breve-resena-historica">Breve reseña histórica<a class="headerlink" href="#breve-resena-historica" title="Permanent link">&para;</a></h2>
+<p>La mayoría de los IDE modernos son gráficos, aunque los primeros se utilizaban en una época en la que nadie soñaba con los gráficos. Se basaban en una interfaz de texto y solo se podían manejar mediante teclas de función y atajos de teclado para activar diversas funciones. Este era, por ejemplo, el caso de Turbo Pascal, creado por Borland:</p>
+<p><img alt="Turbo Pascal" src="../../../assets/images/chapter01/turbo-pascal.png" /></p>
+<p>Los primeros IDE se diseñaron para funcionar a través de una consola o terminal, que ya eran una novedad en sí mismas. De hecho, antes de eso, los programas se creaban generalmente en papel y se introducían en la máquina mediante soportes de papel preparados previamente, como tarjetas perforadas o cintas perforadas.</p>
+<p>He aquí algunos ejemplos históricos concretos. <strong>Dartmouth BASIC</strong> fue el primer lenguaje diseñado para ejecutarse en una consola o terminal. Este antiguo IDE se controlaba mediante comandos, sin utilizar ni siquiera menús ni teclas de acceso rápido. Sin embargo, permitía editar el código fuente, gestionar archivos, compilar, depurar y ejecutar programas de una manera fundamentalmente similar a la de los IDE modernos.</p>
+<p>Luego llegó el momento de <strong>Maestro I</strong>. Se trataba de un producto de <strong>Softlab Munich</strong> que fue el primer entorno de desarrollo integrado del mundo para software. ¿Te puedes creer que ocupara una posición de liderazgo en su nicho durante casi veinte años? Hoy en día, sin embargo, Maestro ya forma parte de la historia.</p>
+<p>Como ves, la humanidad no llegó de inmediato a los IDE multifuncionales.</p>
+<h2 id="que-es-un-ide-moderno">¿Qué es un IDE moderno?<a class="headerlink" href="#que-es-un-ide-moderno" title="Permanent link">&para;</a></h2>
+<p>Los IDE se crearon para maximizar la productividad de los programadores mediante componentes estrechamente integrados con interfaces de usuario sencillas. Esto permite al desarrollador realizar menos pasos para cambiar entre diferentes modos, a diferencia de lo que ocurre con los programas de desarrollo independientes. Sin embargo, los IDE gráficos modernos son paquetes de software complejos. Eso significa que solo se puede lograr la aceleración necesaria del proceso de trabajo tras haber recibido algo de formación. De todos modos, tampoco hay grandes dificultades en este sentido: muchos IDE son bastante interactivos y las interfaces de los distintos fabricantes suelen ser muy similares, por lo que no resulta demasiado difícil cambiar de un IDE a otro.</p>
+<p>Existen muchos IDE para diferentes lenguajes de programación. Algunos solo admiten un único lenguaje, mientras que otros admiten varios o pueden ampliarse con complementos. Por ejemplo, los IDE que admiten varios lenguajes son <strong>IntelliJ IDEA</strong>, <strong>Eclipse</strong>, <strong>NetBeans</strong>, <strong>Android Studio</strong> y <strong>Visual Studio Code</strong>. Los IDE para un lenguaje de programación específico son <strong>Delphi</strong>, <strong>Dev-C++</strong>, <strong>IDLE for Python</strong> y <strong>PyCharm</strong>.</p>
+<p>A modo de ejemplo, así es como se ve el IDE IntelliJ IDEA:</p>
+<p><img alt="IntelliJ" src="../../../assets/images/chapter01/intellij.png" /></p>
+<p>Todos estos entornos pueden ejecutarse en Windows, macOS o GNU/Linux.</p>
+<h2 id="componentes-del-ide">Componentes del IDE<a class="headerlink" href="#componentes-del-ide" title="Permanent link">&para;</a></h2>
+<p>En general, el entorno de desarrollo incluye:</p>
+<ul>
+<li>Un <strong>editor de texto</strong>, diseñado para trabajar con archivos de texto de forma interactiva. Permite visualizar el contenido de los archivos y realizar diversas acciones, como insertar, borrar y copiar texto, realizar búsquedas contextuales, sustituir texto, ordenar cadenas y mucho más. A menudo incluyen funcionalidades adicionales, como el resaltado de sintaxis.</li>
+<li>Un <strong>traductor (compilador y/o intérprete)</strong>, que traduce un texto escrito en un lenguaje de programación a código máquina y lo hace bien inmediatamente antes de iniciar el programa (compilación) o línea por línea (interpretación).</li>
+<li><strong>Herramientas de automatización de la compilación</strong>, que preparan el código y lo ensamblan todo.</li>
+<li>Un <strong>depurador</strong>, que ayuda a buscar errores en el código y los notifica.</li>
+</ul>
+<p>En resumen, el uso de un IDE te convierte en un desarrollador más productivo, ya que ofrece componentes estrechamente integrados con una interfaz de usuario coherente. Además, automatiza algunas tareas rutinarias e incluso te ofrece consejos y comentarios. Todo ello se debe a que el objetivo del entorno integrado es combinar diversas utilidades en un único producto. Este enfoque permite a los desarrolladores centrarse en resolver sus problemas principales, mientras que el IDE se encarga de las operaciones comunes y estándar.</p>
+<h2 id="intellij-idea">IntelliJ IDEA<a class="headerlink" href="#intellij-idea" title="Permanent link">&para;</a></h2>
+<p>IntelliJ IDEA es el IDE líder para Java y Kotlin de JetBrains (la misma empresa que creó Kotlin).</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Si vienes de programar en <strong>Java</strong> con IntelliJ IDEA o Eclipse, estás en terreno conocido: Android Studio, que usaremos más adelante, está construido <strong>sobre IntelliJ IDEA</strong>, así que casi todo lo que aprendas aquí te servirá luego para el desarrollo Android.</p>
+</div>
+<p>En el sector, destaca por:</p>
+<ul>
+<li><strong>Un editor con reconocimiento de contexto</strong>, que te ofrece sugerencias de autocompletado a medida que escribes, propone soluciones para errores y advertencias, y te permite encontrar cualquier cosa, desde clases hasta ventanas de herramientas.</li>
+<li><strong>Su profundo conocimiento del código</strong>, que garantiza que el IDE pueda detectar errores al instante y ofrecer sugerencias relevantes en cada contexto.</li>
+<li><strong>Una experiencia lista para usar</strong>, lo que significa que puedes empezar a programar desde el primer inicio, sin necesidad de instalar complementos.</li>
+<li><strong>Herramientas para el desarrollo colaborativo y a distancia</strong>.</li>
+</ul>
+<p>IntelliJ IDEA es gratuito tanto para uso comercial como no comercial. Sin embargo, algunas funciones solo están disponibles con la suscripción <strong>Ultimate</strong>.</p>
+<ul>
+<li>La versión gratuita (Community) ofrece todas las funciones necesarias para cubrir las necesidades esenciales de la mayoría de los desarrollos en Java y Kotlin. <strong>Es más que suficiente para este curso.</strong></li>
+<li>La suscripción <strong>Ultimate</strong> ofrece soporte avanzado para diversos marcos y tecnologías de backend y frontend, además de herramientas de perfilado, de bases de datos y un cliente HTTP.</li>
+</ul>
+<p>Para obtener más información sobre este IDE, visita la <a href="https://www.jetbrains.com/idea/features">página web oficial</a>.</p>
+<h3 id="crea-tu-primer-proyecto">Crea tu primer proyecto<a class="headerlink" href="#crea-tu-primer-proyecto" title="Permanent link">&para;</a></h3>
+<p>Veamos más detenidamente cómo funciona IntelliJ IDEA. Sigue los pasos que se indican a continuación para crear tu primera aplicación.</p>
+<ol>
+<li>
+<p>Instala IntelliJ IDEA en tu computador y ábrelo.</p>
+</li>
+<li>
+<p>Si no hay ningún proyecto abierto actualmente, haz clic en <em>New Project</em> en la sección <em>Projects</em> de la pantalla de bienvenida. De lo contrario, selecciona <em>File</em> → <em>New</em> → <em>Project</em>.</p>
+</li>
+</ol>
+<p><img alt="Pantalla de bienvenida" src="../../../assets/images/chapter01/intellij-welcome.png" /></p>
+<ol>
+<li>
+<p>En el asistente <em>New Project</em>, selecciona <em>New Project</em> en la lista de la izquierda.</p>
+</li>
+<li>
+<p>Asigna un nombre al proyecto (por ejemplo, <em>Demo</em>) y cambia la ubicación predeterminada si es necesario.</p>
+</li>
+<li>
+<p>Si quieres habilitar el control de versiones, marca la opción <em>Create Git repository</em>. Si no lo haces, igual puedes inicializar el repositorio más adelante.</p>
+</li>
+<li>
+<p>Selecciona <em>Kotlin</em> en <em>Language</em> e <em>IntelliJ</em> en <em>Build system</em>.</p>
+</li>
+</ol>
+<p><img alt="Configuración del nuevo proyecto" src="../../../assets/images/chapter01/intellij-new-project-settings.png" /></p>
+<ol>
+<li>
+<p>Para desarrollar aplicaciones Kotlin en IntelliJ IDEA, necesitas el JetBrains Runtime (JBR). Tu IDE rellenará automáticamente el campo del JBR. No obstante, puedes modificarlo, añadir el JBR necesario desde tu computador o descargar uno.</p>
+</li>
+<li>
+<p>IntelliJ IDEA crea el proyecto. Cuando este proceso haya finalizado, la estructura de tu nuevo proyecto se mostrará en la ventana de herramientas <em>Project</em>. Hay dos nodos de nivel superior:</p>
+</li>
+<li>
+<p><strong>Demo:</strong> representa el módulo de tu proyecto. El directorio <code>.idea</code> y el archivo <code>Demo.iml</code> almacenan los datos de configuración de tu proyecto y del módulo, respectivamente. El directorio <code>src</code> está destinado a tu código fuente.</p>
+</li>
+<li><strong>External Libraries:</strong> representa todos los recursos <strong>externos</strong> necesarios para tu trabajo de desarrollo. Allí se ubican los archivos estándar del lenguaje. También puedes añadir otros recursos manualmente.</li>
+</ol>
+<h3 id="escribe-tu-primer-codigo">Escribe tu primer código<a class="headerlink" href="#escribe-tu-primer-codigo" title="Permanent link">&para;</a></h3>
+<p>Ahora vamos a escribir un fragmento sencillo de código <strong>Kotlin</strong> para el proyecto "Demo".</p>
+<ol>
+<li>En la ventana de herramientas <em>Project</em>, haz clic con el botón derecho del ratón en el directorio <code>src</code>, selecciona <em>New</em> y, luego, <em>Kotlin Class/File</em>.</li>
+</ol>
+<p><img alt="Nuevo archivo" src="../../../assets/images/chapter01/intellij-new-file-a.png" /></p>
+<ol>
+<li>Selecciona la opción <em>File</em>. En el campo <code>Name</code>, escribe <code>Main</code> y pulsa <em>Intro</em>. Se creará un archivo llamado <code>Main.kt</code> (la extensión <code>.kt</code> identifica a los archivos de Kotlin).</li>
+</ol>
+<p><img alt="Archivo Main.kt" src="../../../assets/images/chapter01/intellij-new-file-b.png" /></p>
+<ol>
+<li>A continuación, en el archivo <code>Main.kt</code>, escribamos la función <code>main</code> y llamemos a <code>println()</code>. Puedes empezar a escribir los símbolos y el IDE te sugerirá posibles variantes de código. Esta función se denomina <em>autocompletado de código</em>: IntelliJ IDEA analiza el contexto y sugiere las opciones a las que se puede acceder desde la posición actual del cursor.</li>
+</ol>
+<p><img alt="Proyecto" src="../../../assets/images/chapter01/intellij-project.png" /></p>
+<ol>
+<li>Escribe la declaración de la función <code>main()</code>:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;¡Hola, mundo!&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
+</code></pre></div>
+<p><img alt="Hola Mundo" src="../../../assets/images/chapter01/intellij-hello-world.png" /></p>
+<ol>
+<li>Para ejecutar el programa, haz clic en el ícono de <em>play</em> (▶️) que aparece en el margen izquierdo, junto a la función <code>main</code>, y selecciona <em>Run 'MainKt'</em>. Verás el resultado en la ventana <em>Run</em>, en la parte inferior del IDE.</li>
+</ol>
+<p>¡Felicitaciones! Ya escribiste y ejecutaste tu primera aplicación en Kotlin con IntelliJ IDEA. No te preocupes si todavía no entiendes cada parte del código: lo desglosaremos en detalle en los próximos capítulos.</p>
+<h2 id="un-atajo-sin-instalar-nada-kotlin-playground">Un atajo sin instalar nada: Kotlin Playground<a class="headerlink" href="#un-atajo-sin-instalar-nada-kotlin-playground" title="Permanent link">&para;</a></h2>
+<p>Si quieres probar Kotlin de inmediato, sin instalar ningún IDE, puedes usar el <strong><a href="https://play.kotlinlang.org">Kotlin Playground</a></strong>, un editor en línea que compila y ejecuta código Kotlin directamente en tu navegador.</p>
+<p>Es ideal para experimentar con los primeros ejemplos de este curso o para probar una idea rápida. Eso sí, para proyectos reales (y para todo lo relacionado con Android) necesitarás un IDE de escritorio como IntelliJ IDEA o, más adelante, Android Studio.</p>
+<h2 id="y-android-studio">¿Y Android Studio?<a class="headerlink" href="#y-android-studio" title="Permanent link">&para;</a></h2>
+<p>Como el objetivo final de este curso es desarrollar aplicaciones móviles, seguramente te preguntes por qué no instalamos Android Studio desde ya.</p>
+<p>La razón es pedagógica: <strong>primero conviene dominar el lenguaje Kotlin</strong> con una herramienta liviana y directa, y recién después entrar al mundo de Android, que agrega muchos conceptos nuevos (Gradle, el <code>AndroidManifest</code>, el ciclo de vida de una <code>Activity</code>, la interfaz con Compose, etcétera). Mezclar todo desde el inicio suele abrumar.</p>
+<p>Por eso, la instalación de Android Studio, la creación de tu primer proyecto Android y el recorrido por su interfaz los veremos en la <strong>Parte VI (Capítulo 25)</strong>. Cuando lleguemos ahí, todo lo que aprendiste en IntelliJ IDEA te resultará familiar, porque Android Studio se basa en el mismo motor.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo preparaste tu entorno para programar en Kotlin:</p>
+<ul>
+<li>Un <strong>IDE</strong> integra en un solo programa el editor, el compilador, las herramientas de compilación y el depurador.</li>
+<li><strong>IntelliJ IDEA</strong> es el IDE recomendado para aprender Kotlin; su edición Community, gratuita, es más que suficiente para el curso.</li>
+<li>Creaste tu primer proyecto y ejecutaste un "¡Hola, mundo!".</li>
+<li>Para experimentos rápidos sin instalar nada, tienes el <strong>Kotlin Playground</strong>.</li>
+<li><strong>Android Studio</strong> (el IDE oficial de Android) lo instalaremos más adelante, en la Parte VI, cuando empecemos a desarrollar la aplicación.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -2399,6 +2850,44 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../../.." class="md-footer__link md-footer__link--prev" aria-label="Anterior: Inicio">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Inicio
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../chapter02/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 2. Un primer vistazo a Kotlin">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                2. Un primer vistazo a Kotlin
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -2426,12 +2915,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/android-kotlin-desde-cero/", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "/android-kotlin-desde-cero/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="/android-kotlin-desde-cero/assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="/android-kotlin-desde-cero/assets/js/custom.js"></script>
+        <script src="../../../assets/js/custom.js"></script>
       
     
   </body>

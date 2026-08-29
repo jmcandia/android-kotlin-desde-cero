@@ -1,9 +1,81 @@
-[data-md-color-scheme="default"] .md-typeset code,
-[data-md-color-scheme="default"] .md-ellipsis code {
-  color: #c7254e;
+:root {
+  --black: #1a1a1a;
+  --white: #eeeeee;
+  --yellow: #ffb800;
+  --grey: #666666;
+  --primary: #307fe2;
+  --secondary: #8bb8e8;
 }
 
-[data-md-color-scheme="slate"] .md-typeset code,
-[data-md-color-scheme="slate"] .md-ellipsis code {
-  color: #478be6;
+/* ── Paleta: modo claro ───────────────────────────────────────────────────── */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #307fe2;
+  --md-primary-fg-color--light: #8bb8e8;
+  --md-primary-fg-color--dark: #1a5bb5;
+  --md-accent-fg-color: #ffb800;
+  --md-default-fg-color: #1a1a1a;
+  --md-default-fg-color--light: rgba(26, 26, 26, 0.54);
+  --md-default-fg-color--lighter: rgba(26, 26, 26, 0.32);
+  --md-default-fg-color--lightest: rgba(26, 26, 26, 0.12);
+  --md-typeset-color: #1a1a1a;
+  --md-typeset-a-color: #307fe2;
+
+  --md-footer-bg-color: #307fe2;
+  --md-footer-fg-color: #ffffff;
+  --md-code-fg-color: #c7254e;
+  --md-code-bg-color: #f8f8f8;
+}
+
+/* ── Paleta: modo oscuro ──────────────────────────────────────────────────── */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #1a1a1a;
+  --md-primary-fg-color--light: #8bb8e8;
+  --md-primary-fg-color--dark: #1a5bb5;
+  --md-accent-fg-color: #ffb800;
+  --md-default-fg-color: #eeeeee;
+  --md-typeset-color: #eeeeee;
+  --md-typeset-a-color: #8bb8e8;
+
+  --md-footer-bg-color: #1a1a1a;
+  --md-footer-fg-color: #ffffff;
+  --md-code-fg-color: #478be6;
+  --md-code-bg-color: #2d2d2d;
+}
+
+/* ── Contenedor principal ─────────────────────────────────────────────────── */
+.md-grid {
+  max-width: 100% !important;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-sidebar--primary {
+    left: 0;
+  }
+  .md-sidebar--secondary {
+    right: 0;
+  }
+}
+
+/* ── Navegación inferior: etiquetas "Anterior" y "Siguiente" ─────────────── */
+.md-footer__direction {
+  color: var(--md-accent-fg-color);
+}
+
+.md-footer-meta {
+  display: none;
+}
+
+/* ── Color del icono para cambiar el tema ────────────────────────────────── */
+[data-md-color-scheme="default"] .md-header__button.md-icon svg {
+  fill: var(--white);
+}
+
+[data-md-color-scheme="slate"] .md-header__button.md-icon svg {
+  fill: var(--yellow);
+}
+
+.md-typeset p {
+  text-align: justify;
 }

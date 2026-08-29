@@ -10,25 +10,31 @@
       
       
       
+        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/content/part05/chapter24/">
       
+      
+        <link rel="prev" href="../chapter23/">
+      
+      
+        <link rel="next" href="../../part06/chapter25/">
       
       
         
       
       
-      <link rel="icon" href="/android-kotlin-desde-cero/assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Android con Kotlin desde cero</title>
+        <title>24. Flow, StateFlow y SharedFlow - Android con Kotlin desde cero</title>
       
     
     
-      <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -47,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/css/custom.css">
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
     
-    <script>__md_scope=new URL("/android-kotlin-desde-cero/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -73,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#capitulo-24-flow-stateflow-y-sharedflow" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -85,9 +96,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="/android-kotlin-desde-cero/." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../../.." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
-  <img src="/android-kotlin-desde-cero/assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -104,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              24. <code>Flow</code>, <code>StateFlow</code> y <code>SharedFlow</code>
             
           </span>
         </div>
@@ -222,9 +233,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/android-kotlin-desde-cero/." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../../.." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
-  <img src="/android-kotlin-desde-cero/assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     Android con Kotlin desde cero
@@ -251,7 +262,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -325,7 +336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter01/" class="md-nav__link">
+      <a href="../../part01/chapter01/" class="md-nav__link">
         
   
   
@@ -353,7 +364,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter02/" class="md-nav__link">
+      <a href="../../part01/chapter02/" class="md-nav__link">
         
   
   
@@ -381,7 +392,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter03/" class="md-nav__link">
+      <a href="../../part01/chapter03/" class="md-nav__link">
         
   
   
@@ -409,7 +420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter04/" class="md-nav__link">
+      <a href="../../part01/chapter04/" class="md-nav__link">
         
   
   
@@ -437,7 +448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter05/" class="md-nav__link">
+      <a href="../../part01/chapter05/" class="md-nav__link">
         
   
   
@@ -465,7 +476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter06/" class="md-nav__link">
+      <a href="../../part01/chapter06/" class="md-nav__link">
         
   
   
@@ -493,7 +504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter07/" class="md-nav__link">
+      <a href="../../part01/chapter07/" class="md-nav__link">
         
   
   
@@ -521,7 +532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/exercises/" class="md-nav__link">
+      <a href="../../part01/exercises/" class="md-nav__link">
         
   
   
@@ -603,7 +614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter08/" class="md-nav__link">
+      <a href="../../part02/chapter08/" class="md-nav__link">
         
   
   
@@ -631,7 +642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter09/" class="md-nav__link">
+      <a href="../../part02/chapter09/" class="md-nav__link">
         
   
   
@@ -659,7 +670,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter10/" class="md-nav__link">
+      <a href="../../part02/chapter10/" class="md-nav__link">
         
   
   
@@ -687,7 +698,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/exercises/" class="md-nav__link">
+      <a href="../../part02/exercises/" class="md-nav__link">
         
   
   
@@ -769,7 +780,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter11/" class="md-nav__link">
+      <a href="../../part03/chapter11/" class="md-nav__link">
         
   
   
@@ -797,7 +808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter12/" class="md-nav__link">
+      <a href="../../part03/chapter12/" class="md-nav__link">
         
   
   
@@ -825,7 +836,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter13/" class="md-nav__link">
+      <a href="../../part03/chapter13/" class="md-nav__link">
         
   
   
@@ -853,7 +864,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter14/" class="md-nav__link">
+      <a href="../../part03/chapter14/" class="md-nav__link">
         
   
   
@@ -881,7 +892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter15/" class="md-nav__link">
+      <a href="../../part03/chapter15/" class="md-nav__link">
         
   
   
@@ -909,7 +920,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/exercises/" class="md-nav__link">
+      <a href="../../part03/exercises/" class="md-nav__link">
         
   
   
@@ -991,7 +1002,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter16/" class="md-nav__link">
+      <a href="../../part04/chapter16/" class="md-nav__link">
         
   
   
@@ -1019,7 +1030,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter17/" class="md-nav__link">
+      <a href="../../part04/chapter17/" class="md-nav__link">
         
   
   
@@ -1047,7 +1058,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter18/" class="md-nav__link">
+      <a href="../../part04/chapter18/" class="md-nav__link">
         
   
   
@@ -1075,7 +1086,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter19/" class="md-nav__link">
+      <a href="../../part04/chapter19/" class="md-nav__link">
         
   
   
@@ -1103,7 +1114,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter20/" class="md-nav__link">
+      <a href="../../part04/chapter20/" class="md-nav__link">
         
   
   
@@ -1131,7 +1142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter21/" class="md-nav__link">
+      <a href="../../part04/chapter21/" class="md-nav__link">
         
   
   
@@ -1159,7 +1170,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/exercises/" class="md-nav__link">
+      <a href="../../part04/exercises/" class="md-nav__link">
         
   
   
@@ -1191,18 +1202,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -1223,7 +1236,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1241,7 +1254,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter22/" class="md-nav__link">
+      <a href="../chapter22/" class="md-nav__link">
         
   
   
@@ -1269,7 +1282,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter23/" class="md-nav__link">
+      <a href="../chapter23/" class="md-nav__link">
         
   
   
@@ -1294,10 +1307,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter24/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    24. <code>Flow</code>, <code>StateFlow</code> y <code>SharedFlow</code>
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1313,6 +1353,114 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-un-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es un Flow?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-y-recolectar-un-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear y recolectar un Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operadores-de-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operadores de Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stateflow-un-flujo-con-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        StateFlow: un flujo con estado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sharedflow-para-eventos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SharedFlow: para eventos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-conexion-con-mvvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La conexión con MVVM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1379,7 +1527,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter25/" class="md-nav__link">
+      <a href="../../part06/chapter25/" class="md-nav__link">
         
   
   
@@ -1407,7 +1555,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter26/" class="md-nav__link">
+      <a href="../../part06/chapter26/" class="md-nav__link">
         
   
   
@@ -1435,7 +1583,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter27/" class="md-nav__link">
+      <a href="../../part06/chapter27/" class="md-nav__link">
         
   
   
@@ -1463,7 +1611,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter28/" class="md-nav__link">
+      <a href="../../part06/chapter28/" class="md-nav__link">
         
   
   
@@ -1491,7 +1639,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter29/" class="md-nav__link">
+      <a href="../../part06/chapter29/" class="md-nav__link">
         
   
   
@@ -1519,7 +1667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter30/" class="md-nav__link">
+      <a href="../../part06/chapter30/" class="md-nav__link">
         
   
   
@@ -1547,7 +1695,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter31/" class="md-nav__link">
+      <a href="../../part06/chapter31/" class="md-nav__link">
         
   
   
@@ -1629,7 +1777,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter32/" class="md-nav__link">
+      <a href="../../part07/chapter32/" class="md-nav__link">
         
   
   
@@ -1657,7 +1805,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter33/" class="md-nav__link">
+      <a href="../../part07/chapter33/" class="md-nav__link">
         
   
   
@@ -1685,7 +1833,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter34/" class="md-nav__link">
+      <a href="../../part07/chapter34/" class="md-nav__link">
         
   
   
@@ -1713,7 +1861,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter35/" class="md-nav__link">
+      <a href="../../part07/chapter35/" class="md-nav__link">
         
   
   
@@ -1795,7 +1943,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter36/" class="md-nav__link">
+      <a href="../../part08/chapter36/" class="md-nav__link">
         
   
   
@@ -1823,7 +1971,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter37/" class="md-nav__link">
+      <a href="../../part08/chapter37/" class="md-nav__link">
         
   
   
@@ -1851,7 +1999,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter38/" class="md-nav__link">
+      <a href="../../part08/chapter38/" class="md-nav__link">
         
   
   
@@ -1879,7 +2027,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter39/" class="md-nav__link">
+      <a href="../../part08/chapter39/" class="md-nav__link">
         
   
   
@@ -1961,7 +2109,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter40/" class="md-nav__link">
+      <a href="../../part09/chapter40/" class="md-nav__link">
         
   
   
@@ -1989,7 +2137,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter41/" class="md-nav__link">
+      <a href="../../part09/chapter41/" class="md-nav__link">
         
   
   
@@ -2017,7 +2165,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter42/" class="md-nav__link">
+      <a href="../../part09/chapter42/" class="md-nav__link">
         
   
   
@@ -2045,7 +2193,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter43/" class="md-nav__link">
+      <a href="../../part09/chapter43/" class="md-nav__link">
         
   
   
@@ -2073,7 +2221,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter44/" class="md-nav__link">
+      <a href="../../part09/chapter44/" class="md-nav__link">
         
   
   
@@ -2101,7 +2249,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter45/" class="md-nav__link">
+      <a href="../../part09/chapter45/" class="md-nav__link">
         
   
   
@@ -2129,7 +2277,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter46/" class="md-nav__link">
+      <a href="../../part09/chapter46/" class="md-nav__link">
         
   
   
@@ -2157,7 +2305,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter47/" class="md-nav__link">
+      <a href="../../part09/chapter47/" class="md-nav__link">
         
   
   
@@ -2185,7 +2333,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/chapter48/" class="md-nav__link">
         
   
   
@@ -2213,7 +2361,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter49/" class="md-nav__link">
+      <a href="../../part09/chapter49/" class="md-nav__link">
         
   
   
@@ -2295,7 +2443,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/appendix/design-principle/" class="md-nav__link">
+      <a href="../../appendix/design-principle/" class="md-nav__link">
         
   
   
@@ -2323,7 +2471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/appendix/java-scanner/" class="md-nav__link">
+      <a href="../../appendix/java-scanner/" class="md-nav__link">
         
   
   
@@ -2368,6 +2516,104 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-un-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es un Flow?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-y-recolectar-un-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear y recolectar un Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operadores-de-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operadores de Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stateflow-un-flujo-con-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        StateFlow: un flujo con estado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sharedflow-para-eventos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SharedFlow: para eventos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-conexion-con-mvvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La conexión con MVVM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2380,8 +2626,128 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="capitulo-24-flow-stateflow-y-sharedflow">Capítulo 24: <code>Flow</code>, <code>StateFlow</code> y <code>SharedFlow</code><a class="headerlink" href="#capitulo-24-flow-stateflow-y-sharedflow" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>En el capítulo anterior, una función <code>suspend</code> te daba <strong>un solo</strong> resultado: una descarga, un valor. Pero muchas veces necesitas una <strong>secuencia de valores</strong> que van llegando <strong>a lo largo del tiempo</strong>: los resultados de una búsqueda que se actualizan mientras escribes, las lecturas de un sensor o —lo más importante para nosotros— el <strong>estado de una pantalla</strong> que va cambiando (cargando, luego con datos).</p>
+<p>Para esto, Kotlin ofrece el <strong><code>Flow</code></strong> ("flujo"). En este capítulo verás qué es un Flow, cómo crearlo y recolectarlo, y dos variantes especializadas —<strong><code>StateFlow</code></strong> y <strong><code>SharedFlow</code></strong>— que son la base de cómo la interfaz de una app moderna reacciona automáticamente a los cambios. Con esto cerramos la parte de asincronía y quedamos listos para la arquitectura MVVM.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p><code>Flow</code> y sus variantes forman parte de la misma biblioteca de coroutines (<code>kotlinx.coroutines</code>) que viste en el capítulo anterior.</p>
+</div>
+<h2 id="que-es-un-flow">¿Qué es un Flow?<a class="headerlink" href="#que-es-un-flow" title="Permanent link">&para;</a></h2>
+<p>Un <strong><code>Flow</code></strong> es un <strong>flujo de valores asíncronos</strong>: una fuente que puede <strong>emitir varios valores a lo largo del tiempo</strong>, en lugar de devolver uno solo.</p>
+<p>La diferencia con lo que ya conoces:</p>
+<ul>
+<li>Una función <code>suspend</code> es como pedir <strong>un</strong> café: esperas un momento y lo recibes, una sola vez.</li>
+<li>Un <code>Flow</code> es como una <strong>suscripción</strong>: los valores van llegando, uno tras otro, a medida que están disponibles.</li>
+</ul>
+<p>Otra forma de verlo: un <code>Flow</code> se parece a una lista, pero sus elementos no están todos desde el principio, sino que <strong>aparecen con el tiempo</strong>.</p>
+<h2 id="crear-y-recolectar-un-flow">Crear y recolectar un Flow<a class="headerlink" href="#crear-y-recolectar-un-flow" title="Permanent link">&para;</a></h2>
+<p>Para crear un flujo, usas el constructor <code>flow { }</code> y, dentro, <strong>emites</strong> valores con <code>emit()</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">numeros</span><span class="p">():</span><span class="w"> </span><span class="n">Flow</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flow</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">emit</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">delay</span><span class="p">(</span><span class="m">1000</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">emit</span><span class="p">(</span><span class="m">2</span><span class="p">)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">delay</span><span class="p">(</span><span class="m">1000</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">emit</span><span class="p">(</span><span class="m">3</span><span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>Este flujo emite <code>1</code>, espera un segundo, emite <code>2</code>, espera otro, y emite <code>3</code>. Para <strong>recibir</strong> esos valores, te suscribes con <code>collect</code>, que ejecuta un bloque por cada valor que llega:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runBlocking</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">numeros</span><span class="p">().</span><span class="na">collect</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="n">valor</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Salida</strong> (con un segundo de pausa entre cada número):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>1
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>2
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>3
+</code></pre></div>
+<p>Dos detalles importantes: <code>collect</code> es una función <code>suspend</code> (se suspende esperando los valores, sin bloquear el hilo) y el flujo es "frío" (<em>cold</em>): su código no se ejecuta hasta que alguien lo recolecta. Si nadie hace <code>collect</code>, no se emite nada.</p>
+<h2 id="operadores-de-flow">Operadores de Flow<a class="headerlink" href="#operadores-de-flow" title="Permanent link">&para;</a></h2>
+<p>¿Recuerdas <code>map</code> y <code>filter</code> de las colecciones? Los flujos tienen los <strong>mismos operadores</strong>, y funcionan igual, pero aplicados a los valores a medida que llegan:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runBlocking</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">numeros</span><span class="p">()</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="p">.</span><span class="na">filter</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">it</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// solo los impares: 1, 3</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="p">.</span><span class="na">map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">it</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="p">}</span><span class="w">        </span><span class="c1">// los multiplica por 10: 10, 30</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="p">.</span><span class="na">collect</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="nb">it</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>Todo lo que aprendiste sobre transformar colecciones se traslada a los flujos. La diferencia es que aquí los valores se procesan <strong>conforme se emiten</strong>, no todos de golpe.</p>
+<h2 id="stateflow-un-flujo-con-estado">StateFlow: un flujo con estado<a class="headerlink" href="#stateflow-un-flujo-con-estado" title="Permanent link">&para;</a></h2>
+<p>Un <code>Flow</code> normal no <strong>recuerda</strong> su último valor: si te suscribes tarde, te pierdes lo ya emitido. Pero para la interfaz de una app queremos justo lo contrario: un flujo que <strong>siempre tenga un valor actual</strong> (el estado presente de la pantalla) y que <strong>avise cuando ese valor cambia</strong>.</p>
+<p>Para eso está el <strong><code>StateFlow</code></strong>. Es un flujo que <strong>guarda un valor</strong> y emite cada actualización. Se crea con <code>MutableStateFlow</code>, dándole un valor inicial, y accedes o cambias su valor con la propiedad <code>.value</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">contador</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="p">(</span><span class="m">0</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">println</span><span class="p">(</span><span class="n">contador</span><span class="p">.</span><span class="na">value</span><span class="p">)</span><span class="w"> </span><span class="c1">// 0</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">contador</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w">      </span><span class="c1">// actualiza el estado</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">println</span><span class="p">(</span><span class="n">contador</span><span class="p">.</span><span class="na">value</span><span class="p">)</span><span class="w"> </span><span class="c1">// 1</span>
+</code></pre></div>
+<p>Cualquiera que recolecte ese <code>StateFlow</code> recibe <strong>de inmediato</strong> el valor actual y, luego, cada cambio. Esto lo hace perfecto para representar el <strong>estado de la interfaz</strong>. Retomando la <code>sealed class UiState</code> del capítulo de <code>enum</code> y <code>sealed class</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">estado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span><span class="p">)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1">// Más tarde, cuando llegan los datos:</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">estado</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Exito</span><span class="p">(</span><span class="n">listOf</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Diego&quot;</span><span class="p">))</span>
+</code></pre></div>
+<p>La pantalla, suscrita a <code>estado</code>, empieza mostrando el indicador de carga y, en cuanto el estado pasa a <code>Exito</code>, se <strong>redibuja sola</strong> con los datos.</p>
+<h2 id="sharedflow-para-eventos">SharedFlow: para eventos<a class="headerlink" href="#sharedflow-para-eventos" title="Permanent link">&para;</a></h2>
+<p>Falta mencionar al primo del <code>StateFlow</code>: el <strong><code>SharedFlow</code></strong>. Ambos son flujos que pueden tener varios suscriptores, pero se usan para cosas distintas:</p>
+<ul>
+<li>Un <strong><code>StateFlow</code></strong> representa un <strong>estado</strong>: siempre tiene un valor actual y responde a la pregunta "¿qué debo mostrar ahora?" (la pantalla está cargando, o con datos).</li>
+<li>Un <strong><code>SharedFlow</code></strong> representa <strong>eventos</strong> puntuales: cosas que ocurren una vez y no tienen un "valor actual", como "muestra un mensaje" o "navega a otra pantalla".</li>
+</ul>
+<p>La regla práctica: usa <code>StateFlow</code> para el <strong>estado</strong> de la interfaz y <code>SharedFlow</code> para <strong>eventos</strong> de una sola vez. En una app, el estado de una pantalla suele ser un <code>StateFlow</code>.</p>
+<h2 id="la-conexion-con-mvvm">La conexión con MVVM<a class="headerlink" href="#la-conexion-con-mvvm" title="Permanent link">&para;</a></h2>
+<p>Aquí se juntan varias piezas del curso y aparece un patrón muy habitual en las apps:</p>
+<ul>
+<li>El <strong>ViewModel</strong> (una clase que veremos en detalle en la parte de arquitectura) mantiene un <code>StateFlow&lt;UiState&gt;</code> con el estado de la pantalla.</li>
+<li>Lanza una coroutine (en su <code>viewModelScope</code>, del capítulo anterior) que pide los datos a una fuente externa (por ejemplo, la red) en el hilo de <code>IO</code>.</li>
+<li>Cuando los datos llegan, actualiza el <code>.value</code> del <code>StateFlow</code>.</li>
+<li>La <strong>interfaz</strong> recolecta ese <code>StateFlow</code> y, ante cada cambio, se redibuja automáticamente.</li>
+</ul>
+<p>Visto en el tiempo:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant VM as ViewModel
+    participant SF as StateFlow
+    participant UI as Interfaz
+    UI-&gt;&gt;SF: collect (se suscribe)
+    SF--&gt;&gt;UI: Estado actual: Cargando
+    Note over VM: Llegan los datos
+    VM-&gt;&gt;SF: .value = Exito(datos)
+    SF--&gt;&gt;UI: Nuevo estado: Exito
+    Note over UI: Se redibuja con los datos</code></pre>
+<p>Este flujo de datos en una sola dirección —el estado vive en el ViewModel, la interfaz solo lo observa y reacciona— es el corazón de MVVM, y lo construiremos paso a paso más adelante.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>Con este capítulo cerraste la parte de asincronía:</p>
+<ul>
+<li>Un <strong><code>Flow</code></strong> es un flujo de valores asíncronos que se emiten con <code>emit</code> y se reciben con <code>collect</code>. Es "frío": no se ejecuta hasta que alguien lo recolecta.</li>
+<li>Los flujos admiten los mismos <strong>operadores</strong> que las colecciones (<code>map</code>, <code>filter</code>…), aplicados a los valores a medida que llegan.</li>
+<li>Un <strong><code>StateFlow</code></strong> es un flujo que <strong>guarda un valor actual</strong> y emite sus cambios; es ideal para el <strong>estado de la interfaz</strong>. Se crea con <code>MutableStateFlow</code> y se actualiza con <code>.value</code>.</li>
+<li>Un <strong><code>SharedFlow</code></strong> sirve para <strong>eventos</strong> de una sola vez, en lugar de un estado persistente.</li>
+<li>Este mecanismo —el estado en un <code>StateFlow</code> que la interfaz observa y al que reacciona— es la base de la arquitectura <strong>MVVM</strong>.</li>
+</ul>
+<p>Con esto tienes todos los fundamentos de Kotlin y de la asincronía. En la próxima parte del curso, ¡por fin abrimos Android Studio y creamos nuestra primera aplicación con Jetpack Compose!</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -2399,6 +2765,44 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../chapter23/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 23. &lt;code&gt;suspend&lt;/code&gt;, &lt;code&gt;launch&lt;/code&gt;, &lt;code&gt;async&lt;/code&gt;, scopes y dispatchers">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                23. <code>suspend</code>, <code>launch</code>, <code>async</code>, scopes y dispatchers
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../part06/chapter25/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 25. Android Studio y anatomía de un proyecto">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                25. Android Studio y anatomía de un proyecto
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -2426,12 +2830,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/android-kotlin-desde-cero/", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "/android-kotlin-desde-cero/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="/android-kotlin-desde-cero/assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="/android-kotlin-desde-cero/assets/js/custom.js"></script>
+        <script src="../../../assets/js/custom.js"></script>
       
     
   </body>

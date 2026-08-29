@@ -10,29 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/">
+        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/content/part01/chapter07/">
       
       
+        <link rel="prev" href="../chapter06/">
       
-        <link rel="next" href="content/part01/chapter01/">
+      
+        <link rel="next" href="../exercises/">
       
       
         
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Android con Kotlin desde cero</title>
+        <title>7. Trabajar con cadenas: longitud, concatenación y repeat - Android con Kotlin desde cero</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="assets/css/custom.css">
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#android-con-kotlin-desde-cero" class="md-skip">
+        <a href="#capitulo-7-trabajar-con-cadenas" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -94,9 +96,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../../.." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
-  <img src="assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -113,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Inicio
+              7. Trabajar con cadenas: longitud, concatenación y <code>repeat</code>
             
           </span>
         </div>
@@ -231,9 +233,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../../.." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
-  <img src="assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     Android con Kotlin desde cero
@@ -257,37 +259,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Inicio
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -303,59 +278,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#para-quien-es-este-curso" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Para quién es este curso?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#que-construiremos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Qué construiremos?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#como-esta-organizado" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Cómo está organizado?
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -364,18 +286,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -396,7 +320,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -414,7 +338,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part01/chapter01/" class="md-nav__link">
+      <a href="../chapter01/" class="md-nav__link">
         
   
   
@@ -442,7 +366,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part01/chapter02/" class="md-nav__link">
+      <a href="../chapter02/" class="md-nav__link">
         
   
   
@@ -470,7 +394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part01/chapter03/" class="md-nav__link">
+      <a href="../chapter03/" class="md-nav__link">
         
   
   
@@ -498,7 +422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part01/chapter04/" class="md-nav__link">
+      <a href="../chapter04/" class="md-nav__link">
         
   
   
@@ -526,7 +450,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part01/chapter05/" class="md-nav__link">
+      <a href="../chapter05/" class="md-nav__link">
         
   
   
@@ -554,7 +478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part01/chapter06/" class="md-nav__link">
+      <a href="../chapter06/" class="md-nav__link">
         
   
   
@@ -579,10 +503,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="content/part01/chapter07/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Trabajar con cadenas: longitud, concatenación y <code>repeat</code>
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -598,6 +549,120 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-longitud-de-una-cadena" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La longitud de una cadena
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concatenacion-de-cadenas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concatenación de cadenas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concatenación de cadenas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-orden-importa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El orden importa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concatenar-caracteres-y-numeros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concatenar caracteres y números
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repetir-una-cadena" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repetir una cadena
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cadenas-sin-formato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cadenas sin formato
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -610,7 +675,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part01/exercises/" class="md-nav__link">
+      <a href="../exercises/" class="md-nav__link">
         
   
   
@@ -692,7 +757,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part02/chapter08/" class="md-nav__link">
+      <a href="../../part02/chapter08/" class="md-nav__link">
         
   
   
@@ -720,7 +785,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part02/chapter09/" class="md-nav__link">
+      <a href="../../part02/chapter09/" class="md-nav__link">
         
   
   
@@ -748,7 +813,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part02/chapter10/" class="md-nav__link">
+      <a href="../../part02/chapter10/" class="md-nav__link">
         
   
   
@@ -776,7 +841,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part02/exercises/" class="md-nav__link">
+      <a href="../../part02/exercises/" class="md-nav__link">
         
   
   
@@ -858,7 +923,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part03/chapter11/" class="md-nav__link">
+      <a href="../../part03/chapter11/" class="md-nav__link">
         
   
   
@@ -886,7 +951,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part03/chapter12/" class="md-nav__link">
+      <a href="../../part03/chapter12/" class="md-nav__link">
         
   
   
@@ -914,7 +979,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part03/chapter13/" class="md-nav__link">
+      <a href="../../part03/chapter13/" class="md-nav__link">
         
   
   
@@ -942,7 +1007,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part03/chapter14/" class="md-nav__link">
+      <a href="../../part03/chapter14/" class="md-nav__link">
         
   
   
@@ -970,7 +1035,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part03/chapter15/" class="md-nav__link">
+      <a href="../../part03/chapter15/" class="md-nav__link">
         
   
   
@@ -998,7 +1063,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part03/exercises/" class="md-nav__link">
+      <a href="../../part03/exercises/" class="md-nav__link">
         
   
   
@@ -1080,7 +1145,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part04/chapter16/" class="md-nav__link">
+      <a href="../../part04/chapter16/" class="md-nav__link">
         
   
   
@@ -1108,7 +1173,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part04/chapter17/" class="md-nav__link">
+      <a href="../../part04/chapter17/" class="md-nav__link">
         
   
   
@@ -1136,7 +1201,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part04/chapter18/" class="md-nav__link">
+      <a href="../../part04/chapter18/" class="md-nav__link">
         
   
   
@@ -1164,7 +1229,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part04/chapter19/" class="md-nav__link">
+      <a href="../../part04/chapter19/" class="md-nav__link">
         
   
   
@@ -1192,7 +1257,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part04/chapter20/" class="md-nav__link">
+      <a href="../../part04/chapter20/" class="md-nav__link">
         
   
   
@@ -1220,7 +1285,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part04/chapter21/" class="md-nav__link">
+      <a href="../../part04/chapter21/" class="md-nav__link">
         
   
   
@@ -1248,7 +1313,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part04/exercises/" class="md-nav__link">
+      <a href="../../part04/exercises/" class="md-nav__link">
         
   
   
@@ -1330,7 +1395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part05/chapter22/" class="md-nav__link">
+      <a href="../../part05/chapter22/" class="md-nav__link">
         
   
   
@@ -1358,7 +1423,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part05/chapter23/" class="md-nav__link">
+      <a href="../../part05/chapter23/" class="md-nav__link">
         
   
   
@@ -1386,7 +1451,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part05/chapter24/" class="md-nav__link">
+      <a href="../../part05/chapter24/" class="md-nav__link">
         
   
   
@@ -1468,7 +1533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part06/chapter25/" class="md-nav__link">
+      <a href="../../part06/chapter25/" class="md-nav__link">
         
   
   
@@ -1496,7 +1561,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part06/chapter26/" class="md-nav__link">
+      <a href="../../part06/chapter26/" class="md-nav__link">
         
   
   
@@ -1524,7 +1589,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part06/chapter27/" class="md-nav__link">
+      <a href="../../part06/chapter27/" class="md-nav__link">
         
   
   
@@ -1552,7 +1617,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part06/chapter28/" class="md-nav__link">
+      <a href="../../part06/chapter28/" class="md-nav__link">
         
   
   
@@ -1580,7 +1645,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part06/chapter29/" class="md-nav__link">
+      <a href="../../part06/chapter29/" class="md-nav__link">
         
   
   
@@ -1608,7 +1673,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part06/chapter30/" class="md-nav__link">
+      <a href="../../part06/chapter30/" class="md-nav__link">
         
   
   
@@ -1636,7 +1701,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part06/chapter31/" class="md-nav__link">
+      <a href="../../part06/chapter31/" class="md-nav__link">
         
   
   
@@ -1718,7 +1783,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part07/chapter32/" class="md-nav__link">
+      <a href="../../part07/chapter32/" class="md-nav__link">
         
   
   
@@ -1746,7 +1811,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part07/chapter33/" class="md-nav__link">
+      <a href="../../part07/chapter33/" class="md-nav__link">
         
   
   
@@ -1774,7 +1839,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part07/chapter34/" class="md-nav__link">
+      <a href="../../part07/chapter34/" class="md-nav__link">
         
   
   
@@ -1802,7 +1867,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part07/chapter35/" class="md-nav__link">
+      <a href="../../part07/chapter35/" class="md-nav__link">
         
   
   
@@ -1884,7 +1949,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part08/chapter36/" class="md-nav__link">
+      <a href="../../part08/chapter36/" class="md-nav__link">
         
   
   
@@ -1912,7 +1977,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part08/chapter37/" class="md-nav__link">
+      <a href="../../part08/chapter37/" class="md-nav__link">
         
   
   
@@ -1940,7 +2005,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part08/chapter38/" class="md-nav__link">
+      <a href="../../part08/chapter38/" class="md-nav__link">
         
   
   
@@ -1968,7 +2033,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part08/chapter39/" class="md-nav__link">
+      <a href="../../part08/chapter39/" class="md-nav__link">
         
   
   
@@ -2050,7 +2115,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part09/chapter40/" class="md-nav__link">
+      <a href="../../part09/chapter40/" class="md-nav__link">
         
   
   
@@ -2078,7 +2143,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part09/chapter41/" class="md-nav__link">
+      <a href="../../part09/chapter41/" class="md-nav__link">
         
   
   
@@ -2106,7 +2171,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part09/chapter42/" class="md-nav__link">
+      <a href="../../part09/chapter42/" class="md-nav__link">
         
   
   
@@ -2134,7 +2199,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part09/chapter43/" class="md-nav__link">
+      <a href="../../part09/chapter43/" class="md-nav__link">
         
   
   
@@ -2162,7 +2227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part09/chapter44/" class="md-nav__link">
+      <a href="../../part09/chapter44/" class="md-nav__link">
         
   
   
@@ -2190,7 +2255,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part09/chapter45/" class="md-nav__link">
+      <a href="../../part09/chapter45/" class="md-nav__link">
         
   
   
@@ -2218,7 +2283,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part09/chapter46/" class="md-nav__link">
+      <a href="../../part09/chapter46/" class="md-nav__link">
         
   
   
@@ -2246,7 +2311,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part09/chapter47/" class="md-nav__link">
+      <a href="../../part09/chapter47/" class="md-nav__link">
         
   
   
@@ -2274,7 +2339,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/chapter48/" class="md-nav__link">
         
   
   
@@ -2302,7 +2367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/part09/chapter49/" class="md-nav__link">
+      <a href="../../part09/chapter49/" class="md-nav__link">
         
   
   
@@ -2384,7 +2449,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/appendix/design-principle/" class="md-nav__link">
+      <a href="../../appendix/design-principle/" class="md-nav__link">
         
   
   
@@ -2412,7 +2477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="content/appendix/java-scanner/" class="md-nav__link">
+      <a href="../../appendix/java-scanner/" class="md-nav__link">
         
   
   
@@ -2467,10 +2532,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#para-quien-es-este-curso" class="md-nav__link">
+  <a href="#introduccion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Para quién es este curso?
+        Introducción
       
     </span>
   </a>
@@ -2478,10 +2543,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#que-construiremos" class="md-nav__link">
+  <a href="#la-longitud-de-una-cadena" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué construiremos?
+        La longitud de una cadena
       
     </span>
   </a>
@@ -2489,10 +2554,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#como-esta-organizado" class="md-nav__link">
+  <a href="#concatenacion-de-cadenas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Cómo está organizado?
+        Concatenación de cadenas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Concatenación de cadenas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-orden-importa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El orden importa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concatenar-caracteres-y-numeros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concatenar caracteres y números
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repetir-una-cadena" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repetir una cadena
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cadenas-sin-formato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cadenas sin formato
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
       
     </span>
   </a>
@@ -2519,30 +2645,152 @@
   
 
 
-<h1 id="android-con-kotlin-desde-cero">Android con Kotlin desde cero<a class="headerlink" href="#android-con-kotlin-desde-cero" title="Permanent link">&para;</a></h1>
-<p>Bienvenido a <strong>Android con Kotlin desde cero</strong>: un recorrido que te lleva desde los fundamentos del lenguaje Kotlin hasta construir una aplicación Android completa con Jetpack Compose.</p>
-<h2 id="para-quien-es-este-curso">¿Para quién es este curso?<a class="headerlink" href="#para-quien-es-este-curso" title="Permanent link">&para;</a></h2>
-<p>Está pensado para personas con base en <strong>programación orientada a objetos</strong> (por ejemplo, quienes vienen de Java) que quieren aprender <strong>Kotlin</strong> y el <strong>desarrollo Android moderno</strong>. Cada concepto se apoya en el anterior, con ejemplos claros y sin dar nada por sabido.</p>
-<h2 id="que-construiremos">¿Qué construiremos?<a class="headerlink" href="#que-construiremos" title="Permanent link">&para;</a></h2>
-<p>El hilo conductor del curso es una <strong>app de gestión de contactos</strong> que consume una API REST con operaciones <strong>CRUD</strong> completas: listar contactos (con búsqueda y paginación), ver su detalle, y crearlos, editarlos y eliminarlos. Está construida con <strong>MVVM</strong>, <strong>Jetpack Compose</strong>, <strong>Retrofit</strong> y <strong>Material 3</strong>.</p>
-<h2 id="como-esta-organizado">¿Cómo está organizado?<a class="headerlink" href="#como-esta-organizado" title="Permanent link">&para;</a></h2>
-<p>El curso avanza por partes, de lo más básico a lo más avanzado:</p>
-<ul>
-<li><strong>Parte I · Fundamentos de Kotlin</strong> — variables, tipos, operadores, entrada/salida y cadenas.</li>
-<li><strong>Parte II · Estructuras de control y funciones</strong> — <code>if</code>, <code>when</code>, bucles y funciones.</li>
-<li><strong>Parte III · Colecciones y código robusto</strong> — listas, mapas, operaciones funcionales, <em>null safety</em> y excepciones.</li>
-<li><strong>Parte IV · Programación orientada a objetos en Kotlin</strong> — clases, herencia, <code>data class</code>, <code>object</code>, <code>sealed class</code>, genéricos y lambdas.</li>
-<li><strong>Parte V · Asincronía con Coroutines</strong> — hilos, <code>suspend</code>, <code>launch</code>, <code>Flow</code> y <code>StateFlow</code>.</li>
-<li><strong>Parte VI · Introducción a Android con Jetpack Compose</strong> — Android Studio, componentes, estado, navegación y Material 3.</li>
-<li><strong>Parte VII · Arquitectura MVVM</strong> — <code>ViewModel</code>, estado de la interfaz, repositorio, separación en capas e inyección de dependencias.</li>
-<li><strong>Parte VIII · Consumo de APIs con Retrofit</strong> — HTTP, REST y JSON, configuración de Retrofit, serialización con DTOs y estados de red.</li>
-<li><strong>Parte IX · Proyecto final</strong> — construir, de principio a fin, la app de gestión de contactos con CRUD completo.</li>
-</ul>
-<p>Al final encontrarás los <strong>anexos</strong> con material de referencia (principios de diseño y entrada estándar con <code>Scanner</code>).</p>
+<h1 id="capitulo-7-trabajar-con-cadenas">Capítulo 7: Trabajar con cadenas<a class="headerlink" href="#capitulo-7-trabajar-con-cadenas" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>Como ya sabes, Kotlin cuenta con numerosos tipos de datos, como <code>String</code>, <code>Int</code> y <code>Double</code>. En los capítulos anteriores usaste cadenas muchas veces: para mostrar mensajes, leer datos y construir plantillas. En este capítulo nos centraremos en el tipo <code>String</code> y aprenderemos a <strong>trabajar</strong> con él más de cerca: medir su longitud, unir cadenas entre sí y repetirlas.</p>
+<p>Recuerda que una cadena es una secuencia de cero o más caracteres entre comillas dobles; por ejemplo, <code>"Ana"</code> o <code>""</code>. Seguro que usarás cadenas con frecuencia en tus futuros proyectos, así que estos conceptos básicos te acompañarán durante todo el curso.</p>
+<h2 id="la-longitud-de-una-cadena">La longitud de una cadena<a class="headerlink" href="#la-longitud-de-una-cadena" title="Permanent link">&para;</a></h2>
+<p>A menudo necesitarás saber cuántos caracteres tiene una cadena. La <strong>longitud</strong> de una cadena es, precisamente, el número de caracteres que hay entre las comillas dobles. Para obtenerla, usa <code>.length</code>, que devuelve un valor de tipo <code>Int</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">language</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Kotlin&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">println</span><span class="p">(</span><span class="n">language</span><span class="p">.</span><span class="na">length</span><span class="p">)</span><span class="w"> </span><span class="c1">// 6</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kd">val</span><span class="w"> </span><span class="nv">empty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">println</span><span class="p">(</span><span class="n">empty</span><span class="p">.</span><span class="na">length</span><span class="p">)</span><span class="w"> </span><span class="c1">// 0</span>
+</code></pre></div>
+<p>Fíjate en que <code>.length</code> no lleva paréntesis: es una <strong>propiedad</strong> de la cadena, no una función que se invoca.</p>
+<h2 id="concatenacion-de-cadenas">Concatenación de cadenas<a class="headerlink" href="#concatenacion-de-cadenas" title="Permanent link">&para;</a></h2>
+<p>Otra operación habitual con cadenas es la <strong>concatenación</strong>, que consiste en construir una cadena uniendo otras. Para concatenar dos cadenas, usamos el operador <code>+</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">str1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ab&quot;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">str2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cde&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">str2</span><span class="w"> </span><span class="c1">// &quot;abcde&quot;</span>
+</code></pre></div>
+<p>Al concatenar dos cadenas, se crea una <strong>cadena nueva</strong>; las originales no se modifican:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">one</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1&quot;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">two</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;2&quot;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">twelve</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">two</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">println</span><span class="p">(</span><span class="n">one</span><span class="p">)</span><span class="w">    </span><span class="c1">// 1, sin cambios</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">println</span><span class="p">(</span><span class="n">two</span><span class="p">)</span><span class="w">    </span><span class="c1">// 2, sin cambios</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">println</span><span class="p">(</span><span class="n">twelve</span><span class="p">)</span><span class="w"> </span><span class="c1">// 12</span>
+</code></pre></div>
+<p>Puedes concatenar varias cadenas en la misma expresión:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">firstName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Ana&quot;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">lastName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Gómez&quot;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">fullName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">firstName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lastName</span><span class="w"> </span><span class="c1">// Ana Gómez</span>
+</code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Sugerencia</p>
-<p>Si es tu primera vez, empieza por el <a href="part01/chapter01.md">Capítulo 1</a> y avanza en orden: cada capítulo asume lo aprendido en los anteriores. Usa el menú lateral para desplazarte entre los capítulos.</p>
+<p>La concatenación con <code>+</code> funciona bien, pero cuando construyes un texto a partir de varias variables suele quedar más legible usar las <strong>plantillas de cadena</strong> que viste en el capítulo anterior. Por ejemplo, <code>"$firstName $lastName"</code> se lee mejor que <code>firstName + " " + lastName</code>.</p>
 </div>
+<h3 id="el-orden-importa">El orden importa<a class="headerlink" href="#el-orden-importa" title="Permanent link">&para;</a></h3>
+<p>Al mezclar cadenas con otros tipos, el orden de los operandos es decisivo. Observa este ejemplo, que <strong>no</strong> funciona porque el primer operando es un número:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">errorString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;abc&quot;</span><span class="w"> </span><span class="c1">// ¡un error aquí!</span>
+</code></pre></div>
+<p>En cambio, esta otra situación sí funciona:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">stringAndNumbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;abc&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">11</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">22</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">println</span><span class="p">(</span><span class="n">stringAndNumbers</span><span class="p">)</span><span class="w"> </span><span class="c1">// abc1122</span>
+</code></pre></div>
+<p>¿Por qué? La concatenación se evalúa de <strong>izquierda a derecha</strong>. En el segundo caso, primero se une <code>"abc"</code> con <code>11</code>, lo que produce la cadena <code>"abc11"</code>; luego, a esa cadena se le añade <code>22</code>, dando <code>"abc1122"</code>. En el primer caso, en cambio, Kotlin intenta primero sumar <code>10 + "abc"</code>, es decir, sumar un número con un texto, y eso no tiene sentido: de ahí el error.</p>
+<h3 id="concatenar-caracteres-y-numeros">Concatenar caracteres y números<a class="headerlink" href="#concatenar-caracteres-y-numeros" title="Permanent link">&para;</a></h3>
+<p>Puedes concatenar un carácter con una cadena para obtener una nueva cadena:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">charPlusString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;bc&quot;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">println</span><span class="p">(</span><span class="n">charPlusString</span><span class="p">)</span><span class="w"> </span><span class="c1">// abc</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="kd">val</span><span class="w"> </span><span class="nv">stringPlusChar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;de&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="sc">&#39;f&#39;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">println</span><span class="p">(</span><span class="n">stringPlusChar</span><span class="p">)</span><span class="w"> </span><span class="c1">// def</span>
+</code></pre></div>
+<p>Y, mientras el resultado ya sea una cadena, puedes seguir añadiéndole valores de otros tipos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">charPlusStringPlusInt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;bc&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">123</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">println</span><span class="p">(</span><span class="n">charPlusStringPlusInt</span><span class="p">)</span><span class="w"> </span><span class="c1">// abc123</span>
+</code></pre></div>
+<p>Más adelante veremos con más detalle cómo trabajar con caracteres; por ahora, basta con que recuerdes que puedes concatenar caracteres, cadenas y números para obtener un valor de tipo <code>String</code>.</p>
+<h2 id="repetir-una-cadena">Repetir una cadena<a class="headerlink" href="#repetir-una-cadena" title="Permanent link">&para;</a></h2>
+<p>Si necesitas repetir una cadena dos o más veces, no hace falta escribirla varias veces: Kotlin ofrece la función <code>repeat</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">print</span><span class="p">(</span><span class="s">&quot;Hola&quot;</span><span class="p">.</span><span class="na">repeat</span><span class="p">(</span><span class="m">4</span><span class="p">))</span><span class="w"> </span><span class="c1">// HolaHolaHolaHola</span>
+</code></pre></div>
+<p>Ahora imagina que un amigo, un desarrollador con mucha experiencia, te revela su secreto para convertirte en mejor programador:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>POR HACER:
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>- Comer
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>- Dormir
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>- Programar
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>- Repetir
+</code></pre></div>
+<p>Intentemos convertir ese mensaje en un fragmento de código que muestre tu horario para cada día de la semana:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">println</span><span class="p">(</span><span class="s">&quot;Comer. Dormir. Programar.\n&quot;</span><span class="p">.</span><span class="na">repeat</span><span class="p">(</span><span class="m">7</span><span class="p">))</span><span class="w"> </span><span class="c1">// \n produce un salto de línea</span>
+</code></pre></div>
+<p>Y aquí tienes tu horario semanal:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Comer. Dormir. Programar.
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>Comer. Dormir. Programar.
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>Comer. Dormir. Programar.
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>Comer. Dormir. Programar.
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>Comer. Dormir. Programar.
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>Comer. Dormir. Programar.
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>Comer. Dormir. Programar.
+</code></pre></div>
+<h2 id="cadenas-sin-formato">Cadenas sin formato<a class="headerlink" href="#cadenas-sin-formato" title="Permanent link">&para;</a></h2>
+<p>A veces necesitas incluir símbolos especiales, como tabulaciones o comillas, dentro de una cadena. Puedes hacerlo con la ayuda de <strong>secuencias de escape</strong>, que empiezan con una barra invertida <code>\</code>. Por ejemplo, <code>\"</code> inserta una comilla doble y <code>\n</code> un salto de línea:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">// Muestra: &#39;H&#39; es la primera letra de la cadena &quot;Hola, mundo&quot;.</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">println</span><span class="p">(</span><span class="s">&quot;&#39;H&#39; es la primera letra de la cadena \&quot;Hola, mundo\&quot;.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Esto se ve un poco denso. Si tienes que escribir un texto largo con saltos de línea y caracteres especiales, puede resultar difícil de leer.</p>
+<p>En estos casos, puedes usar una <strong>cadena sin formato</strong> (<em>raw string</em>). Una cadena sin formato puede contener saltos de línea y cualquier otro carácter sin necesidad de escaparlos. Solo tienes que escribir el texto entre comillas triples (<code>"""</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">largeString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="s">    Esta es la casa que construyó Jack.</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="s">    Esta es la malta que había en la casa que construyó Jack.</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="s">    Esta es la rata que se comió la malta</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="s">    que había en la casa que construyó Jack.</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="s">    Este es el gato</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="s">    que mató a la rata que se comió la malta</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="s">    que había en la casa que construyó Jack.</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="s">&quot;&quot;&quot;</span><span class="p">.</span><span class="na">trimIndent</span><span class="p">()</span><span class="w"> </span><span class="c1">// elimina la primera y la última línea vacías y recorta la sangría</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="n">print</span><span class="p">(</span><span class="n">largeString</span><span class="p">)</span>
+</code></pre></div>
+<p>Este texto se muestra así:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Esta es la casa que construyó Jack.
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>Esta es la malta que había en la casa que construyó Jack.
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>Esta es la rata que se comió la malta
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>que había en la casa que construyó Jack.
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>Este es el gato
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>que mató a la rata que se comió la malta
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>que había en la casa que construyó Jack.
+</code></pre></div>
+<p>Como puedes ver, también usamos la función <code>.trimIndent()</code>. Esta función recorta todas las líneas según su sangría mínima común y elimina la primera y la última línea si están vacías. Por ejemplo:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">unevenString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="s">        123</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="s">         456</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="s">          789&quot;&quot;&quot;</span><span class="p">.</span><span class="na">trimIndent</span><span class="p">()</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="n">print</span><span class="p">(</span><span class="n">unevenString</span><span class="p">)</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="n">println</span><span class="p">()</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="kd">val</span><span class="w"> </span><span class="nv">rawString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;123</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="s">         456</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="s">          789</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="s">&quot;&quot;&quot;</span><span class="p">.</span><span class="na">trimIndent</span><span class="p">()</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="n">print</span><span class="p">(</span><span class="n">rawString</span><span class="p">)</span>
+</code></pre></div>
+<p>Este texto se muestra así:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>123
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a> 456
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>  789
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>123
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>         456
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>          789
+</code></pre></div>
+<p>En el primer caso, las tres líneas comparten una sangría mínima de 8 espacios, que <code>trimIndent()</code> recorta por igual. En el segundo, la primera línea (<code>123</code>) va pegada a las comillas triples, sin sangría, por lo que la sangría común es cero y las demás líneas conservan sus espacios.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo trabajaste de cerca con el tipo <code>String</code>:</p>
+<ul>
+<li>La propiedad <code>.length</code> devuelve la cantidad de caracteres de una cadena.</li>
+<li>La <strong>concatenación</strong> con <code>+</code> une cadenas (y otros valores) en una cadena nueva; el orden importa, y para varias variables suelen ser más claras las plantillas de cadena.</li>
+<li>La función <code>repeat</code> repite una cadena varias veces.</li>
+<li>Las <strong>cadenas sin formato</strong> (comillas triples <code>"""</code>) permiten texto multilínea y caracteres especiales sin escaparlos, y <code>.trimIndent()</code> recorta la sangría común.</li>
+</ul>
 
 
 
@@ -2577,15 +2825,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
+          
+          <a href="../chapter06/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 6. Entrada y salida estándar y plantillas de cadena">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                6. Entrada y salida estándar y plantillas de cadena
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="content/part01/chapter01/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 1. El entorno de desarrollo (IDE e IntelliJ IDEA)">
+          <a href="../exercises/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Ejercicios de repaso">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                1. El entorno de desarrollo (IDE e IntelliJ IDEA)
+                Ejercicios de repaso
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2622,12 +2886,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="assets/js/custom.js"></script>
+        <script src="../../../assets/js/custom.js"></script>
       
     
   </body>

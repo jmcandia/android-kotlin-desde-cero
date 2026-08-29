@@ -10,25 +10,31 @@
       
       
       
+        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/content/part07/chapter33/">
       
+      
+        <link rel="prev" href="../chapter32/">
+      
+      
+        <link rel="next" href="../chapter34/">
       
       
         
       
       
-      <link rel="icon" href="/android-kotlin-desde-cero/assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Android con Kotlin desde cero</title>
+        <title>33. ViewModel y el estado de la interfaz (UiState) - Android con Kotlin desde cero</title>
       
     
     
-      <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -47,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/css/custom.css">
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
     
-    <script>__md_scope=new URL("/android-kotlin-desde-cero/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -73,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#capitulo-33-viewmodel-y-el-estado-de-la-interfaz-uistate" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -85,9 +96,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="/android-kotlin-desde-cero/." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../../.." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
-  <img src="/android-kotlin-desde-cero/assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -104,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              33. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
             
           </span>
         </div>
@@ -222,9 +233,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/android-kotlin-desde-cero/." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../../.." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
-  <img src="/android-kotlin-desde-cero/assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     Android con Kotlin desde cero
@@ -251,7 +262,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -325,7 +336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter01/" class="md-nav__link">
+      <a href="../../part01/chapter01/" class="md-nav__link">
         
   
   
@@ -353,7 +364,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter02/" class="md-nav__link">
+      <a href="../../part01/chapter02/" class="md-nav__link">
         
   
   
@@ -381,7 +392,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter03/" class="md-nav__link">
+      <a href="../../part01/chapter03/" class="md-nav__link">
         
   
   
@@ -409,7 +420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter04/" class="md-nav__link">
+      <a href="../../part01/chapter04/" class="md-nav__link">
         
   
   
@@ -437,7 +448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter05/" class="md-nav__link">
+      <a href="../../part01/chapter05/" class="md-nav__link">
         
   
   
@@ -465,7 +476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter06/" class="md-nav__link">
+      <a href="../../part01/chapter06/" class="md-nav__link">
         
   
   
@@ -493,7 +504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter07/" class="md-nav__link">
+      <a href="../../part01/chapter07/" class="md-nav__link">
         
   
   
@@ -521,7 +532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/exercises/" class="md-nav__link">
+      <a href="../../part01/exercises/" class="md-nav__link">
         
   
   
@@ -603,7 +614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter08/" class="md-nav__link">
+      <a href="../../part02/chapter08/" class="md-nav__link">
         
   
   
@@ -631,7 +642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter09/" class="md-nav__link">
+      <a href="../../part02/chapter09/" class="md-nav__link">
         
   
   
@@ -659,7 +670,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter10/" class="md-nav__link">
+      <a href="../../part02/chapter10/" class="md-nav__link">
         
   
   
@@ -687,7 +698,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/exercises/" class="md-nav__link">
+      <a href="../../part02/exercises/" class="md-nav__link">
         
   
   
@@ -769,7 +780,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter11/" class="md-nav__link">
+      <a href="../../part03/chapter11/" class="md-nav__link">
         
   
   
@@ -797,7 +808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter12/" class="md-nav__link">
+      <a href="../../part03/chapter12/" class="md-nav__link">
         
   
   
@@ -825,7 +836,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter13/" class="md-nav__link">
+      <a href="../../part03/chapter13/" class="md-nav__link">
         
   
   
@@ -853,7 +864,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter14/" class="md-nav__link">
+      <a href="../../part03/chapter14/" class="md-nav__link">
         
   
   
@@ -881,7 +892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter15/" class="md-nav__link">
+      <a href="../../part03/chapter15/" class="md-nav__link">
         
   
   
@@ -909,7 +920,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/exercises/" class="md-nav__link">
+      <a href="../../part03/exercises/" class="md-nav__link">
         
   
   
@@ -991,7 +1002,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter16/" class="md-nav__link">
+      <a href="../../part04/chapter16/" class="md-nav__link">
         
   
   
@@ -1019,7 +1030,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter17/" class="md-nav__link">
+      <a href="../../part04/chapter17/" class="md-nav__link">
         
   
   
@@ -1047,7 +1058,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter18/" class="md-nav__link">
+      <a href="../../part04/chapter18/" class="md-nav__link">
         
   
   
@@ -1075,7 +1086,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter19/" class="md-nav__link">
+      <a href="../../part04/chapter19/" class="md-nav__link">
         
   
   
@@ -1103,7 +1114,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter20/" class="md-nav__link">
+      <a href="../../part04/chapter20/" class="md-nav__link">
         
   
   
@@ -1131,7 +1142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter21/" class="md-nav__link">
+      <a href="../../part04/chapter21/" class="md-nav__link">
         
   
   
@@ -1159,7 +1170,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/exercises/" class="md-nav__link">
+      <a href="../../part04/exercises/" class="md-nav__link">
         
   
   
@@ -1241,7 +1252,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter22/" class="md-nav__link">
+      <a href="../../part05/chapter22/" class="md-nav__link">
         
   
   
@@ -1269,7 +1280,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter23/" class="md-nav__link">
+      <a href="../../part05/chapter23/" class="md-nav__link">
         
   
   
@@ -1297,7 +1308,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter24/" class="md-nav__link">
+      <a href="../../part05/chapter24/" class="md-nav__link">
         
   
   
@@ -1379,7 +1390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter25/" class="md-nav__link">
+      <a href="../../part06/chapter25/" class="md-nav__link">
         
   
   
@@ -1407,7 +1418,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter26/" class="md-nav__link">
+      <a href="../../part06/chapter26/" class="md-nav__link">
         
   
   
@@ -1435,7 +1446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter27/" class="md-nav__link">
+      <a href="../../part06/chapter27/" class="md-nav__link">
         
   
   
@@ -1463,7 +1474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter28/" class="md-nav__link">
+      <a href="../../part06/chapter28/" class="md-nav__link">
         
   
   
@@ -1491,7 +1502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter29/" class="md-nav__link">
+      <a href="../../part06/chapter29/" class="md-nav__link">
         
   
   
@@ -1519,7 +1530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter30/" class="md-nav__link">
+      <a href="../../part06/chapter30/" class="md-nav__link">
         
   
   
@@ -1547,7 +1558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter31/" class="md-nav__link">
+      <a href="../../part06/chapter31/" class="md-nav__link">
         
   
   
@@ -1579,18 +1590,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
         
           
           <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
@@ -1611,7 +1624,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1629,7 +1642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter32/" class="md-nav__link">
+      <a href="../chapter32/" class="md-nav__link">
         
   
   
@@ -1654,10 +1667,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter33/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1673,6 +1713,103 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-clase-viewmodel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La clase ViewModel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exponer-el-estado-de-forma-segura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exponer el estado de forma segura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actualizar-el-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actualizar el estado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conectar-el-viewmodel-con-la-interfaz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conectar el ViewModel con la interfaz
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-flujo-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El flujo completo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1685,7 +1822,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter34/" class="md-nav__link">
+      <a href="../chapter34/" class="md-nav__link">
         
   
   
@@ -1713,7 +1850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter35/" class="md-nav__link">
+      <a href="../chapter35/" class="md-nav__link">
         
   
   
@@ -1795,7 +1932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter36/" class="md-nav__link">
+      <a href="../../part08/chapter36/" class="md-nav__link">
         
   
   
@@ -1823,7 +1960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter37/" class="md-nav__link">
+      <a href="../../part08/chapter37/" class="md-nav__link">
         
   
   
@@ -1851,7 +1988,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter38/" class="md-nav__link">
+      <a href="../../part08/chapter38/" class="md-nav__link">
         
   
   
@@ -1879,7 +2016,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter39/" class="md-nav__link">
+      <a href="../../part08/chapter39/" class="md-nav__link">
         
   
   
@@ -1961,7 +2098,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter40/" class="md-nav__link">
+      <a href="../../part09/chapter40/" class="md-nav__link">
         
   
   
@@ -1989,7 +2126,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter41/" class="md-nav__link">
+      <a href="../../part09/chapter41/" class="md-nav__link">
         
   
   
@@ -2017,7 +2154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter42/" class="md-nav__link">
+      <a href="../../part09/chapter42/" class="md-nav__link">
         
   
   
@@ -2045,7 +2182,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter43/" class="md-nav__link">
+      <a href="../../part09/chapter43/" class="md-nav__link">
         
   
   
@@ -2073,7 +2210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter44/" class="md-nav__link">
+      <a href="../../part09/chapter44/" class="md-nav__link">
         
   
   
@@ -2101,7 +2238,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter45/" class="md-nav__link">
+      <a href="../../part09/chapter45/" class="md-nav__link">
         
   
   
@@ -2129,7 +2266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter46/" class="md-nav__link">
+      <a href="../../part09/chapter46/" class="md-nav__link">
         
   
   
@@ -2157,7 +2294,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter47/" class="md-nav__link">
+      <a href="../../part09/chapter47/" class="md-nav__link">
         
   
   
@@ -2185,7 +2322,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/chapter48/" class="md-nav__link">
         
   
   
@@ -2213,7 +2350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter49/" class="md-nav__link">
+      <a href="../../part09/chapter49/" class="md-nav__link">
         
   
   
@@ -2295,7 +2432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/appendix/design-principle/" class="md-nav__link">
+      <a href="../../appendix/design-principle/" class="md-nav__link">
         
   
   
@@ -2323,7 +2460,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/appendix/java-scanner/" class="md-nav__link">
+      <a href="../../appendix/java-scanner/" class="md-nav__link">
         
   
   
@@ -2368,6 +2505,93 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-clase-viewmodel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La clase ViewModel
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exponer-el-estado-de-forma-segura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exponer el estado de forma segura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actualizar-el-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Actualizar el estado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conectar-el-viewmodel-con-la-interfaz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conectar el ViewModel con la interfaz
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-flujo-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El flujo completo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2380,8 +2604,126 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="capitulo-33-viewmodel-y-el-estado-de-la-interfaz-uistate">Capítulo 33: <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)<a class="headerlink" href="#capitulo-33-viewmodel-y-el-estado-de-la-interfaz-uistate" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>En el capítulo anterior conociste MVVM en teoría. Ahora lo pondrás en práctica construyendo su pieza central: el <strong><code>ViewModel</code></strong>, la clase que guarda el estado de la pantalla y ejecuta su lógica. Aprenderás a crear uno, a <strong>exponer</strong> su estado de forma segura con <code>StateFlow</code>, a <strong>actualizarlo</strong> y a <strong>conectarlo</strong> con la interfaz. Aquí se juntan, por fin, el <code>StateFlow</code>, el <code>UiState</code> y el <code>viewModelScope</code> que fuiste viendo por separado.</p>
+<h2 id="la-clase-viewmodel">La clase <code>ViewModel</code><a class="headerlink" href="#la-clase-viewmodel" title="Permanent link">&para;</a></h2>
+<p>Android ofrece una clase base llamada <strong><code>ViewModel</code></strong>. Para crear el tuyo, defines una clase que hereda de ella:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MiViewModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="c1">// estado y lógica de la pantalla</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>Su gran ventaja es la que anticipamos: un <code>ViewModel</code> está diseñado para <strong>vivir más que la <code>Activity</code></strong>. Cuando el dispositivo gira y la <code>Activity</code> se recrea, el <code>ViewModel</code> <strong>sigue existiendo</strong>, con su estado intacto. Ese problema del ciclo de vida queda resuelto sin que hagas nada especial.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>La clase <code>ViewModel</code> viene en una biblioteca de Android (<code>lifecycle</code>), que se agrega como dependencia en el proyecto.</p>
+</div>
+<h2 id="exponer-el-estado-de-forma-segura">Exponer el estado de forma segura<a class="headerlink" href="#exponer-el-estado-de-forma-segura" title="Permanent link">&para;</a></h2>
+<p>El <code>ViewModel</code> guarda el estado de la pantalla. Usaremos para ello el <code>UiState</code> que viste en el capítulo de <code>sealed class</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">UiState</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">object</span><span class="w"> </span><span class="nc">Cargando</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Exito</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">elementos</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Error</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">mensaje</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>Ahora, aquí hay un detalle de diseño importante. El <code>ViewModel</code> necesita <strong>cambiar</strong> el estado, pero la interfaz solo debería <strong>leerlo</strong>, nunca modificarlo. Para lograrlo, se usa un patrón muy común: una propiedad <strong>mutable y privada</strong>, y otra <strong>de solo lectura y pública</strong>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MiViewModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">_uiState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">uiState</span><span class="p">:</span><span class="w"> </span><span class="n">StateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_uiState</span><span class="p">.</span><span class="na">asStateFlow</span><span class="p">()</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><code>_uiState</code> es un <code>MutableStateFlow</code> <strong>privado</strong>: solo el <code>ViewModel</code> puede cambiar su valor. Por convención, su nombre empieza con guion bajo.</li>
+<li><code>uiState</code> es un <code>StateFlow</code> <strong>público</strong> (de solo lectura), que la interfaz observará. El método <code>asStateFlow()</code> "expone" el estado sin permitir modificarlo.</li>
+</ul>
+<p>Así se cumple la <strong>encapsulación</strong>: el estado solo se modifica desde dentro del <code>ViewModel</code>, la única fuente de verdad.</p>
+<h2 id="actualizar-el-estado">Actualizar el estado<a class="headerlink" href="#actualizar-el-estado" title="Permanent link">&para;</a></h2>
+<p>Para cambiar el estado, el <code>ViewModel</code> asigna un nuevo valor a <code>_uiState.value</code>. Como esto suele implicar una tarea lenta (pedir datos), la lanzamos en una coroutine dentro del <strong><code>viewModelScope</code></strong>, el <em>scope</em> del capítulo de coroutines:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MiViewModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">_uiState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">uiState</span><span class="p">:</span><span class="w"> </span><span class="n">StateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_uiState</span><span class="p">.</span><span class="na">asStateFlow</span><span class="p">()</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">cargarDatos</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="n">viewModelScope</span><span class="p">.</span><span class="na">launch</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">            </span><span class="n">_uiState</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">datos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">obtenerDatos</span><span class="p">()</span><span class="w"> </span><span class="c1">// una función suspend que trae los datos</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">            </span><span class="n">_uiState</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Exito</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="p">}</span>
+</code></pre></div>
+<p>Usar <code>viewModelScope</code> es importante: si el <code>ViewModel</code> se destruye, sus coroutines se cancelan solas, evitando trabajo innecesario. (La función <code>obtenerDatos()</code> representa la capa de datos, el <strong>Modelo</strong>, que veremos en el próximo capítulo.)</p>
+<h2 id="conectar-el-viewmodel-con-la-interfaz">Conectar el ViewModel con la interfaz<a class="headerlink" href="#conectar-el-viewmodel-con-la-interfaz" title="Permanent link">&para;</a></h2>
+<p>Falta unir el <code>ViewModel</code> con la Vista. En el composable, obtienes el <code>ViewModel</code> con la función <code>viewModel()</code> y <strong>recolectas</strong> su estado para que la interfaz reaccione a los cambios:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@Composable</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">Pantalla</span><span class="p">(</span><span class="n">viewModel</span><span class="p">:</span><span class="w"> </span><span class="n">MiViewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">viewModel</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">estado</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">uiState</span><span class="p">.</span><span class="na">collectAsStateWithLifecycle</span><span class="p">()</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">estado</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Cargando...&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">        </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Exito</span><span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Se cargaron </span><span class="si">${</span><span class="n">estado</span><span class="p">.</span><span class="na">elementos</span><span class="p">.</span><span class="na">size</span><span class="si">}</span><span class="s"> elementos&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">        </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Error</span><span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Error: </span><span class="si">${</span><span class="n">estado</span><span class="p">.</span><span class="na">mensaje</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">}</span>
+</code></pre></div>
+<p>Analicemos las piezas nuevas:</p>
+<ul>
+<li><code>viewModel()</code> obtiene la instancia del <code>ViewModel</code> (la misma a través de las recomposiciones y de los giros de pantalla).</li>
+<li><code>collectAsStateWithLifecycle()</code> <strong>recolecta</strong> el <code>StateFlow</code> y lo convierte en un estado de Compose: cada vez que el <code>ViewModel</code> cambia <code>uiState</code>, este composable se <strong>recompone</strong> con el nuevo valor.</li>
+<li>El <code>when</code> decide qué mostrar según el estado, aprovechando el <em>smart cast</em> de la <code>sealed class</code>.</li>
+</ul>
+<p>Y para disparar la lógica, la Vista simplemente invoca las funciones del <code>ViewModel</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">Button</span><span class="p">(</span><span class="n">onClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">cargarDatos</span><span class="p">()</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Cargar&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p><code>collectAsStateWithLifecycle()</code> es la forma recomendada de recolectar un <code>StateFlow</code> en Compose, porque solo recolecta mientras la pantalla está visible. Requiere una pequeña dependencia adicional (<code>lifecycle-runtime-compose</code>).</p>
+</div>
+<h2 id="el-flujo-completo">El flujo completo<a class="headerlink" href="#el-flujo-completo" title="Permanent link">&para;</a></h2>
+<p>Con todo junto, el ciclo de MVVM queda así: la Vista pide una acción, el <code>ViewModel</code> actualiza el estado, y la Vista se redibuja sola al observar ese cambio.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant V as Vista
+    participant VM as ViewModel
+    V-&gt;&gt;VM: cargarDatos()
+    Note over VM: _uiState.value = Cargando
+    VM--&gt;&gt;V: estado: Cargando
+    Note over V: Muestra "Cargando..."
+    Note over VM: Llegan los datos&lt;br/&gt;_uiState.value = Exito(datos)
+    VM--&gt;&gt;V: estado: Exito
+    Note over V: Muestra los datos</code></pre>
+<p>Fíjate en que la Vista nunca guarda ni calcula el estado: solo lo <strong>muestra</strong> y <strong>avisa</strong> de los eventos. Toda la lógica vive en el <code>ViewModel</code>.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo construiste el corazón de MVVM:</p>
+<ul>
+<li>Un <strong><code>ViewModel</code></strong> es una clase que hereda de <code>ViewModel</code> y guarda el estado y la lógica de una pantalla. <strong>Sobrevive</strong> a los cambios de configuración, como el giro de pantalla.</li>
+<li>El estado se expone con el patrón <strong><code>MutableStateFlow</code> privado + <code>StateFlow</code> público</strong> (<code>_uiState</code> / <code>uiState</code> con <code>asStateFlow()</code>), de modo que solo el <code>ViewModel</code> puede modificarlo.</li>
+<li>El <code>ViewModel</code> actualiza el estado asignando a <code>_uiState.value</code>, normalmente dentro de una coroutine en <strong><code>viewModelScope</code></strong>.</li>
+<li>La Vista obtiene el <code>ViewModel</code> con <code>viewModel()</code>, recolecta su estado con <strong><code>collectAsStateWithLifecycle()</code></strong> y decide qué mostrar con un <code>when</code> sobre el <code>UiState</code>.</li>
+<li>La Vista solo muestra el estado y avisa de eventos (invocando funciones del <code>ViewModel</code>); toda la lógica queda en el <code>ViewModel</code>.</li>
+</ul>
+<p>En el próximo capítulo separaremos aún más las responsabilidades creando la <strong>capa de datos</strong> (el Modelo): un <strong>repositorio</strong> que se encargue de obtener la información, para que el <code>ViewModel</code> no dependa de dónde vienen los datos.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -2399,6 +2741,44 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../chapter32/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 32. Qué es MVVM y por qué usarlo">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                32. Qué es MVVM y por qué usarlo
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../chapter34/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 34. Repositorio y separación de capas">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                34. Repositorio y separación de capas
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -2426,12 +2806,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/android-kotlin-desde-cero/", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "/android-kotlin-desde-cero/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="/android-kotlin-desde-cero/assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="/android-kotlin-desde-cero/assets/js/custom.js"></script>
+        <script src="../../../assets/js/custom.js"></script>
       
     
   </body>

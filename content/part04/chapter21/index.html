@@ -10,25 +10,31 @@
       
       
       
+        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/content/part04/chapter21/">
       
+      
+        <link rel="prev" href="../chapter20/">
+      
+      
+        <link rel="next" href="../exercises/">
       
       
         
       
       
-      <link rel="icon" href="/android-kotlin-desde-cero/assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Android con Kotlin desde cero</title>
+        <title>21. Genéricos, funciones de extensión y lambdas - Android con Kotlin desde cero</title>
       
     
     
-      <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -47,9 +53,9 @@
       
     
     
-      <link rel="stylesheet" href="/android-kotlin-desde-cero/assets/css/custom.css">
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
     
-    <script>__md_scope=new URL("/android-kotlin-desde-cero/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -73,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#capitulo-21-genericos-funciones-de-extension-y-lambdas" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -85,9 +96,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="/android-kotlin-desde-cero/." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../../.." title="Android con Kotlin desde cero" class="md-header__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
-  <img src="/android-kotlin-desde-cero/assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -104,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              21. Genéricos, funciones de extensión y lambdas
             
           </span>
         </div>
@@ -222,9 +233,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/android-kotlin-desde-cero/." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
+    <a href="../../.." title="Android con Kotlin desde cero" class="md-nav__button md-logo" aria-label="Android con Kotlin desde cero" data-md-component="logo">
       
-  <img src="/android-kotlin-desde-cero/assets/images/favicon.png" alt="logo">
+  <img src="../../../assets/images/favicon.png" alt="logo">
 
     </a>
     Android con Kotlin desde cero
@@ -251,7 +262,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -325,7 +336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter01/" class="md-nav__link">
+      <a href="../../part01/chapter01/" class="md-nav__link">
         
   
   
@@ -353,7 +364,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter02/" class="md-nav__link">
+      <a href="../../part01/chapter02/" class="md-nav__link">
         
   
   
@@ -381,7 +392,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter03/" class="md-nav__link">
+      <a href="../../part01/chapter03/" class="md-nav__link">
         
   
   
@@ -409,7 +420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter04/" class="md-nav__link">
+      <a href="../../part01/chapter04/" class="md-nav__link">
         
   
   
@@ -437,7 +448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter05/" class="md-nav__link">
+      <a href="../../part01/chapter05/" class="md-nav__link">
         
   
   
@@ -465,7 +476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter06/" class="md-nav__link">
+      <a href="../../part01/chapter06/" class="md-nav__link">
         
   
   
@@ -493,7 +504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/chapter07/" class="md-nav__link">
+      <a href="../../part01/chapter07/" class="md-nav__link">
         
   
   
@@ -521,7 +532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part01/exercises/" class="md-nav__link">
+      <a href="../../part01/exercises/" class="md-nav__link">
         
   
   
@@ -603,7 +614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter08/" class="md-nav__link">
+      <a href="../../part02/chapter08/" class="md-nav__link">
         
   
   
@@ -631,7 +642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter09/" class="md-nav__link">
+      <a href="../../part02/chapter09/" class="md-nav__link">
         
   
   
@@ -659,7 +670,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/chapter10/" class="md-nav__link">
+      <a href="../../part02/chapter10/" class="md-nav__link">
         
   
   
@@ -687,7 +698,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part02/exercises/" class="md-nav__link">
+      <a href="../../part02/exercises/" class="md-nav__link">
         
   
   
@@ -769,7 +780,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter11/" class="md-nav__link">
+      <a href="../../part03/chapter11/" class="md-nav__link">
         
   
   
@@ -797,7 +808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter12/" class="md-nav__link">
+      <a href="../../part03/chapter12/" class="md-nav__link">
         
   
   
@@ -825,7 +836,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter13/" class="md-nav__link">
+      <a href="../../part03/chapter13/" class="md-nav__link">
         
   
   
@@ -853,7 +864,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter14/" class="md-nav__link">
+      <a href="../../part03/chapter14/" class="md-nav__link">
         
   
   
@@ -881,7 +892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/chapter15/" class="md-nav__link">
+      <a href="../../part03/chapter15/" class="md-nav__link">
         
   
   
@@ -909,7 +920,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part03/exercises/" class="md-nav__link">
+      <a href="../../part03/exercises/" class="md-nav__link">
         
   
   
@@ -941,18 +952,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -973,7 +986,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -991,7 +1004,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter16/" class="md-nav__link">
+      <a href="../chapter16/" class="md-nav__link">
         
   
   
@@ -1019,7 +1032,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter17/" class="md-nav__link">
+      <a href="../chapter17/" class="md-nav__link">
         
   
   
@@ -1047,7 +1060,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter18/" class="md-nav__link">
+      <a href="../chapter18/" class="md-nav__link">
         
   
   
@@ -1075,7 +1088,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter19/" class="md-nav__link">
+      <a href="../chapter19/" class="md-nav__link">
         
   
   
@@ -1103,7 +1116,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter20/" class="md-nav__link">
+      <a href="../chapter20/" class="md-nav__link">
         
   
   
@@ -1128,10 +1141,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/chapter21/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    21. Genéricos, funciones de extensión y lambdas
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1147,6 +1187,120 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#genericos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Genéricos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de extensión
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lambdas-a-fondo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lambdas a fondo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lambdas a fondo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#los-tipos-de-funcion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Los tipos de función
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funciones-de-orden-superior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de orden superior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-lambda-al-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La lambda al final
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1159,7 +1313,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part04/exercises/" class="md-nav__link">
+      <a href="../exercises/" class="md-nav__link">
         
   
   
@@ -1241,7 +1395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter22/" class="md-nav__link">
+      <a href="../../part05/chapter22/" class="md-nav__link">
         
   
   
@@ -1269,7 +1423,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter23/" class="md-nav__link">
+      <a href="../../part05/chapter23/" class="md-nav__link">
         
   
   
@@ -1297,7 +1451,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part05/chapter24/" class="md-nav__link">
+      <a href="../../part05/chapter24/" class="md-nav__link">
         
   
   
@@ -1379,7 +1533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter25/" class="md-nav__link">
+      <a href="../../part06/chapter25/" class="md-nav__link">
         
   
   
@@ -1407,7 +1561,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter26/" class="md-nav__link">
+      <a href="../../part06/chapter26/" class="md-nav__link">
         
   
   
@@ -1435,7 +1589,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter27/" class="md-nav__link">
+      <a href="../../part06/chapter27/" class="md-nav__link">
         
   
   
@@ -1463,7 +1617,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter28/" class="md-nav__link">
+      <a href="../../part06/chapter28/" class="md-nav__link">
         
   
   
@@ -1491,7 +1645,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter29/" class="md-nav__link">
+      <a href="../../part06/chapter29/" class="md-nav__link">
         
   
   
@@ -1519,7 +1673,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter30/" class="md-nav__link">
+      <a href="../../part06/chapter30/" class="md-nav__link">
         
   
   
@@ -1547,7 +1701,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part06/chapter31/" class="md-nav__link">
+      <a href="../../part06/chapter31/" class="md-nav__link">
         
   
   
@@ -1629,7 +1783,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter32/" class="md-nav__link">
+      <a href="../../part07/chapter32/" class="md-nav__link">
         
   
   
@@ -1657,7 +1811,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter33/" class="md-nav__link">
+      <a href="../../part07/chapter33/" class="md-nav__link">
         
   
   
@@ -1685,7 +1839,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter34/" class="md-nav__link">
+      <a href="../../part07/chapter34/" class="md-nav__link">
         
   
   
@@ -1713,7 +1867,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part07/chapter35/" class="md-nav__link">
+      <a href="../../part07/chapter35/" class="md-nav__link">
         
   
   
@@ -1795,7 +1949,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter36/" class="md-nav__link">
+      <a href="../../part08/chapter36/" class="md-nav__link">
         
   
   
@@ -1823,7 +1977,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter37/" class="md-nav__link">
+      <a href="../../part08/chapter37/" class="md-nav__link">
         
   
   
@@ -1851,7 +2005,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter38/" class="md-nav__link">
+      <a href="../../part08/chapter38/" class="md-nav__link">
         
   
   
@@ -1879,7 +2033,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part08/chapter39/" class="md-nav__link">
+      <a href="../../part08/chapter39/" class="md-nav__link">
         
   
   
@@ -1961,7 +2115,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter40/" class="md-nav__link">
+      <a href="../../part09/chapter40/" class="md-nav__link">
         
   
   
@@ -1989,7 +2143,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter41/" class="md-nav__link">
+      <a href="../../part09/chapter41/" class="md-nav__link">
         
   
   
@@ -2017,7 +2171,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter42/" class="md-nav__link">
+      <a href="../../part09/chapter42/" class="md-nav__link">
         
   
   
@@ -2045,7 +2199,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter43/" class="md-nav__link">
+      <a href="../../part09/chapter43/" class="md-nav__link">
         
   
   
@@ -2073,7 +2227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter44/" class="md-nav__link">
+      <a href="../../part09/chapter44/" class="md-nav__link">
         
   
   
@@ -2101,7 +2255,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter45/" class="md-nav__link">
+      <a href="../../part09/chapter45/" class="md-nav__link">
         
   
   
@@ -2129,7 +2283,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter46/" class="md-nav__link">
+      <a href="../../part09/chapter46/" class="md-nav__link">
         
   
   
@@ -2157,7 +2311,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter47/" class="md-nav__link">
+      <a href="../../part09/chapter47/" class="md-nav__link">
         
   
   
@@ -2185,7 +2339,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/chapter48/" class="md-nav__link">
         
   
   
@@ -2213,7 +2367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/part09/chapter49/" class="md-nav__link">
+      <a href="../../part09/chapter49/" class="md-nav__link">
         
   
   
@@ -2295,7 +2449,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/appendix/design-principle/" class="md-nav__link">
+      <a href="../../appendix/design-principle/" class="md-nav__link">
         
   
   
@@ -2323,7 +2477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/android-kotlin-desde-cero/content/appendix/java-scanner/" class="md-nav__link">
+      <a href="../../appendix/java-scanner/" class="md-nav__link">
         
   
   
@@ -2368,6 +2522,110 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#genericos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Genéricos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de extensión
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lambdas-a-fondo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lambdas a fondo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lambdas a fondo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#los-tipos-de-funcion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Los tipos de función
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funciones-de-orden-superior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de orden superior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-lambda-al-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La lambda al final
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2380,8 +2638,114 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="capitulo-21-genericos-funciones-de-extension-y-lambdas">Capítulo 21: Genéricos, funciones de extensión y lambdas<a class="headerlink" href="#capitulo-21-genericos-funciones-de-extension-y-lambdas" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>Has recorrido un largo camino: dominas los fundamentos de Kotlin y la programación orientada a objetos. Para cerrar esta parte, verás tres herramientas que no son imprescindibles para empezar, pero que hacen tu código mucho más <strong>expresivo y reutilizable</strong>, y que aparecen por todas partes en el desarrollo Android moderno:</p>
+<ul>
+<li>Los <strong>genéricos</strong>, para escribir código que funcione con cualquier tipo de dato.</li>
+<li>Las <strong>funciones de extensión</strong>, para añadir funciones a clases que ya existen.</li>
+<li>Las <strong>lambdas a fondo</strong>, retomando y profundizando lo que viste con las colecciones.</li>
+</ul>
+<p>Ya te has cruzado con las tres sin conocerlas del todo: usaste <code>List&lt;String&gt;</code> (genéricos), llamaste métodos como <code>.first()</code> y escribiste <code>map { it * 2 }</code> (lambdas). Ahora entenderás cómo funcionan por dentro.</p>
+<h2 id="genericos">Genéricos<a class="headerlink" href="#genericos" title="Permanent link">&para;</a></h2>
+<p>Cuando escribiste <code>List&lt;String&gt;</code> o <code>List&lt;Int&gt;</code>, ese <code>&lt;...&gt;</code> son los <strong>genéricos</strong> en acción. Los genéricos te permiten escribir <strong>una sola</strong> pieza de código que funciona con <strong>muchos tipos</strong> distintos, sin perder la seguridad de tipos.</p>
+<p>Imagina que quieres una clase "caja" que guarde un valor. Si hicieras una <code>CajaDeInt</code>, una <code>CajaDeString</code>, etcétera, estarías repitiendo el mismo código (recuerda DRY). En su lugar, defines una clase <strong>genérica</strong>, usando un <strong>parámetro de tipo</strong> entre <code>&lt;&gt;</code> (por convención se llama <code>T</code>, de <em>type</em>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Caja</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">contenido</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">)</span>
+</code></pre></div>
+<p>Aquí <code>T</code> es un marcador de posición para un tipo real, que se decide al crear el objeto:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">cajaNumero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Caja</span><span class="p">(</span><span class="m">5</span><span class="p">)</span><span class="w">     </span><span class="c1">// T es Int</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">cajaTexto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Caja</span><span class="p">(</span><span class="s">&quot;hola&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// T es String</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">println</span><span class="p">(</span><span class="n">cajaNumero</span><span class="p">.</span><span class="na">contenido</span><span class="p">)</span><span class="w"> </span><span class="c1">// 5</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">println</span><span class="p">(</span><span class="n">cajaTexto</span><span class="p">.</span><span class="na">contenido</span><span class="p">)</span><span class="w">  </span><span class="c1">// hola</span>
+</code></pre></div>
+<p>Kotlin recuerda el tipo de cada caja: <code>cajaNumero.contenido</code> es un <code>Int</code> y <code>cajaTexto.contenido</code> es un <code>String</code>. Eso es lo valioso: el mismo código sirve para cualquier tipo, pero cada uso mantiene su tipo concreto.</p>
+<p>Las <strong>funciones</strong> también pueden ser genéricas. Por ejemplo, una que devuelva el primer elemento de cualquier lista:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">fun</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">primero</span><span class="p">(</span><span class="n">lista</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">):</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lista</span><span class="o">[</span><span class="m">0</span><span class="o">]</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">println</span><span class="p">(</span><span class="n">primero</span><span class="p">(</span><span class="n">listOf</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)))</span><span class="w">    </span><span class="c1">// 10  (T es Int)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">println</span><span class="p">(</span><span class="n">primero</span><span class="p">(</span><span class="n">listOf</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p">)))</span><span class="w"> </span><span class="c1">// a   (T es String)</span>
+</code></pre></div>
+<p>Así funcionan por dentro <code>List&lt;T&gt;</code> y todas las colecciones que ya usaste: son clases genéricas.</p>
+<h2 id="funciones-de-extension">Funciones de extensión<a class="headerlink" href="#funciones-de-extension" title="Permanent link">&para;</a></h2>
+<p>A veces querrías añadir una función a una clase que <strong>ya existe</strong> —<code>String</code>, <code>Int</code> o una clase de una librería— pero que no puedes o no quieres modificar. Las <strong>funciones de extensión</strong> de Kotlin te permiten hacer exactamente eso: agregar funciones nuevas a un tipo existente.</p>
+<p>Para definir una, escribes el tipo que quieres extender, un punto y el nombre de la función. Por ejemplo, añadamos a <code>Int</code> una función que diga si es par:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">fun</span><span class="w"> </span><span class="n">Int</span><span class="p">.</span><span class="nf">esPar</span><span class="p">():</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p>Dentro de la función, <code>this</code> se refiere al objeto sobre el que la llamas. Y la usas como si fuera un método más de <code>Int</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">println</span><span class="p">(</span><span class="m">4.</span><span class="n">esPar</span><span class="p">())</span><span class="w"> </span><span class="c1">// true</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">println</span><span class="p">(</span><span class="m">7.</span><span class="n">esPar</span><span class="p">())</span><span class="w"> </span><span class="c1">// false</span>
+</code></pre></div>
+<p>Es importante entender que esto no modifica realmente la clase <code>Int</code> (no le añades nada por dentro): es una comodidad del lenguaje que hace que tu código se lea de forma natural. En el segundo capítulo mencionamos las funciones de extensión como una de las características distintivas de Kotlin; esto es lo que eran.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>En Java, para "añadir" comportamiento a una clase que no controlas, sueles crear métodos utilitarios estáticos (<code>Utilidades.esPar(numero)</code>). Las funciones de extensión de Kotlin logran lo mismo, pero se leen mucho mejor: <code>numero.esPar()</code>.</p>
+</div>
+<h2 id="lambdas-a-fondo">Lambdas a fondo<a class="headerlink" href="#lambdas-a-fondo" title="Permanent link">&para;</a></h2>
+<p>En el capítulo de colecciones usaste lambdas de forma práctica: pequeñas funciones entre llaves, como <code>{ it * 2 }</code>. Ahora veamos cómo funcionan realmente, porque son una de las herramientas más potentes de Kotlin.</p>
+<h3 id="los-tipos-de-funcion">Los tipos de función<a class="headerlink" href="#los-tipos-de-funcion" title="Permanent link">&para;</a></h3>
+<p>Así como un <code>Int</code> es un tipo y un <code>String</code> es otro, <strong>una función también tiene un tipo</strong>. Ese tipo describe qué recibe y qué devuelve. Por ejemplo:</p>
+<ul>
+<li><code>(Int) -&gt; Int</code> es el tipo de una función que recibe un <code>Int</code> y devuelve un <code>Int</code>.</li>
+<li><code>(Int, Int) -&gt; Int</code> recibe dos <code>Int</code> y devuelve un <code>Int</code>.</li>
+<li><code>(String) -&gt; Unit</code> recibe un <code>String</code> y no devuelve nada útil.</li>
+</ul>
+<p>Puedes guardar una lambda en una variable, indicando su tipo de función:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">doble</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="kt">Int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">numero</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">numero</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">println</span><span class="p">(</span><span class="n">doble</span><span class="p">(</span><span class="m">5</span><span class="p">))</span><span class="w"> </span><span class="c1">// 10</span>
+</code></pre></div>
+<p>Aquí <code>doble</code> es una variable cuyo valor es una función. La invocas como a cualquier otra: <code>doble(5)</code>.</p>
+<h3 id="funciones-de-orden-superior">Funciones de orden superior<a class="headerlink" href="#funciones-de-orden-superior" title="Permanent link">&para;</a></h3>
+<p>Como las funciones son valores, puedes <strong>pasarlas como argumento</strong> a otras funciones. Una función que recibe (o devuelve) otra función se llama <strong>función de orden superior</strong>.</p>
+<p>Por ejemplo, una función que aplica una operación a dos números, donde la operación es una lambda que le pasas:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">operar</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">operacion</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="p">):</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">operacion</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>El parámetro <code>operacion</code> es de tipo función <code>(Int, Int) -&gt; Int</code>. Ahora puedes decidir la operación al llamarla:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">suma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">operar</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">})</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">println</span><span class="p">(</span><span class="n">suma</span><span class="p">)</span><span class="w"> </span><span class="c1">// 7</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="kd">val</span><span class="w"> </span><span class="nv">producto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">operar</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">})</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">println</span><span class="p">(</span><span class="n">producto</span><span class="p">)</span><span class="w"> </span><span class="c1">// 12</span>
+</code></pre></div>
+<p>La misma función <code>operar</code> hace cosas distintas según la lambda que le pases. Esto es exactamente lo que hacen <code>map</code>, <code>filter</code> y compañía: son funciones de orden superior que reciben una lambda.</p>
+<h3 id="la-lambda-al-final">La lambda al final<a class="headerlink" href="#la-lambda-al-final" title="Permanent link">&para;</a></h3>
+<p>Kotlin ofrece un atajo: si el <strong>último</strong> parámetro de una función es una lambda, puedes escribirla <strong>fuera</strong> de los paréntesis. Así, esta llamada:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">operar</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">})</span>
+</code></pre></div>
+<p>se puede escribir de forma más limpia:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">operar</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>¡Y aquí se cierra el círculo! Ahora entiendes por qué <code>lista.map { it * 2 }</code> se escribe así: <code>map</code> es una función de orden superior cuyo último (y único) parámetro es una lambda, y por eso la lambda va fuera de los paréntesis, que, al quedar vacíos, desaparecen.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo conociste tres herramientas que hacen tu código más expresivo:</p>
+<ul>
+<li>Los <strong>genéricos</strong> (<code>&lt;T&gt;</code>) permiten escribir clases y funciones que trabajan con cualquier tipo, manteniendo la seguridad de tipos. Así funcionan <code>List&lt;T&gt;</code> y las demás colecciones.</li>
+<li>Las <strong>funciones de extensión</strong> añaden funciones nuevas a tipos existentes (<code>fun Int.esPar()</code>), y dentro de ellas <code>this</code> es el objeto receptor. Se leen de forma natural: <code>numero.esPar()</code>.</li>
+<li>Las <strong>lambdas</strong> tienen un <strong>tipo de función</strong> (<code>(Int) -&gt; Int</code>) y pueden guardarse en variables y pasarse como argumento. Una función que recibe otra función es una <strong>función de orden superior</strong>. Si la lambda es el último parámetro, se escribe fuera de los paréntesis, que es por lo que <code>map { ... }</code> luce como luce.</li>
+</ul>
+<p>Con esto <strong>completas la programación orientada a objetos</strong> y las características esenciales del lenguaje Kotlin. En la próxima parte del curso darás un salto emocionante: la <strong>asincronía con coroutines</strong>, imprescindible para que la aplicación pueda pedir datos a internet sin congelarse.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -2399,6 +2763,44 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../chapter20/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 20. &lt;code&gt;enum&lt;/code&gt; y &lt;code&gt;sealed class&lt;/code&gt;">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                20. <code>enum</code> y <code>sealed class</code>
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../exercises/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Ejercicios de repaso">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Ejercicios de repaso
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -2426,12 +2828,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/android-kotlin-desde-cero/", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "/android-kotlin-desde-cero/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
-      <script src="/android-kotlin-desde-cero/assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="/android-kotlin-desde-cero/assets/js/custom.js"></script>
+        <script src="../../../assets/js/custom.js"></script>
       
     
   </body>
