@@ -10,10 +10,10 @@
       
       
       
-        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/content/part07/chapter32/">
+        <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/content/part06/chapter32/">
       
       
-        <link rel="prev" href="../../part06/chapter31/">
+        <link rel="prev" href="../tutorial_my_todo_list_part_1/">
       
       
         <link rel="next" href="../chapter33/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>32. Qué es MVVM y por qué usarlo - Android con Kotlin desde cero</title>
+        <title>32. Navegación con Navigation Compose - Android con Kotlin desde cero</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#capitulo-32-que-es-mvvm-y-por-que-usarlo" class="md-skip">
+        <a href="#capitulo-32-navegacion-con-navigation-compose" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              32. Qué es MVVM y por qué usarlo
+              32. Navegación con Navigation Compose
             
           </span>
         </div>
@@ -1340,18 +1340,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
           <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
@@ -1372,7 +1374,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1390,7 +1392,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part06/chapter25/" class="md-nav__link">
+      <a href="../chapter25/" class="md-nav__link">
         
   
   
@@ -1418,7 +1420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part06/chapter26/" class="md-nav__link">
+      <a href="../chapter26/" class="md-nav__link">
         
   
   
@@ -1446,7 +1448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part06/chapter27/" class="md-nav__link">
+      <a href="../chapter27/" class="md-nav__link">
         
   
   
@@ -1474,14 +1476,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part06/chapter28/" class="md-nav__link">
+      <a href="../chapter28/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    28. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
+    28. Gestión de recursos: imágenes, íconos y cadenas de texto
   
 
     
@@ -1502,14 +1504,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part06/chapter29/" class="md-nav__link">
+      <a href="../chapter29/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    29. Layouts y listas: <code>Column</code>, <code>Row</code>, <code>LazyColumn</code>
+    29. Material 3: componentes listos para usar
   
 
     
@@ -1530,14 +1532,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part06/chapter30/" class="md-nav__link">
+      <a href="../chapter30/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    30. Material 3: tema, color, tipografía y componentes
+    30. Estructura de pantalla: <code>Scaffold</code>, layouts y <code>LazyColumn</code>
   
 
     
@@ -1558,14 +1560,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part06/chapter31/" class="md-nav__link">
+      <a href="../chapter31/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    31. Navegación con Navigation Compose
+    31. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
   
 
     
@@ -1579,41 +1581,21 @@
 
               
             
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
+              
+                
   
   
   
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
+  
+    <li class="md-nav__item">
+      <a href="../tutorial_my_todo_list_part_1/" class="md-nav__link">
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
-            
   
   
   <span class="md-ellipsis">
     
   
-    Parte VII · Arquitectura MVVM
+    Tutorial: Mi lista de tareas (parte 1)
   
 
     
@@ -1621,19 +1603,11 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_8">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Parte VII · Arquitectura MVVM
+      </a>
+    </li>
   
 
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
+              
             
               
                 
@@ -1658,7 +1632,7 @@
   <span class="md-ellipsis">
     
   
-    32. Qué es MVVM y por qué usarlo
+    32. Navegación con Navigation Compose
   
 
     
@@ -1676,7 +1650,7 @@
   <span class="md-ellipsis">
     
   
-    32. Qué es MVVM y por qué usarlo
+    32. Navegación con Navigation Compose
   
 
     
@@ -1713,10 +1687,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#el-problema-todo-junto-en-la-interfaz" class="md-nav__link">
+  <a href="#las-piezas-navcontroller-y-navhost" class="md-nav__link">
     <span class="md-ellipsis">
       
-        El problema: todo junto en la interfaz
+        Las piezas: NavController y NavHost
       
     </span>
   </a>
@@ -1724,10 +1698,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#que-es-mvvm" class="md-nav__link">
+  <a href="#definir-las-pantallas-el-navhost" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué es MVVM?
+        Definir las pantallas: el NavHost
       
     </span>
   </a>
@@ -1735,10 +1709,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#el-flujo-de-datos" class="md-nav__link">
+  <a href="#navegar-entre-pantallas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        El flujo de datos
+        Navegar entre pantallas
       
     </span>
   </a>
@@ -1746,10 +1720,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#por-que-usar-mvvm" class="md-nav__link">
+  <a href="#volver-atras" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Por qué usar MVVM?
+        Volver atrás
       
     </span>
   </a>
@@ -1757,10 +1731,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#como-se-conecta-con-lo-que-ya-sabes" class="md-nav__link">
+  <a href="#pasar-datos-entre-pantallas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Cómo se conecta con lo que ya sabes
+        Pasar datos entre pantallas
       
     </span>
   </a>
@@ -1801,7 +1775,89 @@
   <span class="md-ellipsis">
     
   
-    33. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
+    33. Material 3: tema, color y tipografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parte VII · Arquitectura MVVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte VII · Arquitectura MVVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter34/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    34. Qué es MVVM y por qué usarlo
   
 
     
@@ -1822,14 +1878,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../chapter34/" class="md-nav__link">
+      <a href="../../part07/chapter35/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    34. Repositorio y separación de capas
+    35. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
   
 
     
@@ -1850,14 +1906,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../chapter35/" class="md-nav__link">
+      <a href="../../part07/chapter36/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    35. Inyección de dependencias (manual y con Hilt)
+    36. Repositorio y separación de capas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter37/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    37. Inyección de dependencias (manual y con Hilt)
   
 
     
@@ -1932,62 +2016,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part08/chapter36/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    36. HTTP, REST y JSON: cómo se comunican las apps con un servidor
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part08/chapter37/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    37. Retrofit: configuración, interfaces y endpoints
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../part08/chapter38/" class="md-nav__link">
         
   
@@ -1995,7 +2023,7 @@
   <span class="md-ellipsis">
     
   
-    38. Serialización JSON y modelos de datos (DTO)
+    38. HTTP, REST y JSON: cómo se comunican las apps con un servidor
   
 
     
@@ -2023,7 +2051,63 @@
   <span class="md-ellipsis">
     
   
-    39. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
+    39. Retrofit: configuración, interfaces y endpoints
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/chapter40/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    40. Serialización JSON y modelos de datos (DTO)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/chapter41/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    41. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
   
 
     
@@ -2098,62 +2182,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part09/chapter40/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    40. Diseño de la app: pantallas, navegación y arquitectura
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter41/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    41. Setup del proyecto y dependencias
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../part09/chapter42/" class="md-nav__link">
         
   
@@ -2161,7 +2189,7 @@
   <span class="md-ellipsis">
     
   
-    42. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>
+    42. Diseño de la app: pantallas, navegación y arquitectura
   
 
     
@@ -2189,7 +2217,7 @@
   <span class="md-ellipsis">
     
   
-    43. Pantalla de lista con paginación
+    43. Setup del proyecto y dependencias
   
 
     
@@ -2217,7 +2245,7 @@
   <span class="md-ellipsis">
     
   
-    44. Carga de sprites con Coil
+    44. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>
   
 
     
@@ -2245,7 +2273,7 @@
   <span class="md-ellipsis">
     
   
-    45. Pantalla de detalle: stats, tipos y habilidades
+    45. Pantalla de lista con paginación
   
 
     
@@ -2273,7 +2301,7 @@
   <span class="md-ellipsis">
     
   
-    46. Búsqueda y filtrado
+    46. Carga de sprites con Coil
   
 
     
@@ -2301,7 +2329,7 @@
   <span class="md-ellipsis">
     
   
-    47. Persistencia local con Room: favoritos y caché offline
+    47. Pantalla de detalle: stats, tipos y habilidades
   
 
     
@@ -2329,7 +2357,7 @@
   <span class="md-ellipsis">
     
   
-    48. Pulido: estados de UI, Material 3 y accesibilidad
+    48. Búsqueda y filtrado
   
 
     
@@ -2357,7 +2385,63 @@
   <span class="md-ellipsis">
     
   
-    49. Cierre: testing básico, buenas prácticas y próximos pasos
+    49. Persistencia local con Room: favoritos y caché offline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part09/chapter50/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    50. Pulido: estados de UI, Material 3 y accesibilidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part09/chapter51/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    51. Cierre: testing básico, buenas prácticas y próximos pasos
   
 
     
@@ -2481,6 +2565,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/android-sdk-criteria/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. Cómo elegir el SDK de un proyecto Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2526,10 +2638,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#el-problema-todo-junto-en-la-interfaz" class="md-nav__link">
+  <a href="#las-piezas-navcontroller-y-navhost" class="md-nav__link">
     <span class="md-ellipsis">
       
-        El problema: todo junto en la interfaz
+        Las piezas: NavController y NavHost
       
     </span>
   </a>
@@ -2537,10 +2649,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#que-es-mvvm" class="md-nav__link">
+  <a href="#definir-las-pantallas-el-navhost" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué es MVVM?
+        Definir las pantallas: el NavHost
       
     </span>
   </a>
@@ -2548,10 +2660,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#el-flujo-de-datos" class="md-nav__link">
+  <a href="#navegar-entre-pantallas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        El flujo de datos
+        Navegar entre pantallas
       
     </span>
   </a>
@@ -2559,10 +2671,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#por-que-usar-mvvm" class="md-nav__link">
+  <a href="#volver-atras" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Por qué usar MVVM?
+        Volver atrás
       
     </span>
   </a>
@@ -2570,10 +2682,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#como-se-conecta-con-lo-que-ya-sabes" class="md-nav__link">
+  <a href="#pasar-datos-entre-pantallas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Cómo se conecta con lo que ya sabes
+        Pasar datos entre pantallas
       
     </span>
   </a>
@@ -2611,68 +2723,83 @@
   
 
 
-<h1 id="capitulo-32-que-es-mvvm-y-por-que-usarlo">Capítulo 32: Qué es MVVM y por qué usarlo<a class="headerlink" href="#capitulo-32-que-es-mvvm-y-por-que-usarlo" title="Permanent link">&para;</a></h1>
+<h1 id="capitulo-32-navegacion-con-navigation-compose">Capítulo 32: Navegación con Navigation Compose<a class="headerlink" href="#capitulo-32-navegacion-con-navigation-compose" title="Permanent link">&para;</a></h1>
 <h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
-<p>Ya sabes construir interfaces con Compose y manejar su estado. Pero, a medida que una app crece, surge una pregunta de fondo: ¿<strong>dónde</strong> debería vivir el estado y la lógica? ¿En los propios composables? Si metes todo ahí —los datos, las reglas, las llamadas a la red—, la interfaz se convierte en un enredo difícil de entender, probar y mantener.</p>
-<p>Para resolver esto existe la <strong>arquitectura</strong>: una forma de organizar el código en partes con responsabilidades claras. En esta parte del curso aprenderás <strong>MVVM</strong>, la arquitectura recomendada para Android. Este capítulo es conceptual: verás <strong>qué</strong> es MVVM y <strong>por qué</strong> conviene usarlo; el código vendrá en los capítulos siguientes.</p>
-<h2 id="el-problema-todo-junto-en-la-interfaz">El problema: todo junto en la interfaz<a class="headerlink" href="#el-problema-todo-junto-en-la-interfaz" title="Permanent link">&para;</a></h2>
-<p>Imagina un composable que lo hace todo: guarda el estado, contiene la lógica del negocio y, además, pide los datos a una fuente externa. Funciona para algo pequeño, pero trae problemas serios cuando la app crece:</p>
+<p>Hasta ahora, tu app ha vivido en una sola pantalla. Pero las aplicaciones reales tienen <strong>varias</strong>: una lista y su detalle, una pantalla de ajustes, un formulario… y el usuario se mueve entre ellas. En este capítulo aprenderás a hacer esa <strong>navegación</strong> entre pantallas con <strong>Navigation Compose</strong>, la biblioteca oficial para ello.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Navigation Compose no viene incluido en la plantilla del proyecto; es una dependencia que se agrega en el <code>build.gradle.kts</code>, a través del catálogo de versiones que viste al crear el proyecto.</p>
+</div>
+<h2 id="las-piezas-navcontroller-y-navhost">Las piezas: <code>NavController</code> y <code>NavHost</code><a class="headerlink" href="#las-piezas-navcontroller-y-navhost" title="Permanent link">&para;</a></h2>
+<p>Navigation Compose se apoya en dos piezas principales:</p>
 <ul>
-<li>Es <strong>difícil de probar</strong>: la lógica está entrelazada con la interfaz, así que no puedes verificarla sin dibujar la pantalla.</li>
-<li>Es <strong>difícil de mantener</strong>: el composable se vuelve enorme y hace demasiadas cosas a la vez (justo lo contrario del principio de responsabilidad única que viste en el anexo).</li>
-<li><strong>Pierde el estado</strong>: como el composable vive dentro de una <code>Activity</code>, al girar el dispositivo se recrea y el estado se pierde (el problema que vimos con el ciclo de vida).</li>
+<li>El <strong><code>NavController</code></strong> es el objeto que <strong>controla</strong> la navegación: lleva la cuenta de las pantallas visitadas (la <em>pila de navegación</em>) y es a quien le pides ir a una pantalla o volver atrás.</li>
+<li>El <strong><code>NavHost</code></strong> es un composable que define el <strong>mapa de navegación</strong>: declara cuáles son las pantallas (los <em>destinos</em>) y con qué <strong>ruta</strong> se llega a cada una.</li>
 </ul>
-<p>La solución es <strong>separar responsabilidades</strong>: que cada parte del código se ocupe de una sola cosa. Eso es exactamente lo que propone MVVM.</p>
-<h2 id="que-es-mvvm">¿Qué es MVVM?<a class="headerlink" href="#que-es-mvvm" title="Permanent link">&para;</a></h2>
-<p><strong>MVVM</strong> son las siglas de <strong>Model-View-ViewModel</strong> ("Modelo-Vista-ViewModel"). Es un patrón que organiza el código en <strong>tres capas</strong>, cada una con una responsabilidad clara:</p>
-<ul>
-<li>La <strong>Vista</strong> (<em>View</em>) es la <strong>interfaz</strong>: tus composables. Su único trabajo es <strong>mostrar</strong> el estado y <strong>avisar</strong> de los eventos del usuario (un toque, un texto escrito). No contiene lógica; es "tonta" a propósito.</li>
-<li>El <strong>ViewModel</strong> es el <strong>intermediario</strong>. Guarda el <strong>estado</strong> de la pantalla y lo expone para que la Vista lo observe. Recibe los eventos de la Vista, ejecuta la lógica correspondiente y actualiza el estado.</li>
-<li>El <strong>Modelo</strong> (<em>Model</em>) son los <strong>datos y la lógica de negocio</strong>: de dónde vienen los datos (una red, una base de datos) y las reglas que los rigen.</li>
-</ul>
-<p>Gráficamente, las tres capas se relacionan así:</p>
-<pre class="mermaid"><code>flowchart TB
-    V["Vista&lt;br/&gt;(composables)"] -- "eventos" --&gt; VM["ViewModel&lt;br/&gt;(estado + lógica)"]
-    VM -- "estado (StateFlow)" --&gt; V
-    VM -- "pide datos" --&gt; M["Modelo&lt;br/&gt;(datos y lógica de negocio)"]
-    M -- "devuelve datos" --&gt; VM</code></pre>
-<p>Fíjate en las flechas: la Vista <strong>observa</strong> el estado del ViewModel y le <strong>envía</strong> eventos; el ViewModel, a su vez, pide y recibe datos del Modelo. La Vista nunca habla directamente con el Modelo: siempre pasa por el ViewModel.</p>
-<h2 id="el-flujo-de-datos">El flujo de datos<a class="headerlink" href="#el-flujo-de-datos" title="Permanent link">&para;</a></h2>
-<p>El patrón sigue un <strong>flujo de datos unidireccional</strong>, que ya conoces del <em>state hoisting</em>: el <strong>estado baja</strong> (del ViewModel a la Vista) y los <strong>eventos suben</strong> (de la Vista al ViewModel).</p>
-<ul>
-<li>El ViewModel expone el estado; para eso usaremos un <code>StateFlow</code>, como viste en la parte de asincronía.</li>
-<li>La Vista recolecta ese estado y, ante cada cambio, se <strong>recompone</strong> sola (la recomposición de Compose).</li>
-<li>Cuando el usuario hace algo, la Vista no lo resuelve por su cuenta: se lo <strong>comunica</strong> al ViewModel, que decide qué hacer.</li>
-</ul>
-<p>En otras palabras, MVVM es el <em>state hoisting</em> llevado al nivel de toda la pantalla: el estado se eleva hasta el ViewModel, la única fuente de verdad.</p>
-<h2 id="por-que-usar-mvvm">¿Por qué usar MVVM?<a class="headerlink" href="#por-que-usar-mvvm" title="Permanent link">&para;</a></h2>
-<p>Separar el código en estas tres capas trae ventajas concretas:</p>
-<ul>
-<li><strong>Separación de responsabilidades</strong>: cada capa hace una sola cosa, así el código es más fácil de entender y de modificar (el principio SRP en acción).</li>
-<li><strong>Testabilidad</strong>: como la lógica vive en el ViewModel, aislada de la interfaz, puedes probarla sin necesidad de dibujar ninguna pantalla.</li>
-<li><strong>Sobrevive a los cambios de configuración</strong>: el ViewModel está diseñado para <strong>vivir más</strong> que la <code>Activity</code>, así que, al girar el dispositivo, el estado <strong>no se pierde</strong> (resolviendo el problema que dejamos pendiente en el capítulo del ciclo de vida).</li>
-<li><strong>Única fuente de verdad</strong>: el estado vive en un solo lugar, lo que evita inconsistencias.</li>
-</ul>
-<p>Por todo esto, MVVM es la arquitectura que <strong>Google recomienda</strong> para las apps Android modernas.</p>
-<h2 id="como-se-conecta-con-lo-que-ya-sabes">Cómo se conecta con lo que ya sabes<a class="headerlink" href="#como-se-conecta-con-lo-que-ya-sabes" title="Permanent link">&para;</a></h2>
-<p>Quizás notaste que MVVM no introduce ideas nuevas, sino que <strong>junta</strong> varias que ya viste a lo largo del curso:</p>
-<ul>
-<li>El <em>state hoisting</em> (elevar el estado): el ViewModel es el lugar al que se eleva el estado de toda la pantalla.</li>
-<li>El <code>StateFlow</code>: el mecanismo con el que el ViewModel expone su estado a la Vista.</li>
-<li>La <code>sealed class UiState</code>: una forma habitual de representar ese estado (cargando, éxito, error).</li>
-<li>El <code>viewModelScope</code>: el <em>scope</em> donde el ViewModel lanza sus coroutines (por ejemplo, para pedir datos).</li>
-</ul>
-<p>En los próximos capítulos construiremos cada pieza: el ViewModel, la separación en capas y la conexión con la interfaz.</p>
+<p>Cada pantalla se identifica con una <strong>ruta</strong> (<em>route</em>), que no es más que un texto único, como <code>"inicio"</code> o <code>"detalle"</code>.</p>
+<h2 id="definir-las-pantallas-el-navhost">Definir las pantallas: el <code>NavHost</code><a class="headerlink" href="#definir-las-pantallas-el-navhost" title="Permanent link">&para;</a></h2>
+<p>Primero creas el <code>NavController</code> (con <code>remember</code>, para que sobreviva a las recomposiciones) y luego declaras el <code>NavHost</code> con sus destinos:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Composable</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">App</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">navController</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rememberNavController</span><span class="p">()</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">NavHost</span><span class="p">(</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="n">navController</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">navController</span><span class="p">,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="n">startDestination</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;inicio&quot;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">        </span><span class="n">composable</span><span class="p">(</span><span class="s">&quot;inicio&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">            </span><span class="n">PantallaInicio</span><span class="p">()</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">        </span><span class="n">composable</span><span class="p">(</span><span class="s">&quot;detalle&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">            </span><span class="n">PantallaDetalle</span><span class="p">()</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="p">}</span>
+</code></pre></div>
+<p><code>startDestination</code> indica la pantalla que se muestra al abrir la app. Cada bloque <code>composable("ruta") { ... }</code> asocia una ruta con el composable que se dibuja cuando se navega a ella.</p>
+<h2 id="navegar-entre-pantallas">Navegar entre pantallas<a class="headerlink" href="#navegar-entre-pantallas" title="Permanent link">&para;</a></h2>
+<p>Para ir de una pantalla a otra, le pides al <code>NavController</code> que <strong>navegue</strong> a una ruta:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">navController</span><span class="p">.</span><span class="na">navigate</span><span class="p">(</span><span class="s">&quot;detalle&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Normalmente esto ocurre en respuesta a una acción del usuario, como tocar un botón:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Button</span><span class="p">(</span><span class="n">onClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">navController</span><span class="p">.</span><span class="na">navigate</span><span class="p">(</span><span class="s">&quot;detalle&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Ver detalle&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>Visualmente, el flujo entre dos pantallas se ve así:</p>
+<pre class="mermaid"><code>flowchart LR
+    A["Pantalla de inicio"] -- "navigate(detalle)" --&gt; B["Pantalla de detalle"]
+    B -- "botón de retroceso" --&gt; A</code></pre>
+<h2 id="volver-atras">Volver atrás<a class="headerlink" href="#volver-atras" title="Permanent link">&para;</a></h2>
+<p>¿Y para volver? La buena noticia es que el <strong>botón de retroceso</strong> del sistema ya funciona solo: al presionarlo, Navigation quita la pantalla actual de la pila y muestra la anterior. Si quieres volver atrás desde tu propio código (por ejemplo, con un botón "Cancelar"), usas:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">navController</span><span class="p">.</span><span class="na">popBackStack</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="pasar-datos-entre-pantallas">Pasar datos entre pantallas<a class="headerlink" href="#pasar-datos-entre-pantallas" title="Permanent link">&para;</a></h2>
+<p>Muchas veces, al navegar a un detalle, necesitas decirle <strong>qué</strong> elemento mostrar. Para eso, la ruta puede incluir <strong>argumentos</strong>, indicados entre llaves:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">composable</span><span class="p">(</span><span class="s">&quot;detalle/{id}&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">backStackEntry</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">backStackEntry</span><span class="p">.</span><span class="na">arguments</span><span class="o">?.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">PantallaDetalle</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">}</span>
+</code></pre></div>
+<p>Y, al navegar, incluyes el valor en la ruta:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">navController</span><span class="p">.</span><span class="na">navigate</span><span class="p">(</span><span class="s">&quot;detalle/42&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Así, la pantalla de detalle recibe el <code>id</code> (<code>"42"</code>) y puede mostrar el elemento correspondiente. Fíjate en que el argumento llega como texto; si necesitas un número, tendrás que convertirlo con <code>toInt()</code>, como viste al principio del curso.</p>
+<div class="admonition tip">
+<p class="admonition-title">Sugerencia</p>
+<p>Como buena práctica, en lugar de pasar el <code>NavController</code> a cada pantalla, es preferible que las pantallas reciban <strong>funciones</strong> de navegación (por ejemplo, <code>onVerDetalle: (String) -&gt; Unit</code>). Así quedan desacopladas de la navegación y son más fáciles de reutilizar y previsualizar, siguiendo la misma idea del <em>state hoisting</em> que viste con el estado.</p>
+</div>
 <h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
-<p>En este capítulo conociste la arquitectura MVVM:</p>
+<p>En este capítulo aprendiste a moverte entre pantallas:</p>
 <ul>
-<li>Sin una arquitectura, poner el estado y la lógica dentro de los composables los vuelve difíciles de probar y mantener y, además, hace perder el estado al girar el dispositivo.</li>
-<li><strong>MVVM</strong> (Model-View-ViewModel) separa el código en tres capas: la <strong>Vista</strong> (los composables, que muestran el estado y avisan de eventos), el <strong>ViewModel</strong> (que guarda el estado y ejecuta la lógica) y el <strong>Modelo</strong> (los datos y la lógica de negocio).</li>
-<li>Sigue un <strong>flujo de datos unidireccional</strong>: el estado baja (del ViewModel a la Vista) y los eventos suben (de la Vista al ViewModel).</li>
-<li>Sus ventajas: separación de responsabilidades, testabilidad, supervivencia a los cambios de configuración y una única fuente de verdad.</li>
-<li>MVVM reúne varias piezas que ya conoces: <em>state hoisting</em>, <code>StateFlow</code>, <code>UiState</code> y <code>viewModelScope</code>.</li>
+<li><strong>Navigation Compose</strong> gestiona la navegación entre composables. Es una dependencia que se agrega al proyecto.</li>
+<li>El <strong><code>NavController</code></strong> controla la navegación (la pila de pantallas); el <strong><code>NavHost</code></strong> define el mapa de destinos, cada uno identificado por una <strong>ruta</strong>.</li>
+<li>Navegas con <code>navController.navigate("ruta")</code>, normalmente en respuesta a una acción del usuario.</li>
+<li>El <strong>botón de retroceso</strong> del sistema funciona automáticamente; también puedes volver con <code>popBackStack()</code>.</li>
+<li>Puedes <strong>pasar datos</strong> incluyendo argumentos en la ruta (<code>"detalle/{id}"</code>) y leerlos en el destino.</li>
+<li>Como buena práctica, pasa <strong>funciones</strong> de navegación a las pantallas en vez del <code>NavController</code>, para mantenerlas desacopladas.</li>
 </ul>
-<p>En el próximo capítulo pondrás esto en práctica: crearás tu primer <strong><code>ViewModel</code></strong>, expondrás su estado con <code>StateFlow</code> y lo conectarás con la interfaz.</p>
+<p>Ya sabes construir y conectar pantallas completas. En el próximo capítulo cerrarás la parte de Compose dándole a la interfaz su <strong>estilo final</strong> con Material 3: el tema, los colores y la tipografía.</p>
 
 
 
@@ -2708,7 +2835,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../../part06/chapter31/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 31. Navegación con Navigation Compose">
+          <a href="../tutorial_my_todo_list_part_1/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Tutorial: Mi lista de tareas (parte 1)">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2718,20 +2845,20 @@
                 Anterior
               </span>
               <div class="md-ellipsis">
-                31. Navegación con Navigation Compose
+                Tutorial: Mi lista de tareas (parte 1)
               </div>
             </div>
           </a>
         
         
           
-          <a href="../chapter33/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 33. &lt;code&gt;ViewModel&lt;/code&gt; y el estado de la interfaz (&lt;code&gt;UiState&lt;/code&gt;)">
+          <a href="../chapter33/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 33. Material 3: tema, color y tipografía">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                33. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
+                33. Material 3: tema, color y tipografía
               </div>
             </div>
             <div class="md-footer__button md-icon">

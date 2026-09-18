@@ -27,7 +27,7 @@
     
     
       
-        <title>29. Layouts y listas: Column, Row, LazyColumn - Android con Kotlin desde cero</title>
+        <title>29. Material 3: componentes listos para usar - Android con Kotlin desde cero</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#capitulo-29-layouts-y-listas-column-row-lazycolumn" class="md-skip">
+        <a href="#capitulo-29-material-3-componentes-listos-para-usar" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              29. Layouts y listas: <code>Column</code>, <code>Row</code>, <code>LazyColumn</code>
+              29. Material 3: componentes listos para usar
             
           </span>
         </div>
@@ -1483,7 +1483,7 @@
   <span class="md-ellipsis">
     
   
-    28. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
+    28. Gestión de recursos: imágenes, íconos y cadenas de texto
   
 
     
@@ -1520,7 +1520,7 @@
   <span class="md-ellipsis">
     
   
-    29. Layouts y listas: <code>Column</code>, <code>Row</code>, <code>LazyColumn</code>
+    29. Material 3: componentes listos para usar
   
 
     
@@ -1538,7 +1538,7 @@
   <span class="md-ellipsis">
     
   
-    29. Layouts y listas: <code>Column</code>, <code>Row</code>, <code>LazyColumn</code>
+    29. Material 3: componentes listos para usar
   
 
     
@@ -1575,10 +1575,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#el-problema-los-elementos-se-superponen" class="md-nav__link">
+  <a href="#que-es-material-design" class="md-nav__link">
     <span class="md-ellipsis">
       
-        El problema: los elementos se superponen
+        ¿Qué es Material Design?
       
     </span>
   </a>
@@ -1586,68 +1586,113 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#column-en-vertical" class="md-nav__link">
+  <a href="#componentes-basicos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Column: en vertical
+        Componentes básicos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Componentes básicos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#row-en-horizontal" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#image" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Row: en horizontal
+        Image
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#box-superponer-elementos" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#button-botones-y-el-evento-de-clic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Box: superponer elementos
+        Button: botones y el evento de clic
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#distribucion-y-alineacion" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#card-agrupar-informacion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Distribución y alineación
+        Card: agrupar información
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#el-modificador-weight" class="md-nav__link">
+  <a href="#otros-componentes-habituales" class="md-nav__link">
     <span class="md-ellipsis">
       
-        El modificador weight
+        Otros componentes habituales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Otros componentes habituales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#icon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Icon
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#lazycolumn-listas-eficientes" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#textfield-la-base-de-los-formularios" class="md-nav__link">
     <span class="md-ellipsis">
       
-        LazyColumn: listas eficientes
+        TextField: la base de los formularios
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkbox-y-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkbox y Switch
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1685,7 +1730,7 @@
   <span class="md-ellipsis">
     
   
-    30. Material 3: tema, color, tipografía y componentes
+    30. Estructura de pantalla: <code>Scaffold</code>, layouts y <code>LazyColumn</code>
   
 
     
@@ -1713,7 +1758,91 @@
   <span class="md-ellipsis">
     
   
-    31. Navegación con Navigation Compose
+    31. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial_my_todo_list_part_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter32/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. Navegación con Navigation Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter33/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Material 3: tema, color y tipografía
   
 
     
@@ -1788,62 +1917,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part07/chapter32/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    32. Qué es MVVM y por qué usarlo
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part07/chapter33/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    33. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../part07/chapter34/" class="md-nav__link">
         
   
@@ -1851,7 +1924,7 @@
   <span class="md-ellipsis">
     
   
-    34. Repositorio y separación de capas
+    34. Qué es MVVM y por qué usarlo
   
 
     
@@ -1879,7 +1952,63 @@
   <span class="md-ellipsis">
     
   
-    35. Inyección de dependencias (manual y con Hilt)
+    35. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter36/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    36. Repositorio y separación de capas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter37/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    37. Inyección de dependencias (manual y con Hilt)
   
 
     
@@ -1954,62 +2083,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part08/chapter36/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    36. HTTP, REST y JSON: cómo se comunican las apps con un servidor
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part08/chapter37/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    37. Retrofit: configuración, interfaces y endpoints
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../part08/chapter38/" class="md-nav__link">
         
   
@@ -2017,7 +2090,7 @@
   <span class="md-ellipsis">
     
   
-    38. Serialización JSON y modelos de datos (DTO)
+    38. HTTP, REST y JSON: cómo se comunican las apps con un servidor
   
 
     
@@ -2045,7 +2118,63 @@
   <span class="md-ellipsis">
     
   
-    39. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
+    39. Retrofit: configuración, interfaces y endpoints
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/chapter40/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    40. Serialización JSON y modelos de datos (DTO)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/chapter41/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    41. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
   
 
     
@@ -2120,62 +2249,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part09/chapter40/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    40. Diseño de la app: pantallas, navegación y arquitectura
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter41/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    41. Setup del proyecto y dependencias
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../part09/chapter42/" class="md-nav__link">
         
   
@@ -2183,7 +2256,7 @@
   <span class="md-ellipsis">
     
   
-    42. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>
+    42. Diseño de la app: pantallas, navegación y arquitectura
   
 
     
@@ -2211,7 +2284,7 @@
   <span class="md-ellipsis">
     
   
-    43. Pantalla de lista con paginación
+    43. Setup del proyecto y dependencias
   
 
     
@@ -2239,7 +2312,7 @@
   <span class="md-ellipsis">
     
   
-    44. Carga de sprites con Coil
+    44. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>
   
 
     
@@ -2267,7 +2340,7 @@
   <span class="md-ellipsis">
     
   
-    45. Pantalla de detalle: stats, tipos y habilidades
+    45. Pantalla de lista con paginación
   
 
     
@@ -2295,7 +2368,7 @@
   <span class="md-ellipsis">
     
   
-    46. Búsqueda y filtrado
+    46. Carga de sprites con Coil
   
 
     
@@ -2323,7 +2396,7 @@
   <span class="md-ellipsis">
     
   
-    47. Persistencia local con Room: favoritos y caché offline
+    47. Pantalla de detalle: stats, tipos y habilidades
   
 
     
@@ -2351,7 +2424,7 @@
   <span class="md-ellipsis">
     
   
-    48. Pulido: estados de UI, Material 3 y accesibilidad
+    48. Búsqueda y filtrado
   
 
     
@@ -2379,7 +2452,63 @@
   <span class="md-ellipsis">
     
   
-    49. Cierre: testing básico, buenas prácticas y próximos pasos
+    49. Persistencia local con Room: favoritos y caché offline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part09/chapter50/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    50. Pulido: estados de UI, Material 3 y accesibilidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part09/chapter51/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    51. Cierre: testing básico, buenas prácticas y próximos pasos
   
 
     
@@ -2503,6 +2632,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/android-sdk-criteria/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C. Cómo elegir el SDK de un proyecto Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2548,10 +2705,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#el-problema-los-elementos-se-superponen" class="md-nav__link">
+  <a href="#que-es-material-design" class="md-nav__link">
     <span class="md-ellipsis">
       
-        El problema: los elementos se superponen
+        ¿Qué es Material Design?
       
     </span>
   </a>
@@ -2559,68 +2716,113 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#column-en-vertical" class="md-nav__link">
+  <a href="#componentes-basicos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Column: en vertical
+        Componentes básicos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Componentes básicos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#row-en-horizontal" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#image" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Row: en horizontal
+        Image
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#box-superponer-elementos" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#button-botones-y-el-evento-de-clic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Box: superponer elementos
+        Button: botones y el evento de clic
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#distribucion-y-alineacion" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#card-agrupar-informacion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Distribución y alineación
+        Card: agrupar información
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#el-modificador-weight" class="md-nav__link">
+  <a href="#otros-componentes-habituales" class="md-nav__link">
     <span class="md-ellipsis">
       
-        El modificador weight
+        Otros componentes habituales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Otros componentes habituales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#icon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Icon
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#lazycolumn-listas-eficientes" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#textfield-la-base-de-los-formularios" class="md-nav__link">
     <span class="md-ellipsis">
       
-        LazyColumn: listas eficientes
+        TextField: la base de los formularios
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkbox-y-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkbox y Switch
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2655,96 +2857,252 @@
   
 
 
-<h1 id="capitulo-29-layouts-y-listas-column-row-lazycolumn">Capítulo 29: Layouts y listas: <code>Column</code>, <code>Row</code>, <code>LazyColumn</code><a class="headerlink" href="#capitulo-29-layouts-y-listas-column-row-lazycolumn" title="Permanent link">&para;</a></h1>
+<h1 id="capitulo-29-material-3-componentes-listos-para-usar">Capítulo 29: Material 3: componentes listos para usar<a class="headerlink" href="#capitulo-29-material-3-componentes-listos-para-usar" title="Permanent link">&para;</a></h1>
 <h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
-<p>Hasta ahora has mostrado composables de a uno. Pero una pantalla real combina <strong>muchos</strong> elementos: textos, imágenes, botones, unos debajo de otros o en fila. En este capítulo aprenderás a <strong>organizarlos</strong> con los layouts de Compose —<code>Column</code>, <code>Row</code> y <code>Box</code>—, a controlar cómo se distribuyen y alinean, y a mostrar <strong>listas</strong> de forma eficiente con <code>LazyColumn</code>, imprescindible para presentar listas largas de datos.</p>
-<h2 id="el-problema-los-elementos-se-superponen">El problema: los elementos se superponen<a class="headerlink" href="#el-problema-los-elementos-se-superponen" title="Permanent link">&para;</a></h2>
-<p>Si colocas dos composables juntos sin más, Compose los dibuja en el <strong>mismo lugar</strong>, uno encima del otro:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Composable</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">Pantalla</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Primero&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Segundo&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// ¡se dibuja encima del anterior!</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
-</code></pre></div>
-<p>Para arreglarlo, necesitas un <strong>layout</strong>: un composable cuyo trabajo es <strong>organizar</strong> a sus hijos. Compose ofrece tres básicos, que resuelven las tres formas fundamentales de disponer elementos:</p>
-<p><img alt="Layout" src="../../../assets/images/chapter29/layout-column-row-box.svg" /></p>
-<h2 id="column-en-vertical"><code>Column</code>: en vertical<a class="headerlink" href="#column-en-vertical" title="Permanent link">&para;</a></h2>
-<p>Un <code>Column</code> organiza a sus hijos <strong>en vertical</strong>, uno debajo del otro:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Column</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Primero&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Segundo&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Tercero&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
-</code></pre></div>
-<p>Ahora los tres textos aparecen apilados de arriba abajo, en el orden en que los escribiste.</p>
-<h2 id="row-en-horizontal"><code>Row</code>: en horizontal<a class="headerlink" href="#row-en-horizontal" title="Permanent link">&para;</a></h2>
-<p>Un <code>Row</code> organiza a sus hijos <strong>en horizontal</strong>, uno al lado del otro:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Row</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Izquierda&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Centro&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Derecha&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
-</code></pre></div>
-<p>Es idéntico a <code>Column</code>, pero en el eje horizontal.</p>
-<h2 id="box-superponer-elementos"><code>Box</code>: superponer elementos<a class="headerlink" href="#box-superponer-elementos" title="Permanent link">&para;</a></h2>
-<p>Un <code>Box</code> <strong>apila</strong> a sus hijos, uno <strong>encima</strong> de otro. Es útil para superponer cosas: un texto sobre una imagen, una insignia sobre un ícono, etcétera.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">Box</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Fondo&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Encima&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// se dibuja sobre el anterior</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">}</span>
-</code></pre></div>
-<p>Combinando estos tres layouts (y anidándolos unos dentro de otros) puedes construir prácticamente cualquier pantalla.</p>
-<h2 id="distribucion-y-alineacion">Distribución y alineación<a class="headerlink" href="#distribucion-y-alineacion" title="Permanent link">&para;</a></h2>
-<p>Dentro de un <code>Column</code> o un <code>Row</code>, a menudo querrás controlar <strong>cómo se reparten</strong> los hijos y <strong>cómo se alinean</strong>. Para eso, estos layouts reciben dos parámetros. La clave es distinguir sus dos ejes:</p>
-<ul>
-<li>En un <code>Column</code>, el eje principal es <strong>vertical</strong>. Controlas la distribución vertical con <code>verticalArrangement</code> y la alineación horizontal con <code>horizontalAlignment</code>.</li>
-<li>En un <code>Row</code>, el eje principal es <strong>horizontal</strong>. Controlas la distribución horizontal con <code>horizontalArrangement</code> y la alineación vertical con <code>verticalAlignment</code>.</li>
-</ul>
-<p>Por ejemplo, un <code>Column</code> que separa sus hijos con espacio y los centra horizontalmente:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">Column</span><span class="p">(</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">verticalArrangement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrangement</span><span class="p">.</span><span class="na">spacedBy</span><span class="p">(</span><span class="m">8.</span><span class="n">dp</span><span class="p">),</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">horizontalAlignment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Alignment</span><span class="p">.</span><span class="na">CenterHorizontally</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Primero&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Segundo&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">}</span>
-</code></pre></div>
-<p>Algunos valores útiles de <code>Arrangement</code> son <code>spacedBy(...)</code> (un espacio fijo entre elementos), <code>SpaceBetween</code> (reparte el espacio sobrante entre ellos) y <code>Center</code> (los agrupa al centro). Y de <code>Alignment</code>, <code>Start</code>, <code>CenterHorizontally</code> y <code>End</code> (o <code>Top</code>, <code>CenterVertically</code> y <code>Bottom</code> en un <code>Row</code>).</p>
-<h2 id="el-modificador-weight">El modificador <code>weight</code><a class="headerlink" href="#el-modificador-weight" title="Permanent link">&para;</a></h2>
-<p>En el capítulo de fundamentos mencionamos que hay modificadores que solo funcionan dentro de ciertos layouts. <code>weight</code> es el más importante: dentro de un <code>Row</code> o un <code>Column</code>, reparte el <strong>espacio disponible</strong> entre los hijos de forma proporcional.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">Row</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Izquierda&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">weight</span><span class="p">(</span><span class="m">1f</span><span class="p">))</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Derecha&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">weight</span><span class="p">(</span><span class="m">1f</span><span class="p">))</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span>
-</code></pre></div>
-<p>Aquí ambos textos reciben el mismo peso (<code>1f</code>), así que se reparten el ancho <strong>a la mitad</strong>. Si a uno le dieras <code>weight(2f)</code> y al otro <code>weight(1f)</code>, el primero ocuparía el doble de espacio que el segundo.</p>
-<h2 id="lazycolumn-listas-eficientes"><code>LazyColumn</code>: listas eficientes<a class="headerlink" href="#lazycolumn-listas-eficientes" title="Permanent link">&para;</a></h2>
-<p>Un <code>Column</code> dibuja <strong>todos</strong> sus hijos de una vez. Eso está bien para unos pocos elementos, pero ¿y si tienes una lista de cientos o miles de elementos? Dibujarlos todos a la vez sería lento y desperdiciaría memoria, sobre todo porque la mayoría ni siquiera caben en la pantalla.</p>
-<p>Para eso está el <strong><code>LazyColumn</code></strong>: una columna con desplazamiento (<em>scroll</em>) que solo compone los elementos <strong>visibles</strong> en cada momento, y los va reutilizando a medida que te desplazas. Así puede mostrar listas enormes sin problemas.</p>
-<p>En vez de escribir cada hijo a mano, le pasas la lista con la función <code>items</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">nombres</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Diego&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Elena&quot;</span><span class="p">)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">LazyColumn</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="n">items</span><span class="p">(</span><span class="n">nombres</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="p">}</span>
-</code></pre></div>
-<p><code>items(nombres)</code> recorre la lista y, por cada elemento, ejecuta la lambda que describe cómo mostrarlo (aquí, un <code>Text</code> con su nombre). El desplazamiento funciona automáticamente. También existe <code>LazyRow</code>, su equivalente horizontal.</p>
+<p>En los capítulos anteriores escribiste tu primer <code>@Composable</code>, conociste <code>Modifier</code> y aprendiste a organizar los recursos de tu app (imágenes, ícono, textos). Las apps reales se construyen con <strong>componentes de interfaz</strong> ya conocidos: textos, imágenes, botones, tarjetas… En este capítulo conocerás <strong>Material 3</strong>, el sistema de diseño que trae Compose, y los <strong>componentes</strong> más habituales que usarás para construir tus pantallas, junto con sus parámetros más comunes.</p>
+<p>Dejaremos para más adelante cómo <strong>personalizar</strong> el aspecto de estos componentes (colores, tipografía); por ahora, usarás el estilo que Android Studio ya dejó preparado en tu proyecto.</p>
+<h2 id="que-es-material-design">¿Qué es Material Design?<a class="headerlink" href="#que-es-material-design" title="Permanent link">&para;</a></h2>
+<p><strong>Material Design</strong> es el sistema de diseño creado por Google: una serie de guías y componentes para construir interfaces atractivas y coherentes en Android (y otras plataformas). Su versión más reciente es <strong>Material 3</strong> (también llamado <em>Material You</em>), que introduce, entre otras cosas, colores capaces de adaptarse al fondo de pantalla del usuario.</p>
+<p>Compose viene con una biblioteca que implementa Material 3, así que obtienes sus componentes y su sistema de temas <strong>gratis</strong>, sin tener que diseñarlos desde cero. Cuando creaste el proyecto, Android Studio generó además un <strong>tema</strong> (un composable, normalmente llamado <code>NombreDeTuAppTheme</code>) que envuelve toda tu interfaz y le da, por detrás, un estilo consistente a todos estos componentes. Volveremos sobre el tema con detalle más adelante; por ahora, basta con saber que ya está ahí, trabajando por ti.</p>
+<h2 id="componentes-basicos">Componentes básicos<a class="headerlink" href="#componentes-basicos" title="Permanent link">&para;</a></h2>
+<p>Material 3 trae muchos componentes ya construidos, todos con un estilo coherente entre sí. Estos son los cuatro que más usarás para armar una pantalla: <code>Text</code>, <code>Image</code>, <code>Button</code> y <code>Card</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Si vienes del desarrollo Android tradicional, <code>LazyColumn</code> cumple el papel del antiguo <code>RecyclerView</code>, pero con muchísimo menos código: no necesitas adaptadores ni <em>view holders</em>.</p>
+<p>Ya conoces <code>Modifier</code> para ajustar tamaño, espaciado, fondo o forma (<code>padding</code>, <code>size</code>, <code>background</code>…). Sigue usándolo para eso. Algunos componentes, como <code>Text</code>, también aceptan parámetros propios de apariencia (<code>color</code>, <code>fontSize</code>…), porque <code>Modifier</code> no llega al contenido interno del componente. Puedes usarlos si lo necesitas, pero acostúmbrate a resolver tamaño, espaciado y fondo con <code>modifier</code>, tal como aprendiste, y deja esos parámetros propios solo para lo que <code>modifier</code> no puede hacer.</p>
 </div>
-<p>Este es, precisamente, el componente con el que se muestran listas largas de datos en una app: una <code>LazyColumn</code> con un <code>items</code> que recorre los elementos.</p>
+<h3 id="text"><code>Text</code><a class="headerlink" href="#text" title="Permanent link">&para;</a></h3>
+<p>Ya usaste <code>Text</code> para mostrar texto en pantalla. Su único parámetro obligatorio es <code>text</code>; el resto de su apariencia (tamaño, espaciado, fondo) sigue resolviéndose con <code>modifier</code>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parámetro</th>
+<th style="text-align: left;">Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>text</code></td>
+<td style="text-align: left;">El texto a mostrar. Es el único parámetro obligatorio.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>textAlign</code></td>
+<td style="text-align: left;">La alineación del texto dentro de su espacio (<code>TextAlign.Center</code>, <code>TextAlign.End</code>…).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>maxLines</code></td>
+<td style="text-align: left;">El número máximo de líneas antes de recortar el texto.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Text</span><span class="p">(</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;¡Bienvenido!&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="p">.</span><span class="na">padding</span><span class="p">(</span><span class="m">16.</span><span class="n">dp</span><span class="p">)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span><span class="p">.</span><span class="na">fillMaxWidth</span><span class="p">(),</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">textAlign</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TextAlign</span><span class="p">.</span><span class="na">Center</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">)</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p><code>Text</code> también admite <code>color</code>, <code>fontSize</code> o <code>fontWeight</code> para fijar su apariencia directamente, y es válido usarlos. Pero cuando lleguemos al capítulo de Material 3 sobre el tema, verás la forma recomendada de aplicar estilos de texto coherentes en toda la app con el parámetro <code>style</code>, en lugar de fijarlos uno por uno en cada <code>Text</code>.</p>
+</div>
+<h3 id="image"><code>Image</code><a class="headerlink" href="#image" title="Permanent link">&para;</a></h3>
+<p><code>Image</code> muestra una imagen: un recurso de tu proyecto (guardado en <code>res/drawable</code>) o un ícono vectorial.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parámetro</th>
+<th style="text-align: left;">Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>painter</code></td>
+<td style="text-align: left;">La fuente de la imagen; lo habitual es <code>painterResource(id = R.drawable.mi_imagen)</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>contentDescription</code></td>
+<td style="text-align: left;">Un texto que describe la imagen para lectores de pantalla; es obligatorio por accesibilidad (usa <code>null</code> solo si la imagen es puramente decorativa).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>contentScale</code></td>
+<td style="text-align: left;">Cómo se ajusta la imagen a su tamaño (<code>ContentScale.Crop</code>, <code>ContentScale.Fit</code>…).</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Image</span><span class="p">(</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">painter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">painterResource</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="na">drawable</span><span class="p">.</span><span class="na">foto_perfil</span><span class="p">),</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">contentDescription</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Foto de perfil&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">contentScale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ContentScale</span><span class="p">.</span><span class="na">Crop</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">size</span><span class="p">(</span><span class="m">80.</span><span class="n">dp</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">)</span>
+</code></pre></div>
+<p>Fíjate en que, para el tamaño, seguimos usando <code>modifier.size(...)</code>, tal como ya sabes; <code>contentScale</code> solo indica <strong>cómo encajar</strong> la imagen dentro de ese tamaño.</p>
+<h3 id="button-botones-y-el-evento-de-clic"><code>Button</code>: botones y el evento de clic<a class="headerlink" href="#button-botones-y-el-evento-de-clic" title="Permanent link">&para;</a></h3>
+<p>Un <strong><code>Button</code></strong> muestra un botón con el estilo de Material. Su único parámetro obligatorio es <code>onClick</code>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parámetro</th>
+<th style="text-align: left;">Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>onClick</code></td>
+<td style="text-align: left;">La acción que se ejecuta al tocar el botón. Es el único parámetro obligatorio.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>enabled</code></td>
+<td style="text-align: left;">Si es <code>false</code>, el botón se muestra atenuado y no responde a los toques.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Button</span><span class="p">(</span><span class="n">onClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Botón presionado&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Enviar&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>Cada vez que el usuario toca el botón, Compose ejecuta la lambda de <code>onClick</code> <strong>una vez</strong> —en este ejemplo, imprime un mensaje en la consola—. Pero fíjate en algo importante: la pantalla <strong>no cambia sola</strong> por tocar el botón. Si dentro de <code>onClick</code> quisieras, por ejemplo, aumentar un contador en pantalla, necesitarías guardar ese número en algo que Compose pueda observar; de lo contrario, aunque el valor cambie por dentro, la interfaz nunca se entera y sigue mostrando lo mismo. A esa pieza que falta se le llama <strong>estado</strong>, y es el tema del capítulo de "Estado en Compose": por ahora, quédate con la idea clave de que <code>onClick</code> es el lugar donde tu app <strong>reacciona</strong> a un toque.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p><code>Button</code> también admite <code>colors</code>, <code>shape</code> o <code>contentPadding</code> para personalizar su apariencia. Por ahora, apóyate en el estilo que trae Material 3 por defecto; en el capítulo de tema aprenderás a ajustar estos aspectos de forma consistente en toda la app, en lugar de repetirlos botón por botón.</p>
+</div>
+<h3 id="card-agrupar-informacion"><code>Card</code>: agrupar información<a class="headerlink" href="#card-agrupar-informacion" title="Permanent link">&para;</a></h3>
+<p>Una <strong><code>Card</code></strong> es una superficie con elevación y esquinas redondeadas, ideal para agrupar información relacionada; es perfecta, por ejemplo, para cada elemento de una lista. No tiene parámetros obligatorios: su contenido se arma como el de cualquier otro composable contenedor, ayudándote de <code>modifier</code> para el espaciado interno.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">Card</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">Column</span><span class="p">(</span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">padding</span><span class="p">(</span><span class="m">16.</span><span class="n">dp</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Ana López&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Diseñadora gráfica&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Igual que <code>Button</code>, <code>Card</code> admite <code>elevation</code>, <code>shape</code> y <code>colors</code> para ajustar su apariencia, y existe en una variante <em>clickable</em> que recibe <code>onClick</code>. Volveremos a estos parámetros de apariencia en el capítulo de tema.</p>
+</div>
+<h2 id="otros-componentes-habituales">Otros componentes habituales<a class="headerlink" href="#otros-componentes-habituales" title="Permanent link">&para;</a></h2>
+<p>Material 3 trae muchos otros componentes con los que te irás encontrando. No hace falta memorizarlos todos ahora, pero conviene que conozcas los más comunes y cómo se usan.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Los ejemplos de esta sección guardan lo que el usuario escribe o marca con <code>remember { mutableStateOf(...) }</code>. Todavía no explicamos en detalle cómo funciona: lo harás en el próximo capítulo, "Estado en Compose". Por ahora, quédate con la idea de que cada uno de estos componentes necesita un lugar donde <strong>guardar</strong> su valor actual, y una función que se ejecute cuando el usuario lo cambia.</p>
+</div>
+<h3 id="icon"><code>Icon</code><a class="headerlink" href="#icon" title="Permanent link">&para;</a></h3>
+<p>Un <strong><code>Icon</code></strong> dibuja un ícono vectorial, muy usado dentro de botones, barras o junto a un texto:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parámetro</th>
+<th style="text-align: left;">Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>imageVector</code></td>
+<td style="text-align: left;">El ícono a mostrar, por ejemplo <code>Icons.Default.Favorite</code>. Es el único parámetro obligatorio.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>contentDescription</code></td>
+<td style="text-align: left;">Un texto que lo describe para lectores de pantalla, igual que en <code>Image</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>tint</code></td>
+<td style="text-align: left;">El color con el que se dibuja el ícono.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">Icon</span><span class="p">(</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="n">imageVector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Icons</span><span class="p">.</span><span class="na">Default</span><span class="p">.</span><span class="na">Favorite</span><span class="p">,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">contentDescription</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Marcar como favorito&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">tint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="p">.</span><span class="na">Red</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">)</span>
+</code></pre></div>
+<h3 id="textfield-la-base-de-los-formularios"><code>TextField</code>: la base de los formularios<a class="headerlink" href="#textfield-la-base-de-los-formularios" title="Permanent link">&para;</a></h3>
+<p>Un <strong><code>TextField</code></strong> es un campo de texto editable: el componente con el que construirás prácticamente <strong>todos los formularios</strong> del curso (inicio de sesión, búsqueda, alta de un contacto…).</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parámetro</th>
+<th style="text-align: left;">Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>value</code></td>
+<td style="text-align: left;">El texto que se muestra <strong>ahora mismo</strong> en el campo. Es obligatorio.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>onValueChange</code></td>
+<td style="text-align: left;">La función que se ejecuta cada vez que el usuario escribe algo. Es obligatorio.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>label</code></td>
+<td style="text-align: left;">Una etiqueta que identifica el campo (por ejemplo, "Correo electrónico").</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>placeholder</code></td>
+<td style="text-align: left;">Un texto de ejemplo que se ve cuando el campo está vacío.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">var</span><span class="w"> </span><span class="nv">nombre</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">remember</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">mutableStateOf</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">TextField</span><span class="p">(</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nombre</span><span class="p">,</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="n">onValueChange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">it</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Nombre&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="n">placeholder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Ingresa tu nombre&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="p">)</span>
+</code></pre></div>
+<p>Fíjate en el patrón: <code>value</code> le dice a <code>TextField</code> <strong>qué mostrar</strong>, y <code>onValueChange</code> recibe el texto nuevo cada vez que el usuario teclea, para que tú lo guardes (aquí, en <code>nombre</code>). Si solo pasaras <code>value</code> sin actualizarlo en <code>onValueChange</code>, el campo se vería "congelado" y no dejaría escribir, por la misma razón que viste con <code>Button</code>: la interfaz no cambia si nadie actualiza el estado que lee. Un formulario real simplemente combina <strong>varios</strong> <code>TextField</code> como este, uno por cada dato que pidas.</p>
+<h3 id="checkbox-y-switch"><code>Checkbox</code> y <code>Switch</code><a class="headerlink" href="#checkbox-y-switch" title="Permanent link">&para;</a></h3>
+<p>Un <strong><code>Checkbox</code></strong> es una casilla de verificación; un <strong><code>Switch</code></strong> es un interruptor de encendido/apagado. Ambos comparten los mismos parámetros:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parámetro</th>
+<th style="text-align: left;">Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>checked</code></td>
+<td style="text-align: left;">Si está marcado o activado. Es obligatorio.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>onCheckedChange</code></td>
+<td style="text-align: left;">La función que se ejecuta cuando el usuario lo toca, con el nuevo valor. Es obligatorio.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">var</span><span class="w"> </span><span class="nv">aceptaTerminos</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">remember</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">mutableStateOf</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">Row</span><span class="p">(</span><span class="n">verticalAlignment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Alignment</span><span class="p">.</span><span class="na">CenterVertically</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="n">Checkbox</span><span class="p">(</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">        </span><span class="n">checked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aceptaTerminos</span><span class="p">,</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="n">onCheckedChange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">aceptaTerminos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">it</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="p">)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Acepto los términos y condiciones&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">}</span>
+</code></pre></div>
+<p>Para un <code>Switch</code>, el uso es idéntico: solo cambia el componente.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">var</span><span class="w"> </span><span class="nv">notificacionesActivas</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">remember</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">mutableStateOf</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">Switch</span><span class="p">(</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="n">checked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">notificacionesActivas</span><span class="p">,</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="n">onCheckedChange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">notificacionesActivas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">it</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">)</span>
+</code></pre></div>
+<p>Fíjate en el patrón que se repite en los tres: cada componente interactivo recibe los <strong>datos a mostrar</strong> (<code>value</code>, <code>checked</code>) y una <strong>función de devolución de llamada</strong> (<code>onValueChange</code>, <code>onCheckedChange</code>) para reaccionar a la interacción del usuario, igual que viste con <code>Button</code> y su <code>onClick</code>. Volverás a encontrarte con varios de estos componentes en capítulos posteriores, sobre todo al construir formularios.</p>
 <h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
-<p>En este capítulo aprendiste a organizar la interfaz:</p>
+<p>En este capítulo conociste los componentes de Material 3:</p>
 <ul>
-<li>Sin un layout, los composables se <strong>superponen</strong>. Los tres layouts básicos son <code>Column</code> (vertical), <code>Row</code> (horizontal) y <code>Box</code> (apilados).</li>
-<li><code>Column</code> y <code>Row</code> controlan la <strong>distribución</strong> (<code>Arrangement</code>) en su eje principal y la <strong>alineación</strong> (<code>Alignment</code>) en el eje cruzado.</li>
-<li>El modificador <strong><code>weight</code></strong>, dentro de un <code>Row</code> o <code>Column</code>, reparte el espacio disponible de forma proporcional.</li>
-<li><strong><code>LazyColumn</code></strong> muestra listas con desplazamiento de forma eficiente, componiendo solo los elementos visibles; se llena con la función <code>items</code>. Su versión horizontal es <code>LazyRow</code>.</li>
+<li><strong>Material Design</strong> es el sistema de diseño de Google; <strong>Material 3</strong> es su versión actual, y Compose lo incluye con componentes y un tema listos para usar.</li>
+<li>Los <strong>componentes básicos</strong> son <code>Text</code>, <code>Image</code>, <code>Button</code> y <code>Card</code>. Para su tamaño, espaciado y fondo sigues usando <code>modifier</code>, tal como ya sabías; sus parámetros propios (<code>text</code>, <code>painter</code>, <code>onClick</code>…) cubren lo que <code>modifier</code> no puede resolver.</li>
+<li><strong><code>Button</code></strong> ejecuta una acción en <code>onClick</code> al tocarlo; por sí solo no actualiza la pantalla, eso requiere <strong>estado</strong> (lo verás más adelante).</li>
+<li>Componentes como <code>Text</code>, <code>Button</code> o <code>Card</code> también admiten parámetros propios de apariencia (<code>color</code>, <code>fontSize</code>, <code>colors</code>, <code>shape</code>…); son válidos, pero el capítulo de tema te mostrará la forma recomendada de aplicarlos de forma coherente en toda la app.</li>
+<li>Hay muchos más componentes: <code>Icon</code> (íconos vectoriales), <code>TextField</code> (la base de los <strong>formularios</strong>), <code>Checkbox</code> y <code>Switch</code> (selección de opciones), todos con un estilo coherente entre sí y el mismo patrón de datos + función de devolución de llamada.</li>
 </ul>
-<p>En el próximo capítulo daremos color y estilo a la interfaz con <strong>Material 3</strong>: componentes listos para usar, temas, tipografía y esquemas de color.</p>
+<p>Con estas piezas ya puedes construir pantallas completas. En el próximo capítulo aprenderás a montar el esqueleto de una pantalla con <code>Scaffold</code> y a <strong>organizar</strong> su contenido con <code>Column</code>, <code>Row</code> y <code>LazyColumn</code>.</p>
 
 
 
@@ -2780,7 +3138,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../chapter28/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 28. Estado en Compose: &lt;code&gt;remember&lt;/code&gt;, &lt;code&gt;mutableStateOf&lt;/code&gt; y &lt;em&gt;state hoisting&lt;/em&gt;">
+          <a href="../chapter28/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 28. Gestión de recursos: imágenes, íconos y cadenas de texto">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2790,20 +3148,20 @@
                 Anterior
               </span>
               <div class="md-ellipsis">
-                28. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
+                28. Gestión de recursos: imágenes, íconos y cadenas de texto
               </div>
             </div>
           </a>
         
         
           
-          <a href="../chapter30/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 30. Material 3: tema, color, tipografía y componentes">
+          <a href="../chapter30/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 30. Estructura de pantalla: &lt;code&gt;Scaffold&lt;/code&gt;, layouts y &lt;code&gt;LazyColumn&lt;/code&gt;">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                30. Material 3: tema, color, tipografía y componentes
+                30. Estructura de pantalla: <code>Scaffold</code>, layouts y <code>LazyColumn</code>
               </div>
             </div>
             <div class="md-footer__button md-icon">
