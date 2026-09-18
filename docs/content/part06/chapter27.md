@@ -46,7 +46,7 @@ flowchart TD
     C --> D["La pantalla se actualiza"]
 ```
 
-Esto es justo lo que anticipamos al hablar de `StateFlow`: la interfaz **observa** los datos y **reacciona** a sus cambios, sin que tengas que actualizarla manualmente. En el próximo capítulo verás cómo se declaran esos datos que, al cambiar, provocan la recomposición (el **estado**).
+Esto es justo lo que anticipamos al hablar de `StateFlow`: la interfaz **observa** los datos y **reacciona** a sus cambios, sin que tengas que actualizarla manualmente. Más adelante verás cómo se declaran esos datos que, al cambiar, provocan la recomposición (el **estado**); antes, aprenderás a organizar varios composables en una misma pantalla.
 
 > [!IMPORTANT]
 > Como un composable puede ejecutarse muchas veces (una por cada recomposición) y en cualquier orden, no debes poner dentro de él acciones con efectos secundarios (como modificar una variable externa o escribir en un archivo). Un composable solo debería **describir** la interfaz a partir de los datos que recibe.
@@ -125,4 +125,4 @@ En este capítulo asentaste los fundamentos de Jetpack Compose:
 - Un **`Modifier`** ajusta la apariencia y el comportamiento de un composable (`padding`, `background`, `fillMaxWidth`, `clickable`…). Se **encadena**, el **orden importa**, y usa la unidad **`dp`** para los tamaños.
 - Por convención, tus composables deberían recibir un parámetro `modifier` con valor por defecto `Modifier` y aplicarlo a su elemento principal.
 
-En el próximo capítulo verás el **estado en Compose**: cómo declarar los datos que, al cambiar, disparan la recomposición, con `remember` y `mutableStateOf`.
+En el próximo capítulo verás cómo Android organiza sus **recursos** (imágenes, el ícono de la app, textos), algo que necesitarás antes de sacarles todo el provecho a los componentes de Material 3.

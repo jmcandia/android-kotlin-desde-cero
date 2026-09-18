@@ -1,138 +1,101 @@
-# Capítulo 28: Estado en Compose: `remember`, `mutableStateOf` y *state hoisting*
+# Capítulo 28: Gestión de recursos: imágenes, íconos y cadenas de texto
 
 ## Introducción
 
-En el capítulo anterior aprendiste la **recomposición**: cuando cambian los datos que un composable lee, Compose lo vuelve a ejecutar y actualiza la interfaz. Pero quedó una pregunta pendiente: ¿cómo se declaran esos datos que, al cambiar, disparan la recomposición?
+En el capítulo 25 viste que un proyecto Android separa el **código** (`kotlin+java/`) de los **recursos** (`res/`): imágenes, el ícono de la app, textos, entre otros. Hasta ahora no necesitabas mirar esa carpeta de cerca, pero para seguir avanzando —y, en particular, para usar `Image` en el próximo capítulo— conviene entender cómo Android organiza esos recursos y cómo se referencian desde tu código.
 
-La respuesta es el **estado** (*state*). En este capítulo aprenderás a crear estado con `mutableStateOf`, a conservarlo entre recomposiciones con `remember`, a mantenerlo incluso al girar el dispositivo con `rememberSaveable`, y una técnica fundamental para organizar bien tu interfaz: el ***state hoisting*** o "elevación del estado".
+En este capítulo verás cómo agregar **imágenes** al proyecto, cómo se genera y personaliza el **ícono de la app**, y por qué conviene guardar los **textos** en un archivo aparte en lugar de escribirlos directamente en el código.
 
-## El problema: una variable normal no basta
+## La carpeta `res` y la clase `R`
 
-Intentemos algo sencillo: un contador que aumenta cada vez que tocas un botón. Con lo que sabes, podrías intentar una variable normal:
+Dentro de `res/` (de *resources*), Android organiza cada tipo de recurso en su propia carpeta. Las que más vas a usar por ahora son:
 
-```kotlin
-@Composable
-fun Contador() {
-    var contador = 0
-
-    Button(onClick = { contador++ }) {
-        Text("Has tocado $contador veces")
-    }
-}
+```text
+res/
+├── drawable/    ← imágenes e íconos vectoriales
+├── mipmap/      ← el ícono de la app, en sus distintas variantes
+└── values/      ← strings.xml, y otros valores como colores o dimensiones
 ```
 
-Pero esto **no funciona**: por más que toques el botón, el número no cambia en pantalla. Y hay dos razones:
+Cuando agregas un archivo a cualquiera de estas carpetas, Android Studio **regenera automáticamente** una clase llamada `R` (de *resources*), con una referencia a cada recurso. Por ejemplo, una imagen `res/drawable/foto_perfil.png` queda disponible en tu código Kotlin como `R.drawable.foto_perfil`; un texto declarado en `res/values/strings.xml` con el nombre `titulo_pantalla`, como `R.string.titulo_pantalla`.
 
-1. Compose **no sabe** que `contador` cambió, así que no recompone: la interfaz nunca se entera de la actualización.
-2. Aunque recompusiera, `contador` es una variable normal que se **reinicia a 0** cada vez que la función se vuelve a ejecutar.
-
-Necesitamos algo que Compose pueda **observar** y que, además, **sobreviva** a las recomposiciones. Esas dos necesidades las resuelven `mutableStateOf` y `remember`.
+Esto tiene dos ventajas grandes frente a, por ejemplo, escribir la ruta de un archivo a mano: el compilador **verifica** que el recurso exista (si lo borras o le cambias el nombre, tu código no compila hasta que lo corrijas) y Android Studio te ofrece **autocompletado** para encontrarlos.
 
 > [!NOTE]Nota
-> `Button` es un componente de Material, que veremos en detalle más adelante. Por ahora basta con saber que su parámetro `onClick` recibe la acción que se ejecuta al tocarlo.
+> Los nombres de los recursos siguen una convención estricta: solo minúsculas, números y guion bajo (`snake_case`), sin espacios ni mayúsculas. Android Studio te avisa si intentas nombrar un archivo de otra forma.
 
-## `mutableStateOf` y `remember`
+## Imágenes: `res/drawable`
 
-La solución tiene dos partes que trabajan juntas.
+Para agregar una imagen a tu proyecto, la forma más simple es arrastrarla (o copiarla) dentro de `res/drawable/` desde el explorador de archivos, o bien hacer clic derecho sobre `res` y elegir **New > Vector Asset** si quieres usar uno de los íconos que trae Android Studio.
 
-**`mutableStateOf`** crea un valor **observable**: un contenedor de estado que Compose vigila. Cuando su contenido cambia, Compose recompone los composables que lo leen.
+Aquí aparece una decisión importante: **imagen de mapa de bits** (PNG, JPG) o **vector** (`.xml`, un *Vector Drawable*).
 
-**`remember`** le dice a Compose que **recuerde** ese valor entre recomposiciones, en lugar de recrearlo cada vez.
+- Una imagen de mapa de bits es una **cuadrícula fija de píxeles**: se ve bien a su tamaño original, pero se pixela si la agrandas demasiado. Por eso, tradicionalmente, Android pedía una copia distinta por cada densidad de pantalla (`mdpi`, `hdpi`, `xhdpi`, `xxhdpi`…), y el sistema elegía automáticamente la que correspondía al dispositivo.
+- Un **Vector Drawable** describe la imagen con **formas matemáticas** (líneas, curvas), no con píxeles. Esto significa que **escala sin perder calidad** a cualquier tamaño y, además, ocupa mucho menos espacio, porque no necesitas una copia por densidad.
 
-Combinándolos:
+Por eso, para íconos y logos simples, **preferirás casi siempre un Vector Drawable**; para fotografías reales (donde no aplican las formas vectoriales), seguirás usando PNG o JPG.
 
-```kotlin
-@Composable
-fun Contador() {
-    val contador = remember { mutableStateOf(0) }
+Una vez que la imagen está en `res/drawable/`, ya sabes cómo mostrarla: con `Image` y `painterResource`, como viste en el capítulo de componentes.
 
-    Button(onClick = { contador.value++ }) {
-        Text("Has tocado ${contador.value} veces")
-    }
-}
+## El ícono de la app: `res/mipmap`
+
+El **ícono de tu app** (el que ve el usuario en la pantalla de inicio del teléfono) vive en una carpeta aparte, `res/mipmap/`, y no en `drawable/`. La razón es técnica: a diferencia de una imagen dentro de tu app —que Android puede optimizar y descartar en las densidades que no necesita—, el ícono del launcher debe estar **siempre disponible en todas las densidades**, sin importar la del dispositivo, porque el sistema operativo lo usa fuera de tu app (en el launcher, en la lista de apps recientes, etc.).
+
+Ya viste, en el `AndroidManifest.xml` del capítulo 25, cómo se referencia:
+
+```xml
+<application
+    android:icon="@mipmap/ic_launcher">
 ```
 
-Ahora sí funciona. Al leer `contador.value` dentro del `Text`, Compose registra que ese texto **depende** de ese estado. Cuando tocas el botón y haces `contador.value++`, el estado cambia, Compose recompone y el texto se actualiza con el nuevo número. Y gracias a `remember`, el valor no se pierde entre recomposiciones.
+Desde Android 8.0 (API 26), los íconos son **adaptativos** (*adaptive icons*): en lugar de una sola imagen, se arman con dos capas, un `ic_launcher_foreground` (el dibujo) y un `ic_launcher_background` (el fondo), para que el propio sistema pueda recortarlas con distintas formas (círculo, cuadrado con esquinas redondeadas, "squircle"…) según el fabricante del dispositivo, manteniendo una apariencia consistente en todo el sistema.
 
-## La sintaxis `by`
+Para reemplazar el ícono por defecto con tu propio logo, no edites los archivos a mano: usa el asistente de Android Studio. Haz clic derecho sobre `res/` y elige **New > Image Asset**. Ahí eliges tu imagen (idealmente un logo simple, en alta resolución o en formato vectorial), Android Studio te deja previsualizar cómo se ve recortado con las distintas formas, y genera automáticamente todos los archivos y densidades necesarias por ti.
 
-Escribir `.value` cada vez es un poco engorroso. Kotlin ofrece una forma más limpia mediante una **propiedad delegada**, con la palabra clave `by`:
+## Texto: `res/values/strings.xml`
 
-```kotlin
-@Composable
-fun Contador() {
-    var contador by remember { mutableStateOf(0) }
+Hasta ahora, en los ejemplos del curso, escribiste el texto directamente en el código: `Text("¡Bienvenido!")`. Funciona, pero en una app real es preferible declarar los textos en un archivo aparte, `res/values/strings.xml`:
 
-    Button(onClick = { contador++ }) {
-        Text("Has tocado $contador veces")
-    }
-}
+```xml
+<resources>
+    <string name="app_name">Mi Lista de Tareas</string>
+    <string name="titulo_pantalla">Mis tareas</string>
+</resources>
 ```
 
-Con `by`, usas `contador` directamente, como si fuera una variable normal: lo lees sin `.value` y lo modificas con `contador++`. Por detrás sigue siendo el mismo estado observable. Fíjate en que ahora se declara con `var`, porque lo vas a modificar. Esta es la forma que verás con más frecuencia.
+Y leerlos desde un composable con `stringResource`:
+
+```kotlin
+Text(text = stringResource(id = R.string.titulo_pantalla))
+```
+
+¿Por qué conviene hacerlo así, en lugar de escribir el texto directamente?
+
+- **Reutilización**: si el mismo texto aparece en varios lugares, lo defines una sola vez (el mismo principio **DRY** del anexo de principios de diseño).
+- **Traducción**: si más adelante quieres ofrecer tu app en otro idioma, creas una carpeta como `values-en/` con un `strings.xml` equivalente, y Android elige automáticamente el que corresponde al idioma del dispositivo, sin tocar una sola línea de tu código Kotlin.
+- Algunos textos, como el **nombre de la app** (`app_name`, el que ya usa tu `AndroidManifest.xml`), **deben** vivir en `strings.xml`; no es opcional.
+
+Los textos con partes variables también se pueden definir como recursos, usando un marcador de posición:
+
+```xml
+<string name="saludo">¡Hola, %1$s!</string>
+```
+
+```kotlin
+Text(text = stringResource(id = R.string.saludo, nombre))
+```
 
 > [!NOTE]Nota
-> Esta sintaxis necesita importar `getValue` y `setValue` de Compose; Android Studio agrega esos imports por ti automáticamente.
-
-## Sobrevivir a la rotación: `rememberSaveable`
-
-¿Recuerdas que, al girar el dispositivo, Android **destruye y recrea** la `Activity`, perdiendo su estado? Ese problema también afecta a `remember`: como la recreación empieza todo de cero, el valor guardado con `remember` se **pierde** al rotar.
-
-Para esos casos existe **`rememberSaveable`**, que funciona igual que `remember`, pero **guarda** el estado y lo **restaura** tras una recreación por cambio de configuración:
-
-```kotlin
-var contador by rememberSaveable { mutableStateOf(0) }
-```
-
-Con este simple cambio, tu contador conserva su valor aunque gires el teléfono. Úsalo cuando quieras que un estado sobreviva a la rotación (por ejemplo, lo que el usuario escribió en un formulario).
-
-## State hoisting: elevar el estado
-
-Hasta ahora, nuestro `Contador` guarda su propio estado dentro de sí mismo. Funciona, pero tiene inconvenientes: nadie desde fuera puede conocer el valor actual ni controlarlo, y el composable es difícil de reutilizar y de previsualizar con distintos valores.
-
-La solución es el ***state hoisting*** ("elevación del estado"): **sacar el estado del composable y moverlo hacia quien lo llama**. El composable queda **sin estado** (*stateless*): recibe el valor a mostrar y una **función** para avisar de los cambios.
-
-```kotlin
-@Composable
-fun Contador(valor: Int, onIncrementar: () -> Unit) {
-    Button(onClick = onIncrementar) {
-        Text("Has tocado $valor veces")
-    }
-}
-```
-
-Ahora `Contador` no guarda nada: solo muestra el `valor` que recibe y, al tocarlo, invoca `onIncrementar`. El estado vive en el composable **padre**:
-
-```kotlin
-@Composable
-fun Pantalla() {
-    var contador by remember { mutableStateOf(0) }
-
-    Contador(
-        valor = contador,
-        onIncrementar = { contador++ }
-    )
-}
-```
-
-Fíjate en el patrón: el **estado baja** (el padre le pasa `valor` al hijo) y los **eventos suben** (el hijo avisa al padre con `onIncrementar`). A este flujo en una sola dirección se le llama **flujo de datos unidireccional**:
-
-```mermaid
-flowchart TD
-    P["Composable padre<br/>(tiene el estado)"] -- "el estado baja: valor" --> H["Composable hijo<br/>(sin estado)"]
-    H -- "los eventos suben: onIncrementar" --> P
-```
-
-Este patrón trae grandes ventajas: el composable `Contador` es **reutilizable** (sirve con cualquier valor y cualquier acción), fácil de **previsualizar** (le pasas un valor fijo) y hay una **única fuente de verdad** para el estado. Es, además, la misma idea que viste con `StateFlow` y que sostiene la arquitectura MVVM: el estado vive en un solo lugar, la interfaz lo observa y le comunica los eventos.
+> Para mantener los ejemplos del curso simples y fáciles de leer, seguiremos escribiendo la mayoría de los textos directamente en el código, como hasta ahora. Pero en un proyecto real —y, en especial, en cualquier app que vayas a publicar— es una buena práctica declarar los textos visibles para el usuario en `strings.xml`.
 
 ## Resumen
 
-En este capítulo aprendiste a manejar el estado en Compose:
+En este capítulo aprendiste a organizar los recursos de tu app:
 
-- El **estado** son los datos que, al cambiar, provocan la recomposición.
-- **`mutableStateOf`** crea un valor **observable** por Compose; **`remember`** lo **conserva** entre recomposiciones. Juntos: `remember { mutableStateOf(...) }`.
-- La sintaxis **`by`** te deja usar el estado como una variable normal, sin `.value`.
-- **`rememberSaveable`** conserva el estado también tras una recreación por cambio de configuración (como girar el dispositivo).
-- El ***state hoisting*** consiste en **elevar el estado** al composable padre, dejando al hijo **sin estado**: recibe el valor y una función para los eventos. Esto sigue el **flujo de datos unidireccional** (el estado baja, los eventos suben) y hace tus composables reutilizables.
+- La carpeta **`res/`** separa los recursos por tipo: `drawable/` (imágenes e íconos), `mipmap/` (el ícono de la app) y `values/` (textos y otros valores).
+- La clase **`R`**, generada automáticamente, te da acceso *type-safe* a cada recurso (`R.drawable.foto`, `R.string.titulo`…); el compilador te avisa si un recurso no existe.
+- Para íconos y logos simples, preferirás un **Vector Drawable**: escala sin perder calidad y no necesita una copia por densidad de pantalla.
+- El **ícono de la app** vive en `mipmap/`, no en `drawable/`, porque debe estar disponible en todas las densidades; se genera y reemplaza con el asistente **Image Asset** de Android Studio, y hoy en día suele ser un **ícono adaptativo** (una capa de fondo y una de primer plano).
+- Los **textos** deberían declararse en `res/values/strings.xml` y leerse con `stringResource`, para reutilizarlos y facilitar la traducción a otros idiomas.
 
-En el próximo capítulo aprenderás a **organizar varios elementos** en la pantalla con los *layouts* (`Column`, `Row`, `Box`) y a mostrar listas con `LazyColumn`.
+En el próximo capítulo retomarás los componentes de Material 3 —`Text`, `Image`, `Button`, `Card`— ahora que ya sabes de dónde salen las imágenes que les vas a pasar.

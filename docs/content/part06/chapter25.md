@@ -36,7 +36,7 @@ En la siguiente pantalla configuras el proyecto:
 
 - **Name**: el nombre de tu app (por ejemplo, `MiPrimeraApp`).
 - **Package name**: un identificador único, normalmente en forma de dominio invertido (por ejemplo, `com.ejemplo.miprimeraapp`).
-- **Minimum SDK**: la versión mínima de Android que soportará tu app; la API 24 o superior es una elección razonable hoy en día (Android Studio te indica qué porcentaje de dispositivos cubre).
+- **Minimum SDK**: la versión mínima de Android que soportará tu app; la API 24 o superior es una elección razonable hoy en día (Android Studio te indica qué porcentaje de dispositivos cubre). Si quieres entender a fondo los criterios detrás de este número y de otros similares, consulta el [Anexo C](../appendix/android-sdk-criteria.md).
 - **Build configuration language**: déjalo en **Kotlin DSL (`build.gradle.kts`)**, la opción recomendada.
 
 El **lenguaje** de programación ya viene fijado en Kotlin, porque Compose solo funciona con Kotlin.

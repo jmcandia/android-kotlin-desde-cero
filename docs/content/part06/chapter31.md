@@ -1,109 +1,138 @@
-# Capítulo 31: Navegación con Navigation Compose
+# Capítulo 31: Estado en Compose: `remember`, `mutableStateOf` y *state hoisting*
 
 ## Introducción
 
-Hasta ahora, tu app ha vivido en una sola pantalla. Pero las aplicaciones reales tienen **varias**: una lista y su detalle, una pantalla de ajustes, un formulario… y el usuario se mueve entre ellas. En este capítulo aprenderás a hacer esa **navegación** entre pantallas con **Navigation Compose**, la biblioteca oficial para ello. Con esto cierras la parte de interfaz con Compose.
+En los capítulos anteriores aprendiste la **recomposición** y a **organizar** varios composables en pantalla con layouts como `Column`, `Row` y `LazyColumn`. Pero quedó una pregunta pendiente: ¿cómo se declaran los datos que, al cambiar, disparan la recomposición?
 
-> [!NOTE]Nota
-> Navigation Compose no viene incluido en la plantilla del proyecto; es una dependencia que se agrega en el `build.gradle.kts`, a través del catálogo de versiones que viste al crear el proyecto.
+La respuesta es el **estado** (*state*). En este capítulo aprenderás a crear estado con `mutableStateOf`, a conservarlo entre recomposiciones con `remember`, a mantenerlo incluso al girar el dispositivo con `rememberSaveable`, y una técnica fundamental para organizar bien tu interfaz: el ***state hoisting*** o "elevación del estado".
 
-## Las piezas: `NavController` y `NavHost`
+## El problema: una variable normal no basta
 
-Navigation Compose se apoya en dos piezas principales:
-
-- El **`NavController`** es el objeto que **controla** la navegación: lleva la cuenta de las pantallas visitadas (la *pila de navegación*) y es a quien le pides ir a una pantalla o volver atrás.
-- El **`NavHost`** es un composable que define el **mapa de navegación**: declara cuáles son las pantallas (los *destinos*) y con qué **ruta** se llega a cada una.
-
-Cada pantalla se identifica con una **ruta** (*route*), que no es más que un texto único, como `"inicio"` o `"detalle"`.
-
-## Definir las pantallas: el `NavHost`
-
-Primero creas el `NavController` (con `remember`, para que sobreviva a las recomposiciones) y luego declaras el `NavHost` con sus destinos:
+Intentemos algo sencillo: un contador que aumenta cada vez que tocas un botón. Con lo que sabes, podrías intentar una variable normal:
 
 ```kotlin
 @Composable
-fun App() {
-    val navController = rememberNavController()
+fun Contador() {
+    var contador = 0
 
-    NavHost(
-        navController = navController,
-        startDestination = "inicio"
-    ) {
-        composable("inicio") {
-            PantallaInicio()
-        }
-        composable("detalle") {
-            PantallaDetalle()
-        }
+    Button(onClick = { contador++ }) {
+        Text("Has tocado $contador veces")
     }
 }
 ```
 
-`startDestination` indica la pantalla que se muestra al abrir la app. Cada bloque `composable("ruta") { ... }` asocia una ruta con el composable que se dibuja cuando se navega a ella.
+Pero esto **no funciona**: por más que toques el botón, el número no cambia en pantalla. Y hay dos razones:
 
-## Navegar entre pantallas
+1. Compose **no sabe** que `contador` cambió, así que no recompone: la interfaz nunca se entera de la actualización.
+2. Aunque recompusiera, `contador` es una variable normal que se **reinicia a 0** cada vez que la función se vuelve a ejecutar.
 
-Para ir de una pantalla a otra, le pides al `NavController` que **navegue** a una ruta:
+Necesitamos algo que Compose pueda **observar** y que, además, **sobreviva** a las recomposiciones. Esas dos necesidades las resuelven `mutableStateOf` y `remember`.
+
+> [!NOTE]Nota
+> `Button` es un componente de Material, que veremos en detalle más adelante. Por ahora basta con saber que su parámetro `onClick` recibe la acción que se ejecuta al tocarlo.
+
+## `mutableStateOf` y `remember`
+
+La solución tiene dos partes que trabajan juntas.
+
+**`mutableStateOf`** crea un valor **observable**: un contenedor de estado que Compose vigila. Cuando su contenido cambia, Compose recompone los composables que lo leen.
+
+**`remember`** le dice a Compose que **recuerde** ese valor entre recomposiciones, en lugar de recrearlo cada vez.
+
+Combinándolos:
 
 ```kotlin
-navController.navigate("detalle")
-```
+@Composable
+fun Contador() {
+    val contador = remember { mutableStateOf(0) }
 
-Normalmente esto ocurre en respuesta a una acción del usuario, como tocar un botón:
-
-```kotlin
-Button(onClick = { navController.navigate("detalle") }) {
-    Text("Ver detalle")
+    Button(onClick = { contador.value++ }) {
+        Text("Has tocado ${contador.value} veces")
+    }
 }
 ```
 
-Visualmente, el flujo entre dos pantallas se ve así:
+Ahora sí funciona. Al leer `contador.value` dentro del `Text`, Compose registra que ese texto **depende** de ese estado. Cuando tocas el botón y haces `contador.value++`, el estado cambia, Compose recompone y el texto se actualiza con el nuevo número. Y gracias a `remember`, el valor no se pierde entre recomposiciones.
+
+## La sintaxis `by`
+
+Escribir `.value` cada vez es un poco engorroso. Kotlin ofrece una forma más limpia mediante una **propiedad delegada**, con la palabra clave `by`:
+
+```kotlin
+@Composable
+fun Contador() {
+    var contador by remember { mutableStateOf(0) }
+
+    Button(onClick = { contador++ }) {
+        Text("Has tocado $contador veces")
+    }
+}
+```
+
+Con `by`, usas `contador` directamente, como si fuera una variable normal: lo lees sin `.value` y lo modificas con `contador++`. Por detrás sigue siendo el mismo estado observable. Fíjate en que ahora se declara con `var`, porque lo vas a modificar. Esta es la forma que verás con más frecuencia.
+
+> [!NOTE]Nota
+> Esta sintaxis necesita importar `getValue` y `setValue` de Compose; Android Studio agrega esos imports por ti automáticamente.
+
+## Sobrevivir a la rotación: `rememberSaveable`
+
+¿Recuerdas que, al girar el dispositivo, Android **destruye y recrea** la `Activity`, perdiendo su estado? Ese problema también afecta a `remember`: como la recreación empieza todo de cero, el valor guardado con `remember` se **pierde** al rotar.
+
+Para esos casos existe **`rememberSaveable`**, que funciona igual que `remember`, pero **guarda** el estado y lo **restaura** tras una recreación por cambio de configuración:
+
+```kotlin
+var contador by rememberSaveable { mutableStateOf(0) }
+```
+
+Con este simple cambio, tu contador conserva su valor aunque gires el teléfono. Úsalo cuando quieras que un estado sobreviva a la rotación (por ejemplo, lo que el usuario escribió en un formulario).
+
+## State hoisting: elevar el estado
+
+Hasta ahora, nuestro `Contador` guarda su propio estado dentro de sí mismo. Funciona, pero tiene inconvenientes: nadie desde fuera puede conocer el valor actual ni controlarlo, y el composable es difícil de reutilizar y de previsualizar con distintos valores.
+
+La solución es el ***state hoisting*** ("elevación del estado"): **sacar el estado del composable y moverlo hacia quien lo llama**. El composable queda **sin estado** (*stateless*): recibe el valor a mostrar y una **función** para avisar de los cambios.
+
+```kotlin
+@Composable
+fun Contador(valor: Int, onIncrementar: () -> Unit) {
+    Button(onClick = onIncrementar) {
+        Text("Has tocado $valor veces")
+    }
+}
+```
+
+Ahora `Contador` no guarda nada: solo muestra el `valor` que recibe y, al tocarlo, invoca `onIncrementar`. El estado vive en el composable **padre**:
+
+```kotlin
+@Composable
+fun Pantalla() {
+    var contador by remember { mutableStateOf(0) }
+
+    Contador(
+        valor = contador,
+        onIncrementar = { contador++ }
+    )
+}
+```
+
+Fíjate en el patrón: el **estado baja** (el padre le pasa `valor` al hijo) y los **eventos suben** (el hijo avisa al padre con `onIncrementar`). A este flujo en una sola dirección se le llama **flujo de datos unidireccional**:
 
 ```mermaid
-flowchart LR
-    A["Pantalla de inicio"] -- "navigate(detalle)" --> B["Pantalla de detalle"]
-    B -- "botón de retroceso" --> A
+flowchart TD
+    P["Composable padre<br/>(tiene el estado)"] -- "el estado baja: valor" --> H["Composable hijo<br/>(sin estado)"]
+    H -- "los eventos suben: onIncrementar" --> P
 ```
 
-## Volver atrás
-
-¿Y para volver? La buena noticia es que el **botón de retroceso** del sistema ya funciona solo: al presionarlo, Navigation quita la pantalla actual de la pila y muestra la anterior. Si quieres volver atrás desde tu propio código (por ejemplo, con un botón "Cancelar"), usas:
-
-```kotlin
-navController.popBackStack()
-```
-
-## Pasar datos entre pantallas
-
-Muchas veces, al navegar a un detalle, necesitas decirle **qué** elemento mostrar. Para eso, la ruta puede incluir **argumentos**, indicados entre llaves:
-
-```kotlin
-composable("detalle/{id}") { backStackEntry ->
-    val id = backStackEntry.arguments?.getString("id")
-    PantallaDetalle(id = id)
-}
-```
-
-Y, al navegar, incluyes el valor en la ruta:
-
-```kotlin
-navController.navigate("detalle/42")
-```
-
-Así, la pantalla de detalle recibe el `id` (`"42"`) y puede mostrar el elemento correspondiente. Fíjate en que el argumento llega como texto; si necesitas un número, tendrás que convertirlo con `toInt()`, como viste al principio del curso.
-
-> [!TIP]Sugerencia
-> Como buena práctica, en lugar de pasar el `NavController` a cada pantalla, es preferible que las pantallas reciban **funciones** de navegación (por ejemplo, `onVerDetalle: (String) -> Unit`). Así quedan desacopladas de la navegación y son más fáciles de reutilizar y previsualizar, siguiendo la misma idea del *state hoisting* que viste con el estado.
+Este patrón trae grandes ventajas: el composable `Contador` es **reutilizable** (sirve con cualquier valor y cualquier acción), fácil de **previsualizar** (le pasas un valor fijo) y hay una **única fuente de verdad** para el estado. Es, además, la misma idea que viste con `StateFlow` y que sostiene la arquitectura MVVM: el estado vive en un solo lugar, la interfaz lo observa y le comunica los eventos.
 
 ## Resumen
 
-En este capítulo aprendiste a moverte entre pantallas:
+En este capítulo aprendiste a manejar el estado en Compose:
 
-- **Navigation Compose** gestiona la navegación entre composables. Es una dependencia que se agrega al proyecto.
-- El **`NavController`** controla la navegación (la pila de pantallas); el **`NavHost`** define el mapa de destinos, cada uno identificado por una **ruta**.
-- Navegas con `navController.navigate("ruta")`, normalmente en respuesta a una acción del usuario.
-- El **botón de retroceso** del sistema funciona automáticamente; también puedes volver con `popBackStack()`.
-- Puedes **pasar datos** incluyendo argumentos en la ruta (`"detalle/{id}"`) y leerlos en el destino.
-- Como buena práctica, pasa **funciones** de navegación a las pantallas en vez del `NavController`, para mantenerlas desacopladas.
+- El **estado** son los datos que, al cambiar, provocan la recomposición.
+- **`mutableStateOf`** crea un valor **observable** por Compose; **`remember`** lo **conserva** entre recomposiciones. Juntos: `remember { mutableStateOf(...) }`.
+- La sintaxis **`by`** te deja usar el estado como una variable normal, sin `.value`.
+- **`rememberSaveable`** conserva el estado también tras una recreación por cambio de configuración (como girar el dispositivo).
+- El ***state hoisting*** consiste en **elevar el estado** al composable padre, dejando al hijo **sin estado**: recibe el valor y una función para los eventos. Esto sigue el **flujo de datos unidireccional** (el estado baja, los eventos suben) y hace tus composables reutilizables.
 
-Con esto cierras la parte de **interfaz con Jetpack Compose**. En la próxima parte del curso darás un paso clave hacia las apps profesionales: la **arquitectura MVVM**, que organiza tu código separando la interfaz, la lógica y los datos.
+En el próximo capítulo aprenderás a moverte entre distintas pantallas de tu app con **Navigation Compose**.

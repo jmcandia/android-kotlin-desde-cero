@@ -1,4 +1,4 @@
-# Capítulo 48: Pulido: estados de UI, Material 3 y accesibilidad
+# Capítulo 48: Búsqueda y filtrado
 
 > [!NOTE]Nota
 > Contenido en construcción

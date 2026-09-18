@@ -106,31 +106,35 @@ nav:
       - "25. Android Studio y anatomía de un proyecto": content/part06/chapter25.md
       - "26. Ciclo de vida de una <code>Activity</code> y tu primer <code>@Composable</code>": content/part06/chapter26.md
       - "27. Fundamentos de Compose: composables, recomposición y <code>Modifier</code>": content/part06/chapter27.md
-      - "28. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>": content/part06/chapter28.md
-      - "29. Layouts y listas: <code>Column</code>, <code>Row</code>, <code>LazyColumn</code>": content/part06/chapter29.md
-      - "30. Material 3: tema, color, tipografía y componentes": content/part06/chapter30.md
-      - "31. Navegación con Navigation Compose": content/part06/chapter31.md
+      - "28. Gestión de recursos: imágenes, íconos y cadenas de texto": content/part06/chapter28.md
+      - "29. Material 3: componentes listos para usar": content/part06/chapter29.md
+      - "30. Estructura de pantalla: <code>Scaffold</code>, layouts y <code>LazyColumn</code>": content/part06/chapter30.md
+      - "31. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>": content/part06/chapter31.md
+      - "Tutorial: Mi lista de tareas (parte 1)": content/part06/tutorial_my_todo_list_part_1.md
+      - "32. Navegación con Navigation Compose": content/part06/chapter32.md
+      - "33. Material 3: tema, color y tipografía": content/part06/chapter33.md
   - "Parte VII · Arquitectura MVVM":
-      - "32. Qué es MVVM y por qué usarlo": content/part07/chapter32.md
-      - "33. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)": content/part07/chapter33.md
-      - "34. Repositorio y separación de capas": content/part07/chapter34.md
-      - "35. Inyección de dependencias (manual y con Hilt)": content/part07/chapter35.md
+      - "34. Qué es MVVM y por qué usarlo": content/part07/chapter34.md
+      - "35. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)": content/part07/chapter35.md
+      - "36. Repositorio y separación de capas": content/part07/chapter36.md
+      - "37. Inyección de dependencias (manual y con Hilt)": content/part07/chapter37.md
   - "Parte VIII · Consumo de API REST con Retrofit":
-      - "36. HTTP, REST y JSON: cómo se comunican las apps con un servidor": content/part08/chapter36.md
-      - "37. Retrofit: configuración, interfaces y endpoints": content/part08/chapter37.md
-      - "38. Serialización JSON y modelos de datos (DTO)": content/part08/chapter38.md
-      - "39. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>": content/part08/chapter39.md
+      - "38. HTTP, REST y JSON: cómo se comunican las apps con un servidor": content/part08/chapter38.md
+      - "39. Retrofit: configuración, interfaces y endpoints": content/part08/chapter39.md
+      - "40. Serialización JSON y modelos de datos (DTO)": content/part08/chapter40.md
+      - "41. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>": content/part08/chapter41.md
   - "Parte IX · Proyecto final":
-      - "40. Diseño de la app: pantallas, navegación y arquitectura": content/part09/chapter40.md
-      - "41. Setup del proyecto y dependencias": content/part09/chapter41.md
-      - "42. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>": content/part09/chapter42.md
-      - "43. Pantalla de lista con paginación": content/part09/chapter43.md
-      - "44. Carga de sprites con Coil": content/part09/chapter44.md
-      - "45. Pantalla de detalle: stats, tipos y habilidades": content/part09/chapter45.md
-      - "46. Búsqueda y filtrado": content/part09/chapter46.md
-      - "47. Persistencia local con Room: favoritos y caché offline": content/part09/chapter47.md
-      - "48. Pulido: estados de UI, Material 3 y accesibilidad": content/part09/chapter48.md
-      - "49. Cierre: testing básico, buenas prácticas y próximos pasos": content/part09/chapter49.md
+      - "42. Diseño de la app: pantallas, navegación y arquitectura": content/part09/chapter42.md
+      - "43. Setup del proyecto y dependencias": content/part09/chapter43.md
+      - "44. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>": content/part09/chapter44.md
+      - "45. Pantalla de lista con paginación": content/part09/chapter45.md
+      - "46. Carga de sprites con Coil": content/part09/chapter46.md
+      - "47. Pantalla de detalle: stats, tipos y habilidades": content/part09/chapter47.md
+      - "48. Búsqueda y filtrado": content/part09/chapter48.md
+      - "49. Persistencia local con Room: favoritos y caché offline": content/part09/chapter49.md
+      - "50. Pulido: estados de UI, Material 3 y accesibilidad": content/part09/chapter50.md
+      - "51. Cierre: testing básico, buenas prácticas y próximos pasos": content/part09/chapter51.md
   - Anexos:
       - "A. Principios de diseño (SOLID, DRY y KISS)": content/appendix/design-principle.md
       - "B. Entrada estándar con Scanner de Java": content/appendix/java-scanner.md
+      - "C. Cómo elegir el SDK de un proyecto Android": content/appendix/android-sdk-criteria.md

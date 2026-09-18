@@ -1,4 +1,4 @@
-# Capítulo 42: Capa de datos: DTOs, `ApiService` y `Repository`
+# Capítulo 42: Diseño de la app: pantallas, navegación y arquitectura
 
 > [!NOTE]Nota
 > Contenido en construcción

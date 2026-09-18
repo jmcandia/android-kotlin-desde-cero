@@ -1,4 +1,4 @@
-# Capítulo 44: Carga de sprites con Coil
+# Capítulo 44: Capa de datos: DTOs, `ApiService` y `Repository`
 
 > [!NOTE]Nota
 > Contenido en construcción

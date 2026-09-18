@@ -1,142 +1,81 @@
-# Capítulo 34: Repositorio y separación de capas
+# Capítulo 34: Qué es MVVM y por qué usarlo
 
 ## Introducción
 
-En el capítulo anterior, el `ViewModel` llamaba a una función `obtenerDatos()`, pero no dijimos **de dónde** salían esos datos. Ahí quedó un cabo suelto que este capítulo viene a resolver.
+Ya sabes construir interfaces con Compose y manejar su estado. Pero, a medida que una app crece, surge una pregunta de fondo: ¿**dónde** debería vivir el estado y la lógica? ¿En los propios composables? Si metes todo ahí —los datos, las reglas, las llamadas a la red—, la interfaz se convierte en un enredo difícil de entender, probar y mantener.
 
-Si el `ViewModel` se encargara él mismo de pedir los datos a la red, leer una base de datos y procesar las respuestas, acabaría haciendo demasiadas cosas. En este capítulo aprenderás a **separar** esa responsabilidad en su propia capa, con el patrón **repositorio**, y a organizar la app en capas bien delimitadas.
+Para resolver esto existe la **arquitectura**: una forma de organizar el código en partes con responsabilidades claras. En esta parte del curso aprenderás **MVVM**, la arquitectura recomendada para Android. Este capítulo es conceptual: verás **qué** es MVVM y **por qué** conviene usarlo; el código vendrá en los capítulos siguientes.
 
-## El problema: el ViewModel no debería saberlo todo
+## El problema: todo junto en la interfaz
 
-Recuerda cuál es el trabajo del `ViewModel`: guardar el estado de la pantalla y su lógica de presentación. Si además lo cargamos con los detalles de **cómo** se obtienen los datos —abrir una conexión de red, interpretar la respuesta, consultar una base de datos—, aparecen dos problemas:
+Imagina un composable que lo hace todo: guarda el estado, contiene la lógica del negocio y, además, pide los datos a una fuente externa. Funciona para algo pequeño, pero trae problemas serios cuando la app crece:
 
-- El `ViewModel` asume **demasiadas responsabilidades** a la vez (otra vez, lo contrario del principio de responsabilidad única).
-- Queda **acoplado** a una fuente de datos concreta: si mañana quieres cambiar de la red a una base de datos local, tendrías que reescribir el `ViewModel`.
+- Es **difícil de probar**: la lógica está entrelazada con la interfaz, así que no puedes verificarla sin dibujar la pantalla.
+- Es **difícil de mantener**: el composable se vuelve enorme y hace demasiadas cosas a la vez (justo lo contrario del principio de responsabilidad única que viste en el anexo).
+- **Pierde el estado**: como el composable vive dentro de una `Activity`, al girar el dispositivo se recrea y el estado se pierde (el problema que vimos con el ciclo de vida).
 
-La solución es separar **"cómo presentar los datos"** (tarea del `ViewModel`) de **"cómo obtener los datos"** (una tarea aparte).
+La solución es **separar responsabilidades**: que cada parte del código se ocupe de una sola cosa. Eso es exactamente lo que propone MVVM.
 
-## La capa de datos: el repositorio
+## ¿Qué es MVVM?
 
-Esa nueva tarea vive en la **capa de datos**, y su pieza principal es el **repositorio**: una clase dedicada exclusivamente a **proveer los datos**. El repositorio es la **fuente única** de información: el `ViewModel` le pide los datos, y el repositorio decide cómo conseguirlos (de la red, de una base de datos local, de una caché, o de una combinación de todo eso).
+**MVVM** son las siglas de **Model-View-ViewModel** ("Modelo-Vista-ViewModel"). Es un patrón que organiza el código en **tres capas**, cada una con una responsabilidad clara:
 
-```kotlin
-class DatosRepository {
-    suspend fun obtenerDatos(): List<String> {
-        // aquí se decide de dónde vienen los datos
-        // (una petición de red, una consulta a la base de datos, etc.)
-    }
-}
-```
+- La **Vista** (*View*) es la **interfaz**: tus composables. Su único trabajo es **mostrar** el estado y **avisar** de los eventos del usuario (un toque, un texto escrito). No contiene lógica; es "tonta" a propósito.
+- El **ViewModel** es el **intermediario**. Guarda el **estado** de la pantalla y lo expone para que la Vista lo observe. Recibe los eventos de la Vista, ejecuta la lógica correspondiente y actualiza el estado.
+- El **Modelo** (*Model*) son los **datos y la lógica de negocio**: de dónde vienen los datos (una red, una base de datos) y las reglas que los rigen.
 
-Ahora el `ViewModel` simplemente le pide los datos al repositorio, sin saber ni preocuparse por su origen:
-
-```kotlin
-class MiViewModel(private val repository: DatosRepository) : ViewModel() {
-    private val _uiState = MutableStateFlow<UiState>(UiState.Cargando)
-    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
-
-    fun cargarDatos() {
-        viewModelScope.launch {
-            _uiState.value = UiState.Cargando
-            val datos = repository.obtenerDatos()
-            _uiState.value = UiState.Exito(datos)
-        }
-    }
-}
-```
-
-El `ViewModel` recibe el repositorio por su **constructor** y lo usa. Su código no menciona la red ni la base de datos: esos detalles quedan encapsulados en el repositorio.
-
-## Las capas de la aplicación
-
-Con esta separación, la app queda organizada en **capas**, cada una con su responsabilidad, donde cada capa solo se comunica con la de abajo:
+Gráficamente, las tres capas se relacionan así:
 
 ```mermaid
-flowchart TD
-    subgraph UI["Capa de interfaz"]
-        V["Vista (composables)"]
-        VM["ViewModel"]
-    end
-    subgraph Datos["Capa de datos"]
-        R["Repositorio"]
-        API["Red (API)"]
-        DB["Base de datos local"]
-    end
-    V --> VM
-    VM --> R
-    R --> API
-    R --> DB
+flowchart TB
+    V["Vista<br/>(composables)"] -- "eventos" --> VM["ViewModel<br/>(estado + lógica)"]
+    VM -- "estado (StateFlow)" --> V
+    VM -- "pide datos" --> M["Modelo<br/>(datos y lógica de negocio)"]
+    M -- "devuelve datos" --> VM
 ```
 
-- La **capa de interfaz** (la Vista y el `ViewModel`) se ocupa de mostrar el estado y reaccionar al usuario.
-- La **capa de datos** (el repositorio y sus fuentes) se ocupa de obtener y guardar la información.
+Fíjate en las flechas: la Vista **observa** el estado del ViewModel y le **envía** eventos; el ViewModel, a su vez, pide y recibe datos del Modelo. La Vista nunca habla directamente con el Modelo: siempre pasa por el ViewModel.
 
-Cada capa tiene un trabajo claro, y ninguna se mete en el de las demás. Esto hace la app mucho más fácil de entender, probar y ampliar.
+## El flujo de datos
 
-## La estructura del proyecto en carpetas
+El patrón sigue un **flujo de datos unidireccional**, que ya conoces del *state hoisting*: el **estado baja** (del ViewModel a la Vista) y los **eventos suben** (de la Vista al ViewModel).
 
-Estas capas no son solo un concepto: se reflejan en **cómo organizas las carpetas** (los *paquetes*) de tu proyecto. Una forma habitual y ordenada es agrupar el código **por capa**:
+- El ViewModel expone el estado; para eso usaremos un `StateFlow`, como viste en la parte de asincronía.
+- La Vista recolecta ese estado y, ante cada cambio, se **recompone** sola (la recomposición de Compose).
+- Cuando el usuario hace algo, la Vista no lo resuelve por su cuenta: se lo **comunica** al ViewModel, que decide qué hacer.
 
-```text
-com.ejemplo.miapp/
-├── data/                      # capa de datos
-│   ├── DatosRepository.kt          # la interfaz del repositorio
-│   └── DatosRepositoryImpl.kt      # su implementación
-├── model/                     # modelos de dominio (las clases que usa la app)
-│   └── Usuario.kt
-├── ui/                        # capa de interfaz
-│   ├── PantallaUsuarios.kt         # composables (la Vista)
-│   ├── UsuariosViewModel.kt        # el ViewModel
-│   ├── UiState.kt                  # el estado de la interfaz
-│   └── theme/                      # el tema de Material (generado por Android Studio)
-└── MainActivity.kt            # el punto de entrada
-```
+En otras palabras, MVVM es el *state hoisting* llevado al nivel de toda la pantalla: el estado se eleva hasta el ViewModel, la única fuente de verdad.
 
-La idea es simple: cada archivo vive en el paquete de la capa a la que pertenece. Un `ViewModel` va en `ui/`; el repositorio, en `data/`; los modelos que la app usa, en `model/`. Así, con solo mirar la ubicación de un archivo, sabes cuál es su responsabilidad.
+## ¿Por qué usar MVVM?
 
-> [!NOTE]Nota
-> Esta estructura irá creciendo con el curso. En el próximo capítulo añadiremos un paquete `di/` para la inyección de dependencias, y al llegar a Retrofit sumaremos, dentro de `data/`, un subpaquete `remote/` con el acceso a la red y los DTOs.
+Separar el código en estas tres capas trae ventajas concretas:
 
-Existen otras maneras de organizar un proyecto —por ejemplo, **por funcionalidad**, agrupando en un mismo paquete todo lo relacionado con una pantalla—, pero organizar **por capas** es claro y más que suficiente para empezar.
+- **Separación de responsabilidades**: cada capa hace una sola cosa, así el código es más fácil de entender y de modificar (el principio SRP en acción).
+- **Testabilidad**: como la lógica vive en el ViewModel, aislada de la interfaz, puedes probarla sin necesidad de dibujar ninguna pantalla.
+- **Sobrevive a los cambios de configuración**: el ViewModel está diseñado para **vivir más** que la `Activity`, así que, al girar el dispositivo, el estado **no se pierde** (resolviendo el problema que dejamos pendiente en el capítulo del ciclo de vida).
+- **Única fuente de verdad**: el estado vive en un solo lugar, lo que evita inconsistencias.
 
-## Depender de una abstracción
+Por todo esto, MVVM es la arquitectura que **Google recomienda** para las apps Android modernas.
 
-Hay una mejora más, y es justo el principio de **inversión de dependencias (DIP)** que viste en el anexo. En el ejemplo anterior, el `ViewModel` depende de la clase concreta `DatosRepository`. Es preferible que dependa de una **interfaz**, y que la implementación concreta se defina aparte:
+## Cómo se conecta con lo que ya sabes
 
-```kotlin
-interface DatosRepository {
-    suspend fun obtenerDatos(): List<String>
-}
+Quizás notaste que MVVM no introduce ideas nuevas, sino que **junta** varias que ya viste a lo largo del curso:
 
-class DatosRepositoryImpl : DatosRepository {
-    override suspend fun obtenerDatos(): List<String> {
-        // la obtención real de los datos
-    }
-}
-```
+- El *state hoisting* (elevar el estado): el ViewModel es el lugar al que se eleva el estado de toda la pantalla.
+- El `StateFlow`: el mecanismo con el que el ViewModel expone su estado a la Vista.
+- La `sealed class UiState`: una forma habitual de representar ese estado (cargando, éxito, error).
+- El `viewModelScope`: el *scope* donde el ViewModel lanza sus coroutines (por ejemplo, para pedir datos).
 
-El `ViewModel` no cambia: sigue recibiendo un `DatosRepository`, pero ahora es la **interfaz**, no una clase concreta. ¿Qué ganas con esto?
-
-- **Testabilidad**: para probar el `ViewModel`, puedes pasarle un repositorio **falso** que devuelva datos de prueba, sin tocar la red.
-- **Flexibilidad**: puedes cambiar la implementación (de la red a una base de datos, por ejemplo) sin modificar el `ViewModel`.
-
-Es exactamente lo que promete DIP: los componentes importantes dependen de **abstracciones**, no de detalles concretos.
-
-## ¿Cómo llega el repositorio al ViewModel?
-
-Queda una pregunta: si el `ViewModel` recibe el repositorio por su constructor, **¿quién crea el repositorio y se lo entrega?** Alguien tiene que construir la implementación concreta (`DatosRepositoryImpl`) y pasársela.
-
-Podrías hacerlo a mano, pero en apps reales, con muchas dependencias entrelazadas, eso se vuelve engorroso. Para resolverlo existe la **inyección de dependencias**, el tema del próximo capítulo: una técnica (y una herramienta, Hilt) que se encarga de crear y entregar automáticamente cada pieza donde se necesita.
+En los próximos capítulos construiremos cada pieza: el ViewModel, la separación en capas y la conexión con la interfaz.
 
 ## Resumen
 
-En este capítulo separaste tu código en capas:
+En este capítulo conociste la arquitectura MVVM:
 
-- El `ViewModel` no debería ocuparse de **cómo** se obtienen los datos; esa es una responsabilidad aparte.
-- El **repositorio** es la clase de la **capa de datos** que provee la información, ocultando su origen (red, base de datos, caché). El `ViewModel` solo le pide los datos.
-- La app se organiza en **capas** (interfaz y datos), donde cada una tiene una responsabilidad clara y solo se comunica con la de abajo.
-- Estas capas se reflejan en la **estructura de carpetas**: se organiza el código por capa (`data/`, `model/`, `ui/`), de modo que la ubicación de cada archivo revela su responsabilidad.
-- Siguiendo el principio **DIP**, el `ViewModel` depende de una **interfaz** de repositorio, no de una clase concreta, lo que mejora la testabilidad y la flexibilidad.
-- El repositorio llega al `ViewModel` por su **constructor**; quién lo crea y lo entrega es el trabajo de la inyección de dependencias.
+- Sin una arquitectura, poner el estado y la lógica dentro de los composables los vuelve difíciles de probar y mantener y, además, hace perder el estado al girar el dispositivo.
+- **MVVM** (Model-View-ViewModel) separa el código en tres capas: la **Vista** (los composables, que muestran el estado y avisan de eventos), el **ViewModel** (que guarda el estado y ejecuta la lógica) y el **Modelo** (los datos y la lógica de negocio).
+- Sigue un **flujo de datos unidireccional**: el estado baja (del ViewModel a la Vista) y los eventos suben (de la Vista al ViewModel).
+- Sus ventajas: separación de responsabilidades, testabilidad, supervivencia a los cambios de configuración y una única fuente de verdad.
+- MVVM reúne varias piezas que ya conoces: *state hoisting*, `StateFlow`, `UiState` y `viewModelScope`.
 
-En el próximo capítulo verás precisamente eso: la **inyección de dependencias** con **Hilt**, que arma y conecta todas estas piezas por ti.
+En el próximo capítulo pondrás esto en práctica: crearás tu primer **`ViewModel`**, expondrás su estado con `StateFlow` y lo conectarás con la interfaz.

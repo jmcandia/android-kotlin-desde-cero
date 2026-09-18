@@ -1,4 +1,4 @@
-# Capítulo 47: Persistencia local con Room: favoritos y caché offline
+# Capítulo 47: Pantalla de detalle: stats, tipos y habilidades
 
 > [!NOTE]Nota
 > Contenido en construcción
