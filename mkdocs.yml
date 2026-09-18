@@ -113,6 +113,7 @@ nav:
       - "Tutorial: Mi lista de tareas (parte 1)": content/part06/tutorial_my_todo_list_part_1.md
       - "32. Navegación con Navigation Compose": content/part06/chapter32.md
       - "33. Material 3: tema, color y tipografía": content/part06/chapter33.md
+      - "Tutorial: Mi lista de tareas (parte 2)": content/part06/tutorial_my_todo_list_part_2.md
   - "Parte VII · Arquitectura MVVM":
       - "34. Qué es MVVM y por qué usarlo": content/part07/chapter34.md
       - "35. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)": content/part07/chapter35.md
