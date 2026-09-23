@@ -1,4 +1,4 @@
-# Capítulo 15: Formato de cadenas con `String.format`
+# Anexo D: Formato de cadenas con `String.format`
 
 ## Introducción
 

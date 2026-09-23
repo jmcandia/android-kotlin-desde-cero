@@ -1,4 +1,4 @@
-# Capítulo 28: Gestión de recursos: imágenes, íconos y cadenas de texto
+# Capítulo 30: Gestión de recursos: imágenes, íconos y cadenas de texto
 
 ## Introducción
 

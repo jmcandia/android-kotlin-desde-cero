@@ -1,4 +1,4 @@
-# Capítulo 34: Qué es MVVM y por qué usarlo
+# Capítulo 38: Qué es MVVM y por qué usarlo
 
 ## Introducción
 

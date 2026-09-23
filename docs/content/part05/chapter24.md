@@ -94,14 +94,17 @@ estado.value = UiState.Exito(listOf("Ana", "Diego"))
 
 La pantalla, suscrita a `estado`, empieza mostrando el indicador de carga y, en cuanto el estado pasa a `Exito`, se **redibuja sola** con los datos.
 
-## SharedFlow: para eventos
+## SharedFlow: para eventos entre componentes
 
-Falta mencionar al primo del `StateFlow`: el **`SharedFlow`**. Ambos son flujos que pueden tener varios suscriptores, pero se usan para cosas distintas:
+Falta mencionar al primo del `StateFlow`: el **`SharedFlow`**. Ambos son flujos que pueden tener varios suscriptores («calientes», *hot*), pero se usan para cosas distintas:
 
-- Un **`StateFlow`** representa un **estado**: siempre tiene un valor actual y responde a la pregunta "¿qué debo mostrar ahora?" (la pantalla está cargando, o con datos).
-- Un **`SharedFlow`** representa **eventos** puntuales: cosas que ocurren una vez y no tienen un "valor actual", como "muestra un mensaje" o "navega a otra pantalla".
+- Un **`StateFlow`** representa un **estado**: siempre tiene un valor actual y responde a la pregunta «¿qué debo mostrar ahora?» (la pantalla está cargando, o con datos). Al suscribirte, recibes de inmediato el último valor.
+- Un **`SharedFlow`** es un emisor de **eventos**: emite valores a los suscriptores activos en ese instante, sin guardar necesariamente un valor actual. Es útil para comunicación entre componentes en segundo plano (por ejemplo, notificar que una sincronización terminó).
 
-La regla práctica: usa `StateFlow` para el **estado** de la interfaz y `SharedFlow` para **eventos** de una sola vez. En una app, el estado de una pantalla suele ser un `StateFlow`.
+> [!WARNING]Cuidado con los eventos de interfaz
+> En muchos tutoriales verás `SharedFlow` usado para eventos de la pantalla («muestra un Snackbar», «navega»). Tiene un problema: si la pantalla se está recreando al girar el dispositivo justo cuando se emite el evento, **el evento se pierde**, porque en esa fracción de segundo nadie estaba recolectando. En la parte de arquitectura (capítulo 40) verás cómo resolverlo modelando esos eventos como parte del propio `UiState`.
+
+La regla práctica: usa `StateFlow` para el **estado** de la interfaz (y para los eventos que la pantalla debe ver sí o sí) y `SharedFlow` cuando necesites emitir eventos a múltiples suscriptores independientes sin guardar un valor fijo.
 
 ## La conexión con MVVM
 
@@ -136,7 +139,7 @@ Con este capítulo cerraste la parte de asincronía:
 - Un **`Flow`** es un flujo de valores asíncronos que se emiten con `emit` y se reciben con `collect`. Es "frío": no se ejecuta hasta que alguien lo recolecta.
 - Los flujos admiten los mismos **operadores** que las colecciones (`map`, `filter`…), aplicados a los valores a medida que llegan.
 - Un **`StateFlow`** es un flujo que **guarda un valor actual** y emite sus cambios; es ideal para el **estado de la interfaz**. Se crea con `MutableStateFlow` y se actualiza con `.value`.
-- Un **`SharedFlow`** sirve para **eventos** de una sola vez, en lugar de un estado persistente.
+- Un **`SharedFlow`** sirve para emitir eventos a múltiples suscriptores independientes, sin guardar un valor actual. Para eventos de interfaz que no deben perderse (Snackbar, navegación), es mejor modelarlos como estado (capítulo 40).
 - Este mecanismo —el estado en un `StateFlow` que la interfaz observa y al que reacciona— es la base de la arquitectura **MVVM**.
 
 Con esto tienes todos los fundamentos de Kotlin y de la asincronía. En la próxima parte del curso, ¡por fin abrimos Android Studio y creamos nuestra primera aplicación con Jetpack Compose!

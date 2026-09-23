@@ -1,4 +1,4 @@
-# Capítulo 37: Inyección de dependencias (manual y con Hilt)
+# Capítulo 42: Inyección de dependencias (manual y con Hilt)
 
 ## Introducción
 
@@ -110,4 +110,4 @@ En este capítulo aprendiste a conectar todas las piezas de tu arquitectura:
 - Anotaciones esenciales: `@HiltAndroidApp` (en la `Application`), `@AndroidEntryPoint` (en la `Activity`), `@Inject constructor` (cómo crear una clase), `@Module` + `@Binds` (qué implementación usar para una interfaz) y `@HiltViewModel` (para los ViewModels).
 - En el composable, obtienes el `ViewModel` con `hiltViewModel()`, ya con sus dependencias inyectadas.
 
-Con esto **cierras la arquitectura MVVM**: interfaz, ViewModel, repositorio y las dependencias que los conectan. En la próxima parte del curso aprenderás a traer datos reales desde internet con **Retrofit**, la pieza que faltaba en la capa de datos.
+Con esto **cierras la arquitectura MVVM**: interfaz, ViewModel, repositorio y las dependencias que los conectan. En el tutorial que sigue aplicarás las dos ideas a **Mi lista de tareas**: sus datos pasarán a un repositorio, Hilt se lo entregará al `ViewModel` y podrás probar ese `ViewModel` sin emulador. Después, en la próxima parte del curso, aprenderás a traer datos reales desde internet con **Retrofit**, la pieza que faltaba en la capa de datos.

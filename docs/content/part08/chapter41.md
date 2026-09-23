@@ -1,8 +1,8 @@
-# Capítulo 36: Repositorio y separación de capas
+# Capítulo 41: Repositorio y separación de capas
 
 ## Introducción
 
-En el capítulo anterior, el `ViewModel` llamaba a una función `obtenerDatos()`, pero no dijimos **de dónde** salían esos datos. Ahí quedó un cabo suelto que este capítulo viene a resolver.
+En el capítulo 39, el `ViewModel` llamaba a una función `obtenerDatos()`, pero no dijimos **de dónde** salían esos datos. Ahí quedó un cabo suelto que este capítulo viene a resolver.
 
 Si el `ViewModel` se encargara él mismo de pedir los datos a la red, leer una base de datos y procesar las respuestas, acabaría haciendo demasiadas cosas. En este capítulo aprenderás a **separar** esa responsabilidad en su propia capa, con el patrón **repositorio**, y a organizar la app en capas bien delimitadas.
 

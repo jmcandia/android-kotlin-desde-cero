@@ -7,7 +7,7 @@ En la primera parte construiste una lista de tareas funcional con una sola panta
 - toda la interfaz vive en una única pantalla;
 - usa los colores y la tipografía que Android Studio generó por defecto.
 
-En esta segunda parte vas a aplicar lo aprendido en los capítulos 32 y 33 para mejorarla sin volver a empezar. Al terminar, tu app tendrá:
+En esta segunda parte vas a aplicar lo aprendido en los capítulos 35 y 36 para mejorarla sin volver a empezar. Al terminar, tu app tendrá:
 
 - una pantalla de lista y una pantalla de detalle;
 - navegación entre ambas con **Navigation Compose**;
@@ -214,7 +214,7 @@ fun App() {
 }
 ```
 
-Todavía falta declarar el destino del detalle; lo haremos en el paso 8. Observa mientras tanto el cambio importante: `App` posee la lista y las acciones, y `ListaTareasScreen` recibirá datos y funciones. Es el mismo *state hoisting* del capítulo 31, aplicado ahora a más de una pantalla.
+Todavía falta declarar el destino del detalle; lo haremos en el paso 8. Observa mientras tanto el cambio importante: `App` posee la lista y las acciones, y `ListaTareasScreen` recibirá datos y funciones. Es el mismo *state hoisting* del capítulo 32, aplicado ahora a más de una pantalla.
 
 ## Paso 7: Convertir la lista en un composable sin estado
 
@@ -476,7 +476,12 @@ Ejecuta la app en modo claro y, después, activa el modo oscuro del emulador o d
 4. Marca una tarea como completada, abre su detalle y comprueba que el estado cambió.
 5. Elimina una tarea y verifica que ya no puedes abrir su detalle desde la lista.
 6. Cambia entre modo claro y oscuro: los componentes deben conservar contraste y los colores deben cambiar según el esquema.
-7. Gira el dispositivo mientras escribes una tarea: el texto debe conservarse gracias a `rememberSaveable`.
+7. Escribe una tarea a medio escribir, agrega una o dos tareas a la lista, y **gira el dispositivo**:
+   - El texto que estabas escribiendo en el campo **se conserva**, gracias a que usamos `rememberSaveable` en `ListaTareasScreen`.
+   - Pero **las tareas de la lista desaparecen**. Como `tareas` vive dentro de un `remember` en el composable `App`, la recreación de la `Activity` provocada por el giro (capítulo 26) destruye toda la jerarquía de vistas y su memoria asociada.
+
+> [!NOTE]Nota
+> Que las tareas se pierdan al girar la pantalla no es un error de tu código: es el comportamiento natural de guardar el estado dentro de la interfaz. En el **Tutorial de la Parte VIII** aprenderás a resolver esto de raíz moviendo la lista a un `ViewModel`, que sobrevive a los giros y mantiene tus datos intactos.
 
 ## Resumen
 
@@ -489,4 +494,4 @@ En esta segunda parte convertiste la lista de tareas en una app con dos pantalla
 - Personalizaste el tema con `lightColorScheme`, `darkColorScheme`, roles de color y una tipografía común.
 - Usaste `rememberSaveable` para conservar el texto del formulario durante una recreación de la actividad.
 
-La aplicación todavía guarda las tareas solo en memoria: si el proceso termina, se pierden. Eso es intencional. En la Parte VII moverás el estado y la lógica a un `ViewModel` con MVVM, y más adelante podrás conectar una fuente de datos real sin cargar esa responsabilidad en los composables.
+La aplicación todavía guarda las tareas solo en memoria: si el proceso termina, se pierden. Eso es intencional. En la Parte VIII moverás el estado y la lógica a un `ViewModel` con MVVM, y más adelante podrás conectar una fuente de datos real sin cargar esa responsabilidad en los composables.

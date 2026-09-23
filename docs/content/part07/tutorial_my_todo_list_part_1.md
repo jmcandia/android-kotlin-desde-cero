@@ -281,7 +281,7 @@ Aquí se combinan varias piezas que ya conoces:
 >
 > También puedes agregar la dependencia desde **Project Structure**.
 
-En ambos casos, fíjate en que **nunca modificamos una lista existente**: siempre creamos una lista nueva (con `+`, `map` o `filter`) y se la asignamos a `tareas`. Es el mismo hábito de trabajar con colecciones de forma inmutable que aprendiste en la Parte III, y es também lo que le permite a Compose darse cuenta de que el estado cambió y recomponer.
+En ambos casos, fíjate en que **nunca modificamos una lista existente**: siempre creamos una lista nueva (con `+`, `map` o `filter`) y se la asignamos a `tareas`. Es el mismo hábito de trabajar con colecciones de forma inmutable que aprendiste en la Parte III, y es también lo que le permite a Compose darse cuenta de que el estado cambió y recomponer.
 
 ## Paso 8: Un mensaje cuando no hay tareas
 
@@ -313,7 +313,7 @@ Ejecuta la app y prueba el flujo completo:
 
 ## Resumen
 
-En este tutorial construiste tu primera interfaz completa combinando lo aprendido en los capítulos 25 a 31:
+En este tutorial construiste tu primera interfaz completa combinando lo aprendido en los capítulos 25 a 33:
 
 - Creaste el proyecto y reutilizaste el **tema por defecto** que genera Android Studio, sin personalizarlo todavía.
 - Le diste a la app un **ícono propio** con el asistente de Image Asset, y declaraste sus textos en `strings.xml`, leyéndolos con `stringResource` en lugar de escribirlos directamente en el código.

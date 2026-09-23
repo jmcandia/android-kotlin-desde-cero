@@ -1,4 +1,4 @@
-# Capítulo 29: Material 3: componentes listos para usar
+# Capítulo 31: Material 3: componentes listos para usar
 
 ## Introducción
 
@@ -103,8 +103,6 @@ Card {
 
 Material 3 trae muchos otros componentes con los que te irás encontrando. No hace falta memorizarlos todos ahora, pero conviene que conozcas los más comunes y cómo se usan.
 
-> [!NOTE]Nota
-> Los ejemplos de esta sección guardan lo que el usuario escribe o marca con `remember { mutableStateOf(...) } `. Todavía no explicamos en detalle cómo funciona: lo harás en el próximo capítulo, "Estado en Compose". Por ahora, quédate con la idea de que cada uno de estos componentes necesita un lugar donde **guardar** su valor actual, y una función que se ejecute cuando el usuario lo cambia.
 
 ### `Icon`
 
@@ -124,142 +122,14 @@ Icon(
 )
 ```
 
-### `TextField`: la base de los formularios
-
-Un **`TextField`** es un campo de texto editable: el componente con el que construirás prácticamente **todos los formularios** del curso (inicio de sesión, búsqueda, alta de un contacto…).
-
-| Parámetro | Qué hace |
-| :--- | :--- |
-| `value` | El texto que se muestra **ahora mismo** en el campo. Es obligatorio. |
-| `onValueChange` | La función que se ejecuta cada vez que el usuario escribe algo. Es obligatorio. |
-| `label` | Una etiqueta que identifica el campo (por ejemplo, "Correo electrónico"). |
-| `placeholder` | Un texto de ejemplo que se ve cuando el campo está vacío. |
-
-```kotlin
-var nombre by remember { mutableStateOf("") }
-
-TextField(
-    value = nombre,
-    onValueChange = { nombre = it },
-    label = { Text("Nombre") },
-    placeholder = { Text("Ingresa tu nombre") }
-)
-```
-
-Fíjate en el patrón: `value` le dice a `TextField` **qué mostrar**, y `onValueChange` recibe el texto nuevo cada vez que el usuario teclea, para que tú lo guardes (aquí, en `nombre`). Si solo pasaras `value` sin actualizarlo en `onValueChange`, el campo se vería "congelado" y no dejaría escribir, por la misma razón que viste con `Button`: la interfaz no cambia si nadie actualiza el estado que lee. Un formulario real simplemente combina **varios** `TextField` como este, uno por cada dato que pidas.
-
-## Formularios: componentes, modelo y validación
-
-Un formulario no es solo una columna de campos. Es un pequeño flujo de datos con tres responsabilidades que conviene distinguir:
-
-1. **Componentes**: `TextField`, `Checkbox`, `Switch`, `Button` y, cuando corresponda, `DropdownMenu` o `RadioButton`.
-2. **Modelo**: una clase que representa los datos que el formulario recopila, sin depender de Compose.
-3. **Validación**: reglas que determinan si esos datos se pueden enviar y mensajes que explican cómo corregirlos.
-
-Por ejemplo, el modelo de un contacto puede vivir en un archivo normal de Kotlin:
-
-```kotlin
-data class ContactoForm(
-    val nombre: String = "",
-    val correo: String = "",
-    val aceptaTerminos: Boolean = false
-)
-```
-
-El composable puede mantener el estado editable y elevar el resultado al contenedor, siguiendo el *state hoisting* del capítulo 31:
-
-```kotlin
-@Composable
-fun ContactoForm(
-    formulario: ContactoForm,
-    errores: Map<String, String>,
-    onFormularioChange: (ContactoForm) -> Unit,
-    onEnviar: () -> Unit
-) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        OutlinedTextField(
-            value = formulario.nombre,
-            onValueChange = { onFormularioChange(formulario.copy(nombre = it)) },
-            label = { Text("Nombre") },
-            isError = errores.containsKey("nombre"),
-            supportingText = { errores["nombre"]?.let { Text(it) } }
-        )
-        OutlinedTextField(
-            value = formulario.correo,
-            onValueChange = { onFormularioChange(formulario.copy(correo = it)) },
-            label = { Text("Correo electrónico") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-            isError = errores.containsKey("correo"),
-            supportingText = { errores["correo"]?.let { Text(it) } }
-        )
-        Button(
-            onClick = onEnviar,
-            enabled = errores.isEmpty() && formulario.aceptaTerminos
-        ) {
-            Text("Guardar")
-        }
-    }
-}
-```
-
-La validación no debería depender de que el usuario pulse el botón. Puedes validar al salir de un campo para ofrecer una corrección temprana, y volver a validar al enviar para no confiar únicamente en el estado visual. Una función pura resulta fácil de probar:
-
-```kotlin
-fun validarContacto(formulario: ContactoForm): Map<String, String> = buildMap {
-    if (formulario.nombre.isBlank()) put("nombre", "Escribe un nombre")
-    if (!formulario.correo.contains("@")) put("correo", "Escribe un correo válido")
-    if (!formulario.aceptaTerminos) put("terminos", "Debes aceptar los términos")
-}
-```
-
-En una pantalla real, el contenedor conserva `ContactoForm` y los errores, y decide cuándo llamar a `validarContacto`. El composable del formulario solo muestra valores, errores y eventos. Para formularios largos, usa `rememberSaveable` para conservar lo escrito durante una recreación de la `Activity`; la validación definitiva y el envío deberán pasar después a un `ViewModel`, como se verá en la Parte VII.
-
-> [!WARNING]Advertencia
-> `isError` cambia el aspecto del campo, pero no sustituye al texto del error ni a una validación real. Tampoco valides solo en la interfaz: la capa que guarda o envía los datos debe volver a comprobar sus reglas.
-
-### `Checkbox` y `Switch`
-
-Un **`Checkbox`** es una casilla de verificación; un **`Switch`** es un interruptor de encendido/apagado. Ambos comparten los mismos parámetros:
-
-| Parámetro | Qué hace |
-| :--- | :--- |
-| `checked` | Si está marcado o activado. Es obligatorio. |
-| `onCheckedChange` | La función que se ejecuta cuando el usuario lo toca, con el nuevo valor. Es obligatorio. |
-
-```kotlin
-var aceptaTerminos by remember { mutableStateOf(false) }
-
-Row(verticalAlignment = Alignment.CenterVertically) {
-    Checkbox(
-        checked = aceptaTerminos,
-        onCheckedChange = { aceptaTerminos = it }
-    )
-    Text("Acepto los términos y condiciones")
-}
-```
-
-Para un `Switch`, el uso es idéntico: solo cambia el componente.
-
-```kotlin
-var notificacionesActivas by remember { mutableStateOf(true) }
-
-Switch(
-    checked = notificacionesActivas,
-    onCheckedChange = { notificacionesActivas = it }
-)
-```
-
-Fíjate en el patrón que se repite en los tres: cada componente interactivo recibe los **datos a mostrar** (`value`, `checked`) y una **función de devolución de llamada** (`onValueChange`, `onCheckedChange`) para reaccionar a la interacción del usuario, igual que viste con `Button` y su `onClick`. Volverás a encontrarte con varios de estos componentes en capítulos posteriores, sobre todo al construir formularios.
-
 ## Resumen
 
 En este capítulo conociste los componentes de Material 3:
 
 - **Material Design** es el sistema de diseño de Google; **Material 3** es su versión actual, y Compose lo incluye con componentes y un tema listos para usar.
 - Los **componentes básicos** son `Text`, `Image`, `Button` y `Card`. Para su tamaño, espaciado y fondo sigues usando `modifier`, tal como ya sabías; sus parámetros propios (`text`, `painter`, `onClick`…) cubren lo que `modifier` no puede resolver.
-- **`Button`** ejecuta una acción en `onClick` al tocarlo; por sí solo no actualiza la pantalla, eso requiere **estado** (lo verás más adelante).
+- **`Button`** ejecuta una acción en `onClick` al tocarlo; por sí solo no actualiza la pantalla, eso requiere **estado**, que verás en el próximo capítulo.
 - Componentes como `Text`, `Button` o `Card` también admiten parámetros propios de apariencia (`color`, `fontSize`, `colors`, `shape`…); son válidos, pero el capítulo de tema te mostrará la forma recomendada de aplicarlos de forma coherente en toda la app.
-- Hay muchos más componentes: `Icon` (íconos vectoriales), `TextField` (la base de los **formularios**), `Checkbox` y `Switch` (selección de opciones), todos con un estilo coherente entre sí y el mismo patrón de datos + función de devolución de llamada.
-- Un formulario combina **componentes**, un **modelo independiente de Compose** y una validación que produce errores comprensibles. El estado se eleva al contenedor y el formulario recibe valores y eventos.
+- **`Icon`** dibuja íconos vectoriales, dentro de botones, barras o junto a un texto.
 
-Con estas piezas ya puedes construir pantallas completas. En el próximo capítulo aprenderás a montar el esqueleto de una pantalla con `Scaffold` y a **organizar** su contenido con `Column`, `Row` y `LazyColumn`.
+Hay componentes que el usuario **modifica**: campos de texto, casillas, interruptores. Para usarlos necesitas **estado**, el tema del próximo capítulo.

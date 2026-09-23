@@ -1,4 +1,4 @@
-# Capítulo 35: `ViewModel` y el estado de la interfaz (`UiState`)
+# Capítulo 39: `ViewModel` y el estado de la interfaz (`UiState`)
 
 ## Introducción
 
@@ -45,6 +45,9 @@ class MiViewModel : ViewModel() {
 
 Así se cumple la **encapsulación**: el estado solo se modifica desde dentro del `ViewModel`, la única fuente de verdad.
 
+> [!NOTE]Nota
+> Una `sealed class` como esta encaja cuando los estados son **excluyentes**: la pantalla está en uno solo a la vez (cargando, éxito o error). Hay pantallas donde eso no alcanza, porque muestran **varias cosas a la vez** (una lista, si está cargando más elementos, un mensaje pendiente…). Para esas, `UiState` se modela mejor como una **`data class`**, con una propiedad por cada dato. Verás el caso concreto en el próximo tutorial.
+
 ## Actualizar el estado
 
 Para cambiar el estado, el `ViewModel` asigna un nuevo valor a `_uiState.value`. Como esto suele implicar una tarea lenta (pedir datos), la lanzamos en una coroutine dentro del **`viewModelScope`**, el *scope* del capítulo de coroutines:
@@ -65,6 +68,52 @@ class MiViewModel : ViewModel() {
 ```
 
 Usar `viewModelScope` es importante: si el `ViewModel` se destruye, sus coroutines se cancelan solas, evitando trabajo innecesario. (La función `obtenerDatos()` representa la capa de datos, el **Modelo**, que veremos en el próximo capítulo.)
+
+### Cargar los datos al crear el `ViewModel`: el bloque `init`
+
+Si `cargarDatos()` trae lo que la pantalla necesita **desde el principio**, no tiene sentido esperar a que algo la llame: se dispara sola, en el bloque `init` de la clase.
+
+```kotlin
+class MiViewModel : ViewModel() {
+    private val _uiState = MutableStateFlow<UiState>(UiState.Cargando)
+    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
+
+    init {
+        cargarDatos()
+    }
+
+    fun cargarDatos() {
+        viewModelScope.launch {
+            _uiState.value = UiState.Cargando
+            val datos = obtenerDatos()
+            _uiState.value = UiState.Exito(datos)
+        }
+    }
+}
+```
+
+El `init` se ejecuta **una sola vez**, cuando se crea la instancia del `ViewModel`. Como el `ViewModel` sobrevive al giro de pantalla, esa creación también ocurre una sola vez: la carga no se repite cada vez que la `Activity` se recrea, solo la primera vez que alguien pide este `ViewModel`. `cargarDatos()` se mantiene **pública** para poder llamarla de nuevo, por ejemplo desde un botón «Reintentar».
+
+### Cambiar el estado a partir del anterior: `update {}`
+
+Asignar directamente a `_uiState.value`, como en los ejemplos de arriba, funciona bien cuando el nuevo estado no depende del anterior: pasas de `Cargando` a `Exito` y listo. Pero si necesitas **partir del valor actual** —agregar un elemento a una lista, marcar algo como hecho, apagar un mensaje ya mostrado—, hacerlo con `.value` tiene un problema: entre que lees `_uiState.value` y le asignas el resultado, otra coroutine podría haber cambiado el estado, y esa modificación se perdería.
+
+`MutableStateFlow` ofrece **`update { }`** para este caso: recibe el estado actual y devuelve el nuevo, en una sola operación que no puede interrumpirse a la mitad.
+
+```kotlin
+data class ContadorUiState(val valor: Int = 0)
+
+class ContadorViewModel : ViewModel() {
+    private val _uiState = MutableStateFlow(ContadorUiState())
+    val uiState: StateFlow<ContadorUiState> = _uiState.asStateFlow()
+
+    fun incrementar() {
+        _uiState.update { estado -> estado.copy(valor = estado.valor + 1) }
+    }
+}
+```
+
+`estado` es el valor actual, y la lambda devuelve el nuevo con `copy` (capítulo 17), cambiando solo lo que hace falta. Es el patrón que usarás siempre que `UiState` sea una `data class`: reserva la asignación directa (`_uiState.value = ...`) para cuando reemplazas el estado completo, como al pasar de un caso de una `sealed class` a otro.
 
 ## Conectar el ViewModel con la interfaz
 
@@ -124,9 +173,10 @@ Fíjate en que la Vista nunca guarda ni calcula el estado: solo lo **muestra** y
 En este capítulo construiste el corazón de MVVM:
 
 - Un **`ViewModel`** es una clase que hereda de `ViewModel` y guarda el estado y la lógica de una pantalla. **Sobrevive** a los cambios de configuración, como el giro de pantalla.
-- El estado se expone con el patrón **`MutableStateFlow` privado + `StateFlow` público** (`_uiState` / `uiState` con `asStateFlow()`), de modo que solo el `ViewModel` puede modificarlo.
-- El `ViewModel` actualiza el estado asignando a `_uiState.value`, normalmente dentro de una coroutine en **`viewModelScope`**.
+- El estado se expone con el patrón **`MutableStateFlow` privado + `StateFlow` público** (`_uiState` / `uiState` con `asStateFlow()`), de modo que solo el `ViewModel` puede modificarlo. Una `sealed class` sirve para estados excluyentes; una **`data class`** sirve cuando la pantalla muestra varios datos a la vez.
+- El `ViewModel` actualiza el estado asignando a `_uiState.value` (para reemplazarlo entero) o con **`update { }`** (para partir del valor actual sin perder cambios concurrentes), normalmente dentro de una coroutine en **`viewModelScope`**.
+- Si la pantalla necesita datos desde el principio, se cargan en el bloque **`init`**: se ejecuta una sola vez por `ViewModel`, y no se repite al girar la pantalla.
 - La Vista obtiene el `ViewModel` con `viewModel()`, recolecta su estado con **`collectAsStateWithLifecycle()`** y decide qué mostrar con un `when` sobre el `UiState`.
 - La Vista solo muestra el estado y avisa de eventos (invocando funciones del `ViewModel`); toda la lógica queda en el `ViewModel`.
 
-En el próximo capítulo separaremos aún más las responsabilidades creando la **capa de datos** (el Modelo): un **repositorio** que se encargue de obtener la información, para que el `ViewModel` no dependa de dónde vienen los datos.
+En el próximo capítulo verás cómo manejar lo que **ocurre una vez** en lugar de dibujarse mientras dura un estado: mostrar un mensaje o navegar después de una acción.

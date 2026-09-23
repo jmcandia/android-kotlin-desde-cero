@@ -1,4 +1,4 @@
-# Capítulo 33: Material 3: tema, color y tipografía
+# Capítulo 36: Material 3: tema, color y tipografía
 
 ## Introducción
 

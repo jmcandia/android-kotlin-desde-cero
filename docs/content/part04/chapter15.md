@@ -1,4 +1,4 @@
-# Capítulo 16: Clases, propiedades y constructores
+# Capítulo 15: Clases, propiedades y constructores
 
 ## Introducción
 

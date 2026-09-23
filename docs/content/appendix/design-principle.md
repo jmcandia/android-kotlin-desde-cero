@@ -1,4 +1,4 @@
-# Anexo: Principios de diseño (SOLID, DRY y KISS)
+# Anexo A: Principios de diseño (SOLID, DRY y KISS)
 
 ## Introducción
 
@@ -7,6 +7,9 @@ A medida que tus programas crecen, escribir código que *funcione* deja de ser s
 En este anexo veremos los más conocidos y útiles: dos principios generales, **DRY** y **KISS**, y el conjunto **SOLID**, cinco principios para organizar el código orientado a objetos. Ninguno es una regla rígida: son guías de sentido común que te acompañarán durante todo el curso.
 
 Los mencionamos por primera vez en el capítulo de funciones, porque las funciones son la primera herramienta que tienes para ponerlos en práctica.
+
+> [!TIP]¿Cuándo leer este anexo?
+> La primera vez que el curso hace referencia a estos principios es en el **capítulo 10** (funciones). Puedes leer el anexo completo en ese momento, o bien limitarte a leer la sección concreta que mencione cada capítulo (por ejemplo, **DIP** se explica a fondo en el capítulo 41, cuando construyes el repositorio). Si prefieres una visión completa desde el principio, léelo después del capítulo 10 y antes de seguir con la Parte III.
 
 ## DRY: no te repitas
 

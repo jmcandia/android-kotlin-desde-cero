@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MiListaDeTareas</string>
+    <string name="titulo_pantalla">Mi lista de tareas</string>
+    <string name="etiqueta_nueva_tarea">Nueva tarea</string>
+    <string name="boton_agregar">Agregar</string>
+    <string name="descripcion_eliminar">Eliminar tarea</string>
+    <string name="mensaje_lista_vacia">Todavía no agregaste ninguna tarea.</string>
+    <string name="titulo_detalle">Detalle de la tarea</string>
+    <string name="descripcion_volver">Volver</string>
+    <string name="tarea_no_encontrada">La tarea ya no existe.</string>
+    <string name="estado_completada">Completada</string>
+    <string name="estado_pendiente">Pendiente</string>
+    <string name="resumen_pendientes">Pendientes: %1$d de %2$d</string>
+    <string name="mensaje_tarea_eliminada">Tarea eliminada</string>
+    <string name="accion_deshacer">Deshacer</string>
+</resources>

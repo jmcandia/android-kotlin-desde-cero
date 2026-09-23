@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Mis Contactos</string>
+
+    <!-- Lista -->
+    <string name="titulo_lista">Contactos</string>
+    <string name="buscar_contactos">Buscar por nombre o apellido</string>
+    <string name="limpiar_busqueda">Limpiar búsqueda</string>
+    <string name="filtro_solo_favoritos">Solo favoritos</string>
+    <string name="nuevo_contacto">Nuevo contacto</string>
+    <string name="lista_vacia">Todavía no hay contactos.</string>
+    <string name="busqueda_sin_resultados">No hay contactos que coincidan con «%1$s».</string>
+    <string name="favoritos_vacios">No hay favoritos entre los contactos cargados.</string>
+    <string name="aviso_datos_guardados">Sin conexión: mostrando los contactos guardados.</string>
+    <string name="marcar_favorito">Marcar como favorito</string>
+    <string name="quitar_favorito">Quitar de favoritos</string>
+
+    <!-- Detalle -->
+    <string name="titulo_detalle">Detalle</string>
+    <string name="volver">Volver</string>
+    <string name="editar">Editar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="etiqueta_email">Correo electrónico</string>
+    <string name="etiqueta_telefono">Teléfono</string>
+    <string name="etiqueta_direccion">Dirección</string>
+    <string name="etiqueta_ciudad">Ciudad</string>
+    <string name="sin_dato">Sin información</string>
+    <string name="confirmar_eliminar_titulo">¿Eliminar contacto?</string>
+    <string name="confirmar_eliminar_texto">Se eliminará a %1$s. Esta acción no se puede deshacer.</string>
+    <string name="cancelar">Cancelar</string>
+
+    <!-- Formulario -->
+    <string name="titulo_nuevo">Nuevo contacto</string>
+    <string name="titulo_editar">Editar contacto</string>
+    <string name="etiqueta_nombre">Nombre</string>
+    <string name="etiqueta_apellido">Apellido</string>
+    <string name="guardar">Guardar</string>
+    <string name="campo_obligatorio">Este campo es obligatorio.</string>
+    <string name="campo_longitud">Debe tener entre %1$d y %2$d caracteres.</string>
+    <string name="campo_largo_maximo">Debe tener como máximo %1$d caracteres.</string>
+    <string name="campo_email_invalido">Escribe un correo válido.</string>
+
+    <!-- Errores y estados -->
+    <string name="cargando">Cargando…</string>
+    <string name="reintentar">Reintentar</string>
+    <string name="error_sin_conexion">No se pudo conectar con el servidor. Revisa tu conexión y que la API esté en ejecución.</string>
+    <string name="error_no_encontrado">El contacto ya no existe.</string>
+    <string name="error_conflicto">Ya existe un contacto con ese correo electrónico.</string>
+    <string name="error_validacion">Revisa los datos del formulario.</string>
+    <string name="error_desconocido">Ocurrió un error inesperado.</string>
+
+    <!-- Permiso de red local (Android 17+) -->
+    <string name="permiso_red_local_texto">Para cargar tus contactos, la app necesita permiso para conectarse al servidor en tu red local.</string>
+    <string name="permiso_red_local_boton">Dar permiso</string>
+</resources>

@@ -1,4 +1,4 @@
-# Capítulo 18: `data class`, `copy` y desestructuración
+# Capítulo 17: `data class`, `copy` y desestructuración
 
 ## Introducción
 

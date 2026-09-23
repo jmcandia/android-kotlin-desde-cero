@@ -1,4 +1,4 @@
-# Capítulo 20: `enum` y `sealed class`
+# Capítulo 19: `enum` y `sealed class`
 
 ## Introducción
 

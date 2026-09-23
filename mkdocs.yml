@@ -88,54 +88,66 @@ nav:
       - "12. Colecciones II: operaciones funcionales (<code>map</code>, <code>filter</code> y <code>forEach</code>)": content/part03/chapter12.md
       - "13. Null safety: manejo seguro de valores nulos": content/part03/chapter13.md
       - "14. Manejo de excepciones: <code>try</code>, <code>catch</code> y <code>Result</code>": content/part03/chapter14.md
-      - "15. Formato de cadenas con <code>String.format</code>": content/part03/chapter15.md
       - "Ejercicios de repaso": content/part03/exercises.md
   - "Parte IV · Programación orientada a objetos":
-      - "16. Clases, propiedades y constructores": content/part04/chapter16.md
-      - "17. Herencia, interfaces y clases abstractas": content/part04/chapter17.md
-      - "18. <code>data class</code>, <code>copy</code> y desestructuración": content/part04/chapter18.md
-      - "19. <code>object</code>, <code>companion object</code> y singletons": content/part04/chapter19.md
-      - "20. <code>enum</code> y <code>sealed class</code>": content/part04/chapter20.md
-      - "21. Genéricos, funciones de extensión y lambdas": content/part04/chapter21.md
+      - "15. Clases, propiedades y constructores": content/part04/chapter15.md
+      - "16. Herencia, interfaces y clases abstractas": content/part04/chapter16.md
+      - "17. <code>data class</code>, <code>copy</code> y desestructuración": content/part04/chapter17.md
+      - "18. <code>object</code>, <code>companion object</code> y singletons": content/part04/chapter18.md
+      - "19. <code>enum</code> y <code>sealed class</code>": content/part04/chapter19.md
+      - "20. Genéricos y funciones de extensión": content/part04/chapter20.md
+      - "21. Lambdas a fondo: receptores, funciones de alcance y delegación": content/part04/chapter21.md
       - "Ejercicios de repaso": content/part04/exercises.md
   - "Parte V · Asincronía con Coroutines":
       - "22. ¿Por qué asincronía? El hilo principal": content/part05/chapter22.md
       - "23. <code>suspend</code>, <code>launch</code>, <code>async</code>, scopes y dispatchers": content/part05/chapter23.md
       - "24. <code>Flow</code>, <code>StateFlow</code> y <code>SharedFlow</code>": content/part05/chapter24.md
-  - "Parte VI · Introducción a Android con Jetpack Compose":
+  - "Parte VI · Android y arquitectura de aplicaciones":
       - "25. Android Studio y anatomía de un proyecto": content/part06/chapter25.md
-      - "26. Ciclo de vida de una <code>Activity</code> y tu primer <code>@Composable</code>": content/part06/chapter26.md
-      - "27. Fundamentos de Compose: composables, recomposición y <code>Modifier</code>": content/part06/chapter27.md
-      - "28. Gestión de recursos: imágenes, íconos y cadenas de texto": content/part06/chapter28.md
-      - "29. Material 3: componentes listos para usar": content/part06/chapter29.md
-      - "30. Estructura de pantalla: <code>Scaffold</code>, layouts y <code>LazyColumn</code>": content/part06/chapter30.md
-      - "31. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>": content/part06/chapter31.md
-      - "Tutorial: Mi lista de tareas (parte 1)": content/part06/tutorial_my_todo_list_part_1.md
-      - "32. Navegación con Navigation Compose": content/part06/chapter32.md
-      - "33. Material 3: tema, color y tipografía": content/part06/chapter33.md
-      - "Tutorial: Mi lista de tareas (parte 2)": content/part06/tutorial_my_todo_list_part_2.md
-  - "Parte VII · Arquitectura MVVM":
-      - "34. Qué es MVVM y por qué usarlo": content/part07/chapter34.md
-      - "35. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)": content/part07/chapter35.md
-      - "36. Repositorio y separación de capas": content/part07/chapter36.md
-      - "37. Inyección de dependencias (manual y con Hilt)": content/part07/chapter37.md
-  - "Parte VIII · Consumo de API REST con Retrofit":
-      - "38. HTTP, REST y JSON: cómo se comunican las apps con un servidor": content/part08/chapter38.md
-      - "39. Retrofit: configuración, interfaces y endpoints": content/part08/chapter39.md
-      - "40. Serialización JSON y modelos de datos (DTO)": content/part08/chapter40.md
-      - "41. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>": content/part08/chapter41.md
-  - "Parte IX · Proyecto final":
-      - "42. Diseño de la app: pantallas, navegación y arquitectura": content/part09/chapter42.md
-      - "43. Setup del proyecto y dependencias": content/part09/chapter43.md
-      - "44. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>": content/part09/chapter44.md
-      - "45. Pantalla de lista con paginación": content/part09/chapter45.md
-      - "46. Carga de sprites con Coil": content/part09/chapter46.md
-      - "47. Pantalla de detalle: stats, tipos y habilidades": content/part09/chapter47.md
-      - "48. Búsqueda y filtrado": content/part09/chapter48.md
-      - "49. Persistencia local con Room: favoritos y caché offline": content/part09/chapter49.md
-      - "50. Pulido: estados de UI, Material 3 y accesibilidad": content/part09/chapter50.md
-      - "51. Cierre: testing básico, buenas prácticas y próximos pasos": content/part09/chapter51.md
+      - "26. Ciclo de vida de una <code>Activity</code>": content/part06/chapter26.md
+      - "27. Cómo se organiza una app: responsabilidades y flujo de datos": content/part06/chapter27.md
+  - "Parte VII · Jetpack Compose y construcción de interfaces":
+      - "28. Tu primer composable: <code>@Composable</code>, <code>@Preview</code> y parámetros": content/part07/chapter28.md
+      - "29. <code>Modifier</code> y layouts: <code>Column</code>, <code>Row</code> y <code>Box</code>": content/part07/chapter29.md
+      - "30. Gestión de recursos: imágenes, íconos y cadenas de texto": content/part07/chapter30.md
+      - "31. Material 3: componentes listos para usar": content/part07/chapter31.md
+      - "32. Estado en Compose: recomposición, <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>": content/part07/chapter32.md
+      - "33. Estructura de pantalla: <code>Scaffold</code> y <code>LazyColumn</code>": content/part07/chapter33.md
+      - "Tutorial: Mi lista de tareas (parte 1)": content/part07/tutorial_my_todo_list_part_1.md
+      - "34. Formularios y validación en la interfaz": content/part07/chapter34.md
+      - "35. Navegación con Navigation Compose": content/part07/chapter35.md
+      - "36. Material 3: tema, color y tipografía": content/part07/chapter36.md
+      - "Tutorial: Mi lista de tareas (parte 2)": content/part07/tutorial_my_todo_list_part_2.md
+      - "37. Diseño adaptable con <em>Window Size Classes</em> (opcional)": content/part07/chapter37.md
+  - "Parte VIII · Estado y arquitectura con MVVM":
+      - "38. Qué es MVVM y por qué usarlo": content/part08/chapter38.md
+      - "39. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)": content/part08/chapter39.md
+      - "40. Efectos y eventos puntuales: <code>LaunchedEffect</code>, Snackbar y navegación": content/part08/chapter40.md
+      - "Tutorial: Mi lista de tareas (parte 3)": content/part08/tutorial_my_todo_list_part_3.md
+      - "41. Repositorio y separación de capas": content/part08/chapter41.md
+      - "42. Inyección de dependencias (manual y con Hilt)": content/part08/chapter42.md
+      - "Tutorial: Mi lista de tareas (parte 4)": content/part08/tutorial_my_todo_list_part_4.md
+  - "Parte IX · Datos: API REST y persistencia local":
+      - "43. HTTP, REST y JSON: cómo se comunican las apps con un servidor": content/part09/chapter43.md
+      - "44. Serialización JSON y modelos de datos (DTO)": content/part09/chapter44.md
+      - "45. Retrofit: configuración, interfaces y endpoints": content/part09/chapter45.md
+      - "46. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>": content/part09/chapter46.md
+      - "47. Persistencia local con Room": content/part09/chapter47.md
+      - "Tutorial: Mi lista de tareas (parte 5)": content/part09/tutorial_my_todo_list_part_5.md
+  - "Parte X · Proyecto final: contactos":
+      - "48. Presentación y arquitectura de «Mis Contactos»": content/part10/chapter48.md
+      - "49. Configuración del proyecto y permisos": content/part10/chapter49.md
+      - "50. La capa remota: DTOs, Retrofit y módulo de red": content/part10/chapter50.md
+      - "51. La capa local: Room para caché y favoritos": content/part10/chapter51.md
+      - "52. El repositorio: estrategia <em>offline-first</em>": content/part10/chapter52.md
+      - "53. Pantalla de lista: búsqueda, paginación y favoritos": content/part10/chapter53.md
+      - "54. Pantalla de detalle: eliminación segura con evento como estado": content/part10/chapter54.md
+      - "55. Pantalla de formulario: validación local y del servidor": content/part10/chapter55.md
+      - "56. Navegación con rutas tipadas": content/part10/chapter56.md
+      - "57. Componentes compartidos y tema visual": content/part10/chapter57.md
+      - "58. Cierre del proyecto y próximos pasos": content/part10/chapter58.md
   - Anexos:
       - "A. Principios de diseño (SOLID, DRY y KISS)": content/appendix/design-principle.md
-      - "B. Entrada estándar con Scanner de Java": content/appendix/java-scanner.md
+      - "B. De Java a Kotlin: equivalencias y <code>Scanner</code>": content/appendix/java-scanner.md
       - "C. Cómo elegir el SDK de un proyecto Android": content/appendix/android-sdk-criteria.md
+      - "D. Formato de cadenas con <code>String.format</code>": content/appendix/string-format.md

@@ -1,10 +1,28 @@
-# Capítulo 31: Estado en Compose: `remember`, `mutableStateOf` y *state hoisting*
+# Capítulo 32: Estado en Compose: recomposición, `remember`, `mutableStateOf` y *state hoisting*
 
 ## Introducción
 
-En los capítulos anteriores aprendiste la **recomposición** y a **organizar** varios composables en pantalla con layouts como `Column`, `Row` y `LazyColumn`. Pero quedó una pregunta pendiente: ¿cómo se declaran los datos que, al cambiar, disparan la recomposición?
+Hasta ahora tus composables muestran siempre lo mismo. Pero una interfaz real **cambia**: un contador que aumenta, un campo de texto que se llena, una casilla que se marca. En este capítulo verás cómo Compose actualiza la pantalla cuando cambian los datos —la **recomposición**— y cómo se declaran esos datos que, al cambiar, la disparan: el **estado** (*state*).
 
-La respuesta es el **estado** (*state*). En este capítulo aprenderás a crear estado con `mutableStateOf`, a conservarlo entre recomposiciones con `remember`, a mantenerlo incluso al girar el dispositivo con `rememberSaveable`, y una técnica fundamental para organizar bien tu interfaz: el ***state hoisting*** o "elevación del estado".
+Aprenderás a crear estado con `mutableStateOf`, a conservarlo entre recomposiciones con `remember`, a mantenerlo incluso al girar el dispositivo con `rememberSaveable`, a usarlo con componentes interactivos como `TextField`, `Checkbox` y `Switch`, y una técnica fundamental para organizar bien tu interfaz: el ***state hoisting*** o "elevación del estado".
+
+## La recomposición
+
+Aquí está la idea central de Compose. En la interfaz tradicional, cuando un dato cambiaba, tenías que buscar el elemento de pantalla y actualizarlo tú a mano. En Compose no: cuando cambian los datos que un composable **lee**, Compose **vuelve a ejecutar** ese composable con los datos nuevos y actualiza lo que se muestra. A ese "volver a ejecutar" se le llama **recomposición**.
+
+Piénsalo así: un composable no es un dibujo fijo, sino una **descripción** de cómo debe verse la interfaz *para unos datos dados*. Si los datos cambian, Compose recalcula la descripción y redibuja solo lo necesario.
+
+```mermaid
+flowchart TD
+    A["Cambian los datos"] --> B["Compose vuelve a ejecutar<br/>el composable (recomposición)"]
+    B --> C["El composable describe la interfaz<br/>con los datos nuevos"]
+    C --> D["La pantalla se actualiza"]
+```
+
+Esto es justo lo que anticipamos al hablar de `StateFlow`: la interfaz **observa** los datos y **reacciona** a sus cambios, sin que tengas que actualizarla manualmente. En el resto de este capítulo verás cómo se declaran esos datos que, al cambiar, provocan la recomposición: el **estado**.
+
+> [!IMPORTANT]
+> Como un composable puede ejecutarse muchas veces (una por cada recomposición) y en cualquier orden, no debes poner dentro de él acciones con efectos secundarios (como modificar una variable externa o escribir en un archivo). Un composable solo debería **describir** la interfaz a partir de los datos que recibe.
 
 ## El problema: una variable normal no basta
 
@@ -86,6 +104,68 @@ var contador by rememberSaveable { mutableStateOf(0) }
 
 Con este simple cambio, tu contador conserva su valor aunque gires el teléfono. Úsalo cuando quieras que un estado sobreviva a la rotación (por ejemplo, lo que el usuario escribió en un formulario).
 
+## Componentes con estado: `TextField`, `Checkbox` y `Switch`
+
+Con `remember` y `mutableStateOf` ya puedes usar los componentes de Material 3 que el usuario **modifica**. Todos siguen el mismo patrón.
+
+### `TextField`: la base de los formularios
+
+Un **`TextField`** es un campo de texto editable: el componente con el que construirás prácticamente **todos los formularios** del curso (inicio de sesión, búsqueda, alta de un contacto…).
+
+| Parámetro | Qué hace |
+| :--- | :--- |
+| `value` | El texto que se muestra **ahora mismo** en el campo. Es obligatorio. |
+| `onValueChange` | La función que se ejecuta cada vez que el usuario escribe algo. Es obligatorio. |
+| `label` | Una etiqueta que identifica el campo (por ejemplo, "Correo electrónico"). |
+| `placeholder` | Un texto de ejemplo que se ve cuando el campo está vacío. |
+
+```kotlin
+var nombre by remember { mutableStateOf("") }
+
+TextField(
+    value = nombre,
+    onValueChange = { nombre = it },
+    label = { Text("Nombre") },
+    placeholder = { Text("Ingresa tu nombre") }
+)
+```
+
+Fíjate en el patrón: `value` le dice a `TextField` **qué mostrar**, y `onValueChange` recibe el texto nuevo cada vez que el usuario teclea, para que tú lo guardes (aquí, en `nombre`). Si solo pasaras `value` sin actualizarlo en `onValueChange`, el campo se vería "congelado" y no dejaría escribir, por la misma razón que viste con `Button`: la interfaz no cambia si nadie actualiza el estado que lee. Un formulario real simplemente combina **varios** `TextField` como este, uno por cada dato que pidas.
+
+### `Checkbox` y `Switch`
+
+Un **`Checkbox`** es una casilla de verificación; un **`Switch`** es un interruptor de encendido/apagado. Ambos comparten los mismos parámetros:
+
+| Parámetro | Qué hace |
+| :--- | :--- |
+| `checked` | Si está marcado o activado. Es obligatorio. |
+| `onCheckedChange` | La función que se ejecuta cuando el usuario lo toca, con el nuevo valor. Es obligatorio. |
+
+```kotlin
+var aceptaTerminos by remember { mutableStateOf(false) }
+
+Row(verticalAlignment = Alignment.CenterVertically) {
+    Checkbox(
+        checked = aceptaTerminos,
+        onCheckedChange = { aceptaTerminos = it }
+    )
+    Text("Acepto los términos y condiciones")
+}
+```
+
+Para un `Switch`, el uso es idéntico: solo cambia el componente.
+
+```kotlin
+var notificacionesActivas by remember { mutableStateOf(true) }
+
+Switch(
+    checked = notificacionesActivas,
+    onCheckedChange = { notificacionesActivas = it }
+)
+```
+
+Fíjate en el patrón que se repite en los tres: cada componente interactivo recibe los **datos a mostrar** (`value`, `checked`) y una **función de devolución de llamada** (`onValueChange`, `onCheckedChange`) para reaccionar a la interacción del usuario, igual que viste con `Button` y su `onClick`. Es el mismo patrón que acabas de ver con `remember` y `mutableStateOf`: el componente no guarda nada por sí mismo; muestra el estado que recibe y avisa cuando el usuario quiere cambiarlo.
+
 ## State hoisting: elevar el estado
 
 Hasta ahora, nuestro `Contador` guarda su propio estado dentro de sí mismo. Funciona, pero tiene inconvenientes: nadie desde fuera puede conocer el valor actual ni controlarlo, y el composable es difícil de reutilizar y de previsualizar con distintos valores.
@@ -129,10 +209,12 @@ Este patrón trae grandes ventajas: el composable `Contador` es **reutilizable**
 
 En este capítulo aprendiste a manejar el estado en Compose:
 
+- La **recomposición** es el mecanismo por el que Compose **vuelve a ejecutar** un composable cuando cambian los datos que lee. Un composable describe la UI para unos datos dados y no debe tener efectos secundarios.
 - El **estado** son los datos que, al cambiar, provocan la recomposición.
 - **`mutableStateOf`** crea un valor **observable** por Compose; **`remember`** lo **conserva** entre recomposiciones. Juntos: `remember { mutableStateOf(...) }`.
 - La sintaxis **`by`** te deja usar el estado como una variable normal, sin `.value`.
 - **`rememberSaveable`** conserva el estado también tras una recreación por cambio de configuración (como girar el dispositivo).
+- Los componentes interactivos (`TextField`, `Checkbox`, `Switch`) reciben el **valor a mostrar** y una **función** que se ejecuta cuando el usuario lo cambia.
 - El ***state hoisting*** consiste en **elevar el estado** al composable padre, dejando al hijo **sin estado**: recibe el valor y una función para los eventos. Esto sigue el **flujo de datos unidireccional** (el estado baja, los eventos suben) y hace tus composables reutilizables.
 
-En el próximo capítulo aprenderás a moverte entre distintas pantallas de tu app con **Navigation Compose**.
+En el próximo capítulo montarás el esqueleto de una pantalla completa con `Scaffold` y mostrarás listas largas con `LazyColumn`.

@@ -1,4 +1,4 @@
-# Capítulo 17: Herencia, interfaces y clases abstractas
+# Capítulo 16: Herencia, interfaces y clases abstractas
 
 ## Introducción
 

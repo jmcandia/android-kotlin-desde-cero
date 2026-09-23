@@ -1,4 +1,4 @@
-# Capítulo 19: `object`, `companion object` y singletons
+# Capítulo 18: `object`, `companion object` y singletons
 
 ## Introducción
 
