@@ -27,7 +27,7 @@
     
     
       
-        <title>20. enum y sealed class - Android con Kotlin desde cero</title>
+        <title>20. Genéricos y funciones de extensión - Android con Kotlin desde cero</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#capitulo-20-enum-y-sealed-class" class="md-skip">
+        <a href="#capitulo-20-genericos-y-funciones-de-extension" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              20. <code>enum</code> y <code>sealed class</code>
+              20. Genéricos y funciones de extensión
             
           </span>
         </div>
@@ -892,34 +892,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part03/chapter15/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    15. Formato de cadenas con <code>String.format</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../part03/exercises/" class="md-nav__link">
         
   
@@ -1004,6 +976,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Clases, propiedades y constructores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../chapter16/" class="md-nav__link">
         
   
@@ -1011,7 +1011,7 @@
   <span class="md-ellipsis">
     
   
-    16. Clases, propiedades y constructores
+    16. Herencia, interfaces y clases abstractas
   
 
     
@@ -1039,7 +1039,7 @@
   <span class="md-ellipsis">
     
   
-    17. Herencia, interfaces y clases abstractas
+    17. <code>data class</code>, <code>copy</code> y desestructuración
   
 
     
@@ -1067,7 +1067,7 @@
   <span class="md-ellipsis">
     
   
-    18. <code>data class</code>, <code>copy</code> y desestructuración
+    18. <code>object</code>, <code>companion object</code> y singletons
   
 
     
@@ -1095,7 +1095,7 @@
   <span class="md-ellipsis">
     
   
-    19. <code>object</code>, <code>companion object</code> y singletons
+    19. <code>enum</code> y <code>sealed class</code>
   
 
     
@@ -1132,7 +1132,7 @@
   <span class="md-ellipsis">
     
   
-    20. <code>enum</code> y <code>sealed class</code>
+    20. Genéricos y funciones de extensión
   
 
     
@@ -1150,7 +1150,7 @@
   <span class="md-ellipsis">
     
   
-    20. <code>enum</code> y <code>sealed class</code>
+    20. Genéricos y funciones de extensión
   
 
     
@@ -1187,10 +1187,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#enum-class" class="md-nav__link">
+  <a href="#genericos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        enum class
+        Genéricos
       
     </span>
   </a>
@@ -1198,65 +1198,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#enum-con-when" class="md-nav__link">
+  <a href="#funciones-de-extension" class="md-nav__link">
     <span class="md-ellipsis">
       
-        enum con when
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enum-con-propiedades" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        enum con propiedades
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cuando-un-enum-no-basta-sealed-class" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cuando un enum no basta: sealed class
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#sealed-class-con-when" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        sealed class con when
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#un-caso-practico-los-estados-de-una-interfaz" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Un caso práctico: los estados de una interfaz
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enum-o-sealed-class" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿enum o sealed class?
+        Funciones de extensión
       
     </span>
   </a>
@@ -1297,7 +1242,7 @@
   <span class="md-ellipsis">
     
   
-    21. Genéricos, funciones de extensión y lambdas
+    21. Lambdas a fondo: receptores, funciones de alcance y delegación
   
 
     
@@ -1509,7 +1454,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VI · Introducción a Android con Jetpack Compose
+    Parte VI · Android y arquitectura de aplicaciones
   
 
     
@@ -1525,7 +1470,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VI · Introducción a Android con Jetpack Compose
+    Parte VI · Android y arquitectura de aplicaciones
   
 
           </label>
@@ -1573,7 +1518,7 @@
   <span class="md-ellipsis">
     
   
-    26. Ciclo de vida de una <code>Activity</code> y tu primer <code>@Composable</code>
+    26. Ciclo de vida de una <code>Activity</code>
   
 
     
@@ -1601,231 +1546,7 @@
   <span class="md-ellipsis">
     
   
-    27. Fundamentos de Compose: composables, recomposición y <code>Modifier</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter28/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    28. Gestión de recursos: imágenes, íconos y cadenas de texto
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter29/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    29. Material 3: componentes listos para usar
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter30/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    30. Estructura de pantalla: <code>Scaffold</code>, layouts y <code>LazyColumn</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter31/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    31. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/tutorial_my_todo_list_part_1/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tutorial: Mi lista de tareas (parte 1)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter32/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    32. Navegación con Navigation Compose
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter33/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    33. Material 3: tema, color y tipografía
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/tutorial_my_todo_list_part_2/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tutorial: Mi lista de tareas (parte 2)
+    27. Cómo se organiza una app: responsabilidades y flujo de datos
   
 
     
@@ -1871,7 +1592,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VII · Arquitectura MVVM
+    Parte VII · Jetpack Compose y construcción de interfaces
   
 
     
@@ -1887,11 +1608,207 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VII · Arquitectura MVVM
+    Parte VII · Jetpack Compose y construcción de interfaces
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Tu primer composable: <code>@Composable</code>, <code>@Preview</code> y parámetros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. <code>Modifier</code> y layouts: <code>Column</code>, <code>Row</code> y <code>Box</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Gestión de recursos: imágenes, íconos y cadenas de texto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. Material 3: componentes listos para usar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter32/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. Estado en Compose: recomposición, <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter33/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Estructura de pantalla: <code>Scaffold</code> y <code>LazyColumn</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/tutorial_my_todo_list_part_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1907,7 +1824,7 @@
   <span class="md-ellipsis">
     
   
-    34. Qué es MVVM y por qué usarlo
+    34. Formularios y validación en la interfaz
   
 
     
@@ -1935,7 +1852,7 @@
   <span class="md-ellipsis">
     
   
-    35. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
+    35. Navegación con Navigation Compose
   
 
     
@@ -1963,7 +1880,35 @@
   <span class="md-ellipsis">
     
   
-    36. Repositorio y separación de capas
+    36. Material 3: tema, color y tipografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/tutorial_my_todo_list_part_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 2)
   
 
     
@@ -1991,7 +1936,7 @@
   <span class="md-ellipsis">
     
   
-    37. Inyección de dependencias (manual y con Hilt)
+    37. Diseño adaptable con <em>Window Size Classes</em> (opcional)
   
 
     
@@ -2037,7 +1982,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VIII · Consumo de API REST con Retrofit
+    Parte VIII · Estado y arquitectura con MVVM
   
 
     
@@ -2053,7 +1998,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VIII · Consumo de API REST con Retrofit
+    Parte VIII · Estado y arquitectura con MVVM
   
 
           </label>
@@ -2073,7 +2018,7 @@
   <span class="md-ellipsis">
     
   
-    38. HTTP, REST y JSON: cómo se comunican las apps con un servidor
+    38. Qué es MVVM y por qué usarlo
   
 
     
@@ -2101,7 +2046,7 @@
   <span class="md-ellipsis">
     
   
-    39. Retrofit: configuración, interfaces y endpoints
+    39. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
   
 
     
@@ -2129,7 +2074,35 @@
   <span class="md-ellipsis">
     
   
-    40. Serialización JSON y modelos de datos (DTO)
+    40. Efectos y eventos puntuales: <code>LaunchedEffect</code>, Snackbar y navegación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/tutorial_my_todo_list_part_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 3)
   
 
     
@@ -2157,7 +2130,63 @@
   <span class="md-ellipsis">
     
   
-    41. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
+    41. Repositorio y separación de capas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/chapter42/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    42. Inyección de dependencias (manual y con Hilt)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/tutorial_my_todo_list_part_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 4)
   
 
     
@@ -2203,7 +2232,7 @@
   <span class="md-ellipsis">
     
   
-    Parte IX · Proyecto final
+    Parte IX · Datos: API REST y persistencia local
   
 
     
@@ -2219,39 +2248,11 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte IX · Proyecto final
+    Parte IX · Datos: API REST y persistencia local
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter42/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    42. Diseño de la app: pantallas, navegación y arquitectura
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -2267,7 +2268,7 @@
   <span class="md-ellipsis">
     
   
-    43. Setup del proyecto y dependencias
+    43. HTTP, REST y JSON: cómo se comunican las apps con un servidor
   
 
     
@@ -2295,7 +2296,7 @@
   <span class="md-ellipsis">
     
   
-    44. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>
+    44. Serialización JSON y modelos de datos (DTO)
   
 
     
@@ -2323,7 +2324,7 @@
   <span class="md-ellipsis">
     
   
-    45. Pantalla de lista con paginación
+    45. Retrofit: configuración, interfaces y endpoints
   
 
     
@@ -2351,7 +2352,7 @@
   <span class="md-ellipsis">
     
   
-    46. Carga de sprites con Coil
+    46. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
   
 
     
@@ -2379,7 +2380,7 @@
   <span class="md-ellipsis">
     
   
-    47. Pantalla de detalle: stats, tipos y habilidades
+    47. Persistencia local con Room
   
 
     
@@ -2400,98 +2401,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/tutorial_my_todo_list_part_5/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    48. Búsqueda y filtrado
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter49/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    49. Persistencia local con Room: favoritos y caché offline
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter50/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    50. Pulido: estados de UI, Material 3 y accesibilidad
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter51/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    51. Cierre: testing básico, buenas prácticas y próximos pasos
+    Tutorial: Mi lista de tareas (parte 5)
   
 
     
@@ -2537,7 +2454,7 @@
   <span class="md-ellipsis">
     
   
-    Anexos
+    Parte X · Proyecto final: contactos
   
 
     
@@ -2550,6 +2467,368 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte X · Proyecto final: contactos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter48/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    48. Presentación y arquitectura de «Mis Contactos»
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter49/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    49. Configuración del proyecto y permisos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter50/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    50. La capa remota: DTOs, Retrofit y módulo de red
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter51/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    51. La capa local: Room para caché y favoritos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter52/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    52. El repositorio: estrategia <em>offline-first</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter53/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    53. Pantalla de lista: búsqueda, paginación y favoritos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter54/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    54. Pantalla de detalle: eliminación segura con evento como estado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter55/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    55. Pantalla de formulario: validación local y del servidor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter56/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    56. Navegación con rutas tipadas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter57/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    57. Componentes compartidos y tema visual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter58/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    58. Cierre del proyecto y próximos pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2601,7 +2880,7 @@
   <span class="md-ellipsis">
     
   
-    B. Entrada estándar con Scanner de Java
+    B. De Java a Kotlin: equivalencias y <code>Scanner</code>
   
 
     
@@ -2630,6 +2909,34 @@
     
   
     C. Cómo elegir el SDK de un proyecto Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/string-format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Formato de cadenas con <code>String.format</code>
   
 
     
@@ -2688,10 +2995,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#enum-class" class="md-nav__link">
+  <a href="#genericos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        enum class
+        Genéricos
       
     </span>
   </a>
@@ -2699,65 +3006,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#enum-con-when" class="md-nav__link">
+  <a href="#funciones-de-extension" class="md-nav__link">
     <span class="md-ellipsis">
       
-        enum con when
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enum-con-propiedades" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        enum con propiedades
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cuando-un-enum-no-basta-sealed-class" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Cuando un enum no basta: sealed class
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#sealed-class-con-when" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        sealed class con when
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#un-caso-practico-los-estados-de-una-interfaz" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Un caso práctico: los estados de una interfaz
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enum-o-sealed-class" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿enum o sealed class?
+        Funciones de extensión
       
     </span>
   </a>
@@ -2795,121 +3047,55 @@
   
 
 
-<h1 id="capitulo-20-enum-y-sealed-class">Capítulo 20: <code>enum</code> y <code>sealed class</code><a class="headerlink" href="#capitulo-20-enum-y-sealed-class" title="Permanent link">&para;</a></h1>
+<h1 id="capitulo-20-genericos-y-funciones-de-extension">Capítulo 20: Genéricos y funciones de extensión<a class="headerlink" href="#capitulo-20-genericos-y-funciones-de-extension" title="Permanent link">&para;</a></h1>
 <h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
-<p>En los capítulos anteriores modelaste cosas con clases. Pero hay situaciones en las que un valor solo puede ser <strong>una de un conjunto fijo de opciones</strong>: los días de la semana, los puntos cardinales, el color de un semáforo, el estado de una descarga.</p>
-<p>Representar esas opciones con simples textos o números es frágil: es fácil escribir <code>"rojo"</code> en un lugar y <code>"Rojo"</code> en otro, y nada te avisa del error. Kotlin ofrece herramientas hechas a medida para estos casos: los <strong><code>enum</code></strong>, para un conjunto fijo de valores con nombre, y las <strong><code>sealed class</code></strong>, para cuando cada opción puede llevar además sus propios datos.</p>
-<p>Este capítulo introduce dos herramientas muy útiles para modelar datos con un conjunto limitado de opciones. Además, verás cómo una <code>sealed class</code> es ideal para representar los <strong>estados de una interfaz</strong> (cargando, éxito, error), un patrón que retomaremos al estudiar la arquitectura.</p>
-<h2 id="enum-class"><code>enum class</code><a class="headerlink" href="#enum-class" title="Permanent link">&para;</a></h2>
-<p>Un <strong><code>enum</code></strong> (de <em>enumeration</em>, "enumeración") define un tipo con un conjunto <strong>fijo y limitado</strong> de valores con nombre. Por ejemplo, los colores de un semáforo:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">enum</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Color</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">ROJO</span><span class="p">,</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">AMARILLO</span><span class="p">,</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">VERDE</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
+<p>Has recorrido un largo camino: dominas los fundamentos de Kotlin y la programación orientada a objetos. Para cerrar esta parte, verás dos herramientas que hacen tu código mucho más <strong>expresivo y reutilizable</strong>, y que aparecen por todas partes en el desarrollo Android moderno:</p>
+<ul>
+<li>Los <strong>genéricos</strong>, para escribir código que funcione con cualquier tipo de dato.</li>
+<li>Las <strong>funciones de extensión</strong>, para añadir funciones a clases que ya existen.</li>
+</ul>
+<p>Ya te has cruzado con las dos sin conocerlas del todo: usaste <code>List&lt;String&gt;</code> (genéricos) y llamaste funciones como <code>.first()</code> sobre una lista (extensiones). Ahora entenderás cómo funcionan por dentro.</p>
+<h2 id="genericos">Genéricos<a class="headerlink" href="#genericos" title="Permanent link">&para;</a></h2>
+<p>Cuando escribiste <code>List&lt;String&gt;</code> o <code>List&lt;Int&gt;</code>, ese <code>&lt;...&gt;</code> son los <strong>genéricos</strong> en acción. Los genéricos te permiten escribir <strong>una sola</strong> pieza de código que funciona con <strong>muchos tipos</strong> distintos, sin perder la seguridad de tipos.</p>
+<p>Imagina que quieres una clase "caja" que guarde un valor. Si hicieras una <code>CajaDeInt</code>, una <code>CajaDeString</code>, etcétera, estarías repitiendo el mismo código (recuerda DRY). En su lugar, defines una clase <strong>genérica</strong>, usando un <strong>parámetro de tipo</strong> entre <code>&lt;&gt;</code> (por convención se llama <code>T</code>, de <em>type</em>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Caja</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">contenido</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">)</span>
 </code></pre></div>
-<p>Cada valor (<code>ROJO</code>, <code>AMARILLO</code>, <code>VERDE</code>) es una constante del tipo <code>Color</code>, y accedes a él a través del nombre del enum:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color</span><span class="p">.</span><span class="na">ROJO</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">println</span><span class="p">(</span><span class="n">color</span><span class="p">)</span><span class="w"> </span><span class="c1">// ROJO</span>
+<p>Aquí <code>T</code> es un marcador de posición para un tipo real, que se decide al crear el objeto:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">cajaNumero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Caja</span><span class="p">(</span><span class="m">5</span><span class="p">)</span><span class="w">     </span><span class="c1">// T es Int</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">cajaTexto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Caja</span><span class="p">(</span><span class="s">&quot;hola&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// T es String</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">println</span><span class="p">(</span><span class="n">cajaNumero</span><span class="p">.</span><span class="na">contenido</span><span class="p">)</span><span class="w"> </span><span class="c1">// 5</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">println</span><span class="p">(</span><span class="n">cajaTexto</span><span class="p">.</span><span class="na">contenido</span><span class="p">)</span><span class="w">  </span><span class="c1">// hola</span>
 </code></pre></div>
-<p>La ventaja es la <strong>seguridad</strong>: una variable de tipo <code>Color</code> solo puede tomar uno de esos tres valores. No hay forma de asignarle un <code>"rojo"</code> mal escrito; el compilador no lo permitiría.</p>
-<h2 id="enum-con-when"><code>enum</code> con <code>when</code><a class="headerlink" href="#enum-con-when" title="Permanent link">&para;</a></h2>
-<p>Los enums encajan perfectamente con el <code>when</code> que viste en el capítulo de control de flujo. De hecho, cuando cubres <strong>todos</strong> los valores del enum, no necesitas la rama <code>else</code>, porque Kotlin sabe que no hay más opciones posibles:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">accion</span><span class="p">(</span><span class="n">color</span><span class="p">:</span><span class="w"> </span><span class="n">Color</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">color</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">Color</span><span class="p">.</span><span class="na">ROJO</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Detente&quot;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">Color</span><span class="p">.</span><span class="na">AMARILLO</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Precaución&quot;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">Color</span><span class="p">.</span><span class="na">VERDE</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Avanza&quot;</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">println</span><span class="p">(</span><span class="n">accion</span><span class="p">(</span><span class="n">Color</span><span class="p">.</span><span class="na">VERDE</span><span class="p">))</span><span class="w"> </span><span class="c1">// Avanza</span>
+<p>Kotlin recuerda el tipo de cada caja: <code>cajaNumero.contenido</code> es un <code>Int</code> y <code>cajaTexto.contenido</code> es un <code>String</code>. Eso es lo valioso: el mismo código sirve para cualquier tipo, pero cada uso mantiene su tipo concreto.</p>
+<p>Las <strong>funciones</strong> también pueden ser genéricas. Por ejemplo, una que devuelva el primer elemento de cualquier lista:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">fun</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">primero</span><span class="p">(</span><span class="n">lista</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">):</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lista</span><span class="o">[</span><span class="m">0</span><span class="o">]</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">println</span><span class="p">(</span><span class="n">primero</span><span class="p">(</span><span class="n">listOf</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)))</span><span class="w">    </span><span class="c1">// 10  (T es Int)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">println</span><span class="p">(</span><span class="n">primero</span><span class="p">(</span><span class="n">listOf</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p">)))</span><span class="w"> </span><span class="c1">// a   (T es String)</span>
 </code></pre></div>
-<p>Esto es muy útil: si algún día agregas un cuarto valor al enum, el compilador te avisará de que este <code>when</code> ya no cubre todos los casos, y tendrás que actualizarlo. El lenguaje te protege de los olvidos.</p>
-<h2 id="enum-con-propiedades"><code>enum</code> con propiedades<a class="headerlink" href="#enum-con-propiedades" title="Permanent link">&para;</a></h2>
-<p>Los valores de un enum también pueden llevar <strong>datos</strong> asociados. Para eso, el enum recibe un constructor, y cada valor le pasa sus argumentos:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">enum</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Prioridad</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">nivel</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">BAJA</span><span class="p">(</span><span class="m">1</span><span class="p">),</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">MEDIA</span><span class="p">(</span><span class="m">2</span><span class="p">),</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">ALTA</span><span class="p">(</span><span class="m">3</span><span class="p">)</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
+<p>Así funcionan por dentro <code>List&lt;T&gt;</code> y todas las colecciones que ya usaste: son clases genéricas.</p>
+<h2 id="funciones-de-extension">Funciones de extensión<a class="headerlink" href="#funciones-de-extension" title="Permanent link">&para;</a></h2>
+<p>A veces querrías añadir una función a una clase que <strong>ya existe</strong> —<code>String</code>, <code>Int</code> o una clase de una librería— pero que no puedes o no quieres modificar. Las <strong>funciones de extensión</strong> de Kotlin te permiten hacer exactamente eso: agregar funciones nuevas a un tipo existente.</p>
+<p>Para definir una, escribes el tipo que quieres extender, un punto y el nombre de la función. Por ejemplo, añadamos a <code>Int</code> una función que diga si es par:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">fun</span><span class="w"> </span><span class="n">Int</span><span class="p">.</span><span class="nf">esPar</span><span class="p">():</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span>
 </code></pre></div>
-<p>Ahora cada valor tiene una propiedad <code>nivel</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">println</span><span class="p">(</span><span class="n">Prioridad</span><span class="p">.</span><span class="na">ALTA</span><span class="p">.</span><span class="na">nivel</span><span class="p">)</span><span class="w"> </span><span class="c1">// 3</span>
+<p>Dentro de la función, <code>this</code> se refiere al objeto sobre el que la llamas. Y la usas como si fuera un método más de <code>Int</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">println</span><span class="p">(</span><span class="m">4.</span><span class="n">esPar</span><span class="p">())</span><span class="w"> </span><span class="c1">// true</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">println</span><span class="p">(</span><span class="m">7.</span><span class="n">esPar</span><span class="p">())</span><span class="w"> </span><span class="c1">// false</span>
 </code></pre></div>
-<h2 id="cuando-un-enum-no-basta-sealed-class">Cuando un enum no basta: <code>sealed class</code><a class="headerlink" href="#cuando-un-enum-no-basta-sealed-class" title="Permanent link">&para;</a></h2>
-<p>Los enums son ideales cuando cada opción tiene la <strong>misma forma</strong>: un nombre y, quizás, unas propiedades uniformes. Pero a veces cada opción necesita llevar <strong>datos distintos</strong>.</p>
-<p>Piensa en el resultado de una operación de red: puede ser un <strong>éxito</strong> (que trae los datos obtenidos) o un <strong>error</strong> (que trae un mensaje). Son dos casos con estructuras diferentes: uno lleva datos, el otro un mensaje. Un enum no encaja bien aquí.</p>
-<p>Para esto está la <strong><code>sealed class</code></strong> ("clase sellada"): define una jerarquía <strong>cerrada</strong> de subclases, todas conocidas de antemano. Cada subclase puede ser distinta (una <code>data class</code>, un <code>object</code>) y llevar sus propios datos:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Resultado</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Exito</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">datos</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Resultado</span><span class="p">()</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Error</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">mensaje</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Resultado</span><span class="p">()</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span>
-</code></pre></div>
-<p>"Sellada" significa que Kotlin conoce <strong>todas</strong> sus subclases posibles (deben declararse junto a ella). Eso es lo que la hace tan potente con el <code>when</code>.</p>
-<h2 id="sealed-class-con-when"><code>sealed class</code> con <code>when</code><a class="headerlink" href="#sealed-class-con-when" title="Permanent link">&para;</a></h2>
-<p>Al usar una <code>sealed class</code> en un <code>when</code>, aprovechas dos cosas. Primero, el operador <code>is</code>, que comprueba de qué subtipo es el objeto. Segundo, el <em>smart cast</em>: dentro de cada rama, Kotlin ya sabe el tipo concreto y te deja acceder a sus datos:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">manejar</span><span class="p">(</span><span class="n">resultado</span><span class="p">:</span><span class="w"> </span><span class="n">Resultado</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">resultado</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Resultado</span><span class="p">.</span><span class="na">Exito</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Datos recibidos: </span><span class="si">${</span><span class="n">resultado</span><span class="p">.</span><span class="na">datos</span><span class="si">}</span><span class="s">&quot;</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">Resultado</span><span class="p">.</span><span class="na">Error</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Ocurrió un error: </span><span class="si">${</span><span class="n">resultado</span><span class="p">.</span><span class="na">mensaje</span><span class="si">}</span><span class="s">&quot;</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">}</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">println</span><span class="p">(</span><span class="n">manejar</span><span class="p">(</span><span class="n">Resultado</span><span class="p">.</span><span class="na">Exito</span><span class="p">(</span><span class="s">&quot;Hola&quot;</span><span class="p">)))</span><span class="w">    </span><span class="c1">// Datos recibidos: Hola</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">println</span><span class="p">(</span><span class="n">manejar</span><span class="p">(</span><span class="n">Resultado</span><span class="p">.</span><span class="na">Error</span><span class="p">(</span><span class="s">&quot;Sin red&quot;</span><span class="p">)))</span><span class="w"> </span><span class="c1">// Ocurrió un error: Sin red</span>
-</code></pre></div>
-<p>Fíjate en que, igual que con los enums, <strong>no hace falta <code>else</code></strong>: como la clase está sellada, Kotlin sabe que solo existen <code>Exito</code> y <code>Error</code>, así que el <code>when</code> ya es exhaustivo.</p>
+<p>Es importante entender que esto no modifica realmente la clase <code>Int</code> (no le añades nada por dentro): es una comodidad del lenguaje que hace que tu código se lea de forma natural. En el segundo capítulo mencionamos las funciones de extensión como una de las características distintivas de Kotlin; esto es lo que eran.</p>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>El operador <code>is</code> comprueba si un objeto es de un tipo determinado (si vienes de Java, es como <code>instanceof</code>). Dentro de la rama <code>is Resultado.Exito</code>, Kotlin aplica <em>smart cast</em>: ya sabe que <code>resultado</code> es un <code>Exito</code>, y por eso puedes leer <code>resultado.datos</code> directamente, sin ninguna conversión.</p>
+<p>En Java, para "añadir" comportamiento a una clase que no controlas, sueles crear métodos utilitarios estáticos (<code>Utilidades.esPar(numero)</code>). Las funciones de extensión de Kotlin logran lo mismo, pero se leen mucho mejor: <code>numero.esPar()</code>.</p>
 </div>
-<h2 id="un-caso-practico-los-estados-de-una-interfaz">Un caso práctico: los estados de una interfaz<a class="headerlink" href="#un-caso-practico-los-estados-de-una-interfaz" title="Permanent link">&para;</a></h2>
-<p>Un caso muy común en el desarrollo de apps: una pantalla que carga datos desde una fuente externa (una red, una base de datos) puede estar en uno de tres estados: <strong>cargando</strong>, <strong>con datos</strong> (éxito) o <strong>con error</strong>. Es un ejemplo perfecto para una <code>sealed class</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">UiState</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="kd">object</span><span class="w"> </span><span class="nc">Cargando</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Exito</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">elementos</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Error</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">mensaje</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">}</span>
-</code></pre></div>
-<p>Fíjate en que <code>Cargando</code> es un <code>object</code> (no necesita datos: solo representa "estoy cargando"), mientras que <code>Exito</code> y <code>Error</code> son <code>data class</code>, porque sí llevan información. En UML, esa jerarquía sellada se ve así:</p>
-<pre class="mermaid"><code>classDiagram
-    class UiState {
-        &lt;&lt;sealed&gt;&gt;
-    }
-    class Cargando {
-        &lt;&lt;object&gt;&gt;
-    }
-    class Exito {
-        +elementos: List~String~
-    }
-    class Error {
-        +mensaje: String
-    }
-    UiState &lt;|-- Cargando
-    UiState &lt;|-- Exito
-    UiState &lt;|-- Error</code></pre>
-<p>Luego, la interfaz decidirá qué mostrar según el estado, con un <code>when</code> exhaustivo:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="n">estado</span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">estado</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Mostrando indicador de carga...&quot;</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Exito</span><span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Mostrando </span><span class="si">${</span><span class="n">estado</span><span class="p">.</span><span class="na">elementos</span><span class="p">.</span><span class="na">size</span><span class="si">}</span><span class="s"> elementos&quot;</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Error</span><span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Mostrando mensaje: </span><span class="si">${</span><span class="n">estado</span><span class="p">.</span><span class="na">mensaje</span><span class="si">}</span><span class="s">&quot;</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">}</span>
-</code></pre></div>
-<p>Este es el corazón de cómo una app moderna maneja la incertidumbre de los datos, y lo retomaremos al construir la arquitectura MVVM.</p>
-<h2 id="enum-o-sealed-class">¿enum o sealed class?<a class="headerlink" href="#enum-o-sealed-class" title="Permanent link">&para;</a></h2>
-<p>Ambos representan un conjunto fijo de opciones, así que ¿cuál usar?</p>
-<ul>
-<li>Usa un <strong><code>enum</code></strong> cuando las opciones sean valores simples y con la <strong>misma forma</strong>: un conjunto de constantes con nombre (colores, direcciones, niveles).</li>
-<li>Usa una <strong><code>sealed class</code></strong> cuando cada opción necesite llevar <strong>sus propios datos</strong> o tener una estructura distinta (un resultado con datos o con error, los estados de una pantalla).</li>
-</ul>
-<p>En pocas palabras: si cada caso es solo "una etiqueta", un <code>enum</code> basta; si cada caso "carga algo distinto", usa una <code>sealed class</code>.</p>
 <h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
-<p>En este capítulo aprendiste a modelar conjuntos fijos de opciones:</p>
+<p>En este capítulo conociste dos herramientas que hacen tu código más expresivo:</p>
 <ul>
-<li>Un <strong><code>enum class</code></strong> define un conjunto fijo de valores con nombre; da seguridad frente a valores inválidos y funciona muy bien con <code>when</code> (exhaustivo, sin <code>else</code>). Sus valores pueden tener propiedades.</li>
-<li>Una <strong><code>sealed class</code></strong> define una jerarquía cerrada de subclases conocidas de antemano; cada una puede ser distinta y llevar sus propios datos.</li>
-<li>Con <code>when</code> y el operador <code>is</code>, manejas una <code>sealed class</code> de forma exhaustiva y con <em>smart cast</em> (accedes a los datos de cada caso sin conversiones).</li>
-<li>Usa <code>enum</code> para opciones con la misma forma y <code>sealed class</code> para opciones que cargan datos distintos.</li>
-<li>Este patrón es la base para modelar los <strong>estados de una interfaz</strong> (cargando, éxito, error).</li>
+<li>Los <strong>genéricos</strong> (<code>&lt;T&gt;</code>) permiten escribir clases y funciones que trabajan con cualquier tipo, manteniendo la seguridad de tipos. Así funcionan <code>List&lt;T&gt;</code> y las demás colecciones.</li>
+<li>Las <strong>funciones de extensión</strong> añaden funciones nuevas a tipos existentes (<code>fun Int.esPar()</code>), y dentro de ellas <code>this</code> es el objeto receptor. Se leen de forma natural: <code>numero.esPar()</code>.</li>
 </ul>
-<p>Con esto casi cierras la parte de POO. En el próximo capítulo verás tres herramientas que hacen tu código más expresivo y reutilizable: los <strong>genéricos</strong>, las <strong>funciones de extensión</strong> y las <strong>lambdas</strong> (que ya usaste con las colecciones y que ahora estudiarás a fondo).</p>
+<p>En el próximo capítulo, el último de esta parte, volverás a las <strong>lambdas</strong> para verlas a fondo: lambdas con receptor, funciones de alcance y delegación con <code>by</code>. Son la base sobre la que se construye Jetpack Compose.</p>
 
 
 
@@ -2945,7 +3131,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../chapter19/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 19. &lt;code&gt;object&lt;/code&gt;, &lt;code&gt;companion object&lt;/code&gt; y singletons">
+          <a href="../chapter19/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 19. &lt;code&gt;enum&lt;/code&gt; y &lt;code&gt;sealed class&lt;/code&gt;">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2955,20 +3141,20 @@
                 Anterior
               </span>
               <div class="md-ellipsis">
-                19. <code>object</code>, <code>companion object</code> y singletons
+                19. <code>enum</code> y <code>sealed class</code>
               </div>
             </div>
           </a>
         
         
           
-          <a href="../chapter21/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 21. Genéricos, funciones de extensión y lambdas">
+          <a href="../chapter21/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 21. Lambdas a fondo: receptores, funciones de alcance y delegación">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                21. Genéricos, funciones de extensión y lambdas
+                21. Lambdas a fondo: receptores, funciones de alcance y delegación
               </div>
             </div>
             <div class="md-footer__button md-icon">

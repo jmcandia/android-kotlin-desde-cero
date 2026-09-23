@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/content/part04/chapter16/">
       
       
-        <link rel="prev" href="../../part03/exercises/">
+        <link rel="prev" href="../chapter15/">
       
       
         <link rel="next" href="../chapter17/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>16. Clases, propiedades y constructores - Android con Kotlin desde cero</title>
+        <title>16. Herencia, interfaces y clases abstractas - Android con Kotlin desde cero</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#capitulo-16-clases-propiedades-y-constructores" class="md-skip">
+        <a href="#capitulo-16-herencia-interfaces-y-clases-abstractas" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              16. Clases, propiedades y constructores
+              16. Herencia, interfaces y clases abstractas
             
           </span>
         </div>
@@ -892,34 +892,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part03/chapter15/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    15. Formato de cadenas con <code>String.format</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../part03/exercises/" class="md-nav__link">
         
   
@@ -1001,6 +973,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Clases, propiedades y constructores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1020,7 +1020,7 @@
   <span class="md-ellipsis">
     
   
-    16. Clases, propiedades y constructores
+    16. Herencia, interfaces y clases abstractas
   
 
     
@@ -1038,7 +1038,7 @@
   <span class="md-ellipsis">
     
   
-    16. Clases, propiedades y constructores
+    16. Herencia, interfaces y clases abstractas
   
 
     
@@ -1075,10 +1075,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#que-es-la-programacion-orientada-a-objetos" class="md-nav__link">
+  <a href="#herencia" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué es la programación orientada a objetos?
+        Herencia
       
     </span>
   </a>
@@ -1086,10 +1086,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#los-pilares-de-la-poo" class="md-nav__link">
+  <a href="#sobrescribir-metodos-override" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Los pilares de la POO
+        Sobrescribir métodos: override
       
     </span>
   </a>
@@ -1097,10 +1097,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#que-es-una-clase" class="md-nav__link">
+  <a href="#polimorfismo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué es una clase?
+        Polimorfismo
       
     </span>
   </a>
@@ -1108,10 +1108,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#definir-una-clase-y-crear-objetos" class="md-nav__link">
+  <a href="#clases-abstractas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Definir una clase y crear objetos
+        Clases abstractas
       
     </span>
   </a>
@@ -1119,10 +1119,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#propiedades" class="md-nav__link">
+  <a href="#interfaces" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Propiedades
+        Interfaces
       
     </span>
   </a>
@@ -1130,54 +1130,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#el-constructor-primario" class="md-nav__link">
+  <a href="#clase-abstracta-o-interfaz" class="md-nav__link">
     <span class="md-ellipsis">
       
-        El constructor primario
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#valores-por-defecto-en-el-constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Valores por defecto en el constructor
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#el-bloque-init" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        El bloque init
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#funciones-miembro-metodos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Funciones miembro (métodos)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mutabilidad-que-controla-val" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mutabilidad: qué controla val
+        ¿Clase abstracta o interfaz?
       
     </span>
   </a>
@@ -1218,7 +1174,7 @@
   <span class="md-ellipsis">
     
   
-    17. Herencia, interfaces y clases abstractas
+    17. <code>data class</code>, <code>copy</code> y desestructuración
   
 
     
@@ -1246,7 +1202,7 @@
   <span class="md-ellipsis">
     
   
-    18. <code>data class</code>, <code>copy</code> y desestructuración
+    18. <code>object</code>, <code>companion object</code> y singletons
   
 
     
@@ -1274,7 +1230,7 @@
   <span class="md-ellipsis">
     
   
-    19. <code>object</code>, <code>companion object</code> y singletons
+    19. <code>enum</code> y <code>sealed class</code>
   
 
     
@@ -1302,7 +1258,7 @@
   <span class="md-ellipsis">
     
   
-    20. <code>enum</code> y <code>sealed class</code>
+    20. Genéricos y funciones de extensión
   
 
     
@@ -1330,7 +1286,7 @@
   <span class="md-ellipsis">
     
   
-    21. Genéricos, funciones de extensión y lambdas
+    21. Lambdas a fondo: receptores, funciones de alcance y delegación
   
 
     
@@ -1542,7 +1498,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VI · Introducción a Android con Jetpack Compose
+    Parte VI · Android y arquitectura de aplicaciones
   
 
     
@@ -1558,7 +1514,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VI · Introducción a Android con Jetpack Compose
+    Parte VI · Android y arquitectura de aplicaciones
   
 
           </label>
@@ -1606,7 +1562,7 @@
   <span class="md-ellipsis">
     
   
-    26. Ciclo de vida de una <code>Activity</code> y tu primer <code>@Composable</code>
+    26. Ciclo de vida de una <code>Activity</code>
   
 
     
@@ -1634,231 +1590,7 @@
   <span class="md-ellipsis">
     
   
-    27. Fundamentos de Compose: composables, recomposición y <code>Modifier</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter28/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    28. Gestión de recursos: imágenes, íconos y cadenas de texto
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter29/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    29. Material 3: componentes listos para usar
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter30/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    30. Estructura de pantalla: <code>Scaffold</code>, layouts y <code>LazyColumn</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter31/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    31. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/tutorial_my_todo_list_part_1/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tutorial: Mi lista de tareas (parte 1)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter32/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    32. Navegación con Navigation Compose
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter33/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    33. Material 3: tema, color y tipografía
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/tutorial_my_todo_list_part_2/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tutorial: Mi lista de tareas (parte 2)
+    27. Cómo se organiza una app: responsabilidades y flujo de datos
   
 
     
@@ -1904,7 +1636,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VII · Arquitectura MVVM
+    Parte VII · Jetpack Compose y construcción de interfaces
   
 
     
@@ -1920,11 +1652,207 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VII · Arquitectura MVVM
+    Parte VII · Jetpack Compose y construcción de interfaces
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Tu primer composable: <code>@Composable</code>, <code>@Preview</code> y parámetros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. <code>Modifier</code> y layouts: <code>Column</code>, <code>Row</code> y <code>Box</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Gestión de recursos: imágenes, íconos y cadenas de texto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. Material 3: componentes listos para usar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter32/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. Estado en Compose: recomposición, <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter33/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Estructura de pantalla: <code>Scaffold</code> y <code>LazyColumn</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/tutorial_my_todo_list_part_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1940,7 +1868,7 @@
   <span class="md-ellipsis">
     
   
-    34. Qué es MVVM y por qué usarlo
+    34. Formularios y validación en la interfaz
   
 
     
@@ -1968,7 +1896,7 @@
   <span class="md-ellipsis">
     
   
-    35. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
+    35. Navegación con Navigation Compose
   
 
     
@@ -1996,7 +1924,35 @@
   <span class="md-ellipsis">
     
   
-    36. Repositorio y separación de capas
+    36. Material 3: tema, color y tipografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/tutorial_my_todo_list_part_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 2)
   
 
     
@@ -2024,7 +1980,7 @@
   <span class="md-ellipsis">
     
   
-    37. Inyección de dependencias (manual y con Hilt)
+    37. Diseño adaptable con <em>Window Size Classes</em> (opcional)
   
 
     
@@ -2070,7 +2026,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VIII · Consumo de API REST con Retrofit
+    Parte VIII · Estado y arquitectura con MVVM
   
 
     
@@ -2086,7 +2042,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VIII · Consumo de API REST con Retrofit
+    Parte VIII · Estado y arquitectura con MVVM
   
 
           </label>
@@ -2106,7 +2062,7 @@
   <span class="md-ellipsis">
     
   
-    38. HTTP, REST y JSON: cómo se comunican las apps con un servidor
+    38. Qué es MVVM y por qué usarlo
   
 
     
@@ -2134,7 +2090,7 @@
   <span class="md-ellipsis">
     
   
-    39. Retrofit: configuración, interfaces y endpoints
+    39. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
   
 
     
@@ -2162,7 +2118,35 @@
   <span class="md-ellipsis">
     
   
-    40. Serialización JSON y modelos de datos (DTO)
+    40. Efectos y eventos puntuales: <code>LaunchedEffect</code>, Snackbar y navegación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/tutorial_my_todo_list_part_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 3)
   
 
     
@@ -2190,7 +2174,63 @@
   <span class="md-ellipsis">
     
   
-    41. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
+    41. Repositorio y separación de capas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/chapter42/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    42. Inyección de dependencias (manual y con Hilt)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/tutorial_my_todo_list_part_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 4)
   
 
     
@@ -2236,7 +2276,7 @@
   <span class="md-ellipsis">
     
   
-    Parte IX · Proyecto final
+    Parte IX · Datos: API REST y persistencia local
   
 
     
@@ -2252,39 +2292,11 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte IX · Proyecto final
+    Parte IX · Datos: API REST y persistencia local
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter42/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    42. Diseño de la app: pantallas, navegación y arquitectura
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -2300,7 +2312,7 @@
   <span class="md-ellipsis">
     
   
-    43. Setup del proyecto y dependencias
+    43. HTTP, REST y JSON: cómo se comunican las apps con un servidor
   
 
     
@@ -2328,7 +2340,7 @@
   <span class="md-ellipsis">
     
   
-    44. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>
+    44. Serialización JSON y modelos de datos (DTO)
   
 
     
@@ -2356,7 +2368,7 @@
   <span class="md-ellipsis">
     
   
-    45. Pantalla de lista con paginación
+    45. Retrofit: configuración, interfaces y endpoints
   
 
     
@@ -2384,7 +2396,7 @@
   <span class="md-ellipsis">
     
   
-    46. Carga de sprites con Coil
+    46. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
   
 
     
@@ -2412,7 +2424,7 @@
   <span class="md-ellipsis">
     
   
-    47. Pantalla de detalle: stats, tipos y habilidades
+    47. Persistencia local con Room
   
 
     
@@ -2433,98 +2445,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/tutorial_my_todo_list_part_5/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    48. Búsqueda y filtrado
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter49/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    49. Persistencia local con Room: favoritos y caché offline
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter50/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    50. Pulido: estados de UI, Material 3 y accesibilidad
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter51/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    51. Cierre: testing básico, buenas prácticas y próximos pasos
+    Tutorial: Mi lista de tareas (parte 5)
   
 
     
@@ -2570,7 +2498,7 @@
   <span class="md-ellipsis">
     
   
-    Anexos
+    Parte X · Proyecto final: contactos
   
 
     
@@ -2583,6 +2511,368 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte X · Proyecto final: contactos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter48/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    48. Presentación y arquitectura de «Mis Contactos»
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter49/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    49. Configuración del proyecto y permisos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter50/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    50. La capa remota: DTOs, Retrofit y módulo de red
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter51/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    51. La capa local: Room para caché y favoritos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter52/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    52. El repositorio: estrategia <em>offline-first</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter53/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    53. Pantalla de lista: búsqueda, paginación y favoritos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter54/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    54. Pantalla de detalle: eliminación segura con evento como estado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter55/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    55. Pantalla de formulario: validación local y del servidor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter56/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    56. Navegación con rutas tipadas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter57/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    57. Componentes compartidos y tema visual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter58/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    58. Cierre del proyecto y próximos pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2634,7 +2924,7 @@
   <span class="md-ellipsis">
     
   
-    B. Entrada estándar con Scanner de Java
+    B. De Java a Kotlin: equivalencias y <code>Scanner</code>
   
 
     
@@ -2663,6 +2953,34 @@
     
   
     C. Cómo elegir el SDK de un proyecto Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/string-format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Formato de cadenas con <code>String.format</code>
   
 
     
@@ -2721,10 +3039,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#que-es-la-programacion-orientada-a-objetos" class="md-nav__link">
+  <a href="#herencia" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué es la programación orientada a objetos?
+        Herencia
       
     </span>
   </a>
@@ -2732,10 +3050,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#los-pilares-de-la-poo" class="md-nav__link">
+  <a href="#sobrescribir-metodos-override" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Los pilares de la POO
+        Sobrescribir métodos: override
       
     </span>
   </a>
@@ -2743,10 +3061,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#que-es-una-clase" class="md-nav__link">
+  <a href="#polimorfismo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué es una clase?
+        Polimorfismo
       
     </span>
   </a>
@@ -2754,10 +3072,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#definir-una-clase-y-crear-objetos" class="md-nav__link">
+  <a href="#clases-abstractas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Definir una clase y crear objetos
+        Clases abstractas
       
     </span>
   </a>
@@ -2765,10 +3083,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#propiedades" class="md-nav__link">
+  <a href="#interfaces" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Propiedades
+        Interfaces
       
     </span>
   </a>
@@ -2776,54 +3094,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#el-constructor-primario" class="md-nav__link">
+  <a href="#clase-abstracta-o-interfaz" class="md-nav__link">
     <span class="md-ellipsis">
       
-        El constructor primario
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#valores-por-defecto-en-el-constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Valores por defecto en el constructor
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#el-bloque-init" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        El bloque init
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#funciones-miembro-metodos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Funciones miembro (métodos)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mutabilidad-que-controla-val" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mutabilidad: qué controla val
+        ¿Clase abstracta o interfaz?
       
     </span>
   </a>
@@ -2861,173 +3135,201 @@
   
 
 
-<h1 id="capitulo-16-clases-propiedades-y-constructores">Capítulo 16: Clases, propiedades y constructores<a class="headerlink" href="#capitulo-16-clases-propiedades-y-constructores" title="Permanent link">&para;</a></h1>
+<h1 id="capitulo-16-herencia-interfaces-y-clases-abstractas">Capítulo 16: Herencia, interfaces y clases abstractas<a class="headerlink" href="#capitulo-16-herencia-interfaces-y-clases-abstractas" title="Permanent link">&para;</a></h1>
 <h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
-<p>Hasta ahora, cuando querías representar algo con varios datos —una persona con su nombre, su edad y su correo—, tenías que usar variables sueltas:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Ana&quot;</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">edad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">correo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ana@ejemplo.com&quot;</span>
+<p>En el capítulo anterior aprendiste a crear clases. Pero, en un programa real, las clases rara vez viven aisladas: suelen estar <strong>relacionadas</strong> entre sí. Un <code>Estudiante</code> es una <code>Persona</code> con algunas cosas más; un <code>Círculo</code> y un <code>Cuadrado</code> son dos tipos de <code>Figura</code>.</p>
+<p>Este capítulo desarrolla dos de los cuatro pilares de la POO que presentamos antes: la <strong>herencia</strong>, que permite que unas clases reutilicen y extiendan a otras, y el <strong>polimorfismo</strong>, que permite tratar de forma uniforme a objetos de distintos tipos relacionados. Para ello conocerás también dos herramientas clave: las <strong>clases abstractas</strong> y las <strong>interfaces</strong>.</p>
+<h2 id="herencia">Herencia<a class="headerlink" href="#herencia" title="Permanent link">&para;</a></h2>
+<p>Imagina que ya tienes tu clase <code>Persona</code> y ahora necesitas modelar un <code>Estudiante</code>. Un estudiante tiene nombre y edad (como cualquier persona) y, además, una universidad. Podrías copiar todo el código de <code>Persona</code> en <code>Estudiante</code>, pero eso repetiría lógica (recuerda el principio DRY) y sería difícil de mantener.</p>
+<p>La <strong>herencia</strong> resuelve esto: permite que una clase (la <strong>hija</strong> o <strong>subclase</strong>) reutilice las propiedades y los métodos de otra (la <strong>madre</strong>, <strong>base</strong> o <strong>superclase</strong>) y le añada lo suyo.</p>
+<p>En Kotlin hay un detalle importante: por defecto, las clases están <strong>cerradas</strong> a la herencia. Para permitir que otras hereden de ella, la clase base debe marcarse con la palabra clave <code>open</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">open</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Persona</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">edad</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">saludar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hola, soy </span><span class="si">$</span><span class="n">nombre</span><span class="s">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
 </code></pre></div>
-<p>Funciona para una persona, pero ¿y si tienes muchas? ¿Y cómo agrupas, junto a esos datos, las acciones que se pueden hacer con ellos? Aquí empieza la <strong>programación orientada a objetos (POO)</strong>.</p>
-<p>La herramienta central de la POO es la <strong>clase</strong>. En este capítulo aprenderás a crear tus propias clases, a darles datos mediante <strong>propiedades</strong>, a construir objetos con <strong>constructores</strong> y a añadirles comportamiento con funciones. Es un paso fundamental: a partir de aquí modelarás las cosas de tu programa como objetos. Pero antes, veamos brevemente en qué consiste este estilo de programación.</p>
+<p>Ahora <code>Estudiante</code> puede heredar de <code>Persona</code> usando dos puntos <code>:</code>, pasando al constructor de la madre los datos que esta necesita:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Estudiante</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">edad</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">universidad</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Persona</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="n">edad</span><span class="p">)</span>
+</code></pre></div>
+<p>Fíjate en que <code>nombre</code> y <code>edad</code>, en el constructor de <code>Estudiante</code>, no llevan <code>val</code>: no son propiedades nuevas, sino parámetros que se pasan al constructor de <code>Persona</code>, que es quien las declara como propiedades.</p>
+<p>Un objeto <code>Estudiante</code> tiene acceso a todo lo de <code>Persona</code>, más lo suyo propio:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">estudiante</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Estudiante</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Universidad Central&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">estudiante</span><span class="p">.</span><span class="na">saludar</span><span class="p">()</span><span class="w">            </span><span class="c1">// Hola, soy Ana  (heredado de Persona)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">println</span><span class="p">(</span><span class="n">estudiante</span><span class="p">.</span><span class="na">universidad</span><span class="p">)</span><span class="w"> </span><span class="c1">// Universidad Central  (propio de Estudiante)</span>
+</code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Si vienes de Java, ya conoces la POO. En este capítulo verás cómo Kotlin expresa las mismas ideas de forma mucho más concisa.</p>
+<p>En Java, las clases se pueden heredar por defecto. Kotlin invierte esa decisión: una clase es <code>final</code> (cerrada) salvo que la marques como <code>open</code>. Es intencional: favorece un diseño más seguro y predecible, en la línea de los principios que vimos en el anexo.</p>
 </div>
-<h2 id="que-es-la-programacion-orientada-a-objetos">¿Qué es la programación orientada a objetos?<a class="headerlink" href="#que-es-la-programacion-orientada-a-objetos" title="Permanent link">&para;</a></h2>
-<p>La <strong>programación orientada a objetos</strong> (POO) es un <em>paradigma</em>: una forma de organizar y estructurar el código. En lugar de entender un programa como una simple lista de instrucciones y funciones sueltas, la POO lo organiza en torno a <strong>objetos</strong>.</p>
-<p>Un objeto representa una "cosa" del problema que estás resolviendo —una persona, un producto, un pedido— y reúne en un solo lugar dos aspectos: sus <strong>datos</strong> (qué información contiene) y su <strong>comportamiento</strong> (qué puede hacer).</p>
-<p>Antes de la POO predominaba la <strong>programación estructurada</strong> (o procedural), en la que los datos y las funciones que los manipulaban vivían por separado. A medida que los programas crecían, esa separación se volvía difícil de mantener. La POO surgió para ordenar ese crecimiento, agrupando cada conjunto de datos con las operaciones que le corresponden. Sus ideas nacieron con lenguajes como <strong>Simula</strong> (en los años 60) y se popularizaron con <strong>Smalltalk</strong> durante las décadas de 1970 y 1980; hoy están presentes en la mayoría de los lenguajes modernos, incluidos Java y Kotlin.</p>
-<h2 id="los-pilares-de-la-poo">Los pilares de la POO<a class="headerlink" href="#los-pilares-de-la-poo" title="Permanent link">&para;</a></h2>
-<p>La POO se apoya en cuatro conceptos fundamentales, conocidos como sus <strong>cuatro pilares</strong>. Los presentamos aquí en su idea general; los iremos desarrollando en profundidad a lo largo de esta parte del curso.</p>
+<h2 id="sobrescribir-metodos-override">Sobrescribir métodos: <code>override</code><a class="headerlink" href="#sobrescribir-metodos-override" title="Permanent link">&para;</a></h2>
+<p>A veces, la clase hija necesita que un método heredado se comporte de forma <strong>distinta</strong>. Por ejemplo, que un <code>Estudiante</code> salude mencionando su universidad. Para eso se <strong>sobrescribe</strong> el método.</p>
+<p>Igual que con la herencia de clases, hay que dar permiso explícito: el método de la clase base debe marcarse <code>open</code>, y en la hija se usa la palabra clave <code>override</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">open</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Persona</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">edad</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">open</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">saludar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hola, soy </span><span class="si">$</span><span class="n">nombre</span><span class="s">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Estudiante</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">edad</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">universidad</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Persona</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="n">edad</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">saludar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hola, soy </span><span class="si">$</span><span class="n">nombre</span><span class="s"> y estudio en </span><span class="si">$</span><span class="n">universidad</span><span class="s">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">estudiante</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Estudiante</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Universidad Central&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">estudiante</span><span class="p">.</span><span class="na">saludar</span><span class="p">()</span><span class="w"> </span><span class="c1">// Hola, soy Ana y estudio en Universidad Central</span>
+</code></pre></div>
+<p>Si además quieres reutilizar el comportamiento de la madre dentro del método sobrescrito, puedes invocarlo con <code>super</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">saludar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">super</span><span class="p">.</span><span class="na">saludar</span><span class="p">()</span><span class="w"> </span><span class="c1">// ejecuta el saludar() de Persona</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;y estudio en </span><span class="si">$</span><span class="n">universidad</span><span class="s">&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="polimorfismo">Polimorfismo<a class="headerlink" href="#polimorfismo" title="Permanent link">&para;</a></h2>
+<p>Aquí aparece el segundo pilar de este capítulo. Como un <code>Estudiante</code> <strong>es</strong> una <code>Persona</code>, puedes tratarlo como tal: una variable de tipo <code>Persona</code> puede contener un <code>Estudiante</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">persona</span><span class="p">:</span><span class="w"> </span><span class="n">Persona</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Estudiante</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Universidad Central&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">persona</span><span class="p">.</span><span class="na">saludar</span><span class="p">()</span><span class="w"> </span><span class="c1">// Hola, soy Ana y estudio en Universidad Central</span>
+</code></pre></div>
+<p>Fíjate en algo importante: aunque la variable es de tipo <code>Persona</code>, al llamar a <code>saludar()</code> se ejecuta la versión de <code>Estudiante</code>, la del objeto <strong>real</strong>. A esto se le llama <strong>polimorfismo</strong>: la misma llamada (<code>saludar()</code>) produce comportamientos distintos según el tipo real del objeto.</p>
+<p>El polimorfismo brilla cuando trabajas con colecciones de objetos relacionados. Puedes guardar personas y estudiantes en una misma lista de <code>Persona</code> y tratarlos por igual; cada uno responderá a su manera:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">personas</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Persona</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="n">Persona</span><span class="p">(</span><span class="s">&quot;Diego&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">40</span><span class="p">),</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="n">Estudiante</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Universidad Central&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">personas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="na">saludar</span><span class="p">()</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>Salida:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Hola, soy Diego
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Hola, soy Ana y estudio en Universidad Central
+</code></pre></div>
+<p>Tu código puede trabajar con <code>Persona</code> en general, sin preocuparse por el tipo concreto, y aun así cada objeto se comporta correctamente.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Para que el polimorfismo funcione bien, cada subclase debe poder <strong>sustituir</strong> a su clase base sin romper las expectativas. Esa es justamente la idea del principio de sustitución de Liskov (LSP) que vimos en el anexo de principios de diseño.</p>
+</div>
+<h2 id="clases-abstractas">Clases abstractas<a class="headerlink" href="#clases-abstractas" title="Permanent link">&para;</a></h2>
+<p>A veces, una clase base representa un concepto <strong>general</strong> que no tiene sentido instanciar por sí solo. Por ejemplo, "figura" es una idea abstracta: en la práctica tienes círculos o cuadrados, pero nunca una "figura" a secas. Además, quieres <strong>obligar</strong> a cada figura a saber calcular su área, aunque cada una lo haga distinto.</p>
+<p>Para eso están las <strong>clases abstractas</strong>. Una clase abstracta:</p>
 <ul>
-<li><strong>Abstracción.</strong> Representar en el código solo los aspectos <strong>esenciales</strong> de algo, ocultando los detalles que no importan. Por ejemplo, para modelar una persona quizás baste con su nombre y su edad, sin incluir cada detalle de su vida. Una clase es, en el fondo, una abstracción: tú decides qué datos y qué comportamiento son relevantes.</li>
-<li><strong>Encapsulación.</strong> <strong>Agrupar</strong> los datos y el comportamiento en una misma unidad (el objeto) y <strong>controlar el acceso</strong> a su interior, exponiendo solo lo necesario. Así, cada objeto protege sus propios datos y decide cómo pueden usarse.</li>
-<li><strong>Herencia.</strong> Permitir que una clase <strong>reutilice y extienda</strong> las características de otra. Por ejemplo, una clase <code>Estudiante</code> podría heredar de <code>Persona</code> todo lo común y añadir lo suyo. La veremos en el próximo capítulo.</li>
-<li><strong>Polimorfismo.</strong> Permitir que objetos de distintas clases respondan a una misma operación <strong>cada uno a su manera</strong>. También lo desarrollaremos en el próximo capítulo.</li>
+<li>se declara con <code>abstract</code> y <strong>no se puede instanciar</strong> directamente;</li>
+<li>puede tener <strong>miembros abstractos</strong> (métodos sin cuerpo, que las subclases están obligadas a implementar) y también miembros normales (con cuerpo).</li>
 </ul>
-<p>En este capítulo nos concentramos en la base sobre la que se apoyan todos estos pilares: las <strong>clases</strong> y los <strong>objetos</strong>.</p>
-<div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p>Escribir buen código orientado a objetos no consiste solo en usar clases, sino en organizarlas bien. Para eso existen principios de diseño como <strong>SOLID</strong>, que revisamos en el <a href="../../appendix/design-principle/">anexo de principios de diseño</a>. Te será útil volver a él a medida que avances en esta parte del curso.</p>
-</div>
-<h2 id="que-es-una-clase">¿Qué es una clase?<a class="headerlink" href="#que-es-una-clase" title="Permanent link">&para;</a></h2>
-<p>Una <strong>clase</strong> es una <strong>plantilla</strong> (o molde) para crear objetos. Describe qué <strong>datos</strong> tendrá cada objeto y qué <strong>puede hacer</strong>. Un <strong>objeto</strong> es una instancia concreta creada a partir de esa plantilla.</p>
-<p>Una analogía habitual: la clase es como el <strong>plano</strong> de una casa, y los objetos son las <strong>casas</strong> construidas a partir de ese plano. Con un solo plano puedes construir muchas casas, cada una con sus propias características (una pintada de azul, otra de verde), pero todas comparten la misma estructura.</p>
-<p>Para representar una clase de forma visual se usa a menudo un <strong>diagrama UML</strong> (<em>Unified Modeling Language</em>), una notación estándar en el diseño de software. Una clase se dibuja como un rectángulo con su nombre en la parte superior y sus <strong>propiedades</strong> debajo; más adelante le añadiremos también sus <strong>métodos</strong>. Por ejemplo, una clase <code>Persona</code> con un nombre y una edad se representaría así:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Figura</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">area</span><span class="p">():</span><span class="w"> </span><span class="kt">Double</span><span class="w"> </span><span class="c1">// sin cuerpo: cada figura debe implementarlo</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">describir</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">           </span><span class="c1">// con cuerpo: común a todas</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Soy una figura con área </span><span class="si">${</span><span class="n">area</span><span class="p">()</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>Las subclases implementan los miembros abstractos con <code>override</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Circulo</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">radio</span><span class="p">:</span><span class="w"> </span><span class="kt">Double</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Figura</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">area</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.1416</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">radio</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">radio</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="p">}</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Cuadrado</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">lado</span><span class="p">:</span><span class="w"> </span><span class="kt">Double</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Figura</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">area</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lado</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">lado</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>En notación UML, esta jerarquía se representa así (la flecha con punta hueca indica herencia, y <code>&lt;&lt;abstract&gt;&gt;</code> marca la clase abstracta):</p>
 <pre class="mermaid"><code>classDiagram
-    class Persona {
-        +nombre: String
-        +edad: Int
-    }</code></pre>
-<p>El signo <code>+</code> indica que ese elemento es accesible desde fuera de la clase. A lo largo del capítulo iremos construyendo esta clase en código.</p>
-<h2 id="definir-una-clase-y-crear-objetos">Definir una clase y crear objetos<a class="headerlink" href="#definir-una-clase-y-crear-objetos" title="Permanent link">&para;</a></h2>
-<p>Para definir una clase, usas la palabra clave <code>class</code> seguida de su nombre. Por convención, los nombres de clase empiezan con <strong>mayúscula</strong>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Persona</span>
+    class Figura {
+        &lt;&lt;abstract&gt;&gt;
+        +area()* Double
+        +describir()
+    }
+    class Circulo {
+        +radio: Double
+        +area() Double
+    }
+    class Cuadrado {
+        +lado: Double
+        +area() Double
+    }
+    Figura &lt;|-- Circulo
+    Figura &lt;|-- Cuadrado</code></pre>
+<p>Ahora puedes tratar a todas las figuras de manera uniforme:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">figuras</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Figura</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listOf</span><span class="p">(</span><span class="n">Circulo</span><span class="p">(</span><span class="m">2.0</span><span class="p">),</span><span class="w"> </span><span class="n">Cuadrado</span><span class="p">(</span><span class="m">3.0</span><span class="p">))</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">figura</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">figuras</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="n">figura</span><span class="p">.</span><span class="na">describir</span><span class="p">()</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="p">}</span>
 </code></pre></div>
-<p>Esta clase, por ahora, no hace nada, pero ya podemos crear <strong>objetos</strong> (instancias) a partir de ella. Para eso, escribes el nombre de la clase seguido de paréntesis:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">persona</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Persona</span><span class="p">()</span>
+<p>Intentar crear <code>Figura()</code> directamente daría un error, porque es abstracta. Y fíjate en que <code>describir()</code> puede usar <code>area()</code> aunque <code>Figura</code> no sepa cómo se calcula: confía en que cada subclase lo implementará. Aquí ves la abstracción y el polimorfismo trabajando juntos.</p>
+<h2 id="interfaces">Interfaces<a class="headerlink" href="#interfaces" title="Permanent link">&para;</a></h2>
+<p>Las clases abstractas sirven cuando hay una relación clara de "es un tipo de" y quieres compartir algo de implementación. Pero a veces solo quieres definir un <strong>contrato</strong>: un conjunto de capacidades que distintas clases pueden tener, aunque no compartan una clase base común.</p>
+<p>Para eso están las <strong>interfaces</strong>. Una interfaz declara <strong>qué</strong> métodos debe tener una clase, sin decir necesariamente <strong>cómo</strong>. Se define con <code>interface</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nc">Nadador</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">nadar</span><span class="p">()</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">}</span>
 </code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p>Si vienes de Java, fíjate en un detalle: en Kotlin <strong>no</strong> se usa la palabra <code>new</code> para crear objetos. Basta con <code>Persona()</code>.</p>
-</div>
-<p>Ahora <code>persona</code> es un objeto de tipo <code>Persona</code>. El siguiente paso es darle datos.</p>
-<h2 id="propiedades">Propiedades<a class="headerlink" href="#propiedades" title="Permanent link">&para;</a></h2>
-<p>Los datos que guarda un objeto se llaman <strong>propiedades</strong>. Se declaran dentro del cuerpo de la clase, como variables (<code>val</code> o <code>var</code>):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Persona</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sin nombre&quot;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">edad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">}</span>
+<p>Una clase la <strong>implementa</strong> con la misma sintaxis de los dos puntos, y debe proporcionar el cuerpo de sus métodos con <code>override</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Pez</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Nadador</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">nadar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;</span><span class="si">$</span><span class="n">nombre</span><span class="s"> nada en el agua&quot;</span><span class="p">)</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="p">}</span>
 </code></pre></div>
-<p>Accedes a las propiedades de un objeto con un punto <code>.</code> seguido del nombre de la propiedad:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">persona</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Persona</span><span class="p">()</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">persona</span><span class="p">.</span><span class="na">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Ana&quot;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">persona</span><span class="p">.</span><span class="na">edad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">println</span><span class="p">(</span><span class="n">persona</span><span class="p">.</span><span class="na">nombre</span><span class="p">)</span><span class="w"> </span><span class="c1">// Ana</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">println</span><span class="p">(</span><span class="n">persona</span><span class="p">.</span><span class="na">edad</span><span class="p">)</span><span class="w">   </span><span class="c1">// 30</span>
+<p>La gran diferencia con la herencia de clases es que una clase puede <strong>implementar varias interfaces</strong> a la vez (mientras que solo puede heredar de una clase). Esto permite combinar capacidades:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nc">Volador</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">volar</span><span class="p">()</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="p">}</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Pato</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Nadador</span><span class="p">,</span><span class="w"> </span><span class="n">Volador</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">nadar</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;</span><span class="si">$</span><span class="n">nombre</span><span class="s"> nada&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">volar</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;</span><span class="si">$</span><span class="n">nombre</span><span class="s"> vuela&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="p">}</span>
 </code></pre></div>
-<p>Igual que con las variables, una propiedad <code>val</code> es de solo lectura (no se puede reasignar) y una <code>var</code> se puede modificar.</p>
-<div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p>En Java, sueles declarar los campos como privados y escribir métodos <em>getter</em> y <em>setter</em> para acceder a ellos. En Kotlin, esos accesos se generan automáticamente: cuando escribes <code>persona.nombre</code>, por dentro Kotlin usa el getter o el setter correspondiente, sin que tengas que escribirlos.</p>
-</div>
-<h2 id="el-constructor-primario">El constructor primario<a class="headerlink" href="#el-constructor-primario" title="Permanent link">&para;</a></h2>
-<p>El ejemplo anterior tiene un inconveniente: creamos una <code>Persona</code> sin datos y se los asignamos después, uno por uno. Sería mejor exigir que toda persona tenga un nombre y una edad <strong>desde el momento en que se crea</strong>. Para eso están los <strong>constructores</strong>.</p>
-<p>Un <strong>constructor</strong> es lo que se ejecuta al crear un objeto y define qué datos necesita. En Kotlin, la forma más habitual es el <strong>constructor primario</strong>, que se escribe en la propia cabecera de la clase, entre paréntesis, junto al nombre:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Persona</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">edad</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span>
-</code></pre></div>
-<p>Con esto, cada <code>Persona</code> requiere un nombre y una edad al crearse, y esos valores quedan guardados como propiedades:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">persona</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Persona</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">println</span><span class="p">(</span><span class="n">persona</span><span class="p">.</span><span class="na">nombre</span><span class="p">)</span><span class="w"> </span><span class="c1">// Ana</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">println</span><span class="p">(</span><span class="n">persona</span><span class="p">.</span><span class="na">edad</span><span class="p">)</span><span class="w">   </span><span class="c1">// 30</span>
-</code></pre></div>
-<p>Fíjate en el poder de esa única línea: al escribir <code>val nombre: String</code> dentro del constructor, Kotlin <strong>declara la propiedad y la inicializa</strong> a la vez. Si usas <code>var</code> en lugar de <code>val</code>, la propiedad podrá modificarse después.</p>
-<div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p>Esta concisión es una de las señas de identidad de Kotlin. En Java, la misma clase requeriría declarar los campos, escribir un constructor que reciba los parámetros y asignarlos uno a uno. En Kotlin, todo eso cabe en <code>class Persona(val nombre: String, val edad: Int)</code>.</p>
-</div>
-<h2 id="valores-por-defecto-en-el-constructor">Valores por defecto en el constructor<a class="headerlink" href="#valores-por-defecto-en-el-constructor" title="Permanent link">&para;</a></h2>
-<p>Al igual que en las funciones, los parámetros del constructor pueden tener <strong>valores por defecto</strong>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Persona</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">edad</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
-</code></pre></div>
-<p>Así, puedes crear una persona indicando solo el nombre; la edad tomará el valor por defecto:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">persona1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Persona</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)</span><span class="w"> </span><span class="c1">// nombre y edad</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">persona2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Persona</span><span class="p">(</span><span class="s">&quot;Diego&quot;</span><span class="p">)</span><span class="w">   </span><span class="c1">// solo nombre; edad = 0</span>
-</code></pre></div>
-<p>También puedes usar <strong>argumentos con nombre</strong> al crear el objeto, tal como viste con las funciones:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">persona</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Persona</span><span class="p">(</span><span class="n">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">edad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30</span><span class="p">)</span>
-</code></pre></div>
-<h2 id="el-bloque-init">El bloque <code>init</code><a class="headerlink" href="#el-bloque-init" title="Permanent link">&para;</a></h2>
-<p>A veces necesitas ejecutar código <strong>en el momento de crear el objeto</strong>: por ejemplo, validar los datos o mostrar un mensaje. Para eso está el bloque <code>init</code>, que se ejecuta cada vez que se construye un objeto:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Persona</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">edad</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="k">init</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">edad</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;La edad no puede ser negativa&quot;</span><span class="p">)</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">        </span><span class="p">}</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Se creó una persona llamada </span><span class="si">$</span><span class="n">nombre</span><span class="s">&quot;</span><span class="p">)</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="p">}</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">persona</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Persona</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)</span><span class="w"> </span><span class="c1">// imprime: Se creó una persona llamada Ana</span>
-</code></pre></div>
-<p>Aquí el <code>init</code> valida que la edad no sea negativa (lanzando una excepción si lo es, como viste en el capítulo de excepciones) y muestra un mensaje. Todo eso ocurre justo al crear el objeto.</p>
-<h2 id="funciones-miembro-metodos">Funciones miembro (métodos)<a class="headerlink" href="#funciones-miembro-metodos" title="Permanent link">&para;</a></h2>
-<p>Una clase no solo guarda datos: también puede tener <strong>comportamiento</strong>, en forma de funciones definidas dentro de ella. A estas funciones se les llama <strong>funciones miembro</strong> o <strong>métodos</strong>, y pueden usar directamente las propiedades del objeto:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Persona</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">edad</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">saludar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hola, soy </span><span class="si">$</span><span class="n">nombre</span><span class="s"> y tengo </span><span class="si">$</span><span class="n">edad</span><span class="s"> años&quot;</span><span class="p">)</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">esMayorDeEdad</span><span class="p">():</span><span class="w"> </span><span class="kt">Boolean</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">edad</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">18</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="p">}</span>
-</code></pre></div>
-<p>Los invocas sobre un objeto, con la notación de punto:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">persona</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Persona</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">persona</span><span class="p">.</span><span class="na">saludar</span><span class="p">()</span><span class="w">                </span><span class="c1">// Hola, soy Ana y tengo 30 años</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">println</span><span class="p">(</span><span class="n">persona</span><span class="p">.</span><span class="na">esMayorDeEdad</span><span class="p">())</span><span class="w"> </span><span class="c1">// true</span>
-</code></pre></div>
-<p>Fíjate en que <code>saludar</code> y <code>esMayorDeEdad</code> usan <code>nombre</code> y <code>edad</code> sin recibirlos como parámetros: al ser métodos de la clase, tienen acceso directo a las propiedades del objeto. Así se cumple la idea central de la POO: <strong>agrupar los datos y el comportamiento que opera sobre ellos</strong> en una misma unidad.</p>
-<p>Con sus datos y su comportamiento, la clase <code>Persona</code> completa se representa así en UML (ahora con sus métodos en la parte inferior):</p>
+<p>Un <code>Pato</code> es, a la vez, <code>Nadador</code> y <code>Volador</code>. En UML, esta relación (llamada <em>realización</em>) se dibuja con una flecha de línea discontinua:</p>
 <pre class="mermaid"><code>classDiagram
-    class Persona {
+    class Nadador {
+        &lt;&lt;interface&gt;&gt;
+        +nadar()
+    }
+    class Volador {
+        &lt;&lt;interface&gt;&gt;
+        +volar()
+    }
+    class Pato {
         +nombre: String
-        +edad: Int
-        +saludar()
-        +esMayorDeEdad() Boolean
-    }</code></pre>
-<h2 id="mutabilidad-que-controla-val">Mutabilidad: qué controla <code>val</code><a class="headerlink" href="#mutabilidad-que-controla-val" title="Permanent link">&para;</a></h2>
-<p>Una pregunta natural al declarar propiedades y objetos con <code>val</code> es: ¿eso los vuelve inmutables? Como viste al trabajar con colecciones, <code>val</code> <strong>impide reasignar</strong>, pero no necesariamente <strong>congela el contenido</strong>. Con las clases, esto se manifiesta en dos niveles.</p>
-<p><strong>A nivel de propiedad.</strong> Una propiedad <code>val</code> no se puede reasignar; una <code>var</code>, sí. Fíjate en que aquí declaramos <code>edad</code> como <code>var</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Persona</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">edad</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">persona</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Persona</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="n">persona</span><span class="p">.</span><span class="na">edad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">31</span><span class="w">        </span><span class="c1">// correcto: edad es var</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="n">persona</span><span class="p">.</span><span class="na">nombre</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Elena&quot;</span><span class="w"> </span><span class="c1">// error: nombre es val, no se puede reasignar</span>
+        +nadar()
+        +volar()
+    }
+    Nadador &lt;|.. Pato
+    Volador &lt;|.. Pato</code></pre>
+<p>Las interfaces también pueden incluir métodos con una <strong>implementación por defecto</strong>, que las clases pueden usar tal cual o sobrescribir:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nc">Nadador</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">nadar</span><span class="p">()</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">descansar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// implementación por defecto</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Descansando en la orilla&quot;</span><span class="p">)</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="p">}</span>
 </code></pre></div>
-<p><strong>A nivel de objeto.</strong> Cuando guardas un objeto en una variable <code>val</code>, no puedes <strong>reasignar</strong> esa variable por otro objeto, pero sí puedes modificar el estado interno del objeto (sus propiedades <code>var</code>):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">persona</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Persona</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">persona</span><span class="p">.</span><span class="na">edad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">31</span><span class="w">              </span><span class="c1">// correcto: cambiamos el interior del objeto</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="n">persona</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Persona</span><span class="p">(</span><span class="s">&quot;Diego&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">25</span><span class="p">)</span><span class="w"> </span><span class="c1">// error: no podemos reasignar la variable val</span>
-</code></pre></div>
-<p>En otras palabras: <code>val</code> controla si puedes <strong>cambiar la variable por otra</strong>, no si puedes <strong>modificar el objeto por dentro</strong>. Para que un objeto sea realmente <strong>inmutable</strong>, todas sus propiedades deben ser <code>val</code> (y, a su vez, contener valores inmutables).</p>
-<p>Es el mismo principio que viste con las colecciones: un <code>val</code> con una <code>MutableList</code> no se puede reasignar, pero su contenido sí puede cambiar.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Como viste en el anexo, es preferible tener varias interfaces pequeñas y específicas (<code>Nadador</code>, <code>Volador</code>) que una interfaz gigante: ese es el principio de segregación de interfaces (ISP).</p>
+</div>
+<h2 id="clase-abstracta-o-interfaz">¿Clase abstracta o interfaz?<a class="headerlink" href="#clase-abstracta-o-interfaz" title="Permanent link">&para;</a></h2>
+<p>Ambas permiten definir tipos que otras clases concretan, así que ¿cuándo usar cada una?</p>
+<ul>
+<li>Usa una <strong>clase abstracta</strong> cuando varias clases comparten una <strong>base común</strong> con algo de implementación y estado (propiedades), y tiene sentido una relación estricta de "es un tipo de". Una clase solo puede heredar de <strong>una</strong> clase (abstracta o no).</li>
+<li>Usa una <strong>interfaz</strong> cuando quieres definir <strong>capacidades</strong> que muchas clases (incluso sin relación entre sí) pueden tener. Una clase puede implementar <strong>varias</strong> interfaces.</li>
+</ul>
+<p>Una regla práctica: si piensas en términos de "<strong>es un</strong>" (un círculo <em>es una</em> figura), suele encajar una clase; si piensas en términos de "<strong>es capaz de</strong>" (un pato <em>es capaz de</em> nadar), suele encajar una interfaz.</p>
 <h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
-<p>En este capítulo diste tus primeros pasos en la programación orientada a objetos:</p>
+<p>En este capítulo desarrollaste los pilares de la herencia y el polimorfismo:</p>
 <ul>
-<li>La <strong>POO</strong> es un paradigma que organiza el código en torno a <strong>objetos</strong>, que combinan datos y comportamiento. Se apoya en cuatro pilares: <strong>abstracción</strong>, <strong>encapsulación</strong>, <strong>herencia</strong> y <strong>polimorfismo</strong>.</li>
-<li>Una <strong>clase</strong> es una plantilla para crear objetos; un <strong>objeto</strong> es una instancia concreta de una clase. Un <strong>diagrama UML</strong> representa una clase con su nombre, sus propiedades y sus métodos.</li>
-<li>En Kotlin, los objetos se crean con <code>NombreClase(...)</code>, <strong>sin</strong> la palabra <code>new</code>.</li>
-<li>Las <strong>propiedades</strong> guardan los datos del objeto y se acceden con la notación de punto (<code>objeto.propiedad</code>).</li>
-<li>El <strong>constructor primario</strong>, en la cabecera de la clase, declara e inicializa las propiedades de forma muy concisa: <code>class Persona(val nombre: String, val edad: Int)</code>.</li>
-<li>Los parámetros del constructor admiten <strong>valores por defecto</strong>, y el bloque <strong><code>init</code></strong> ejecuta código al crear el objeto (por ejemplo, para validar).</li>
-<li>Las <strong>funciones miembro</strong> (métodos) definen el comportamiento y tienen acceso directo a las propiedades.</li>
-<li>Una propiedad o variable <code>val</code> no se puede <strong>reasignar</strong>, pero el objeto al que apunta sí puede cambiar por dentro (sus propiedades <code>var</code>). Para que un objeto sea inmutable, todas sus propiedades deben ser <code>val</code>.</li>
+<li>La <strong>herencia</strong> permite que una subclase reutilice y extienda a una superclase. En Kotlin, la clase base debe marcarse <code>open</code> (por defecto, las clases están cerradas).</li>
+<li>Con <code>override</code> (sobre un miembro <code>open</code>), una subclase <strong>sobrescribe</strong> el comportamiento heredado; <code>super</code> invoca la versión de la madre.</li>
+<li>El <strong>polimorfismo</strong> permite tratar objetos de distintas subclases a través de su tipo base; cada uno responde según su tipo real.</li>
+<li>Una <strong>clase abstracta</strong> (<code>abstract</code>) no se instancia y puede tener miembros abstractos (que las subclases deben implementar) y concretos.</li>
+<li>Una <strong>interfaz</strong> define un contrato de capacidades; una clase puede implementar <strong>varias</strong> interfaces, y estas pueden incluir métodos por defecto.</li>
+<li>Usa una clase abstracta para "es un" con base compartida; una interfaz para "es capaz de".</li>
 </ul>
-<p>En el próximo capítulo verás cómo las clases pueden <strong>relacionarse entre sí</strong> mediante la herencia, las interfaces y las clases abstractas.</p>
+<p>En el próximo capítulo verás las <strong><code>data class</code></strong>, una forma concisa de crear clases pensadas para guardar datos, que usaremos mucho en la aplicación.</p>
 
 
 
@@ -3063,7 +3365,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../../part03/exercises/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Ejercicios de repaso">
+          <a href="../chapter15/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 15. Clases, propiedades y constructores">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -3073,20 +3375,20 @@
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Ejercicios de repaso
+                15. Clases, propiedades y constructores
               </div>
             </div>
           </a>
         
         
           
-          <a href="../chapter17/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 17. Herencia, interfaces y clases abstractas">
+          <a href="../chapter17/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 17. &lt;code&gt;data class&lt;/code&gt;, &lt;code&gt;copy&lt;/code&gt; y desestructuración">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                17. Herencia, interfaces y clases abstractas
+                17. <code>data class</code>, <code>copy</code> y desestructuración
               </div>
             </div>
             <div class="md-footer__button md-icon">

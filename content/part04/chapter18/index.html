@@ -27,7 +27,7 @@
     
     
       
-        <title>18. data class, copy y desestructuración - Android con Kotlin desde cero</title>
+        <title>18. object, companion object y singletons - Android con Kotlin desde cero</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#capitulo-18-data-class-copy-y-desestructuracion" class="md-skip">
+        <a href="#capitulo-18-object-companion-object-y-singletons" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              18. <code>data class</code>, <code>copy</code> y desestructuración
+              18. <code>object</code>, <code>companion object</code> y singletons
             
           </span>
         </div>
@@ -892,34 +892,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part03/chapter15/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    15. Formato de cadenas con <code>String.format</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../part03/exercises/" class="md-nav__link">
         
   
@@ -1004,6 +976,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Clases, propiedades y constructores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../chapter16/" class="md-nav__link">
         
   
@@ -1011,7 +1011,7 @@
   <span class="md-ellipsis">
     
   
-    16. Clases, propiedades y constructores
+    16. Herencia, interfaces y clases abstractas
   
 
     
@@ -1039,7 +1039,7 @@
   <span class="md-ellipsis">
     
   
-    17. Herencia, interfaces y clases abstractas
+    17. <code>data class</code>, <code>copy</code> y desestructuración
   
 
     
@@ -1076,7 +1076,7 @@
   <span class="md-ellipsis">
     
   
-    18. <code>data class</code>, <code>copy</code> y desestructuración
+    18. <code>object</code>, <code>companion object</code> y singletons
   
 
     
@@ -1094,7 +1094,7 @@
   <span class="md-ellipsis">
     
   
-    18. <code>data class</code>, <code>copy</code> y desestructuración
+    18. <code>object</code>, <code>companion object</code> y singletons
   
 
     
@@ -1131,10 +1131,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#el-problema-clases-que-solo-guardan-datos" class="md-nav__link">
+  <a href="#el-patron-singleton" class="md-nav__link">
     <span class="md-ellipsis">
       
-        El problema: clases que solo guardan datos
+        El patrón singleton
       
     </span>
   </a>
@@ -1142,71 +1142,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#la-solucion-data-class" class="md-nav__link">
+  <a href="#object-singletons-en-kotlin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        La solución: data class
+        object: singletons en Kotlin
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="La solución: data class">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tostring-legible" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        toString() legible
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#comparacion-por-contenido" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Comparación por contenido
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#copy-copias-modificadas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        copy(): copias modificadas
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#desestructuracion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Desestructuración
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#cuando-usar-una-data-class" class="md-nav__link">
+  <a href="#companion-object" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Cuándo usar una data class?
+        companion object
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#object-frente-a-companion-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        object frente a companion object
       
     </span>
   </a>
@@ -1247,7 +1208,7 @@
   <span class="md-ellipsis">
     
   
-    19. <code>object</code>, <code>companion object</code> y singletons
+    19. <code>enum</code> y <code>sealed class</code>
   
 
     
@@ -1275,7 +1236,7 @@
   <span class="md-ellipsis">
     
   
-    20. <code>enum</code> y <code>sealed class</code>
+    20. Genéricos y funciones de extensión
   
 
     
@@ -1303,7 +1264,7 @@
   <span class="md-ellipsis">
     
   
-    21. Genéricos, funciones de extensión y lambdas
+    21. Lambdas a fondo: receptores, funciones de alcance y delegación
   
 
     
@@ -1515,7 +1476,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VI · Introducción a Android con Jetpack Compose
+    Parte VI · Android y arquitectura de aplicaciones
   
 
     
@@ -1531,7 +1492,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VI · Introducción a Android con Jetpack Compose
+    Parte VI · Android y arquitectura de aplicaciones
   
 
           </label>
@@ -1579,7 +1540,7 @@
   <span class="md-ellipsis">
     
   
-    26. Ciclo de vida de una <code>Activity</code> y tu primer <code>@Composable</code>
+    26. Ciclo de vida de una <code>Activity</code>
   
 
     
@@ -1607,231 +1568,7 @@
   <span class="md-ellipsis">
     
   
-    27. Fundamentos de Compose: composables, recomposición y <code>Modifier</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter28/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    28. Gestión de recursos: imágenes, íconos y cadenas de texto
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter29/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    29. Material 3: componentes listos para usar
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter30/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    30. Estructura de pantalla: <code>Scaffold</code>, layouts y <code>LazyColumn</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter31/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    31. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/tutorial_my_todo_list_part_1/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tutorial: Mi lista de tareas (parte 1)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter32/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    32. Navegación con Navigation Compose
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter33/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    33. Material 3: tema, color y tipografía
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/tutorial_my_todo_list_part_2/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tutorial: Mi lista de tareas (parte 2)
+    27. Cómo se organiza una app: responsabilidades y flujo de datos
   
 
     
@@ -1877,7 +1614,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VII · Arquitectura MVVM
+    Parte VII · Jetpack Compose y construcción de interfaces
   
 
     
@@ -1893,11 +1630,207 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VII · Arquitectura MVVM
+    Parte VII · Jetpack Compose y construcción de interfaces
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Tu primer composable: <code>@Composable</code>, <code>@Preview</code> y parámetros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. <code>Modifier</code> y layouts: <code>Column</code>, <code>Row</code> y <code>Box</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Gestión de recursos: imágenes, íconos y cadenas de texto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. Material 3: componentes listos para usar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter32/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. Estado en Compose: recomposición, <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter33/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Estructura de pantalla: <code>Scaffold</code> y <code>LazyColumn</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/tutorial_my_todo_list_part_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1913,7 +1846,7 @@
   <span class="md-ellipsis">
     
   
-    34. Qué es MVVM y por qué usarlo
+    34. Formularios y validación en la interfaz
   
 
     
@@ -1941,7 +1874,7 @@
   <span class="md-ellipsis">
     
   
-    35. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
+    35. Navegación con Navigation Compose
   
 
     
@@ -1969,7 +1902,35 @@
   <span class="md-ellipsis">
     
   
-    36. Repositorio y separación de capas
+    36. Material 3: tema, color y tipografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/tutorial_my_todo_list_part_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 2)
   
 
     
@@ -1997,7 +1958,7 @@
   <span class="md-ellipsis">
     
   
-    37. Inyección de dependencias (manual y con Hilt)
+    37. Diseño adaptable con <em>Window Size Classes</em> (opcional)
   
 
     
@@ -2043,7 +2004,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VIII · Consumo de API REST con Retrofit
+    Parte VIII · Estado y arquitectura con MVVM
   
 
     
@@ -2059,7 +2020,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VIII · Consumo de API REST con Retrofit
+    Parte VIII · Estado y arquitectura con MVVM
   
 
           </label>
@@ -2079,7 +2040,7 @@
   <span class="md-ellipsis">
     
   
-    38. HTTP, REST y JSON: cómo se comunican las apps con un servidor
+    38. Qué es MVVM y por qué usarlo
   
 
     
@@ -2107,7 +2068,7 @@
   <span class="md-ellipsis">
     
   
-    39. Retrofit: configuración, interfaces y endpoints
+    39. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
   
 
     
@@ -2135,7 +2096,35 @@
   <span class="md-ellipsis">
     
   
-    40. Serialización JSON y modelos de datos (DTO)
+    40. Efectos y eventos puntuales: <code>LaunchedEffect</code>, Snackbar y navegación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/tutorial_my_todo_list_part_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 3)
   
 
     
@@ -2163,7 +2152,63 @@
   <span class="md-ellipsis">
     
   
-    41. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
+    41. Repositorio y separación de capas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/chapter42/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    42. Inyección de dependencias (manual y con Hilt)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/tutorial_my_todo_list_part_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 4)
   
 
     
@@ -2209,7 +2254,7 @@
   <span class="md-ellipsis">
     
   
-    Parte IX · Proyecto final
+    Parte IX · Datos: API REST y persistencia local
   
 
     
@@ -2225,39 +2270,11 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte IX · Proyecto final
+    Parte IX · Datos: API REST y persistencia local
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter42/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    42. Diseño de la app: pantallas, navegación y arquitectura
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -2273,7 +2290,7 @@
   <span class="md-ellipsis">
     
   
-    43. Setup del proyecto y dependencias
+    43. HTTP, REST y JSON: cómo se comunican las apps con un servidor
   
 
     
@@ -2301,7 +2318,7 @@
   <span class="md-ellipsis">
     
   
-    44. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>
+    44. Serialización JSON y modelos de datos (DTO)
   
 
     
@@ -2329,7 +2346,7 @@
   <span class="md-ellipsis">
     
   
-    45. Pantalla de lista con paginación
+    45. Retrofit: configuración, interfaces y endpoints
   
 
     
@@ -2357,7 +2374,7 @@
   <span class="md-ellipsis">
     
   
-    46. Carga de sprites con Coil
+    46. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
   
 
     
@@ -2385,7 +2402,7 @@
   <span class="md-ellipsis">
     
   
-    47. Pantalla de detalle: stats, tipos y habilidades
+    47. Persistencia local con Room
   
 
     
@@ -2406,98 +2423,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/tutorial_my_todo_list_part_5/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    48. Búsqueda y filtrado
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter49/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    49. Persistencia local con Room: favoritos y caché offline
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter50/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    50. Pulido: estados de UI, Material 3 y accesibilidad
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter51/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    51. Cierre: testing básico, buenas prácticas y próximos pasos
+    Tutorial: Mi lista de tareas (parte 5)
   
 
     
@@ -2543,7 +2476,7 @@
   <span class="md-ellipsis">
     
   
-    Anexos
+    Parte X · Proyecto final: contactos
   
 
     
@@ -2556,6 +2489,368 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte X · Proyecto final: contactos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter48/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    48. Presentación y arquitectura de «Mis Contactos»
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter49/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    49. Configuración del proyecto y permisos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter50/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    50. La capa remota: DTOs, Retrofit y módulo de red
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter51/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    51. La capa local: Room para caché y favoritos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter52/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    52. El repositorio: estrategia <em>offline-first</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter53/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    53. Pantalla de lista: búsqueda, paginación y favoritos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter54/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    54. Pantalla de detalle: eliminación segura con evento como estado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter55/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    55. Pantalla de formulario: validación local y del servidor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter56/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    56. Navegación con rutas tipadas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter57/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    57. Componentes compartidos y tema visual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter58/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    58. Cierre del proyecto y próximos pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2607,7 +2902,7 @@
   <span class="md-ellipsis">
     
   
-    B. Entrada estándar con Scanner de Java
+    B. De Java a Kotlin: equivalencias y <code>Scanner</code>
   
 
     
@@ -2636,6 +2931,34 @@
     
   
     C. Cómo elegir el SDK de un proyecto Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/string-format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Formato de cadenas con <code>String.format</code>
   
 
     
@@ -2694,10 +3017,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#el-problema-clases-que-solo-guardan-datos" class="md-nav__link">
+  <a href="#el-patron-singleton" class="md-nav__link">
     <span class="md-ellipsis">
       
-        El problema: clases que solo guardan datos
+        El patrón singleton
       
     </span>
   </a>
@@ -2705,71 +3028,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#la-solucion-data-class" class="md-nav__link">
+  <a href="#object-singletons-en-kotlin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        La solución: data class
+        object: singletons en Kotlin
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="La solución: data class">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#tostring-legible" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        toString() legible
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#comparacion-por-contenido" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Comparación por contenido
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#copy-copias-modificadas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        copy(): copias modificadas
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#desestructuracion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Desestructuración
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#cuando-usar-una-data-class" class="md-nav__link">
+  <a href="#companion-object" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Cuándo usar una data class?
+        companion object
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#object-frente-a-companion-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        object frente a companion object
       
     </span>
   </a>
@@ -2807,86 +3091,72 @@
   
 
 
-<h1 id="capitulo-18-data-class-copy-y-desestructuracion">Capítulo 18: <code>data class</code>, <code>copy</code> y desestructuración<a class="headerlink" href="#capitulo-18-data-class-copy-y-desestructuracion" title="Permanent link">&para;</a></h1>
+<h1 id="capitulo-18-object-companion-object-y-singletons">Capítulo 18: <code>object</code>, <code>companion object</code> y singletons<a class="headerlink" href="#capitulo-18-object-companion-object-y-singletons" title="Permanent link">&para;</a></h1>
 <h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
-<p>En los capítulos anteriores creaste clases con datos y comportamiento. Pero muy a menudo necesitarás clases cuyo <strong>único propósito</strong> es <strong>guardar datos</strong>: un usuario con su nombre y su correo, un punto con sus coordenadas, un producto con su precio. No tienen lógica compleja; solo agrupan información.</p>
-<p>Para esos casos, escribir una clase normal resulta más trabajoso de lo necesario. Kotlin ofrece un atajo pensado justo para esto: la <strong><code>data class</code></strong> (clase de datos), que genera automáticamente varias funciones útiles. En este capítulo verás qué te regala una <code>data class</code>, cómo crear copias modificadas con <code>copy</code> y cómo repartir sus datos en variables mediante la <strong>desestructuración</strong> (que veníamos anunciando desde capítulos anteriores).</p>
-<p>Este tema es muy común en el desarrollo Android: los datos que recibes de una API, de una base de datos o de un formulario suelen modelarse, precisamente, como <code>data class</code>.</p>
-<h2 id="el-problema-clases-que-solo-guardan-datos">El problema: clases que solo guardan datos<a class="headerlink" href="#el-problema-clases-que-solo-guardan-datos" title="Permanent link">&para;</a></h2>
-<p>Supongamos una clase normal para representar un usuario:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Usuario</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">edad</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span>
+<p>Hasta ahora, a partir de una clase creabas <strong>muchos</strong> objetos: varias personas, varios usuarios. Pero a veces necesitas justo lo contrario: <strong>un único objeto</strong> que exista para todo el programa. Piensa en la configuración de una aplicación, un registro de eventos (<em>logger</em>) o un gestor de conexión: tiene sentido que haya <strong>uno solo</strong>, compartido por todos.</p>
+<p>También ocurre que quieres definir algo ligado a una <strong>clase</strong> en sí, no a sus objetos: por ejemplo, una constante propia de la clase o una función que sirva para crear instancias.</p>
+<p>Kotlin resuelve ambas necesidades con la palabra clave <code>object</code> y con el <code>companion object</code>. En este capítulo verás qué es el patrón <em>singleton</em>, cómo crearlo con <code>object</code> y cómo asociar miembros a una clase con <code>companion object</code>. Si vienes de Java, esta es la respuesta de Kotlin a la palabra clave <code>static</code>.</p>
+<h2 id="el-patron-singleton">El patrón singleton<a class="headerlink" href="#el-patron-singleton" title="Permanent link">&para;</a></h2>
+<p>Un <strong>singleton</strong> ("único") es un patrón de diseño muy común: una clase de la que existe <strong>una sola instancia</strong> en todo el programa, accesible desde cualquier parte.</p>
+<p>Se usa cuando tiene sentido que haya un único punto de referencia para algo: la configuración global, un registro compartido, un contador central. En lenguajes como Java, implementarlo a mano requiere cierto cuidado (un constructor privado, una variable estática, etc.). Kotlin lo integra en el propio lenguaje, y por eso crearlo es trivial.</p>
+<h2 id="object-singletons-en-kotlin"><code>object</code>: singletons en Kotlin<a class="headerlink" href="#object-singletons-en-kotlin" title="Permanent link">&para;</a></h2>
+<p>Para declarar un singleton, usas la palabra clave <code>object</code> en lugar de <code>class</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">object</span><span class="w"> </span><span class="nc">Configuracion</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">idioma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;es&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1.0&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">mostrar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Idioma: </span><span class="si">$</span><span class="n">idioma</span><span class="s">, versión: </span><span class="si">$</span><span class="n">version</span><span class="s">&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">}</span>
 </code></pre></div>
-<p>Funciona, pero al usarla notarás tres molestias. Primero, si la imprimes, no ves sus datos, sino algo críptico:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Usuario</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">println</span><span class="p">(</span><span class="n">usuario</span><span class="p">)</span><span class="w"> </span><span class="c1">// Usuario@1b6d3586  (poco útil)</span>
+<p>La diferencia clave con una clase es que <strong>no creas</strong> objetos de <code>Configuracion</code>: no hay constructor ni se usa <code>Configuracion()</code>. El objeto simplemente <strong>existe</strong> (Kotlin lo crea automáticamente la primera vez que lo usas), y accedes a sus miembros directamente a través de su nombre:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">println</span><span class="p">(</span><span class="n">Configuracion</span><span class="p">.</span><span class="na">idioma</span><span class="p">)</span><span class="w"> </span><span class="c1">// es</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">Configuracion</span><span class="p">.</span><span class="na">idioma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;en&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">Configuracion</span><span class="p">.</span><span class="na">mostrar</span><span class="p">()</span><span class="w">       </span><span class="c1">// Idioma: en, versión: 1.0</span>
 </code></pre></div>
-<p>Segundo, dos usuarios con <strong>los mismos datos</strong> no se consideran iguales al compararlos con <code>==</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">u1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Usuario</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">u2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Usuario</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">println</span><span class="p">(</span><span class="n">u1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">u2</span><span class="p">)</span><span class="w"> </span><span class="c1">// false  (aunque tengan los mismos datos)</span>
+<p>Como hay una sola instancia, ese cambio de idioma se ve desde cualquier lugar del programa que use <code>Configuracion</code>. Un <code>object</code> puede tener propiedades y funciones, igual que una clase; lo único que no tiene es constructor, porque no se instancia.</p>
+<h2 id="companion-object"><code>companion object</code><a class="headerlink" href="#companion-object" title="Permanent link">&para;</a></h2>
+<p>Ahora, el otro caso: quieres algo ligado a una <strong>clase</strong>, no a sus objetos individuales.</p>
+<p>Por ejemplo, imagina una clase <code>Usuario</code> y quieres:</p>
+<ul>
+<li>una <strong>constante</strong> propia de la clase, como la edad mínima permitida;</li>
+<li>una <strong>función de fábrica</strong> que cree usuarios de cierta forma.</li>
+</ul>
+<p>Estos miembros no pertenecen a un usuario concreto, sino a la clase <code>Usuario</code> en general. Para eso, Kotlin ofrece el <strong><code>companion object</code></strong> ("objeto acompañante"): un objeto único que va <strong>dentro</strong> de la clase y se asocia a ella:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Usuario</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">edad</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">companion</span><span class="w"> </span><span class="kd">object</span><span class="w"> </span><span class="err">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">EDAD_MINIMA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="kd">fun</span><span class="w"> </span><span class="nf">crearInvitado</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Usuario</span><span class="p">(</span><span class="s">&quot;Invitado&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">EDAD_MINIMA</span><span class="p">)</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
 </code></pre></div>
-<p>Y tercero, no hay una forma cómoda de crear una copia con algún dato cambiado.</p>
-<p>Todo esto ocurre porque, para Kotlin, <code>Usuario</code> es una clase cualquiera: no sabe que su propósito es representar datos.</p>
-<h2 id="la-solucion-data-class">La solución: <code>data class</code><a class="headerlink" href="#la-solucion-data-class" title="Permanent link">&para;</a></h2>
-<p>Basta con anteponer la palabra clave <code>data</code> a la clase:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Usuario</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">edad</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span>
+<p>Accedes a sus miembros a través del <strong>nombre de la clase</strong>, sin crear ningún objeto:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">println</span><span class="p">(</span><span class="n">Usuario</span><span class="p">.</span><span class="na">EDAD_MINIMA</span><span class="p">)</span><span class="w">           </span><span class="c1">// 18</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">invitado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Usuario</span><span class="p">.</span><span class="na">crearInvitado</span><span class="p">()</span><span class="w"> </span><span class="c1">// crea un Usuario usando la fábrica</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">println</span><span class="p">(</span><span class="n">invitado</span><span class="p">.</span><span class="na">nombre</span><span class="p">)</span><span class="w">               </span><span class="c1">// Invitado</span>
 </code></pre></div>
-<p>Con ese simple cambio, Kotlin genera automáticamente varias funciones basadas en las propiedades del constructor. Veamos las más importantes.</p>
-<h3 id="tostring-legible"><code>toString()</code> legible<a class="headerlink" href="#tostring-legible" title="Permanent link">&para;</a></h3>
-<p>Ahora, al imprimir un objeto, ves sus datos de forma clara:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Usuario</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">println</span><span class="p">(</span><span class="n">usuario</span><span class="p">)</span><span class="w"> </span><span class="c1">// Usuario(nombre=Ana, edad=30)</span>
-</code></pre></div>
-<h3 id="comparacion-por-contenido">Comparación por contenido<a class="headerlink" href="#comparacion-por-contenido" title="Permanent link">&para;</a></h3>
-<p>Dos objetos con los mismos datos ahora <strong>sí</strong> se consideran iguales:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">u1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Usuario</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">u2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Usuario</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">println</span><span class="p">(</span><span class="n">u1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">u2</span><span class="p">)</span><span class="w"> </span><span class="c1">// true</span>
-</code></pre></div>
-<p>Una <code>data class</code> compara por el <strong>contenido</strong> (los valores de sus propiedades), no por si son el mismo objeto en memoria.</p>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>En Kotlin, <code>==</code> compara contenido (por dentro llama al método <code>equals()</code>). Si vienes de Java, ten presente que allí <code>==</code> compara referencias; el equivalente en Kotlin para comparar referencias es <code>===</code>.</p>
+<p>Si vienes de Java, el <code>companion object</code> cumple el papel de los miembros <code>static</code>: constantes y funciones que pertenecen a la clase y no a sus instancias. Kotlin no tiene la palabra clave <code>static</code>; usa el <code>companion object</code> en su lugar.</p>
 </div>
-<h3 id="copy-copias-modificadas"><code>copy()</code>: copias modificadas<a class="headerlink" href="#copy-copias-modificadas" title="Permanent link">&para;</a></h3>
-<p>Como muchas <code>data class</code> se diseñan con propiedades <code>val</code> (inmutables), no puedes cambiar un objeto existente. En su lugar, creas una <strong>copia</strong> con los cambios que quieras, usando <code>copy()</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Usuario</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">usuarioMayor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usuario</span><span class="p">.</span><span class="na">copy</span><span class="p">(</span><span class="n">edad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">31</span><span class="p">)</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">println</span><span class="p">(</span><span class="n">usuario</span><span class="p">)</span><span class="w">      </span><span class="c1">// Usuario(nombre=Ana, edad=30)  (sin cambios)</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">println</span><span class="p">(</span><span class="n">usuarioMayor</span><span class="p">)</span><span class="w"> </span><span class="c1">// Usuario(nombre=Ana, edad=31)  (copia con edad nueva)</span>
-</code></pre></div>
-<p><code>copy()</code> crea un objeto nuevo idéntico al original, salvo las propiedades que le indiques (aquí, <code>edad</code>). El objeto original no se toca. Esta es una forma muy común y segura de "modificar" datos inmutables: en lugar de cambiar el objeto, produces uno nuevo.</p>
-<h3 id="desestructuracion">Desestructuración<a class="headerlink" href="#desestructuracion" title="Permanent link">&para;</a></h3>
-<p>Por último, una <code>data class</code> te permite <strong>repartir</strong> sus propiedades en variables separadas de una sola vez. A esto se le llama <strong>desestructuración</strong>, y es lo que veníamos anunciando en capítulos anteriores:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Usuario</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kd">val</span><span class="w"> </span><span class="p">(</span><span class="nv">nombre</span><span class="p">,</span><span class="w"> </span><span class="nv">edad</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usuario</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">println</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span><span class="w"> </span><span class="c1">// Ana</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">println</span><span class="p">(</span><span class="n">edad</span><span class="p">)</span><span class="w">   </span><span class="c1">// 30</span>
-</code></pre></div>
-<p>En una sola línea, <code>val (nombre, edad) = usuario</code> crea dos variables y les asigna, <strong>en orden</strong>, las propiedades del objeto (por eso el orden de las variables debe coincidir con el del constructor).</p>
-<p>Esto es especialmente cómodo al recorrer colecciones. ¿Recuerdas cómo recorríamos un mapa?</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">edades</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapOf</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Diego&quot;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="m">25</span><span class="p">)</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">for</span><span class="w"> </span><span class="p">((</span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="n">edad</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">edades</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;</span><span class="si">$</span><span class="n">nombre</span><span class="s"> tiene </span><span class="si">$</span><span class="n">edad</span><span class="s"> años&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">}</span>
-</code></pre></div>
-<p>Eso funciona porque cada par de un mapa es, por dentro, un objeto que se puede desestructurar, igual que una <code>data class</code>.</p>
-<h2 id="cuando-usar-una-data-class">¿Cuándo usar una <code>data class</code>?<a class="headerlink" href="#cuando-usar-una-data-class" title="Permanent link">&para;</a></h2>
-<p>Usa una <code>data class</code> cuando el propósito principal de la clase sea <strong>contener datos</strong>, sin lógica compleja: modelos de información, resultados, configuraciones, respuestas de una API.</p>
-<p>Para clases en las que lo importante es el <strong>comportamiento</strong> o la <strong>identidad</strong> (no sus datos), o que participan en jerarquías de herencia, es mejor una clase normal. De hecho, una <code>data class</code> no puede ser <code>abstract</code> ni <code>open</code>, y debe tener al menos una propiedad en su constructor.</p>
-<p>En resumen: si te descubres creando una clase solo para agrupar unos cuantos datos, casi siempre querrás que sea una <code>data class</code>.</p>
-<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
-<p>En este capítulo conociste una de las herramientas más prácticas de Kotlin:</p>
+<h2 id="object-frente-a-companion-object"><code>object</code> frente a <code>companion object</code><a class="headerlink" href="#object-frente-a-companion-object" title="Permanent link">&para;</a></h2>
+<p>Ambos crean un único objeto, pero se usan en situaciones distintas:</p>
 <ul>
-<li>Una <strong><code>data class</code></strong> es una clase pensada para <strong>guardar datos</strong>. Se declara anteponiendo <code>data</code>.</li>
-<li>Kotlin le genera automáticamente: un <code>toString()</code> legible, comparación por contenido (<code>==</code>), un método <code>copy()</code> y soporte para desestructuración.</li>
-<li><code>copy()</code> crea un objeto nuevo con algunas propiedades cambiadas, sin modificar el original: ideal para datos inmutables (<code>val</code>).</li>
-<li>La <strong>desestructuración</strong> (<code>val (a, b) = objeto</code>) reparte las propiedades en variables, en el orden del constructor.</li>
-<li>Usa <code>data class</code> para clases que principalmente contienen datos.</li>
+<li>Un <strong><code>object</code></strong> es un singleton <strong>independiente</strong>, que existe por sí mismo (una configuración, un <em>logger</em>). Se accede por su propio nombre.</li>
+<li>Un <strong><code>companion object</code></strong> vive <strong>dentro de una clase</strong> y agrupa lo que pertenece a la clase en general (constantes, funciones de fábrica). Se accede a través del nombre de la clase.</li>
 </ul>
-<p>En el próximo capítulo verás <code>object</code> y <code>companion object</code>, que te permitirán crear objetos únicos (<em>singletons</em>) y agrupar funciones y constantes ligadas a una clase.</p>
+<p>Una pista: si lo que defines tiene sentido por sí solo, usa <code>object</code>; si tiene sentido solo en relación con una clase concreta, usa un <code>companion object</code> dentro de ella.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo aprendiste a crear objetos únicos:</p>
+<ul>
+<li>Un <strong>singleton</strong> es una clase con una única instancia, compartida por todo el programa.</li>
+<li>La palabra clave <strong><code>object</code></strong> crea un singleton directamente: no tiene constructor ni se instancia; accedes a sus miembros por su nombre (<code>Configuracion.idioma</code>).</li>
+<li>El <strong><code>companion object</code></strong> es un objeto único dentro de una clase, para miembros que pertenecen a la clase y no a sus instancias (constantes, funciones de fábrica). Se accede por el nombre de la clase (<code>Usuario.EDAD_MINIMA</code>).</li>
+<li>El <code>companion object</code> es el reemplazo de Kotlin para los miembros <code>static</code> de Java.</li>
+</ul>
+<p>En el próximo capítulo verás dos herramientas muy útiles para modelar datos con un conjunto limitado de opciones: los <code>enum</code> y las <code>sealed class</code>.</p>
 
 
 
@@ -2922,7 +3192,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../chapter17/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 17. Herencia, interfaces y clases abstractas">
+          <a href="../chapter17/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 17. &lt;code&gt;data class&lt;/code&gt;, &lt;code&gt;copy&lt;/code&gt; y desestructuración">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2932,20 +3202,20 @@
                 Anterior
               </span>
               <div class="md-ellipsis">
-                17. Herencia, interfaces y clases abstractas
+                17. <code>data class</code>, <code>copy</code> y desestructuración
               </div>
             </div>
           </a>
         
         
           
-          <a href="../chapter19/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 19. &lt;code&gt;object&lt;/code&gt;, &lt;code&gt;companion object&lt;/code&gt; y singletons">
+          <a href="../chapter19/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 19. &lt;code&gt;enum&lt;/code&gt; y &lt;code&gt;sealed class&lt;/code&gt;">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                19. <code>object</code>, <code>companion object</code> y singletons
+                19. <code>enum</code> y <code>sealed class</code>
               </div>
             </div>
             <div class="md-footer__button md-icon">

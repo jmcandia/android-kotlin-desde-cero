@@ -16,7 +16,7 @@
         <link rel="prev" href="../chapter26/">
       
       
-        <link rel="next" href="../chapter28/">
+        <link rel="next" href="../../part07/chapter28/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>27. Fundamentos de Compose: composables, recomposición y Modifier - Android con Kotlin desde cero</title>
+        <title>27. Cómo se organiza una app: responsabilidades y flujo de datos - Android con Kotlin desde cero</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#capitulo-27-fundamentos-de-compose-composables-recomposicion-y-modifier" class="md-skip">
+        <a href="#capitulo-27-como-se-organiza-una-app-responsabilidades-y-flujo-de-datos" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              27. Fundamentos de Compose: composables, recomposición y <code>Modifier</code>
+              27. Cómo se organiza una app: responsabilidades y flujo de datos
             
           </span>
         </div>
@@ -892,34 +892,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part03/chapter15/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    15. Formato de cadenas con <code>String.format</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../part03/exercises/" class="md-nav__link">
         
   
@@ -1002,6 +974,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../part04/chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Clases, propiedades y constructores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../part04/chapter16/" class="md-nav__link">
         
   
@@ -1009,7 +1009,7 @@
   <span class="md-ellipsis">
     
   
-    16. Clases, propiedades y constructores
+    16. Herencia, interfaces y clases abstractas
   
 
     
@@ -1037,7 +1037,7 @@
   <span class="md-ellipsis">
     
   
-    17. Herencia, interfaces y clases abstractas
+    17. <code>data class</code>, <code>copy</code> y desestructuración
   
 
     
@@ -1065,7 +1065,7 @@
   <span class="md-ellipsis">
     
   
-    18. <code>data class</code>, <code>copy</code> y desestructuración
+    18. <code>object</code>, <code>companion object</code> y singletons
   
 
     
@@ -1093,7 +1093,7 @@
   <span class="md-ellipsis">
     
   
-    19. <code>object</code>, <code>companion object</code> y singletons
+    19. <code>enum</code> y <code>sealed class</code>
   
 
     
@@ -1121,7 +1121,7 @@
   <span class="md-ellipsis">
     
   
-    20. <code>enum</code> y <code>sealed class</code>
+    20. Genéricos y funciones de extensión
   
 
     
@@ -1149,7 +1149,7 @@
   <span class="md-ellipsis">
     
   
-    21. Genéricos, funciones de extensión y lambdas
+    21. Lambdas a fondo: receptores, funciones de alcance y delegación
   
 
     
@@ -1363,7 +1363,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VI · Introducción a Android con Jetpack Compose
+    Parte VI · Android y arquitectura de aplicaciones
   
 
     
@@ -1379,7 +1379,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VI · Introducción a Android con Jetpack Compose
+    Parte VI · Android y arquitectura de aplicaciones
   
 
           </label>
@@ -1427,7 +1427,7 @@
   <span class="md-ellipsis">
     
   
-    26. Ciclo de vida de una <code>Activity</code> y tu primer <code>@Composable</code>
+    26. Ciclo de vida de una <code>Activity</code>
   
 
     
@@ -1464,7 +1464,7 @@
   <span class="md-ellipsis">
     
   
-    27. Fundamentos de Compose: composables, recomposición y <code>Modifier</code>
+    27. Cómo se organiza una app: responsabilidades y flujo de datos
   
 
     
@@ -1482,7 +1482,7 @@
   <span class="md-ellipsis">
     
   
-    27. Fundamentos de Compose: composables, recomposición y <code>Modifier</code>
+    27. Cómo se organiza una app: responsabilidades y flujo de datos
   
 
     
@@ -1519,10 +1519,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#composables-con-parametros" class="md-nav__link">
+  <a href="#los-cinco-trabajos-de-una-app" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Composables con parámetros
+        Los cinco trabajos de una app
       
     </span>
   </a>
@@ -1530,10 +1530,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#la-recomposicion" class="md-nav__link">
+  <a href="#por-que-no-todo-en-la-activity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        La recomposición
+        Por qué no todo en la Activity
       
     </span>
   </a>
@@ -1541,30 +1541,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#modificadores-modifier" class="md-nav__link">
+  <a href="#tres-zonas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Modificadores (Modifier)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Modificadores (Modifier)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#la-convencion-del-parametro-modifier" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        La convención del parámetro modifier
+        Tres zonas
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#los-datos-fluyen-en-un-solo-sentido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Los datos fluyen en un solo sentido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-mapa-que-vas-a-construir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El mapa que vas a construir
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1583,230 +1588,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../chapter28/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    28. Gestión de recursos: imágenes, íconos y cadenas de texto
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../chapter29/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    29. Material 3: componentes listos para usar
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../chapter30/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    30. Estructura de pantalla: <code>Scaffold</code>, layouts y <code>LazyColumn</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../chapter31/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    31. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../tutorial_my_todo_list_part_1/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tutorial: Mi lista de tareas (parte 1)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../chapter32/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    32. Navegación con Navigation Compose
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../chapter33/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    33. Material 3: tema, color y tipografía
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../tutorial_my_todo_list_part_2/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tutorial: Mi lista de tareas (parte 2)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1844,7 +1625,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VII · Arquitectura MVVM
+    Parte VII · Jetpack Compose y construcción de interfaces
   
 
     
@@ -1860,11 +1641,207 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VII · Arquitectura MVVM
+    Parte VII · Jetpack Compose y construcción de interfaces
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Tu primer composable: <code>@Composable</code>, <code>@Preview</code> y parámetros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. <code>Modifier</code> y layouts: <code>Column</code>, <code>Row</code> y <code>Box</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Gestión de recursos: imágenes, íconos y cadenas de texto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. Material 3: componentes listos para usar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter32/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. Estado en Compose: recomposición, <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter33/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Estructura de pantalla: <code>Scaffold</code> y <code>LazyColumn</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/tutorial_my_todo_list_part_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1880,7 +1857,7 @@
   <span class="md-ellipsis">
     
   
-    34. Qué es MVVM y por qué usarlo
+    34. Formularios y validación en la interfaz
   
 
     
@@ -1908,7 +1885,7 @@
   <span class="md-ellipsis">
     
   
-    35. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
+    35. Navegación con Navigation Compose
   
 
     
@@ -1936,7 +1913,35 @@
   <span class="md-ellipsis">
     
   
-    36. Repositorio y separación de capas
+    36. Material 3: tema, color y tipografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/tutorial_my_todo_list_part_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 2)
   
 
     
@@ -1964,7 +1969,7 @@
   <span class="md-ellipsis">
     
   
-    37. Inyección de dependencias (manual y con Hilt)
+    37. Diseño adaptable con <em>Window Size Classes</em> (opcional)
   
 
     
@@ -2010,7 +2015,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VIII · Consumo de API REST con Retrofit
+    Parte VIII · Estado y arquitectura con MVVM
   
 
     
@@ -2026,7 +2031,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VIII · Consumo de API REST con Retrofit
+    Parte VIII · Estado y arquitectura con MVVM
   
 
           </label>
@@ -2046,7 +2051,7 @@
   <span class="md-ellipsis">
     
   
-    38. HTTP, REST y JSON: cómo se comunican las apps con un servidor
+    38. Qué es MVVM y por qué usarlo
   
 
     
@@ -2074,7 +2079,7 @@
   <span class="md-ellipsis">
     
   
-    39. Retrofit: configuración, interfaces y endpoints
+    39. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
   
 
     
@@ -2102,7 +2107,35 @@
   <span class="md-ellipsis">
     
   
-    40. Serialización JSON y modelos de datos (DTO)
+    40. Efectos y eventos puntuales: <code>LaunchedEffect</code>, Snackbar y navegación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/tutorial_my_todo_list_part_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 3)
   
 
     
@@ -2130,7 +2163,63 @@
   <span class="md-ellipsis">
     
   
-    41. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
+    41. Repositorio y separación de capas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/chapter42/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    42. Inyección de dependencias (manual y con Hilt)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/tutorial_my_todo_list_part_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 4)
   
 
     
@@ -2176,7 +2265,7 @@
   <span class="md-ellipsis">
     
   
-    Parte IX · Proyecto final
+    Parte IX · Datos: API REST y persistencia local
   
 
     
@@ -2192,39 +2281,11 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte IX · Proyecto final
+    Parte IX · Datos: API REST y persistencia local
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter42/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    42. Diseño de la app: pantallas, navegación y arquitectura
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -2240,7 +2301,7 @@
   <span class="md-ellipsis">
     
   
-    43. Setup del proyecto y dependencias
+    43. HTTP, REST y JSON: cómo se comunican las apps con un servidor
   
 
     
@@ -2268,7 +2329,7 @@
   <span class="md-ellipsis">
     
   
-    44. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>
+    44. Serialización JSON y modelos de datos (DTO)
   
 
     
@@ -2296,7 +2357,7 @@
   <span class="md-ellipsis">
     
   
-    45. Pantalla de lista con paginación
+    45. Retrofit: configuración, interfaces y endpoints
   
 
     
@@ -2324,7 +2385,7 @@
   <span class="md-ellipsis">
     
   
-    46. Carga de sprites con Coil
+    46. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
   
 
     
@@ -2352,7 +2413,7 @@
   <span class="md-ellipsis">
     
   
-    47. Pantalla de detalle: stats, tipos y habilidades
+    47. Persistencia local con Room
   
 
     
@@ -2373,98 +2434,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/tutorial_my_todo_list_part_5/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    48. Búsqueda y filtrado
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter49/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    49. Persistencia local con Room: favoritos y caché offline
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter50/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    50. Pulido: estados de UI, Material 3 y accesibilidad
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter51/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    51. Cierre: testing básico, buenas prácticas y próximos pasos
+    Tutorial: Mi lista de tareas (parte 5)
   
 
     
@@ -2510,7 +2487,7 @@
   <span class="md-ellipsis">
     
   
-    Anexos
+    Parte X · Proyecto final: contactos
   
 
     
@@ -2523,6 +2500,368 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte X · Proyecto final: contactos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter48/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    48. Presentación y arquitectura de «Mis Contactos»
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter49/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    49. Configuración del proyecto y permisos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter50/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    50. La capa remota: DTOs, Retrofit y módulo de red
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter51/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    51. La capa local: Room para caché y favoritos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter52/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    52. El repositorio: estrategia <em>offline-first</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter53/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    53. Pantalla de lista: búsqueda, paginación y favoritos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter54/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    54. Pantalla de detalle: eliminación segura con evento como estado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter55/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    55. Pantalla de formulario: validación local y del servidor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter56/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    56. Navegación con rutas tipadas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter57/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    57. Componentes compartidos y tema visual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter58/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    58. Cierre del proyecto y próximos pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2574,7 +2913,7 @@
   <span class="md-ellipsis">
     
   
-    B. Entrada estándar con Scanner de Java
+    B. De Java a Kotlin: equivalencias y <code>Scanner</code>
   
 
     
@@ -2603,6 +2942,34 @@
     
   
     C. Cómo elegir el SDK de un proyecto Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/string-format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Formato de cadenas con <code>String.format</code>
   
 
     
@@ -2661,10 +3028,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#composables-con-parametros" class="md-nav__link">
+  <a href="#los-cinco-trabajos-de-una-app" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Composables con parámetros
+        Los cinco trabajos de una app
       
     </span>
   </a>
@@ -2672,10 +3039,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#la-recomposicion" class="md-nav__link">
+  <a href="#por-que-no-todo-en-la-activity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        La recomposición
+        Por qué no todo en la Activity
       
     </span>
   </a>
@@ -2683,30 +3050,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#modificadores-modifier" class="md-nav__link">
+  <a href="#tres-zonas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Modificadores (Modifier)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Modificadores (Modifier)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#la-convencion-del-parametro-modifier" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        La convención del parámetro modifier
+        Tres zonas
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#los-datos-fluyen-en-un-solo-sentido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Los datos fluyen en un solo sentido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-mapa-que-vas-a-construir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El mapa que vas a construir
+      
+    </span>
+  </a>
   
 </li>
       
@@ -2741,151 +3113,120 @@
   
 
 
-<h1 id="capitulo-27-fundamentos-de-compose-composables-recomposicion-y-modifier">Capítulo 27: Fundamentos de Compose: composables, recomposición y <code>Modifier</code><a class="headerlink" href="#capitulo-27-fundamentos-de-compose-composables-recomposicion-y-modifier" title="Permanent link">&para;</a></h1>
+<h1 id="capitulo-27-como-se-organiza-una-app-responsabilidades-y-flujo-de-datos">Capítulo 27: Cómo se organiza una app: responsabilidades y flujo de datos<a class="headerlink" href="#capitulo-27-como-se-organiza-una-app-responsabilidades-y-flujo-de-datos" title="Permanent link">&para;</a></h1>
 <h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
-<p>En el capítulo anterior escribiste tu primer <code>@Composable</code> y viste que Compose es <strong>declarativo</strong>: describes la interfaz y Compose la dibuja. Ahora profundizaremos en los tres fundamentos que sostienen todo lo que construirás con Compose:</p>
-<ul>
-<li>Los <strong>composables con parámetros</strong>, que los hacen reutilizables.</li>
-<li>La <strong>recomposición</strong>, el mecanismo por el que la interfaz se actualiza sola cuando cambian los datos.</li>
-<li>El <strong><code>Modifier</code></strong>, la herramienta para ajustar la apariencia y el comportamiento de cada componente.</li>
-</ul>
-<p>Con estas tres ideas entenderás el "cómo" y el "porqué" de Compose, y estarás listo para construir interfaces reales.</p>
-<h2 id="composables-con-parametros">Composables con parámetros<a class="headerlink" href="#composables-con-parametros" title="Permanent link">&para;</a></h2>
-<p>Un composable es una función, así que —como cualquier función— puede recibir <strong>parámetros</strong>. Esto es lo que los hace reutilizables. En vez de un saludo fijo, podemos parametrizar el nombre:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@Composable</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">Saludo</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;¡Hola, </span><span class="si">$</span><span class="n">nombre</span><span class="s">!&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
-</code></pre></div>
-<p>Ahora el mismo composable sirve para saludar a cualquiera:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Saludo</span><span class="p">(</span><span class="s">&quot;Ana&quot;</span><span class="p">)</span><span class="w">   </span><span class="c1">// muestra: ¡Hola, Ana!</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">Saludo</span><span class="p">(</span><span class="s">&quot;Diego&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// muestra: ¡Hola, Diego!</span>
-</code></pre></div>
-<p>Y, tal como una función puede llamar a otras, un composable puede llamar a <strong>otros composables</strong>. Así se construye una interfaz en Compose: componiendo piezas pequeñas para formar pantallas complejas.</p>
-<div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p>Por ahora combinaremos composables de a uno. Para <strong>organizar varios elementos</strong> en pantalla (uno debajo de otro, en fila, etc.) necesitarás los <em>layouts</em>, que veremos en un capítulo próximo.</p>
-</div>
-<h2 id="la-recomposicion">La recomposición<a class="headerlink" href="#la-recomposicion" title="Permanent link">&para;</a></h2>
-<p>Aquí está la idea central de Compose. En la interfaz tradicional, cuando un dato cambiaba, tenías que buscar el elemento de pantalla y actualizarlo tú a mano. En Compose no: cuando cambian los datos que un composable <strong>lee</strong>, Compose <strong>vuelve a ejecutar</strong> ese composable con los datos nuevos y actualiza lo que se muestra. A ese "volver a ejecutar" se le llama <strong>recomposición</strong>.</p>
-<p>Piénsalo así: un composable no es un dibujo fijo, sino una <strong>descripción</strong> de cómo debe verse la interfaz <em>para unos datos dados</em>. Si los datos cambian, Compose recalcula la descripción y redibuja solo lo necesario.</p>
-<pre class="mermaid"><code>flowchart TD
-    A["Cambian los datos"] --&gt; B["Compose vuelve a ejecutar&lt;br/&gt;el composable (recomposición)"]
-    B --&gt; C["El composable describe la interfaz&lt;br/&gt;con los datos nuevos"]
-    C --&gt; D["La pantalla se actualiza"]</code></pre>
-<p>Esto es justo lo que anticipamos al hablar de <code>StateFlow</code>: la interfaz <strong>observa</strong> los datos y <strong>reacciona</strong> a sus cambios, sin que tengas que actualizarla manualmente. Más adelante verás cómo se declaran esos datos que, al cambiar, provocan la recomposición (el <strong>estado</strong>); antes, aprenderás a organizar varios composables en una misma pantalla.</p>
-<div class="admonition tip">
-<p class="admonition-title">Important</p>
-<p>Como un composable puede ejecutarse muchas veces (una por cada recomposición) y en cualquier orden, no debes poner dentro de él acciones con efectos secundarios (como modificar una variable externa o escribir en un archivo). Un composable solo debería <strong>describir</strong> la interfaz a partir de los datos que recibe.</p>
-</div>
-<h2 id="modificadores-modifier">Modificadores (<code>Modifier</code>)<a class="headerlink" href="#modificadores-modifier" title="Permanent link">&para;</a></h2>
-<p>Un <code>Text</code> por sí solo es solo texto pegado a la esquina. ¿Cómo le das espacio alrededor, un tamaño, un color de fondo, o haces que responda a un toque? Con un <strong><code>Modifier</code></strong> ("modificador").</p>
-<p>Un <code>Modifier</code> es un objeto que le pasas a un composable para <strong>ajustar su apariencia o su comportamiento</strong>. Casi todos los composables aceptan un parámetro <code>modifier</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Text</span><span class="p">(</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;¡Hola!&quot;</span><span class="p">,</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">padding</span><span class="p">(</span><span class="m">16.</span><span class="n">dp</span><span class="p">)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">)</span>
-</code></pre></div>
-<p>Aquí <code>Modifier.padding(16.dp)</code> le agrega un espacio de 16 alrededor del texto.</p>
-<div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p><code>dp</code> significa <em>density-independent pixels</em> (píxeles independientes de la densidad). Es la unidad de medida de Compose para tamaños y espacios, y se adapta sola a pantallas de distinta densidad, para que tu interfaz se vea consistente en cualquier dispositivo.</p>
-</div>
-<p>Los modificadores se <strong>encadenan</strong>, uno tras otro, y cada uno se aplica en orden:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">Text</span><span class="p">(</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;¡Hola!&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="p">.</span><span class="na">padding</span><span class="p">(</span><span class="m">16.</span><span class="n">dp</span><span class="p">)</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="p">.</span><span class="na">background</span><span class="p">(</span><span class="n">Color</span><span class="p">.</span><span class="na">Yellow</span><span class="p">)</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">)</span>
-</code></pre></div>
-<p>El <strong>orden importa</strong>. No es lo mismo poner primero el espaciado y luego el fondo, que al revés: en el ejemplo de arriba, el fondo amarillo se pinta <em>dentro</em> del espaciado; si invirtieras las llamadas, el amarillo cubriría también ese espacio.</p>
-<p>A continuación, algunos de los modificadores más usados:</p>
+<p>Antes de escribir tu primera pantalla, conviene tener un <strong>mapa</strong> del terreno. En este capítulo no escribirás código: verás qué trabajos tiene que hacer cualquier app, por qué no conviene hacerlos todos en el mismo lugar y en qué dirección se mueven los datos. Es un capítulo corto, y su objetivo es que, cuando lleguen las piezas concretas, sepas dónde encaja cada una.</p>
+<p>Usaremos como ejemplo una app que construirás en la Parte VII: <strong>Mi lista de tareas</strong>. El usuario escribe una tarea, la agrega a la lista, la marca como hecha o la elimina.</p>
+<h2 id="los-cinco-trabajos-de-una-app">Los cinco trabajos de una app<a class="headerlink" href="#los-cinco-trabajos-de-una-app" title="Permanent link">&para;</a></h2>
+<p>Por simple que sea, una app como la lista de tareas tiene que hacer cinco trabajos distintos:</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Modificador</th>
-<th style="text-align: left;">Qué hace</th>
-<th style="text-align: left;">Parámetros</th>
+<th style="text-align: left;">Trabajo</th>
+<th style="text-align: left;">En la lista de tareas</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>padding(...)</code></td>
-<td style="text-align: left;">Agrega espacio alrededor del elemento.</td>
-<td style="text-align: left;">Un <code>Dp</code> para todos los lados, o valores por lado (<code>horizontal</code>/<code>vertical</code>, o <code>start</code>/<code>top</code>/<code>end</code>/<code>bottom</code>).</td>
+<td style="text-align: left;"><strong>Mostrar</strong></td>
+<td style="text-align: left;">Dibujar la lista, el campo de texto y el contador de pendientes.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>size(...)</code></td>
-<td style="text-align: left;">Fija un ancho y un alto concretos.</td>
-<td style="text-align: left;">Un <code>Dp</code> (cuadrado), o <code>width</code> y <code>height</code> en <code>Dp</code>.</td>
+<td style="text-align: left;"><strong>Reaccionar</strong></td>
+<td style="text-align: left;">Detectar que el usuario tocó «Agregar» o marcó una casilla.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>width(...)</code> / <code>height(...)</code></td>
-<td style="text-align: left;">Fija solo el ancho o solo el alto.</td>
-<td style="text-align: left;">Un <code>Dp</code>.</td>
+<td style="text-align: left;"><strong>Decidir</strong></td>
+<td style="text-align: left;">Aplicar las reglas: una tarea vacía no se agrega; al marcarla, cambia a hecha.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>fillMaxWidth()</code></td>
-<td style="text-align: left;">Hace que el elemento ocupe todo el ancho disponible.</td>
-<td style="text-align: left;">Opcional: una fracción <code>Float</code> (0f–1f); por defecto, todo el ancho.</td>
+<td style="text-align: left;"><strong>Obtener</strong></td>
+<td style="text-align: left;">Conseguir las tareas existentes al abrir la app.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>fillMaxHeight()</code></td>
-<td style="text-align: left;">Ocupa todo el alto disponible.</td>
-<td style="text-align: left;">Opcional: una fracción <code>Float</code>; por defecto, todo el alto.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>fillMaxSize()</code></td>
-<td style="text-align: left;">Ocupa todo el ancho y el alto disponibles.</td>
-<td style="text-align: left;">Opcional: una fracción <code>Float</code>; por defecto, todo el espacio.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>background(...)</code></td>
-<td style="text-align: left;">Aplica un color (o degradado) de fondo.</td>
-<td style="text-align: left;">Un <code>Color</code> (o un <code>Brush</code> para degradados) y, opcionalmente, una <code>Shape</code>.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>border(...)</code></td>
-<td style="text-align: left;">Dibuja un borde alrededor del elemento.</td>
-<td style="text-align: left;">El grosor (<code>Dp</code>), un <code>Color</code> y, opcionalmente, una <code>Shape</code>.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>clip(...)</code></td>
-<td style="text-align: left;">Recorta el elemento a una forma (por ejemplo, esquinas redondeadas).</td>
-<td style="text-align: left;">Una <code>Shape</code> (p. ej., <code>RoundedCornerShape</code> o <code>CircleShape</code>).</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>clickable { ... }</code></td>
-<td style="text-align: left;">Hace que el elemento responda a los toques.</td>
-<td style="text-align: left;">Una lambda <code>onClick</code> que se ejecuta al tocar.</td>
+<td style="text-align: left;"><strong>Guardar</strong></td>
+<td style="text-align: left;">Conservar las tareas para que sigan ahí mañana.</td>
 </tr>
 </tbody>
 </table>
-<div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p>Existen además modificadores que solo están disponibles <strong>dentro de ciertos layouts</strong> (como <code>weight</code>, para repartir el espacio en una fila o columna, o <code>align</code>, para alinear dentro de un contenedor). Los verás cuando lleguemos a los layouts.</p>
-</div>
-<h3 id="la-convencion-del-parametro-modifier">La convención del parámetro <code>modifier</code><a class="headerlink" href="#la-convencion-del-parametro-modifier" title="Permanent link">&para;</a></h3>
-<p>Cuando crees tus propios composables, es una buena práctica que reciban un parámetro <code>modifier</code> y lo apliquen a su elemento principal, con este patrón:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@Composable</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">Saludo</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="n">modifier</span><span class="p">:</span><span class="w"> </span><span class="n">Modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;¡Hola, </span><span class="si">$</span><span class="n">nombre</span><span class="s">!&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">modifier</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="p">)</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">}</span>
-</code></pre></div>
-<p>Al darle el valor por defecto <code>Modifier</code> (un modificador vacío), quien use <code>Saludo</code> puede pasarle ajustes desde fuera o no pasarle ninguno. Esto hace tus composables mucho más flexibles y reutilizables, y es la convención que sigue todo Compose.</p>
-<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
-<p>En este capítulo asentaste los fundamentos de Jetpack Compose:</p>
+<p>Los dos primeros tienen que ver con la <strong>interfaz</strong>. Los tres últimos tienen que ver con los <strong>datos</strong> y sus reglas, y no dependen de cómo se vea la pantalla: la regla «una tarea vacía no se agrega» es la misma si la pantalla es de un teléfono, de una tableta o de un reloj.</p>
+<h2 id="por-que-no-todo-en-la-activity">Por qué no todo en la <code>Activity</code><a class="headerlink" href="#por-que-no-todo-en-la-activity" title="Permanent link">&para;</a></h2>
+<p>La forma más directa de escribir la app sería poner los cinco trabajos en un solo lugar: la <code>Activity</code> y su interfaz. Para una pantalla de prueba funciona, pero tiene tres problemas que ya puedes anticipar:</p>
 <ul>
-<li>Los <strong>composables</strong> son funciones que pueden recibir <strong>parámetros</strong> y llamarse entre sí; así se construye la interfaz componiendo piezas.</li>
-<li>La <strong>recomposición</strong> es el mecanismo por el que Compose <strong>vuelve a ejecutar</strong> un composable cuando cambian los datos que lee, actualizando la interfaz automáticamente. Un composable describe la UI para unos datos dados y no debe tener efectos secundarios.</li>
-<li>Un <strong><code>Modifier</code></strong> ajusta la apariencia y el comportamiento de un composable (<code>padding</code>, <code>background</code>, <code>fillMaxWidth</code>, <code>clickable</code>…). Se <strong>encadena</strong>, el <strong>orden importa</strong>, y usa la unidad <strong><code>dp</code></strong> para los tamaños.</li>
-<li>Por convención, tus composables deberían recibir un parámetro <code>modifier</code> con valor por defecto <code>Modifier</code> y aplicarlo a su elemento principal.</li>
+<li><strong>Se pierde el estado.</strong> Como viste en el capítulo anterior, al girar el dispositivo Android destruye y recrea la <code>Activity</code>. Si las tareas viven ahí, desaparecen.</li>
+<li><strong>Todo cambia a la vez.</strong> Si mañana las tareas se guardan en un servidor en lugar de en el teléfono, tendrías que modificar el mismo archivo que dibuja la pantalla, con el riesgo de romper algo que no tenía nada que ver.</li>
+<li><strong>Es difícil de probar.</strong> Para comprobar que una tarea vacía no se agrega, tendrías que abrir la app y tocar botones, porque la regla está mezclada con el dibujo.</li>
 </ul>
-<p>En el próximo capítulo verás cómo Android organiza sus <strong>recursos</strong> (imágenes, el ícono de la app, textos), algo que necesitarás antes de sacarles todo el provecho a los componentes de Material 3.</p>
+<p>La solución es la misma que viste con las clases en la Parte IV: <strong>separar responsabilidades</strong>. Cada parte del código se ocupa de un trabajo, y se comunica con las demás a través de una puerta bien definida.</p>
+<h2 id="tres-zonas">Tres zonas<a class="headerlink" href="#tres-zonas" title="Permanent link">&para;</a></h2>
+<p>Si agrupas los cinco trabajos, aparecen tres zonas:</p>
+<pre class="mermaid"><code>flowchart LR
+    UI["&lt;b&gt;Interfaz&lt;/b&gt;&lt;br/&gt;mostrar y reaccionar"]
+    Estado["&lt;b&gt;Estado y lógica de la pantalla&lt;/b&gt;&lt;br/&gt;decidir"]
+    Datos["&lt;b&gt;Datos&lt;/b&gt;&lt;br/&gt;obtener y guardar"]
+    UI -- "eventos&lt;br/&gt;(«el usuario tocó Agregar»)" --&gt; Estado
+    Estado -- "estado&lt;br/&gt;(«esta es la lista actual»)" --&gt; UI
+    Estado -- "pide y guarda" --&gt; Datos
+    Datos -- "entrega datos" --&gt; Estado</code></pre>
+<ul>
+<li>La <strong>interfaz</strong> no toma decisiones. Muestra el estado que recibe y avisa cuando el usuario hace algo.</li>
+<li>La zona de <strong>estado y lógica</strong> recibe esos avisos, aplica las reglas y produce el nuevo estado de la pantalla. Además, sobrevive a la rotación.</li>
+<li>La zona de <strong>datos</strong> sabe de dónde vienen las tareas y dónde se guardan. Nadie más necesita saberlo.</li>
+</ul>
+<h2 id="los-datos-fluyen-en-un-solo-sentido">Los datos fluyen en un solo sentido<a class="headerlink" href="#los-datos-fluyen-en-un-solo-sentido" title="Permanent link">&para;</a></h2>
+<p>Fíjate en las flechas del diagrama. El <strong>estado baja</strong> hacia la interfaz y los <strong>eventos suben</strong> desde ella. La interfaz nunca modifica los datos directamente: solo avisa de lo que pasó.</p>
+<p>Así ocurre agregar una tarea:</p>
+<ol>
+<li>El usuario escribe «Comprar pan» y toca <strong>Agregar</strong> (<em>reaccionar</em>).</li>
+<li>La interfaz avisa: «el usuario quiere agregar "Comprar pan"».</li>
+<li>La lógica comprueba que el texto no esté vacío (<em>decidir</em>) y le pide a la zona de datos que la guarde (<em>guardar</em>).</li>
+<li>La lógica produce el nuevo estado: la lista con una tarea más.</li>
+<li>La interfaz recibe ese estado y se vuelve a dibujar (<em>mostrar</em>).</li>
+</ol>
+<p>A este recorrido se le llama <strong>flujo de datos unidireccional</strong>. Su ventaja es que siempre sabes dónde buscar: si la lista se ve mal, el problema está en cómo se muestra el estado; si una tarea vacía se agregó, el problema está en la lógica.</p>
+<p>Hay una segunda regla, igual de importante: <strong>las dependencias apuntan hacia los datos</strong>. La interfaz conoce a la lógica, y la lógica conoce a la zona de datos, pero no al revés. La zona de datos no sabe que existe una pantalla. Por eso puedes cambiar la pantalla sin tocar los datos, o cambiar de dónde vienen los datos sin tocar la pantalla.</p>
+<h2 id="el-mapa-que-vas-a-construir">El mapa que vas a construir<a class="headerlink" href="#el-mapa-que-vas-a-construir" title="Permanent link">&para;</a></h2>
+<p>A lo largo del curso, cada zona tendrá su pieza concreta de Android:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Zona</th>
+<th style="text-align: left;">Pieza</th>
+<th style="text-align: left;">Dónde la verás</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Interfaz</td>
+<td style="text-align: left;">Composables de <strong>Jetpack Compose</strong></td>
+<td style="text-align: left;">Parte VII</td>
+</tr>
+<tr>
+<td style="text-align: left;">Estado y lógica</td>
+<td style="text-align: left;"><strong><code>ViewModel</code></strong></td>
+<td style="text-align: left;">Parte VIII</td>
+</tr>
+<tr>
+<td style="text-align: left;">Datos</td>
+<td style="text-align: left;"><strong>Repositorio</strong> que usa una fuente: en memoria, una API REST o una base de datos local</td>
+<td style="text-align: left;">Partes VIII y IX</td>
+</tr>
+</tbody>
+</table>
+<p>Esta organización tiene nombre: <strong>MVVM</strong> (<em>Model-View-ViewModel</em>), la arquitectura que recomienda Android. No necesitas recordarlo ahora. En la Parte VII construirás la lista de tareas con todo dentro de la interfaz, y comprobarás en primera persona que las tareas se pierden al girar el teléfono. En la Parte VIII moverás cada trabajo a su zona.</p>
+<div class="admonition tip">
+<p class="admonition-title">Important</p>
+<p>Estas tres zonas son <strong>responsabilidades</strong>, no carpetas. Una app pequeña puede tener todo en unos pocos archivos y respetar igualmente el flujo de datos. Lo que importa es quién decide, quién muestra y quién guarda; cómo organices después los archivos es una decisión aparte, que verás en la Parte VIII.</p>
+</div>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Toda app hace cinco trabajos: <strong>mostrar</strong>, <strong>reaccionar</strong>, <strong>decidir</strong>, <strong>obtener</strong> y <strong>guardar</strong>.</li>
+<li>Ponerlos todos en la <code>Activity</code> hace que el estado se pierda al girar, que un cambio arrastre a todo lo demás y que la lógica sea difícil de probar.</li>
+<li>Se agrupan en tres zonas: <strong>interfaz</strong>, <strong>estado y lógica</strong> y <strong>datos</strong>.</li>
+<li>El <strong>estado baja</strong> y los <strong>eventos suben</strong> (flujo de datos unidireccional); las <strong>dependencias apuntan hacia los datos</strong>.</li>
+<li>En el curso, esas zonas serán <strong>Compose</strong>, el <strong><code>ViewModel</code></strong> y el <strong>repositorio</strong>: la arquitectura <strong>MVVM</strong>. Son responsabilidades, no carpetas.</li>
+</ul>
+<p>En la próxima parte empezarás por la primera zona: la <strong>interfaz</strong>, con Jetpack Compose.</p>
 
 
 
@@ -2921,7 +3262,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../chapter26/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 26. Ciclo de vida de una &lt;code&gt;Activity&lt;/code&gt; y tu primer &lt;code&gt;@Composable&lt;/code&gt;">
+          <a href="../chapter26/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 26. Ciclo de vida de una &lt;code&gt;Activity&lt;/code&gt;">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2931,20 +3272,20 @@
                 Anterior
               </span>
               <div class="md-ellipsis">
-                26. Ciclo de vida de una <code>Activity</code> y tu primer <code>@Composable</code>
+                26. Ciclo de vida de una <code>Activity</code>
               </div>
             </div>
           </a>
         
         
           
-          <a href="../chapter28/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 28. Gestión de recursos: imágenes, íconos y cadenas de texto">
+          <a href="../../part07/chapter28/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 28. Tu primer composable: &lt;code&gt;@Composable&lt;/code&gt;, &lt;code&gt;@Preview&lt;/code&gt; y parámetros">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                28. Gestión de recursos: imágenes, íconos y cadenas de texto
+                28. Tu primer composable: <code>@Composable</code>, <code>@Preview</code> y parámetros
               </div>
             </div>
             <div class="md-footer__button md-icon">

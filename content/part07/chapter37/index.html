@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://jmcandia.github.io/android-kotlin-desde-cero/content/part07/chapter37/">
       
       
-        <link rel="prev" href="../chapter36/">
+        <link rel="prev" href="../tutorial_my_todo_list_part_2/">
       
       
         <link rel="next" href="../../part08/chapter38/">
@@ -27,7 +27,7 @@
     
     
       
-        <title>37. Inyección de dependencias (manual y con Hilt) - Android con Kotlin desde cero</title>
+        <title>37. Diseño adaptable con Window Size Classes (opcional) - Android con Kotlin desde cero</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#capitulo-37-inyeccion-de-dependencias-manual-y-con-hilt" class="md-skip">
+        <a href="#capitulo-37-diseno-adaptable-con-window-size-classes" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              37. Inyección de dependencias (manual y con Hilt)
+              37. Diseño adaptable con <em>Window Size Classes</em> (opcional)
             
           </span>
         </div>
@@ -892,34 +892,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part03/chapter15/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    15. Formato de cadenas con <code>String.format</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../part03/exercises/" class="md-nav__link">
         
   
@@ -1002,6 +974,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../part04/chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Clases, propiedades y constructores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../part04/chapter16/" class="md-nav__link">
         
   
@@ -1009,7 +1009,7 @@
   <span class="md-ellipsis">
     
   
-    16. Clases, propiedades y constructores
+    16. Herencia, interfaces y clases abstractas
   
 
     
@@ -1037,7 +1037,7 @@
   <span class="md-ellipsis">
     
   
-    17. Herencia, interfaces y clases abstractas
+    17. <code>data class</code>, <code>copy</code> y desestructuración
   
 
     
@@ -1065,7 +1065,7 @@
   <span class="md-ellipsis">
     
   
-    18. <code>data class</code>, <code>copy</code> y desestructuración
+    18. <code>object</code>, <code>companion object</code> y singletons
   
 
     
@@ -1093,7 +1093,7 @@
   <span class="md-ellipsis">
     
   
-    19. <code>object</code>, <code>companion object</code> y singletons
+    19. <code>enum</code> y <code>sealed class</code>
   
 
     
@@ -1121,7 +1121,7 @@
   <span class="md-ellipsis">
     
   
-    20. <code>enum</code> y <code>sealed class</code>
+    20. Genéricos y funciones de extensión
   
 
     
@@ -1149,7 +1149,7 @@
   <span class="md-ellipsis">
     
   
-    21. Genéricos, funciones de extensión y lambdas
+    21. Lambdas a fondo: receptores, funciones de alcance y delegación
   
 
     
@@ -1361,7 +1361,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VI · Introducción a Android con Jetpack Compose
+    Parte VI · Android y arquitectura de aplicaciones
   
 
     
@@ -1377,7 +1377,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VI · Introducción a Android con Jetpack Compose
+    Parte VI · Android y arquitectura de aplicaciones
   
 
           </label>
@@ -1425,7 +1425,7 @@
   <span class="md-ellipsis">
     
   
-    26. Ciclo de vida de una <code>Activity</code> y tu primer <code>@Composable</code>
+    26. Ciclo de vida de una <code>Activity</code>
   
 
     
@@ -1453,231 +1453,7 @@
   <span class="md-ellipsis">
     
   
-    27. Fundamentos de Compose: composables, recomposición y <code>Modifier</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter28/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    28. Gestión de recursos: imágenes, íconos y cadenas de texto
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter29/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    29. Material 3: componentes listos para usar
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter30/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    30. Estructura de pantalla: <code>Scaffold</code>, layouts y <code>LazyColumn</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter31/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    31. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/tutorial_my_todo_list_part_1/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tutorial: Mi lista de tareas (parte 1)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter32/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    32. Navegación con Navigation Compose
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter33/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    33. Material 3: tema, color y tipografía
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/tutorial_my_todo_list_part_2/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tutorial: Mi lista de tareas (parte 2)
+    27. Cómo se organiza una app: responsabilidades y flujo de datos
   
 
     
@@ -1725,7 +1501,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VII · Arquitectura MVVM
+    Parte VII · Jetpack Compose y construcción de interfaces
   
 
     
@@ -1741,11 +1517,207 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VII · Arquitectura MVVM
+    Parte VII · Jetpack Compose y construcción de interfaces
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Tu primer composable: <code>@Composable</code>, <code>@Preview</code> y parámetros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. <code>Modifier</code> y layouts: <code>Column</code>, <code>Row</code> y <code>Box</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Gestión de recursos: imágenes, íconos y cadenas de texto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. Material 3: componentes listos para usar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter32/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. Estado en Compose: recomposición, <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter33/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Estructura de pantalla: <code>Scaffold</code> y <code>LazyColumn</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial_my_todo_list_part_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1761,7 +1733,7 @@
   <span class="md-ellipsis">
     
   
-    34. Qué es MVVM y por qué usarlo
+    34. Formularios y validación en la interfaz
   
 
     
@@ -1789,7 +1761,7 @@
   <span class="md-ellipsis">
     
   
-    35. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
+    35. Navegación con Navigation Compose
   
 
     
@@ -1817,7 +1789,35 @@
   <span class="md-ellipsis">
     
   
-    36. Repositorio y separación de capas
+    36. Material 3: tema, color y tipografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial_my_todo_list_part_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 2)
   
 
     
@@ -1854,7 +1854,7 @@
   <span class="md-ellipsis">
     
   
-    37. Inyección de dependencias (manual y con Hilt)
+    37. Diseño adaptable con <em>Window Size Classes</em> (opcional)
   
 
     
@@ -1872,7 +1872,7 @@
   <span class="md-ellipsis">
     
   
-    37. Inyección de dependencias (manual y con Hilt)
+    37. Diseño adaptable con <em>Window Size Classes</em> (opcional)
   
 
     
@@ -1909,46 +1909,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#que-es-la-inyeccion-de-dependencias" class="md-nav__link">
+  <a href="#adaptar-el-diseno-al-espacio-disponible" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué es la inyección de dependencias?
+        Adaptar el diseño al espacio disponible
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adaptar el diseño al espacio disponible">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtener-la-clase-desde-un-composable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Obtener la clase desde un composable
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#inyeccion-manual" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Inyección manual
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#hilt-inyeccion-automatica" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Hilt: inyección automática
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lo-esencial-de-hilt" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Lo esencial de Hilt
-      
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2004,7 +1988,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VIII · Consumo de API REST con Retrofit
+    Parte VIII · Estado y arquitectura con MVVM
   
 
     
@@ -2020,7 +2004,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VIII · Consumo de API REST con Retrofit
+    Parte VIII · Estado y arquitectura con MVVM
   
 
           </label>
@@ -2040,7 +2024,7 @@
   <span class="md-ellipsis">
     
   
-    38. HTTP, REST y JSON: cómo se comunican las apps con un servidor
+    38. Qué es MVVM y por qué usarlo
   
 
     
@@ -2068,7 +2052,7 @@
   <span class="md-ellipsis">
     
   
-    39. Retrofit: configuración, interfaces y endpoints
+    39. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
   
 
     
@@ -2096,7 +2080,35 @@
   <span class="md-ellipsis">
     
   
-    40. Serialización JSON y modelos de datos (DTO)
+    40. Efectos y eventos puntuales: <code>LaunchedEffect</code>, Snackbar y navegación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/tutorial_my_todo_list_part_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 3)
   
 
     
@@ -2124,7 +2136,63 @@
   <span class="md-ellipsis">
     
   
-    41. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
+    41. Repositorio y separación de capas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/chapter42/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    42. Inyección de dependencias (manual y con Hilt)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/tutorial_my_todo_list_part_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 4)
   
 
     
@@ -2170,7 +2238,7 @@
   <span class="md-ellipsis">
     
   
-    Parte IX · Proyecto final
+    Parte IX · Datos: API REST y persistencia local
   
 
     
@@ -2186,39 +2254,11 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte IX · Proyecto final
+    Parte IX · Datos: API REST y persistencia local
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter42/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    42. Diseño de la app: pantallas, navegación y arquitectura
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -2234,7 +2274,7 @@
   <span class="md-ellipsis">
     
   
-    43. Setup del proyecto y dependencias
+    43. HTTP, REST y JSON: cómo se comunican las apps con un servidor
   
 
     
@@ -2262,7 +2302,7 @@
   <span class="md-ellipsis">
     
   
-    44. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>
+    44. Serialización JSON y modelos de datos (DTO)
   
 
     
@@ -2290,7 +2330,7 @@
   <span class="md-ellipsis">
     
   
-    45. Pantalla de lista con paginación
+    45. Retrofit: configuración, interfaces y endpoints
   
 
     
@@ -2318,7 +2358,7 @@
   <span class="md-ellipsis">
     
   
-    46. Carga de sprites con Coil
+    46. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
   
 
     
@@ -2346,7 +2386,7 @@
   <span class="md-ellipsis">
     
   
-    47. Pantalla de detalle: stats, tipos y habilidades
+    47. Persistencia local con Room
   
 
     
@@ -2367,98 +2407,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/tutorial_my_todo_list_part_5/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    48. Búsqueda y filtrado
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter49/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    49. Persistencia local con Room: favoritos y caché offline
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter50/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    50. Pulido: estados de UI, Material 3 y accesibilidad
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter51/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    51. Cierre: testing básico, buenas prácticas y próximos pasos
+    Tutorial: Mi lista de tareas (parte 5)
   
 
     
@@ -2504,7 +2460,7 @@
   <span class="md-ellipsis">
     
   
-    Anexos
+    Parte X · Proyecto final: contactos
   
 
     
@@ -2517,6 +2473,368 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte X · Proyecto final: contactos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter48/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    48. Presentación y arquitectura de «Mis Contactos»
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter49/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    49. Configuración del proyecto y permisos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter50/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    50. La capa remota: DTOs, Retrofit y módulo de red
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter51/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    51. La capa local: Room para caché y favoritos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter52/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    52. El repositorio: estrategia <em>offline-first</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter53/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    53. Pantalla de lista: búsqueda, paginación y favoritos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter54/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    54. Pantalla de detalle: eliminación segura con evento como estado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter55/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    55. Pantalla de formulario: validación local y del servidor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter56/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    56. Navegación con rutas tipadas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter57/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    57. Componentes compartidos y tema visual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter58/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    58. Cierre del proyecto y próximos pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2568,7 +2886,7 @@
   <span class="md-ellipsis">
     
   
-    B. Entrada estándar con Scanner de Java
+    B. De Java a Kotlin: equivalencias y <code>Scanner</code>
   
 
     
@@ -2597,6 +2915,34 @@
     
   
     C. Cómo elegir el SDK de un proyecto Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/string-format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Formato de cadenas con <code>String.format</code>
   
 
     
@@ -2655,46 +3001,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#que-es-la-inyeccion-de-dependencias" class="md-nav__link">
+  <a href="#adaptar-el-diseno-al-espacio-disponible" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué es la inyección de dependencias?
+        Adaptar el diseño al espacio disponible
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adaptar el diseño al espacio disponible">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtener-la-clase-desde-un-composable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Obtener la clase desde un composable
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#inyeccion-manual" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Inyección manual
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#hilt-inyeccion-automatica" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Hilt: inyección automática
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lo-esencial-de-hilt" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Lo esencial de Hilt
-      
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2729,83 +3059,195 @@
   
 
 
-<h1 id="capitulo-37-inyeccion-de-dependencias-manual-y-con-hilt">Capítulo 37: Inyección de dependencias (manual y con Hilt)<a class="headerlink" href="#capitulo-37-inyeccion-de-dependencias-manual-y-con-hilt" title="Permanent link">&para;</a></h1>
-<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
-<p>En el capítulo anterior quedó una pregunta abierta: si el <code>ViewModel</code> recibe el repositorio por su constructor, <strong>¿quién crea el repositorio y se lo entrega?</strong> La respuesta es la <strong>inyección de dependencias</strong> (<em>dependency injection</em>, o DI).</p>
-<p>En este capítulo entenderás qué es la inyección de dependencias, cómo hacerla <strong>a mano</strong>, y cómo <strong>Hilt</strong> —la herramienta recomendada para Android— la automatiza. Con esto cierras la parte de arquitectura.</p>
-<h2 id="que-es-la-inyeccion-de-dependencias">¿Qué es la inyección de dependencias?<a class="headerlink" href="#que-es-la-inyeccion-de-dependencias" title="Permanent link">&para;</a></h2>
-<p>Una <strong>dependencia</strong> es un objeto que una clase necesita para hacer su trabajo. El <code>ViewModel</code> depende de un repositorio; el repositorio, a su vez, podría depender de un cliente de red. La pregunta es: ¿cómo obtiene una clase sus dependencias?</p>
-<p>Hay dos opciones:</p>
-<ul>
-<li>Que la clase <strong>cree</strong> sus propias dependencias por dentro: <code>val repository = DatosRepositoryImpl()</code>. Esto la deja <strong>acoplada</strong> a esa implementación concreta.</li>
-<li>Que la clase <strong>reciba</strong> sus dependencias desde fuera, normalmente por su <strong>constructor</strong>. A esto se le llama <strong>inyección de dependencias</strong>.</li>
-</ul>
-<p>De hecho, ya estuviste inyectando dependencias sin ponerle nombre: cuando el <code>ViewModel</code> recibía el repositorio por su constructor, alguien de fuera se lo estaba <strong>inyectando</strong>. Las ventajas ya las conoces del principio DIP: desacoplamiento, y la posibilidad de pasar una implementación falsa para las pruebas.</p>
-<h2 id="inyeccion-manual">Inyección manual<a class="headerlink" href="#inyeccion-manual" title="Permanent link">&para;</a></h2>
-<p>La forma más directa de inyectar dependencias es <strong>a mano</strong>: creas los objetos y los vas pasando, empezando por los más básicos:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">repository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DatosRepositoryImpl</span><span class="p">()</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">val</span><span class="w"> </span><span class="nv">viewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MiViewModel</span><span class="p">(</span><span class="n">repository</span><span class="p">)</span>
-</code></pre></div>
-<p>Para una app pequeña, esto basta. Pero a medida que crece, la <strong>cadena de dependencias</strong> se alarga: el repositorio necesita un cliente de red, que necesita una configuración, y así sucesivamente.</p>
-<pre class="mermaid"><code>flowchart TD
-    VM["ViewModel"] --&gt; R["Repositorio"]
-    R --&gt; N["Cliente de red"]
-    N --&gt; C["Configuración"]</code></pre>
-<p>Tendrías que construir todo ese grafo a mano, en el orden correcto, y repetirlo en cada lugar donde se necesite. Se vuelve tedioso y propenso a errores. Aquí es donde una herramienta de inyección automática ayuda muchísimo.</p>
-<h2 id="hilt-inyeccion-automatica">Hilt: inyección automática<a class="headerlink" href="#hilt-inyeccion-automatica" title="Permanent link">&para;</a></h2>
-<p><strong>Hilt</strong> es la biblioteca de inyección de dependencias <strong>recomendada para Android</strong> (está construida sobre otra llamada Dagger). La idea es simple: le indicas <strong>una vez</strong> cómo crear cada pieza, y Hilt <strong>genera automáticamente</strong> todo el código para construirlas y conectarlas donde hagan falta. Tú ya no armas el grafo a mano.</p>
+<h1 id="capitulo-37-diseno-adaptable-con-window-size-classes">Capítulo 37: Diseño adaptable con <em>Window Size Classes</em><a class="headerlink" href="#capitulo-37-diseno-adaptable-con-window-size-classes" title="Permanent link">&para;</a></h1>
 <div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p>Hilt requiere algo de configuración inicial en el proyecto (una dependencia y un <em>plugin</em> de Gradle) que se hace una sola vez.</p>
+<p class="admonition-title">Capítulo opcional</p>
+<p>Este capítulo es de ampliación. No es necesario para continuar con la Parte VIII ni con el proyecto final; vuelve a él cuando quieras que tu app aproveche tabletas, pantallas plegables o ventanas redimensionables.</p>
 </div>
-<h2 id="lo-esencial-de-hilt">Lo esencial de Hilt<a class="headerlink" href="#lo-esencial-de-hilt" title="Permanent link">&para;</a></h2>
-<p>Hilt funciona a base de <strong>anotaciones</strong>. Estas son las que necesitas para el caso típico.</p>
-<p>Primero, preparas la app anotando tu clase <code>Application</code> y tu <code>Activity</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@HiltAndroidApp</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MiApp</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Application</span><span class="p">()</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nd">@AndroidEntryPoint</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MainActivity</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ComponentActivity</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
-</code></pre></div>
-<p>Luego, le dices a Hilt cómo <strong>crear</strong> una clase marcando su constructor con <code>@Inject</code>. Así, Hilt sabe construir el repositorio (y le inyectará, a su vez, lo que este necesite):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">DatosRepositoryImpl</span><span class="w"> </span><span class="nd">@Inject</span><span class="w"> </span><span class="k">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DatosRepository</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerDatos</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">}</span>
-</code></pre></div>
-<p>Como el <code>ViewModel</code> depende de la <strong>interfaz</strong> <code>DatosRepository</code>, hay que decirle a Hilt qué implementación usar cuando alguien pida esa interfaz. Eso se hace en un <strong>módulo</strong>, con <code>@Binds</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Module</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nd">@InstallIn</span><span class="p">(</span><span class="n">SingletonComponent</span><span class="o">::</span><span class="n">class</span><span class="p">)</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">DataModule</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nd">@Binds</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">bindRepository</span><span class="p">(</span><span class="n">impl</span><span class="p">:</span><span class="w"> </span><span class="n">DatosRepositoryImpl</span><span class="p">):</span><span class="w"> </span><span class="n">DatosRepository</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">}</span>
-</code></pre></div>
-<p>El <code>ViewModel</code> se marca con <code>@HiltViewModel</code> y recibe sus dependencias por el constructor, también con <code>@Inject</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@HiltViewModel</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MiViewModel</span><span class="w"> </span><span class="nd">@Inject</span><span class="w"> </span><span class="k">constructor</span><span class="p">(</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">repository</span><span class="p">:</span><span class="w"> </span><span class="n">DatosRepository</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="c1">// ... la misma lógica de antes ...</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
-</code></pre></div>
-<p>Y, por último, en el composable obtienes el <code>ViewModel</code> con <code>hiltViewModel()</code> (en lugar del <code>viewModel()</code> que viste antes). Hilt se encarga de crear el <code>ViewModel</code> <strong>con su repositorio ya inyectado</strong>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@Composable</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">Pantalla</span><span class="p">(</span><span class="n">viewModel</span><span class="p">:</span><span class="w"> </span><span class="n">MiViewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hiltViewModel</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">estado</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">uiState</span><span class="p">.</span><span class="na">collectAsStateWithLifecycle</span><span class="p">()</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="c1">// ... mostrar el estado ...</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">}</span>
-</code></pre></div>
-<p>Fíjate en lo que logramos: en ningún lugar escribiste <code>DatosRepositoryImpl()</code> ni pasaste el repositorio a mano. Hilt lee las anotaciones, arma el grafo completo de dependencias y entrega cada pieza ya construida donde se necesita.</p>
-<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
-<p>En este capítulo aprendiste a conectar todas las piezas de tu arquitectura:</p>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>Hasta ahora has diseñado pantallas pensando en un teléfono en vertical. En este capítulo verás cómo una misma app puede cambiar su <strong>estructura</strong> según el espacio disponible, apoyándose en lo que ya conoces: <code>Scaffold</code>, <code>Row</code>, <code>weight</code> y las barras de navegación del capítulo 35.</p>
+<h2 id="adaptar-el-diseno-al-espacio-disponible">Adaptar el diseño al espacio disponible<a class="headerlink" href="#adaptar-el-diseno-al-espacio-disponible" title="Permanent link">&para;</a></h2>
+<p>Una interfaz móvil no debe limitarse a escalar. En una pantalla estrecha puede mostrar una sola columna y navegación inferior; en una pantalla ancha puede mostrar una lista junto a un detalle y una navegación lateral. El contenido es el mismo, pero la <strong>estructura</strong> cambia.</p>
+<p>Las <strong>Window Size Classes</strong> clasifican el espacio disponible de la ventana en categorías estables, en lugar de tomar decisiones con muchos valores concretos:</p>
 <ul>
-<li>Una <strong>dependencia</strong> es un objeto que una clase necesita. La <strong>inyección de dependencias</strong> consiste en <strong>recibirlas desde fuera</strong> (por el constructor) en lugar de crearlas internamente, lo que desacopla el código.</li>
-<li>La <strong>inyección manual</strong> (crear y pasar los objetos a mano) funciona en apps pequeñas, pero se vuelve tediosa cuando la cadena de dependencias crece.</li>
-<li><strong>Hilt</strong> es la herramienta recomendada para Android: con anotaciones, arma y entrega automáticamente el grafo de dependencias.</li>
-<li>Anotaciones esenciales: <code>@HiltAndroidApp</code> (en la <code>Application</code>), <code>@AndroidEntryPoint</code> (en la <code>Activity</code>), <code>@Inject constructor</code> (cómo crear una clase), <code>@Module</code> + <code>@Binds</code> (qué implementación usar para una interfaz) y <code>@HiltViewModel</code> (para los ViewModels).</li>
-<li>En el composable, obtienes el <code>ViewModel</code> con <code>hiltViewModel()</code>, ya con sus dependencias inyectadas.</li>
+<li><strong>Compact</strong>: normalmente una sola columna y acciones esenciales.</li>
+<li><strong>Medium</strong>: más espacio para separar secciones o mostrar dos columnas sencillas.</li>
+<li><strong>Expanded</strong>: una navegación lateral, paneles simultáneos o una lista y su detalle.</li>
 </ul>
-<p>Con esto <strong>cierras la arquitectura MVVM</strong>: interfaz, ViewModel, repositorio y las dependencias que los conectan. En la próxima parte del curso aprenderás a traer datos reales desde internet con <strong>Retrofit</strong>, la pieza que faltaba en la capa de datos.</p>
+<p>Estas clases describen el espacio disponible en <strong>dp</strong>, no el tamaño físico del dispositivo. Para el ancho de la ventana, la guía de diseño de Android usa habitualmente estos puntos de corte:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Clase de ancho</th>
+<th style="text-align: left;">Ancho disponible</th>
+<th style="text-align: left;">Decisiones habituales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>Compact</code></td>
+<td style="text-align: left;">Menos de <code>600.dp</code></td>
+<td style="text-align: left;">Una columna, <code>NavigationBar</code> y pantallas completas.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Medium</code></td>
+<td style="text-align: left;">Desde <code>600.dp</code> hasta menos de <code>840.dp</code></td>
+<td style="text-align: left;">Dos columnas moderadas, <code>NavigationRail</code> o una lista con un panel secundario.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Expanded</code></td>
+<td style="text-align: left;"><code>840.dp</code> o más</td>
+<td style="text-align: left;">Navegación lateral, lista y detalle simultáneos o varias regiones persistentes.</td>
+</tr>
+</tbody>
+</table>
+<p>Los límites no son una clasificación de teléfonos concretos. Un móvil puede pasar de <code>Compact</code> a <code>Medium</code> al girarse, una tableta puede estar en <code>Expanded</code> y una ventana de escritorio puede cambiar de clase al redimensionarse. Por eso se decide a partir del espacio real que recibe la app.</p>
+<p>También existe una <strong>clase de altura</strong> con las mismas categorías. Es útil cuando una pantalla tiene poco espacio vertical: en altura <code>Compact</code> puedes reducir espacios, agrupar acciones o permitir desplazamiento; en altura <code>Medium</code> puedes mostrar más contenido; en altura <code>Expanded</code> puedes distribuir las secciones con mayor comodidad. No conviene usar la altura para decidir si una navegación debe ser inferior o lateral: esa decisión suele depender principalmente del ancho.</p>
+<p>La clase tampoco indica por sí sola qué diseño debes construir. Es un punto de partida para una decisión de producto:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Necesidad</th>
+<th style="text-align: left;"><code>Compact</code></th>
+<th style="text-align: left;"><code>Medium</code></th>
+<th style="text-align: left;"><code>Expanded</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Lista y detalle</td>
+<td style="text-align: left;">Navegar a otra pantalla</td>
+<td style="text-align: left;">Mostrar una lista amplia y un detalle opcional</td>
+<td style="text-align: left;">Mantener lista y detalle visibles a la vez</td>
+</tr>
+<tr>
+<td style="text-align: left;">Navegación</td>
+<td style="text-align: left;"><code>NavigationBar</code></td>
+<td style="text-align: left;"><code>NavigationRail</code> o barra inferior si sigue siendo cómoda</td>
+<td style="text-align: left;"><code>NavigationDrawer</code> permanente o rail con etiquetas</td>
+</tr>
+<tr>
+<td style="text-align: left;">Formulario</td>
+<td style="text-align: left;">Una columna y scroll</td>
+<td style="text-align: left;">Dos grupos de campos si mejora la lectura</td>
+<td style="text-align: left;">Separar datos principales, ayuda y resumen</td>
+</tr>
+<tr>
+<td style="text-align: left;">Acciones</td>
+<td style="text-align: left;">Mostrar las esenciales</td>
+<td style="text-align: left;">Agrupar acciones relacionadas</td>
+<td style="text-align: left;">Mantener acciones frecuentes visibles y el resto en menú</td>
+</tr>
+</tbody>
+</table>
+<p>La clasificación debe basarse en el ancho de la ventana, no en el modelo del teléfono. Así la misma decisión funciona en un móvil girado, una tableta, una ventana redimensionada o un escritorio.</p>
+<h3 id="obtener-la-clase-desde-un-composable">Obtener la clase desde un composable<a class="headerlink" href="#obtener-la-clase-desde-un-composable" title="Permanent link">&para;</a></h3>
+<p>También puedes encapsular el acceso a la actividad actual en una función composable. Este patrón permite que una pantalla obtenga su <code>WindowSizeClass</code> sin recibir la actividad como parámetro:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">androidx.activity.compose.LocalActivity</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.material3.windowsizeclass.WindowSizeClass</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.material3.windowsizeclass.calculateWindowSizeClass</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.runtime.Composable</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nd">@OptIn</span><span class="p">(</span><span class="n">ExperimentalMaterial3WindowSizeClassApi</span><span class="o">::</span><span class="n">class</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nd">@Composable</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">getWindowSizeClass</span><span class="p">():</span><span class="w"> </span><span class="n">WindowSizeClass</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">calculateWindowSizeClass</span><span class="p">(</span><span class="n">LocalActivity</span><span class="p">.</span><span class="na">current</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">android</span><span class="p">.</span><span class="na">app</span><span class="p">.</span><span class="na">Activity</span><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">}</span>
+</code></pre></div>
+<p>La pantalla puede consultar la clase y delegar la composición a una implementación específica para cada ancho. El <code>when</code> es exhaustivo: cada valor de <code>WindowWidthSizeClass</code> tiene una estructura explícita.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">androidx.compose.material3.windowsizeclass.WindowWidthSizeClass</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nd">@Composable</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">HomeScreen</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">windowSizeClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getWindowSizeClass</span><span class="p">()</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">windowSizeClass</span><span class="p">.</span><span class="na">widthSizeClass</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">        </span><span class="n">WindowWidthSizeClass</span><span class="p">.</span><span class="na">Compact</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">HomeScreenCompact</span><span class="p">()</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span><span class="n">WindowWidthSizeClass</span><span class="p">.</span><span class="na">Medium</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">HomeScreenMedium</span><span class="p">()</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="n">WindowWidthSizeClass</span><span class="p">.</span><span class="na">Expanded</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">HomeScreenExpanded</span><span class="p">()</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="p">}</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="nd">@Composable</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">HomeScreenCompact</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="c1">// Implement the compact screen layout</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="p">}</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="nd">@Composable</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">HomeScreenMedium</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">    </span><span class="c1">// Implement the medium screen layout</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="p">}</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="nd">@Composable</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">HomeScreenExpanded</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">    </span><span class="c1">// Implement the expanded screen layout</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="p">}</span>
+</code></pre></div>
+<p>En este caso, <code>HomeScreen</code> decide <strong>qué estructura</strong> mostrar, mientras que <code>HomeScreenCompact</code>, <code>HomeScreenMedium</code> y <code>HomeScreenExpanded</code> implementan cada composición. Las tres variantes pueden compartir modelos, estado y callbacks; lo que cambia es la disposición de los elementos. <code>LocalActivity.current</code> y <code>calculateWindowSizeClass</code> dependen de las versiones de <code>activity-compose</code> y Material 3 del proyecto, por lo que Android Studio puede solicitar la actualización de la dependencia o del import.</p>
+<p>Con la biblioteca <code>androidx.compose.material3:material3-window-size-class</code>, una actividad puede obtener la clase y pasar solo una decisión de diseño al composable:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MainActivity</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ComponentActivity</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span><span class="w"> </span><span class="n">Bundle?)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="k">super</span><span class="p">.</span><span class="na">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">        </span><span class="n">setContent</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">windowSizeClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calculateWindowSizeClass</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">            </span><span class="n">MiAppTheme</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">                </span><span class="n">ContactosApp</span><span class="p">(</span><span class="n">windowWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">windowSizeClass</span><span class="p">.</span><span class="na">widthSizeClass</span><span class="p">)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">}</span>
+</code></pre></div>
+<p>La pantalla decide su composición, no cada componente individual:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@Composable</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">ContactosApp</span><span class="p">(</span><span class="n">windowWidth</span><span class="p">:</span><span class="w"> </span><span class="n">WindowWidthSizeClass</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">windowWidth</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="n">WindowWidthSizeClass</span><span class="p">.</span><span class="na">Expanded</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ContactosTwoPane</span><span class="p">()</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="n">WindowWidthSizeClass</span><span class="p">.</span><span class="na">Medium</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ContactosWithRail</span><span class="p">()</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="n">WindowWidthSizeClass</span><span class="p">.</span><span class="na">Compact</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ContactosSinglePane</span><span class="p">()</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">}</span>
+</code></pre></div>
+<p>El diseño puede compartir los mismos composables internos y cambiar solo el contenedor:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@Composable</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">ContactosLayout</span><span class="p">(</span><span class="n">windowWidth</span><span class="p">:</span><span class="w"> </span><span class="n">WindowWidthSizeClass</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">windowWidth</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="n">WindowWidthSizeClass</span><span class="p">.</span><span class="na">Compact</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">            </span><span class="n">Scaffold</span><span class="p">(</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">                </span><span class="n">bottomBar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ContactosBottomBar</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">            </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">padding</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">                </span><span class="n">ContactosList</span><span class="p">(</span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">padding</span><span class="p">(</span><span class="n">padding</span><span class="p">))</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">        </span><span class="n">WindowWidthSizeClass</span><span class="p">.</span><span class="na">Medium</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">            </span><span class="n">Row</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">                </span><span class="n">ContactosRail</span><span class="p">()</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">                </span><span class="n">ContactosList</span><span class="p">(</span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">weight</span><span class="p">(</span><span class="m">1f</span><span class="p">))</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">        </span><span class="n">WindowWidthSizeClass</span><span class="p">.</span><span class="na">Expanded</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">            </span><span class="n">Row</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">                </span><span class="n">ContactosNavigationDrawer</span><span class="p">()</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">                </span><span class="n">ContactosList</span><span class="p">(</span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">weight</span><span class="p">(</span><span class="m">0.4f</span><span class="p">))</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="w">                </span><span class="n">ContactoDetail</span><span class="p">(</span><span class="n">modifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Modifier</span><span class="p">.</span><span class="na">weight</span><span class="p">(</span><span class="m">0.6f</span><span class="p">))</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="p">}</span>
+</code></pre></div>
+<p>En este ejemplo, la lista y el detalle siguen siendo las mismas funciones y el estado de selección sigue teniendo una sola fuente de verdad. Solo cambia el contenedor que las presenta. Si el ancho cambia mientras la app está abierta, Compose recompone esta decisión y la navegación debe conservar el destino y el elemento seleccionado siempre que la nueva estructura pueda mostrarlos.</p>
+<p>El nombre de algunas APIs puede variar según la versión de Compose. El principio no cambia: medir el espacio disponible, elegir una estructura y dejar que los componentes internos ocupen el espacio asignado con <code>fillMaxWidth</code>, <code>weight</code>, <code>LazyColumn</code> y restricciones razonables. No conviene mantener dos copias independientes de la navegación o del estado solo porque cambia la disposición visual.</p>
+<div class="admonition tip">
+<p class="admonition-title">Important</p>
+<p>Una adaptación correcta conserva la jerarquía y la tarea principal. No ocultes información esencial en una pantalla ancha ni fuerces una fila de controles que desborde en una pantalla estrecha; cambia la composición, no el significado.</p>
+</div>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Las <strong>Window Size Classes</strong> permiten elegir entre una composición compacta, intermedia o expandida según el espacio real de la ventana, haciendo posible un diseño adaptable para móviles, tabletas y ventanas redimensionadas.</li>
+<li><code>Compact</code>, <code>Medium</code> y <code>Expanded</code> son clases de ancho y de alto basadas en <code>dp</code>; para el ancho, los puntos de referencia habituales son <code>600.dp</code> y <code>840.dp</code>. No representan modelos de dispositivo, sino el espacio que la app tiene disponible.</li>
+<li>La pantalla decide su composición; los composables internos, el estado y la navegación se comparten entre las variantes.</li>
+</ul>
 
 
 
@@ -2841,7 +3283,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../chapter36/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 36. Repositorio y separación de capas">
+          <a href="../tutorial_my_todo_list_part_2/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Tutorial: Mi lista de tareas (parte 2)">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2851,20 +3293,20 @@
                 Anterior
               </span>
               <div class="md-ellipsis">
-                36. Repositorio y separación de capas
+                Tutorial: Mi lista de tareas (parte 2)
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../part08/chapter38/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 38. HTTP, REST y JSON: cómo se comunican las apps con un servidor">
+          <a href="../../part08/chapter38/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 38. Qué es MVVM y por qué usarlo">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                38. HTTP, REST y JSON: cómo se comunican las apps con un servidor
+                38. Qué es MVVM y por qué usarlo
               </div>
             </div>
             <div class="md-footer__button md-icon">

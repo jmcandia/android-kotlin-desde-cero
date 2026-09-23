@@ -27,7 +27,7 @@
     
     
       
-        <title>39. Retrofit: configuración, interfaces y endpoints - Android con Kotlin desde cero</title>
+        <title>39. ViewModel y el estado de la interfaz (UiState) - Android con Kotlin desde cero</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#capitulo-39-retrofit-configuracion-interfaces-y-endpoints" class="md-skip">
+        <a href="#capitulo-39-viewmodel-y-el-estado-de-la-interfaz-uistate" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              39. Retrofit: configuración, interfaces y endpoints
+              39. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
             
           </span>
         </div>
@@ -892,34 +892,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part03/chapter15/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    15. Formato de cadenas con <code>String.format</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../part03/exercises/" class="md-nav__link">
         
   
@@ -1002,6 +974,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../part04/chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Clases, propiedades y constructores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../part04/chapter16/" class="md-nav__link">
         
   
@@ -1009,7 +1009,7 @@
   <span class="md-ellipsis">
     
   
-    16. Clases, propiedades y constructores
+    16. Herencia, interfaces y clases abstractas
   
 
     
@@ -1037,7 +1037,7 @@
   <span class="md-ellipsis">
     
   
-    17. Herencia, interfaces y clases abstractas
+    17. <code>data class</code>, <code>copy</code> y desestructuración
   
 
     
@@ -1065,7 +1065,7 @@
   <span class="md-ellipsis">
     
   
-    18. <code>data class</code>, <code>copy</code> y desestructuración
+    18. <code>object</code>, <code>companion object</code> y singletons
   
 
     
@@ -1093,7 +1093,7 @@
   <span class="md-ellipsis">
     
   
-    19. <code>object</code>, <code>companion object</code> y singletons
+    19. <code>enum</code> y <code>sealed class</code>
   
 
     
@@ -1121,7 +1121,7 @@
   <span class="md-ellipsis">
     
   
-    20. <code>enum</code> y <code>sealed class</code>
+    20. Genéricos y funciones de extensión
   
 
     
@@ -1149,7 +1149,7 @@
   <span class="md-ellipsis">
     
   
-    21. Genéricos, funciones de extensión y lambdas
+    21. Lambdas a fondo: receptores, funciones de alcance y delegación
   
 
     
@@ -1361,7 +1361,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VI · Introducción a Android con Jetpack Compose
+    Parte VI · Android y arquitectura de aplicaciones
   
 
     
@@ -1377,7 +1377,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VI · Introducción a Android con Jetpack Compose
+    Parte VI · Android y arquitectura de aplicaciones
   
 
           </label>
@@ -1425,7 +1425,7 @@
   <span class="md-ellipsis">
     
   
-    26. Ciclo de vida de una <code>Activity</code> y tu primer <code>@Composable</code>
+    26. Ciclo de vida de una <code>Activity</code>
   
 
     
@@ -1453,231 +1453,7 @@
   <span class="md-ellipsis">
     
   
-    27. Fundamentos de Compose: composables, recomposición y <code>Modifier</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter28/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    28. Gestión de recursos: imágenes, íconos y cadenas de texto
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter29/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    29. Material 3: componentes listos para usar
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter30/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    30. Estructura de pantalla: <code>Scaffold</code>, layouts y <code>LazyColumn</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter31/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    31. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/tutorial_my_todo_list_part_1/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tutorial: Mi lista de tareas (parte 1)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter32/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    32. Navegación con Navigation Compose
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter33/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    33. Material 3: tema, color y tipografía
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/tutorial_my_todo_list_part_2/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tutorial: Mi lista de tareas (parte 2)
+    27. Cómo se organiza una app: responsabilidades y flujo de datos
   
 
     
@@ -1723,7 +1499,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VII · Arquitectura MVVM
+    Parte VII · Jetpack Compose y construcción de interfaces
   
 
     
@@ -1739,11 +1515,207 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VII · Arquitectura MVVM
+    Parte VII · Jetpack Compose y construcción de interfaces
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Tu primer composable: <code>@Composable</code>, <code>@Preview</code> y parámetros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. <code>Modifier</code> y layouts: <code>Column</code>, <code>Row</code> y <code>Box</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Gestión de recursos: imágenes, íconos y cadenas de texto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. Material 3: componentes listos para usar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter32/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. Estado en Compose: recomposición, <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter33/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Estructura de pantalla: <code>Scaffold</code> y <code>LazyColumn</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/tutorial_my_todo_list_part_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1759,7 +1731,7 @@
   <span class="md-ellipsis">
     
   
-    34. Qué es MVVM y por qué usarlo
+    34. Formularios y validación en la interfaz
   
 
     
@@ -1787,7 +1759,7 @@
   <span class="md-ellipsis">
     
   
-    35. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
+    35. Navegación con Navigation Compose
   
 
     
@@ -1815,7 +1787,35 @@
   <span class="md-ellipsis">
     
   
-    36. Repositorio y separación de capas
+    36. Material 3: tema, color y tipografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/tutorial_my_todo_list_part_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 2)
   
 
     
@@ -1843,7 +1843,7 @@
   <span class="md-ellipsis">
     
   
-    37. Inyección de dependencias (manual y con Hilt)
+    37. Diseño adaptable con <em>Window Size Classes</em> (opcional)
   
 
     
@@ -1891,7 +1891,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VIII · Consumo de API REST con Retrofit
+    Parte VIII · Estado y arquitectura con MVVM
   
 
     
@@ -1907,7 +1907,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VIII · Consumo de API REST con Retrofit
+    Parte VIII · Estado y arquitectura con MVVM
   
 
           </label>
@@ -1927,7 +1927,7 @@
   <span class="md-ellipsis">
     
   
-    38. HTTP, REST y JSON: cómo se comunican las apps con un servidor
+    38. Qué es MVVM y por qué usarlo
   
 
     
@@ -1964,7 +1964,7 @@
   <span class="md-ellipsis">
     
   
-    39. Retrofit: configuración, interfaces y endpoints
+    39. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
   
 
     
@@ -1982,7 +1982,7 @@
   <span class="md-ellipsis">
     
   
-    39. Retrofit: configuración, interfaces y endpoints
+    39. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
   
 
     
@@ -2019,10 +2019,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#que-es-retrofit" class="md-nav__link">
+  <a href="#la-clase-viewmodel" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué es Retrofit?
+        La clase ViewModel
       
     </span>
   </a>
@@ -2030,10 +2030,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#instalar-y-configurar-retrofit" class="md-nav__link">
+  <a href="#exponer-el-estado-de-forma-segura" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Instalar y configurar Retrofit
+        Exponer el estado de forma segura
       
     </span>
   </a>
@@ -2041,10 +2041,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#definir-la-interfaz-de-la-api" class="md-nav__link">
+  <a href="#actualizar-el-estado" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Definir la interfaz de la API
+        Actualizar el estado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actualizar el estado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cargar-los-datos-al-crear-el-viewmodel-el-bloque-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cargar los datos al crear el ViewModel: el bloque init
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cambiar-el-estado-a-partir-del-anterior-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cambiar el estado a partir del anterior: update {}
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conectar-el-viewmodel-con-la-interfaz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conectar el ViewModel con la interfaz
       
     </span>
   </a>
@@ -2052,32 +2091,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#endpoints-con-parametros" class="md-nav__link">
+  <a href="#el-flujo-completo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Endpoints con parámetros
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#construir-la-instancia-de-retrofit" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Construir la instancia de Retrofit
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usar-la-api-desde-el-repositorio" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Usar la API desde el repositorio
+        El flujo completo
       
     </span>
   </a>
@@ -2118,7 +2135,35 @@
   <span class="md-ellipsis">
     
   
-    40. Serialización JSON y modelos de datos (DTO)
+    40. Efectos y eventos puntuales: <code>LaunchedEffect</code>, Snackbar y navegación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial_my_todo_list_part_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 3)
   
 
     
@@ -2146,7 +2191,63 @@
   <span class="md-ellipsis">
     
   
-    41. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
+    41. Repositorio y separación de capas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter42/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    42. Inyección de dependencias (manual y con Hilt)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial_my_todo_list_part_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 4)
   
 
     
@@ -2192,7 +2293,7 @@
   <span class="md-ellipsis">
     
   
-    Parte IX · Proyecto final
+    Parte IX · Datos: API REST y persistencia local
   
 
     
@@ -2208,39 +2309,11 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte IX · Proyecto final
+    Parte IX · Datos: API REST y persistencia local
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter42/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    42. Diseño de la app: pantallas, navegación y arquitectura
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -2256,7 +2329,7 @@
   <span class="md-ellipsis">
     
   
-    43. Setup del proyecto y dependencias
+    43. HTTP, REST y JSON: cómo se comunican las apps con un servidor
   
 
     
@@ -2284,7 +2357,7 @@
   <span class="md-ellipsis">
     
   
-    44. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>
+    44. Serialización JSON y modelos de datos (DTO)
   
 
     
@@ -2312,7 +2385,7 @@
   <span class="md-ellipsis">
     
   
-    45. Pantalla de lista con paginación
+    45. Retrofit: configuración, interfaces y endpoints
   
 
     
@@ -2340,7 +2413,7 @@
   <span class="md-ellipsis">
     
   
-    46. Carga de sprites con Coil
+    46. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
   
 
     
@@ -2368,7 +2441,7 @@
   <span class="md-ellipsis">
     
   
-    47. Pantalla de detalle: stats, tipos y habilidades
+    47. Persistencia local con Room
   
 
     
@@ -2389,98 +2462,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part09/chapter48/" class="md-nav__link">
+      <a href="../../part09/tutorial_my_todo_list_part_5/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    48. Búsqueda y filtrado
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter49/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    49. Persistencia local con Room: favoritos y caché offline
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter50/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    50. Pulido: estados de UI, Material 3 y accesibilidad
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part09/chapter51/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    51. Cierre: testing básico, buenas prácticas y próximos pasos
+    Tutorial: Mi lista de tareas (parte 5)
   
 
     
@@ -2526,7 +2515,7 @@
   <span class="md-ellipsis">
     
   
-    Anexos
+    Parte X · Proyecto final: contactos
   
 
     
@@ -2539,6 +2528,368 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte X · Proyecto final: contactos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter48/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    48. Presentación y arquitectura de «Mis Contactos»
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter49/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    49. Configuración del proyecto y permisos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter50/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    50. La capa remota: DTOs, Retrofit y módulo de red
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter51/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    51. La capa local: Room para caché y favoritos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter52/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    52. El repositorio: estrategia <em>offline-first</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter53/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    53. Pantalla de lista: búsqueda, paginación y favoritos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter54/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    54. Pantalla de detalle: eliminación segura con evento como estado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter55/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    55. Pantalla de formulario: validación local y del servidor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter56/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    56. Navegación con rutas tipadas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter57/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    57. Componentes compartidos y tema visual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter58/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    58. Cierre del proyecto y próximos pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2590,7 +2941,7 @@
   <span class="md-ellipsis">
     
   
-    B. Entrada estándar con Scanner de Java
+    B. De Java a Kotlin: equivalencias y <code>Scanner</code>
   
 
     
@@ -2619,6 +2970,34 @@
     
   
     C. Cómo elegir el SDK de un proyecto Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/string-format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Formato de cadenas con <code>String.format</code>
   
 
     
@@ -2677,10 +3056,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#que-es-retrofit" class="md-nav__link">
+  <a href="#la-clase-viewmodel" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué es Retrofit?
+        La clase ViewModel
       
     </span>
   </a>
@@ -2688,10 +3067,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#instalar-y-configurar-retrofit" class="md-nav__link">
+  <a href="#exponer-el-estado-de-forma-segura" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Instalar y configurar Retrofit
+        Exponer el estado de forma segura
       
     </span>
   </a>
@@ -2699,10 +3078,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#definir-la-interfaz-de-la-api" class="md-nav__link">
+  <a href="#actualizar-el-estado" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Definir la interfaz de la API
+        Actualizar el estado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actualizar el estado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cargar-los-datos-al-crear-el-viewmodel-el-bloque-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cargar los datos al crear el ViewModel: el bloque init
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cambiar-el-estado-a-partir-del-anterior-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cambiar el estado a partir del anterior: update {}
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conectar-el-viewmodel-con-la-interfaz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conectar el ViewModel con la interfaz
       
     </span>
   </a>
@@ -2710,32 +3128,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#endpoints-con-parametros" class="md-nav__link">
+  <a href="#el-flujo-completo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Endpoints con parámetros
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#construir-la-instancia-de-retrofit" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Construir la instancia de Retrofit
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usar-la-api-desde-el-repositorio" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Usar la API desde el repositorio
+        El flujo completo
       
     </span>
   </a>
@@ -2773,107 +3169,146 @@
   
 
 
-<h1 id="capitulo-39-retrofit-configuracion-interfaces-y-endpoints">Capítulo 39: Retrofit: configuración, interfaces y endpoints<a class="headerlink" href="#capitulo-39-retrofit-configuracion-interfaces-y-endpoints" title="Permanent link">&para;</a></h1>
+<h1 id="capitulo-39-viewmodel-y-el-estado-de-la-interfaz-uistate">Capítulo 39: <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)<a class="headerlink" href="#capitulo-39-viewmodel-y-el-estado-de-la-interfaz-uistate" title="Permanent link">&para;</a></h1>
 <h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
-<p>En el capítulo anterior entendiste cómo se comunican una app y un servidor con HTTP, REST y JSON. Hacer todo eso a mano —abrir la conexión, construir la petición, esperar la respuesta, interpretar el JSON— sería tedioso y propenso a errores.</p>
-<p>Aquí entra <strong>Retrofit</strong>: una biblioteca que hace ese trabajo por ti. Tú describes la API como una <strong>interfaz de Kotlin</strong>, y Retrofit genera automáticamente el código para hacer las peticiones. En este capítulo aprenderás a configurar Retrofit, a declarar los <em>endpoints</em> en una interfaz y a hacer tu primera llamada.</p>
+<p>En el capítulo anterior conociste MVVM en teoría. Ahora lo pondrás en práctica construyendo su pieza central: el <strong><code>ViewModel</code></strong>, la clase que guarda el estado de la pantalla y ejecuta su lógica. Aprenderás a crear uno, a <strong>exponer</strong> su estado de forma segura con <code>StateFlow</code>, a <strong>actualizarlo</strong> y a <strong>conectarlo</strong> con la interfaz. Aquí se juntan, por fin, el <code>StateFlow</code>, el <code>UiState</code> y el <code>viewModelScope</code> que fuiste viendo por separado.</p>
+<h2 id="la-clase-viewmodel">La clase <code>ViewModel</code><a class="headerlink" href="#la-clase-viewmodel" title="Permanent link">&para;</a></h2>
+<p>Android ofrece una clase base llamada <strong><code>ViewModel</code></strong>. Para crear el tuyo, defines una clase que hereda de ella:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MiViewModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="c1">// estado y lógica de la pantalla</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>Su gran ventaja es la que anticipamos: un <code>ViewModel</code> está diseñado para <strong>vivir más que la <code>Activity</code></strong>. Cuando el dispositivo gira y la <code>Activity</code> se recrea, el <code>ViewModel</code> <strong>sigue existiendo</strong>, con su estado intacto. Ese problema del ciclo de vida queda resuelto sin que hagas nada especial.</p>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Retrofit es una biblioteca externa; en la siguiente sección la agregamos al proyecto.</p>
+<p>La clase <code>ViewModel</code> viene en una biblioteca de Android (<code>lifecycle</code>), que se agrega como dependencia en el proyecto.</p>
 </div>
-<h2 id="que-es-retrofit">¿Qué es Retrofit?<a class="headerlink" href="#que-es-retrofit" title="Permanent link">&para;</a></h2>
-<p><strong>Retrofit</strong> convierte una API REST en una <strong>interfaz de Kotlin</strong>. La idea es elegante: en lugar de escribir código de red, <strong>declaras</strong> qué endpoints existen y qué devuelven, usando una interfaz con <strong>anotaciones</strong>. Retrofit lee esa interfaz y crea, por detrás, la implementación que hace las peticiones reales.</p>
-<p>Además, se integra a la perfección con las <strong>coroutines</strong> (puedes declarar los endpoints como funciones <code>suspend</code>) y convierte automáticamente el <strong>JSON</strong> de la respuesta en objetos de Kotlin.</p>
-<h2 id="instalar-y-configurar-retrofit">Instalar y configurar Retrofit<a class="headerlink" href="#instalar-y-configurar-retrofit" title="Permanent link">&para;</a></h2>
-<p>Retrofit es una biblioteca externa, así que primero hay que <strong>agregarla al proyecto</strong>. Al momento de escribir este curso, la última versión estable es la <strong>3.0.0</strong>. Necesitarás dos dependencias: <strong>Retrofit</strong> en sí, y un <strong>convertidor</strong> que transforme el JSON en objetos de Kotlin (usaremos el de <code>kotlinx.serialization</code>).</p>
-<p>Siguiendo el catálogo de versiones que viste al crear el proyecto, primero declaras la versión y las bibliotecas en <code>libs.versions.toml</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">[versions]</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">retrofit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;3.0.0&quot;</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">[libraries]</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">retrofit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;com.squareup.retrofit2&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;retrofit&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;retrofit&quot;</span><span class="w"> </span><span class="p">}</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">retrofit-kotlinx-serialization</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;com.squareup.retrofit2&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;converter-kotlinx-serialization&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;retrofit&quot;</span><span class="w"> </span><span class="p">}</span>
-</code></pre></div>
-<p>Y luego las agregas al <code>build.gradle.kts</code> del módulo <code>app</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">dependencies</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="na">retrofit</span><span class="p">)</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="na">retrofit</span><span class="p">.</span><span class="na">kotlinx</span><span class="p">.</span><span class="na">serialization</span><span class="p">)</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="c1">// ...otras dependencias</span>
+<h2 id="exponer-el-estado-de-forma-segura">Exponer el estado de forma segura<a class="headerlink" href="#exponer-el-estado-de-forma-segura" title="Permanent link">&para;</a></h2>
+<p>El <code>ViewModel</code> guarda el estado de la pantalla. Usaremos para ello el <code>UiState</code> que viste en el capítulo de <code>sealed class</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">sealed</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">UiState</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kd">object</span><span class="w"> </span><span class="nc">Cargando</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Exito</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">elementos</span><span class="p">:</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">Error</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">mensaje</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UiState</span><span class="p">()</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
 </code></pre></div>
-<p>Tras sincronizar Gradle, Retrofit queda listo para usar.</p>
-<div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p>Retrofit requiere como mínimo <strong>Java 8</strong> o <strong>Android API 21+</strong>, algo que cualquier proyecto reciente ya cumple. Es un proyecto de código abierto de Square; su documentación oficial está en <a href="https://square.github.io/retrofit/">square.github.io/retrofit</a>.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Nota</p>
-<p>El convertidor de <code>kotlinx.serialization</code> necesita, además, el <em>plugin</em> de serialización y que tus clases de datos estén marcadas como <code>@Serializable</code>. Eso lo completaremos en el próximo capítulo, al hablar de serialización y DTOs.</p>
-</div>
-<h2 id="definir-la-interfaz-de-la-api">Definir la interfaz de la API<a class="headerlink" href="#definir-la-interfaz-de-la-api" title="Permanent link">&para;</a></h2>
-<p>El corazón de Retrofit es una interfaz donde <strong>cada método representa un endpoint</strong>. Se anota con el método HTTP y la ruta:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nc">ApiService</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nd">@GET</span><span class="p">(</span><span class="s">&quot;usuarios&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerUsuarios</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Usuario</span><span class="o">&gt;</span>
+<p>Ahora, aquí hay un detalle de diseño importante. El <code>ViewModel</code> necesita <strong>cambiar</strong> el estado, pero la interfaz solo debería <strong>leerlo</strong>, nunca modificarlo. Para lograrlo, se usa un patrón muy común: una propiedad <strong>mutable y privada</strong>, y otra <strong>de solo lectura y pública</strong>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MiViewModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">_uiState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">uiState</span><span class="p">:</span><span class="w"> </span><span class="n">StateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_uiState</span><span class="p">.</span><span class="na">asStateFlow</span><span class="p">()</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
 </code></pre></div>
-<p>Analicémoslo:</p>
 <ul>
-<li><code>@GET("usuarios")</code> indica que este método hace una petición <code>GET</code> al endpoint <code>usuarios</code> (relativo a la URL base que configuraremos más abajo).</li>
-<li><code>suspend fun</code> aprovecha las coroutines: la llamada se suspende mientras espera la respuesta, sin bloquear el hilo.</li>
-<li>El tipo de retorno, <code>List&lt;Usuario&gt;</code>, es lo que Retrofit te entregará ya convertido: toma el JSON de la respuesta y lo transforma en objetos. Aquí <code>Usuario</code> es una <code>data class</code> que describe la forma de los datos (algo que detallaremos en el próximo capítulo).</li>
+<li><code>_uiState</code> es un <code>MutableStateFlow</code> <strong>privado</strong>: solo el <code>ViewModel</code> puede cambiar su valor. Por convención, su nombre empieza con guion bajo.</li>
+<li><code>uiState</code> es un <code>StateFlow</code> <strong>público</strong> (de solo lectura), que la interfaz observará. El método <code>asStateFlow()</code> "expone" el estado sin permitir modificarlo.</li>
 </ul>
-<h2 id="endpoints-con-parametros">Endpoints con parámetros<a class="headerlink" href="#endpoints-con-parametros" title="Permanent link">&para;</a></h2>
-<p>Muchos endpoints necesitan parámetros. Retrofit los maneja con más anotaciones.</p>
-<p>Para un valor que va <strong>dentro de la ruta</strong> (como un id), usas <code>@Path</code>, y lo referencias entre llaves en la URL:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@GET</span><span class="p">(</span><span class="s">&quot;usuarios/{id}&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerUsuario</span><span class="p">(</span><span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">):</span><span class="w"> </span><span class="n">Usuario</span>
+<p>Así se cumple la <strong>encapsulación</strong>: el estado solo se modifica desde dentro del <code>ViewModel</code>, la única fuente de verdad.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Una <code>sealed class</code> como esta encaja cuando los estados son <strong>excluyentes</strong>: la pantalla está en uno solo a la vez (cargando, éxito o error). Hay pantallas donde eso no alcanza, porque muestran <strong>varias cosas a la vez</strong> (una lista, si está cargando más elementos, un mensaje pendiente…). Para esas, <code>UiState</code> se modela mejor como una <strong><code>data class</code></strong>, con una propiedad por cada dato. Verás el caso concreto en el próximo tutorial.</p>
+</div>
+<h2 id="actualizar-el-estado">Actualizar el estado<a class="headerlink" href="#actualizar-el-estado" title="Permanent link">&para;</a></h2>
+<p>Para cambiar el estado, el <code>ViewModel</code> asigna un nuevo valor a <code>_uiState.value</code>. Como esto suele implicar una tarea lenta (pedir datos), la lanzamos en una coroutine dentro del <strong><code>viewModelScope</code></strong>, el <em>scope</em> del capítulo de coroutines:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MiViewModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">_uiState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">uiState</span><span class="p">:</span><span class="w"> </span><span class="n">StateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_uiState</span><span class="p">.</span><span class="na">asStateFlow</span><span class="p">()</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">cargarDatos</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="n">viewModelScope</span><span class="p">.</span><span class="na">launch</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">            </span><span class="n">_uiState</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">datos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">obtenerDatos</span><span class="p">()</span><span class="w"> </span><span class="c1">// una función suspend que trae los datos</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">            </span><span class="n">_uiState</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Exito</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="p">}</span>
 </code></pre></div>
-<p>Al llamar <code>obtenerUsuario(42)</code>, Retrofit construye la petición a <code>usuarios/42</code>.</p>
-<p>Para un parámetro de <strong>consulta</strong> (los que van después del <code>?</code> en la URL), usas <code>@Query</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@GET</span><span class="p">(</span><span class="s">&quot;usuarios&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">buscarUsuarios</span><span class="p">(</span><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;nombre&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="p">):</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Usuario</span><span class="o">&gt;</span>
+<p>Usar <code>viewModelScope</code> es importante: si el <code>ViewModel</code> se destruye, sus coroutines se cancelan solas, evitando trabajo innecesario. (La función <code>obtenerDatos()</code> representa la capa de datos, el <strong>Modelo</strong>, que veremos en el próximo capítulo.)</p>
+<h3 id="cargar-los-datos-al-crear-el-viewmodel-el-bloque-init">Cargar los datos al crear el <code>ViewModel</code>: el bloque <code>init</code><a class="headerlink" href="#cargar-los-datos-al-crear-el-viewmodel-el-bloque-init" title="Permanent link">&para;</a></h3>
+<p>Si <code>cargarDatos()</code> trae lo que la pantalla necesita <strong>desde el principio</strong>, no tiene sentido esperar a que algo la llame: se dispara sola, en el bloque <code>init</code> de la clase.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">MiViewModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">_uiState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">uiState</span><span class="p">:</span><span class="w"> </span><span class="n">StateFlow</span><span class="o">&lt;</span><span class="n">UiState</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_uiState</span><span class="p">.</span><span class="na">asStateFlow</span><span class="p">()</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="k">init</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="n">cargarDatos</span><span class="p">()</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">cargarDatos</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">        </span><span class="n">viewModelScope</span><span class="p">.</span><span class="na">launch</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">            </span><span class="n">_uiState</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">            </span><span class="kd">val</span><span class="w"> </span><span class="nv">datos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">obtenerDatos</span><span class="p">()</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">            </span><span class="n">_uiState</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Exito</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="p">}</span>
 </code></pre></div>
-<p>Al llamar <code>buscarUsuarios("Ana")</code>, Retrofit genera la petición a <code>usuarios?nombre=Ana</code>.</p>
-<h2 id="construir-la-instancia-de-retrofit">Construir la instancia de Retrofit<a class="headerlink" href="#construir-la-instancia-de-retrofit" title="Permanent link">&para;</a></h2>
-<p>Con la interfaz definida, falta crear la instancia de Retrofit y, a partir de ella, el objeto que implementa tu interfaz. Se usa <code>Retrofit.Builder</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">retrofit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Retrofit</span><span class="p">.</span><span class="na">Builder</span><span class="p">()</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="p">.</span><span class="na">baseUrl</span><span class="p">(</span><span class="s">&quot;https://api.ejemplo.com/&quot;</span><span class="p">)</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="p">.</span><span class="na">addConverterFactory</span><span class="p">(</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">        </span><span class="n">Json</span><span class="p">.</span><span class="na">asConverterFactory</span><span class="p">(</span><span class="s">&quot;application/json&quot;</span><span class="p">.</span><span class="na">toMediaType</span><span class="p">())</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="p">)</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="p">.</span><span class="na">build</span><span class="p">()</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="kd">val</span><span class="w"> </span><span class="nv">apiService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">retrofit</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">ApiService</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="p">)</span>
+<p>El <code>init</code> se ejecuta <strong>una sola vez</strong>, cuando se crea la instancia del <code>ViewModel</code>. Como el <code>ViewModel</code> sobrevive al giro de pantalla, esa creación también ocurre una sola vez: la carga no se repite cada vez que la <code>Activity</code> se recrea, solo la primera vez que alguien pide este <code>ViewModel</code>. <code>cargarDatos()</code> se mantiene <strong>pública</strong> para poder llamarla de nuevo, por ejemplo desde un botón «Reintentar».</p>
+<h3 id="cambiar-el-estado-a-partir-del-anterior-update">Cambiar el estado a partir del anterior: <code>update {}</code><a class="headerlink" href="#cambiar-el-estado-a-partir-del-anterior-update" title="Permanent link">&para;</a></h3>
+<p>Asignar directamente a <code>_uiState.value</code>, como en los ejemplos de arriba, funciona bien cuando el nuevo estado no depende del anterior: pasas de <code>Cargando</code> a <code>Exito</code> y listo. Pero si necesitas <strong>partir del valor actual</strong> —agregar un elemento a una lista, marcar algo como hecho, apagar un mensaje ya mostrado—, hacerlo con <code>.value</code> tiene un problema: entre que lees <code>_uiState.value</code> y le asignas el resultado, otra coroutine podría haber cambiado el estado, y esa modificación se perdería.</p>
+<p><code>MutableStateFlow</code> ofrece <strong><code>update { }</code></strong> para este caso: recibe el estado actual y devuelve el nuevo, en una sola operación que no puede interrumpirse a la mitad.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">data</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nc">ContadorUiState</span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="nv">valor</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kd">class</span><span class="w"> </span><span class="nc">ContadorViewModel</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ViewModel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">_uiState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MutableStateFlow</span><span class="p">(</span><span class="n">ContadorUiState</span><span class="p">())</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">uiState</span><span class="p">:</span><span class="w"> </span><span class="n">StateFlow</span><span class="o">&lt;</span><span class="n">ContadorUiState</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_uiState</span><span class="p">.</span><span class="na">asStateFlow</span><span class="p">()</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">incrementar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">        </span><span class="n">_uiState</span><span class="p">.</span><span class="na">update</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">estado</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">estado</span><span class="p">.</span><span class="na">copy</span><span class="p">(</span><span class="n">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">estado</span><span class="p">.</span><span class="na">valor</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="p">}</span>
 </code></pre></div>
-<p>Las piezas clave:</p>
-<ul>
-<li><code>baseUrl(...)</code> es la parte común de todas las URLs. Se combina con la ruta de cada endpoint (por ejemplo, <code>usuarios</code>) para formar la dirección completa. Debe terminar en <code>/</code>.</li>
-<li><code>addConverterFactory(...)</code> le indica a Retrofit cómo <strong>convertir</strong> el JSON en objetos. Aquí usamos el convertidor de <code>kotlinx.serialization</code> (<code>Json.asConverterFactory(...)</code>) que instalamos más arriba. Los detalles de cómo tus <code>data class</code> se conectan con el JSON son el tema del próximo capítulo.</li>
-<li><code>retrofit.create(ApiService::class.java)</code> genera la implementación de tu interfaz. El resultado, <code>apiService</code>, ya está listo para usarse.</li>
-</ul>
-<h2 id="usar-la-api-desde-el-repositorio">Usar la API desde el repositorio<a class="headerlink" href="#usar-la-api-desde-el-repositorio" title="Permanent link">&para;</a></h2>
-<p>¿Dónde encaja todo esto? En la <strong>capa de datos</strong> que armaste en la parte de arquitectura. El repositorio recibe el <code>ApiService</code> y lo usa para obtener los datos:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">DatosRepositoryImpl</span><span class="p">(</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">apiService</span><span class="p">:</span><span class="w"> </span><span class="n">ApiService</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">DatosRepository</span><span class="w"> </span><span class="p">{</span>
+<p><code>estado</code> es el valor actual, y la lambda devuelve el nuevo con <code>copy</code> (capítulo 17), cambiando solo lo que hace falta. Es el patrón que usarás siempre que <code>UiState</code> sea una <code>data class</code>: reserva la asignación directa (<code>_uiState.value = ...</code>) para cuando reemplazas el estado completo, como al pasar de un caso de una <code>sealed class</code> a otro.</p>
+<h2 id="conectar-el-viewmodel-con-la-interfaz">Conectar el ViewModel con la interfaz<a class="headerlink" href="#conectar-el-viewmodel-con-la-interfaz" title="Permanent link">&para;</a></h2>
+<p>Falta unir el <code>ViewModel</code> con la Vista. En el composable, obtienes el <code>ViewModel</code> con la función <code>viewModel()</code> y <strong>recolectas</strong> su estado para que la interfaz reaccione a los cambios:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@Composable</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kd">fun</span><span class="w"> </span><span class="nf">Pantalla</span><span class="p">(</span><span class="n">viewModel</span><span class="p">:</span><span class="w"> </span><span class="n">MiViewModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">viewModel</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="nv">estado</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">uiState</span><span class="p">.</span><span class="na">collectAsStateWithLifecycle</span><span class="p">()</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerDatos</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Usuario</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">apiService</span><span class="p">.</span><span class="na">obtenerUsuarios</span><span class="p">()</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="p">}</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="k">when</span><span class="w"> </span><span class="p">(</span><span class="n">estado</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Cargando</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Cargando...&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Exito</span><span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Se cargaron </span><span class="si">${</span><span class="n">estado</span><span class="p">.</span><span class="na">elementos</span><span class="p">.</span><span class="na">size</span><span class="si">}</span><span class="s"> elementos&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">        </span><span class="k">is</span><span class="w"> </span><span class="n">UiState</span><span class="p">.</span><span class="na">Error</span><span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Error: </span><span class="si">${</span><span class="n">estado</span><span class="p">.</span><span class="na">mensaje</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="p">}</span>
 </code></pre></div>
-<p>Fíjate en lo limpio que queda: el repositorio solo invoca <code>apiService.obtenerUsuarios()</code>, una función <code>suspend</code>, sin ver ni un detalle de red. Y como el <code>ViewModel</code> depende de la interfaz del repositorio, nada más arriba se entera de que los datos vienen de Retrofit. Cada capa cumple su papel, tal como planeamos.</p>
-<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
-<p>En este capítulo configuraste Retrofit para consumir una API:</p>
+<p>Analicemos las piezas nuevas:</p>
 <ul>
-<li><strong>Retrofit</strong> convierte una API REST en una <strong>interfaz de Kotlin</strong>: declaras los endpoints y Retrofit genera el código que hace las peticiones.</li>
-<li>Cada método de la interfaz es un endpoint, anotado con su método HTTP (<code>@GET</code>, <code>@POST</code>, …) y su ruta. Al declararlo <code>suspend</code>, se integra con las coroutines.</li>
-<li>Los parámetros se pasan con <code>@Path</code> (dentro de la ruta) y <code>@Query</code> (después del <code>?</code>).</li>
-<li>Creas la instancia con <code>Retrofit.Builder</code>, indicando la <code>baseUrl</code> y un <strong>convertidor</strong> de JSON, y obtienes la implementación con <code>retrofit.create(...)</code>.</li>
-<li>El <code>ApiService</code> se usa desde el <strong>repositorio</strong>, encajando de forma natural en la arquitectura por capas.</li>
+<li><code>viewModel()</code> obtiene la instancia del <code>ViewModel</code> (la misma a través de las recomposiciones y de los giros de pantalla).</li>
+<li><code>collectAsStateWithLifecycle()</code> <strong>recolecta</strong> el <code>StateFlow</code> y lo convierte en un estado de Compose: cada vez que el <code>ViewModel</code> cambia <code>uiState</code>, este composable se <strong>recompone</strong> con el nuevo valor.</li>
+<li>El <code>when</code> decide qué mostrar según el estado, aprovechando el <em>smart cast</em> de la <code>sealed class</code>.</li>
 </ul>
-<p>En el próximo capítulo verás la pieza que quedó pendiente: la <strong>serialización</strong>, es decir, cómo se convierte el JSON en tus <code>data class</code> mediante los <strong>DTOs</strong>.</p>
+<p>Y para disparar la lógica, la Vista simplemente invoca las funciones del <code>ViewModel</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">Button</span><span class="p">(</span><span class="n">onClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">viewModel</span><span class="p">.</span><span class="na">cargarDatos</span><span class="p">()</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Cargar&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p><code>collectAsStateWithLifecycle()</code> es la forma recomendada de recolectar un <code>StateFlow</code> en Compose, porque solo recolecta mientras la pantalla está visible. Requiere una pequeña dependencia adicional (<code>lifecycle-runtime-compose</code>).</p>
+</div>
+<h2 id="el-flujo-completo">El flujo completo<a class="headerlink" href="#el-flujo-completo" title="Permanent link">&para;</a></h2>
+<p>Con todo junto, el ciclo de MVVM queda así: la Vista pide una acción, el <code>ViewModel</code> actualiza el estado, y la Vista se redibuja sola al observar ese cambio.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant V as Vista
+    participant VM as ViewModel
+    V-&gt;&gt;VM: cargarDatos()
+    Note over VM: _uiState.value = Cargando
+    VM--&gt;&gt;V: estado: Cargando
+    Note over V: Muestra "Cargando..."
+    Note over VM: Llegan los datos&lt;br/&gt;_uiState.value = Exito(datos)
+    VM--&gt;&gt;V: estado: Exito
+    Note over V: Muestra los datos</code></pre>
+<p>Fíjate en que la Vista nunca guarda ni calcula el estado: solo lo <strong>muestra</strong> y <strong>avisa</strong> de los eventos. Toda la lógica vive en el <code>ViewModel</code>.</p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>En este capítulo construiste el corazón de MVVM:</p>
+<ul>
+<li>Un <strong><code>ViewModel</code></strong> es una clase que hereda de <code>ViewModel</code> y guarda el estado y la lógica de una pantalla. <strong>Sobrevive</strong> a los cambios de configuración, como el giro de pantalla.</li>
+<li>El estado se expone con el patrón <strong><code>MutableStateFlow</code> privado + <code>StateFlow</code> público</strong> (<code>_uiState</code> / <code>uiState</code> con <code>asStateFlow()</code>), de modo que solo el <code>ViewModel</code> puede modificarlo. Una <code>sealed class</code> sirve para estados excluyentes; una <strong><code>data class</code></strong> sirve cuando la pantalla muestra varios datos a la vez.</li>
+<li>El <code>ViewModel</code> actualiza el estado asignando a <code>_uiState.value</code> (para reemplazarlo entero) o con <strong><code>update { }</code></strong> (para partir del valor actual sin perder cambios concurrentes), normalmente dentro de una coroutine en <strong><code>viewModelScope</code></strong>.</li>
+<li>Si la pantalla necesita datos desde el principio, se cargan en el bloque <strong><code>init</code></strong>: se ejecuta una sola vez por <code>ViewModel</code>, y no se repite al girar la pantalla.</li>
+<li>La Vista obtiene el <code>ViewModel</code> con <code>viewModel()</code>, recolecta su estado con <strong><code>collectAsStateWithLifecycle()</code></strong> y decide qué mostrar con un <code>when</code> sobre el <code>UiState</code>.</li>
+<li>La Vista solo muestra el estado y avisa de eventos (invocando funciones del <code>ViewModel</code>); toda la lógica queda en el <code>ViewModel</code>.</li>
+</ul>
+<p>En el próximo capítulo verás cómo manejar lo que <strong>ocurre una vez</strong> en lugar de dibujarse mientras dura un estado: mostrar un mensaje o navegar después de una acción.</p>
 
 
 
@@ -2909,7 +3344,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../chapter38/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 38. HTTP, REST y JSON: cómo se comunican las apps con un servidor">
+          <a href="../chapter38/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 38. Qué es MVVM y por qué usarlo">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2919,20 +3354,20 @@
                 Anterior
               </span>
               <div class="md-ellipsis">
-                38. HTTP, REST y JSON: cómo se comunican las apps con un servidor
+                38. Qué es MVVM y por qué usarlo
               </div>
             </div>
           </a>
         
         
           
-          <a href="../chapter40/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 40. Serialización JSON y modelos de datos (DTO)">
+          <a href="../chapter40/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 40. Efectos y eventos puntuales: &lt;code&gt;LaunchedEffect&lt;/code&gt;, Snackbar y navegación">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                40. Serialización JSON y modelos de datos (DTO)
+                40. Efectos y eventos puntuales: <code>LaunchedEffect</code>, Snackbar y navegación
               </div>
             </div>
             <div class="md-footer__button md-icon">

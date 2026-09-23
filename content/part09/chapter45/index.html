@@ -27,7 +27,7 @@
     
     
       
-        <title>45. Pantalla de lista con paginación - Android con Kotlin desde cero</title>
+        <title>45. Retrofit: configuración, interfaces y endpoints - Android con Kotlin desde cero</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#capitulo-45-pantalla-de-lista-con-paginacion" class="md-skip">
+        <a href="#capitulo-45-retrofit-configuracion-interfaces-y-endpoints" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              45. Pantalla de lista con paginación
+              45. Retrofit: configuración, interfaces y endpoints
             
           </span>
         </div>
@@ -892,34 +892,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../part03/chapter15/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    15. Formato de cadenas con <code>String.format</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../part03/exercises/" class="md-nav__link">
         
   
@@ -1002,6 +974,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../part04/chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    15. Clases, propiedades y constructores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../part04/chapter16/" class="md-nav__link">
         
   
@@ -1009,7 +1009,7 @@
   <span class="md-ellipsis">
     
   
-    16. Clases, propiedades y constructores
+    16. Herencia, interfaces y clases abstractas
   
 
     
@@ -1037,7 +1037,7 @@
   <span class="md-ellipsis">
     
   
-    17. Herencia, interfaces y clases abstractas
+    17. <code>data class</code>, <code>copy</code> y desestructuración
   
 
     
@@ -1065,7 +1065,7 @@
   <span class="md-ellipsis">
     
   
-    18. <code>data class</code>, <code>copy</code> y desestructuración
+    18. <code>object</code>, <code>companion object</code> y singletons
   
 
     
@@ -1093,7 +1093,7 @@
   <span class="md-ellipsis">
     
   
-    19. <code>object</code>, <code>companion object</code> y singletons
+    19. <code>enum</code> y <code>sealed class</code>
   
 
     
@@ -1121,7 +1121,7 @@
   <span class="md-ellipsis">
     
   
-    20. <code>enum</code> y <code>sealed class</code>
+    20. Genéricos y funciones de extensión
   
 
     
@@ -1149,7 +1149,7 @@
   <span class="md-ellipsis">
     
   
-    21. Genéricos, funciones de extensión y lambdas
+    21. Lambdas a fondo: receptores, funciones de alcance y delegación
   
 
     
@@ -1361,7 +1361,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VI · Introducción a Android con Jetpack Compose
+    Parte VI · Android y arquitectura de aplicaciones
   
 
     
@@ -1377,7 +1377,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VI · Introducción a Android con Jetpack Compose
+    Parte VI · Android y arquitectura de aplicaciones
   
 
           </label>
@@ -1425,7 +1425,7 @@
   <span class="md-ellipsis">
     
   
-    26. Ciclo de vida de una <code>Activity</code> y tu primer <code>@Composable</code>
+    26. Ciclo de vida de una <code>Activity</code>
   
 
     
@@ -1453,231 +1453,7 @@
   <span class="md-ellipsis">
     
   
-    27. Fundamentos de Compose: composables, recomposición y <code>Modifier</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter28/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    28. Gestión de recursos: imágenes, íconos y cadenas de texto
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter29/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    29. Material 3: componentes listos para usar
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter30/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    30. Estructura de pantalla: <code>Scaffold</code>, layouts y <code>LazyColumn</code>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter31/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    31. Estado en Compose: <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/tutorial_my_todo_list_part_1/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tutorial: Mi lista de tareas (parte 1)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter32/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    32. Navegación con Navigation Compose
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/chapter33/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    33. Material 3: tema, color y tipografía
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../part06/tutorial_my_todo_list_part_2/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tutorial: Mi lista de tareas (parte 2)
+    27. Cómo se organiza una app: responsabilidades y flujo de datos
   
 
     
@@ -1723,7 +1499,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VII · Arquitectura MVVM
+    Parte VII · Jetpack Compose y construcción de interfaces
   
 
     
@@ -1739,11 +1515,207 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VII · Arquitectura MVVM
+    Parte VII · Jetpack Compose y construcción de interfaces
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter28/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    28. Tu primer composable: <code>@Composable</code>, <code>@Preview</code> y parámetros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    29. <code>Modifier</code> y layouts: <code>Column</code>, <code>Row</code> y <code>Box</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter30/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    30. Gestión de recursos: imágenes, íconos y cadenas de texto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter31/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    31. Material 3: componentes listos para usar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter32/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    32. Estado en Compose: recomposición, <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/chapter33/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    33. Estructura de pantalla: <code>Scaffold</code> y <code>LazyColumn</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/tutorial_my_todo_list_part_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 1)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1759,7 +1731,7 @@
   <span class="md-ellipsis">
     
   
-    34. Qué es MVVM y por qué usarlo
+    34. Formularios y validación en la interfaz
   
 
     
@@ -1787,7 +1759,7 @@
   <span class="md-ellipsis">
     
   
-    35. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
+    35. Navegación con Navigation Compose
   
 
     
@@ -1815,7 +1787,35 @@
   <span class="md-ellipsis">
     
   
-    36. Repositorio y separación de capas
+    36. Material 3: tema, color y tipografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part07/tutorial_my_todo_list_part_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 2)
   
 
     
@@ -1843,7 +1843,7 @@
   <span class="md-ellipsis">
     
   
-    37. Inyección de dependencias (manual y con Hilt)
+    37. Diseño adaptable con <em>Window Size Classes</em> (opcional)
   
 
     
@@ -1889,7 +1889,7 @@
   <span class="md-ellipsis">
     
   
-    Parte VIII · Consumo de API REST con Retrofit
+    Parte VIII · Estado y arquitectura con MVVM
   
 
     
@@ -1905,7 +1905,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte VIII · Consumo de API REST con Retrofit
+    Parte VIII · Estado y arquitectura con MVVM
   
 
           </label>
@@ -1925,7 +1925,7 @@
   <span class="md-ellipsis">
     
   
-    38. HTTP, REST y JSON: cómo se comunican las apps con un servidor
+    38. Qué es MVVM y por qué usarlo
   
 
     
@@ -1953,7 +1953,7 @@
   <span class="md-ellipsis">
     
   
-    39. Retrofit: configuración, interfaces y endpoints
+    39. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)
   
 
     
@@ -1981,7 +1981,35 @@
   <span class="md-ellipsis">
     
   
-    40. Serialización JSON y modelos de datos (DTO)
+    40. Efectos y eventos puntuales: <code>LaunchedEffect</code>, Snackbar y navegación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/tutorial_my_todo_list_part_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 3)
   
 
     
@@ -2009,7 +2037,63 @@
   <span class="md-ellipsis">
     
   
-    41. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
+    41. Repositorio y separación de capas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/chapter42/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    42. Inyección de dependencias (manual y con Hilt)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part08/tutorial_my_todo_list_part_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial: Mi lista de tareas (parte 4)
   
 
     
@@ -2057,7 +2141,7 @@
   <span class="md-ellipsis">
     
   
-    Parte IX · Proyecto final
+    Parte IX · Datos: API REST y persistencia local
   
 
     
@@ -2073,39 +2157,11 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Parte IX · Proyecto final
+    Parte IX · Datos: API REST y persistencia local
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../chapter42/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    42. Diseño de la app: pantallas, navegación y arquitectura
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -2121,7 +2177,7 @@
   <span class="md-ellipsis">
     
   
-    43. Setup del proyecto y dependencias
+    43. HTTP, REST y JSON: cómo se comunican las apps con un servidor
   
 
     
@@ -2149,7 +2205,7 @@
   <span class="md-ellipsis">
     
   
-    44. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>
+    44. Serialización JSON y modelos de datos (DTO)
   
 
     
@@ -2179,6 +2235,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    45. Retrofit: configuración, interfaces y endpoints
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -2186,7 +2260,7 @@
   <span class="md-ellipsis">
     
   
-    45. Pantalla de lista con paginación
+    45. Retrofit: configuración, interfaces y endpoints
   
 
     
@@ -2195,6 +2269,224 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-retrofit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es Retrofit?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalar-retrofit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instalar Retrofit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definir-la-interfaz-de-la-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definir la interfaz de la API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Definir la interfaz de la API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parametros-de-consulta-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros de consulta: @Query
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enviar-datos-post-put-y-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enviar datos: @POST, @PUT y @Body
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sin-respuesta-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sin respuesta: @DELETE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#y-si-la-respuesta-es-un-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Y si la respuesta es un error?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construir-la-instancia-de-retrofit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Construir la instancia de Retrofit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-retrofit-con-hilt-provides" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear Retrofit con Hilt: @Provides
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conectarse-a-la-api-de-tu-computador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conectarse a la API de tu computador
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conectarse a la API de tu computador">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-10022-no-localhost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 10.0.2.2, no localhost
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-el-permiso-de-internet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El permiso de internet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-http-sin-cifrar-cleartext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. HTTP sin cifrar (cleartext)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#android-17-el-permiso-de-red-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Android 17: el permiso de red local
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usar-la-api-desde-el-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar la API desde el repositorio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2215,7 +2507,7 @@
   <span class="md-ellipsis">
     
   
-    46. Carga de sprites con Coil
+    46. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
   
 
     
@@ -2243,7 +2535,7 @@
   <span class="md-ellipsis">
     
   
-    47. Pantalla de detalle: stats, tipos y habilidades
+    47. Persistencia local con Room
   
 
     
@@ -2264,98 +2556,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../chapter48/" class="md-nav__link">
+      <a href="../tutorial_my_todo_list_part_5/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    48. Búsqueda y filtrado
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../chapter49/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    49. Persistencia local con Room: favoritos y caché offline
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../chapter50/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    50. Pulido: estados de UI, Material 3 y accesibilidad
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../chapter51/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    51. Cierre: testing básico, buenas prácticas y próximos pasos
+    Tutorial: Mi lista de tareas (parte 5)
   
 
     
@@ -2401,7 +2609,7 @@
   <span class="md-ellipsis">
     
   
-    Anexos
+    Parte X · Proyecto final: contactos
   
 
     
@@ -2414,6 +2622,368 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Parte X · Proyecto final: contactos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter48/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    48. Presentación y arquitectura de «Mis Contactos»
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter49/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    49. Configuración del proyecto y permisos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter50/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    50. La capa remota: DTOs, Retrofit y módulo de red
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter51/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    51. La capa local: Room para caché y favoritos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter52/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    52. El repositorio: estrategia <em>offline-first</em>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter53/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    53. Pantalla de lista: búsqueda, paginación y favoritos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter54/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    54. Pantalla de detalle: eliminación segura con evento como estado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter55/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    55. Pantalla de formulario: validación local y del servidor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter56/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    56. Navegación con rutas tipadas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter57/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    57. Componentes compartidos y tema visual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part10/chapter58/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    58. Cierre del proyecto y próximos pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2465,7 +3035,7 @@
   <span class="md-ellipsis">
     
   
-    B. Entrada estándar con Scanner de Java
+    B. De Java a Kotlin: equivalencias y <code>Scanner</code>
   
 
     
@@ -2507,6 +3077,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/string-format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D. Formato de cadenas con <code>String.format</code>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2534,6 +3132,213 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-retrofit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es Retrofit?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalar-retrofit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instalar Retrofit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definir-la-interfaz-de-la-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definir la interfaz de la API
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Definir la interfaz de la API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parametros-de-consulta-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros de consulta: @Query
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enviar-datos-post-put-y-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enviar datos: @POST, @PUT y @Body
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sin-respuesta-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sin respuesta: @DELETE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#y-si-la-respuesta-es-un-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Y si la respuesta es un error?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construir-la-instancia-de-retrofit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Construir la instancia de Retrofit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crear-retrofit-con-hilt-provides" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear Retrofit con Hilt: @Provides
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conectarse-a-la-api-de-tu-computador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conectarse a la API de tu computador
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conectarse a la API de tu computador">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-10022-no-localhost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 10.0.2.2, no localhost
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-el-permiso-de-internet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. El permiso de internet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-http-sin-cifrar-cleartext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. HTTP sin cifrar (cleartext)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#android-17-el-permiso-de-red-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Android 17: el permiso de red local
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usar-la-api-desde-el-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar la API desde el repositorio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -2552,11 +3357,271 @@
   
 
 
-<h1 id="capitulo-45-pantalla-de-lista-con-paginacion">Capítulo 45: Pantalla de lista con paginación<a class="headerlink" href="#capitulo-45-pantalla-de-lista-con-paginacion" title="Permanent link">&para;</a></h1>
+<h1 id="capitulo-45-retrofit-configuracion-interfaces-y-endpoints">Capítulo 45: Retrofit: configuración, interfaces y endpoints<a class="headerlink" href="#capitulo-45-retrofit-configuracion-interfaces-y-endpoints" title="Permanent link">&para;</a></h1>
+<h2 id="introduccion">Introducción<a class="headerlink" href="#introduccion" title="Permanent link">&para;</a></h2>
+<p>Ya conoces la API de contactos desde fuera (capítulo 43) y sabes convertir su JSON en objetos de Kotlin (capítulo 44). Falta el paso del medio: <strong>hacer la petición</strong> desde la app. Hacerlo a mano —abrir la conexión, construir la petición, esperar la respuesta, leer el cuerpo— sería tedioso y propenso a errores.</p>
+<p>Aquí entra <strong>Retrofit</strong>: una biblioteca que hace ese trabajo por ti. Tú describes la API como una <strong>interfaz de Kotlin</strong>, y Retrofit genera el código que hace las peticiones. En este capítulo aprenderás a configurarlo, a declarar los cinco <em>endpoints</em> de la API de contactos, a crear la instancia con Hilt y a resolver los tres obstáculos que aparecen al conectarse a una API que corre en tu propio computador.</p>
+<h2 id="que-es-retrofit">¿Qué es Retrofit?<a class="headerlink" href="#que-es-retrofit" title="Permanent link">&para;</a></h2>
+<p><strong>Retrofit</strong> convierte una API REST en una <strong>interfaz de Kotlin</strong>. En lugar de escribir código de red, <strong>declaras</strong> qué <em>endpoints</em> existen y qué devuelven, con <strong>anotaciones</strong>. Retrofit lee esa interfaz y crea, por detrás, la implementación que hace las peticiones reales.</p>
+<p>Además, se integra con las <strong>coroutines</strong> (los <em>endpoints</em> se declaran como funciones <code>suspend</code>) y usa <code>kotlinx.serialization</code> para convertir el JSON en tus DTOs. Por debajo, las conexiones las hace <strong>OkHttp</strong>, otra biblioteca del mismo autor (Square).</p>
+<h2 id="instalar-retrofit">Instalar Retrofit<a class="headerlink" href="#instalar-retrofit" title="Permanent link">&para;</a></h2>
+<p>Necesitarás tres bibliotecas: <strong>Retrofit</strong>, su <strong>convertidor</strong> para <code>kotlinx.serialization</code> y un <strong>interceptor de registro</strong> de OkHttp, que muestra cada petición en Logcat y es muy útil mientras desarrollas. En el catálogo <code>gradle/libs.versions.toml</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">[versions]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">retrofit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;3.0.0&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">okhttp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;4.12.0&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">[libraries]</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">retrofit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;com.squareup.retrofit2&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;retrofit&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;retrofit&quot;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">retrofit-kotlinx-serialization</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;com.squareup.retrofit2&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;converter-kotlinx-serialization&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;retrofit&quot;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">okhttp-logging-interceptor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;com.squareup.okhttp3&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;logging-interceptor&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="p">.</span><span class="n">ref</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;okhttp&quot;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>Y en el <code>build.gradle.kts</code> del módulo <code>app</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">dependencies</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="c1">// ... las que ya tenías</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="na">retrofit</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="na">retrofit</span><span class="p">.</span><span class="na">kotlinx</span><span class="p">.</span><span class="na">serialization</span><span class="p">)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="na">okhttp</span><span class="p">.</span><span class="na">logging</span><span class="p">.</span><span class="na">interceptor</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>El convertidor necesita que el proyecto ya tenga el plugin y la biblioteca de <code>kotlinx.serialization</code>, que configuraste en el capítulo anterior.</p>
 <div class="admonition note">
 <p class="admonition-title">Nota</p>
-<p>Contenido en construcción</p>
+<p>Retrofit es un proyecto de código abierto de Square; su documentación oficial está en <a href="https://square.github.io/retrofit/">square.github.io/retrofit</a>. Las versiones de este capítulo son las que se usaron para probar el código del curso.</p>
 </div>
+<h2 id="definir-la-interfaz-de-la-api">Definir la interfaz de la API<a class="headerlink" href="#definir-la-interfaz-de-la-api" title="Permanent link">&para;</a></h2>
+<p>El corazón de Retrofit es una interfaz donde <strong>cada función representa un <em>endpoint</em></strong>. Empecemos por el más simple, obtener un contacto:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nc">ContactApi</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nd">@GET</span><span class="p">(</span><span class="s">&quot;api/contact/{id}&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerContacto</span><span class="p">(</span><span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">):</span><span class="w"> </span><span class="n">ContactDto</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><code>@GET("api/contact/{id}")</code> indica que la función hace un <code>GET</code> a esa ruta, relativa a la URL base que configurarás más abajo. La ruta <strong>no empieza con <code>/</code></strong>.</li>
+<li><code>{id}</code> es un hueco en la ruta, y <code>@Path("id")</code> indica qué parámetro lo llena. Al llamar a <code>obtenerContacto(42)</code>, Retrofit pide <code>api/contact/42</code>.</li>
+<li><code>suspend fun</code> hace que la llamada se suspenda mientras espera la respuesta, sin bloquear el hilo principal.</li>
+<li>El tipo de retorno, <code>ContactDto</code>, es lo que Retrofit entrega <strong>ya convertido</strong>. Si la respuesta es un <code>200</code>, deserializa el cuerpo con <code>kotlinx.serialization</code>.</li>
+</ul>
+<h3 id="parametros-de-consulta-query">Parámetros de consulta: <code>@Query</code><a class="headerlink" href="#parametros-de-consulta-query" title="Permanent link">&para;</a></h3>
+<p>La lista usa los parámetros de consulta que probaste en Swagger:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@GET</span><span class="p">(</span><span class="s">&quot;api/contact&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerContactos</span><span class="p">(</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;page&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">pagina</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;size&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">tamano</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;search&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">busqueda</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;sort&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">orden</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;firstName,asc&quot;</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">):</span><span class="w"> </span><span class="n">ContactPageDto</span>
+</code></pre></div>
+<p>Cada <code>@Query</code> agrega un parámetro después del <code>?</code>. Al llamar a <code>obtenerContactos(pagina = 0, tamano = 20)</code>, Retrofit pide <code>api/contact?page=0&amp;size=20&amp;sort=firstName%2Casc</code> (la coma se codifica como <code>%2C</code>). Dos detalles útiles:</p>
+<ul>
+<li>Si un parámetro <code>@Query</code> vale <strong><code>null</code></strong>, Retrofit lo <strong>omite</strong>. Por eso <code>busqueda</code> es anulable: sin búsqueda, la URL no lleva <code>search</code>.</li>
+<li>Los parámetros pueden tener <strong>valores por defecto</strong>, como en cualquier función de Kotlin. El orden alfabético por nombre queda fijo sin que quien llama tenga que recordarlo.</li>
+</ul>
+<h3 id="enviar-datos-post-put-y-body">Enviar datos: <code>@POST</code>, <code>@PUT</code> y <code>@Body</code><a class="headerlink" href="#enviar-datos-post-put-y-body" title="Permanent link">&para;</a></h3>
+<p>Para crear y modificar, el contacto viaja en el <strong>cuerpo</strong> de la petición. Se indica con <code>@Body</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@POST</span><span class="p">(</span><span class="s">&quot;api/contact&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">crearContacto</span><span class="p">(</span><span class="nd">@Body</span><span class="w"> </span><span class="n">contacto</span><span class="p">:</span><span class="w"> </span><span class="n">ContactRequestDto</span><span class="p">):</span><span class="w"> </span><span class="n">ContactDto</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nd">@PUT</span><span class="p">(</span><span class="s">&quot;api/contact/{id}&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">actualizarContacto</span><span class="p">(</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nd">@Body</span><span class="w"> </span><span class="n">contacto</span><span class="p">:</span><span class="w"> </span><span class="n">ContactRequestDto</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">):</span><span class="w"> </span><span class="n">ContactDto</span>
+</code></pre></div>
+<p>Retrofit <strong>serializa</strong> el <code>ContactRequestDto</code> con <code>kotlinx.serialization</code> (el <code>encodeToString</code> del capítulo anterior) y lo envía como JSON. Las dos funciones devuelven el contacto tal como quedó en el servidor, con su <code>id</code>.</p>
+<h3 id="sin-respuesta-delete">Sin respuesta: <code>@DELETE</code><a class="headerlink" href="#sin-respuesta-delete" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@DELETE</span><span class="p">(</span><span class="s">&quot;api/contact/{id}&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">eliminarContacto</span><span class="p">(</span><span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span>
+</code></pre></div>
+<p>La API responde <code>204 No Content</code>, sin cuerpo, así que la función no declara tipo de retorno (devuelve <code>Unit</code>). Si termina sin lanzar una excepción, el contacto se eliminó.</p>
+<p>Con eso, la interfaz completa queda así:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">interface</span><span class="w"> </span><span class="nc">ContactApi</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nd">@GET</span><span class="p">(</span><span class="s">&quot;api/contact&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerContactos</span><span class="p">(</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">        </span><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;page&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">pagina</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;size&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">tamano</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;search&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">busqueda</span><span class="p">:</span><span class="w"> </span><span class="kt">String?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">        </span><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;sort&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">orden</span><span class="p">:</span><span class="w"> </span><span class="kt">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;firstName,asc&quot;</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="p">):</span><span class="w"> </span><span class="n">ContactPageDto</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="nd">@GET</span><span class="p">(</span><span class="s">&quot;api/contact/{id}&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerContacto</span><span class="p">(</span><span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">):</span><span class="w"> </span><span class="n">ContactDto</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">    </span><span class="nd">@POST</span><span class="p">(</span><span class="s">&quot;api/contact&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">    </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">crearContacto</span><span class="p">(</span><span class="nd">@Body</span><span class="w"> </span><span class="n">contacto</span><span class="p">:</span><span class="w"> </span><span class="n">ContactRequestDto</span><span class="p">):</span><span class="w"> </span><span class="n">ContactDto</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">    </span><span class="nd">@PUT</span><span class="p">(</span><span class="s">&quot;api/contact/{id}&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">    </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">actualizarContacto</span><span class="p">(</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">        </span><span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">        </span><span class="nd">@Body</span><span class="w"> </span><span class="n">contacto</span><span class="p">:</span><span class="w"> </span><span class="n">ContactRequestDto</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">    </span><span class="p">):</span><span class="w"> </span><span class="n">ContactDto</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">    </span><span class="nd">@DELETE</span><span class="p">(</span><span class="s">&quot;api/contact/{id}&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">    </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">eliminarContacto</span><span class="p">(</span><span class="nd">@Path</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="kt">Int</span><span class="p">)</span>
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="p">}</span>
+</code></pre></div>
+<p>Fíjate en que es una interfaz pequeña y fiel a la API: una función por <em>endpoint</em>, con DTOs en la entrada y en la salida. No mapea ni decide nada; eso lo hará el repositorio.</p>
+<h3 id="y-si-la-respuesta-es-un-error">¿Y si la respuesta es un error?<a class="headerlink" href="#y-si-la-respuesta-es-un-error" title="Permanent link">&para;</a></h3>
+<p>Si el servidor responde con un código que no es <code>2xx</code> (un <code>404</code>, un <code>409</code>), la función <strong>lanza una excepción</strong> <code>HttpException</code>, que trae el código y el cuerpo del error. Si ni siquiera se puede conectar (servidor apagado, sin red), lanza una <code>IOException</code>. Distinguir y tratar esos casos es el tema del próximo capítulo.</p>
+<h2 id="construir-la-instancia-de-retrofit">Construir la instancia de Retrofit<a class="headerlink" href="#construir-la-instancia-de-retrofit" title="Permanent link">&para;</a></h2>
+<p>Con la interfaz definida, falta crear el objeto que la implementa. Se hace con <code>Retrofit.Builder</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">val</span><span class="w"> </span><span class="nv">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Json</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ignoreUnknownKeys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kd">val</span><span class="w"> </span><span class="nv">cliente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OkHttpClient</span><span class="p">.</span><span class="na">Builder</span><span class="p">()</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="p">.</span><span class="na">addInterceptor</span><span class="p">(</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">        </span><span class="n">HttpLoggingInterceptor</span><span class="p">().</span><span class="na">apply</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HttpLoggingInterceptor</span><span class="p">.</span><span class="na">Level</span><span class="p">.</span><span class="na">BASIC</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="p">)</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="p">.</span><span class="na">build</span><span class="p">()</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="kd">val</span><span class="w"> </span><span class="nv">retrofit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Retrofit</span><span class="p">.</span><span class="na">Builder</span><span class="p">()</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="p">.</span><span class="na">baseUrl</span><span class="p">(</span><span class="s">&quot;http://10.0.2.2:8080/&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="p">.</span><span class="na">client</span><span class="p">(</span><span class="n">cliente</span><span class="p">)</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">    </span><span class="p">.</span><span class="na">addConverterFactory</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="na">asConverterFactory</span><span class="p">(</span><span class="s">&quot;application/json&quot;</span><span class="p">.</span><span class="na">toMediaType</span><span class="p">()))</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="p">.</span><span class="na">build</span><span class="p">()</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="kd">val</span><span class="w"> </span><span class="nv">api</span><span class="p">:</span><span class="w"> </span><span class="n">ContactApi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">retrofit</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">ContactApi</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><strong><code>baseUrl</code></strong> es la parte común de todas las URLs. Se combina con la ruta de cada <em>endpoint</em> (<code>api/contact</code>) para formar la dirección completa. <strong>Debe terminar en <code>/</code></strong>, o Retrofit lanza un error al crearse. Enseguida verás por qué es <code>10.0.2.2</code> y no <code>localhost</code>.</li>
+<li><strong><code>client</code></strong> es el cliente de OkHttp que hará las conexiones. Aquí se le agrega el interceptor de registro con nivel <code>BASIC</code>, que escribe en Logcat una línea por petición y otra por respuesta.</li>
+<li><strong><code>addConverterFactory</code></strong> le indica a Retrofit cómo convertir los cuerpos. Recibe <strong>la misma instancia de <code>Json</code></strong> configurada en el capítulo anterior, con <code>ignoreUnknownKeys</code>. Si usaras el <code>Json</code> sin configurar, el <code>_links</code> de cada respuesta provocaría un error.</li>
+<li><strong><code>retrofit.create(...)</code></strong> genera la implementación de la interfaz. <code>ContactApi::class.java</code> es la referencia a la clase que viste en el capítulo 21.</li>
+</ul>
+<p>Los imports de este bloque son:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">import</span><span class="w"> </span><span class="nn">kotlinx.serialization.json.Json</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">import</span><span class="w"> </span><span class="nn">okhttp3.MediaType.Companion.toMediaType</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">import</span><span class="w"> </span><span class="nn">okhttp3.OkHttpClient</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">import</span><span class="w"> </span><span class="nn">okhttp3.logging.HttpLoggingInterceptor</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="k">import</span><span class="w"> </span><span class="nn">retrofit2.Retrofit</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="k">import</span><span class="w"> </span><span class="nn">retrofit2.converter.kotlinx.serialization.asConverterFactory</span>
+</code></pre></div>
+<h2 id="crear-retrofit-con-hilt-provides">Crear Retrofit con Hilt: <code>@Provides</code><a class="headerlink" href="#crear-retrofit-con-hilt-provides" title="Permanent link">&para;</a></h2>
+<p>Crear Retrofit es costoso, y la app necesita <strong>una sola instancia</strong>, compartida por todos los repositorios. Es un trabajo para Hilt. Pero hay un problema: en el capítulo 42 le enseñaste a Hilt a crear clases <strong>marcando su constructor</strong> con <code>@Inject</code>, y <code>Retrofit</code> no es una clase tuya: se construye con <code>Retrofit.Builder</code>. No puedes agregarle anotaciones.</p>
+<p>Para estos casos existe <strong><code>@Provides</code></strong>: una función, dentro de un módulo, que le enseña a Hilt <strong>cómo construir</strong> un objeto. Crea <code>di/NetworkModule.kt</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nd">@Module</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nd">@InstallIn</span><span class="p">(</span><span class="n">SingletonComponent</span><span class="o">::</span><span class="n">class</span><span class="p">)</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="kd">object</span><span class="w"> </span><span class="nc">NetworkModule</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="cm">/** Desde el emulador, 10.0.2.2 es el computador donde corre la API. */</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">BASE_URL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http://10.0.2.2:8080/&quot;</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="nd">@Provides</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">    </span><span class="nd">@Singleton</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">provideJson</span><span class="p">():</span><span class="w"> </span><span class="n">Json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Json</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">        </span><span class="n">ignoreUnknownKeys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">        </span><span class="n">explicitNulls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">    </span><span class="nd">@Provides</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">    </span><span class="nd">@Singleton</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">provideOkHttpClient</span><span class="p">():</span><span class="w"> </span><span class="n">OkHttpClient</span><span class="w"> </span><span class="o">=</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">        </span><span class="n">OkHttpClient</span><span class="p">.</span><span class="na">Builder</span><span class="p">()</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">            </span><span class="p">.</span><span class="na">addInterceptor</span><span class="p">(</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">                </span><span class="n">HttpLoggingInterceptor</span><span class="p">().</span><span class="na">apply</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HttpLoggingInterceptor</span><span class="p">.</span><span class="na">Level</span><span class="p">.</span><span class="na">BASIC</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">            </span><span class="p">)</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">            </span><span class="p">.</span><span class="na">build</span><span class="p">()</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">    </span><span class="nd">@Provides</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">    </span><span class="nd">@Singleton</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">provideRetrofit</span><span class="p">(</span><span class="n">client</span><span class="p">:</span><span class="w"> </span><span class="n">OkHttpClient</span><span class="p">,</span><span class="w"> </span><span class="n">json</span><span class="p">:</span><span class="w"> </span><span class="n">Json</span><span class="p">):</span><span class="w"> </span><span class="n">Retrofit</span><span class="w"> </span><span class="o">=</span>
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="w">        </span><span class="n">Retrofit</span><span class="p">.</span><span class="na">Builder</span><span class="p">()</span>
+<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="w">            </span><span class="p">.</span><span class="na">baseUrl</span><span class="p">(</span><span class="n">BASE_URL</span><span class="p">)</span>
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="w">            </span><span class="p">.</span><span class="na">client</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a><span class="w">            </span><span class="p">.</span><span class="na">addConverterFactory</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="na">asConverterFactory</span><span class="p">(</span><span class="s">&quot;application/json&quot;</span><span class="p">.</span><span class="na">toMediaType</span><span class="p">()))</span>
+<a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a><span class="w">            </span><span class="p">.</span><span class="na">build</span><span class="p">()</span>
+<a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a>
+<a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a><span class="w">    </span><span class="nd">@Provides</span>
+<a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a><span class="w">    </span><span class="nd">@Singleton</span>
+<a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a><span class="w">    </span><span class="kd">fun</span><span class="w"> </span><span class="nf">provideContactApi</span><span class="p">(</span><span class="n">retrofit</span><span class="p">:</span><span class="w"> </span><span class="n">Retrofit</span><span class="p">):</span><span class="w"> </span><span class="n">ContactApi</span><span class="w"> </span><span class="o">=</span>
+<a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a><span class="w">        </span><span class="n">retrofit</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">ContactApi</span><span class="o">::</span><span class="n">class</span><span class="p">.</span><span class="na">java</span><span class="p">)</span>
+<a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a><span class="p">}</span>
+</code></pre></div>
+<p>Léelo de abajo hacia arriba, como lo hace Hilt:</p>
+<ul>
+<li>Cuando alguien pide un <strong><code>ContactApi</code></strong>, Hilt llama a <code>provideContactApi</code>. Esa función necesita un <code>Retrofit</code>, así que Hilt busca quién lo provee.</li>
+<li><strong><code>provideRetrofit</code></strong> lo construye, pero necesita un <code>OkHttpClient</code> y un <code>Json</code>: Hilt llama a las dos funciones de arriba y le pasa los resultados.</li>
+<li><strong><code>@Singleton</code></strong> hace que cada objeto se cree <strong>una sola vez</strong> y se reutilice.</li>
+<li>El módulo es un <strong><code>object</code></strong> (y no una <code>abstract class</code> como el <code>DataModule</code> del capítulo 42) porque sus funciones tienen cuerpo y no necesitan estado.</li>
+</ul>
+<p>Los <strong>parámetros</strong> de una función <code>@Provides</code> son sus dependencias. Tú nunca llamas a estas funciones: Hilt las encadena solo, en el orden correcto. Ahora cualquier clase puede pedir un <code>ContactApi</code> en su constructor.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p><code>explicitNulls = false</code> hace que, al leer, una clave que falta se trate como <code>null</code> aunque la propiedad no tenga valor por defecto, y que, al escribir, no se envíen las propiedades <code>null</code>. Es una red de seguridad adicional; los valores por defecto del capítulo anterior siguen siendo la forma clara de decir qué claves son opcionales.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Sugerencia</p>
+<p>Usa <code>@Binds</code> cuando la clase es <strong>tuya</strong> y solo hay que decir qué implementación usar para una interfaz. Usa <code>@Provides</code> cuando el objeto se <strong>construye con código</strong> (un <em>builder</em>, una función de fábrica) o viene de una biblioteca.</p>
+</div>
+<h2 id="conectarse-a-la-api-de-tu-computador">Conectarse a la API de tu computador<a class="headerlink" href="#conectarse-a-la-api-de-tu-computador" title="Permanent link">&para;</a></h2>
+<p>Si ejecutas la app ahora, la petición fallará. Hay tres obstáculos, y los tres aparecen solo porque la API corre en tu propio computador.</p>
+<h3 id="1-10022-no-localhost">1. <code>10.0.2.2</code>, no <code>localhost</code><a class="headerlink" href="#1-10022-no-localhost" title="Permanent link">&para;</a></h3>
+<p>El emulador de Android es un <strong>dispositivo aparte</strong>, con su propia red. Dentro del emulador, <code>localhost</code> es el propio emulador, no tu computador. Para llegar a tu computador, el emulador ofrece una dirección especial: <strong><code>10.0.2.2</code></strong>. Por eso la URL base es <code>http://10.0.2.2:8080/</code>.</p>
+<p>Si pruebas en un <strong>teléfono físico</strong>, <code>10.0.2.2</code> no existe: usa la dirección IP de tu computador en la red Wi-Fi (por ejemplo, <code>http://192.168.1.20:8080/</code>), con el teléfono conectado a la misma red.</p>
+<h3 id="2-el-permiso-de-internet">2. El permiso de internet<a class="headerlink" href="#2-el-permiso-de-internet" title="Permanent link">&para;</a></h3>
+<p>Una app de Android no puede usar la red a menos que lo declare. En <code>AndroidManifest.xml</code>, antes de la etiqueta <code>&lt;application&gt;</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">&lt;uses-permission</span><span class="w"> </span><span class="na">android:name=</span><span class="s">&quot;android.permission.INTERNET&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</code></pre></div>
+<p>Sin este permiso, OkHttp falla apenas intenta conectarse, con un error que habla de un permiso denegado (<code>EPERM</code> o <code>Permission denied</code>).</p>
+<h3 id="3-http-sin-cifrar-cleartext">3. HTTP sin cifrar (<em>cleartext</em>)<a class="headerlink" href="#3-http-sin-cifrar-cleartext" title="Permanent link">&para;</a></h3>
+<p>La API local usa <code>http://</code>, sin cifrar. Desde Android 9, las apps <strong>bloquean por defecto</strong> el tráfico HTTP sin cifrar y solo permiten <code>https://</code>. Es una buena protección en producción, pero impide hablar con tu API local; el error dice <code>CLEARTEXT communication to 10.0.2.2 not permitted</code>.</p>
+<p>La solución correcta es permitir HTTP <strong>solo hacia esa dirección</strong>, con un archivo de configuración de seguridad de red. Crea <code>res/xml/network_security_config.xml</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nt">&lt;network-security-config&gt;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="cm">&lt;!-- Permite HTTP sin cifrar solo hacia la API local del curso (el equipo anfitrión visto desde el emulador). --&gt;</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nt">&lt;domain-config</span><span class="w"> </span><span class="na">cleartextTrafficPermitted=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">        </span><span class="nt">&lt;domain</span><span class="w"> </span><span class="na">includeSubdomains=</span><span class="s">&quot;false&quot;</span><span class="nt">&gt;</span>10.0.2.2<span class="nt">&lt;/domain&gt;</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="nt">&lt;/domain-config&gt;</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="nt">&lt;/network-security-config&gt;</span>
+</code></pre></div>
+<p>Y actívalo desde la etiqueta <code>&lt;application&gt;</code> del manifiesto:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">&lt;application</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="na">android:networkSecurityConfig=</span><span class="s">&quot;@xml/network_security_config&quot;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="err">...</span><span class="w"> </span><span class="nt">&gt;</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Advertencia</p>
+<p>En internet verás la solución rápida: <code>android:usesCleartextTraffic="true"</code> en el manifiesto. Permite HTTP sin cifrar hacia <strong>cualquier</strong> servidor, y es fácil olvidarla al publicar la app. Con el archivo de configuración, la excepción queda limitada a <code>10.0.2.2</code>.</p>
+</div>
+<h3 id="android-17-el-permiso-de-red-local">Android 17: el permiso de red local<a class="headerlink" href="#android-17-el-permiso-de-red-local" title="Permanent link">&para;</a></h3>
+<p>Desde <strong>Android 17 (API 37)</strong>, conectarse a una dirección de la <strong>red local</strong> —y <code>10.0.2.2</code> lo es— exige un permiso más: <code>ACCESS_LOCAL_NETWORK</code>. Se declara en el manifiesto, junto al de internet:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">&lt;uses-permission</span><span class="w"> </span><span class="na">android:name=</span><span class="s">&quot;android.permission.ACCESS_LOCAL_NETWORK&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</code></pre></div>
+<p>A diferencia de <code>INTERNET</code>, es un <strong>permiso de ejecución</strong>: declararlo no basta, el usuario tiene que concederlo mientras la app está en uso, como el de la cámara o la ubicación. Si no está concedido, la conexión no llega a establecerse y OkHttp termina con una <code>SocketTimeoutException</code> después de esperar varios segundos, un error que no da ninguna pista de la causa real.</p>
+<p>En el proyecto final (capítulo 49) escribirás un composable que pide este permiso al abrir la app. Mientras tanto, para probar los ejemplos de este capítulo en un emulador con API 37, concédelo a mano: mantén presionado el ícono de la app, elige <strong>Información de la app</strong> → <strong>Permisos</strong> y activa el de red local. En emuladores con una API anterior a la 37, este permiso no existe y no hace falta.</p>
+<h2 id="usar-la-api-desde-el-repositorio">Usar la API desde el repositorio<a class="headerlink" href="#usar-la-api-desde-el-repositorio" title="Permanent link">&para;</a></h2>
+<p>La interfaz de Retrofit encaja en la capa de datos que construiste en la Parte VIII. El repositorio la recibe por su constructor, gracias al <code>@Provides</code>, y traduce los DTOs a modelos de dominio con los mapeos del capítulo anterior:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">ContactosRepositoryImpl</span><span class="w"> </span><span class="nd">@Inject</span><span class="w"> </span><span class="k">constructor</span><span class="p">(</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="nv">api</span><span class="p">:</span><span class="w"> </span><span class="n">ContactApi</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ContactosRepository</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span><span class="kd">override</span><span class="w"> </span><span class="kd">suspend</span><span class="w"> </span><span class="kd">fun</span><span class="w"> </span><span class="nf">obtenerContactos</span><span class="p">():</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Contacto</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">        </span><span class="n">api</span><span class="p">.</span><span class="na">obtenerContactos</span><span class="p">(</span><span class="n">pagina</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">tamano</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">)</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">            </span><span class="p">.</span><span class="na">embedded</span><span class="o">?.</span><span class="na">contacts</span><span class="p">.</span><span class="na">orEmpty</span><span class="p">()</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">            </span><span class="p">.</span><span class="na">map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nb">it</span><span class="p">.</span><span class="na">aDominio</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="p">}</span>
+</code></pre></div>
+<p>La cadena es: pedir la primera página, sacar la lista de <code>embedded</code> (que puede ser <code>null</code> si no hay contactos, de ahí el <code>?.</code> y el <code>orEmpty()</code> del capítulo 13) y convertir cada <code>ContactDto</code> en un <code>Contacto</code>. El repositorio no ve una sola URL ni una cabecera, y hacia arriba solo entrega <code>Contacto</code>. Como el <code>ViewModel</code> depende de la interfaz <code>ContactosRepository</code>, nada más arriba se entera de que los datos vienen de Retrofit.</p>
+<p>Con la API en ejecución y el permiso concedido, abre <strong>Logcat</strong> y filtra por <code>okhttp</code>. Por cada petición verás dos líneas parecidas a estas:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>--&gt; GET http://10.0.2.2:8080/api/contact?page=0&amp;size=20&amp;sort=firstName%2Casc
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>&lt;-- 200 http://10.0.2.2:8080/api/contact?page=0&amp;size=20&amp;sort=firstName%2Casc (38ms, unknown-length body)
+</code></pre></div>
+<p>La primera es la petición; la segunda, el código de la respuesta y cuánto tardó. Cuando algo falle, lo primero es mirar aquí: si no aparece la línea <code>&lt;--</code>, la petición no llegó al servidor.</p>
+<div class="admonition tip">
+<p class="admonition-title">Sugerencia</p>
+<p>Cambia el nivel del interceptor a <code>HttpLoggingInterceptor.Level.BODY</code> para ver también las cabeceras y el cuerpo completo de cada petición y respuesta. Es ideal para depurar, pero genera mucho texto: vuelve a <code>BASIC</code> cuando termines.</p>
+</div>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Retrofit</strong> convierte una API REST en una <strong>interfaz de Kotlin</strong>: declaras los <em>endpoints</em> con anotaciones y Retrofit genera el código que hace las peticiones, sobre OkHttp.</li>
+<li>Cada función de la interfaz es un <em>endpoint</em>: <code>@GET</code>, <code>@POST</code>, <code>@PUT</code> o <code>@DELETE</code> con su ruta relativa. Se declaran <code>suspend</code>.</li>
+<li><strong><code>@Path</code></strong> llena un hueco de la ruta; <strong><code>@Query</code></strong> agrega un parámetro de consulta (y se omite si vale <code>null</code>); <strong><code>@Body</code></strong> envía un objeto serializado como JSON. Una función sin tipo de retorno sirve para respuestas sin cuerpo, como el <code>204</code> de <code>DELETE</code>.</li>
+<li>Un código que no es <code>2xx</code> lanza una <strong><code>HttpException</code></strong>; la falta de conexión, una <strong><code>IOException</code></strong>.</li>
+<li>La instancia se crea con <code>Retrofit.Builder</code>: <code>baseUrl</code> (terminada en <code>/</code>), un cliente de OkHttp con interceptor de registro y el convertidor con <strong>tu</strong> instancia de <code>Json</code>.</li>
+<li>Con Hilt, los objetos que se construyen con código se proveen con funciones <strong><code>@Provides</code></strong> en un módulo <code>object</code>, marcadas con <code>@Singleton</code> para compartir una sola instancia.</li>
+<li>Para llegar a la API local desde el emulador: la dirección <strong><code>10.0.2.2</code></strong>, el permiso <strong><code>INTERNET</code></strong>, un <strong><code>network_security_config.xml</code></strong> que permita HTTP solo hacia esa dirección y, desde Android 17, el permiso de ejecución <strong><code>ACCESS_LOCAL_NETWORK</code></strong>.</li>
+</ul>
+<p>En el próximo capítulo verás qué hacer cuando la petición <strong>tarda</strong> y cuando <strong>falla</strong>: los estados de red y los tipos de error.</p>
 
 
 
@@ -2592,7 +3657,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Pie" >
         
           
-          <a href="../chapter44/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 44. Capa de datos: DTOs, &lt;code&gt;ApiService&lt;/code&gt; y &lt;code&gt;Repository&lt;/code&gt;">
+          <a href="../chapter44/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 44. Serialización JSON y modelos de datos (DTO)">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2602,20 +3667,20 @@
                 Anterior
               </span>
               <div class="md-ellipsis">
-                44. Capa de datos: DTOs, <code>ApiService</code> y <code>Repository</code>
+                44. Serialización JSON y modelos de datos (DTO)
               </div>
             </div>
           </a>
         
         
           
-          <a href="../chapter46/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 46. Carga de sprites con Coil">
+          <a href="../chapter46/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 46. Estados de red: &lt;em&gt;loading&lt;/em&gt;, &lt;em&gt;success&lt;/em&gt; y &lt;em&gt;error&lt;/em&gt;">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                46. Carga de sprites con Coil
+                46. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>
               </div>
             </div>
             <div class="md-footer__button md-icon">
