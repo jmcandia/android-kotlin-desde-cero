@@ -1,129 +1,92 @@
-# Capítulo 18: `data class`, `copy` y desestructuración
+# Capítulo 19: `object`, `companion object` y singletons
 
 ## Introducción
 
-En los capítulos anteriores creaste clases con datos y comportamiento. Pero muy a menudo necesitarás clases cuyo **único propósito** es **guardar datos**: un usuario con su nombre y su correo, un punto con sus coordenadas, un producto con su precio. No tienen lógica compleja; solo agrupan información.
+Hasta ahora, a partir de una clase creabas **muchos** objetos: varias personas, varios usuarios. Pero a veces necesitas justo lo contrario: **un único objeto** que exista para todo el programa. Piensa en la configuración de una aplicación, un registro de eventos (*logger*) o un gestor de conexión: tiene sentido que haya **uno solo**, compartido por todos.
 
-Para esos casos, escribir una clase normal resulta más trabajoso de lo necesario. Kotlin ofrece un atajo pensado justo para esto: la **`data class`** (clase de datos), que genera automáticamente varias funciones útiles. En este capítulo verás qué te regala una `data class`, cómo crear copias modificadas con `copy` y cómo repartir sus datos en variables mediante la **desestructuración** (que veníamos anunciando desde capítulos anteriores).
+También ocurre que quieres definir algo ligado a una **clase** en sí, no a sus objetos: por ejemplo, una constante propia de la clase o una función que sirva para crear instancias.
 
-Este tema es muy común en el desarrollo Android: los datos que recibes de una API, de una base de datos o de un formulario suelen modelarse, precisamente, como `data class`.
+Kotlin resuelve ambas necesidades con la palabra clave `object` y con el `companion object`. En este capítulo verás qué es el patrón *singleton*, cómo crearlo con `object` y cómo asociar miembros a una clase con `companion object`. Si vienes de Java, esta es la respuesta de Kotlin a la palabra clave `static`.
 
-## El problema: clases que solo guardan datos
+## El patrón singleton
 
-Supongamos una clase normal para representar un usuario:
+Un **singleton** ("único") es un patrón de diseño muy común: una clase de la que existe **una sola instancia** en todo el programa, accesible desde cualquier parte.
 
-```kotlin
-class Usuario(val nombre: String, val edad: Int)
-```
+Se usa cuando tiene sentido que haya un único punto de referencia para algo: la configuración global, un registro compartido, un contador central. En lenguajes como Java, implementarlo a mano requiere cierto cuidado (un constructor privado, una variable estática, etc.). Kotlin lo integra en el propio lenguaje, y por eso crearlo es trivial.
 
-Funciona, pero al usarla notarás tres molestias. Primero, si la imprimes, no ves sus datos, sino algo críptico:
+## `object`: singletons en Kotlin
 
-```kotlin
-val usuario = Usuario("Ana", 30)
-println(usuario) // Usuario@1b6d3586  (poco útil)
-```
-
-Segundo, dos usuarios con **los mismos datos** no se consideran iguales al compararlos con `==`:
+Para declarar un singleton, usas la palabra clave `object` en lugar de `class`:
 
 ```kotlin
-val u1 = Usuario("Ana", 30)
-val u2 = Usuario("Ana", 30)
-println(u1 == u2) // false  (aunque tengan los mismos datos)
-```
+object Configuracion {
+    var idioma = "es"
+    val version = "1.0"
 
-Y tercero, no hay una forma cómoda de crear una copia con algún dato cambiado.
-
-Todo esto ocurre porque, para Kotlin, `Usuario` es una clase cualquiera: no sabe que su propósito es representar datos.
-
-## La solución: `data class`
-
-Basta con anteponer la palabra clave `data` a la clase:
-
-```kotlin
-data class Usuario(val nombre: String, val edad: Int)
-```
-
-Con ese simple cambio, Kotlin genera automáticamente varias funciones basadas en las propiedades del constructor. Veamos las más importantes.
-
-### `toString()` legible
-
-Ahora, al imprimir un objeto, ves sus datos de forma clara:
-
-```kotlin
-val usuario = Usuario("Ana", 30)
-println(usuario) // Usuario(nombre=Ana, edad=30)
-```
-
-### Comparación por contenido
-
-Dos objetos con los mismos datos ahora **sí** se consideran iguales:
-
-```kotlin
-val u1 = Usuario("Ana", 30)
-val u2 = Usuario("Ana", 30)
-println(u1 == u2) // true
-```
-
-Una `data class` compara por el **contenido** (los valores de sus propiedades), no por si son el mismo objeto en memoria.
-
-> [!NOTE]Nota
-> En Kotlin, `==` compara contenido (por dentro llama al método `equals()`). Si vienes de Java, ten presente que allí `==` compara referencias; el equivalente en Kotlin para comparar referencias es `===`.
-
-### `copy()`: copias modificadas
-
-Como muchas `data class` se diseñan con propiedades `val` (inmutables), no puedes cambiar un objeto existente. En su lugar, creas una **copia** con los cambios que quieras, usando `copy()`:
-
-```kotlin
-val usuario = Usuario("Ana", 30)
-val usuarioMayor = usuario.copy(edad = 31)
-
-println(usuario)      // Usuario(nombre=Ana, edad=30)  (sin cambios)
-println(usuarioMayor) // Usuario(nombre=Ana, edad=31)  (copia con edad nueva)
-```
-
-`copy()` crea un objeto nuevo idéntico al original, salvo las propiedades que le indiques (aquí, `edad`). El objeto original no se toca. Esta es una forma muy común y segura de "modificar" datos inmutables: en lugar de cambiar el objeto, produces uno nuevo.
-
-### Desestructuración
-
-Por último, una `data class` te permite **repartir** sus propiedades en variables separadas de una sola vez. A esto se le llama **desestructuración**, y es lo que veníamos anunciando en capítulos anteriores:
-
-```kotlin
-val usuario = Usuario("Ana", 30)
-val (nombre, edad) = usuario
-
-println(nombre) // Ana
-println(edad)   // 30
-```
-
-En una sola línea, `val (nombre, edad) = usuario` crea dos variables y les asigna, **en orden**, las propiedades del objeto (por eso el orden de las variables debe coincidir con el del constructor).
-
-Esto es especialmente cómodo al recorrer colecciones. ¿Recuerdas cómo recorríamos un mapa?
-
-```kotlin
-val edades = mapOf("Ana" to 30, "Diego" to 25)
-for ((nombre, edad) in edades) {
-    println("$nombre tiene $edad años")
+    fun mostrar() {
+        println("Idioma: $idioma, versión: $version")
+    }
 }
 ```
 
-Eso funciona porque cada par de un mapa es, por dentro, un objeto que se puede desestructurar, igual que una `data class`.
+La diferencia clave con una clase es que **no creas** objetos de `Configuracion`: no hay constructor ni se usa `Configuracion()`. El objeto simplemente **existe** (Kotlin lo crea automáticamente la primera vez que lo usas), y accedes a sus miembros directamente a través de su nombre:
 
-## ¿Cuándo usar una `data class`?
+```kotlin
+println(Configuracion.idioma) // es
+Configuracion.idioma = "en"
+Configuracion.mostrar()       // Idioma: en, versión: 1.0
+```
 
-Usa una `data class` cuando el propósito principal de la clase sea **contener datos**, sin lógica compleja: modelos de información, resultados, configuraciones, respuestas de una API.
+Como hay una sola instancia, ese cambio de idioma se ve desde cualquier lugar del programa que use `Configuracion`. Un `object` puede tener propiedades y funciones, igual que una clase; lo único que no tiene es constructor, porque no se instancia.
 
-Para clases en las que lo importante es el **comportamiento** o la **identidad** (no sus datos), o que participan en jerarquías de herencia, es mejor una clase normal. De hecho, una `data class` no puede ser `abstract` ni `open`, y debe tener al menos una propiedad en su constructor.
+## `companion object`
 
-En resumen: si te descubres creando una clase solo para agrupar unos cuantos datos, casi siempre querrás que sea una `data class`.
+Ahora, el otro caso: quieres algo ligado a una **clase**, no a sus objetos individuales.
+
+Por ejemplo, imagina una clase `Usuario` y quieres:
+
+- una **constante** propia de la clase, como la edad mínima permitida;
+- una **función de fábrica** que cree usuarios de cierta forma.
+
+Estos miembros no pertenecen a un usuario concreto, sino a la clase `Usuario` en general. Para eso, Kotlin ofrece el **`companion object`** ("objeto acompañante"): un objeto único que va **dentro** de la clase y se asocia a ella:
+
+```kotlin
+class Usuario(val nombre: String, val edad: Int) {
+    companion object {
+        const val EDAD_MINIMA = 18
+
+        fun crearInvitado() = Usuario("Invitado", EDAD_MINIMA)
+    }
+}
+```
+
+Accedes a sus miembros a través del **nombre de la clase**, sin crear ningún objeto:
+
+```kotlin
+println(Usuario.EDAD_MINIMA)           // 18
+val invitado = Usuario.crearInvitado() // crea un Usuario usando la fábrica
+println(invitado.nombre)               // Invitado
+```
+
+> [!NOTE]Nota
+> Si vienes de Java, el `companion object` cumple el papel de los miembros `static`: constantes y funciones que pertenecen a la clase y no a sus instancias. Kotlin no tiene la palabra clave `static`; usa el `companion object` en su lugar.
+
+## `object` frente a `companion object`
+
+Ambos crean un único objeto, pero se usan en situaciones distintas:
+
+- Un **`object`** es un singleton **independiente**, que existe por sí mismo (una configuración, un *logger*). Se accede por su propio nombre.
+- Un **`companion object`** vive **dentro de una clase** y agrupa lo que pertenece a la clase en general (constantes, funciones de fábrica). Se accede a través del nombre de la clase.
+
+Una pista: si lo que defines tiene sentido por sí solo, usa `object`; si tiene sentido solo en relación con una clase concreta, usa un `companion object` dentro de ella.
 
 ## Resumen
 
-En este capítulo conociste una de las herramientas más prácticas de Kotlin:
+En este capítulo aprendiste a crear objetos únicos:
 
-- Una **`data class`** es una clase pensada para **guardar datos**. Se declara anteponiendo `data`.
-- Kotlin le genera automáticamente: un `toString()` legible, comparación por contenido (`==`), un método `copy()` y soporte para desestructuración.
-- `copy()` crea un objeto nuevo con algunas propiedades cambiadas, sin modificar el original: ideal para datos inmutables (`val`).
-- La **desestructuración** (`val (a, b) = objeto`) reparte las propiedades en variables, en el orden del constructor.
-- Usa `data class` para clases que principalmente contienen datos.
+- Un **singleton** es una clase con una única instancia, compartida por todo el programa.
+- La palabra clave **`object`** crea un singleton directamente: no tiene constructor ni se instancia; accedes a sus miembros por su nombre (`Configuracion.idioma`).
+- El **`companion object`** es un objeto único dentro de una clase, para miembros que pertenecen a la clase y no a sus instancias (constantes, funciones de fábrica). Se accede por el nombre de la clase (`Usuario.EDAD_MINIMA`).
+- El `companion object` es el reemplazo de Kotlin para los miembros `static` de Java.
 
-En el próximo capítulo verás `object` y `companion object`, que te permitirán crear objetos únicos (*singletons*) y agrupar funciones y constantes ligadas a una clase.
+En el próximo capítulo verás dos herramientas muy útiles para modelar datos con un conjunto limitado de opciones: los `enum` y las `sealed class`.

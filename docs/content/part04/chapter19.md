@@ -1,92 +1,168 @@
-# Capítulo 19: `object`, `companion object` y singletons
+# Capítulo 20: `enum` y `sealed class`
 
 ## Introducción
 
-Hasta ahora, a partir de una clase creabas **muchos** objetos: varias personas, varios usuarios. Pero a veces necesitas justo lo contrario: **un único objeto** que exista para todo el programa. Piensa en la configuración de una aplicación, un registro de eventos (*logger*) o un gestor de conexión: tiene sentido que haya **uno solo**, compartido por todos.
+En los capítulos anteriores modelaste cosas con clases. Pero hay situaciones en las que un valor solo puede ser **una de un conjunto fijo de opciones**: los días de la semana, los puntos cardinales, el color de un semáforo, el estado de una descarga.
 
-También ocurre que quieres definir algo ligado a una **clase** en sí, no a sus objetos: por ejemplo, una constante propia de la clase o una función que sirva para crear instancias.
+Representar esas opciones con simples textos o números es frágil: es fácil escribir `"rojo"` en un lugar y `"Rojo"` en otro, y nada te avisa del error. Kotlin ofrece herramientas hechas a medida para estos casos: los **`enum`**, para un conjunto fijo de valores con nombre, y las **`sealed class`**, para cuando cada opción puede llevar además sus propios datos.
 
-Kotlin resuelve ambas necesidades con la palabra clave `object` y con el `companion object`. En este capítulo verás qué es el patrón *singleton*, cómo crearlo con `object` y cómo asociar miembros a una clase con `companion object`. Si vienes de Java, esta es la respuesta de Kotlin a la palabra clave `static`.
+Este capítulo introduce dos herramientas muy útiles para modelar datos con un conjunto limitado de opciones. Además, verás cómo una `sealed class` es ideal para representar los **estados de una interfaz** (cargando, éxito, error), un patrón que retomaremos al estudiar la arquitectura.
 
-## El patrón singleton
+## `enum class`
 
-Un **singleton** ("único") es un patrón de diseño muy común: una clase de la que existe **una sola instancia** en todo el programa, accesible desde cualquier parte.
-
-Se usa cuando tiene sentido que haya un único punto de referencia para algo: la configuración global, un registro compartido, un contador central. En lenguajes como Java, implementarlo a mano requiere cierto cuidado (un constructor privado, una variable estática, etc.). Kotlin lo integra en el propio lenguaje, y por eso crearlo es trivial.
-
-## `object`: singletons en Kotlin
-
-Para declarar un singleton, usas la palabra clave `object` en lugar de `class`:
+Un **`enum`** (de *enumeration*, "enumeración") define un tipo con un conjunto **fijo y limitado** de valores con nombre. Por ejemplo, los colores de un semáforo:
 
 ```kotlin
-object Configuracion {
-    var idioma = "es"
-    val version = "1.0"
-
-    fun mostrar() {
-        println("Idioma: $idioma, versión: $version")
-    }
+enum class Color {
+    ROJO,
+    AMARILLO,
+    VERDE
 }
 ```
 
-La diferencia clave con una clase es que **no creas** objetos de `Configuracion`: no hay constructor ni se usa `Configuracion()`. El objeto simplemente **existe** (Kotlin lo crea automáticamente la primera vez que lo usas), y accedes a sus miembros directamente a través de su nombre:
+Cada valor (`ROJO`, `AMARILLO`, `VERDE`) es una constante del tipo `Color`, y accedes a él a través del nombre del enum:
 
 ```kotlin
-println(Configuracion.idioma) // es
-Configuracion.idioma = "en"
-Configuracion.mostrar()       // Idioma: en, versión: 1.0
+val color = Color.ROJO
+println(color) // ROJO
 ```
 
-Como hay una sola instancia, ese cambio de idioma se ve desde cualquier lugar del programa que use `Configuracion`. Un `object` puede tener propiedades y funciones, igual que una clase; lo único que no tiene es constructor, porque no se instancia.
+La ventaja es la **seguridad**: una variable de tipo `Color` solo puede tomar uno de esos tres valores. No hay forma de asignarle un `"rojo"` mal escrito; el compilador no lo permitiría.
 
-## `companion object`
+## `enum` con `when`
 
-Ahora, el otro caso: quieres algo ligado a una **clase**, no a sus objetos individuales.
-
-Por ejemplo, imagina una clase `Usuario` y quieres:
-
-- una **constante** propia de la clase, como la edad mínima permitida;
-- una **función de fábrica** que cree usuarios de cierta forma.
-
-Estos miembros no pertenecen a un usuario concreto, sino a la clase `Usuario` en general. Para eso, Kotlin ofrece el **`companion object`** ("objeto acompañante"): un objeto único que va **dentro** de la clase y se asocia a ella:
+Los enums encajan perfectamente con el `when` que viste en el capítulo de control de flujo. De hecho, cuando cubres **todos** los valores del enum, no necesitas la rama `else`, porque Kotlin sabe que no hay más opciones posibles:
 
 ```kotlin
-class Usuario(val nombre: String, val edad: Int) {
-    companion object {
-        const val EDAD_MINIMA = 18
+fun accion(color: Color) = when (color) {
+    Color.ROJO -> "Detente"
+    Color.AMARILLO -> "Precaución"
+    Color.VERDE -> "Avanza"
+}
 
-        fun crearInvitado() = Usuario("Invitado", EDAD_MINIMA)
-    }
+println(accion(Color.VERDE)) // Avanza
+```
+
+Esto es muy útil: si algún día agregas un cuarto valor al enum, el compilador te avisará de que este `when` ya no cubre todos los casos, y tendrás que actualizarlo. El lenguaje te protege de los olvidos.
+
+## `enum` con propiedades
+
+Los valores de un enum también pueden llevar **datos** asociados. Para eso, el enum recibe un constructor, y cada valor le pasa sus argumentos:
+
+```kotlin
+enum class Prioridad(val nivel: Int) {
+    BAJA(1),
+    MEDIA(2),
+    ALTA(3)
 }
 ```
 
-Accedes a sus miembros a través del **nombre de la clase**, sin crear ningún objeto:
+Ahora cada valor tiene una propiedad `nivel`:
 
 ```kotlin
-println(Usuario.EDAD_MINIMA)           // 18
-val invitado = Usuario.crearInvitado() // crea un Usuario usando la fábrica
-println(invitado.nombre)               // Invitado
+println(Prioridad.ALTA.nivel) // 3
 ```
+
+## Cuando un enum no basta: `sealed class`
+
+Los enums son ideales cuando cada opción tiene la **misma forma**: un nombre y, quizás, unas propiedades uniformes. Pero a veces cada opción necesita llevar **datos distintos**.
+
+Piensa en el resultado de una operación de red: puede ser un **éxito** (que trae los datos obtenidos) o un **error** (que trae un mensaje). Son dos casos con estructuras diferentes: uno lleva datos, el otro un mensaje. Un enum no encaja bien aquí.
+
+Para esto está la **`sealed class`** ("clase sellada"): define una jerarquía **cerrada** de subclases, todas conocidas de antemano. Cada subclase puede ser distinta (una `data class`, un `object`) y llevar sus propios datos:
+
+```kotlin
+sealed class Resultado {
+    data class Exito(val datos: String) : Resultado()
+    data class Error(val mensaje: String) : Resultado()
+}
+```
+
+"Sellada" significa que Kotlin conoce **todas** sus subclases posibles (deben declararse junto a ella). Eso es lo que la hace tan potente con el `when`.
+
+## `sealed class` con `when`
+
+Al usar una `sealed class` en un `when`, aprovechas dos cosas. Primero, el operador `is`, que comprueba de qué subtipo es el objeto. Segundo, el *smart cast*: dentro de cada rama, Kotlin ya sabe el tipo concreto y te deja acceder a sus datos:
+
+```kotlin
+fun manejar(resultado: Resultado) = when (resultado) {
+    is Resultado.Exito -> "Datos recibidos: ${resultado.datos}"
+    is Resultado.Error -> "Ocurrió un error: ${resultado.mensaje}"
+}
+```
+
+```kotlin
+println(manejar(Resultado.Exito("Hola")))    // Datos recibidos: Hola
+println(manejar(Resultado.Error("Sin red"))) // Ocurrió un error: Sin red
+```
+
+Fíjate en que, igual que con los enums, **no hace falta `else`**: como la clase está sellada, Kotlin sabe que solo existen `Exito` y `Error`, así que el `when` ya es exhaustivo.
 
 > [!NOTE]Nota
-> Si vienes de Java, el `companion object` cumple el papel de los miembros `static`: constantes y funciones que pertenecen a la clase y no a sus instancias. Kotlin no tiene la palabra clave `static`; usa el `companion object` en su lugar.
+> El operador `is` comprueba si un objeto es de un tipo determinado (si vienes de Java, es como `instanceof`). Dentro de la rama `is Resultado.Exito`, Kotlin aplica *smart cast*: ya sabe que `resultado` es un `Exito`, y por eso puedes leer `resultado.datos` directamente, sin ninguna conversión.
 
-## `object` frente a `companion object`
+## Un caso práctico: los estados de una interfaz
 
-Ambos crean un único objeto, pero se usan en situaciones distintas:
+Un caso muy común en el desarrollo de apps: una pantalla que carga datos desde una fuente externa (una red, una base de datos) puede estar en uno de tres estados: **cargando**, **con datos** (éxito) o **con error**. Es un ejemplo perfecto para una `sealed class`:
 
-- Un **`object`** es un singleton **independiente**, que existe por sí mismo (una configuración, un *logger*). Se accede por su propio nombre.
-- Un **`companion object`** vive **dentro de una clase** y agrupa lo que pertenece a la clase en general (constantes, funciones de fábrica). Se accede a través del nombre de la clase.
+```kotlin
+sealed class UiState {
+    object Cargando : UiState()
+    data class Exito(val elementos: List<String>) : UiState()
+    data class Error(val mensaje: String) : UiState()
+}
+```
 
-Una pista: si lo que defines tiene sentido por sí solo, usa `object`; si tiene sentido solo en relación con una clase concreta, usa un `companion object` dentro de ella.
+Fíjate en que `Cargando` es un `object` (no necesita datos: solo representa "estoy cargando"), mientras que `Exito` y `Error` son `data class`, porque sí llevan información. En UML, esa jerarquía sellada se ve así:
+
+```mermaid
+classDiagram
+    class UiState {
+        <<sealed>>
+    }
+    class Cargando {
+        <<object>>
+    }
+    class Exito {
+        +elementos: List~String~
+    }
+    class Error {
+        +mensaje: String
+    }
+    UiState <|-- Cargando
+    UiState <|-- Exito
+    UiState <|-- Error
+```
+
+Luego, la interfaz decidirá qué mostrar según el estado, con un `when` exhaustivo:
+
+```kotlin
+fun render(estado: UiState) = when (estado) {
+    is UiState.Cargando -> "Mostrando indicador de carga..."
+    is UiState.Exito    -> "Mostrando ${estado.elementos.size} elementos"
+    is UiState.Error    -> "Mostrando mensaje: ${estado.mensaje}"
+}
+```
+
+Este es el corazón de cómo una app moderna maneja la incertidumbre de los datos, y lo retomaremos al construir la arquitectura MVVM.
+
+## ¿enum o sealed class?
+
+Ambos representan un conjunto fijo de opciones, así que ¿cuál usar?
+
+- Usa un **`enum`** cuando las opciones sean valores simples y con la **misma forma**: un conjunto de constantes con nombre (colores, direcciones, niveles).
+- Usa una **`sealed class`** cuando cada opción necesite llevar **sus propios datos** o tener una estructura distinta (un resultado con datos o con error, los estados de una pantalla).
+
+En pocas palabras: si cada caso es solo "una etiqueta", un `enum` basta; si cada caso "carga algo distinto", usa una `sealed class`.
 
 ## Resumen
 
-En este capítulo aprendiste a crear objetos únicos:
+En este capítulo aprendiste a modelar conjuntos fijos de opciones:
 
-- Un **singleton** es una clase con una única instancia, compartida por todo el programa.
-- La palabra clave **`object`** crea un singleton directamente: no tiene constructor ni se instancia; accedes a sus miembros por su nombre (`Configuracion.idioma`).
-- El **`companion object`** es un objeto único dentro de una clase, para miembros que pertenecen a la clase y no a sus instancias (constantes, funciones de fábrica). Se accede por el nombre de la clase (`Usuario.EDAD_MINIMA`).
-- El `companion object` es el reemplazo de Kotlin para los miembros `static` de Java.
+- Un **`enum class`** define un conjunto fijo de valores con nombre; da seguridad frente a valores inválidos y funciona muy bien con `when` (exhaustivo, sin `else`). Sus valores pueden tener propiedades.
+- Una **`sealed class`** define una jerarquía cerrada de subclases conocidas de antemano; cada una puede ser distinta y llevar sus propios datos.
+- Con `when` y el operador `is`, manejas una `sealed class` de forma exhaustiva y con *smart cast* (accedes a los datos de cada caso sin conversiones).
+- Usa `enum` para opciones con la misma forma y `sealed class` para opciones que cargan datos distintos.
+- Este patrón es la base para modelar los **estados de una interfaz** (cargando, éxito, error).
 
-En el próximo capítulo verás dos herramientas muy útiles para modelar datos con un conjunto limitado de opciones: los `enum` y las `sealed class`.
+Con esto casi cierras la parte de POO. En el próximo capítulo verás tres herramientas que hacen tu código más expresivo y reutilizable: los **genéricos**, las **funciones de extensión** y las **lambdas** (que ya usaste con las colecciones y que ahora estudiarás a fondo).

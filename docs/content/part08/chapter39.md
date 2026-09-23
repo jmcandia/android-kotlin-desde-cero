@@ -1,138 +1,132 @@
-# Capítulo 39: Retrofit: configuración, interfaces y endpoints
+# Capítulo 35: `ViewModel` y el estado de la interfaz (`UiState`)
 
 ## Introducción
 
-En el capítulo anterior entendiste cómo se comunican una app y un servidor con HTTP, REST y JSON. Hacer todo eso a mano —abrir la conexión, construir la petición, esperar la respuesta, interpretar el JSON— sería tedioso y propenso a errores.
+En el capítulo anterior conociste MVVM en teoría. Ahora lo pondrás en práctica construyendo su pieza central: el **`ViewModel`**, la clase que guarda el estado de la pantalla y ejecuta su lógica. Aprenderás a crear uno, a **exponer** su estado de forma segura con `StateFlow`, a **actualizarlo** y a **conectarlo** con la interfaz. Aquí se juntan, por fin, el `StateFlow`, el `UiState` y el `viewModelScope` que fuiste viendo por separado.
 
-Aquí entra **Retrofit**: una biblioteca que hace ese trabajo por ti. Tú describes la API como una **interfaz de Kotlin**, y Retrofit genera automáticamente el código para hacer las peticiones. En este capítulo aprenderás a configurar Retrofit, a declarar los *endpoints* en una interfaz y a hacer tu primera llamada.
+## La clase `ViewModel`
 
-> [!NOTE]Nota
-> Retrofit es una biblioteca externa; en la siguiente sección la agregamos al proyecto.
-
-## ¿Qué es Retrofit?
-
-**Retrofit** convierte una API REST en una **interfaz de Kotlin**. La idea es elegante: en lugar de escribir código de red, **declaras** qué endpoints existen y qué devuelven, usando una interfaz con **anotaciones**. Retrofit lee esa interfaz y crea, por detrás, la implementación que hace las peticiones reales.
-
-Además, se integra a la perfección con las **coroutines** (puedes declarar los endpoints como funciones `suspend`) y convierte automáticamente el **JSON** de la respuesta en objetos de Kotlin.
-
-## Instalar y configurar Retrofit
-
-Retrofit es una biblioteca externa, así que primero hay que **agregarla al proyecto**. Al momento de escribir este curso, la última versión estable es la **3.0.0**. Necesitarás dos dependencias: **Retrofit** en sí, y un **convertidor** que transforme el JSON en objetos de Kotlin (usaremos el de `kotlinx.serialization`).
-
-Siguiendo el catálogo de versiones que viste al crear el proyecto, primero declaras la versión y las bibliotecas en `libs.versions.toml`:
-
-```toml
-[versions]
-retrofit = "3.0.0"
-
-[libraries]
-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
-retrofit-kotlinx-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
-```
-
-Y luego las agregas al `build.gradle.kts` del módulo `app`:
+Android ofrece una clase base llamada **`ViewModel`**. Para crear el tuyo, defines una clase que hereda de ella:
 
 ```kotlin
-dependencies {
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.kotlinx.serialization)
-    // ...otras dependencias
+class MiViewModel : ViewModel() {
+    // estado y lógica de la pantalla
 }
 ```
 
-Tras sincronizar Gradle, Retrofit queda listo para usar.
+Su gran ventaja es la que anticipamos: un `ViewModel` está diseñado para **vivir más que la `Activity`**. Cuando el dispositivo gira y la `Activity` se recrea, el `ViewModel` **sigue existiendo**, con su estado intacto. Ese problema del ciclo de vida queda resuelto sin que hagas nada especial.
 
 > [!NOTE]Nota
-> Retrofit requiere como mínimo **Java 8** o **Android API 21+**, algo que cualquier proyecto reciente ya cumple. Es un proyecto de código abierto de Square; su documentación oficial está en [square.github.io/retrofit](https://square.github.io/retrofit/).
+> La clase `ViewModel` viene en una biblioteca de Android (`lifecycle`), que se agrega como dependencia en el proyecto.
 
-> [!NOTE]Nota
-> El convertidor de `kotlinx.serialization` necesita, además, el *plugin* de serialización y que tus clases de datos estén marcadas como `@Serializable`. Eso lo completaremos en el próximo capítulo, al hablar de serialización y DTOs.
+## Exponer el estado de forma segura
 
-## Definir la interfaz de la API
-
-El corazón de Retrofit es una interfaz donde **cada método representa un endpoint**. Se anota con el método HTTP y la ruta:
+El `ViewModel` guarda el estado de la pantalla. Usaremos para ello el `UiState` que viste en el capítulo de `sealed class`:
 
 ```kotlin
-interface ApiService {
-    @GET("usuarios")
-    suspend fun obtenerUsuarios(): List<Usuario>
+sealed class UiState {
+    object Cargando : UiState()
+    data class Exito(val elementos: List<String>) : UiState()
+    data class Error(val mensaje: String) : UiState()
 }
 ```
 
-Analicémoslo:
-
-- `@GET("usuarios")` indica que este método hace una petición `GET` al endpoint `usuarios` (relativo a la URL base que configuraremos más abajo).
-- `suspend fun` aprovecha las coroutines: la llamada se suspende mientras espera la respuesta, sin bloquear el hilo.
-- El tipo de retorno, `List<Usuario>`, es lo que Retrofit te entregará ya convertido: toma el JSON de la respuesta y lo transforma en objetos. Aquí `Usuario` es una `data class` que describe la forma de los datos (algo que detallaremos en el próximo capítulo).
-
-## Endpoints con parámetros
-
-Muchos endpoints necesitan parámetros. Retrofit los maneja con más anotaciones.
-
-Para un valor que va **dentro de la ruta** (como un id), usas `@Path`, y lo referencias entre llaves en la URL:
+Ahora, aquí hay un detalle de diseño importante. El `ViewModel` necesita **cambiar** el estado, pero la interfaz solo debería **leerlo**, nunca modificarlo. Para lograrlo, se usa un patrón muy común: una propiedad **mutable y privada**, y otra **de solo lectura y pública**.
 
 ```kotlin
-@GET("usuarios/{id}")
-suspend fun obtenerUsuario(@Path("id") id: Int): Usuario
+class MiViewModel : ViewModel() {
+    private val _uiState = MutableStateFlow<UiState>(UiState.Cargando)
+    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
+}
 ```
 
-Al llamar `obtenerUsuario(42)`, Retrofit construye la petición a `usuarios/42`.
+- `_uiState` es un `MutableStateFlow` **privado**: solo el `ViewModel` puede cambiar su valor. Por convención, su nombre empieza con guion bajo.
+- `uiState` es un `StateFlow` **público** (de solo lectura), que la interfaz observará. El método `asStateFlow()` "expone" el estado sin permitir modificarlo.
 
-Para un parámetro de **consulta** (los que van después del `?` en la URL), usas `@Query`:
+Así se cumple la **encapsulación**: el estado solo se modifica desde dentro del `ViewModel`, la única fuente de verdad.
 
-```kotlin
-@GET("usuarios")
-suspend fun buscarUsuarios(@Query("nombre") nombre: String): List<Usuario>
-```
+## Actualizar el estado
 
-Al llamar `buscarUsuarios("Ana")`, Retrofit genera la petición a `usuarios?nombre=Ana`.
-
-## Construir la instancia de Retrofit
-
-Con la interfaz definida, falta crear la instancia de Retrofit y, a partir de ella, el objeto que implementa tu interfaz. Se usa `Retrofit.Builder`:
+Para cambiar el estado, el `ViewModel` asigna un nuevo valor a `_uiState.value`. Como esto suele implicar una tarea lenta (pedir datos), la lanzamos en una coroutine dentro del **`viewModelScope`**, el *scope* del capítulo de coroutines:
 
 ```kotlin
-val retrofit = Retrofit.Builder()
-    .baseUrl("https://api.ejemplo.com/")
-    .addConverterFactory(
-        Json.asConverterFactory("application/json".toMediaType())
-    )
-    .build()
+class MiViewModel : ViewModel() {
+    private val _uiState = MutableStateFlow<UiState>(UiState.Cargando)
+    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
-val apiService = retrofit.create(ApiService::class.java)
-```
-
-Las piezas clave:
-
-- `baseUrl(...)` es la parte común de todas las URLs. Se combina con la ruta de cada endpoint (por ejemplo, `usuarios`) para formar la dirección completa. Debe terminar en `/`.
-- `addConverterFactory(...)` le indica a Retrofit cómo **convertir** el JSON en objetos. Aquí usamos el convertidor de `kotlinx.serialization` (`Json.asConverterFactory(...)`) que instalamos más arriba. Los detalles de cómo tus `data class` se conectan con el JSON son el tema del próximo capítulo.
-- `retrofit.create(ApiService::class.java)` genera la implementación de tu interfaz. El resultado, `apiService`, ya está listo para usarse.
-
-## Usar la API desde el repositorio
-
-¿Dónde encaja todo esto? En la **capa de datos** que armaste en la parte de arquitectura. El repositorio recibe el `ApiService` y lo usa para obtener los datos:
-
-```kotlin
-class DatosRepositoryImpl(
-    private val apiService: ApiService
-) : DatosRepository {
-
-    override suspend fun obtenerDatos(): List<Usuario> {
-        return apiService.obtenerUsuarios()
+    fun cargarDatos() {
+        viewModelScope.launch {
+            _uiState.value = UiState.Cargando
+            val datos = obtenerDatos() // una función suspend que trae los datos
+            _uiState.value = UiState.Exito(datos)
+        }
     }
 }
 ```
 
-Fíjate en lo limpio que queda: el repositorio solo invoca `apiService.obtenerUsuarios()`, una función `suspend`, sin ver ni un detalle de red. Y como el `ViewModel` depende de la interfaz del repositorio, nada más arriba se entera de que los datos vienen de Retrofit. Cada capa cumple su papel, tal como planeamos.
+Usar `viewModelScope` es importante: si el `ViewModel` se destruye, sus coroutines se cancelan solas, evitando trabajo innecesario. (La función `obtenerDatos()` representa la capa de datos, el **Modelo**, que veremos en el próximo capítulo.)
+
+## Conectar el ViewModel con la interfaz
+
+Falta unir el `ViewModel` con la Vista. En el composable, obtienes el `ViewModel` con la función `viewModel()` y **recolectas** su estado para que la interfaz reaccione a los cambios:
+
+```kotlin
+@Composable
+fun Pantalla(viewModel: MiViewModel = viewModel()) {
+    val estado by viewModel.uiState.collectAsStateWithLifecycle()
+
+    when (estado) {
+        is UiState.Cargando -> Text("Cargando...")
+        is UiState.Exito    -> Text("Se cargaron ${estado.elementos.size} elementos")
+        is UiState.Error    -> Text("Error: ${estado.mensaje}")
+    }
+}
+```
+
+Analicemos las piezas nuevas:
+
+- `viewModel()` obtiene la instancia del `ViewModel` (la misma a través de las recomposiciones y de los giros de pantalla).
+- `collectAsStateWithLifecycle()` **recolecta** el `StateFlow` y lo convierte en un estado de Compose: cada vez que el `ViewModel` cambia `uiState`, este composable se **recompone** con el nuevo valor.
+- El `when` decide qué mostrar según el estado, aprovechando el *smart cast* de la `sealed class`.
+
+Y para disparar la lógica, la Vista simplemente invoca las funciones del `ViewModel`:
+
+```kotlin
+Button(onClick = { viewModel.cargarDatos() }) {
+    Text("Cargar")
+}
+```
+
+> [!NOTE]Nota
+> `collectAsStateWithLifecycle()` es la forma recomendada de recolectar un `StateFlow` en Compose, porque solo recolecta mientras la pantalla está visible. Requiere una pequeña dependencia adicional (`lifecycle-runtime-compose`).
+
+## El flujo completo
+
+Con todo junto, el ciclo de MVVM queda así: la Vista pide una acción, el `ViewModel` actualiza el estado, y la Vista se redibuja sola al observar ese cambio.
+
+```mermaid
+sequenceDiagram
+    participant V as Vista
+    participant VM as ViewModel
+    V->>VM: cargarDatos()
+    Note over VM: _uiState.value = Cargando
+    VM-->>V: estado: Cargando
+    Note over V: Muestra "Cargando..."
+    Note over VM: Llegan los datos<br/>_uiState.value = Exito(datos)
+    VM-->>V: estado: Exito
+    Note over V: Muestra los datos
+```
+
+Fíjate en que la Vista nunca guarda ni calcula el estado: solo lo **muestra** y **avisa** de los eventos. Toda la lógica vive en el `ViewModel`.
 
 ## Resumen
 
-En este capítulo configuraste Retrofit para consumir una API:
+En este capítulo construiste el corazón de MVVM:
 
-- **Retrofit** convierte una API REST en una **interfaz de Kotlin**: declaras los endpoints y Retrofit genera el código que hace las peticiones.
-- Cada método de la interfaz es un endpoint, anotado con su método HTTP (`@GET`, `@POST`, …) y su ruta. Al declararlo `suspend`, se integra con las coroutines.
-- Los parámetros se pasan con `@Path` (dentro de la ruta) y `@Query` (después del `?`).
-- Creas la instancia con `Retrofit.Builder`, indicando la `baseUrl` y un **convertidor** de JSON, y obtienes la implementación con `retrofit.create(...)`.
-- El `ApiService` se usa desde el **repositorio**, encajando de forma natural en la arquitectura por capas.
+- Un **`ViewModel`** es una clase que hereda de `ViewModel` y guarda el estado y la lógica de una pantalla. **Sobrevive** a los cambios de configuración, como el giro de pantalla.
+- El estado se expone con el patrón **`MutableStateFlow` privado + `StateFlow` público** (`_uiState` / `uiState` con `asStateFlow()`), de modo que solo el `ViewModel` puede modificarlo.
+- El `ViewModel` actualiza el estado asignando a `_uiState.value`, normalmente dentro de una coroutine en **`viewModelScope`**.
+- La Vista obtiene el `ViewModel` con `viewModel()`, recolecta su estado con **`collectAsStateWithLifecycle()`** y decide qué mostrar con un `when` sobre el `UiState`.
+- La Vista solo muestra el estado y avisa de eventos (invocando funciones del `ViewModel`); toda la lógica queda en el `ViewModel`.
 
-En el próximo capítulo verás la pieza que quedó pendiente: la **serialización**, es decir, cómo se convierte el JSON en tus `data class` mediante los **DTOs**.
+En el próximo capítulo separaremos aún más las responsabilidades creando la **capa de datos** (el Modelo): un **repositorio** que se encargue de obtener la información, para que el `ViewModel` no dependa de dónde vienen los datos.

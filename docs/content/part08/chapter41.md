@@ -1,121 +1,142 @@
-# Capítulo 41: Estados de red: *loading*, *success* y *error*
+# Capítulo 36: Repositorio y separación de capas
 
 ## Introducción
 
-Ya tienes todas las piezas: **Retrofit** para pedir los datos, un **repositorio** que los provee, un **`ViewModel`** con su `UiState`, y una interfaz que reacciona al estado. En este capítulo las **unes** en el flujo completo de una petición de red, manejando sus tres estados —**cargando**, **éxito** y **error**— de principio a fin. Con esto cierras la parte de red y completas la arquitectura que venías construyendo.
+En el capítulo anterior, el `ViewModel` llamaba a una función `obtenerDatos()`, pero no dijimos **de dónde** salían esos datos. Ahí quedó un cabo suelto que este capítulo viene a resolver.
 
-## Los tres estados de una petición
+Si el `ViewModel` se encargara él mismo de pedir los datos a la red, leer una base de datos y procesar las respuestas, acabaría haciendo demasiadas cosas. En este capítulo aprenderás a **separar** esa responsabilidad en su propia capa, con el patrón **repositorio**, y a organizar la app en capas bien delimitadas.
 
-Una petición de red tiene dos características que no puedes ignorar: **toma tiempo** y **puede fallar** (por falta de conexión, un error del servidor, datos mal formados…). Por eso, en todo momento, tu pantalla estará en uno de tres estados:
+## El problema: el ViewModel no debería saberlo todo
 
-- **Cargando**: la petición está en curso. Muestra un indicador de progreso.
-- **Éxito**: los datos llegaron. Muéstralos.
-- **Error**: algo salió mal. Muestra un mensaje (y, idealmente, una opción para reintentar).
+Recuerda cuál es el trabajo del `ViewModel`: guardar el estado de la pantalla y su lógica de presentación. Si además lo cargamos con los detalles de **cómo** se obtienen los datos —abrir una conexión de red, interpretar la respuesta, consultar una base de datos—, aparecen dos problemas:
 
-Ya modelaste exactamente esto con una `sealed class`, en la parte de POO. Ahora la usamos con un modelo de dominio real:
+- El `ViewModel` asume **demasiadas responsabilidades** a la vez (otra vez, lo contrario del principio de responsabilidad única).
+- Queda **acoplado** a una fuente de datos concreta: si mañana quieres cambiar de la red a una base de datos local, tendrías que reescribir el `ViewModel`.
+
+La solución es separar **"cómo presentar los datos"** (tarea del `ViewModel`) de **"cómo obtener los datos"** (una tarea aparte).
+
+## La capa de datos: el repositorio
+
+Esa nueva tarea vive en la **capa de datos**, y su pieza principal es el **repositorio**: una clase dedicada exclusivamente a **proveer los datos**. El repositorio es la **fuente única** de información: el `ViewModel` le pide los datos, y el repositorio decide cómo conseguirlos (de la red, de una base de datos local, de una caché, o de una combinación de todo eso).
 
 ```kotlin
-sealed class UiState {
-    object Cargando : UiState()
-    data class Exito(val usuarios: List<Usuario>) : UiState()
-    data class Error(val mensaje: String) : UiState()
+class DatosRepository {
+    suspend fun obtenerDatos(): List<String> {
+        // aquí se decide de dónde vienen los datos
+        // (una petición de red, una consulta a la base de datos, etc.)
+    }
 }
 ```
 
-## El ViewModel: orquestar los tres estados
-
-El `ViewModel` es el director de orquesta: pide los datos al repositorio y va cambiando el estado según lo que ocurra.
+Ahora el `ViewModel` simplemente le pide los datos al repositorio, sin saber ni preocuparse por su origen:
 
 ```kotlin
-@HiltViewModel
-class UsuariosViewModel @Inject constructor(
-    private val repository: UsuariosRepository
-) : ViewModel() {
-
+class MiViewModel(private val repository: DatosRepository) : ViewModel() {
     private val _uiState = MutableStateFlow<UiState>(UiState.Cargando)
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
-    fun cargarUsuarios() {
+    fun cargarDatos() {
         viewModelScope.launch {
             _uiState.value = UiState.Cargando
-            try {
-                val usuarios = repository.obtenerUsuarios()
-                _uiState.value = UiState.Exito(usuarios)
-            } catch (e: Exception) {
-                _uiState.value = UiState.Error("No se pudieron cargar los datos")
-            }
+            val datos = repository.obtenerDatos()
+            _uiState.value = UiState.Exito(datos)
         }
     }
 }
 ```
 
-Sigue la secuencia:
+El `ViewModel` recibe el repositorio por su **constructor** y lo usa. Su código no menciona la red ni la base de datos: esos detalles quedan encapsulados en el repositorio.
 
-1. Antes de empezar, pone el estado en **`Cargando`**.
-2. Dentro de un **`try`**, pide los datos al repositorio. Si todo va bien, pasa a **`Exito`** con la lista.
-3. Si la petición **lanza una excepción** (recuerda el manejo de excepciones que viste antes), el **`catch`** la atrapa y pone el estado en **`Error`**.
+## Las capas de la aplicación
 
-Así, cualquier fallo de la red —que en Retrofit se manifiesta como una excepción— se convierte en un estado de `Error` que la interfaz sabrá mostrar, en lugar de tumbar la app.
+Con esta separación, la app queda organizada en **capas**, cada una con su responsabilidad, donde cada capa solo se comunica con la de abajo:
 
-> [!TIP]Sugerencia
-> En vez de `try/catch`, también puedes usar `runCatching`, que viste en el capítulo de excepciones y encaja muy bien aquí. Y si quisieras distinguir tipos de error (sin conexión, servidor caído, etc.), podrías atrapar excepciones más específicas y dar mensajes distintos.
+```mermaid
+flowchart TD
+    subgraph UI["Capa de interfaz"]
+        V["Vista (composables)"]
+        VM["ViewModel"]
+    end
+    subgraph Datos["Capa de datos"]
+        R["Repositorio"]
+        API["Red (API)"]
+        DB["Base de datos local"]
+    end
+    V --> VM
+    VM --> R
+    R --> API
+    R --> DB
+```
 
-## La interfaz: reaccionar a cada estado
+- La **capa de interfaz** (la Vista y el `ViewModel`) se ocupa de mostrar el estado y reaccionar al usuario.
+- La **capa de datos** (el repositorio y sus fuentes) se ocupa de obtener y guardar la información.
 
-La interfaz observa el estado y decide qué mostrar en cada caso, con el `when` exhaustivo que ya conoces:
+Cada capa tiene un trabajo claro, y ninguna se mete en el de las demás. Esto hace la app mucho más fácil de entender, probar y ampliar.
+
+## La estructura del proyecto en carpetas
+
+Estas capas no son solo un concepto: se reflejan en **cómo organizas las carpetas** (los *paquetes*) de tu proyecto. Una forma habitual y ordenada es agrupar el código **por capa**:
+
+```text
+com.ejemplo.miapp/
+├── data/                      # capa de datos
+│   ├── DatosRepository.kt          # la interfaz del repositorio
+│   └── DatosRepositoryImpl.kt      # su implementación
+├── model/                     # modelos de dominio (las clases que usa la app)
+│   └── Usuario.kt
+├── ui/                        # capa de interfaz
+│   ├── PantallaUsuarios.kt         # composables (la Vista)
+│   ├── UsuariosViewModel.kt        # el ViewModel
+│   ├── UiState.kt                  # el estado de la interfaz
+│   └── theme/                      # el tema de Material (generado por Android Studio)
+└── MainActivity.kt            # el punto de entrada
+```
+
+La idea es simple: cada archivo vive en el paquete de la capa a la que pertenece. Un `ViewModel` va en `ui/`; el repositorio, en `data/`; los modelos que la app usa, en `model/`. Así, con solo mirar la ubicación de un archivo, sabes cuál es su responsabilidad.
+
+> [!NOTE]Nota
+> Esta estructura irá creciendo con el curso. En el próximo capítulo añadiremos un paquete `di/` para la inyección de dependencias, y al llegar a Retrofit sumaremos, dentro de `data/`, un subpaquete `remote/` con el acceso a la red y los DTOs.
+
+Existen otras maneras de organizar un proyecto —por ejemplo, **por funcionalidad**, agrupando en un mismo paquete todo lo relacionado con una pantalla—, pero organizar **por capas** es claro y más que suficiente para empezar.
+
+## Depender de una abstracción
+
+Hay una mejora más, y es justo el principio de **inversión de dependencias (DIP)** que viste en el anexo. En el ejemplo anterior, el `ViewModel` depende de la clase concreta `DatosRepository`. Es preferible que dependa de una **interfaz**, y que la implementación concreta se defina aparte:
 
 ```kotlin
-@Composable
-fun PantallaUsuarios(viewModel: UsuariosViewModel = hiltViewModel()) {
-    val estado by viewModel.uiState.collectAsStateWithLifecycle()
+interface DatosRepository {
+    suspend fun obtenerDatos(): List<String>
+}
 
-    when (val actual = estado) {
-        is UiState.Cargando -> CircularProgressIndicator()
-        is UiState.Exito    -> ListaUsuarios(actual.usuarios)
-        is UiState.Error    -> MensajeError(
-            mensaje = actual.mensaje,
-            onReintentar = { viewModel.cargarUsuarios() }
-        )
+class DatosRepositoryImpl : DatosRepository {
+    override suspend fun obtenerDatos(): List<String> {
+        // la obtención real de los datos
     }
 }
 ```
 
-- En **`Cargando`**, muestra un `CircularProgressIndicator` (el indicador de progreso circular de Material).
-- En **`Exito`**, muestra la lista con los datos (por ejemplo, en una `LazyColumn`).
-- En **`Error`**, muestra el mensaje y un botón para **reintentar**, que simplemente vuelve a llamar a `cargarUsuarios()`.
+El `ViewModel` no cambia: sigue recibiendo un `DatosRepository`, pero ahora es la **interfaz**, no una clase concreta. ¿Qué ganas con esto?
 
-La interfaz no sabe nada de red ni de excepciones: solo reacciona al estado que le entrega el `ViewModel`.
+- **Testabilidad**: para probar el `ViewModel`, puedes pasarle un repositorio **falso** que devuelva datos de prueba, sin tocar la red.
+- **Flexibilidad**: puedes cambiar la implementación (de la red a una base de datos, por ejemplo) sin modificar el `ViewModel`.
 
-## El flujo completo
+Es exactamente lo que promete DIP: los componentes importantes dependen de **abstracciones**, no de detalles concretos.
 
-Este es el recorrido completo, uniendo todo lo que aprendiste en las últimas partes del curso:
+## ¿Cómo llega el repositorio al ViewModel?
 
-```mermaid
-sequenceDiagram
-    participant UI as Interfaz
-    participant VM as ViewModel
-    participant Repo as Repositorio
-    participant API as API (Retrofit)
-    UI->>VM: cargarUsuarios()
-    Note over VM: estado = Cargando
-    VM->>Repo: obtenerUsuarios()
-    Repo->>API: GET /usuarios
-    API-->>Repo: JSON (o excepción)
-    Repo-->>VM: List~Usuario~ (o excepción)
-    Note over VM: estado = Exito (o Error)
-    VM-->>UI: nuevo estado
-    Note over UI: se recompone
-```
+Queda una pregunta: si el `ViewModel` recibe el repositorio por su constructor, **¿quién crea el repositorio y se lo entrega?** Alguien tiene que construir la implementación concreta (`DatosRepositoryImpl`) y pasársela.
 
-Cuando la interfaz pide cargar, el `ViewModel` marca `Cargando`, le pide los datos al repositorio, que a su vez usa Retrofit para llamar a la API. Según el resultado —datos o excepción—, el `ViewModel` pasa a `Exito` o a `Error`, y la interfaz se recompone para mostrar lo que corresponda. Cada capa hace su parte, y el usuario siempre ve un estado claro.
+Podrías hacerlo a mano, pero en apps reales, con muchas dependencias entrelazadas, eso se vuelve engorroso. Para resolverlo existe la **inyección de dependencias**, el tema del próximo capítulo: una técnica (y una herramienta, Hilt) que se encarga de crear y entregar automáticamente cada pieza donde se necesita.
 
 ## Resumen
 
-En este capítulo uniste todas las piezas para manejar una petición de red:
+En este capítulo separaste tu código en capas:
 
-- Una petición de red **toma tiempo** y **puede fallar**, así que la pantalla siempre está en uno de tres estados: **cargando**, **éxito** o **error**, modelados con tu `UiState`.
-- El **`ViewModel`** orquesta esos estados: pone `Cargando`, pide los datos al repositorio dentro de un `try`, pasa a `Exito` si llegan y a `Error` (en el `catch`) si algo falla.
-- Las excepciones de red se **convierten en un estado de `Error`**, en lugar de tumbar la app.
-- La **interfaz** observa el estado y, con un `when`, muestra el indicador de carga, los datos o el mensaje de error (con opción de reintentar).
+- El `ViewModel` no debería ocuparse de **cómo** se obtienen los datos; esa es una responsabilidad aparte.
+- El **repositorio** es la clase de la **capa de datos** que provee la información, ocultando su origen (red, base de datos, caché). El `ViewModel` solo le pide los datos.
+- La app se organiza en **capas** (interfaz y datos), donde cada una tiene una responsabilidad clara y solo se comunica con la de abajo.
+- Estas capas se reflejan en la **estructura de carpetas**: se organiza el código por capa (`data/`, `model/`, `ui/`), de modo que la ubicación de cada archivo revela su responsabilidad.
+- Siguiendo el principio **DIP**, el `ViewModel` depende de una **interfaz** de repositorio, no de una clase concreta, lo que mejora la testabilidad y la flexibilidad.
+- El repositorio llega al `ViewModel` por su **constructor**; quién lo crea y lo entrega es el trabajo de la inyección de dependencias.
 
-Con esto **cierras la arquitectura completa** de una app moderna: interfaz declarativa con Compose, estado en un `ViewModel`, datos desde un repositorio con Retrofit y un manejo claro de los estados de red. En la próxima parte del curso pondrás en práctica absolutamente todo lo aprendido, construyendo una aplicación completa de principio a fin.
+En el próximo capítulo verás precisamente eso: la **inyección de dependencias** con **Hilt**, que arma y conecta todas estas piezas por ti.
