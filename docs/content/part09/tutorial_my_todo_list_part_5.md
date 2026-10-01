@@ -4,7 +4,7 @@
 
 Al final de la cuarta parte, **Mi lista de tareas** tenía una arquitectura completa: interfaz, `ViewModel`, repositorio y Hilt conectándolo todo. Solo le faltaba una cosa: si cierras la app, las tareas se pierden, porque el repositorio las guarda en memoria.
 
-En esta última parte vas a guardarlas en una base de datos del teléfono con **Room**, aplicando lo que viste en el capítulo 47. Al terminar:
+En esta última parte vas a guardarlas en una base de datos del teléfono con **Room**, aplicando lo que viste en el capítulo 50. Al terminar:
 
 - las tareas se guardarán en una tabla `tareas` de SQLite;
 - **sobrevivirán al cierre de la app** y al reinicio del teléfono;
@@ -71,7 +71,7 @@ dependencies {
 }
 ```
 
-Como en el capítulo 47, el compilador de Room se agrega con `ksp(...)`, igual que el de Hilt. Pulsa **Sync Now**.
+Como en el capítulo 50, el compilador de Room se agrega con `ksp(...)`, igual que el de Hilt. Pulsa **Sync Now**.
 
 ## Paso 2: La entidad
 
@@ -103,7 +103,7 @@ fun Tarea.aEntity(creadaEn: Long = System.currentTimeMillis()): TareaEntity =
 
 La entidad tiene una columna que `Tarea` no tiene: **`creadaEn`**, el momento en que se guardó la tarea, en milisegundos. Una tabla SQL no garantiza ningún orden al leer sus filas; sin esta columna, la lista podría aparecer desordenada. La necesitas para guardar, pero la interfaz no la usa, así que se queda en la entidad y `Tarea` no cambia.
 
-Las dos **funciones de extensión** (capítulo 20) traducen entre el modelo de dominio y la entidad. `aEntity` recibe `creadaEn` como parámetro con valor por defecto: la hora actual.
+Las dos **funciones de extensión** (capítulo 21) traducen entre el modelo de dominio y la entidad. `aEntity` recibe `creadaEn` como parámetro con valor por defecto: la hora actual.
 
 ## Paso 3: El DAO
 
@@ -164,7 +164,7 @@ Room genera la implementación de esta clase y de `TareaDao` al compilar.
 
 ## Paso 5: Crear la base de datos con Hilt
 
-La base de datos se crea con `Room.databaseBuilder`, no con un constructor que Hilt pueda llamar. Como viste en el capítulo 47, para eso se usa un módulo con funciones **`@Provides`**. En el paquete `di`, junto a `DataModule.kt`, crea `DatabaseModule.kt`:
+La base de datos se crea con `Room.databaseBuilder`, no con un constructor que Hilt pueda llamar. Como viste en el capítulo 50, para eso se usa un módulo con funciones **`@Provides`**. En el paquete `di`, junto a `DataModule.kt`, crea `DatabaseModule.kt`:
 
 ```kotlin
 package com.ejemplo.milistadetareas.di
@@ -271,7 +271,7 @@ Antes de ejecutar, repasa lo que **no** tocaste:
 - **Las pruebas unitarias**. Crean el `ViewModel` con `TareasRepositoryEnMemoria`, así que siguen sin necesitar emulador ni base de datos. Ejecútalas: deben pasar las tres.
 
 > [!NOTE]Nota
-> En el capítulo 47, el `ViewModel` de notas convertía el `Flow` en estado con `stateIn`. El de tareas recolecta el `Flow` en el `init` y lo copia a su `_uiState`. Las dos formas son correctas. Aquí se usa la segunda porque el estado no es solo la lista: también lleva el mensaje del Snackbar, que no viene del repositorio.
+> En el capítulo 50, el `ViewModel` de notas convertía el `Flow` en estado con `stateIn`. El de tareas recolecta el `Flow` en el `init` y lo copia a su `_uiState`. Las dos formas son correctas. Aquí se usa la segunda porque el estado no es solo la lista: también lleva el mensaje del Snackbar, que no viene del repositorio.
 
 ## Paso 9: Ejecutar y probar
 

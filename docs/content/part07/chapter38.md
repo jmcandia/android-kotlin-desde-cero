@@ -1,4 +1,4 @@
-# Capítulo 35c: Barras de navegación y destinos principales
+# Capítulo 38: Barras de navegación y destinos principales
 
 ## Introducción
 
@@ -305,7 +305,7 @@ App
 
 La barra y el contenido también deben adaptarse juntos. En una ventana compacta, `NavigationBar` puede llevar a una pantalla completa; en una ventana expandida, la misma acción puede seleccionar el panel de la izquierda mientras el detalle permanece visible. En ambos casos, la fuente de verdad sigue siendo el estado del `NavController`, y `NavHost` continúa declarando los destinos.
 
-El capítulo 37 (opcional) profundiza en cómo detectar el tamaño de ventana con *Window Size Classes* y elegir automáticamente entre `NavigationBar`, `NavigationRail` o un diseño de dos paneles.
+El capítulo 40 (opcional) profundiza en cómo detectar el tamaño de ventana con *Window Size Classes* y elegir automáticamente entre `NavigationBar`, `NavigationRail` o un diseño de dos paneles.
 
 ## Resumen
 

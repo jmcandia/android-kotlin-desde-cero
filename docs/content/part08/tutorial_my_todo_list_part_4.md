@@ -2,7 +2,7 @@
 
 ## Qué vamos a construir
 
-En la tercera parte, `TareasViewModel` tomó el control del estado de la app. Pero todavía hace dos trabajos: decide **qué mostrar** y además **guarda los datos**. En los capítulos 41 y 42 viste cómo separar esos trabajos con un repositorio y cómo conectar las piezas con Hilt.
+En la tercera parte, `TareasViewModel` tomó el control del estado de la app. Pero todavía hace dos trabajos: decide **qué mostrar** y además **guarda los datos**. En los capítulos 44 y 45 viste cómo separar esos trabajos con un repositorio y cómo conectar las piezas con Hilt.
 
 En esta cuarta parte vas a reorganizar la app por dentro, otra vez sin cambiar lo que ve el usuario. Al terminar, tendrá:
 
@@ -82,7 +82,7 @@ Pulsa **Sync Now**.
 
 ## Paso 2: Preparar la app para Hilt
 
-Como viste en el capítulo 42, Hilt necesita una clase `Application` anotada con `@HiltAndroidApp`: es el punto donde empieza a construir las dependencias. Tu proyecto todavía no tiene una, así que créala. En el paquete principal, crea el archivo `MiListaDeTareasApp.kt`:
+Como viste en el capítulo 45, Hilt necesita una clase `Application` anotada con `@HiltAndroidApp`: es el punto donde empieza a construir las dependencias. Tu proyecto todavía no tiene una, así que créala. En el paquete principal, crea el archivo `MiListaDeTareasApp.kt`:
 
 ```kotlin
 import android.app.Application
@@ -185,7 +185,7 @@ Las dos anotaciones son para Hilt:
 
 ## Paso 5: Decirle a Hilt qué implementación usar
 
-El `ViewModel` va a pedir un `TareasRepository`, que es una interfaz. Hilt sabe crear `TareasRepositoryEnMemoria`, pero no sabe que es la implementación que debe usar para esa interfaz. Eso se lo dices en un **módulo** con `@Binds`, como en el capítulo 42.
+El `ViewModel` va a pedir un `TareasRepository`, que es una interfaz. Hilt sabe crear `TareasRepositoryEnMemoria`, pero no sabe que es la implementación que debe usar para esa interfaz. Eso se lo dices en un **módulo** con `@Binds`, como en el capítulo 45.
 
 Crea un paquete `di` (de *dependency injection*) junto a `data`, y dentro el archivo `DataModule.kt`:
 
@@ -215,7 +215,7 @@ Léelo como una regla: «cuando alguien pida un `TareasRepository`, entrégale u
 Esta línea es la única de todo el proyecto que conoce la implementación concreta. En la quinta parte cambiarás la memoria por una base de datos, y bastará con cambiarla aquí.
 
 > [!NOTE]Nota
-> Las pantallas y el `ViewModel` se quedan en el paquete principal, donde ya estaban. En una app más grande los moverías a un paquete `ui/`, como sugiere el capítulo 41; aquí basta con que los datos y la configuración de Hilt tengan su propio lugar.
+> Las pantallas y el `ViewModel` se quedan en el paquete principal, donde ya estaban. En una app más grande los moverías a un paquete `ui/`, como sugiere el capítulo 44; aquí basta con que los datos y la configuración de Hilt tengan su propio lugar.
 
 ## Paso 6: El `ViewModel` observa el repositorio
 
@@ -294,7 +294,7 @@ import kotlinx.coroutines.launch
 Fíjate en lo que cambió y en lo que no:
 
 - **El constructor** recibe el repositorio, con `@Inject`. La clase se anota con `@HiltViewModel`. El `ViewModel` solo conoce la interfaz `TareasRepository`: no sabe que las tareas están en memoria.
-- **El bloque `init`** se ejecuta una sola vez, al crear el `ViewModel`. Lanza una coroutine que **recolecta** el `Flow` del repositorio durante toda la vida del `ViewModel`: cada vez que llega una lista nueva, la copia al estado. Es la carga inicial «en el `init`» que recomendaba el capítulo 40.
+- **El bloque `init`** se ejecuta una sola vez, al crear el `ViewModel`. Lanza una coroutine que **recolecta** el `Flow` del repositorio durante toda la vida del `ViewModel`: cada vez que llega una lista nueva, la copia al estado. Es la carga inicial «en el `init`» que recomendaba el capítulo 43.
 - **Las acciones ya no tocan la lista**. `agregarTarea` le pide al repositorio que agregue la tarea y termina ahí. La lista nueva llegará sola por el `Flow`, y el `init` la pondrá en el estado. Como las funciones del repositorio son `suspend`, cada acción las llama dentro de `viewModelScope.launch`.
 - **El `ViewModel` sigue siendo dueño de lo que es de la pantalla**: el mensaje del Snackbar y `ultimaEliminada`. El repositorio no sabe nada de Snackbars.
 - **La interfaz del `ViewModel` no cambió**: las mismas funciones públicas, con los mismos parámetros, y el mismo `uiState`. Por eso las pantallas no se tocan.

@@ -7,7 +7,7 @@ En la primera parte construiste una lista de tareas funcional con una sola panta
 - toda la interfaz vive en una única pantalla;
 - usa los colores y la tipografía que Android Studio generó por defecto.
 
-En esta segunda parte vas a aplicar lo aprendido en los capítulos 35 y 36 para mejorarla sin volver a empezar. Al terminar, tu app tendrá:
+En esta segunda parte vas a aplicar lo aprendido en los capítulos 36 y 39 para mejorarla sin volver a empezar. Al terminar, tu app tendrá:
 
 - una pantalla de lista y una pantalla de detalle;
 - navegación entre ambas con **Navigation Compose**;
@@ -40,7 +40,7 @@ dependencies {
 }
 ```
 
-La versión puede ser distinta cuando leas este tutorial. Si Android Studio sugiere una versión más reciente compatible con tu proyecto, usa esa. También puedes declararla en el catálogo de versiones (`gradle/libs.versions.toml`) y añadirla con `implementation(libs.androidx.navigation.compose)`, como viste en el capítulo 25.
+La versión puede ser distinta cuando leas este tutorial. Si Android Studio sugiere una versión más reciente compatible con tu proyecto, usa esa. También puedes declararla en el catálogo de versiones (`gradle/libs.versions.toml`) y añadirla con `implementation(libs.androidx.navigation.compose)`, como viste en el capítulo 26.
 
 Pulsa **Sync Now** y espera a que termine la sincronización. Los imports que usarás después pertenecen principalmente a estos paquetes:
 
@@ -214,7 +214,7 @@ fun App() {
 }
 ```
 
-Todavía falta declarar el destino del detalle; lo haremos en el paso 8. Observa mientras tanto el cambio importante: `App` posee la lista y las acciones, y `ListaTareasScreen` recibirá datos y funciones. Es el mismo *state hoisting* del capítulo 32, aplicado ahora a más de una pantalla.
+Todavía falta declarar el destino del detalle; lo haremos en el paso 8. Observa mientras tanto el cambio importante: `App` posee la lista y las acciones, y `ListaTareasScreen` recibirá datos y funciones. Es el mismo *state hoisting* del capítulo 33, aplicado ahora a más de una pantalla.
 
 ## Paso 7: Convertir la lista en un composable sin estado
 
@@ -478,7 +478,7 @@ Ejecuta la app en modo claro y, después, activa el modo oscuro del emulador o d
 6. Cambia entre modo claro y oscuro: los componentes deben conservar contraste y los colores deben cambiar según el esquema.
 7. Escribe una tarea a medio escribir, agrega una o dos tareas a la lista, y **gira el dispositivo**:
    - El texto que estabas escribiendo en el campo **se conserva**, gracias a que usamos `rememberSaveable` en `ListaTareasScreen`.
-   - Pero **las tareas de la lista desaparecen**. Como `tareas` vive dentro de un `remember` en el composable `App`, la recreación de la `Activity` provocada por el giro (capítulo 26) destruye toda la jerarquía de vistas y su memoria asociada.
+   - Pero **las tareas de la lista desaparecen**. Como `tareas` vive dentro de un `remember` en el composable `App`, la recreación de la `Activity` provocada por el giro (capítulo 27) destruye toda la jerarquía de vistas y su memoria asociada.
 
 > [!NOTE]Nota
 > Que las tareas se pierdan al girar la pantalla no es un error de tu código: es el comportamiento natural de guardar el estado dentro de la interfaz. En el **Tutorial de la Parte VIII** aprenderás a resolver esto de raíz moviendo la lista a un `ViewModel`, que sobrevive a los giros y mantiene tus datos intactos.

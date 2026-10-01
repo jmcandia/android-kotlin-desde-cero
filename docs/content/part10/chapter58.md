@@ -1,98 +1,444 @@
-# Capítulo 58: Cierre del proyecto y próximos pasos
+# Capítulo 58: Pantalla de formulario: validación local y del servidor
 
 ## Introducción
 
-Has terminado «Mis Contactos»: una aplicación Android completa, con arquitectura MVVM, persistencia offline-first, navegación tipada y una interfaz construida enteramente con Jetpack Compose. En este último capítulo repasamos cómo probarla manualmente antes de darla por terminada, revisamos el mapa completo de lo que aprendiste a lo largo del curso, y sugerimos hacia dónde seguir.
+La pantalla de formulario cumple dos roles con la misma interfaz: **crear** un contacto nuevo y **editar** uno existente. Es también la pantalla con más responsabilidades de validación: revisa los datos localmente antes de enviarlos (para dar una respuesta inmediata) y, si el servidor rechaza igualmente la petición, traduce esos errores de vuelta a los campos correspondientes.
 
-## Pruebas manuales sugeridas
+En este capítulo veremos `ContactoForm` (el modelo del formulario y sus reglas de validación), `FormularioContactoViewModel` y `FormularioContactoScreen`.
 
-Antes de considerar cualquier funcionalidad "terminada", conviene recorrerla a mano al menos una vez, verificando tanto el camino feliz como los casos límite. Esta lista te sirve como *checklist* final para «Mis Contactos» — ejecútala con la API (`code/contact-list-api/`) corriendo en `http://localhost:8080` y la app instalada en un dispositivo o emulador con suficiente memoria disponible:
+## El modelo del formulario: `ContactoForm.kt`
 
-**Lista de contactos**
+A diferencia de `Contacto` y `DatosContacto` (capítulo 51), el formulario necesita que **todos** sus campos sean `String`, incluso los numéricos o los opcionales, porque así es como llegan desde un `TextField`. Un campo vacío se representa como `""`, no como `null`:
 
-- [ ] Al abrir la app, se ve un indicador de carga y luego la primera página de contactos.
-- [ ] Escribir en el buscador no dispara una petición por cada letra (revisa el *log* de la API): solo una, unos 400 ms después de dejar de escribir.
-- [ ] Bajar hasta el final de la lista carga automáticamente la página siguiente, sin necesidad de un botón.
-- [ ] Deslizar hacia abajo desde arriba de la lista (*pull-to-refresh*) vuelve a traer la primera página.
-- [ ] Tocar el ícono de favorito en un contacto lo marca de inmediato, sin esperar respuesta de red (es una operación local).
-- [ ] Activar el filtro de "solo favoritos" oculta el resto sin volver a pedir datos al servidor.
-- [ ] Detener el servidor de la API y recargar (deslizando hacia abajo): la lista muestra los contactos guardados en caché con el aviso de "datos guardados localmente".
+```kotlin
+package com.ejemplo.miscontactos.ui.formulario
 
-**Detalle de contacto**
-
-- [ ] Tocar un contacto abre su ficha completa, con los campos opcionales mostrando "sin información" cuando corresponde.
-- [ ] Marcar o desmarcar favorito desde el detalle se refleja también en la lista al volver atrás.
-- [ ] Tocar eliminar muestra un diálogo de confirmación; cancelar no borra nada.
-- [ ] Confirmar la eliminación borra el contacto y vuelve automáticamente a la lista, que ya no lo muestra.
-
-**Formulario**
-
-- [ ] Crear un contacto dejando el nombre vacío muestra el error "obligatorio" sin llegar a llamar a la API.
-- [ ] Escribir un correo sin `@` muestra "correo inválido" apenas se intenta guardar.
-- [ ] Crear un contacto con un correo que ya existe en la API muestra el error de conflicto en el campo de correo.
-- [ ] Guardar con éxito vuelve automáticamente a la pantalla anterior (a la lista si era nuevo, al detalle si era una edición).
-- [ ] Editar un contacto precarga sus datos actuales en el formulario.
-
-**Generales**
-
-- [ ] Rotar la pantalla en cualquier momento (formulario a medio llenar, diálogo de confirmación abierto) no pierde el estado en curso.
-- [ ] Sin permiso de red local concedido (Android 17+), la app pide el permiso antes de mostrar cualquier pantalla.
-
-> [!TIP]Sugerencia
-> Cada ítem de esta lista corresponde a una decisión de diseño que tomamos en algún capítulo de esta parte: el *debounce* del capítulo 53, el evento-como-estado de los capítulos 54 y 55, la estrategia *offline-first* del capítulo 52, la validación en dos niveles del capítulo 55. Si alguno falla, ese es el capítulo al que conviene volver.
-
-## El mapa completo del curso
-
-Estas fueron las grandes etapas que recorriste:
-
-```mermaid
-flowchart LR
-    K["Partes I-IV\nKotlin: sintaxis, POO,\ncolecciones, null safety"] --> C["Parte V\nCoroutines y Flow"]
-    C --> A["Parte VI\nAndroid: Activity,\nciclo de vida"]
-    A --> J["Parte VII\nJetpack Compose:\nUI declarativa"]
-    J --> M["Parte VIII\nMVVM: ViewModel,\nUiState, Hilt"]
-    M --> R["Parte IX\nRetrofit + Room:\nred y persistencia"]
-    R --> P["Parte X\nProyecto final:\nMis Contactos"]
+data class ContactoForm(
+    val nombre: String = "",
+    val apellido: String = "",
+    val email: String = "",
+    val telefono: String = "",
+    val direccion: String = "",
+    val ciudad: String = ""
+)
 ```
 
-Cada parte no fue un tema aislado: la **Parte X** es, literalmente, la combinación de todas las anteriores en una sola aplicación real. Repasa esta correspondencia:
+### El enum `Campo`
 
-| En «Mis Contactos»... | ...se apoya en |
-|---|---|
-| `sealed interface`/`sealed class` para `UiState` y `ErrorDatos` | Parte IV (cap. 19) |
-| `suspend`, `viewModelScope.launch`, `Job`, cancelación | Parte V (cap. 22–23) |
-| `StateFlow`, `SharedFlow`, `.update {}` | Parte V (cap. 24) |
-| Composables con y sin estado, `LazyColumn`, `Scaffold` | Parte VII (cap. 28–33) |
-| `LaunchedEffect` y el patrón evento-como-estado | Parte VIII (cap. 40) |
-| `ViewModel` + `UiState` + `Repository` + Hilt | Parte VIII (cap. 38–42) |
-| DTOs, Retrofit, serialización JSON, estados de red | Parte IX (cap. 43–46) |
-| Room, entidades, DAOs, caché offline | Parte IX (cap. 47) |
+```kotlin
+enum class Campo(val nombreApi: String) {
+    NOMBRE("nombre"),
+    APELLIDO("apellido"),
+    EMAIL("email"),
+    TELEFONO("telefono"),
+    DIRECCION("direccion"),
+    CIUDAD("ciudad")
+}
+```
 
-Si alguna fila te resulta borrosa, es una señal legítima de que vale la pena repasar ese capítulo antes de construir tu propio proyecto — no hace falta que domines todo perfectamente antes de seguir, pero sí que sepas *dónde volver a buscarlo* cuando lo necesites.
+Cada valor del `enum` (capítulo 20) lleva asociado su `nombreApi`: el nombre exacto que usa el campo en el JSON que envía y responde el servidor. Este puente entre el nombre de la propiedad en Kotlin y el nombre del campo en la API es lo que permite, más adelante, traducir automáticamente un mensaje de error del servidor ("email: formato no válido") al campo `Campo.EMAIL` de la interfaz.
 
-## Qué no cubrimos (a propósito)
+### Errores de campo: `ErrorCampo`
 
-«Mis Contactos» es una aplicación completa, pero deliberadamente **acotada**, para mantener el foco en los conceptos centrales del curso. Quedaron fuera del alcance, a propósito:
+```kotlin
+sealed interface ErrorCampo {
+    data object Obligatorio : ErrorCampo
+    data class Longitud(val minimo: Int) : ErrorCampo
+    data class LargoMaximo(val maximo: Int) : ErrorCampo
+    data object EmailInvalido : ErrorCampo
+    data class Servidor(val mensaje: String) : ErrorCampo
+}
+```
 
-- **Pruebas automatizadas** (unitarias de ViewModels con `Turbine`/`kotlinx-coroutines-test`, de UI con `ComposeTestRule`): son el siguiente paso natural una vez que te sientes cómodo con la arquitectura, pero introducir *testing* junto con MVVM, coroutines y Compose de una sola vez habría sido demasiado para un curso desde cero.
-- **Sincronización en segundo plano** (`WorkManager`) para reintentar operaciones creadas sin conexión: la estrategia *offline-first* de este curso solo cubre **lectura** offline (capítulo 52); escribir sin conexión y sincronizar después es un problema considerablemente más complejo.
-- **Módulos de Gradle múltiples** (separar `:data`, `:domain`, `:ui` en módulos independientes): útil en proyectos grandes de equipo, pero innecesario en una app de este tamaño, y habría añadido complejidad de configuración sin aportar a los conceptos centrales.
-- **Inyección de dependencias sin Hilt** (Koin u otras alternativas): el curso eligió Hilt por ser la recomendación oficial de Google para Android, pero los principios de inyección de dependencias del capítulo 42 aplican igual con cualquier framework.
+Modelar los errores como una `sealed interface` (en vez de simples cadenas de texto) permite que la Screen decida **qué texto mostrar en cada idioma** a partir del tipo de error, en lugar de que el `ViewModel` tenga que conocer cadenas de recursos (`stringResource`), algo que no está disponible fuera de un composable. `Servidor` es el único caso que sí lleva un mensaje en texto plano, porque ese mensaje ya viene redactado por la API.
 
-## Próximos pasos sugeridos
+### Validación local: `validarContacto`
 
-Con esta base, algunas direcciones razonables para seguir creciendo como desarrollador Android:
+```kotlin
+private val PATRON_EMAIL = Regex("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")
 
-1. **Agrega pruebas automatizadas** a `ListaContactosViewModel` o `FormularioContactoViewModel`: son los más ricos en lógica (debounce, validación, paginación) y los que más se benefician de una red de seguridad ante futuros cambios.
-2. **Extiende «Mis Contactos»** con una funcionalidad nueva de punta a punta: por ejemplo, ordenar la lista por distintos criterios, o agrupar contactos por la primera letra del apellido (algo similar a lo que ya viste con `LazyColumn` en el capítulo 33). Repetir el ciclo completo (`UiState` → `ViewModel` → `Repository` → capa remota/local si aplica) sobre un caso nuevo es la mejor forma de consolidar la arquitectura.
-3. **Explora Compose Multiplatform** si te interesa compartir lógica de negocio (ViewModels, repositorios) entre Android, iOS y escritorio; los conceptos de `StateFlow` y `UiState` de este curso se trasladan casi sin cambios.
-4. **Revisa la documentación oficial de Android** (developer.android.com) sobre los temas que quedaron fuera de alcance: es el lugar correcto para profundizar en `WorkManager`, módulos multi-Gradle o testing avanzado, ahora que ya tienes el vocabulario y los conceptos de este curso como base.
+fun validarContacto(form: ContactoForm): Map<Campo, ErrorCampo> {
+    val errores = mutableMapOf<Campo, ErrorCampo>()
+
+    if (form.nombre.isBlank()) {
+        errores[Campo.NOMBRE] = ErrorCampo.Obligatorio
+    } else if (form.nombre.length < LARGO_MINIMO_NOMBRE) {
+        errores[Campo.NOMBRE] = ErrorCampo.Longitud(LARGO_MINIMO_NOMBRE)
+    }
+
+    if (form.apellido.isBlank()) {
+        errores[Campo.APELLIDO] = ErrorCampo.Obligatorio
+    } else if (form.apellido.length < LARGO_MINIMO_APELLIDO) {
+        errores[Campo.APELLIDO] = ErrorCampo.Longitud(LARGO_MINIMO_APELLIDO)
+    }
+
+    if (form.email.isBlank()) {
+        errores[Campo.EMAIL] = ErrorCampo.Obligatorio
+    } else if (!PATRON_EMAIL.matches(form.email)) {
+        errores[Campo.EMAIL] = ErrorCampo.EmailInvalido
+    }
+
+    if (form.direccion.length > LARGO_MAXIMO_DIRECCION) {
+        errores[Campo.DIRECCION] = ErrorCampo.LargoMaximo(LARGO_MAXIMO_DIRECCION)
+    }
+
+    return errores
+}
+```
+
+`validarContacto` es una **función pura**: recibe un `ContactoForm` y devuelve un `Map<Campo, ErrorCampo>` sin efectos secundarios ni dependencias externas, lo que la hace trivial de probar de forma aislada, sin necesidad de un `ViewModel` ni de Android. Solo se agrega una entrada al mapa cuando un campo falla su validación; un formulario válido produce un mapa vacío.
+
+### Errores del servidor: `erroresDelServidor`
+
+```kotlin
+fun erroresDelServidor(errores: List<String>): Map<Campo, ErrorCampo> {
+    val porCampo = mutableMapOf<Campo, ErrorCampo>()
+    for (error in errores) {
+        val (nombreCampo, mensaje) = error.split(":", limit = 2)
+            .map { it.trim() }
+            .let { it[0] to it.getOrElse(1) { it[0] } }
+        val campo = Campo.entries.find { it.nombreApi == nombreCampo }
+        if (campo != null) {
+            porCampo[campo] = ErrorCampo.Servidor(mensaje)
+        }
+    }
+    return porCampo
+}
+```
+
+Recuerda de `ErrorDatos` (capítulo 49) que `ErrorDatos.Validacion` trae una `List<String>` con mensajes en formato `"campo: descripción"`. Esta función separa cada cadena en su nombre de campo y su mensaje, busca el `Campo` de Kotlin cuyo `nombreApi` coincide, y arma el mismo tipo de mapa que produce `validarContacto`, para que la Screen los pueda mostrar de forma idéntica sin importar si el error vino del cliente o del servidor.
+
+### Mapeos entre formulario y dominio
+
+```kotlin
+fun ContactoForm.aDatos(): DatosContacto = DatosContacto(
+    nombre = nombre.trim(),
+    apellido = apellido.trim(),
+    email = email.trim(),
+    telefono = telefono.trim().ifBlank { null },
+    direccion = direccion.trim().ifBlank { null },
+    ciudad = ciudad.trim().ifBlank { null }
+)
+
+fun Contacto.aFormulario(): ContactoForm = ContactoForm(
+    nombre = nombre,
+    apellido = apellido,
+    email = email,
+    telefono = telefono.orEmpty(),
+    direccion = direccion.orEmpty(),
+    ciudad = ciudad.orEmpty()
+)
+```
+
+`aDatos()` convierte el formulario (todo `String`) al modelo de dominio `DatosContacto` (capítulo 51), donde los campos opcionales sí son `String?`: un campo en blanco se transforma en `null` con `ifBlank { null }`. `aFormulario()` hace el camino inverso al editar un contacto existente, usando `orEmpty()` para convertir un `String?` en `""` si no hay valor.
+
+## El ViewModel: `FormularioContactoViewModel`
+
+```kotlin
+data class FormularioContactoUiState(
+    val formulario: ContactoForm = ContactoForm(),
+    val errores: Map<Campo, ErrorCampo> = emptyMap(),
+    val esEdicion: Boolean = false,
+    val cargando: Boolean = false,
+    val guardando: Boolean = false,
+    val guardado: Boolean = false,
+    val errorGeneral: ErrorDatos? = null
+)
+
+@HiltViewModel
+class FormularioContactoViewModel @Inject constructor(
+    private val repository: ContactosRepository,
+    savedStateHandle: SavedStateHandle
+) : ViewModel() {
+
+    private val id: Int? = savedStateHandle.toRoute<FormularioContactoRuta>().id
+
+    private val _uiState = MutableStateFlow(
+        FormularioContactoUiState(esEdicion = id != null, cargando = id != null)
+    )
+    val uiState: StateFlow<FormularioContactoUiState> = _uiState.asStateFlow()
+
+    init {
+        if (id != null) cargarContacto(id)
+    }
+
+    // ... (cargarContacto, cambiarCampo, guardar)
+}
+```
+
+El `id` vuelve a leerse desde la ruta tipada, pero esta vez es **anulable** (`Int?`): la misma pantalla sirve para crear (`id == null`) y para editar (`id != null`). Ese único valor determina tanto `esEdicion` como si hay que mostrar un indicador de carga inicial mientras se trae el contacto a editar.
+
+### Cargar el contacto a editar
+
+```kotlin
+private fun cargarContacto(id: Int) {
+    viewModelScope.launch {
+        repository.obtenerContacto(id)
+            .onSuccess { contacto ->
+                _uiState.update { it.copy(formulario = contacto.aFormulario(), cargando = false) }
+            }
+            .onFailure { error ->
+                _uiState.update { it.copy(cargando = false, errorGeneral = error.comoErrorDatos()) }
+            }
+    }
+}
+```
+
+Cuando se crea un contacto nuevo, no hace falta esta llamada: el formulario ya nace con `ContactoForm()` (todos los campos vacíos). Solo al editar se pide el contacto por su `id` y se convierte a `ContactoForm` con `aFormulario()`.
+
+### Cambiar un campo y limpiar su error
+
+```kotlin
+fun cambiarCampo(campo: Campo, valor: String) {
+    _uiState.update { estado ->
+        val formulario = when (campo) {
+            Campo.NOMBRE -> estado.formulario.copy(nombre = valor)
+            Campo.APELLIDO -> estado.formulario.copy(apellido = valor)
+            Campo.EMAIL -> estado.formulario.copy(email = valor)
+            Campo.TELEFONO -> estado.formulario.copy(telefono = valor)
+            Campo.DIRECCION -> estado.formulario.copy(direccion = valor)
+            Campo.CIUDAD -> estado.formulario.copy(ciudad = valor)
+        }
+        estado.copy(formulario = formulario, errores = estado.errores - campo)
+    }
+}
+```
+
+Cada vez que el usuario modifica un campo, además de actualizar su valor, **se quita ese campo del mapa de errores** (`estado.errores - campo`, operador de colecciones del capítulo 11). Así, si el usuario ya vio el error "correo inválido" y empieza a corregirlo, el mensaje desaparece apenas empieza a escribir, en lugar de esperar a un nuevo intento de guardado.
+
+### Guardar: validar antes de llamar a la red
+
+```kotlin
+fun guardar() {
+    val formulario = _uiState.value.formulario
+    val errores = validarContacto(formulario)
+    if (errores.isNotEmpty()) {
+        _uiState.update { it.copy(errores = errores) }
+        return
+    }
+
+    viewModelScope.launch {
+        _uiState.update { it.copy(guardando = true, errorGeneral = null) }
+        val datos = formulario.aDatos()
+        val resultado = if (id != null) repository.actualizar(id, datos) else repository.crear(datos)
+
+        resultado
+            .onSuccess {
+                _uiState.update { it.copy(guardando = false, guardado = true) }
+            }
+            .onFailure { excepcion ->
+                val error = excepcion.comoErrorDatos()
+                when (error) {
+                    is ErrorDatos.Validacion ->
+                        _uiState.update { it.copy(guardando = false, errores = erroresDelServidor(error.errores)) }
+                    is ErrorDatos.Conflicto ->
+                        _uiState.update {
+                            it.copy(guardando = false, errores = mapOf(Campo.EMAIL to ErrorCampo.Servidor(error.message.orEmpty())))
+                        }
+                    else ->
+                        _uiState.update { it.copy(guardando = false, errorGeneral = error) }
+                }
+            }
+    }
+}
+```
+
+`guardar()` tiene dos líneas de defensa:
+
+1. **Validación local primero**: llama a `validarContacto(formulario)` de forma síncrona, sin coroutine. Si hay errores, los publica en el estado y **retorna de inmediato**, sin llamar jamás a la red con datos que ya sabemos inválidos.
+2. **Validación del servidor como respaldo**: si la validación local pasó pero el servidor igual rechaza los datos (por ejemplo, un correo que ya existe, algo que solo el servidor puede saber), el `when` distingue tres casos:
+   - `ErrorDatos.Validacion`: errores por campo, traducidos con `erroresDelServidor`.
+   - `ErrorDatos.Conflicto`: un caso específico (correo duplicado) que se asigna directamente al campo `EMAIL`.
+   - Cualquier otro error (por ejemplo, `SinConexion`): se guarda en `errorGeneral`, porque no corresponde a ningún campo en particular.
+
+`id != null` decide, en una sola línea, si la operación es `actualizar` o `crear` — el mismo `id` opcional que ya vimos determinar `esEdicion` al construir el estado inicial.
+
+## La pantalla: `FormularioContactoScreen`
+
+```kotlin
+@Composable
+fun FormularioContactoScreen(
+    onVolver: () -> Unit,
+    viewModel: FormularioContactoViewModel = hiltViewModel()
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(uiState.guardado) {
+        if (uiState.guardado) onVolver()
+    }
+
+    FormularioContactoContent(
+        uiState = uiState,
+        onCampoChange = viewModel::cambiarCampo,
+        onGuardar = viewModel::guardar,
+        onVolver = onVolver
+    )
+}
+```
+
+Igual que en la pantalla de detalle, guardar con éxito es un evento (`guardado: Boolean`) observado con `LaunchedEffect(uiState.guardado)` para volver atrás — el mismo patrón, reutilizado por tercera vez en esta parte del curso.
+
+### El contenido: un campo por dato, con su error
+
+```kotlin
+@Composable
+fun FormularioContactoContent(
+    uiState: FormularioContactoUiState,
+    onCampoChange: (Campo, String) -> Unit,
+    onGuardar: () -> Unit,
+    onVolver: () -> Unit
+) {
+    val snackbarHostState = remember { SnackbarHostState() }
+    val errorGeneral = uiState.errorGeneral
+    LaunchedEffect(errorGeneral) {
+        if (errorGeneral != null) snackbarHostState.showSnackbar(mensajeDe(errorGeneral))
+    }
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        stringResource(
+                            if (uiState.esEdicion) R.string.titulo_editar else R.string.titulo_nuevo
+                        )
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = onVolver) {
+                        Icon(Icons.AutoMirrored.Default.ArrowBack, contentDescription = null)
+                    }
+                }
+            )
+        }
+    ) { innerPadding ->
+        if (uiState.cargando) {
+            EstadoCargando(modifier = Modifier.padding(innerPadding))
+            return@Scaffold
+        }
+
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
+                .padding(16.dp)
+        ) {
+            CampoTexto(
+                etiqueta = stringResource(R.string.campo_nombre),
+                valor = uiState.formulario.nombre,
+                error = uiState.errores[Campo.NOMBRE],
+                onValueChange = { onCampoChange(Campo.NOMBRE, it) },
+                capitalizarPalabras = true
+            )
+            CampoTexto(
+                etiqueta = stringResource(R.string.campo_apellido),
+                valor = uiState.formulario.apellido,
+                error = uiState.errores[Campo.APELLIDO],
+                onValueChange = { onCampoChange(Campo.APELLIDO, it) },
+                capitalizarPalabras = true
+            )
+            CampoTexto(
+                etiqueta = stringResource(R.string.campo_email),
+                valor = uiState.formulario.email,
+                error = uiState.errores[Campo.EMAIL],
+                onValueChange = { onCampoChange(Campo.EMAIL, it) },
+                tipoTeclado = KeyboardType.Email
+            )
+            CampoTexto(
+                etiqueta = stringResource(R.string.campo_telefono),
+                valor = uiState.formulario.telefono,
+                error = uiState.errores[Campo.TELEFONO],
+                onValueChange = { onCampoChange(Campo.TELEFONO, it) },
+                tipoTeclado = KeyboardType.Phone
+            )
+            CampoTexto(
+                etiqueta = stringResource(R.string.campo_direccion),
+                valor = uiState.formulario.direccion,
+                error = uiState.errores[Campo.DIRECCION],
+                onValueChange = { onCampoChange(Campo.DIRECCION, it) },
+                capitalizarPalabras = true
+            )
+            CampoTexto(
+                etiqueta = stringResource(R.string.campo_ciudad),
+                valor = uiState.formulario.ciudad,
+                error = uiState.errores[Campo.CIUDAD],
+                onValueChange = { onCampoChange(Campo.CIUDAD, it) },
+                capitalizarPalabras = true
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(onClick = onGuardar, enabled = !uiState.guardando, modifier = Modifier.fillMaxWidth()) {
+                if (uiState.guardando) {
+                    CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp)
+                } else {
+                    Text(stringResource(R.string.guardar))
+                }
+            }
+        }
+    }
+}
+```
+
+Cada `CampoTexto` recibe su propio error potencial con `uiState.errores[Campo.X]` — como `errores` es un `Map`, un campo sin problemas simplemente no tiene entrada y el acceso devuelve `null`. El botón de guardar se **deshabilita** (`enabled = !uiState.guardando`) mientras la operación está en curso, y muestra un `CircularProgressIndicator` pequeño en lugar del texto, evitando que el usuario dispare guardados duplicados con toques repetidos.
+
+### `CampoTexto`: un `OutlinedTextField` configurable
+
+```kotlin
+@Composable
+private fun CampoTexto(
+    etiqueta: String,
+    valor: String,
+    error: ErrorCampo?,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    tipoTeclado: KeyboardType = KeyboardType.Text,
+    capitalizarPalabras: Boolean = false
+) {
+    Column(modifier = modifier.padding(vertical = 4.dp)) {
+        OutlinedTextField(
+            value = valor,
+            onValueChange = onValueChange,
+            label = { Text(etiqueta) },
+            isError = error != null,
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(
+                keyboardType = tipoTeclado,
+                capitalization = if (capitalizarPalabras) KeyboardCapitalization.Words else KeyboardCapitalization.None
+            ),
+            modifier = Modifier.fillMaxWidth()
+        )
+        if (error != null) {
+            Text(
+                text = mensajeDeCampo(error),
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(start = 16.dp, top = 4.dp)
+            )
+        }
+    }
+}
+
+@Composable
+private fun mensajeDeCampo(error: ErrorCampo): String = when (error) {
+    ErrorCampo.Obligatorio -> stringResource(R.string.error_obligatorio)
+    is ErrorCampo.Longitud -> stringResource(R.string.error_longitud_minima, error.minimo)
+    is ErrorCampo.LargoMaximo -> stringResource(R.string.error_largo_maximo, error.maximo)
+    ErrorCampo.EmailInvalido -> stringResource(R.string.error_email_invalido)
+    is ErrorCampo.Servidor -> error.mensaje
+}
+```
+
+`keyboardOptions` es lo que le indica al teclado del sistema qué mostrar: `KeyboardType.Email` habilita la tecla `@` para el correo, `KeyboardType.Phone` cambia a un teclado numérico para el teléfono, y `KeyboardCapitalization.Words` pone en mayúscula automática la primera letra de cada palabra en campos como nombre o dirección.
+
+`mensajeDeCampo` es el `when` exhaustivo (capítulo 20) que traduce cada variante de `ErrorCampo` a un texto localizado — el mismo principio que `mensajeDe(error: ErrorDatos)` del capítulo 49: los datos deciden qué pasó, la interfaz decide cómo decirlo.
 
 ## Resumen
 
-- Antes de dar por terminada una funcionalidad, recórrela manualmente cubriendo tanto el camino feliz como los casos límite (validación, sin conexión, rotación de pantalla).
-- «Mis Contactos» integra, en una sola app, todo lo enseñado en las Partes I a IX: Kotlin, coroutines, Compose, MVVM y la capa de datos con Retrofit y Room.
-- El curso dejó fuera, a propósito, pruebas automatizadas, sincronización en segundo plano y módulos múltiples de Gradle, para mantener el foco en los fundamentos.
-- El camino natural desde aquí es agregar pruebas, extender la app con una funcionalidad propia, y profundizar en la documentación oficial de Android para los temas avanzados que quedaron pendientes.
+- `ContactoForm` guarda todos los campos como `String` (incluso los opcionales), porque así llegan desde un `TextField`; se convierte a `DatosContacto` con `aDatos()` al guardar, y desde `Contacto` con `aFormulario()` al editar.
+- `validarContacto` es una función pura que revisa el formulario localmente; `erroresDelServidor` traduce los mensajes `"campo: descripción"` de `ErrorDatos.Validacion` al mismo formato `Map<Campo, ErrorCampo>`, para que la interfaz no tenga que distinguir el origen del error.
+- `guardar()` valida localmente primero (sin red) y, si el servidor igual rechaza los datos, distingue `Validacion` (por campo), `Conflicto` (correo duplicado, asignado a `EMAIL`) y cualquier otro error (a `errorGeneral`).
+- `FormularioContactoScreen` reutiliza, por tercera vez en esta parte, el patrón "evento como estado": `guardado: Boolean` + `LaunchedEffect` para volver atrás tras guardar con éxito.
+- `CampoTexto` centraliza la configuración del teclado (`KeyboardType`, `KeyboardCapitalization`) y la presentación del error de cada campo.
 
-Gracias por recorrer este curso completo, desde tu primera línea de Kotlin hasta una aplicación Android real y funcional. El código de «Mis Contactos» queda en `code/contact-list-app/` como referencia para revisar, modificar y seguir aprendiendo.
+En el próximo capítulo veremos cómo estas tres pantallas se conectan mediante **rutas de navegación tipadas**, en lugar del patrón de cadenas de texto que usaste en el capítulo 37.

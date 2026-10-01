@@ -1,444 +1,250 @@
-# Capítulo 55: Pantalla de formulario: validación local y del servidor
+# Capítulo 55: El repositorio: estrategia *offline-first*
 
 ## Introducción
 
-La pantalla de formulario cumple dos roles con la misma interfaz: **crear** un contacto nuevo y **editar** uno existente. Es también la pantalla con más responsabilidades de validación: revisa los datos localmente antes de enviarlos (para dar una respuesta inmediata) y, si el servidor rechaza igualmente la petición, traduce esos errores de vuelta a los campos correspondientes.
+Ya tienes las dos fuentes de datos por separado: la API remota (capítulo 53) y la base de datos local (capítulo 54). Ahora las uniremos en una sola pieza: el **repositorio**. Su trabajo es decidir, ante cada operación, si conviene usar la red, la caché local, o ambas, sin que el resto de la aplicación tenga que preocuparse por esa decisión.
 
-En este capítulo veremos `ContactoForm` (el modelo del formulario y sus reglas de validación), `FormularioContactoViewModel` y `FormularioContactoScreen`.
+En este capítulo implementaremos `ContactosRepositoryImpl`, que sigue una estrategia ***offline-first***: intenta primero la red, pero si no hay conexión, recurre a los datos guardados en Room en lugar de simplemente mostrar un error.
 
-## El modelo del formulario: `ContactoForm.kt`
+## La interfaz del repositorio
 
-A diferencia de `Contacto` y `DatosContacto` (capítulo 48), el formulario necesita que **todos** sus campos sean `String`, incluso los numéricos o los opcionales, porque así es como llegan desde un `TextField`. Un campo vacío se representa como `""`, no como `null`:
-
-```kotlin
-package com.ejemplo.miscontactos.ui.formulario
-
-data class ContactoForm(
-    val nombre: String = "",
-    val apellido: String = "",
-    val email: String = "",
-    val telefono: String = "",
-    val direccion: String = "",
-    val ciudad: String = ""
-)
-```
-
-### El enum `Campo`
+En `data/ContactosRepository.kt` definimos el contrato que el resto de la app conocerá, sin exponer detalles de Retrofit ni de Room:
 
 ```kotlin
-enum class Campo(val nombreApi: String) {
-    NOMBRE("nombre"),
-    APELLIDO("apellido"),
-    EMAIL("email"),
-    TELEFONO("telefono"),
-    DIRECCION("direccion"),
-    CIUDAD("ciudad")
+package com.ejemplo.miscontactos.data
+
+import com.ejemplo.miscontactos.model.Contacto
+import com.ejemplo.miscontactos.model.DatosContacto
+import com.ejemplo.miscontactos.model.PaginaContactos
+import kotlinx.coroutines.flow.Flow
+
+/**
+ * Punto único de acceso a los contactos. Quien lo usa no sabe si los datos
+ * vienen de la API (Retrofit) o de la base de datos local (Room).
+ */
+interface ContactosRepository {
+
+    /** Emite un valor cada vez que se crea, edita o elimina un contacto. */
+    val cambios: Flow<Unit>
+
+    /** Ids de los contactos marcados como favoritos (dato solo local). */
+    val favoritos: Flow<Set<Int>>
+
+    suspend fun obtenerPagina(pagina: Int, busqueda: String? = null): Result<PaginaContactos>
+    suspend fun obtenerContacto(id: Int): Result<Contacto>
+    suspend fun crear(datos: DatosContacto): Result<Contacto>
+    suspend fun actualizar(id: Int, datos: DatosContacto): Result<Contacto>
+    suspend fun eliminar(id: Int): Result<Unit>
+    suspend fun alternarFavorito(id: Int)
 }
 ```
 
-Cada valor del `enum` (capítulo 19) lleva asociado su `nombreApi`: el nombre exacto que usa el campo en el JSON que envía y responde el servidor. Este puente entre el nombre de la propiedad en Kotlin y el nombre del campo en la API es lo que permite, más adelante, traducir automáticamente un mensaje de error del servidor ("email: formato no válido") al campo `Campo.EMAIL` de la interfaz.
+Dos propiedades merecen atención antes de ver la implementación:
 
-### Errores de campo: `ErrorCampo`
+- **`cambios: Flow<Unit>`**: no lleva información, solo **avisa**. Cuando se crea, edita o elimina un contacto en cualquier parte de la app, cualquier pantalla suscrita a este flujo sabe que debe refrescar sus datos. Es el mecanismo que usaremos para que, por ejemplo, la lista se actualice sola después de guardar un formulario, sin acoplar directamente esas dos pantallas.
+- **`favoritos: Flow<Set<Int>>`**: como viste en el capítulo 51, ser favorito no es parte del modelo `Contacto`; es una lista de identificadores que cualquier pantalla puede cruzar con los contactos que ya tiene cargados.
 
-```kotlin
-sealed interface ErrorCampo {
-    data object Obligatorio : ErrorCampo
-    data class Longitud(val minimo: Int) : ErrorCampo
-    data class LargoMaximo(val maximo: Int) : ErrorCampo
-    data object EmailInvalido : ErrorCampo
-    data class Servidor(val mensaje: String) : ErrorCampo
-}
-```
-
-Modelar los errores como una `sealed interface` (en vez de simples cadenas de texto) permite que la Screen decida **qué texto mostrar en cada idioma** a partir del tipo de error, en lugar de que el `ViewModel` tenga que conocer cadenas de recursos (`stringResource`), algo que no está disponible fuera de un composable. `Servidor` es el único caso que sí lleva un mensaje en texto plano, porque ese mensaje ya viene redactado por la API.
-
-### Validación local: `validarContacto`
+## La implementación: `ContactosRepositoryImpl`
 
 ```kotlin
-private val PATRON_EMAIL = Regex("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")
+package com.ejemplo.miscontactos.data
 
-fun validarContacto(form: ContactoForm): Map<Campo, ErrorCampo> {
-    val errores = mutableMapOf<Campo, ErrorCampo>()
+import com.ejemplo.miscontactos.data.local.ContactoDao
+import com.ejemplo.miscontactos.data.local.FavoritoDao
+import com.ejemplo.miscontactos.data.local.FavoritoEntity
+import com.ejemplo.miscontactos.data.local.aDominio
+import com.ejemplo.miscontactos.data.local.aEntity
+import com.ejemplo.miscontactos.data.remote.ContactApi
+import com.ejemplo.miscontactos.data.remote.aDominio
+import com.ejemplo.miscontactos.data.remote.aErrorDatos
+import com.ejemplo.miscontactos.data.remote.aRequest
+import com.ejemplo.miscontactos.model.Contacto
+import com.ejemplo.miscontactos.model.DatosContacto
+import com.ejemplo.miscontactos.model.ErrorDatos
+import com.ejemplo.miscontactos.model.PaginaContactos
+import javax.inject.Inject
+import javax.inject.Singleton
+import kotlin.coroutines.cancellation.CancellationException
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.serialization.json.Json
 
-    if (form.nombre.isBlank()) {
-        errores[Campo.NOMBRE] = ErrorCampo.Obligatorio
-    } else if (form.nombre.length < LARGO_MINIMO_NOMBRE) {
-        errores[Campo.NOMBRE] = ErrorCampo.Longitud(LARGO_MINIMO_NOMBRE)
-    }
+@Singleton
+class ContactosRepositoryImpl @Inject constructor(
+    private val api: ContactApi,
+    private val contactoDao: ContactoDao,
+    private val favoritoDao: FavoritoDao,
+    private val json: Json
+) : ContactosRepository {
 
-    if (form.apellido.isBlank()) {
-        errores[Campo.APELLIDO] = ErrorCampo.Obligatorio
-    } else if (form.apellido.length < LARGO_MINIMO_APELLIDO) {
-        errores[Campo.APELLIDO] = ErrorCampo.Longitud(LARGO_MINIMO_APELLIDO)
-    }
+    private val _cambios = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
+    override val cambios: Flow<Unit> = _cambios.asSharedFlow()
 
-    if (form.email.isBlank()) {
-        errores[Campo.EMAIL] = ErrorCampo.Obligatorio
-    } else if (!PATRON_EMAIL.matches(form.email)) {
-        errores[Campo.EMAIL] = ErrorCampo.EmailInvalido
-    }
+    override val favoritos: Flow<Set<Int>> =
+        favoritoDao.observarIds().map { ids -> ids.toSet() }
 
-    if (form.direccion.length > LARGO_MAXIMO_DIRECCION) {
-        errores[Campo.DIRECCION] = ErrorCampo.LargoMaximo(LARGO_MAXIMO_DIRECCION)
-    }
+    // ... (obtenerPagina, obtenerContacto, crear, actualizar, eliminar, alternarFavorito)
 
-    return errores
-}
-```
-
-`validarContacto` es una **función pura**: recibe un `ContactoForm` y devuelve un `Map<Campo, ErrorCampo>` sin efectos secundarios ni dependencias externas, lo que la hace trivial de probar de forma aislada, sin necesidad de un `ViewModel` ni de Android. Solo se agrega una entrada al mapa cuando un campo falla su validación; un formulario válido produce un mapa vacío.
-
-### Errores del servidor: `erroresDelServidor`
-
-```kotlin
-fun erroresDelServidor(errores: List<String>): Map<Campo, ErrorCampo> {
-    val porCampo = mutableMapOf<Campo, ErrorCampo>()
-    for (error in errores) {
-        val (nombreCampo, mensaje) = error.split(":", limit = 2)
-            .map { it.trim() }
-            .let { it[0] to it.getOrElse(1) { it[0] } }
-        val campo = Campo.entries.find { it.nombreApi == nombreCampo }
-        if (campo != null) {
-            porCampo[campo] = ErrorCampo.Servidor(mensaje)
-        }
-    }
-    return porCampo
-}
-```
-
-Recuerda de `ErrorDatos` (capítulo 46) que `ErrorDatos.Validacion` trae una `List<String>` con mensajes en formato `"campo: descripción"`. Esta función separa cada cadena en su nombre de campo y su mensaje, busca el `Campo` de Kotlin cuyo `nombreApi` coincide, y arma el mismo tipo de mapa que produce `validarContacto`, para que la Screen los pueda mostrar de forma idéntica sin importar si el error vino del cliente o del servidor.
-
-### Mapeos entre formulario y dominio
-
-```kotlin
-fun ContactoForm.aDatos(): DatosContacto = DatosContacto(
-    nombre = nombre.trim(),
-    apellido = apellido.trim(),
-    email = email.trim(),
-    telefono = telefono.trim().ifBlank { null },
-    direccion = direccion.trim().ifBlank { null },
-    ciudad = ciudad.trim().ifBlank { null }
-)
-
-fun Contacto.aFormulario(): ContactoForm = ContactoForm(
-    nombre = nombre,
-    apellido = apellido,
-    email = email,
-    telefono = telefono.orEmpty(),
-    direccion = direccion.orEmpty(),
-    ciudad = ciudad.orEmpty()
-)
-```
-
-`aDatos()` convierte el formulario (todo `String`) al modelo de dominio `DatosContacto` (capítulo 48), donde los campos opcionales sí son `String?`: un campo en blanco se transforma en `null` con `ifBlank { null }`. `aFormulario()` hace el camino inverso al editar un contacto existente, usando `orEmpty()` para convertir un `String?` en `""` si no hay valor.
-
-## El ViewModel: `FormularioContactoViewModel`
-
-```kotlin
-data class FormularioContactoUiState(
-    val formulario: ContactoForm = ContactoForm(),
-    val errores: Map<Campo, ErrorCampo> = emptyMap(),
-    val esEdicion: Boolean = false,
-    val cargando: Boolean = false,
-    val guardando: Boolean = false,
-    val guardado: Boolean = false,
-    val errorGeneral: ErrorDatos? = null
-)
-
-@HiltViewModel
-class FormularioContactoViewModel @Inject constructor(
-    private val repository: ContactosRepository,
-    savedStateHandle: SavedStateHandle
-) : ViewModel() {
-
-    private val id: Int? = savedStateHandle.toRoute<FormularioContactoRuta>().id
-
-    private val _uiState = MutableStateFlow(
-        FormularioContactoUiState(esEdicion = id != null, cargando = id != null)
-    )
-    val uiState: StateFlow<FormularioContactoUiState> = _uiState.asStateFlow()
-
-    init {
-        if (id != null) cargarContacto(id)
-    }
-
-    // ... (cargarContacto, cambiarCampo, guardar)
-}
-```
-
-El `id` vuelve a leerse desde la ruta tipada, pero esta vez es **anulable** (`Int?`): la misma pantalla sirve para crear (`id == null`) y para editar (`id != null`). Ese único valor determina tanto `esEdicion` como si hay que mostrar un indicador de carga inicial mientras se trae el contacto a editar.
-
-### Cargar el contacto a editar
-
-```kotlin
-private fun cargarContacto(id: Int) {
-    viewModelScope.launch {
-        repository.obtenerContacto(id)
-            .onSuccess { contacto ->
-                _uiState.update { it.copy(formulario = contacto.aFormulario(), cargando = false) }
-            }
-            .onFailure { error ->
-                _uiState.update { it.copy(cargando = false, errorGeneral = error.comoErrorDatos()) }
-            }
+    companion object {
+        const val TAMANO_PAGINA = 20
     }
 }
 ```
 
-Cuando se crea un contacto nuevo, no hace falta esta llamada: el formulario ya nace con `ContactoForm()` (todos los campos vacíos). Solo al editar se pide el contacto por su `id` y se convierte a `ContactoForm` con `aFormulario()`.
+- El repositorio recibe **las cuatro dependencias** por su constructor: el cliente de red, los dos DAOs y el `Json` compartido. Gracias a Hilt (capítulos 48, 53 y 51), no tenemos que construir nada de esto manualmente.
+- `_cambios` es un `SharedFlow` mutable y privado, expuesto como un `Flow` de solo lectura, siguiendo el mismo patrón de encapsulación que ya usaste con `StateFlow` en el capítulo 42.
+- `favoritos` **transforma** el `Flow<List<Int>>` del DAO en un `Flow<Set<Int>>` con el operador `map` (capítulo 25), porque a la interfaz le conviene comprobar pertenencia (`id in favoritos`) con un `Set`, que es más eficiente que buscar en una `List`.
 
-### Cambiar un campo y limpiar su error
+## Obtener una página: la lógica *offline-first*
 
-```kotlin
-fun cambiarCampo(campo: Campo, valor: String) {
-    _uiState.update { estado ->
-        val formulario = when (campo) {
-            Campo.NOMBRE -> estado.formulario.copy(nombre = valor)
-            Campo.APELLIDO -> estado.formulario.copy(apellido = valor)
-            Campo.EMAIL -> estado.formulario.copy(email = valor)
-            Campo.TELEFONO -> estado.formulario.copy(telefono = valor)
-            Campo.DIRECCION -> estado.formulario.copy(direccion = valor)
-            Campo.CIUDAD -> estado.formulario.copy(ciudad = valor)
-        }
-        estado.copy(formulario = formulario, errores = estado.errores - campo)
-    }
-}
-```
-
-Cada vez que el usuario modifica un campo, además de actualizar su valor, **se quita ese campo del mapa de errores** (`estado.errores - campo`, operador de colecciones del capítulo 11). Así, si el usuario ya vio el error "correo inválido" y empieza a corregirlo, el mensaje desaparece apenas empieza a escribir, en lugar de esperar a un nuevo intento de guardado.
-
-### Guardar: validar antes de llamar a la red
+Esta es la operación más interesante del repositorio, porque combina red, caché y manejo de errores:
 
 ```kotlin
-fun guardar() {
-    val formulario = _uiState.value.formulario
-    val errores = validarContacto(formulario)
-    if (errores.isNotEmpty()) {
-        _uiState.update { it.copy(errores = errores) }
-        return
+override suspend fun obtenerPagina(pagina: Int, busqueda: String?): Result<PaginaContactos> {
+    val esPrimeraPaginaSinFiltro = pagina == 0 && busqueda.isNullOrBlank()
+
+    val resultado = llamarApi {
+        api.obtenerContactos(pagina = pagina, tamano = TAMANO_PAGINA, busqueda = busqueda).aDominio()
     }
 
-    viewModelScope.launch {
-        _uiState.update { it.copy(guardando = true, errorGeneral = null) }
-        val datos = formulario.aDatos()
-        val resultado = if (id != null) repository.actualizar(id, datos) else repository.crear(datos)
-
-        resultado
-            .onSuccess {
-                _uiState.update { it.copy(guardando = false, guardado = true) }
-            }
-            .onFailure { excepcion ->
-                val error = excepcion.comoErrorDatos()
-                when (error) {
-                    is ErrorDatos.Validacion ->
-                        _uiState.update { it.copy(guardando = false, errores = erroresDelServidor(error.errores)) }
-                    is ErrorDatos.Conflicto ->
-                        _uiState.update {
-                            it.copy(guardando = false, errores = mapOf(Campo.EMAIL to ErrorCampo.Servidor(error.message.orEmpty())))
-                        }
-                    else ->
-                        _uiState.update { it.copy(guardando = false, errorGeneral = error) }
-                }
-            }
-    }
-}
-```
-
-`guardar()` tiene dos líneas de defensa:
-
-1. **Validación local primero**: llama a `validarContacto(formulario)` de forma síncrona, sin coroutine. Si hay errores, los publica en el estado y **retorna de inmediato**, sin llamar jamás a la red con datos que ya sabemos inválidos.
-2. **Validación del servidor como respaldo**: si la validación local pasó pero el servidor igual rechaza los datos (por ejemplo, un correo que ya existe, algo que solo el servidor puede saber), el `when` distingue tres casos:
-   - `ErrorDatos.Validacion`: errores por campo, traducidos con `erroresDelServidor`.
-   - `ErrorDatos.Conflicto`: un caso específico (correo duplicado) que se asigna directamente al campo `EMAIL`.
-   - Cualquier otro error (por ejemplo, `SinConexion`): se guarda en `errorGeneral`, porque no corresponde a ningún campo en particular.
-
-`id != null` decide, en una sola línea, si la operación es `actualizar` o `crear` — el mismo `id` opcional que ya vimos determinar `esEdicion` al construir el estado inicial.
-
-## La pantalla: `FormularioContactoScreen`
-
-```kotlin
-@Composable
-fun FormularioContactoScreen(
-    onVolver: () -> Unit,
-    viewModel: FormularioContactoViewModel = hiltViewModel()
-) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    LaunchedEffect(uiState.guardado) {
-        if (uiState.guardado) onVolver()
-    }
-
-    FormularioContactoContent(
-        uiState = uiState,
-        onCampoChange = viewModel::cambiarCampo,
-        onGuardar = viewModel::guardar,
-        onVolver = onVolver
-    )
-}
-```
-
-Igual que en la pantalla de detalle, guardar con éxito es un evento (`guardado: Boolean`) observado con `LaunchedEffect(uiState.guardado)` para volver atrás — el mismo patrón, reutilizado por tercera vez en esta parte del curso.
-
-### El contenido: un campo por dato, con su error
-
-```kotlin
-@Composable
-fun FormularioContactoContent(
-    uiState: FormularioContactoUiState,
-    onCampoChange: (Campo, String) -> Unit,
-    onGuardar: () -> Unit,
-    onVolver: () -> Unit
-) {
-    val snackbarHostState = remember { SnackbarHostState() }
-    val errorGeneral = uiState.errorGeneral
-    LaunchedEffect(errorGeneral) {
-        if (errorGeneral != null) snackbarHostState.showSnackbar(mensajeDe(errorGeneral))
-    }
-
-    Scaffold(
-        snackbarHost = { SnackbarHost(snackbarHostState) },
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        stringResource(
-                            if (uiState.esEdicion) R.string.titulo_editar else R.string.titulo_nuevo
-                        )
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = onVolver) {
-                        Icon(Icons.AutoMirrored.Default.ArrowBack, contentDescription = null)
-                    }
-                }
-            )
-        }
-    ) { innerPadding ->
-        if (uiState.cargando) {
-            EstadoCargando(modifier = Modifier.padding(innerPadding))
-            return@Scaffold
-        }
-
-        Column(
-            modifier = Modifier
-                .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
-                .padding(16.dp)
-        ) {
-            CampoTexto(
-                etiqueta = stringResource(R.string.campo_nombre),
-                valor = uiState.formulario.nombre,
-                error = uiState.errores[Campo.NOMBRE],
-                onValueChange = { onCampoChange(Campo.NOMBRE, it) },
-                capitalizarPalabras = true
-            )
-            CampoTexto(
-                etiqueta = stringResource(R.string.campo_apellido),
-                valor = uiState.formulario.apellido,
-                error = uiState.errores[Campo.APELLIDO],
-                onValueChange = { onCampoChange(Campo.APELLIDO, it) },
-                capitalizarPalabras = true
-            )
-            CampoTexto(
-                etiqueta = stringResource(R.string.campo_email),
-                valor = uiState.formulario.email,
-                error = uiState.errores[Campo.EMAIL],
-                onValueChange = { onCampoChange(Campo.EMAIL, it) },
-                tipoTeclado = KeyboardType.Email
-            )
-            CampoTexto(
-                etiqueta = stringResource(R.string.campo_telefono),
-                valor = uiState.formulario.telefono,
-                error = uiState.errores[Campo.TELEFONO],
-                onValueChange = { onCampoChange(Campo.TELEFONO, it) },
-                tipoTeclado = KeyboardType.Phone
-            )
-            CampoTexto(
-                etiqueta = stringResource(R.string.campo_direccion),
-                valor = uiState.formulario.direccion,
-                error = uiState.errores[Campo.DIRECCION],
-                onValueChange = { onCampoChange(Campo.DIRECCION, it) },
-                capitalizarPalabras = true
-            )
-            CampoTexto(
-                etiqueta = stringResource(R.string.campo_ciudad),
-                valor = uiState.formulario.ciudad,
-                error = uiState.errores[Campo.CIUDAD],
-                onValueChange = { onCampoChange(Campo.CIUDAD, it) },
-                capitalizarPalabras = true
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = onGuardar, enabled = !uiState.guardando, modifier = Modifier.fillMaxWidth()) {
-                if (uiState.guardando) {
-                    CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp)
-                } else {
-                    Text(stringResource(R.string.guardar))
-                }
-            }
-        }
-    }
-}
-```
-
-Cada `CampoTexto` recibe su propio error potencial con `uiState.errores[Campo.X]` — como `errores` es un `Map`, un campo sin problemas simplemente no tiene entrada y el acceso devuelve `null`. El botón de guardar se **deshabilita** (`enabled = !uiState.guardando`) mientras la operación está en curso, y muestra un `CircularProgressIndicator` pequeño en lugar del texto, evitando que el usuario dispare guardados duplicados con toques repetidos.
-
-### `CampoTexto`: un `OutlinedTextField` configurable
-
-```kotlin
-@Composable
-private fun CampoTexto(
-    etiqueta: String,
-    valor: String,
-    error: ErrorCampo?,
-    onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    tipoTeclado: KeyboardType = KeyboardType.Text,
-    capitalizarPalabras: Boolean = false
-) {
-    Column(modifier = modifier.padding(vertical = 4.dp)) {
-        OutlinedTextField(
-            value = valor,
-            onValueChange = onValueChange,
-            label = { Text(etiqueta) },
-            isError = error != null,
-            singleLine = true,
-            keyboardOptions = KeyboardOptions(
-                keyboardType = tipoTeclado,
-                capitalization = if (capitalizarPalabras) KeyboardCapitalization.Words else KeyboardCapitalization.None
-            ),
-            modifier = Modifier.fillMaxWidth()
-        )
-        if (error != null) {
-            Text(
-                text = mensajeDeCampo(error),
-                color = MaterialTheme.colorScheme.error,
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(start = 16.dp, top = 4.dp)
+    resultado.onSuccess { paginaContactos ->
+        if (esPrimeraPaginaSinFiltro) {
+            contactoDao.reemplazarTodos(
+                paginaContactos.contactos.mapIndexed { indice, contacto -> contacto.aEntity(indice) }
             )
         }
     }
-}
 
-@Composable
-private fun mensajeDeCampo(error: ErrorCampo): String = when (error) {
-    ErrorCampo.Obligatorio -> stringResource(R.string.error_obligatorio)
-    is ErrorCampo.Longitud -> stringResource(R.string.error_longitud_minima, error.minimo)
-    is ErrorCampo.LargoMaximo -> stringResource(R.string.error_largo_maximo, error.maximo)
-    ErrorCampo.EmailInvalido -> stringResource(R.string.error_email_invalido)
-    is ErrorCampo.Servidor -> error.mensaje
+    // Sin conexión: si pedíamos la primera página sin filtro, usamos la copia local.
+    val error = resultado.exceptionOrNull()
+    if (error is ErrorDatos.SinConexion && esPrimeraPaginaSinFiltro) {
+        val guardados = contactoDao.obtenerTodos()
+        if (guardados.isNotEmpty()) {
+            return Result.success(
+                PaginaContactos(
+                    contactos = guardados.map { it.aDominio() },
+                    pagina = 0,
+                    totalPaginas = 1,
+                    desdeCache = true
+                )
+            )
+        }
+    }
+    return resultado
 }
 ```
 
-`keyboardOptions` es lo que le indica al teclado del sistema qué mostrar: `KeyboardType.Email` habilita la tecla `@` para el correo, `KeyboardType.Phone` cambia a un teclado numérico para el teléfono, y `KeyboardCapitalization.Words` pone en mayúscula automática la primera letra de cada palabra en campos como nombre o dirección.
+Analicemos la decisión paso a paso:
 
-`mensajeDeCampo` es el `when` exhaustivo (capítulo 19) que traduce cada variante de `ErrorCampo` a un texto localizado — el mismo principio que `mensajeDe(error: ErrorDatos)` del capítulo 46: los datos deciden qué pasó, la interfaz decide cómo decirlo.
+1. **`esPrimeraPaginaSinFiltro`**: solo actualizamos la caché completa cuando pedimos la primera página **sin ningún término de búsqueda**. No tendría sentido, por ejemplo, que una búsqueda de "Ana" reemplazara la caché con solo los contactos que coinciden con ese filtro.
+2. **Éxito de red**: si la llamada a la API funciona y estamos en ese caso especial, `contactoDao.reemplazarTodos(...)` guarda una copia fresca en Room, usando el índice de la lista como `orden` (capítulo 54).
+3. **Fallo por falta de conexión**: revisamos si el error es específicamente `ErrorDatos.SinConexion` (capítulo 49) **y** si estábamos pidiendo esa primera página sin filtro. Si ambas condiciones se cumplen, en lugar de propagar el error, leemos `contactoDao.obtenerTodos()` y devolvemos un `Result.success` con esos datos, marcado con `desdeCache = true`.
+4. **Cualquier otro caso** (un error distinto, o una búsqueda que falló sin red): se devuelve el `resultado` original, con su error, ya que no tenemos una copia local relevante que ofrecer.
+
+> [!NOTE]Nota
+> Fíjate en que el repositorio **nunca oculta** que los datos vienen de la caché: lo señala explícitamente con `desdeCache = true`, para que la interfaz pueda avisarle al usuario, como verás en el próximo capítulo.
+
+## Obtener un contacto: el mismo patrón, más simple
+
+```kotlin
+override suspend fun obtenerContacto(id: Int): Result<Contacto> {
+    val resultado = llamarApi { api.obtenerContacto(id).aDominio() }
+    if (resultado.exceptionOrNull() is ErrorDatos.SinConexion) {
+        contactoDao.obtenerPorId(id)?.let { return Result.success(it.aDominio()) }
+    }
+    return resultado
+}
+```
+
+Aquí no hace falta distinguir "primera página sin filtro": simplemente, si falla por falta de conexión, buscamos ese contacto específico en la caché por su `id`. Si no está guardado (por ejemplo, porque nunca se cargó esa página), se propaga el error original.
+
+## Crear, actualizar y eliminar: siempre contra la red
+
+A diferencia de la lectura, las operaciones que **modifican** datos no tienen sentido sin conexión (no construimos una cola de sincronización en esta versión de la app). Cada una llama a la API y, si tiene éxito, avisa a través de `_cambios`:
+
+```kotlin
+override suspend fun crear(datos: DatosContacto): Result<Contacto> =
+    llamarApi { api.crearContacto(datos.aRequest()).aDominio() }
+        .onSuccess { _cambios.tryEmit(Unit) }
+
+override suspend fun actualizar(id: Int, datos: DatosContacto): Result<Contacto> =
+    llamarApi { api.actualizarContacto(id, datos.aRequest()).aDominio() }
+        .onSuccess { _cambios.tryEmit(Unit) }
+
+override suspend fun eliminar(id: Int): Result<Unit> =
+    llamarApi { api.eliminarContacto(id) }
+        .onSuccess {
+            contactoDao.borrar(id)
+            favoritoDao.borrar(id)
+            _cambios.tryEmit(Unit)
+        }
+```
+
+Al eliminar, además de emitir el aviso de cambio, limpiamos ese contacto de **ambas** tablas locales: ya no debería aparecer en la caché ni seguir marcado como favorito.
+
+## Alternar favorito: una operación puramente local
+
+```kotlin
+override suspend fun alternarFavorito(id: Int) {
+    if (favoritoDao.esFavorito(id)) {
+        favoritoDao.borrar(id)
+    } else {
+        favoritoDao.insertar(FavoritoEntity(contactoId = id))
+    }
+}
+```
+
+Esta operación nunca toca la red: solo lee y escribe en la tabla `favoritos` de Room. Como `favoritos` es un `Flow`, cualquier pantalla suscrita se entera del cambio automáticamente, sin que `alternarFavorito` tenga que emitir nada explícitamente.
+
+## El ayudante `llamarApi`
+
+Igual que viste en el capítulo 49, centralizamos la conversión de excepciones en una función privada:
+
+```kotlin
+private suspend fun <T> llamarApi(bloque: suspend () -> T): Result<T> =
+    try {
+        Result.success(bloque())
+    } catch (e: CancellationException) {
+        throw e
+    } catch (e: Exception) {
+        Result.failure(e.aErrorDatos(json))
+    }
+```
+
+`llamarApi` es genérica (capítulo 21): funciona igual para `List<Contacto>`, `Contacto` o `Unit`. Vuelve a lanzar `CancellationException` sin atraparla, por la misma razón que se explicó en el capítulo 49: no es un error de la aplicación, es la señal de que la coroutine debe detenerse.
+
+## El flujo completo: red, caché y notificación
+
+```mermaid
+sequenceDiagram
+    participant VM as ViewModel
+    participant Repo as Repositorio
+    participant API as API (Retrofit)
+    participant Room as Room (caché)
+
+    VM->>Repo: obtenerPagina(0, null)
+    Repo->>API: GET /api/contact
+    alt Con conexión
+        API-->>Repo: ContactPageDto
+        Repo->>Room: reemplazarTodos(...)
+        Repo-->>VM: Result.success(desdeCache = false)
+    else Sin conexión
+        API--xRepo: IOException
+        Repo->>Room: obtenerTodos()
+        Room-->>Repo: contactos guardados
+        Repo-->>VM: Result.success(desdeCache = true)
+    end
+```
 
 ## Resumen
 
-- `ContactoForm` guarda todos los campos como `String` (incluso los opcionales), porque así llegan desde un `TextField`; se convierte a `DatosContacto` con `aDatos()` al guardar, y desde `Contacto` con `aFormulario()` al editar.
-- `validarContacto` es una función pura que revisa el formulario localmente; `erroresDelServidor` traduce los mensajes `"campo: descripción"` de `ErrorDatos.Validacion` al mismo formato `Map<Campo, ErrorCampo>`, para que la interfaz no tenga que distinguir el origen del error.
-- `guardar()` valida localmente primero (sin red) y, si el servidor igual rechaza los datos, distingue `Validacion` (por campo), `Conflicto` (correo duplicado, asignado a `EMAIL`) y cualquier otro error (a `errorGeneral`).
-- `FormularioContactoScreen` reutiliza, por tercera vez en esta parte, el patrón "evento como estado": `guardado: Boolean` + `LaunchedEffect` para volver atrás tras guardar con éxito.
-- `CampoTexto` centraliza la configuración del teclado (`KeyboardType`, `KeyboardCapitalization`) y la presentación del error de cada campo.
+- `ContactosRepository` expone dos flujos de aviso: `cambios` (para refrescar tras crear/editar/eliminar) y `favoritos` (los identificadores marcados localmente).
+- `obtenerPagina` sigue una estrategia *offline-first*: solo cuando la petición de la primera página sin filtro falla por falta de conexión, recurre a la caché de Room y lo señala con `desdeCache = true`.
+- `obtenerContacto` aplica el mismo respaldo, pero buscando un único contacto por `id`.
+- Crear, actualizar y eliminar dependen siempre de la red, y notifican el cambio mediante `_cambios.tryEmit(Unit)`.
+- `alternarFavorito` es una operación puramente local, sin llamadas HTTP.
+- El ayudante genérico `llamarApi` centraliza la traducción de excepciones a `ErrorDatos`, sin atrapar nunca `CancellationException`.
 
-En el próximo capítulo veremos cómo estas tres pantallas se conectan mediante **rutas de navegación tipadas**, en lugar del patrón de cadenas de texto que usaste en el capítulo 35b.
+Con el repositorio terminado, ya tenemos toda la capa de datos. En el próximo capítulo construiremos la primera pantalla: la lista de contactos, con búsqueda, scroll infinito y favoritos.

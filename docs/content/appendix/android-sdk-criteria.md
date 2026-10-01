@@ -2,7 +2,7 @@
 
 ## Introducción
 
-Cuando creaste tu primer proyecto, en el [capítulo 25](../part06/chapter25.md), Android Studio te pidió un **Minimum SDK** y siguió de largo con un valor razonable. Pero esa pantalla en realidad esconde **tres números** distintos, cada uno con un propósito distinto, y elegirlos bien tiene consecuencias reales: cuántos dispositivos pueden instalar tu app, qué versiones de Android puedes aprovechar y si Google Play te dejará publicarla.
+Cuando creaste tu primer proyecto, en el [capítulo 26](../part06/chapter26.md), Android Studio te pidió un **Minimum SDK** y siguió de largo con un valor razonable. Pero esa pantalla en realidad esconde **tres números** distintos, cada uno con un propósito distinto, y elegirlos bien tiene consecuencias reales: cuántos dispositivos pueden instalar tu app, qué versiones de Android puedes aprovechar y si Google Play te dejará publicarla.
 
 Este anexo explica esos tres números —**`minSdk`**, **`targetSdk`** y **`compileSdk`**— y los criterios para elegir cada uno.
 

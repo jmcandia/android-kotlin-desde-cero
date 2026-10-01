@@ -4,6 +4,17 @@ Registro de los hitos más relevantes del curso **"Android con Kotlin desde cero
 
 Este archivo resume los cambios de alto nivel del contenido del curso. Para el detalle sesión a sesión de las decisiones de rediseño, consulta `CONTEXT.md`.
 
+## 2026-10-01
+
+### Añadido
+
+- Ejercicios de repaso de fin de bloque para las Partes V, VI y X para integrar andamiaje decreciente (*scaffolding fading*).
+
+### Cambiado
+
+- Se eliminaron los sufijos con letras introduciendo una numeración estrictamente secuencial en cascada, llevando el total del curso a 61 capítulos.
+- Se dividieron capítulos densos (Excepciones y Result; Navegación Compose) en capítulos separados más manejables.
+
 ## 2026-09-29
 
 ### Añadido

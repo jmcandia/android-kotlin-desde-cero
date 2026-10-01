@@ -2,7 +2,7 @@
 
 ## Qué vamos a construir
 
-Al terminar la segunda parte, **Mi lista de tareas** tenía dos pantallas, navegación y un tema propio. Pero su estado seguía viviendo en un composable: la lista de tareas estaba guardada con `remember` dentro de `App`. En el capítulo 27 adelantamos qué problema trae eso, y en los capítulos 38 a 40 viste cómo resolverlo.
+Al terminar la segunda parte, **Mi lista de tareas** tenía dos pantallas, navegación y un tema propio. Pero su estado seguía viviendo en un composable: la lista de tareas estaba guardada con `remember` dentro de `App`. En el capítulo 28 adelantamos qué problema trae eso, y en los capítulos 41 a 43 viste cómo resolverlo.
 
 En esta tercera parte vas a aplicar MVVM a la app sin cambiar lo que el usuario ve. Al terminar, tu app tendrá:
 
@@ -13,7 +13,7 @@ En esta tercera parte vas a aplicar MVVM a la app sin cambiar lo que el usuario 
 - un Snackbar con la acción **Deshacer** al eliminar una tarea.
 
 > [!NOTE]Nota
-> Todavía no habrá repositorio ni Hilt: el `ViewModel` guardará las tareas él mismo. Separar los datos en su propia capa es el tema de la cuarta parte, después de los capítulos 41 y 42.
+> Todavía no habrá repositorio ni Hilt: el `ViewModel` guardará las tareas él mismo. Separar los datos en su propia capa es el tema de la cuarta parte, después de los capítulos 44 y 45.
 
 ## Paso 1: Comprobar el problema
 
@@ -23,7 +23,7 @@ Abre el proyecto `MiListaDeTareas` de la parte 2 y ejecútalo. Haz esta prueba:
 2. Escribe un texto en el campo **Nueva tarea**, sin agregarlo.
 3. Gira el emulador o el dispositivo.
 
-El texto del campo se conserva, gracias a `rememberSaveable`. Pero **la lista de tareas desaparece**. Al girar, Android destruye la `Activity` y la vuelve a crear (capítulo 26); todo lo que estaba guardado con `remember` se pierde con ella.
+El texto del campo se conserva, gracias a `rememberSaveable`. Pero **la lista de tareas desaparece**. Al girar, Android destruye la `Activity` y la vuelve a crear (capítulo 27); todo lo que estaba guardado con `remember` se pierde con ella.
 
 Podrías cambiar el `remember` de la lista por `rememberSaveable`, pero sería un parche: el estado seguiría viviendo en la interfaz, junto con la lógica para modificarlo. La solución de fondo es moverlo a un `ViewModel`, que **vive más que la `Activity`**.
 
@@ -67,7 +67,7 @@ Agrega en `strings.xml` los textos del resumen y del Snackbar:
 
 ## Paso 4: El estado de la pantalla: `TareasUiState`
 
-En el capítulo 39 viste un `UiState` como `sealed class`, con un estado distinto para *cargando*, *éxito* y *error*. Esta pantalla no carga nada: siempre muestra una lista (vacía o no) y, a veces, un mensaje. Cuando la pantalla muestra **varios datos a la vez**, el estado se modela mejor con una **`data class`**, con una propiedad por cada dato.
+En el capítulo 42 viste un `UiState` como `sealed class`, con un estado distinto para *cargando*, *éxito* y *error*. Esta pantalla no carga nada: siempre muestra una lista (vacía o no) y, a veces, un mensaje. Cuando la pantalla muestra **varios datos a la vez**, el estado se modela mejor con una **`data class`**, con una propiedad por cada dato.
 
 Crea el archivo `TareasUiState.kt` en el mismo paquete que `MainActivity.kt`:
 
@@ -86,14 +86,14 @@ sealed interface Mensaje {
 ```
 
 - `tareas` es la lista que muestra la pantalla.
-- `mensaje` es el evento pendiente del capítulo 40: `null` cuando no hay nada que avisar.
+- `mensaje` es el evento pendiente del capítulo 43: `null` cuando no hay nada que avisar.
 - `pendientes` es una propiedad **calculada**: no se guarda, se deriva de `tareas` cada vez que se consulta. Así nunca puede quedar desincronizada con la lista.
 
 Los valores por defecto describen el estado inicial: una lista vacía y ningún mensaje.
 
 ## Paso 5: El `TareasViewModel`
 
-Crea el archivo `TareasViewModel.kt`, también en el paquete principal. Empieza por el estado, con el patrón del capítulo 39: un `MutableStateFlow` privado y un `StateFlow` público.
+Crea el archivo `TareasViewModel.kt`, también en el paquete principal. Empieza por el estado, con el patrón del capítulo 42: un `MutableStateFlow` privado y un `StateFlow` público.
 
 ```kotlin
 class TareasViewModel : ViewModel() {
@@ -212,7 +212,7 @@ fun FormularioNuevaTarea(
 }
 ```
 
-El texto que se está escribiendo sigue siendo estado **local** de la interfaz, con `rememberSaveable`: nadie más lo necesita y no tiene sentido llevarlo al `ViewModel`. El botón ahora se deshabilita con `enabled` mientras el campo está vacío, como viste en el capítulo 34, en lugar de ignorar el toque en silencio.
+El texto que se está escribiendo sigue siendo estado **local** de la interfaz, con `rememberSaveable`: nadie más lo necesita y no tiene sentido llevarlo al `ViewModel`. El botón ahora se deshabilita con `enabled` mientras el campo está vacío, como viste en el capítulo 35, en lugar de ignorar el toque en silencio.
 
 ## Paso 7: La pantalla recibe el `UiState`
 
@@ -289,7 +289,7 @@ fun ListaTareasScreen(
 }
 ```
 
-Es el código del capítulo 40, ahora en su lugar real:
+Es el código del capítulo 43, ahora en su lugar real:
 
 - El `SnackbarHostState` se crea con `remember` y se entrega al `Scaffold` en `snackbarHost`.
 - El `LaunchedEffect` tiene como clave `uiState.mensaje`. Cuando el `ViewModel` pone `TareaEliminada`, se lanza, muestra el Snackbar y espera. Si el usuario toca **Deshacer**, llama a `onDeshacer()`; en cualquier caso, termina con `onMensajeMostrado()`.
@@ -380,7 +380,7 @@ fun App(viewModel: TareasViewModel = viewModel()) {
 Compara con la versión de la parte 2:
 
 - `var tareas by remember { ... }` desapareció. En su lugar, `viewModel()` entrega el `TareasViewModel` (el mismo, aunque la `Activity` se recree) y `collectAsStateWithLifecycle()` convierte su `StateFlow` en estado de Compose.
-- Las lambdas con la lógica de agregar, completar y eliminar se reemplazan por **referencias a funciones**, que viste en el capítulo 21. Allí usaste `Tipo::función`; aquí, a la izquierda de `::` va un **objeto concreto**: `viewModel::agregarTarea` apunta a la función `agregarTarea` de *ese* `ViewModel`, y equivale a escribir `{ texto -> viewModel.agregarTarea(texto) }`. Sus tipos coinciden con los parámetros de la pantalla: `agregarTarea` recibe un `String` y devuelve `Unit`, igual que `onAgregar`.
+- Las lambdas con la lógica de agregar, completar y eliminar se reemplazan por **referencias a funciones**, que viste en el capítulo 22. Allí usaste `Tipo::función`; aquí, a la izquierda de `::` va un **objeto concreto**: `viewModel::agregarTarea` apunta a la función `agregarTarea` de *ese* `ViewModel`, y equivale a escribir `{ texto -> viewModel.agregarTarea(texto) }`. Sus tipos coinciden con los parámetros de la pantalla: `agregarTarea` recibe un `String` y devuelve `Unit`, igual que `onAgregar`.
 - La navegación sigue en el `NavHost`: el `ViewModel` no conoce el `NavController`.
 
 Los imports nuevos son:
@@ -414,10 +414,10 @@ En esta tercera parte aplicaste MVVM a **Mi lista de tareas**:
 - Comprobaste que el estado guardado con `remember` se pierde al girar la pantalla, porque la `Activity` se recrea.
 - Modelaste el estado de la pantalla como una **`data class`** (`TareasUiState`), con una propiedad calculada (`pendientes`) y un mensaje pendiente (`mensaje: Mensaje?`).
 - Creaste `TareasViewModel`, que expone el estado como `StateFlow` y lo modifica con **`update { }`** y `copy`. La lógica que antes vivía en las lambdas de `App` ahora está en el `ViewModel`.
-- Mostraste un **Snackbar** con **Deshacer** a partir de un evento modelado como estado, con `LaunchedEffect`, tal como en el capítulo 40.
+- Mostraste un **Snackbar** con **Deshacer** a partir de un evento modelado como estado, con `LaunchedEffect`, tal como en el capítulo 43.
 - Conectaste la interfaz con `viewModel()`, `collectAsStateWithLifecycle()` y **referencias a funciones**.
 - Dejaste en la interfaz solo el estado que es de la interfaz: el texto del formulario y el `SnackbarHostState`.
 
-El `ViewModel` todavía hace dos trabajos: decide qué mostrar **y** guarda los datos. En la cuarta parte, después de los capítulos 41 y 42, moverás los datos a un **repositorio** y dejarás que **Hilt** lo entregue al `ViewModel`.
+El `ViewModel` todavía hace dos trabajos: decide qué mostrar **y** guarda los datos. En la cuarta parte, después de los capítulos 44 y 45, moverás los datos a un **repositorio** y dejarás que **Hilt** lo entregue al `ViewModel`.
 
 El código completo de esta etapa está en `code/todo-list-app/etapas/etapa3/`.

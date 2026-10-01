@@ -1,4 +1,4 @@
-# Capítulo 14b: `Result<T>`: manejo funcional de éxito y fallo
+# Capítulo 15: `Result<T>`: manejo funcional de éxito y fallo
 
 ## Introducción
 

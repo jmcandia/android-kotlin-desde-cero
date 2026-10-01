@@ -1,101 +1,175 @@
-# Capítulo 30: Gestión de recursos: imágenes, íconos y cadenas de texto
+# Capítulo 30: `Modifier` y layouts: `Column`, `Row` y `Box`
 
 ## Introducción
 
-En el capítulo 25 viste que un proyecto Android separa el **código** (`kotlin+java/`) de los **recursos** (`res/`): imágenes, el ícono de la app, textos, entre otros. Hasta ahora no necesitabas mirar esa carpeta de cerca, pero para seguir avanzando —y, en particular, para usar `Image` en el próximo capítulo— conviene entender cómo Android organiza esos recursos y cómo se referencian desde tu código.
+En el capítulo anterior escribiste composables que muestran un texto. Pero una interfaz real necesita dos cosas más: **ajustar** cada elemento (darle espacio, tamaño, un fondo, que responda a un toque) y **organizar** varios elementos en pantalla (uno debajo de otro, en fila o superpuestos).
 
-En este capítulo verás cómo agregar **imágenes** al proyecto, cómo se genera y personaliza el **ícono de la app**, y por qué conviene guardar los **textos** en un archivo aparte en lugar de escribirlos directamente en el código.
+En este capítulo aprenderás ambas: el **`Modifier`**, la herramienta para ajustar la apariencia y el comportamiento de cada composable, y los tres **layouts** básicos de Compose —`Column`, `Row` y `Box`—, junto con cómo distribuir y alinear sus hijos.
 
-## La carpeta `res` y la clase `R`
+## Modificadores (`Modifier`)
 
-Dentro de `res/` (de *resources*), Android organiza cada tipo de recurso en su propia carpeta. Las que más vas a usar por ahora son:
+Un `Text` por sí solo es solo texto pegado a la esquina. ¿Cómo le das espacio alrededor, un tamaño, un color de fondo, o haces que responda a un toque? Con un **`Modifier`** ("modificador").
 
-```text
-res/
-├── drawable/    ← imágenes e íconos vectoriales
-├── mipmap/      ← el ícono de la app, en sus distintas variantes
-└── values/      ← strings.xml, y otros valores como colores o dimensiones
-```
-
-Cuando agregas un archivo a cualquiera de estas carpetas, Android Studio **regenera automáticamente** una clase llamada `R` (de *resources*), con una referencia a cada recurso. Por ejemplo, una imagen `res/drawable/foto_perfil.png` queda disponible en tu código Kotlin como `R.drawable.foto_perfil`; un texto declarado en `res/values/strings.xml` con el nombre `titulo_pantalla`, como `R.string.titulo_pantalla`.
-
-Esto tiene dos ventajas grandes frente a, por ejemplo, escribir la ruta de un archivo a mano: el compilador **verifica** que el recurso exista (si lo borras o le cambias el nombre, tu código no compila hasta que lo corrijas) y Android Studio te ofrece **autocompletado** para encontrarlos.
-
-> [!NOTE]Nota
-> Los nombres de los recursos siguen una convención estricta: solo minúsculas, números y guion bajo (`snake_case`), sin espacios ni mayúsculas. Android Studio te avisa si intentas nombrar un archivo de otra forma.
-
-## Imágenes: `res/drawable`
-
-Para agregar una imagen a tu proyecto, la forma más simple es arrastrarla (o copiarla) dentro de `res/drawable/` desde el explorador de archivos, o bien hacer clic derecho sobre `res` y elegir **New > Vector Asset** si quieres usar uno de los íconos que trae Android Studio.
-
-Aquí aparece una decisión importante: **imagen de mapa de bits** (PNG, JPG) o **vector** (`.xml`, un *Vector Drawable*).
-
-- Una imagen de mapa de bits es una **cuadrícula fija de píxeles**: se ve bien a su tamaño original, pero se pixela si la agrandas demasiado. Por eso, tradicionalmente, Android pedía una copia distinta por cada densidad de pantalla (`mdpi`, `hdpi`, `xhdpi`, `xxhdpi`…), y el sistema elegía automáticamente la que correspondía al dispositivo.
-- Un **Vector Drawable** describe la imagen con **formas matemáticas** (líneas, curvas), no con píxeles. Esto significa que **escala sin perder calidad** a cualquier tamaño y, además, ocupa mucho menos espacio, porque no necesitas una copia por densidad.
-
-Por eso, para íconos y logos simples, **preferirás casi siempre un Vector Drawable**; para fotografías reales (donde no aplican las formas vectoriales), seguirás usando PNG o JPG.
-
-Una vez que la imagen está en `res/drawable/`, ya sabes cómo mostrarla: con `Image` y `painterResource`, como viste en el capítulo de componentes.
-
-## El ícono de la app: `res/mipmap`
-
-El **ícono de tu app** (el que ve el usuario en la pantalla de inicio del teléfono) vive en una carpeta aparte, `res/mipmap/`, y no en `drawable/`. La razón es técnica: a diferencia de una imagen dentro de tu app —que Android puede optimizar y descartar en las densidades que no necesita—, el ícono del launcher debe estar **siempre disponible en todas las densidades**, sin importar la del dispositivo, porque el sistema operativo lo usa fuera de tu app (en el launcher, en la lista de apps recientes, etc.).
-
-Ya viste, en el `AndroidManifest.xml` del capítulo 25, cómo se referencia:
-
-```xml
-<application
-    android:icon="@mipmap/ic_launcher">
-```
-
-Desde Android 8.0 (API 26), los íconos son **adaptativos** (*adaptive icons*): en lugar de una sola imagen, se arman con dos capas, un `ic_launcher_foreground` (el dibujo) y un `ic_launcher_background` (el fondo), para que el propio sistema pueda recortarlas con distintas formas (círculo, cuadrado con esquinas redondeadas, "squircle"…) según el fabricante del dispositivo, manteniendo una apariencia consistente en todo el sistema.
-
-Para reemplazar el ícono por defecto con tu propio logo, no edites los archivos a mano: usa el asistente de Android Studio. Haz clic derecho sobre `res/` y elige **New > Image Asset**. Ahí eliges tu imagen (idealmente un logo simple, en alta resolución o en formato vectorial), Android Studio te deja previsualizar cómo se ve recortado con las distintas formas, y genera automáticamente todos los archivos y densidades necesarias por ti.
-
-## Texto: `res/values/strings.xml`
-
-Hasta ahora, en los ejemplos del curso, escribiste el texto directamente en el código: `Text("¡Bienvenido!")`. Funciona, pero en una app real es preferible declarar los textos en un archivo aparte, `res/values/strings.xml`:
-
-```xml
-<resources>
-    <string name="app_name">Mi Lista de Tareas</string>
-    <string name="titulo_pantalla">Mis tareas</string>
-</resources>
-```
-
-Y leerlos desde un composable con `stringResource`:
+Un `Modifier` es un objeto que le pasas a un composable para **ajustar su apariencia o su comportamiento**. Casi todos los composables aceptan un parámetro `modifier`:
 
 ```kotlin
-Text(text = stringResource(id = R.string.titulo_pantalla))
+Text(
+    text = "¡Hola!",
+    modifier = Modifier.padding(16.dp)
+)
 ```
 
-¿Por qué conviene hacerlo así, en lugar de escribir el texto directamente?
-
-- **Reutilización**: si el mismo texto aparece en varios lugares, lo defines una sola vez (el mismo principio **DRY** del anexo de principios de diseño).
-- **Traducción**: si más adelante quieres ofrecer tu app en otro idioma, creas una carpeta como `values-en/` con un `strings.xml` equivalente, y Android elige automáticamente el que corresponde al idioma del dispositivo, sin tocar una sola línea de tu código Kotlin.
-- Algunos textos, como el **nombre de la app** (`app_name`, el que ya usa tu `AndroidManifest.xml`), **deben** vivir en `strings.xml`; no es opcional.
-
-Los textos con partes variables también se pueden definir como recursos, usando un marcador de posición:
-
-```xml
-<string name="saludo">¡Hola, %1$s!</string>
-```
-
-```kotlin
-Text(text = stringResource(id = R.string.saludo, nombre))
-```
+Aquí `Modifier.padding(16.dp)` le agrega un espacio de 16 alrededor del texto.
 
 > [!NOTE]Nota
-> Para mantener los ejemplos del curso simples y fáciles de leer, seguiremos escribiendo la mayoría de los textos directamente en el código, como hasta ahora. Pero en un proyecto real —y, en especial, en cualquier app que vayas a publicar— es una buena práctica declarar los textos visibles para el usuario en `strings.xml`.
+> `dp` significa *density-independent pixels* (píxeles independientes de la densidad). Es la unidad de medida de Compose para tamaños y espacios, y se adapta sola a pantallas de distinta densidad, para que tu interfaz se vea consistente en cualquier dispositivo.
+
+Los modificadores se **encadenan**, uno tras otro, y cada uno se aplica en orden:
+
+```kotlin
+Text(
+    text = "¡Hola!",
+    modifier = Modifier
+        .padding(16.dp)
+        .background(Color.Yellow)
+)
+```
+
+El **orden importa**. No es lo mismo poner primero el espaciado y luego el fondo, que al revés: en el ejemplo de arriba, el fondo amarillo se pinta *dentro* del espaciado; si invirtieras las llamadas, el amarillo cubriría también ese espacio.
+
+A continuación, algunos de los modificadores más usados:
+
+| Modificador | Qué hace | Parámetros |
+| :--- | :--- | :--- |
+| `padding(...)` | Agrega espacio alrededor del elemento. | Un `Dp` para todos los lados, o valores por lado (`horizontal`/`vertical`, o `start`/`top`/`end`/`bottom`). |
+| `size(...)` | Fija un ancho y un alto concretos. | Un `Dp` (cuadrado), o `width` y `height` en `Dp`. |
+| `width(...)` / `height(...)` | Fija solo el ancho o solo el alto. | Un `Dp`. |
+| `fillMaxWidth()` | Hace que el elemento ocupe todo el ancho disponible. | Opcional: una fracción `Float` (0f–1f); por defecto, todo el ancho. |
+| `fillMaxHeight()` | Ocupa todo el alto disponible. | Opcional: una fracción `Float`; por defecto, todo el alto. |
+| `fillMaxSize()` | Ocupa todo el ancho y el alto disponibles. | Opcional: una fracción `Float`; por defecto, todo el espacio. |
+| `background(...)` | Aplica un color (o degradado) de fondo. | Un `Color` (o un `Brush` para degradados) y, opcionalmente, una `Shape`. |
+| `border(...)` | Dibuja un borde alrededor del elemento. | El grosor (`Dp`), un `Color` y, opcionalmente, una `Shape`. |
+| `clip(...)` | Recorta el elemento a una forma (por ejemplo, esquinas redondeadas). | Una `Shape` (p. ej., `RoundedCornerShape` o `CircleShape`). |
+| `clickable { ... }` | Hace que el elemento responda a los toques. | Una lambda `onClick` que se ejecuta al tocar. |
+
+> [!NOTE]Nota
+> Existen además modificadores que solo están disponibles **dentro de ciertos layouts** (como `weight`, para repartir el espacio en una fila o columna, o `align`, para alinear dentro de un contenedor). Los verás cuando lleguemos a los layouts.
+
+### La convención del parámetro `modifier`
+
+Cuando crees tus propios composables, es una buena práctica que reciban un parámetro `modifier` y lo apliquen a su elemento principal, con este patrón:
+
+```kotlin
+@Composable
+fun Saludo(nombre: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "¡Hola, $nombre!",
+        modifier = modifier
+    )
+}
+```
+
+Al darle el valor por defecto `Modifier` (un modificador vacío), quien use `Saludo` puede pasarle ajustes desde fuera o no pasarle ninguno. Esto hace tus composables mucho más flexibles y reutilizables, y es la convención que sigue todo Compose.
+
+## El problema: los elementos se superponen
+
+Si colocas dos composables juntos sin más, Compose los dibuja en el **mismo lugar**, uno encima del otro:
+
+```kotlin
+@Composable
+fun Pantalla() {
+    Text("Primero")
+    Text("Segundo") // ¡se dibuja encima del anterior!
+}
+```
+
+Para arreglarlo, necesitas un **layout**: un composable cuyo trabajo es **organizar** a sus hijos. Compose ofrece tres básicos, que resuelven las tres formas fundamentales de disponer elementos:
+
+![Layout](../../assets/images/chapter29/layout-column-row-box.svg)
+
+## `Column`: en vertical
+
+Un `Column` organiza a sus hijos **en vertical**, uno debajo del otro:
+
+```kotlin
+Column {
+    Text("Primero")
+    Text("Segundo")
+    Text("Tercero")
+}
+```
+
+Ahora los tres textos aparecen apilados de arriba abajo, en el orden en que los escribiste.
+
+## `Row`: en horizontal
+
+Un `Row` organiza a sus hijos **en horizontal**, uno al lado del otro:
+
+```kotlin
+Row {
+    Text("Izquierda")
+    Text("Centro")
+    Text("Derecha")
+}
+```
+
+Es idéntico a `Column`, pero en el eje horizontal.
+
+## `Box`: superponer elementos
+
+Un `Box` **apila** a sus hijos, uno **encima** de otro. Es útil para superponer cosas: un texto sobre una imagen, una insignia sobre un ícono, etcétera.
+
+```kotlin
+Box {
+    Text("Fondo")
+    Text("Encima") // se dibuja sobre el anterior
+}
+```
+
+Combinando estos tres layouts (y anidándolos unos dentro de otros) puedes construir prácticamente cualquier pantalla.
+
+## Distribución y alineación
+
+Dentro de un `Column` o un `Row`, a menudo querrás controlar **cómo se reparten** los hijos y **cómo se alinean**. Para eso, estos layouts reciben dos parámetros. La clave es distinguir sus dos ejes:
+
+- En un `Column`, el eje principal es **vertical**. Controlas la distribución vertical con `verticalArrangement` y la alineación horizontal con `horizontalAlignment`.
+- En un `Row`, el eje principal es **horizontal**. Controlas la distribución horizontal con `horizontalArrangement` y la alineación vertical con `verticalAlignment`.
+
+Por ejemplo, un `Column` que separa sus hijos con espacio y los centra horizontalmente:
+
+```kotlin
+Column(
+    verticalArrangement = Arrangement.spacedBy(8.dp),
+    horizontalAlignment = Alignment.CenterHorizontally
+) {
+    Text("Primero")
+    Text("Segundo")
+}
+```
+
+Algunos valores útiles de `Arrangement` son `spacedBy(...)` (un espacio fijo entre elementos), `SpaceBetween` (reparte el espacio sobrante entre ellos) y `Center` (los agrupa al centro). Y de `Alignment`, `Start`, `CenterHorizontally` y `End` (o `Top`, `CenterVertically` y `Bottom` en un `Row`).
+
+## El modificador `weight`
+
+Al principio de este capítulo mencionamos que hay modificadores que solo funcionan dentro de ciertos layouts. `weight` es el más importante: dentro de un `Row` o un `Column`, reparte el **espacio disponible** entre los hijos de forma proporcional.
+
+```kotlin
+Row {
+    Text("Izquierda", modifier = Modifier.weight(1f))
+    Text("Derecha", modifier = Modifier.weight(1f))
+}
+```
+
+Aquí ambos textos reciben el mismo peso (`1f`), así que se reparten el ancho **a la mitad**. Si a uno le dieras `weight(2f)` y al otro `weight(1f)`, el primero ocuparía el doble de espacio que el segundo.
 
 ## Resumen
 
-En este capítulo aprendiste a organizar los recursos de tu app:
+En este capítulo aprendiste a ajustar y organizar composables:
 
-- La carpeta **`res/`** separa los recursos por tipo: `drawable/` (imágenes e íconos), `mipmap/` (el ícono de la app) y `values/` (textos y otros valores).
-- La clase **`R`**, generada automáticamente, te da acceso *type-safe* a cada recurso (`R.drawable.foto`, `R.string.titulo`…); el compilador te avisa si un recurso no existe.
-- Para íconos y logos simples, preferirás un **Vector Drawable**: escala sin perder calidad y no necesita una copia por densidad de pantalla.
-- El **ícono de la app** vive en `mipmap/`, no en `drawable/`, porque debe estar disponible en todas las densidades; se genera y reemplaza con el asistente **Image Asset** de Android Studio, y hoy en día suele ser un **ícono adaptativo** (una capa de fondo y una de primer plano).
-- Los **textos** deberían declararse en `res/values/strings.xml` y leerse con `stringResource`, para reutilizarlos y facilitar la traducción a otros idiomas.
+- Un **`Modifier`** ajusta la apariencia y el comportamiento de un composable (`padding`, `background`, `fillMaxWidth`, `clickable`…). Se **encadena**, el **orden importa**, y usa la unidad **`dp`** para los tamaños.
+- Por convención, tus composables deberían recibir un parámetro `modifier` con valor por defecto `Modifier` y aplicarlo a su elemento principal.
+- Sin un layout, los composables se **superponen**. Los tres layouts básicos son `Column` (vertical), `Row` (horizontal) y `Box` (apilados).
+- `Column` y `Row` controlan la **distribución** (`Arrangement`) en su eje principal y la **alineación** (`Alignment`) en el eje cruzado.
+- El modificador **`weight`**, dentro de un `Row` o `Column`, reparte el espacio disponible de forma proporcional.
 
-En el próximo capítulo retomarás los componentes de Material 3 —`Text`, `Image`, `Button`, `Card`— ahora que ya sabes de dónde salen las imágenes que les vas a pasar.
+En el próximo capítulo verás cómo Android organiza sus **recursos** (imágenes, el ícono de la app, textos), algo que necesitarás antes de sacarles todo el provecho a los componentes de Material 3.

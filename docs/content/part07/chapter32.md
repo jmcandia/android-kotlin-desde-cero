@@ -1,220 +1,135 @@
-# Capítulo 32: Estado en Compose: recomposición, `remember`, `mutableStateOf` y *state hoisting*
+# Capítulo 32: Material 3: componentes listos para usar
 
 ## Introducción
 
-Hasta ahora tus composables muestran siempre lo mismo. Pero una interfaz real **cambia**: un contador que aumenta, un campo de texto que se llena, una casilla que se marca. En este capítulo verás cómo Compose actualiza la pantalla cuando cambian los datos —la **recomposición**— y cómo se declaran esos datos que, al cambiar, la disparan: el **estado** (*state*).
+En los capítulos anteriores escribiste tu primer `@Composable`, conociste `Modifier` y aprendiste a organizar los recursos de tu app (imágenes, ícono, textos). Las apps reales se construyen con **componentes de interfaz** ya conocidos: textos, imágenes, botones, tarjetas… En este capítulo conocerás **Material 3**, el sistema de diseño que trae Compose, y los **componentes** más habituales que usarás para construir tus pantallas, junto con sus parámetros más comunes.
 
-Aprenderás a crear estado con `mutableStateOf`, a conservarlo entre recomposiciones con `remember`, a mantenerlo incluso al girar el dispositivo con `rememberSaveable`, a usarlo con componentes interactivos como `TextField`, `Checkbox` y `Switch`, y una técnica fundamental para organizar bien tu interfaz: el ***state hoisting*** o "elevación del estado".
+Dejaremos para más adelante cómo **personalizar** el aspecto de estos componentes (colores, tipografía); por ahora, usarás el estilo que Android Studio ya dejó preparado en tu proyecto.
 
-## La recomposición
+## ¿Qué es Material Design?
 
-Aquí está la idea central de Compose. En la interfaz tradicional, cuando un dato cambiaba, tenías que buscar el elemento de pantalla y actualizarlo tú a mano. En Compose no: cuando cambian los datos que un composable **lee**, Compose **vuelve a ejecutar** ese composable con los datos nuevos y actualiza lo que se muestra. A ese "volver a ejecutar" se le llama **recomposición**.
+**Material Design** es el sistema de diseño creado por Google: una serie de guías y componentes para construir interfaces atractivas y coherentes en Android (y otras plataformas). Su versión más reciente es **Material 3** (también llamado *Material You*), que introduce, entre otras cosas, colores capaces de adaptarse al fondo de pantalla del usuario.
 
-Piénsalo así: un composable no es un dibujo fijo, sino una **descripción** de cómo debe verse la interfaz *para unos datos dados*. Si los datos cambian, Compose recalcula la descripción y redibuja solo lo necesario.
+Compose viene con una biblioteca que implementa Material 3, así que obtienes sus componentes y su sistema de temas **gratis**, sin tener que diseñarlos desde cero. Cuando creaste el proyecto, Android Studio generó además un **tema** (un composable, normalmente llamado `NombreDeTuAppTheme`) que envuelve toda tu interfaz y le da, por detrás, un estilo consistente a todos estos componentes. Volveremos sobre el tema con detalle más adelante; por ahora, basta con saber que ya está ahí, trabajando por ti.
 
-```mermaid
-flowchart TD
-    A["Cambian los datos"] --> B["Compose vuelve a ejecutar<br/>el composable (recomposición)"]
-    B --> C["El composable describe la interfaz<br/>con los datos nuevos"]
-    C --> D["La pantalla se actualiza"]
-```
+## Componentes básicos
 
-Esto es justo lo que anticipamos al hablar de `StateFlow`: la interfaz **observa** los datos y **reacciona** a sus cambios, sin que tengas que actualizarla manualmente. En el resto de este capítulo verás cómo se declaran esos datos que, al cambiar, provocan la recomposición: el **estado**.
-
-> [!IMPORTANT]
-> Como un composable puede ejecutarse muchas veces (una por cada recomposición) y en cualquier orden, no debes poner dentro de él acciones con efectos secundarios (como modificar una variable externa o escribir en un archivo). Un composable solo debería **describir** la interfaz a partir de los datos que recibe.
-
-## El problema: una variable normal no basta
-
-Intentemos algo sencillo: un contador que aumenta cada vez que tocas un botón. Con lo que sabes, podrías intentar una variable normal:
-
-```kotlin
-@Composable
-fun Contador() {
-    var contador = 0
-
-    Button(onClick = { contador++ }) {
-        Text("Has tocado $contador veces")
-    }
-}
-```
-
-Pero esto **no funciona**: por más que toques el botón, el número no cambia en pantalla. Y hay dos razones:
-
-1. Compose **no sabe** que `contador` cambió, así que no recompone: la interfaz nunca se entera de la actualización.
-2. Aunque recompusiera, `contador` es una variable normal que se **reinicia a 0** cada vez que la función se vuelve a ejecutar.
-
-Necesitamos algo que Compose pueda **observar** y que, además, **sobreviva** a las recomposiciones. Esas dos necesidades las resuelven `mutableStateOf` y `remember`.
+Material 3 trae muchos componentes ya construidos, todos con un estilo coherente entre sí. Estos son los cuatro que más usarás para armar una pantalla: `Text`, `Image`, `Button` y `Card`.
 
 > [!NOTE]Nota
-> `Button` es un componente de Material, que veremos en detalle más adelante. Por ahora basta con saber que su parámetro `onClick` recibe la acción que se ejecuta al tocarlo.
+> Ya conoces `Modifier` para ajustar tamaño, espaciado, fondo o forma (`padding`, `size`, `background`…). Sigue usándolo para eso. Algunos componentes, como `Text`, también aceptan parámetros propios de apariencia (`color`, `fontSize`…), porque `Modifier` no llega al contenido interno del componente. Puedes usarlos si lo necesitas, pero acostúmbrate a resolver tamaño, espaciado y fondo con `modifier`, tal como aprendiste, y deja esos parámetros propios solo para lo que `modifier` no puede hacer.
 
-## `mutableStateOf` y `remember`
+### `Text`
 
-La solución tiene dos partes que trabajan juntas.
-
-**`mutableStateOf`** crea un valor **observable**: un contenedor de estado que Compose vigila. Cuando su contenido cambia, Compose recompone los composables que lo leen.
-
-**`remember`** le dice a Compose que **recuerde** ese valor entre recomposiciones, en lugar de recrearlo cada vez.
-
-Combinándolos:
-
-```kotlin
-@Composable
-fun Contador() {
-    val contador = remember { mutableStateOf(0) }
-
-    Button(onClick = { contador.value++ }) {
-        Text("Has tocado ${contador.value} veces")
-    }
-}
-```
-
-Ahora sí funciona. Al leer `contador.value` dentro del `Text`, Compose registra que ese texto **depende** de ese estado. Cuando tocas el botón y haces `contador.value++`, el estado cambia, Compose recompone y el texto se actualiza con el nuevo número. Y gracias a `remember`, el valor no se pierde entre recomposiciones.
-
-## La sintaxis `by`
-
-Escribir `.value` cada vez es un poco engorroso. Kotlin ofrece una forma más limpia mediante una **propiedad delegada**, con la palabra clave `by`:
-
-```kotlin
-@Composable
-fun Contador() {
-    var contador by remember { mutableStateOf(0) }
-
-    Button(onClick = { contador++ }) {
-        Text("Has tocado $contador veces")
-    }
-}
-```
-
-Con `by`, usas `contador` directamente, como si fuera una variable normal: lo lees sin `.value` y lo modificas con `contador++`. Por detrás sigue siendo el mismo estado observable. Fíjate en que ahora se declara con `var`, porque lo vas a modificar. Esta es la forma que verás con más frecuencia.
-
-> [!NOTE]Nota
-> Esta sintaxis necesita importar `getValue` y `setValue` de Compose; Android Studio agrega esos imports por ti automáticamente.
-
-## Sobrevivir a la rotación: `rememberSaveable`
-
-¿Recuerdas que, al girar el dispositivo, Android **destruye y recrea** la `Activity`, perdiendo su estado? Ese problema también afecta a `remember`: como la recreación empieza todo de cero, el valor guardado con `remember` se **pierde** al rotar.
-
-Para esos casos existe **`rememberSaveable`**, que funciona igual que `remember`, pero **guarda** el estado y lo **restaura** tras una recreación por cambio de configuración:
-
-```kotlin
-var contador by rememberSaveable { mutableStateOf(0) }
-```
-
-Con este simple cambio, tu contador conserva su valor aunque gires el teléfono. Úsalo cuando quieras que un estado sobreviva a la rotación (por ejemplo, lo que el usuario escribió en un formulario).
-
-## Componentes con estado: `TextField`, `Checkbox` y `Switch`
-
-Con `remember` y `mutableStateOf` ya puedes usar los componentes de Material 3 que el usuario **modifica**. Todos siguen el mismo patrón.
-
-### `TextField`: la base de los formularios
-
-Un **`TextField`** es un campo de texto editable: el componente con el que construirás prácticamente **todos los formularios** del curso (inicio de sesión, búsqueda, alta de un contacto…).
+Ya usaste `Text` para mostrar texto en pantalla. Su único parámetro obligatorio es `text`; el resto de su apariencia (tamaño, espaciado, fondo) sigue resolviéndose con `modifier`:
 
 | Parámetro | Qué hace |
 | :--- | :--- |
-| `value` | El texto que se muestra **ahora mismo** en el campo. Es obligatorio. |
-| `onValueChange` | La función que se ejecuta cada vez que el usuario escribe algo. Es obligatorio. |
-| `label` | Una etiqueta que identifica el campo (por ejemplo, "Correo electrónico"). |
-| `placeholder` | Un texto de ejemplo que se ve cuando el campo está vacío. |
+| `text` | El texto a mostrar. Es el único parámetro obligatorio. |
+| `textAlign` | La alineación del texto dentro de su espacio (`TextAlign.Center`, `TextAlign.End`…). |
+| `maxLines` | El número máximo de líneas antes de recortar el texto. |
 
 ```kotlin
-var nombre by remember { mutableStateOf("") }
-
-TextField(
-    value = nombre,
-    onValueChange = { nombre = it },
-    label = { Text("Nombre") },
-    placeholder = { Text("Ingresa tu nombre") }
+Text(
+    text = "¡Bienvenido!",
+    modifier = Modifier
+        .padding(16.dp)
+        .fillMaxWidth(),
+    textAlign = TextAlign.Center
 )
 ```
 
-Fíjate en el patrón: `value` le dice a `TextField` **qué mostrar**, y `onValueChange` recibe el texto nuevo cada vez que el usuario teclea, para que tú lo guardes (aquí, en `nombre`). Si solo pasaras `value` sin actualizarlo en `onValueChange`, el campo se vería "congelado" y no dejaría escribir, por la misma razón que viste con `Button`: la interfaz no cambia si nadie actualiza el estado que lee. Un formulario real simplemente combina **varios** `TextField` como este, uno por cada dato que pidas.
+> [!NOTE]Nota
+> `Text` también admite `color`, `fontSize` o `fontWeight` para fijar su apariencia directamente, y es válido usarlos. Pero cuando lleguemos al capítulo de Material 3 sobre el tema, verás la forma recomendada de aplicar estilos de texto coherentes en toda la app con el parámetro `style`, en lugar de fijarlos uno por uno en cada `Text`.
 
-### `Checkbox` y `Switch`
+### `Image`
 
-Un **`Checkbox`** es una casilla de verificación; un **`Switch`** es un interruptor de encendido/apagado. Ambos comparten los mismos parámetros:
+`Image` muestra una imagen: un recurso de tu proyecto (guardado en `res/drawable`) o un ícono vectorial.
 
 | Parámetro | Qué hace |
 | :--- | :--- |
-| `checked` | Si está marcado o activado. Es obligatorio. |
-| `onCheckedChange` | La función que se ejecuta cuando el usuario lo toca, con el nuevo valor. Es obligatorio. |
+| `painter` | La fuente de la imagen; lo habitual es `painterResource(id = R.drawable.mi_imagen)`. |
+| `contentDescription` | Un texto que describe la imagen para lectores de pantalla; es obligatorio por accesibilidad (usa `null` solo si la imagen es puramente decorativa). |
+| `contentScale` | Cómo se ajusta la imagen a su tamaño (`ContentScale.Crop`, `ContentScale.Fit`…). |
 
 ```kotlin
-var aceptaTerminos by remember { mutableStateOf(false) }
-
-Row(verticalAlignment = Alignment.CenterVertically) {
-    Checkbox(
-        checked = aceptaTerminos,
-        onCheckedChange = { aceptaTerminos = it }
-    )
-    Text("Acepto los términos y condiciones")
-}
-```
-
-Para un `Switch`, el uso es idéntico: solo cambia el componente.
-
-```kotlin
-var notificacionesActivas by remember { mutableStateOf(true) }
-
-Switch(
-    checked = notificacionesActivas,
-    onCheckedChange = { notificacionesActivas = it }
+Image(
+    painter = painterResource(id = R.drawable.foto_perfil),
+    contentDescription = "Foto de perfil",
+    contentScale = ContentScale.Crop,
+    modifier = Modifier.size(80.dp)
 )
 ```
 
-Fíjate en el patrón que se repite en los tres: cada componente interactivo recibe los **datos a mostrar** (`value`, `checked`) y una **función de devolución de llamada** (`onValueChange`, `onCheckedChange`) para reaccionar a la interacción del usuario, igual que viste con `Button` y su `onClick`. Es el mismo patrón que acabas de ver con `remember` y `mutableStateOf`: el componente no guarda nada por sí mismo; muestra el estado que recibe y avisa cuando el usuario quiere cambiarlo.
+Fíjate en que, para el tamaño, seguimos usando `modifier.size(...)`, tal como ya sabes; `contentScale` solo indica **cómo encajar** la imagen dentro de ese tamaño.
 
-## State hoisting: elevar el estado
+### `Button`: botones y el evento de clic
 
-Hasta ahora, nuestro `Contador` guarda su propio estado dentro de sí mismo. Funciona, pero tiene inconvenientes: nadie desde fuera puede conocer el valor actual ni controlarlo, y el composable es difícil de reutilizar y de previsualizar con distintos valores.
+Un **`Button`** muestra un botón con el estilo de Material. Su único parámetro obligatorio es `onClick`:
 
-La solución es el ***state hoisting*** ("elevación del estado"): **sacar el estado del composable y moverlo hacia quien lo llama**. El composable queda **sin estado** (*stateless*): recibe el valor a mostrar y una **función** para avisar de los cambios.
+| Parámetro | Qué hace |
+| :--- | :--- |
+| `onClick` | La acción que se ejecuta al tocar el botón. Es el único parámetro obligatorio. |
+| `enabled` | Si es `false`, el botón se muestra atenuado y no responde a los toques. |
 
 ```kotlin
-@Composable
-fun Contador(valor: Int, onIncrementar: () -> Unit) {
-    Button(onClick = onIncrementar) {
-        Text("Has tocado $valor veces")
+Button(onClick = { println("Botón presionado") }) {
+    Text("Enviar")
+}
+```
+
+Cada vez que el usuario toca el botón, Compose ejecuta la lambda de `onClick` **una vez** —en este ejemplo, imprime un mensaje en la consola—. Pero fíjate en algo importante: la pantalla **no cambia sola** por tocar el botón. Si dentro de `onClick` quisieras, por ejemplo, aumentar un contador en pantalla, necesitarías guardar ese número en algo que Compose pueda observar; de lo contrario, aunque el valor cambie por dentro, la interfaz nunca se entera y sigue mostrando lo mismo. A esa pieza que falta se le llama **estado**, y es el tema del capítulo de "Estado en Compose": por ahora, quédate con la idea clave de que `onClick` es el lugar donde tu app **reacciona** a un toque.
+
+> [!NOTE]Nota
+> `Button` también admite `colors`, `shape` o `contentPadding` para personalizar su apariencia. Por ahora, apóyate en el estilo que trae Material 3 por defecto; en el capítulo de tema aprenderás a ajustar estos aspectos de forma consistente en toda la app, en lugar de repetirlos botón por botón.
+
+### `Card`: agrupar información
+
+Una **`Card`** es una superficie con elevación y esquinas redondeadas, ideal para agrupar información relacionada; es perfecta, por ejemplo, para cada elemento de una lista. No tiene parámetros obligatorios: su contenido se arma como el de cualquier otro composable contenedor, ayudándote de `modifier` para el espaciado interno.
+
+```kotlin
+Card {
+    Column(modifier = Modifier.padding(16.dp)) {
+        Text("Ana López")
+        Text("Diseñadora gráfica")
     }
 }
 ```
 
-Ahora `Contador` no guarda nada: solo muestra el `valor` que recibe y, al tocarlo, invoca `onIncrementar`. El estado vive en el composable **padre**:
+> [!NOTE]Nota
+> Igual que `Button`, `Card` admite `elevation`, `shape` y `colors` para ajustar su apariencia, y existe en una variante *clickable* que recibe `onClick`. Volveremos a estos parámetros de apariencia en el capítulo de tema.
+
+## Otros componentes habituales
+
+Material 3 trae muchos otros componentes con los que te irás encontrando. No hace falta memorizarlos todos ahora, pero conviene que conozcas los más comunes y cómo se usan.
+
+
+### `Icon`
+
+Un **`Icon`** dibuja un ícono vectorial, muy usado dentro de botones, barras o junto a un texto:
+
+| Parámetro | Qué hace |
+| :--- | :--- |
+| `imageVector` | El ícono a mostrar, por ejemplo `Icons.Default.Favorite`. Es el único parámetro obligatorio. |
+| `contentDescription` | Un texto que lo describe para lectores de pantalla, igual que en `Image`. |
+| `tint` | El color con el que se dibuja el ícono. |
 
 ```kotlin
-@Composable
-fun Pantalla() {
-    var contador by remember { mutableStateOf(0) }
-
-    Contador(
-        valor = contador,
-        onIncrementar = { contador++ }
-    )
-}
+Icon(
+    imageVector = Icons.Default.Favorite,
+    contentDescription = "Marcar como favorito",
+    tint = Color.Red
+)
 ```
-
-Fíjate en el patrón: el **estado baja** (el padre le pasa `valor` al hijo) y los **eventos suben** (el hijo avisa al padre con `onIncrementar`). A este flujo en una sola dirección se le llama **flujo de datos unidireccional**:
-
-```mermaid
-flowchart TD
-    P["Composable padre<br/>(tiene el estado)"] -- "el estado baja: valor" --> H["Composable hijo<br/>(sin estado)"]
-    H -- "los eventos suben: onIncrementar" --> P
-```
-
-Este patrón trae grandes ventajas: el composable `Contador` es **reutilizable** (sirve con cualquier valor y cualquier acción), fácil de **previsualizar** (le pasas un valor fijo) y hay una **única fuente de verdad** para el estado. Es, además, la misma idea que viste con `StateFlow` y que sostiene la arquitectura MVVM: el estado vive en un solo lugar, la interfaz lo observa y le comunica los eventos.
 
 ## Resumen
 
-En este capítulo aprendiste a manejar el estado en Compose:
+En este capítulo conociste los componentes de Material 3:
 
-- La **recomposición** es el mecanismo por el que Compose **vuelve a ejecutar** un composable cuando cambian los datos que lee. Un composable describe la UI para unos datos dados y no debe tener efectos secundarios.
-- El **estado** son los datos que, al cambiar, provocan la recomposición.
-- **`mutableStateOf`** crea un valor **observable** por Compose; **`remember`** lo **conserva** entre recomposiciones. Juntos: `remember { mutableStateOf(...) }`.
-- La sintaxis **`by`** te deja usar el estado como una variable normal, sin `.value`.
-- **`rememberSaveable`** conserva el estado también tras una recreación por cambio de configuración (como girar el dispositivo).
-- Los componentes interactivos (`TextField`, `Checkbox`, `Switch`) reciben el **valor a mostrar** y una **función** que se ejecuta cuando el usuario lo cambia.
-- El ***state hoisting*** consiste en **elevar el estado** al composable padre, dejando al hijo **sin estado**: recibe el valor y una función para los eventos. Esto sigue el **flujo de datos unidireccional** (el estado baja, los eventos suben) y hace tus composables reutilizables.
+- **Material Design** es el sistema de diseño de Google; **Material 3** es su versión actual, y Compose lo incluye con componentes y un tema listos para usar.
+- Los **componentes básicos** son `Text`, `Image`, `Button` y `Card`. Para su tamaño, espaciado y fondo sigues usando `modifier`, tal como ya sabías; sus parámetros propios (`text`, `painter`, `onClick`…) cubren lo que `modifier` no puede resolver.
+- **`Button`** ejecuta una acción en `onClick` al tocarlo; por sí solo no actualiza la pantalla, eso requiere **estado**, que verás en el próximo capítulo.
+- Componentes como `Text`, `Button` o `Card` también admiten parámetros propios de apariencia (`color`, `fontSize`, `colors`, `shape`…); son válidos, pero el capítulo de tema te mostrará la forma recomendada de aplicarlos de forma coherente en toda la app.
+- **`Icon`** dibuja íconos vectoriales, dentro de botones, barras o junto a un texto.
 
-En el próximo capítulo montarás el esqueleto de una pantalla completa con `Scaffold` y mostrarás listas largas con `LazyColumn`.
+Hay componentes que el usuario **modifica**: campos de texto, casillas, interruptores. Para usarlos necesitas **estado**, el tema del próximo capítulo.

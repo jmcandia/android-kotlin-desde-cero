@@ -1,175 +1,108 @@
-# Capítulo 29: `Modifier` y layouts: `Column`, `Row` y `Box`
+# Capítulo 29: Tu primer composable: `@Composable`, `@Preview` y parámetros
 
 ## Introducción
 
-En el capítulo anterior escribiste composables que muestran un texto. Pero una interfaz real necesita dos cosas más: **ajustar** cada elemento (darle espacio, tamaño, un fondo, que responda a un toque) y **organizar** varios elementos en pantalla (uno debajo de otro, en fila o superpuestos).
+Ya sabes que `MainActivity` llama a `setContent { }` en `onCreate`, y que la `Activity` es solo el contenedor de la pantalla. En el mapa del capítulo anterior, esta parte del curso se ocupa de la primera zona: la **interfaz**. En este capítulo escribirás lo que va **dentro** de `setContent { }`: tu primer componente de interfaz con Jetpack Compose —un `@Composable`—. Aprenderás a verlo al instante con `@Preview`, sin siquiera ejecutar la app, y a hacerlo reutilizable con **parámetros**.
 
-En este capítulo aprenderás ambas: el **`Modifier`**, la herramienta para ajustar la apariencia y el comportamiento de cada composable, y los tres **layouts** básicos de Compose —`Column`, `Row` y `Box`—, junto con cómo distribuir y alinear sus hijos.
+## Tu primer `@Composable`
 
-## Modificadores (`Modifier`)
+Pasemos ahora a lo que va dentro de `setContent { }`: la interfaz, construida con **Jetpack Compose**.
 
-Un `Text` por sí solo es solo texto pegado a la esquina. ¿Cómo le das espacio alrededor, un tamaño, un color de fondo, o haces que responda a un toque? Con un **`Modifier`** ("modificador").
+Compose es un kit de herramientas **declarativo**: en lugar de crear y modificar elementos de pantalla paso a paso, tú **describes** cómo debe verse la interfaz, y Compose se encarga de dibujarla. Esa descripción se hace con **funciones componibles** (*composables*): funciones normales de Kotlin marcadas con la anotación **`@Composable`**.
 
-Un `Modifier` es un objeto que le pasas a un composable para **ajustar su apariencia o su comportamiento**. Casi todos los composables aceptan un parámetro `modifier`:
-
-```kotlin
-Text(
-    text = "¡Hola!",
-    modifier = Modifier.padding(16.dp)
-)
-```
-
-Aquí `Modifier.padding(16.dp)` le agrega un espacio de 16 alrededor del texto.
-
-> [!NOTE]Nota
-> `dp` significa *density-independent pixels* (píxeles independientes de la densidad). Es la unidad de medida de Compose para tamaños y espacios, y se adapta sola a pantallas de distinta densidad, para que tu interfaz se vea consistente en cualquier dispositivo.
-
-Los modificadores se **encadenan**, uno tras otro, y cada uno se aplica en orden:
-
-```kotlin
-Text(
-    text = "¡Hola!",
-    modifier = Modifier
-        .padding(16.dp)
-        .background(Color.Yellow)
-)
-```
-
-El **orden importa**. No es lo mismo poner primero el espaciado y luego el fondo, que al revés: en el ejemplo de arriba, el fondo amarillo se pinta *dentro* del espaciado; si invirtieras las llamadas, el amarillo cubriría también ese espacio.
-
-A continuación, algunos de los modificadores más usados:
-
-| Modificador | Qué hace | Parámetros |
-| :--- | :--- | :--- |
-| `padding(...)` | Agrega espacio alrededor del elemento. | Un `Dp` para todos los lados, o valores por lado (`horizontal`/`vertical`, o `start`/`top`/`end`/`bottom`). |
-| `size(...)` | Fija un ancho y un alto concretos. | Un `Dp` (cuadrado), o `width` y `height` en `Dp`. |
-| `width(...)` / `height(...)` | Fija solo el ancho o solo el alto. | Un `Dp`. |
-| `fillMaxWidth()` | Hace que el elemento ocupe todo el ancho disponible. | Opcional: una fracción `Float` (0f–1f); por defecto, todo el ancho. |
-| `fillMaxHeight()` | Ocupa todo el alto disponible. | Opcional: una fracción `Float`; por defecto, todo el alto. |
-| `fillMaxSize()` | Ocupa todo el ancho y el alto disponibles. | Opcional: una fracción `Float`; por defecto, todo el espacio. |
-| `background(...)` | Aplica un color (o degradado) de fondo. | Un `Color` (o un `Brush` para degradados) y, opcionalmente, una `Shape`. |
-| `border(...)` | Dibuja un borde alrededor del elemento. | El grosor (`Dp`), un `Color` y, opcionalmente, una `Shape`. |
-| `clip(...)` | Recorta el elemento a una forma (por ejemplo, esquinas redondeadas). | Una `Shape` (p. ej., `RoundedCornerShape` o `CircleShape`). |
-| `clickable { ... }` | Hace que el elemento responda a los toques. | Una lambda `onClick` que se ejecuta al tocar. |
-
-> [!NOTE]Nota
-> Existen además modificadores que solo están disponibles **dentro de ciertos layouts** (como `weight`, para repartir el espacio en una fila o columna, o `align`, para alinear dentro de un contenedor). Los verás cuando lleguemos a los layouts.
-
-### La convención del parámetro `modifier`
-
-Cuando crees tus propios composables, es una buena práctica que reciban un parámetro `modifier` y lo apliquen a su elemento principal, con este patrón:
+Aquí tienes tu primer composable, que muestra un texto en pantalla:
 
 ```kotlin
 @Composable
-fun Saludo(nombre: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "¡Hola, $nombre!",
-        modifier = modifier
-    )
+fun Saludo() {
+    Text("¡Hola, Android!")
 }
 ```
 
-Al darle el valor por defecto `Modifier` (un modificador vacío), quien use `Saludo` puede pasarle ajustes desde fuera o no pasarle ninguno. Esto hace tus composables mucho más flexibles y reutilizables, y es la convención que sigue todo Compose.
+Analicémoslo:
 
-## El problema: los elementos se superponen
+- La anotación `@Composable` le indica a Compose que esta función **describe una parte de la interfaz**.
+- `Text(...)` es, a su vez, otro composable: uno que ya viene con Compose y que muestra texto en pantalla.
 
-Si colocas dos composables juntos sin más, Compose los dibuja en el **mismo lugar**, uno encima del otro:
+Así se construye una interfaz en Compose: **componiendo** unas funciones dentro de otras. Un composable puede llamar a otros composables, y así se van armando pantallas complejas a partir de piezas simples.
+
+> [!NOTE]Nota
+> Por convención, los nombres de las funciones componibles se escriben con **mayúscula inicial** (`Saludo`, `Text`), a diferencia de las funciones normales de Kotlin, que usan minúscula inicial.
+
+## Vistas previas con `@Preview`
+
+Una de las mejores cosas de Compose es que puedes **ver** un composable directamente en Android Studio, sin tener que ejecutar la app en un emulador o dispositivo. Para eso está la anotación **`@Preview`**.
+
+Creas una función componible aparte, la marcas con `@Preview` (además de `@Composable`) y, dentro, llamas al composable que quieres previsualizar:
+
+```kotlin
+@Preview
+@Composable
+fun SaludoPreview() {
+    Saludo()
+}
+```
+
+Android Studio mostrará, en un panel junto al editor, cómo se ve `Saludo`. Cada vez que cambies el código, la vista previa se actualiza. Esto hace que construir interfaces sea mucho más rápido: ves el resultado al instante.
+
+## Juntando todo
+
+Volvamos a `MainActivity` del capítulo anterior. Ahora puedes entender cómo encaja todo: en `onCreate`, `setContent { }` recibe el composable que será la interfaz de la pantalla:
+
+```kotlin
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            Saludo() // nuestra interfaz
+        }
+    }
+}
+
+@Composable
+fun Saludo() {
+    Text("¡Hola, Android!")
+}
+
+@Preview
+@Composable
+fun SaludoPreview() {
+    Saludo()
+}
+```
+
+Cuando el usuario abre la app, Android crea `MainActivity`, llama a `onCreate` y `setContent` dibuja el composable `Saludo`. Ese texto es tu primera interfaz hecha con Compose.
+
+## Composables con parámetros
+
+Un composable es una función, así que —como cualquier función— puede recibir **parámetros**. Esto es lo que los hace reutilizables. En vez de un saludo fijo, podemos parametrizar el nombre:
 
 ```kotlin
 @Composable
-fun Pantalla() {
-    Text("Primero")
-    Text("Segundo") // ¡se dibuja encima del anterior!
+fun Saludo(nombre: String) {
+    Text("¡Hola, $nombre!")
 }
 ```
 
-Para arreglarlo, necesitas un **layout**: un composable cuyo trabajo es **organizar** a sus hijos. Compose ofrece tres básicos, que resuelven las tres formas fundamentales de disponer elementos:
-
-![Layout](../../assets/images/chapter29/layout-column-row-box.svg)
-
-## `Column`: en vertical
-
-Un `Column` organiza a sus hijos **en vertical**, uno debajo del otro:
+Ahora el mismo composable sirve para saludar a cualquiera:
 
 ```kotlin
-Column {
-    Text("Primero")
-    Text("Segundo")
-    Text("Tercero")
-}
+Saludo("Ana")   // muestra: ¡Hola, Ana!
+Saludo("Diego") // muestra: ¡Hola, Diego!
 ```
 
-Ahora los tres textos aparecen apilados de arriba abajo, en el orden en que los escribiste.
+Y, tal como una función puede llamar a otras, un composable puede llamar a **otros composables**. Así se construye una interfaz en Compose: componiendo piezas pequeñas para formar pantallas complejas.
 
-## `Row`: en horizontal
-
-Un `Row` organiza a sus hijos **en horizontal**, uno al lado del otro:
-
-```kotlin
-Row {
-    Text("Izquierda")
-    Text("Centro")
-    Text("Derecha")
-}
-```
-
-Es idéntico a `Column`, pero en el eje horizontal.
-
-## `Box`: superponer elementos
-
-Un `Box` **apila** a sus hijos, uno **encima** de otro. Es útil para superponer cosas: un texto sobre una imagen, una insignia sobre un ícono, etcétera.
-
-```kotlin
-Box {
-    Text("Fondo")
-    Text("Encima") // se dibuja sobre el anterior
-}
-```
-
-Combinando estos tres layouts (y anidándolos unos dentro de otros) puedes construir prácticamente cualquier pantalla.
-
-## Distribución y alineación
-
-Dentro de un `Column` o un `Row`, a menudo querrás controlar **cómo se reparten** los hijos y **cómo se alinean**. Para eso, estos layouts reciben dos parámetros. La clave es distinguir sus dos ejes:
-
-- En un `Column`, el eje principal es **vertical**. Controlas la distribución vertical con `verticalArrangement` y la alineación horizontal con `horizontalAlignment`.
-- En un `Row`, el eje principal es **horizontal**. Controlas la distribución horizontal con `horizontalArrangement` y la alineación vertical con `verticalAlignment`.
-
-Por ejemplo, un `Column` que separa sus hijos con espacio y los centra horizontalmente:
-
-```kotlin
-Column(
-    verticalArrangement = Arrangement.spacedBy(8.dp),
-    horizontalAlignment = Alignment.CenterHorizontally
-) {
-    Text("Primero")
-    Text("Segundo")
-}
-```
-
-Algunos valores útiles de `Arrangement` son `spacedBy(...)` (un espacio fijo entre elementos), `SpaceBetween` (reparte el espacio sobrante entre ellos) y `Center` (los agrupa al centro). Y de `Alignment`, `Start`, `CenterHorizontally` y `End` (o `Top`, `CenterVertically` y `Bottom` en un `Row`).
-
-## El modificador `weight`
-
-Al principio de este capítulo mencionamos que hay modificadores que solo funcionan dentro de ciertos layouts. `weight` es el más importante: dentro de un `Row` o un `Column`, reparte el **espacio disponible** entre los hijos de forma proporcional.
-
-```kotlin
-Row {
-    Text("Izquierda", modifier = Modifier.weight(1f))
-    Text("Derecha", modifier = Modifier.weight(1f))
-}
-```
-
-Aquí ambos textos reciben el mismo peso (`1f`), así que se reparten el ancho **a la mitad**. Si a uno le dieras `weight(2f)` y al otro `weight(1f)`, el primero ocuparía el doble de espacio que el segundo.
+> [!NOTE]Nota
+> Por ahora combinaremos composables de a uno. Para **organizar varios elementos** en pantalla (uno debajo de otro, en fila, etc.) necesitarás los *layouts*, que veremos en un capítulo próximo.
 
 ## Resumen
 
-En este capítulo aprendiste a ajustar y organizar composables:
+En este capítulo diste tus primeros pasos con Jetpack Compose:
 
-- Un **`Modifier`** ajusta la apariencia y el comportamiento de un composable (`padding`, `background`, `fillMaxWidth`, `clickable`…). Se **encadena**, el **orden importa**, y usa la unidad **`dp`** para los tamaños.
-- Por convención, tus composables deberían recibir un parámetro `modifier` con valor por defecto `Modifier` y aplicarlo a su elemento principal.
-- Sin un layout, los composables se **superponen**. Los tres layouts básicos son `Column` (vertical), `Row` (horizontal) y `Box` (apilados).
-- `Column` y `Row` controlan la **distribución** (`Arrangement`) en su eje principal y la **alineación** (`Alignment`) en el eje cruzado.
-- El modificador **`weight`**, dentro de un `Row` o `Column`, reparte el espacio disponible de forma proporcional.
+- **Jetpack Compose** es declarativo: describes la interfaz con funciones **`@Composable`**. `Text` es un composable básico, y los composables se **componen** unos dentro de otros.
+- La anotación **`@Preview`** te permite ver un composable en Android Studio sin ejecutar la app.
+- En `MainActivity`, `setContent { }` recibe el composable que será la interfaz de la pantalla.
+- Los composables pueden recibir **parámetros**, lo que los hace reutilizables.
 
-En el próximo capítulo verás cómo Android organiza sus **recursos** (imágenes, el ícono de la app, textos), algo que necesitarás antes de sacarles todo el provecho a los componentes de Material 3.
+En el próximo capítulo aprenderás a ajustar la apariencia de cada composable con **`Modifier`** y a organizar varios en pantalla con los layouts `Column`, `Row` y `Box`.

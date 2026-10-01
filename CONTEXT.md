@@ -142,3 +142,14 @@ Registro de trabajo de la reestructuración del curso «Android con Kotlin desde
 - **Verificar el sitio:** `venv/bin/mkdocs build --strict` (mkdocs está instalado en el `venv/` del repo, no en el sistema).
 - **Verificar ejemplos de Kotlin de consola:** `/snap/android-studio/244/plugins/Kotlin/kotlinc/bin/kotlinc archivo.kt -include-runtime -d a.jar && java -jar a.jar`.
 - **Formato de avisos:** `> [!NOTE]Nota`, `> [!TIP]Sugerencia`, `> [!WARNING]Advertencia`, `> [!IMPORTANT]`.
+
+### 2026-10-01 — Sesión 6
+- **Mejoras pedagógicas adicionales (implementadas y refactorizadas)**:
+  - Se dividió el antiguo capítulo 14 (Excepciones y Result) y el 35 (Navegación) para reducir la carga cognitiva.
+  - Se agregaron archivos de ejercicios de repaso transversal (`exercises.md`) para las Partes V, VI y X (ejercicio de cierre con scaffolding fading).
+  - Se descartó el uso de sufijos de letras (14a, 35a, etc.) a favor de una **numeración estrictamente secuencial**. Se realizó una renumeración completa en cascada de los capítulos siguientes.
+- El curso consta ahora oficialmente de **61 capítulos numéricos** consecutivos.
+- Las referencias cruzadas internas y el índice `mkdocs.yml` se actualizaron para apuntar a la nueva numeración escalar. `mkdocs build --strict` pasa sin errores.
+- **Correcciones post-renumeración (misma sesión)**:
+  - Cap. 42 (`ViewModel` y el estado de la interfaz): se explicó que `viewModel()` requiere la dependencia `lifecycle-viewmodel-compose` (antes solo se mencionaba la de `collectAsStateWithLifecycle()`), para que el tutorial 3 de «Mi lista de tareas» no introduzca esa dependencia sin contexto previo.
+  - Se detectó y corrigió un desfase en el H1 interno (`# Capítulo N: ...`) de 43 capítulos (15 en adelante, salvo el 35): el número embebido en el encabezado no coincidía con el número real del archivo/`mkdocs.yml`, por una doble aplicación del script de renumeración de la sesión anterior sobre encabezados ya corregidos. Verificado con `mkdocs build --strict` y un chequeo cruzado archivo↔H1 sin discrepancias.

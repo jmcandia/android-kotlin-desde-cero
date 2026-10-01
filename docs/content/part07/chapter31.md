@@ -1,135 +1,101 @@
-# Capítulo 31: Material 3: componentes listos para usar
+# Capítulo 31: Gestión de recursos: imágenes, íconos y cadenas de texto
 
 ## Introducción
 
-En los capítulos anteriores escribiste tu primer `@Composable`, conociste `Modifier` y aprendiste a organizar los recursos de tu app (imágenes, ícono, textos). Las apps reales se construyen con **componentes de interfaz** ya conocidos: textos, imágenes, botones, tarjetas… En este capítulo conocerás **Material 3**, el sistema de diseño que trae Compose, y los **componentes** más habituales que usarás para construir tus pantallas, junto con sus parámetros más comunes.
+En el capítulo 26 viste que un proyecto Android separa el **código** (`kotlin+java/`) de los **recursos** (`res/`): imágenes, el ícono de la app, textos, entre otros. Hasta ahora no necesitabas mirar esa carpeta de cerca, pero para seguir avanzando —y, en particular, para usar `Image` en el próximo capítulo— conviene entender cómo Android organiza esos recursos y cómo se referencian desde tu código.
 
-Dejaremos para más adelante cómo **personalizar** el aspecto de estos componentes (colores, tipografía); por ahora, usarás el estilo que Android Studio ya dejó preparado en tu proyecto.
+En este capítulo verás cómo agregar **imágenes** al proyecto, cómo se genera y personaliza el **ícono de la app**, y por qué conviene guardar los **textos** en un archivo aparte en lugar de escribirlos directamente en el código.
 
-## ¿Qué es Material Design?
+## La carpeta `res` y la clase `R`
 
-**Material Design** es el sistema de diseño creado por Google: una serie de guías y componentes para construir interfaces atractivas y coherentes en Android (y otras plataformas). Su versión más reciente es **Material 3** (también llamado *Material You*), que introduce, entre otras cosas, colores capaces de adaptarse al fondo de pantalla del usuario.
+Dentro de `res/` (de *resources*), Android organiza cada tipo de recurso en su propia carpeta. Las que más vas a usar por ahora son:
 
-Compose viene con una biblioteca que implementa Material 3, así que obtienes sus componentes y su sistema de temas **gratis**, sin tener que diseñarlos desde cero. Cuando creaste el proyecto, Android Studio generó además un **tema** (un composable, normalmente llamado `NombreDeTuAppTheme`) que envuelve toda tu interfaz y le da, por detrás, un estilo consistente a todos estos componentes. Volveremos sobre el tema con detalle más adelante; por ahora, basta con saber que ya está ahí, trabajando por ti.
-
-## Componentes básicos
-
-Material 3 trae muchos componentes ya construidos, todos con un estilo coherente entre sí. Estos son los cuatro que más usarás para armar una pantalla: `Text`, `Image`, `Button` y `Card`.
-
-> [!NOTE]Nota
-> Ya conoces `Modifier` para ajustar tamaño, espaciado, fondo o forma (`padding`, `size`, `background`…). Sigue usándolo para eso. Algunos componentes, como `Text`, también aceptan parámetros propios de apariencia (`color`, `fontSize`…), porque `Modifier` no llega al contenido interno del componente. Puedes usarlos si lo necesitas, pero acostúmbrate a resolver tamaño, espaciado y fondo con `modifier`, tal como aprendiste, y deja esos parámetros propios solo para lo que `modifier` no puede hacer.
-
-### `Text`
-
-Ya usaste `Text` para mostrar texto en pantalla. Su único parámetro obligatorio es `text`; el resto de su apariencia (tamaño, espaciado, fondo) sigue resolviéndose con `modifier`:
-
-| Parámetro | Qué hace |
-| :--- | :--- |
-| `text` | El texto a mostrar. Es el único parámetro obligatorio. |
-| `textAlign` | La alineación del texto dentro de su espacio (`TextAlign.Center`, `TextAlign.End`…). |
-| `maxLines` | El número máximo de líneas antes de recortar el texto. |
-
-```kotlin
-Text(
-    text = "¡Bienvenido!",
-    modifier = Modifier
-        .padding(16.dp)
-        .fillMaxWidth(),
-    textAlign = TextAlign.Center
-)
+```text
+res/
+├── drawable/    ← imágenes e íconos vectoriales
+├── mipmap/      ← el ícono de la app, en sus distintas variantes
+└── values/      ← strings.xml, y otros valores como colores o dimensiones
 ```
 
-> [!NOTE]Nota
-> `Text` también admite `color`, `fontSize` o `fontWeight` para fijar su apariencia directamente, y es válido usarlos. Pero cuando lleguemos al capítulo de Material 3 sobre el tema, verás la forma recomendada de aplicar estilos de texto coherentes en toda la app con el parámetro `style`, en lugar de fijarlos uno por uno en cada `Text`.
+Cuando agregas un archivo a cualquiera de estas carpetas, Android Studio **regenera automáticamente** una clase llamada `R` (de *resources*), con una referencia a cada recurso. Por ejemplo, una imagen `res/drawable/foto_perfil.png` queda disponible en tu código Kotlin como `R.drawable.foto_perfil`; un texto declarado en `res/values/strings.xml` con el nombre `titulo_pantalla`, como `R.string.titulo_pantalla`.
 
-### `Image`
-
-`Image` muestra una imagen: un recurso de tu proyecto (guardado en `res/drawable`) o un ícono vectorial.
-
-| Parámetro | Qué hace |
-| :--- | :--- |
-| `painter` | La fuente de la imagen; lo habitual es `painterResource(id = R.drawable.mi_imagen)`. |
-| `contentDescription` | Un texto que describe la imagen para lectores de pantalla; es obligatorio por accesibilidad (usa `null` solo si la imagen es puramente decorativa). |
-| `contentScale` | Cómo se ajusta la imagen a su tamaño (`ContentScale.Crop`, `ContentScale.Fit`…). |
-
-```kotlin
-Image(
-    painter = painterResource(id = R.drawable.foto_perfil),
-    contentDescription = "Foto de perfil",
-    contentScale = ContentScale.Crop,
-    modifier = Modifier.size(80.dp)
-)
-```
-
-Fíjate en que, para el tamaño, seguimos usando `modifier.size(...)`, tal como ya sabes; `contentScale` solo indica **cómo encajar** la imagen dentro de ese tamaño.
-
-### `Button`: botones y el evento de clic
-
-Un **`Button`** muestra un botón con el estilo de Material. Su único parámetro obligatorio es `onClick`:
-
-| Parámetro | Qué hace |
-| :--- | :--- |
-| `onClick` | La acción que se ejecuta al tocar el botón. Es el único parámetro obligatorio. |
-| `enabled` | Si es `false`, el botón se muestra atenuado y no responde a los toques. |
-
-```kotlin
-Button(onClick = { println("Botón presionado") }) {
-    Text("Enviar")
-}
-```
-
-Cada vez que el usuario toca el botón, Compose ejecuta la lambda de `onClick` **una vez** —en este ejemplo, imprime un mensaje en la consola—. Pero fíjate en algo importante: la pantalla **no cambia sola** por tocar el botón. Si dentro de `onClick` quisieras, por ejemplo, aumentar un contador en pantalla, necesitarías guardar ese número en algo que Compose pueda observar; de lo contrario, aunque el valor cambie por dentro, la interfaz nunca se entera y sigue mostrando lo mismo. A esa pieza que falta se le llama **estado**, y es el tema del capítulo de "Estado en Compose": por ahora, quédate con la idea clave de que `onClick` es el lugar donde tu app **reacciona** a un toque.
+Esto tiene dos ventajas grandes frente a, por ejemplo, escribir la ruta de un archivo a mano: el compilador **verifica** que el recurso exista (si lo borras o le cambias el nombre, tu código no compila hasta que lo corrijas) y Android Studio te ofrece **autocompletado** para encontrarlos.
 
 > [!NOTE]Nota
-> `Button` también admite `colors`, `shape` o `contentPadding` para personalizar su apariencia. Por ahora, apóyate en el estilo que trae Material 3 por defecto; en el capítulo de tema aprenderás a ajustar estos aspectos de forma consistente en toda la app, en lugar de repetirlos botón por botón.
+> Los nombres de los recursos siguen una convención estricta: solo minúsculas, números y guion bajo (`snake_case`), sin espacios ni mayúsculas. Android Studio te avisa si intentas nombrar un archivo de otra forma.
 
-### `Card`: agrupar información
+## Imágenes: `res/drawable`
 
-Una **`Card`** es una superficie con elevación y esquinas redondeadas, ideal para agrupar información relacionada; es perfecta, por ejemplo, para cada elemento de una lista. No tiene parámetros obligatorios: su contenido se arma como el de cualquier otro composable contenedor, ayudándote de `modifier` para el espaciado interno.
+Para agregar una imagen a tu proyecto, la forma más simple es arrastrarla (o copiarla) dentro de `res/drawable/` desde el explorador de archivos, o bien hacer clic derecho sobre `res` y elegir **New > Vector Asset** si quieres usar uno de los íconos que trae Android Studio.
+
+Aquí aparece una decisión importante: **imagen de mapa de bits** (PNG, JPG) o **vector** (`.xml`, un *Vector Drawable*).
+
+- Una imagen de mapa de bits es una **cuadrícula fija de píxeles**: se ve bien a su tamaño original, pero se pixela si la agrandas demasiado. Por eso, tradicionalmente, Android pedía una copia distinta por cada densidad de pantalla (`mdpi`, `hdpi`, `xhdpi`, `xxhdpi`…), y el sistema elegía automáticamente la que correspondía al dispositivo.
+- Un **Vector Drawable** describe la imagen con **formas matemáticas** (líneas, curvas), no con píxeles. Esto significa que **escala sin perder calidad** a cualquier tamaño y, además, ocupa mucho menos espacio, porque no necesitas una copia por densidad.
+
+Por eso, para íconos y logos simples, **preferirás casi siempre un Vector Drawable**; para fotografías reales (donde no aplican las formas vectoriales), seguirás usando PNG o JPG.
+
+Una vez que la imagen está en `res/drawable/`, ya sabes cómo mostrarla: con `Image` y `painterResource`, como viste en el capítulo de componentes.
+
+## El ícono de la app: `res/mipmap`
+
+El **ícono de tu app** (el que ve el usuario en la pantalla de inicio del teléfono) vive en una carpeta aparte, `res/mipmap/`, y no en `drawable/`. La razón es técnica: a diferencia de una imagen dentro de tu app —que Android puede optimizar y descartar en las densidades que no necesita—, el ícono del launcher debe estar **siempre disponible en todas las densidades**, sin importar la del dispositivo, porque el sistema operativo lo usa fuera de tu app (en el launcher, en la lista de apps recientes, etc.).
+
+Ya viste, en el `AndroidManifest.xml` del capítulo 26, cómo se referencia:
+
+```xml
+<application
+    android:icon="@mipmap/ic_launcher">
+```
+
+Desde Android 8.0 (API 26), los íconos son **adaptativos** (*adaptive icons*): en lugar de una sola imagen, se arman con dos capas, un `ic_launcher_foreground` (el dibujo) y un `ic_launcher_background` (el fondo), para que el propio sistema pueda recortarlas con distintas formas (círculo, cuadrado con esquinas redondeadas, "squircle"…) según el fabricante del dispositivo, manteniendo una apariencia consistente en todo el sistema.
+
+Para reemplazar el ícono por defecto con tu propio logo, no edites los archivos a mano: usa el asistente de Android Studio. Haz clic derecho sobre `res/` y elige **New > Image Asset**. Ahí eliges tu imagen (idealmente un logo simple, en alta resolución o en formato vectorial), Android Studio te deja previsualizar cómo se ve recortado con las distintas formas, y genera automáticamente todos los archivos y densidades necesarias por ti.
+
+## Texto: `res/values/strings.xml`
+
+Hasta ahora, en los ejemplos del curso, escribiste el texto directamente en el código: `Text("¡Bienvenido!")`. Funciona, pero en una app real es preferible declarar los textos en un archivo aparte, `res/values/strings.xml`:
+
+```xml
+<resources>
+    <string name="app_name">Mi Lista de Tareas</string>
+    <string name="titulo_pantalla">Mis tareas</string>
+</resources>
+```
+
+Y leerlos desde un composable con `stringResource`:
 
 ```kotlin
-Card {
-    Column(modifier = Modifier.padding(16.dp)) {
-        Text("Ana López")
-        Text("Diseñadora gráfica")
-    }
-}
+Text(text = stringResource(id = R.string.titulo_pantalla))
+```
+
+¿Por qué conviene hacerlo así, en lugar de escribir el texto directamente?
+
+- **Reutilización**: si el mismo texto aparece en varios lugares, lo defines una sola vez (el mismo principio **DRY** del anexo de principios de diseño).
+- **Traducción**: si más adelante quieres ofrecer tu app en otro idioma, creas una carpeta como `values-en/` con un `strings.xml` equivalente, y Android elige automáticamente el que corresponde al idioma del dispositivo, sin tocar una sola línea de tu código Kotlin.
+- Algunos textos, como el **nombre de la app** (`app_name`, el que ya usa tu `AndroidManifest.xml`), **deben** vivir en `strings.xml`; no es opcional.
+
+Los textos con partes variables también se pueden definir como recursos, usando un marcador de posición:
+
+```xml
+<string name="saludo">¡Hola, %1$s!</string>
+```
+
+```kotlin
+Text(text = stringResource(id = R.string.saludo, nombre))
 ```
 
 > [!NOTE]Nota
-> Igual que `Button`, `Card` admite `elevation`, `shape` y `colors` para ajustar su apariencia, y existe en una variante *clickable* que recibe `onClick`. Volveremos a estos parámetros de apariencia en el capítulo de tema.
-
-## Otros componentes habituales
-
-Material 3 trae muchos otros componentes con los que te irás encontrando. No hace falta memorizarlos todos ahora, pero conviene que conozcas los más comunes y cómo se usan.
-
-
-### `Icon`
-
-Un **`Icon`** dibuja un ícono vectorial, muy usado dentro de botones, barras o junto a un texto:
-
-| Parámetro | Qué hace |
-| :--- | :--- |
-| `imageVector` | El ícono a mostrar, por ejemplo `Icons.Default.Favorite`. Es el único parámetro obligatorio. |
-| `contentDescription` | Un texto que lo describe para lectores de pantalla, igual que en `Image`. |
-| `tint` | El color con el que se dibuja el ícono. |
-
-```kotlin
-Icon(
-    imageVector = Icons.Default.Favorite,
-    contentDescription = "Marcar como favorito",
-    tint = Color.Red
-)
-```
+> Para mantener los ejemplos del curso simples y fáciles de leer, seguiremos escribiendo la mayoría de los textos directamente en el código, como hasta ahora. Pero en un proyecto real —y, en especial, en cualquier app que vayas a publicar— es una buena práctica declarar los textos visibles para el usuario en `strings.xml`.
 
 ## Resumen
 
-En este capítulo conociste los componentes de Material 3:
+En este capítulo aprendiste a organizar los recursos de tu app:
 
-- **Material Design** es el sistema de diseño de Google; **Material 3** es su versión actual, y Compose lo incluye con componentes y un tema listos para usar.
-- Los **componentes básicos** son `Text`, `Image`, `Button` y `Card`. Para su tamaño, espaciado y fondo sigues usando `modifier`, tal como ya sabías; sus parámetros propios (`text`, `painter`, `onClick`…) cubren lo que `modifier` no puede resolver.
-- **`Button`** ejecuta una acción en `onClick` al tocarlo; por sí solo no actualiza la pantalla, eso requiere **estado**, que verás en el próximo capítulo.
-- Componentes como `Text`, `Button` o `Card` también admiten parámetros propios de apariencia (`color`, `fontSize`, `colors`, `shape`…); son válidos, pero el capítulo de tema te mostrará la forma recomendada de aplicarlos de forma coherente en toda la app.
-- **`Icon`** dibuja íconos vectoriales, dentro de botones, barras o junto a un texto.
+- La carpeta **`res/`** separa los recursos por tipo: `drawable/` (imágenes e íconos), `mipmap/` (el ícono de la app) y `values/` (textos y otros valores).
+- La clase **`R`**, generada automáticamente, te da acceso *type-safe* a cada recurso (`R.drawable.foto`, `R.string.titulo`…); el compilador te avisa si un recurso no existe.
+- Para íconos y logos simples, preferirás un **Vector Drawable**: escala sin perder calidad y no necesita una copia por densidad de pantalla.
+- El **ícono de la app** vive en `mipmap/`, no en `drawable/`, porque debe estar disponible en todas las densidades; se genera y reemplaza con el asistente **Image Asset** de Android Studio, y hoy en día suele ser un **ícono adaptativo** (una capa de fondo y una de primer plano).
+- Los **textos** deberían declararse en `res/values/strings.xml` y leerse con `stringResource`, para reutilizarlos y facilitar la traducción a otros idiomas.
 
-Hay componentes que el usuario **modifica**: campos de texto, casillas, interruptores. Para usarlos necesitas **estado**, el tema del próximo capítulo.
+En el próximo capítulo retomarás los componentes de Material 3 —`Text`, `Image`, `Button`, `Card`— ahora que ya sabes de dónde salen las imágenes que les vas a pasar.

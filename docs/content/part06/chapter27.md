@@ -1,91 +1,58 @@
-# Capítulo 27: Cómo se organiza una app: responsabilidades y flujo de datos
+# Capítulo 27: Ciclo de vida de una `Activity`
 
 ## Introducción
 
-Antes de escribir tu primera pantalla, conviene tener un **mapa** del terreno. En este capítulo no escribirás código: verás qué trabajos tiene que hacer cualquier app, por qué no conviene hacerlos todos en el mismo lugar y en qué dirección se mueven los datos. Es un capítulo corto, y su objetivo es que, cuando lleguen las piezas concretas, sepas dónde encaja cada una.
+En el capítulo anterior conociste `MainActivity` y viste que su método `onCreate` contiene una llamada a `setContent { }`, donde vive la interfaz. Antes de construir esa interfaz, conviene entender el objeto que la contiene.
 
-Usaremos como ejemplo una app que construirás en la Parte VII: **Mi lista de tareas**. El usuario escribe una tarea, la agrega a la lista, la marca como hecha o la elimina.
+En este capítulo conocerás el **ciclo de vida de una `Activity`**: cómo Android crea, muestra, oculta y destruye las pantallas de tu app, y por qué eso te importa.
 
-## Los cinco trabajos de una app
+## ¿Qué es una Activity?
 
-Por simple que sea, una app como la lista de tareas tiene que hacer cinco trabajos distintos:
+Como vimos, una **`Activity`** es una **pantalla** de tu aplicación. `MainActivity` es la que se abre al iniciar la app, pero una aplicación puede tener varias.
 
-| Trabajo | En la lista de tareas |
-| :--- | :--- |
-| **Mostrar** | Dibujar la lista, el campo de texto y el contador de pendientes. |
-| **Reaccionar** | Detectar que el usuario tocó «Agregar» o marcó una casilla. |
-| **Decidir** | Aplicar las reglas: una tarea vacía no se agrega; al marcarla, cambia a hecha. |
-| **Obtener** | Conseguir las tareas existentes al abrir la app. |
-| **Guardar** | Conservar las tareas para que sigan ahí mañana. |
+Lo importante es que una `Activity` **no está siempre presente**. Android la **crea** cuando hace falta y la **destruye** cuando ya no se necesita, según lo que hace el usuario: abrir la app, cambiar a otra aplicación, girar el teléfono, volver atrás… Tu código no controla del todo *cuándo* ocurre esto; lo controla el sistema. Por eso necesitas una forma de reaccionar a esos momentos, y ahí entra el ciclo de vida.
 
-Los dos primeros tienen que ver con la **interfaz**. Los tres últimos tienen que ver con los **datos** y sus reglas, y no dependen de cómo se vea la pantalla: la regla «una tarea vacía no se agrega» es la misma si la pantalla es de un teléfono, de una tableta o de un reloj.
+## El ciclo de vida de una Activity
 
-## Por qué no todo en la `Activity`
-
-La forma más directa de escribir la app sería poner los cinco trabajos en un solo lugar: la `Activity` y su interfaz. Para una pantalla de prueba funciona, pero tiene tres problemas que ya puedes anticipar:
-
-- **Se pierde el estado.** Como viste en el capítulo anterior, al girar el dispositivo Android destruye y recrea la `Activity`. Si las tareas viven ahí, desaparecen.
-- **Todo cambia a la vez.** Si mañana las tareas se guardan en un servidor en lugar de en el teléfono, tendrías que modificar el mismo archivo que dibuja la pantalla, con el riesgo de romper algo que no tenía nada que ver.
-- **Es difícil de probar.** Para comprobar que una tarea vacía no se agrega, tendrías que abrir la app y tocar botones, porque la regla está mezclada con el dibujo.
-
-La solución es la misma que viste con las clases en la Parte IV: **separar responsabilidades**. Cada parte del código se ocupa de un trabajo, y se comunica con las demás a través de una puerta bien definida.
-
-## Tres zonas
-
-Si agrupas los cinco trabajos, aparecen tres zonas:
+El **ciclo de vida** es la secuencia de estados por los que pasa una `Activity`, desde que nace hasta que muere. En cada transición, Android llama a un **método** que tú puedes sobrescribir (como ya hiciste con `onCreate`) para ejecutar código en ese momento:
 
 ```mermaid
-flowchart LR
-    UI["<b>Interfaz</b><br/>mostrar y reaccionar"]
-    Estado["<b>Estado y lógica de la pantalla</b><br/>decidir"]
-    Datos["<b>Datos</b><br/>obtener y guardar"]
-    UI -- "eventos<br/>(«el usuario tocó Agregar»)" --> Estado
-    Estado -- "estado<br/>(«esta es la lista actual»)" --> UI
-    Estado -- "pide y guarda" --> Datos
-    Datos -- "entrega datos" --> Estado
+flowchart TD
+    A["La app se inicia"] --> B["onCreate()"]
+    B --> C["onStart()"]
+    C --> D["onResume()"]
+    D --> E["La Activity está visible e interactiva"]
+    E --> F["onPause()"]
+    F --> G["onStop()"]
+    G --> H["onDestroy()"]
 ```
 
-- La **interfaz** no toma decisiones. Muestra el estado que recibe y avisa cuando el usuario hace algo.
-- La zona de **estado y lógica** recibe esos avisos, aplica las reglas y produce el nuevo estado de la pantalla. Además, sobrevive a la rotación.
-- La zona de **datos** sabe de dónde vienen las tareas y dónde se guardan. Nadie más necesita saberlo.
+- **`onCreate()`**: la `Activity` se está creando. Aquí preparas la pantalla; por eso el `setContent { }` va aquí.
+- **`onStart()`**: la pantalla pasa a ser **visible** para el usuario.
+- **`onResume()`**: la pantalla pasa al **primer plano** y el usuario ya puede interactuar con ella.
+- **`onPause()`**: la pantalla **pierde el foco** (por ejemplo, aparece un diálogo encima).
+- **`onStop()`**: la pantalla deja de ser **visible** (el usuario cambió a otra app).
+- **`onDestroy()`**: la `Activity` se está **destruyendo**.
 
-## Los datos fluyen en un solo sentido
+No necesitas memorizarlos todos ahora. La idea clave es que estos métodos te permiten reaccionar a los cambios: por ejemplo, pausar un video en `onPause` cuando la pantalla deja de estar en primer plano, y reanudarlo en `onResume`.
 
-Fíjate en las flechas del diagrama. El **estado baja** hacia la interfaz y los **eventos suben** desde ella. La interfaz nunca modifica los datos directamente: solo avisa de lo que pasó.
+> [!NOTE]Nota
+> Con Jetpack Compose, en la práctica tocarás pocos de estos métodos directamente: Compose y las herramientas modernas se encargan de gran parte del trabajo. Aun así, entender el ciclo de vida es fundamental, porque la `Activity` es la que **aloja** tu interfaz Compose.
 
-Así ocurre agregar una tarea:
+## Cambios de configuración y recreación
 
-1. El usuario escribe «Comprar pan» y toca **Agregar** (*reaccionar*).
-2. La interfaz avisa: «el usuario quiere agregar "Comprar pan"».
-3. La lógica comprueba que el texto no esté vacío (*decidir*) y le pide a la zona de datos que la guarde (*guardar*).
-4. La lógica produce el nuevo estado: la lista con una tarea más.
-5. La interfaz recibe ese estado y se vuelve a dibujar (*mostrar*).
+Hay un comportamiento del ciclo de vida que sorprende a quienes empiezan y conviene conocer desde ya. Cuando ocurre un **cambio de configuración** —el más común es **girar** el dispositivo—, Android **destruye y vuelve a crear** la `Activity` desde cero: llama a `onDestroy` y luego a `onCreate` otra vez.
 
-A este recorrido se le llama **flujo de datos unidireccional**. Su ventaja es que siempre sabes dónde buscar: si la lista se ve mal, el problema está en cómo se muestra el estado; si una tarea vacía se agregó, el problema está en la lógica.
+¿La consecuencia? Cualquier dato que estuvieras guardando dentro de la `Activity` **se pierde** en ese proceso. Imagina un contador en pantalla: al girar el teléfono, volvería a cero.
 
-Hay una segunda regla, igual de importante: **las dependencias apuntan hacia los datos**. La interfaz conoce a la lógica, y la lógica conoce a la zona de datos, pero no al revés. La zona de datos no sabe que existe una pantalla. Por eso puedes cambiar la pantalla sin tocar los datos, o cambiar de dónde vienen los datos sin tocar la pantalla.
-
-## El mapa que vas a construir
-
-A lo largo del curso, cada zona tendrá su pieza concreta de Android:
-
-| Zona | Pieza | Dónde la verás |
-| :--- | :--- | :--- |
-| Interfaz | Composables de **Jetpack Compose** | Parte VII |
-| Estado y lógica | **`ViewModel`** | Parte VIII |
-| Datos | **Repositorio** que usa una fuente: en memoria, una API REST o una base de datos local | Partes VIII y IX |
-
-Esta organización tiene nombre: **MVVM** (*Model-View-ViewModel*), la arquitectura que recomienda Android. No necesitas recordarlo ahora. En la Parte VII construirás la lista de tareas con todo dentro de la interfaz, y comprobarás en primera persona que las tareas se pierden al girar el teléfono. En la Parte VIII moverás cada trabajo a su zona.
-
-> [!IMPORTANT]
-> Estas tres zonas son **responsabilidades**, no carpetas. Una app pequeña puede tener todo en unos pocos archivos y respetar igualmente el flujo de datos. Lo que importa es quién decide, quién muestra y quién guarda; cómo organices después los archivos es una decisión aparte, que verás en la Parte VIII.
+Esta es una de las razones por las que, más adelante, el estado de la pantalla no vivirá en la `Activity`, sino en un **`ViewModel`**, una clase diseñada para **sobrevivir** a estas recreaciones. Lo veremos en detalle en la parte de arquitectura; por ahora, quédate con el problema.
 
 ## Resumen
 
-- Toda app hace cinco trabajos: **mostrar**, **reaccionar**, **decidir**, **obtener** y **guardar**.
-- Ponerlos todos en la `Activity` hace que el estado se pierda al girar, que un cambio arrastre a todo lo demás y que la lógica sea difícil de probar.
-- Se agrupan en tres zonas: **interfaz**, **estado y lógica** y **datos**.
-- El **estado baja** y los **eventos suben** (flujo de datos unidireccional); las **dependencias apuntan hacia los datos**.
-- En el curso, esas zonas serán **Compose**, el **`ViewModel`** y el **repositorio**: la arquitectura **MVVM**. Son responsabilidades, no carpetas.
+En este capítulo conociste el contenedor de las pantallas de Android:
 
-En la próxima parte empezarás por la primera zona: la **interfaz**, con Jetpack Compose.
+- Una **`Activity`** es una pantalla que Android **crea y destruye** según el uso; tu código no controla del todo cuándo.
+- El **ciclo de vida** son los estados por los que pasa una `Activity`, con métodos como `onCreate`, `onStart`, `onResume`, `onPause`, `onStop` y `onDestroy` que puedes sobrescribir para reaccionar a cada momento.
+- Un **cambio de configuración** (como girar el dispositivo) **destruye y recrea** la `Activity`, lo que hace perder su estado; por eso más adelante usaremos un `ViewModel`.
+
+Antes de construir la interfaz que va dentro de `setContent { }`, el próximo capítulo te dará un mapa de cómo se organiza una app: qué trabajos hace y por qué no conviene ponerlos todos en la `Activity`.

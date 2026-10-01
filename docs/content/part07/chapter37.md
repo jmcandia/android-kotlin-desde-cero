@@ -1,166 +1,105 @@
-# Capítulo 37: Diseño adaptable con *Window Size Classes*
-
-> [!NOTE]Capítulo opcional
-> Este capítulo es de ampliación. No es necesario para continuar con la Parte VIII ni con el proyecto final; vuelve a él cuando quieras que tu app aproveche tabletas, pantallas plegables o ventanas redimensionables.
+# Capítulo 37: Navegación avanzada: rutas modeladas y paso de datos
 
 ## Introducción
 
-Hasta ahora has diseñado pantallas pensando en un teléfono en vertical. En este capítulo verás cómo una misma app puede cambiar su **estructura** según el espacio disponible, apoyándose en lo que ya conoces: `Scaffold`, `Row`, `weight` y las barras de navegación del capítulo 35c.
+En el capítulo anterior aprendiste los fundamentos de Navigation Compose: el `NavController`, el `NavHost` y el *back stack*. Hasta ahora usaste rutas como cadenas de texto simples (`"inicio"`, `"favoritos"`). En este capítulo verás cómo modelar rutas y destinos de forma más robusta, cómo **pasar datos** entre pantallas con argumentos, y buenas prácticas para mantener tus pantallas desacopladas de la navegación.
 
-## Adaptar el diseño al espacio disponible
+## Modelar rutas y destinos
 
-Una interfaz móvil no debe limitarse a escalar. En una pantalla estrecha puede mostrar una sola columna y navegación inferior; en una pantalla ancha puede mostrar una lista junto a un detalle y una navegación lateral. El contenido es el mismo, pero la **estructura** cambia.
-
-Las **Window Size Classes** clasifican el espacio disponible de la ventana en categorías estables, en lugar de tomar decisiones con muchos valores concretos:
-
-- **Compact**: normalmente una sola columna y acciones esenciales.
-- **Medium**: más espacio para separar secciones o mostrar dos columnas sencillas.
-- **Expanded**: una navegación lateral, paneles simultáneos o una lista y su detalle.
-
-Estas clases describen el espacio disponible en **dp**, no el tamaño físico del dispositivo. Para el ancho de la ventana, la guía de diseño de Android usa habitualmente estos puntos de corte:
-
-| Clase de ancho | Ancho disponible | Decisiones habituales |
-| :--- | :--- | :--- |
-| `Compact` | Menos de `600.dp` | Una columna, `NavigationBar` y pantallas completas. |
-| `Medium` | Desde `600.dp` hasta menos de `840.dp` | Dos columnas moderadas, `NavigationRail` o una lista con un panel secundario. |
-| `Expanded` | `840.dp` o más | Navegación lateral, lista y detalle simultáneos o varias regiones persistentes. |
-
-Los límites no son una clasificación de teléfonos concretos. Un móvil puede pasar de `Compact` a `Medium` al girarse, una tableta puede estar en `Expanded` y una ventana de escritorio puede cambiar de clase al redimensionarse. Por eso se decide a partir del espacio real que recibe la app.
-
-También existe una **clase de altura** con las mismas categorías. Es útil cuando una pantalla tiene poco espacio vertical: en altura `Compact` puedes reducir espacios, agrupar acciones o permitir desplazamiento; en altura `Medium` puedes mostrar más contenido; en altura `Expanded` puedes distribuir las secciones con mayor comodidad. No conviene usar la altura para decidir si una navegación debe ser inferior o lateral: esa decisión suele depender principalmente del ancho.
-
-La clase tampoco indica por sí sola qué diseño debes construir. Es un punto de partida para una decisión de producto:
-
-| Necesidad | `Compact` | `Medium` | `Expanded` |
-| :--- | :--- | :--- | :--- |
-| Lista y detalle | Navegar a otra pantalla | Mostrar una lista amplia y un detalle opcional | Mantener lista y detalle visibles a la vez |
-| Navegación | `NavigationBar` | `NavigationRail` o barra inferior si sigue siendo cómoda | `NavigationDrawer` permanente o rail con etiquetas |
-| Formulario | Una columna y scroll | Dos grupos de campos si mejora la lectura | Separar datos principales, ayuda y resumen |
-| Acciones | Mostrar las esenciales | Agrupar acciones relacionadas | Mantener acciones frecuentes visibles y el resto en menú |
-
-La clasificación debe basarse en el ancho de la ventana, no en el modelo del teléfono. Así la misma decisión funciona en un móvil girado, una tableta, una ventana redimensionada o un escritorio.
-
-### Obtener la clase desde un composable
-
-También puedes encapsular el acceso a la actividad actual en una función composable. Este patrón permite que una pantalla obtenga su `WindowSizeClass` sin recibir la actividad como parámetro:
+Las cadenas de texto repartidas por todo el código son fáciles de escribir mal y difíciles de mantener. Una práctica común es centralizar las rutas en un modelo:
 
 ```kotlin
-import androidx.activity.compose.LocalActivity
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
-import androidx.compose.runtime.Composable
-
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
-@Composable
-fun getWindowSizeClass(): WindowSizeClass {
-    return calculateWindowSizeClass(LocalActivity.current as android.app.Activity)
+sealed class AppDestination(val route: String) {
+    data object Inicio : AppDestination("inicio")
+    data object Favoritos : AppDestination("favoritos")
+    data object Perfil : AppDestination("perfil")
+    data object Detalle : AppDestination("detalle/{id}")
 }
 ```
 
-La pantalla puede consultar la clase y delegar la composición a una implementación específica para cada ancho. El `when` es exhaustivo: cada valor de `WindowWidthSizeClass` tiene una estructura explícita.
+Ahora, en lugar de usar cadenas directamente:
 
 ```kotlin
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+navController.navigate("inicio") // ❌ fácil equivocarse
+```
 
-@Composable
-fun HomeScreen() {
-    val windowSizeClass = getWindowSizeClass()
-    when (windowSizeClass.widthSizeClass) {
-        WindowWidthSizeClass.Compact -> HomeScreenCompact()
-        WindowWidthSizeClass.Medium -> HomeScreenMedium()
-        WindowWidthSizeClass.Expanded -> HomeScreenExpanded()
-    }
-}
+usas el modelo:
 
-@Composable
-fun HomeScreenCompact() {
-    // Implement the compact screen layout
-}
+```kotlin
+navController.navigate(AppDestination.Inicio.route) // ✅ seguro
+```
 
-@Composable
-fun HomeScreenMedium() {
-    // Implement the medium screen layout
-}
+Si necesitas una ruta que incluya datos (como un ID), puedes construirla así:
 
-@Composable
-fun HomeScreenExpanded() {
-    // Implement the expanded screen layout
+```kotlin
+navController.navigate("detalle/42")
+```
+
+La ruta `"detalle/{id}"` es una **declaración** que indica que el destino acepta un parámetro; la ruta que usas al navegar contiene el valor concreto.
+
+## Pasar datos entre pantallas
+
+Muchas veces necesitas pasar información de una pantalla a otra. Por ejemplo, al navegar a un detalle, necesitas decirle **qué** elemento mostrar.
+
+Para eso, las rutas pueden incluir **argumentos**, indicados entre llaves:
+
+```kotlin
+composable("detalle/{id}") { backStackEntry ->
+    val id = backStackEntry.arguments?.getString("id")
+    PantallaDetalle(id = id)
 }
 ```
 
-En este caso, `HomeScreen` decide **qué estructura** mostrar, mientras que `HomeScreenCompact`, `HomeScreenMedium` y `HomeScreenExpanded` implementan cada composición. Las tres variantes pueden compartir modelos, estado y callbacks; lo que cambia es la disposición de los elementos. `LocalActivity.current` y `calculateWindowSizeClass` dependen de las versiones de `activity-compose` y Material 3 del proyecto, por lo que Android Studio puede solicitar la actualización de la dependencia o del import.
-
-Con la biblioteca `androidx.compose.material3:material3-window-size-class`, una actividad puede obtener la clase y pasar solo una decisión de diseño al composable:
+Y, al navegar, incluyes el valor en la ruta:
 
 ```kotlin
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            val windowSizeClass = calculateWindowSizeClass(this)
-            MiAppTheme {
-                ContactosApp(windowWidth = windowSizeClass.widthSizeClass)
-            }
-        }
+navController.navigate("detalle/42")
+```
+
+Así, la pantalla de detalle recibe el `id` (`"42"`) y puede mostrar el elemento correspondiente. 
+
+> [!NOTE]Nota
+> El argumento llega como texto (`String`). Si necesitas un número, conviértelo con `toInt()`, como viste en el capítulo 4.
+
+Para valores que puedan incluir espacios o caracteres especiales, codifica el argumento o, cuando el flujo lo requiera, pasa solo un identificador estable y recupera el objeto desde el estado de la app o su repositorio. No pases objetos grandes dentro de una ruta.
+
+## Buenas prácticas de navegación
+
+> [!TIP]Sugerencia
+> En lugar de pasar el `NavController` a cada pantalla, es preferible que las pantallas reciban **funciones** de navegación (por ejemplo, `onVerDetalle: (String) -> Unit`). Así quedan desacopladas de la navegación y son más fáciles de reutilizar y previsualizar, siguiendo la misma idea del *state hoisting* que viste con el estado.
+
+Por ejemplo, en lugar de:
+
+```kotlin
+@Composable
+fun PantallaInicio(navController: NavController) {
+    Button(onClick = { navController.navigate("favoritos") }) {
+        Text("Ver favoritos")
     }
 }
 ```
 
-La pantalla decide su composición, no cada componente individual:
+Prefiere:
 
 ```kotlin
 @Composable
-fun ContactosApp(windowWidth: WindowWidthSizeClass) {
-    when (windowWidth) {
-        WindowWidthSizeClass.Expanded -> ContactosTwoPane()
-        WindowWidthSizeClass.Medium -> ContactosWithRail()
-        WindowWidthSizeClass.Compact -> ContactosSinglePane()
+fun PantallaInicio(onNavigateToFavoritos: () -> Unit) {
+    Button(onClick = onNavigateToFavoritos) {
+        Text("Ver favoritos")
     }
 }
 ```
 
-El diseño puede compartir los mismos composables internos y cambiar solo el contenedor:
-
-```kotlin
-@Composable
-fun ContactosLayout(windowWidth: WindowWidthSizeClass) {
-    when (windowWidth) {
-        WindowWidthSizeClass.Compact -> {
-            Scaffold(
-                bottomBar = { ContactosBottomBar() }
-            ) { padding ->
-                ContactosList(modifier = Modifier.padding(padding))
-            }
-        }
-
-        WindowWidthSizeClass.Medium -> {
-            Row {
-                ContactosRail()
-                ContactosList(modifier = Modifier.weight(1f))
-            }
-        }
-
-        WindowWidthSizeClass.Expanded -> {
-            Row {
-                ContactosNavigationDrawer()
-                ContactosList(modifier = Modifier.weight(0.4f))
-                ContactoDetail(modifier = Modifier.weight(0.6f))
-            }
-        }
-    }
-}
-```
-
-En este ejemplo, la lista y el detalle siguen siendo las mismas funciones y el estado de selección sigue teniendo una sola fuente de verdad. Solo cambia el contenedor que las presenta. Si el ancho cambia mientras la app está abierta, Compose recompone esta decisión y la navegación debe conservar el destino y el elemento seleccionado siempre que la nueva estructura pueda mostrarlos.
-
-El nombre de algunas APIs puede variar según la versión de Compose. El principio no cambia: medir el espacio disponible, elegir una estructura y dejar que los componentes internos ocupen el espacio asignado con `fillMaxWidth`, `weight`, `LazyColumn` y restricciones razonables. No conviene mantener dos copias independientes de la navegación o del estado solo porque cambia la disposición visual.
-
-> [!IMPORTANT]
-> Una adaptación correcta conserva la jerarquía y la tarea principal. No ocultes información esencial en una pantalla ancha ni fuerces una fila de controles que desborde en una pantalla estrecha; cambia la composición, no el significado.
+Así, `PantallaInicio` no necesita conocer el `NavController` ni las rutas; simplemente invoca la función que recibe.
 
 ## Resumen
 
-- Las **Window Size Classes** permiten elegir entre una composición compacta, intermedia o expandida según el espacio real de la ventana, haciendo posible un diseño adaptable para móviles, tabletas y ventanas redimensionadas.
-- `Compact`, `Medium` y `Expanded` son clases de ancho y de alto basadas en `dp`; para el ancho, los puntos de referencia habituales son `600.dp` y `840.dp`. No representan modelos de dispositivo, sino el espacio que la app tiene disponible.
-- La pantalla decide su composición; los composables internos, el estado y la navegación se comparten entre las variantes.
+En este capítulo profundizaste en la navegación con Navigation Compose:
+
+- Centraliza las rutas en un **modelo** (`sealed class AppDestination`) en lugar de repartir cadenas por todo el código.
+- Una ruta con `{id}` es una **declaración** de parámetro; al navegar, incluyes el valor concreto (`"detalle/42"`).
+- Los **argumentos** de la ruta llegan como texto; conviértelos con `toInt()` si necesitas un número.
+- No pases **objetos grandes** dentro de una ruta; pasa un identificador y recupera el objeto desde el estado o el repositorio.
+- Como buena práctica, pasa **funciones** de navegación a las pantallas en vez del `NavController`, para mantenerlas desacopladas (misma idea del *state hoisting*).
+
+En el **próximo capítulo** verás las barras de navegación de Material 3 —los controles visibles con los que el usuario se mueve por la app— y cómo integrarlas con todo lo que aprendiste aquí.

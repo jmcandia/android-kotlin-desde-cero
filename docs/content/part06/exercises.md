@@ -44,7 +44,7 @@ Además, responde:
 
 ### Descripción
 
-El capítulo 27 identifica cinco trabajos en cualquier app: **mostrar**, **reaccionar**, **decidir**, **obtener** y **guardar**. Para cada fragmento de código siguiente, indica a cuál de esos trabajos pertenece y en qué **capa** debería vivir (interfaz, lógica de presentación o datos):
+El capítulo 28 identifica cinco trabajos en cualquier app: **mostrar**, **reaccionar**, **decidir**, **obtener** y **guardar**. Para cada fragmento de código siguiente, indica a cuál de esos trabajos pertenece y en qué **capa** debería vivir (interfaz, lógica de presentación o datos):
 
 ```kotlin
 // Fragmento A
@@ -139,7 +139,7 @@ Enumera **todos los problemas** que este código tiene respecto a: (a) el hilo p
 
     **(c) Separación de responsabilidades**
 
-    - Los cinco trabajos del capítulo 27 (mostrar, reaccionar, decidir, obtener, guardar) están todos en `onCreate`: la validación (5), la red (3), el disco (1) y el dibujado (4) comparten un mismo método. Cualquier cambio de diseño obliga a tocar código de datos, y viceversa.
+    - Los cinco trabajos del capítulo 28 (mostrar, reaccionar, decidir, obtener, guardar) están todos en `onCreate`: la validación (5), la red (3), el disco (1) y el dibujado (4) comparten un mismo método. Cualquier cambio de diseño obliga a tocar código de datos, y viceversa.
     - **Corrección**: dividir en capas: la interfaz solo dibuja y reporta eventos; el `ViewModel` valida y decide; un repositorio obtiene y guarda (con Room para el disco y Retrofit para la red, como verás en la Parte IX).
 
     **(d) Testabilidad**

@@ -1,190 +1,308 @@
-# Capítulo 57: Componentes compartidos y tema visual
+# Capítulo 57: Pantalla de detalle: eliminación segura con evento como estado
 
 ## Introducción
 
-A lo largo de los capítulos 53 a 55 usamos varios composables sin detenernos en ellos: `AvatarContacto`, `EstadoCargando`, `EstadoError`, `EstadoVacio`, `mensajeDe`. Son piezas **reutilizadas por las tres pantallas** de la aplicación, y vivir en `ui/componentes/` en vez de duplicarse en cada pantalla es lo que evita, por ejemplo, que la lista y el detalle dibujen el avatar de forma ligeramente distinta.
+La pantalla de detalle muestra la información completa de un contacto y permite marcarlo como favorito, editarlo o eliminarlo. Es más simple que la lista en cuanto a datos que maneja, pero introduce un problema nuevo: **eliminar un contacto es una acción destructiva** que necesita confirmación del usuario y, una vez completada, debe **navegar hacia atrás automáticamente**. Resolveremos esto con el patrón "evento como estado" del capítulo 43.
 
-En este capítulo cerramos la interfaz de «Mis Contactos» revisando esos componentes compartidos y el tema visual (`Theme.kt`, `Color.kt`) que los envuelve a todos.
+## El estado de la pantalla: `DetalleContactoUiState`
 
-## El avatar: `AvatarContacto`
+A diferencia de la lista, esta pantalla sí puede modelarse con una `sealed interface`, porque sus posibilidades son mutuamente excluyentes: o todavía no hay datos (cargando), o falló la carga (error), o hay un contacto que mostrar (contenido):
 
 ```kotlin
-package com.ejemplo.miscontactos.ui.componentes
+package com.ejemplo.miscontactos.ui.detalle
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
 import com.ejemplo.miscontactos.model.Contacto
+import com.ejemplo.miscontactos.model.ErrorDatos
 
-@Composable
-fun AvatarContacto(contacto: Contacto, modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier
-            .size(48.dp)
-            .clip(CircleShape),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = contacto.iniciales,
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onPrimaryContainer
-        )
-        AsyncImage(
-            model = "https://i.pravatar.cc/300?u=contacto-${contacto.id}",
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.size(48.dp)
-        )
-    }
+sealed interface DetalleContactoUiState {
+    data object Cargando : DetalleContactoUiState
+
+    data class Error(val error: ErrorDatos) : DetalleContactoUiState
+
+    data class Contenido(
+        val contacto: Contacto,
+        val esFavorito: Boolean = false,
+        val eliminando: Boolean = false,
+        val eliminado: Boolean = false,
+        val errorAccion: ErrorDatos? = null
+    ) : DetalleContactoUiState
 }
 ```
 
-`AsyncImage` viene de **Coil 3** (`coil3.compose.AsyncImage`), la biblioteca de carga de imágenes que ya se declaró en las dependencias del capítulo 49. Su trabajo es descargar la foto, guardarla en caché y dibujarla, todo con una sola función composable, sin que tengas que gestionar hilos ni bitmaps manualmente.
+Dentro de `Contenido` sí usamos una `data class` con varios campos, porque una vez que hay un contacto cargado, la pantalla vuelve a necesitar mostrar varias cosas simultáneamente: si se está favoriteando, si se está eliminando, si la eliminación ya terminó, o si una acción (favorito o borrado) falló.
 
-Fíjate en el orden de los dos elementos dentro del `Box`: primero el `Text` con las iniciales, **luego** la `AsyncImage` encima. Mientras la imagen todavía no termina de descargarse (o si la URL falla), el texto de iniciales queda visible detrás; en cuanto `AsyncImage` completa la carga, la tapa por completo. Es un *fallback* simple, sin necesidad de observar el estado de carga de Coil explícitamente.
+Fíjate especialmente en **`eliminado: Boolean`**: no es un dato del contacto, es un **evento**. Cuando pasa a `true`, la pantalla debe reaccionar navegando hacia atrás, tal como estudiaste en el capítulo 43 con el ejemplo de guardar y volver.
 
-`contentScale = ContentScale.Crop` recorta la imagen para llenar el círculo sin deformarla, igual que harías con un `object-fit: cover` en CSS.
-
-## Estados reutilizables: `Estados.kt`
-
-Las tres pantallas necesitan mostrar, en algún momento, "está cargando", "algo falló" o "no hay nada que mostrar". En lugar de que cada una redibuje su propia versión, `Estados.kt` centraliza estos tres casos:
+## El ViewModel: `DetalleContactoViewModel`
 
 ```kotlin
-@Composable
-fun EstadoCargando(modifier: Modifier = Modifier) {
-    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        CircularProgressIndicator()
-    }
-}
+package com.ejemplo.miscontactos.ui.detalle
 
-@Composable
-fun EstadoError(
-    error: ErrorDatos,
-    onReintentar: (() -> Unit)?,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier.fillMaxSize().padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Icon(
-            Icons.Default.ErrorOutline,
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.error,
-            modifier = Modifier.size(48.dp)
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(mensajeDe(error), textAlign = TextAlign.Center)
-        if (onReintentar != null) {
-            Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = onReintentar) { Text(stringResource(R.string.reintentar)) }
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
+import com.ejemplo.miscontactos.data.ContactosRepository
+import com.ejemplo.miscontactos.model.comoErrorDatos
+import com.ejemplo.miscontactos.ui.navigation.DetalleContactoRuta
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+
+@HiltViewModel
+class DetalleContactoViewModel @Inject constructor(
+    private val repository: ContactosRepository,
+    savedStateHandle: SavedStateHandle
+) : ViewModel() {
+
+    private val id: Int = savedStateHandle.toRoute<DetalleContactoRuta>().id
+
+    private val _uiState = MutableStateFlow<DetalleContactoUiState>(DetalleContactoUiState.Cargando)
+    val uiState: StateFlow<DetalleContactoUiState> = _uiState.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            repository.favoritos.collect { favoritos ->
+                actualizarContenido { it.copy(esFavorito = id in favoritos) }
+            }
         }
-    }
-}
-
-@Composable
-fun EstadoVacio(mensaje: String, modifier: Modifier = Modifier) {
-    Box(modifier = modifier.fillMaxSize().padding(24.dp), contentAlignment = Alignment.Center) {
-        Text(mensaje, textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onSurfaceVariant)
-    }
-}
-```
-
-`EstadoError` recibe `onReintentar: (() -> Unit)?` como **función opcional**: cuando es `null` (como en la pantalla de detalle del capítulo 54, donde reintentar simplemente recargaría de nuevo el mismo `id` sin que tenga mucho sentido exponer un botón separado), el botón de reintentar no se dibuja. Es el mismo principio de "el estado decide qué mostrar" que ya aplicaste con `contactosVisibles` en el capítulo 53, llevado a un parámetro de función en vez de a una propiedad.
-
-`EstadoVacio` recibe el mensaje ya armado como `String`, en lugar de un recurso, precisamente porque —como viste en el capítulo 53— ese mensaje cambia según el contexto (favoritos vacíos, búsqueda sin resultados, lista realmente vacía), y es la pantalla que lo llama quien decide cuál de los tres aplica.
-
-### `mensajeDe`: traducir errores a texto
-
-```kotlin
-@Composable
-fun mensajeDe(error: ErrorDatos): String = when (error) {
-    is ErrorDatos.SinConexion -> stringResource(R.string.error_sin_conexion)
-    is ErrorDatos.NoEncontrado -> stringResource(R.string.error_no_encontrado)
-    is ErrorDatos.Conflicto -> error.message ?: stringResource(R.string.error_desconocido)
-    is ErrorDatos.Validacion -> stringResource(R.string.error_validacion)
-    is ErrorDatos.Desconocido -> stringResource(R.string.error_desconocido)
-}
-```
-
-Esta función ya la mencionamos en el capítulo 46: como `ErrorDatos` es una `sealed class`, el `when` es **exhaustivo** — si en el futuro se agrega una nueva variante de error, el compilador obliga a manejarla aquí también, evitando que un caso quede sin traducción. Se usa tanto en `EstadoError` como directamente en los `Snackbar` de las pantallas de detalle y formulario (capítulos 54 y 55).
-
-## El permiso de red local: `PermisoRedLocal`
-
-Ya viste este composable completo en el capítulo 49, pero vale la pena recordar por qué vive en `ui/componentes/` junto a los demás: aunque solo se usa una vez (envolviendo todo `ContactosNavHost` desde `MainActivity`), es un componente genérico —no conoce contactos ni pantallas específicas— y encaja mejor junto al resto de piezas reutilizables que dentro de una carpeta de una sola pantalla.
-
-## El tema visual: `Theme.kt` y `Color.kt`
-
-```kotlin
-// Color.kt
-val Azul = Color(0xFF1E5AA8)
-val AzulClaro = Color(0xFFB8D0F0)
-val Turquesa = Color(0xFF00897B)
-val TurquesaClaro = Color(0xFF80CBC4)
-val Error = Color(0xFFBA1A1A)
-val ErrorClaro = Color(0xFFFFDAD6)
-```
-
-```kotlin
-// Theme.kt
-private val LightColorScheme = lightColorScheme(
-    primary = Azul,
-    primaryContainer = AzulClaro,
-    secondary = Turquesa,
-    secondaryContainer = TurquesaClaro,
-    error = Error,
-    errorContainer = ErrorClaro
-)
-
-private val DarkColorScheme = darkColorScheme(
-    primary = AzulClaro,
-    secondary = TurquesaClaro,
-    error = ErrorClaro
-)
-
-@Composable
-fun MisContactosTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false,
-    content: @Composable () -> Unit
-) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        viewModelScope.launch {
+            repository.cambios.collect { cargar() }
         }
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        cargar()
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
+    // ... (cargar, alternarFavorito, eliminar, errorAccionMostrado, actualizarContenido)
+}
+```
+
+El `id` del contacto no llega como parámetro de función: se lee del `SavedStateHandle` mediante `savedStateHandle.toRoute<DetalleContactoRuta>().id`, la forma de leer argumentos de navegación tipados que veremos en detalle en el capítulo 59. Como en la pantalla de lista, el `init` se suscribe tanto a `favoritos` como a `cambios`, manteniendo el detalle sincronizado si el contacto se edita desde otra pantalla.
+
+### Cargar el contacto
+
+```kotlin
+private fun cargar() {
+    viewModelScope.launch {
+        _uiState.update { DetalleContactoUiState.Cargando }
+        repository.obtenerContacto(id)
+            .onSuccess { contacto ->
+                _uiState.update {
+                    DetalleContactoUiState.Contenido(contacto = contacto)
+                }
+            }
+            .onFailure { error ->
+                _uiState.update { DetalleContactoUiState.Error(error.comoErrorDatos()) }
+            }
+    }
+}
+```
+
+Nota que `cargar()` siempre **reemplaza** el estado desde cero, incluso si ya había un `Contenido` visible: al recargar tras un cambio externo (por ejemplo, se editó el contacto desde el formulario), es correcto volver a mostrar `Cargando` brevemente y luego el contenido actualizado.
+
+### Alternar favorito y eliminar
+
+```kotlin
+fun alternarFavorito() {
+    viewModelScope.launch { repository.alternarFavorito(id) }
+}
+
+fun eliminar() {
+    viewModelScope.launch {
+        actualizarContenido { it.copy(eliminando = true, errorAccion = null) }
+        repository.eliminar(id)
+            .onSuccess {
+                actualizarContenido { it.copy(eliminando = false, eliminado = true) }
+            }
+            .onFailure { error ->
+                actualizarContenido {
+                    it.copy(eliminando = false, errorAccion = error.comoErrorDatos())
+                }
+            }
+    }
+}
+
+fun errorAccionMostrado() {
+    actualizarContenido { it.copy(errorAccion = null) }
+}
+```
+
+`eliminar()` sigue el mismo patrón de tres pasos que ya usaste en los capítulos 42 y 49: marca `eliminando = true` antes de la llamada, y según el resultado, marca `eliminado = true` (el evento que disparará la navegación) o guarda el error en `errorAccion` para mostrarlo en un snackbar. `errorAccionMostrado()` lo limpia después de mostrarlo, evitando que se repita en una recomposición.
+
+### El ayudante `actualizarContenido`
+
+```kotlin
+private inline fun actualizarContenido(
+    transformar: (DetalleContactoUiState.Contenido) -> DetalleContactoUiState.Contenido
+) {
+    _uiState.update { estado ->
+        if (estado is DetalleContactoUiState.Contenido) transformar(estado) else estado
+    }
+}
+```
+
+Como varias funciones (`alternarFavorito`, `eliminar`, la suscripción a `favoritos`) solo tienen sentido cuando el estado ya es `Contenido`, centralizamos esa comprobación en `actualizarContenido`: si el estado actual es `Cargando` o `Error`, la actualización simplemente se ignora. Esto evita repetir un `if (estado is Contenido)` en cada función.
+
+## La pantalla: `DetalleContactoScreen`
+
+```kotlin
+@Composable
+fun DetalleContactoScreen(
+    onEditar: (Int) -> Unit,
+    onVolver: () -> Unit,
+    viewModel: DetalleContactoViewModel = hiltViewModel()
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    val eliminado = (uiState as? DetalleContactoUiState.Contenido)?.eliminado ?: false
+    LaunchedEffect(eliminado) {
+        if (eliminado) onVolver()
+    }
+
+    DetalleContactoContent(
+        uiState = uiState,
+        onAlternarFavorito = viewModel::alternarFavorito,
+        onEliminar = viewModel::eliminar,
+        onErrorAccionMostrado = viewModel::errorAccionMostrado,
+        onEditar = onEditar,
+        onVolver = onVolver
     )
 }
 ```
 
-Este es el mismo patrón de tema Material 3 que estudiaste en el capítulo 36: una paleta de colores propia de la app (`LightColorScheme`/`DarkColorScheme`, construidas a partir de las constantes de `Color.kt`) y, opcionalmente, **color dinámico** en Android 12 (API 31, `Build.VERSION_CODES.S`) en adelante, que deriva la paleta del fondo de pantalla del usuario en lugar de usar los colores fijos de la marca. Aquí `dynamicColor` tiene su valor por defecto en `false`: «Mis Contactos» prioriza su identidad visual propia (azul y turquesa) sobre adaptarse al *wallpaper* de cada dispositivo, pero deja la puerta abierta a activarlo con un simple cambio de parámetro.
+Este `LaunchedEffect(eliminado)` es exactamente el patrón "evento como estado" del capítulo 43: en lugar de que el `ViewModel` llame directamente a una función de navegación (que no debería conocer), expone un booleano en el `UiState`, y es la Screen quien observa ese booleano y decide navegar. Como la clave del efecto es `eliminado`, solo se ejecuta cuando ese valor cambia de `false` a `true`, nunca en cada recomposición.
 
-`MainActivity` envuelve toda la interfaz en `MisContactosTheme { ... }`, por lo que cualquier composable de la app —`ContactoItem`, `FichaContacto`, `CampoTexto`, etc.— accede a estos colores simplemente a través de `MaterialTheme.colorScheme`, sin tener que recibirlos como parámetro.
+### Confirmación con `AlertDialog`
+
+```kotlin
+@Composable
+fun DetalleContactoContent(
+    uiState: DetalleContactoUiState,
+    onAlternarFavorito: () -> Unit,
+    onEliminar: () -> Unit,
+    onErrorAccionMostrado: () -> Unit,
+    onEditar: (Int) -> Unit,
+    onVolver: () -> Unit
+) {
+    var confirmarEliminar by rememberSaveable { mutableStateOf(false) }
+    val snackbarHostState = remember { SnackbarHostState() }
+    val contenido = uiState as? DetalleContactoUiState.Contenido
+
+    val errorAccion = contenido?.errorAccion
+    LaunchedEffect(errorAccion) {
+        if (errorAccion != null) {
+            snackbarHostState.showSnackbar(mensajeDe(errorAccion))
+            onErrorAccionMostrado()
+        }
+    }
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
+        topBar = {
+            TopAppBar(
+                title = { Text(stringResource(R.string.titulo_detalle)) },
+                navigationIcon = {
+                    IconButton(onClick = onVolver) {
+                        Icon(Icons.AutoMirrored.Default.ArrowBack, contentDescription = null)
+                    }
+                },
+                actions = {
+                    if (contenido != null) {
+                        IconToggleButton(checked = contenido.esFavorito, onCheckedChange = { onAlternarFavorito() }) {
+                            Icon(
+                                imageVector = if (contenido.esFavorito) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                                contentDescription = null
+                            )
+                        }
+                        IconButton(onClick = { onEditar(contenido.contacto.id) }) {
+                            Icon(Icons.Default.Edit, contentDescription = stringResource(R.string.editar_contacto))
+                        }
+                        IconButton(onClick = { confirmarEliminar = true }) {
+                            Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.eliminar_contacto))
+                        }
+                    }
+                }
+            )
+        }
+    ) { innerPadding ->
+        Box(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
+            when (uiState) {
+                is DetalleContactoUiState.Cargando -> EstadoCargando()
+                is DetalleContactoUiState.Error -> EstadoError(error = uiState.error, onReintentar = null)
+                is DetalleContactoUiState.Contenido -> FichaContacto(contacto = uiState.contacto)
+            }
+        }
+    }
+
+    if (confirmarEliminar) {
+        AlertDialog(
+            onDismissRequest = { confirmarEliminar = false },
+            title = { Text(stringResource(R.string.confirmar_eliminar_titulo)) },
+            text = { Text(stringResource(R.string.confirmar_eliminar_mensaje)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    confirmarEliminar = false
+                    onEliminar()
+                }) { Text(stringResource(R.string.eliminar_contacto)) }
+            },
+            dismissButton = {
+                TextButton(onClick = { confirmarEliminar = false }) {
+                    Text(stringResource(R.string.cancelar))
+                }
+            }
+        )
+    }
+}
+```
+
+Los botones de la barra superior (favorito, editar, eliminar) solo se dibujan **cuando `contenido != null`**: no tiene sentido ofrecer acciones sobre un contacto que todavía se está cargando o que falló al cargar.
+
+El ícono de eliminar no borra directamente: solo cambia `confirmarEliminar` a `true`, lo que hace aparecer un `AlertDialog` de Material 3. Únicamente si el usuario toca el botón de confirmación dentro del diálogo se llama a `onEliminar()`. `confirmarEliminar` vive en `rememberSaveable` (capítulo 33) para sobrevivir a un cambio de configuración, como la rotación de pantalla, sin volver a preguntar innecesariamente ni perder la confirmación en curso.
+
+El segundo `LaunchedEffect`, con clave `errorAccion`, muestra un snackbar cuando `alternarFavorito()` o `eliminar()` fallan, y llama a `onErrorAccionMostrado()` para limpiar el error una vez mostrado — el mismo patrón de "consumir el evento" que ya usaste en el capítulo 43.
+
+### La ficha del contacto
+
+```kotlin
+@Composable
+private fun FichaContacto(contacto: Contacto, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier.fillMaxSize().padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        AvatarContacto(contacto = contacto, modifier = Modifier.size(96.dp))
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(contacto.nombreCompleto, style = MaterialTheme.typography.headlineSmall)
+
+        Spacer(modifier = Modifier.height(24.dp))
+        DatoContacto(icono = Icons.Default.Email, valor = contacto.email)
+        DatoContacto(icono = Icons.Default.Phone, valor = contacto.telefono)
+        DatoContacto(icono = Icons.Default.Home, valor = contacto.direccion)
+        DatoContacto(icono = Icons.Default.LocationCity, valor = contacto.ciudad)
+    }
+}
+
+@Composable
+private fun DatoContacto(icono: ImageVector, valor: String?, modifier: Modifier = Modifier) {
+    Row(modifier = modifier.fillMaxWidth().padding(vertical = 8.dp)) {
+        Icon(icono, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+        Spacer(modifier = Modifier.width(12.dp))
+        Text(valor ?: stringResource(R.string.sin_informacion))
+    }
+}
+```
+
+`DatoContacto` recibe un `valor: String?` porque, como recordarás del modelo de dominio (capítulo 51), `telefono`, `direccion` y `ciudad` son opcionales: cuando son `null`, se muestra el texto `sin_informacion` en lugar de dejar la fila vacía o esconderla, dándole al usuario una señal consistente de "este dato no se cargó" en vez de un hueco silencioso.
 
 ## Resumen
 
-- `ui/componentes/` reúne las piezas que usa más de una pantalla: `AvatarContacto` (foto con Coil 3 sobre iniciales de respaldo), `Estados.kt` (`EstadoCargando`/`EstadoError`/`EstadoVacio`/`mensajeDe`) y `PermisoRedLocal` (capítulo 49).
-- `AvatarContacto` superpone `AsyncImage` sobre un `Text` de iniciales: mientras la imagen no carga, las iniciales quedan visibles como *fallback*.
-- `EstadoError` acepta un `onReintentar` **opcional**, dejando que cada pantalla decida si ofrece o no un botón de reintento.
-- `mensajeDe(error: ErrorDatos)` centraliza, con un `when` exhaustivo, la traducción de cada variante de error a un texto localizado.
-- El tema (`Theme.kt`/`Color.kt`) sigue el patrón Material 3 del capítulo 36: paleta propia por defecto, con soporte opcional para color dinámico desde Android 12.
+- `DetalleContactoUiState` vuelve a ser una `sealed interface` (`Cargando` / `Error` / `Contenido`) porque sus tres posibilidades son mutuamente excluyentes, pero `Contenido` es una `data class` porque, una vez con datos, hay varias cosas que coexisten (favorito, eliminando, eliminado, error de acción).
+- El `id` del contacto se obtiene con `savedStateHandle.toRoute<DetalleContactoRuta>().id`, el mecanismo de argumentos tipados que se explica a fondo en el capítulo 59.
+- `eliminar()` es un ejemplo más del patrón "evento como estado" (capítulo 43): el `ViewModel` no navega; expone `eliminado = true` en el `UiState`, y un `LaunchedEffect(eliminado)` en la Screen decide volver atrás.
+- La eliminación se confirma con un `AlertDialog` antes de llamar a `onEliminar()`, y su estado de visibilidad se guarda con `rememberSaveable` para sobrevivir a la rotación.
+- El ayudante privado `actualizarContenido` evita repetir la comprobación `is Contenido` en cada función del `ViewModel`.
 
-Con esto completamos el recorrido por la interfaz de «Mis Contactos». En el capítulo final cerraremos el proyecto con una revisión general, algunas pruebas manuales sugeridas y los próximos pasos sugeridos para seguir aprendiendo.
+En el próximo capítulo construiremos la pantalla de formulario, la más exigente en validación: campos obligatorios, formato de correo, y errores que pueden venir tanto del cliente como del servidor.

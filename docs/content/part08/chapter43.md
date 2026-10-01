@@ -1,4 +1,4 @@
-# Capítulo 40: Efectos y eventos puntuales: `LaunchedEffect`, Snackbar y navegación
+# Capítulo 43: Efectos y eventos puntuales: `LaunchedEffect`, Snackbar y navegación
 
 ## Introducción
 
@@ -197,7 +197,7 @@ Fíjate en que los textos se obtienen con `stringResource` **fuera** del `Launch
 ¿Por qué tanto trabajo, en lugar de que el `ViewModel` «dispare» el mensaje? Porque, al ser estado, **no se pierde**. Si el usuario gira el teléfono justo cuando se elimina la tarea, la pantalla se recrea, vuelve a leer el estado, encuentra el mensaje pendiente y lo muestra. Y como `onMensajeMostrado()` lo borra, tampoco se muestra dos veces.
 
 > [!NOTE]¿Y el `SharedFlow`?
-> En el capítulo 24 viste que un `SharedFlow` sirve para eventos de una sola vez, y es una alternativa que encontrarás en muchos proyectos: el `ViewModel` emite el evento y la interfaz lo recolecta. Su problema es que, si nadie está recolectando en ese instante (por ejemplo, durante la rotación), el evento **se pierde**. Por eso, en este curso los eventos que nacen en el `ViewModel` se modelan como estado. `SharedFlow` sigue siendo útil para eventos entre capas que no dependen de una pantalla visible.
+> En el capítulo 25 viste que un `SharedFlow` sirve para eventos de una sola vez, y es una alternativa que encontrarás en muchos proyectos: el `ViewModel` emite el evento y la interfaz lo recolecta. Su problema es que, si nadie está recolectando en ese instante (por ejemplo, durante la rotación), el evento **se pierde**. Por eso, en este curso los eventos que nacen en el `ViewModel` se modelan como estado. `SharedFlow` sigue siendo útil para eventos entre capas que no dependen de una pantalla visible.
 
 ## Navegar después de una acción
 

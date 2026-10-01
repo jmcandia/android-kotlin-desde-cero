@@ -1,8 +1,8 @@
-# Capítulo 45: Retrofit: configuración, interfaces y endpoints
+# Capítulo 48: Retrofit: configuración, interfaces y endpoints
 
 ## Introducción
 
-Ya conoces la API de contactos desde fuera (capítulo 43) y sabes convertir su JSON en objetos de Kotlin (capítulo 44). Falta el paso del medio: **hacer la petición** desde la app. Hacerlo a mano —abrir la conexión, construir la petición, esperar la respuesta, leer el cuerpo— sería tedioso y propenso a errores.
+Ya conoces la API de contactos desde fuera (capítulo 46) y sabes convertir su JSON en objetos de Kotlin (capítulo 47). Falta el paso del medio: **hacer la petición** desde la app. Hacerlo a mano —abrir la conexión, construir la petición, esperar la respuesta, leer el cuerpo— sería tedioso y propenso a errores.
 
 Aquí entra **Retrofit**: una biblioteca que hace ese trabajo por ti. Tú describes la API como una **interfaz de Kotlin**, y Retrofit genera el código que hace las peticiones. En este capítulo aprenderás a configurarlo, a declarar los cinco *endpoints* de la API de contactos, a crear la instancia con Hilt y a resolver los tres obstáculos que aparecen al conectarse a una API que corre en tu propio computador.
 
@@ -166,7 +166,7 @@ val api: ContactApi = retrofit.create(ContactApi::class.java)
 - **`baseUrl`** es la parte común de todas las URLs. Se combina con la ruta de cada *endpoint* (`api/contact`) para formar la dirección completa. **Debe terminar en `/`**, o Retrofit lanza un error al crearse. Enseguida verás por qué es `10.0.2.2` y no `localhost`.
 - **`client`** es el cliente de OkHttp que hará las conexiones. Aquí se le agrega el interceptor de registro con nivel `BASIC`, que escribe en Logcat una línea por petición y otra por respuesta.
 - **`addConverterFactory`** le indica a Retrofit cómo convertir los cuerpos. Recibe **la misma instancia de `Json`** configurada en el capítulo anterior, con `ignoreUnknownKeys`. Si usaras el `Json` sin configurar, el `_links` de cada respuesta provocaría un error.
-- **`retrofit.create(...)`** genera la implementación de la interfaz. `ContactApi::class.java` es la referencia a la clase que viste en el capítulo 21.
+- **`retrofit.create(...)`** genera la implementación de la interfaz. `ContactApi::class.java` es la referencia a la clase que viste en el capítulo 22.
 
 Los imports de este bloque son:
 
@@ -181,7 +181,7 @@ import retrofit2.converter.kotlinx.serialization.asConverterFactory
 
 ## Crear Retrofit con Hilt: `@Provides`
 
-Crear Retrofit es costoso, y la app necesita **una sola instancia**, compartida por todos los repositorios. Es un trabajo para Hilt. Pero hay un problema: en el capítulo 42 le enseñaste a Hilt a crear clases **marcando su constructor** con `@Inject`, y `Retrofit` no es una clase tuya: se construye con `Retrofit.Builder`. No puedes agregarle anotaciones.
+Crear Retrofit es costoso, y la app necesita **una sola instancia**, compartida por todos los repositorios. Es un trabajo para Hilt. Pero hay un problema: en el capítulo 45 le enseñaste a Hilt a crear clases **marcando su constructor** con `@Inject`, y `Retrofit` no es una clase tuya: se construye con `Retrofit.Builder`. No puedes agregarle anotaciones.
 
 Para estos casos existe **`@Provides`**: una función, dentro de un módulo, que le enseña a Hilt **cómo construir** un objeto. Crea `di/NetworkModule.kt`:
 
@@ -230,7 +230,7 @@ Léelo de abajo hacia arriba, como lo hace Hilt:
 - Cuando alguien pide un **`ContactApi`**, Hilt llama a `provideContactApi`. Esa función necesita un `Retrofit`, así que Hilt busca quién lo provee.
 - **`provideRetrofit`** lo construye, pero necesita un `OkHttpClient` y un `Json`: Hilt llama a las dos funciones de arriba y le pasa los resultados.
 - **`@Singleton`** hace que cada objeto se cree **una sola vez** y se reutilice.
-- El módulo es un **`object`** (y no una `abstract class` como el `DataModule` del capítulo 42) porque sus funciones tienen cuerpo y no necesitan estado.
+- El módulo es un **`object`** (y no una `abstract class` como el `DataModule` del capítulo 45) porque sus funciones tienen cuerpo y no necesitan estado.
 
 Los **parámetros** de una función `@Provides` son sus dependencias. Tú nunca llamas a estas funciones: Hilt las encadena solo, en el orden correcto. Ahora cualquier clase puede pedir un `ContactApi` en su constructor.
 
@@ -297,7 +297,7 @@ Desde **Android 17 (API 37)**, conectarse a una dirección de la **red local** �
 
 A diferencia de `INTERNET`, es un **permiso de ejecución**: declararlo no basta, el usuario tiene que concederlo mientras la app está en uso, como el de la cámara o la ubicación. Si no está concedido, la conexión no llega a establecerse y OkHttp termina con una `SocketTimeoutException` después de esperar varios segundos, un error que no da ninguna pista de la causa real.
 
-En el proyecto final (capítulo 49) escribirás un composable que pide este permiso al abrir la app. Mientras tanto, para probar los ejemplos de este capítulo en un emulador con API 37, concédelo a mano: mantén presionado el ícono de la app, elige **Información de la app** → **Permisos** y activa el de red local. En emuladores con una API anterior a la 37, este permiso no existe y no hace falta.
+En el proyecto final (capítulo 52) escribirás un composable que pide este permiso al abrir la app. Mientras tanto, para probar los ejemplos de este capítulo en un emulador con API 37, concédelo a mano: mantén presionado el ícono de la app, elige **Información de la app** → **Permisos** y activa el de red local. En emuladores con una API anterior a la 37, este permiso no existe y no hace falta.
 
 ## Usar la API desde el repositorio
 

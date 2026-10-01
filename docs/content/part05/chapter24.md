@@ -1,145 +1,151 @@
-# Capítulo 24: `Flow`, `StateFlow` y `SharedFlow`
+# Capítulo 24: `suspend`, `launch`, `async`, scopes y dispatchers
 
 ## Introducción
 
-En el capítulo anterior, una función `suspend` te daba **un solo** resultado: una descarga, un valor. Pero muchas veces necesitas una **secuencia de valores** que van llegando **a lo largo del tiempo**: los resultados de una búsqueda que se actualizan mientras escribes, las lecturas de un sensor o —lo más importante para nosotros— el **estado de una pantalla** que va cambiando (cargando, luego con datos).
+En el capítulo anterior entendiste el problema: no podemos bloquear el hilo principal con tareas lentas, y los enfoques tradicionales para evitarlo eran engorrosos. Ahora conocerás la solución de Kotlin: las **coroutines**.
 
-Para esto, Kotlin ofrece el **`Flow`** ("flujo"). En este capítulo verás qué es un Flow, cómo crearlo y recolectarlo, y dos variantes especializadas —**`StateFlow`** y **`SharedFlow`**— que son la base de cómo la interfaz de una app moderna reacciona automáticamente a los cambios. Con esto cerramos la parte de asincronía y quedamos listos para la arquitectura MVVM.
+Las coroutines te permiten escribir código asíncrono que se lee de arriba abajo, casi como el código secuencial de siempre, pero sin congelar la aplicación. En este capítulo verás qué es una coroutine, las funciones `suspend`, cómo lanzarlas con `launch` y `async`, dónde viven (los *scopes*) y cómo elegir en qué hilo se ejecutan (los *dispatchers*).
 
 > [!NOTE]Nota
-> `Flow` y sus variantes forman parte de la misma biblioteca de coroutines (`kotlinx.coroutines`) que viste en el capítulo anterior.
+> Las coroutines vienen de una biblioteca oficial de Kotlin llamada `kotlinx.coroutines`. En un proyecto Android ya viene incluida; en los ejemplos usaremos `import kotlinx.coroutines.*`.
 
-## ¿Qué es un Flow?
+## ¿Qué es una coroutine?
 
-Un **`Flow`** es un **flujo de valores asíncronos**: una fuente que puede **emitir varios valores a lo largo del tiempo**, en lugar de devolver uno solo.
+Una **coroutine** es una tarea que puede ejecutarse de forma concurrente (a la vez que otras) y que, a diferencia de un hilo, puede **suspenderse** (pausarse) y **reanudarse** más tarde **sin bloquear** el hilo en el que corre.
 
-La diferencia con lo que ya conoces:
+Esa es su magia. Cuando una coroutine llega a una operación lenta (una descarga), en lugar de quedarse esperando y bloquear el hilo, se **suspende** y libera el hilo para que haga otras cosas. Cuando la operación termina, la coroutine se **reanuda** donde quedó.
 
-- Una función `suspend` es como pedir **un** café: esperas un momento y lo recibes, una sola vez.
-- Un `Flow` es como una **suscripción**: los valores van llegando, uno tras otro, a medida que están disponibles.
+Suele decirse que las coroutines son "hilos ligeros": puedes lanzar miles de ellas sobre unos pocos hilos reales, porque casi no consumen recursos. Piénsalo como un cocinero que, mientras algo está en el horno, no se queda mirándolo: aprovecha para picar verduras y vuelve al horno cuando suena el temporizador. La coroutine hace lo mismo con el hilo: no lo desperdicia esperando.
 
-Otra forma de verlo: un `Flow` se parece a una lista, pero sus elementos no están todos desde el principio, sino que **aparecen con el tiempo**.
+## Funciones `suspend`
 
-## Crear y recolectar un Flow
-
-Para crear un flujo, usas el constructor `flow { }` y, dentro, **emites** valores con `emit()`:
+Una función que puede **suspenderse** se marca con la palabra clave `suspend`. Dentro de ella puedes llamar a otras funciones suspend, como `delay`, que "espera" una cantidad de tiempo **sin bloquear** el hilo (es la versión coroutine de una pausa):
 
 ```kotlin
-fun numeros(): Flow<Int> = flow {
-    emit(1)
-    delay(1000)
-    emit(2)
-    delay(1000)
-    emit(3)
+suspend fun descargar(): String {
+    delay(2000) // simula una descarga de 2 segundos, sin bloquear el hilo
+    return "datos descargados"
 }
 ```
 
-Este flujo emite `1`, espera un segundo, emite `2`, espera otro, y emite `3`. Para **recibir** esos valores, te suscribes con `collect`, que ejecuta un bloque por cada valor que llega:
+La diferencia con una pausa normal es clave: mientras `delay` "espera", el hilo queda libre para atender otras coroutines.
+
+Una función `suspend` solo puede llamarse desde otra función `suspend` o desde dentro de una coroutine; no puedes llamarla directamente desde una función normal como `main`. Por eso necesitamos una forma de **iniciar** una coroutine.
+
+## `launch`: lanzar una coroutine
+
+Para iniciar una coroutine se usa un **constructor de coroutines**. El más común es `launch`, que lanza una coroutine y **sigue adelante** sin esperar su resultado (lo que se llama "dispara y olvida").
+
+`launch` necesita ejecutarse dentro de un *scope* (lo veremos en detalle más abajo). Para poder probar los ejemplos en un programa normal, usaremos `runBlocking`, que crea un scope y sirve de puente entre el mundo normal y el de las coroutines:
 
 ```kotlin
+import kotlinx.coroutines.*
+
 fun main() = runBlocking {
-    numeros().collect { valor ->
-        println(valor)
+    println("Inicio")
+
+    launch {
+        delay(1000)
+        println("Tarea terminada")
     }
+
+    println("Fin de main")
 }
 ```
 
-**Salida** (con un segundo de pausa entre cada número):
+**Salida:**
 
 ```plaintext
-1
-2
-3
+Inicio
+Fin de main
+Tarea terminada
 ```
 
-Dos detalles importantes: `collect` es una función `suspend` (se suspende esperando los valores, sin bloquear el hilo) y el flujo es "frío" (*cold*): su código no se ejecuta hasta que alguien lo recolecta. Si nadie hace `collect`, no se emite nada.
+Fíjate en el orden: "Fin de main" aparece **antes** que "Tarea terminada". Esto demuestra que `launch` no bloquea: lanza la coroutine (que se suspende durante el `delay`) y continúa de inmediato con el resto del código. Un segundo después, la coroutine se reanuda e imprime su mensaje.
 
-## Operadores de Flow
+> [!NOTE]Nota
+> `runBlocking` sí bloquea el hilo hasta que terminan sus coroutines, por lo que se usa sobre todo para pruebas y para el `main`, no en el código real de una app. En Android usaremos *scopes* que no bloquean, como verás más adelante.
 
-¿Recuerdas `map` y `filter` de las colecciones? Los flujos tienen los **mismos operadores**, y funcionan igual, pero aplicados a los valores a medida que llegan:
+## `async` y `await`: obtener un resultado
+
+`launch` no devuelve un resultado. Cuando sí necesitas el valor que produce una coroutine, usas `async`, que devuelve un objeto `Deferred` ("diferido": una promesa de un valor futuro). Para obtener el valor, llamas a `await()`, que espera (suspendiéndose) hasta que esté listo:
 
 ```kotlin
 fun main() = runBlocking {
-    numeros()
-        .filter { it % 2 == 1 } // solo los impares: 1, 3
-        .map { it * 10 }        // los multiplica por 10: 10, 30
-        .collect { println(it) }
+    val tarea = async { descargar() }
+    val resultado = tarea.await()
+    println(resultado) // datos descargados
 }
 ```
 
-Todo lo que aprendiste sobre transformar colecciones se traslada a los flujos. La diferencia es que aquí los valores se procesan **conforme se emiten**, no todos de golpe.
-
-## StateFlow: un flujo con estado
-
-Un `Flow` normal no **recuerda** su último valor: si te suscribes tarde, te pierdes lo ya emitido. Pero para la interfaz de una app queremos justo lo contrario: un flujo que **siempre tenga un valor actual** (el estado presente de la pantalla) y que **avise cuando ese valor cambia**.
-
-Para eso está el **`StateFlow`**. Es un flujo que **guarda un valor** y emite cada actualización. Se crea con `MutableStateFlow`, dándole un valor inicial, y accedes o cambias su valor con la propiedad `.value`:
+La gran ventaja de `async` es que puedes lanzar **varias tareas en paralelo** y esperar sus resultados. Por ejemplo, dos descargas a la vez:
 
 ```kotlin
-val contador = MutableStateFlow(0)
+fun main() = runBlocking {
+    val tarea1 = async { descargar() }
+    val tarea2 = async { descargar() }
 
-println(contador.value) // 0
-contador.value = 1      // actualiza el estado
-println(contador.value) // 1
+    println(tarea1.await())
+    println(tarea2.await())
+}
 ```
 
-Cualquiera que recolecte ese `StateFlow` recibe **de inmediato** el valor actual y, luego, cada cambio. Esto lo hace perfecto para representar el **estado de la interfaz**. Retomando la `sealed class UiState` del capítulo de `enum` y `sealed class`:
+Como ambas descargas empiezan casi al mismo tiempo, el total tarda alrededor de **2 segundos** (lo que dura una), no 4. Si las hubieras hecho una tras otra, habrían tardado el doble.
+
+## CoroutineScope: dónde viven las coroutines
+
+Toda coroutine vive dentro de un **scope** (ámbito), que **controla su ciclo de vida**. Un scope agrupa las coroutines que lanzas en él, y si el scope se cancela, **todas** sus coroutines se cancelan con él.
+
+Esto es muy importante: evita que queden coroutines "huérfanas" ejecutándose cuando ya no se necesitan (por ejemplo, una descarga que sigue en marcha después de que el usuario cerró la pantalla). A este manejo ordenado se le llama **concurrencia estructurada**.
+
+En Android no crearás los scopes a mano: usarás scopes que ya vienen atados al ciclo de vida de los componentes. El más habitual es `viewModelScope`, que cancela automáticamente sus coroutines cuando su pantalla desaparece. Lo veremos al construir la arquitectura MVVM. Por ahora, quédate con la idea: **cada coroutine pertenece a un scope, y el scope se encarga de limpiarla cuando corresponde**.
+
+## Dispatchers: en qué hilo se ejecutan
+
+Falta la pieza que conecta todo con el capítulo anterior: ¿en qué **hilo** corre una coroutine? De eso se encarga el **dispatcher** ("despachador"). Kotlin ofrece tres principales:
+
+- **`Dispatchers.Main`**: el hilo principal. Se usa para actualizar la interfaz.
+- **`Dispatchers.IO`**: pensado para operaciones de entrada/salida lentas (red, disco, base de datos). Aquí harás las descargas.
+- **`Dispatchers.Default`**: para trabajo intensivo de CPU (cálculos pesados).
+
+Para ejecutar un bloque de código en un dispatcher concreto, usas `withContext`, que **cambia de hilo** durante ese bloque y vuelve al original al terminar:
 
 ```kotlin
-val estado = MutableStateFlow<UiState>(UiState.Cargando)
-
-// Más tarde, cuando llegan los datos:
-estado.value = UiState.Exito(listOf("Ana", "Diego"))
+suspend fun cargarDatos() {
+    // Estamos en el hilo principal
+    val datos = withContext(Dispatchers.IO) {
+        descargar() // esto corre en un hilo de IO, sin bloquear el principal
+    }
+    // De vuelta en el hilo principal, con el resultado ya listo
+    println("Recibidos: $datos")
+}
 ```
 
-La pantalla, suscrita a `estado`, empieza mostrando el indicador de carga y, en cuanto el estado pasa a `Exito`, se **redibuja sola** con los datos.
-
-## SharedFlow: para eventos entre componentes
-
-Falta mencionar al primo del `StateFlow`: el **`SharedFlow`**. Ambos son flujos que pueden tener varios suscriptores («calientes», *hot*), pero se usan para cosas distintas:
-
-- Un **`StateFlow`** representa un **estado**: siempre tiene un valor actual y responde a la pregunta «¿qué debo mostrar ahora?» (la pantalla está cargando, o con datos). Al suscribirte, recibes de inmediato el último valor.
-- Un **`SharedFlow`** es un emisor de **eventos**: emite valores a los suscriptores activos en ese instante, sin guardar necesariamente un valor actual. Es útil para comunicación entre componentes en segundo plano (por ejemplo, notificar que una sincronización terminó).
-
-> [!WARNING]Cuidado con los eventos de interfaz
-> En muchos tutoriales verás `SharedFlow` usado para eventos de la pantalla («muestra un Snackbar», «navega»). Tiene un problema: si la pantalla se está recreando al girar el dispositivo justo cuando se emite el evento, **el evento se pierde**, porque en esa fracción de segundo nadie estaba recolectando. En la parte de arquitectura (capítulo 40) verás cómo resolverlo modelando esos eventos como parte del propio `UiState`.
-
-La regla práctica: usa `StateFlow` para el **estado** de la interfaz (y para los eventos que la pantalla debe ver sí o sí) y `SharedFlow` cuando necesites emitir eventos a múltiples suscriptores independientes sin guardar un valor fijo.
-
-## La conexión con MVVM
-
-Aquí se juntan varias piezas del curso y aparece un patrón muy habitual en las apps:
-
-- El **ViewModel** (una clase que veremos en detalle en la parte de arquitectura) mantiene un `StateFlow<UiState>` con el estado de la pantalla.
-- Lanza una coroutine (en su `viewModelScope`, del capítulo anterior) que pide los datos a una fuente externa (por ejemplo, la red) en el hilo de `IO`.
-- Cuando los datos llegan, actualiza el `.value` del `StateFlow`.
-- La **interfaz** recolecta ese `StateFlow` y, ante cada cambio, se redibuja automáticamente.
-
-Visto en el tiempo:
+Este es exactamente el patrón que resuelve el problema del capítulo anterior: la descarga ocurre en un hilo de IO (sin congelar la app) y, cuando termina, el código vuelve al hilo principal para mostrar el resultado. Visto en el tiempo:
 
 ```mermaid
 sequenceDiagram
-    participant VM as ViewModel
-    participant SF as StateFlow
-    participant UI as Interfaz
-    UI->>SF: collect (se suscribe)
-    SF-->>UI: Estado actual: Cargando
-    Note over VM: Llegan los datos
-    VM->>SF: .value = Exito(datos)
-    SF-->>UI: Nuevo estado: Exito
-    Note over UI: Se redibuja con los datos
+    participant Main as Hilo principal
+    participant IO as Hilo de IO
+    Note over Main: cargarDatos() se ejecuta
+    Main->>IO: withContext(Dispatchers.IO)
+    activate IO
+    Note over IO: Descarga datos (lento)
+    IO-->>Main: Devuelve el resultado
+    deactivate IO
+    Note over Main: Muestra el resultado en la UI
 ```
 
-Este flujo de datos en una sola dirección —el estado vive en el ViewModel, la interfaz solo lo observa y reacciona— es el corazón de MVVM, y lo construiremos paso a paso más adelante.
+Y lo mejor es que el código se lee de arriba abajo, sin callbacks anidados: primero descarga, luego muestra. Esa es la gran promesa de las coroutines cumplida.
 
 ## Resumen
 
-Con este capítulo cerraste la parte de asincronía:
+En este capítulo empezaste a escribir código asíncrono con coroutines:
 
-- Un **`Flow`** es un flujo de valores asíncronos que se emiten con `emit` y se reciben con `collect`. Es "frío": no se ejecuta hasta que alguien lo recolecta.
-- Los flujos admiten los mismos **operadores** que las colecciones (`map`, `filter`…), aplicados a los valores a medida que llegan.
-- Un **`StateFlow`** es un flujo que **guarda un valor actual** y emite sus cambios; es ideal para el **estado de la interfaz**. Se crea con `MutableStateFlow` y se actualiza con `.value`.
-- Un **`SharedFlow`** sirve para emitir eventos a múltiples suscriptores independientes, sin guardar un valor actual. Para eventos de interfaz que no deben perderse (Snackbar, navegación), es mejor modelarlos como estado (capítulo 40).
-- Este mecanismo —el estado en un `StateFlow` que la interfaz observa y al que reacciona— es la base de la arquitectura **MVVM**.
+- Una **coroutine** es una tarea que puede **suspenderse y reanudarse** sin bloquear el hilo; son tan ligeras que puedes lanzar miles.
+- Una función `suspend` puede pausarse; dentro de ella puedes llamar a otras suspend, como `delay` (una espera que no bloquea).
+- **`launch`** lanza una coroutine sin esperar su resultado ("dispara y olvida"); **`async`** + **`await`** lanzan una coroutine y obtienen su valor, ideal para ejecutar tareas en paralelo.
+- Toda coroutine vive en un **scope**, que controla su ciclo de vida y cancela sus coroutines cuando ya no se necesitan (concurrencia estructurada). En Android usarás scopes como `viewModelScope`.
+- Un **dispatcher** decide en qué hilo corre la coroutine: `Main` para la interfaz, `IO` para red y disco, `Default` para cálculos. Con `withContext` cambias de hilo para un bloque.
 
-Con esto tienes todos los fundamentos de Kotlin y de la asincronía. En la próxima parte del curso, ¡por fin abrimos Android Studio y creamos nuestra primera aplicación con Jetpack Compose!
+En el próximo capítulo verás `Flow`, `StateFlow` y `SharedFlow`: la forma de trabajar con **secuencias de valores asíncronos** que van llegando con el tiempo, la base para que la interfaz reaccione automáticamente a los cambios de datos.

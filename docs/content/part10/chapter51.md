@@ -1,238 +1,207 @@
-# Capítulo 51: La capa local: Room para caché y favoritos
+# Capítulo 51: Presentación y arquitectura de «Mis Contactos»
 
 ## Introducción
 
-Una aplicación móvil moderna debe ser resistente a la falta de conectividad. Si el usuario abre «Mis Contactos» en el metro o en un ascensor, no debería encontrarse con una pantalla en blanco o un error inmediato: la aplicación debe mostrar los últimos contactos descargados. Además, hay preferencias que pertenecen exclusivamente al usuario del teléfono y que la API compartida no almacena, como la lista de contactos marcados como **favoritos**.
+Has llegado a la última parte del curso. A lo largo de los capítulos anteriores fuiste aprendiendo cada pieza por separado: la sintaxis moderna de Kotlin, la asincronía con coroutines y flujos, el diseño de interfaces declarativas con Jetpack Compose, la arquitectura MVVM con `ViewModel` y `StateFlow`, la inyección de dependencias con Hilt, la comunicación de red con Retrofit y la serialización JSON, y la persistencia en base de datos local con Room.
 
-Para resolver ambas necesidades, implementamos una capa de persistencia local utilizando **Room**. En este capítulo crearemos las entidades de base de datos, los DAOs, la base de datos `ContactosDatabase` y el módulo de inyección `DatabaseModule`.
+Ahora unirás todas esas piezas en una **aplicación completa, profesional y real**: **«Mis Contactos»**. Esta app se conecta a la API REST que exploraste en el capítulo 46 (`code/contact-list-api/`), guarda una copia local en Room para funcionar sin conexión, permite gestionar contactos con validación estricta de formularios y ofrece una experiencia de usuario fluida con búsqueda en tiempo real, scroll infinito y soporte para favoritos.
 
-## Por qué dos tablas separadas: caché y favoritos
+En este capítulo conocerás la aplicación en detalle, su arquitectura general por capas, el modelo de dominio y la organización de paquetes del proyecto.
 
-Nuestra base de datos local SQLite maneja dos tipos de datos con ciclos de vida completamente diferentes:
+## ¿Qué hace la aplicación «Mis Contactos»?
+
+«Mis Contactos» es un gestor de libreta de direcciones estructurado en tres pantallas principales:
 
 ```mermaid
-erDiagram
-    CONTACTOS {
-        int id PK
-        string nombre
-        string apellido
-        string email
-        string telefono
-        string direccion
-        string ciudad
-        int orden
-    }
-    FAVORITOS {
-        int contactoId PK
-    }
+graph LR
+    Lista[Pantalla de Lista] -->|Tocar contacto| Detalle[Pantalla de Detalle]
+    Lista -->|Botón +| FormNuevo[Formulario: Nuevo]
+    Detalle -->|Botón Editar| FormEditar[Formulario: Editar]
+    Detalle -->|Eliminar| Lista
+    FormNuevo -->|Guardar| Lista
+    FormEditar -->|Guardar| Detalle
 ```
 
-1. **Tabla `contactos` (Caché)**: almacena una copia local de los contactos obtenidos desde la API. Si la app se sincroniza con el servidor, esta tabla se puede borrar y reconstruir por completo.
-2. **Tabla `favoritos` (Persistencia propia)**: almacena únicamente los identificadores (`contactoId`) de los contactos que el usuario ha marcado con una estrella. Esta información **nunca se borra al refrescar la red**, conservando los favoritos del usuario independientemente de cuántas veces se descargue la lista del servidor.
+1. **Pantalla de Lista (`ListaContactosScreen`)**:
+   - Muestra los contactos ordenados alfabéticamente por nombre.
+   - Permite **buscar en tiempo real** por nombre o apellido con filtrado reactivo.
+   - Ofrece un filtro rápido para ver solo **favoritos**.
+   - Carga contactos bajo demanda mediante **scroll infinito** (paginación).
+   - Permite refrescar la lista deslizando hacia abajo (*pull-to-refresh*).
+   - Muestra fotos de perfil con avatar dinámico (mediante la biblioteca Coil) e iniciales de respaldo.
+   - Permite marcar o desmarcar favoritos con un solo toque.
 
-## Las entidades de Room
+2. **Pantalla de Detalle (`DetalleContactoScreen`)**:
+   - Muestra la información completa del contacto (nombre, apellido, correo, teléfono, dirección, ciudad).
+   - Permite cambiar el estado de favorito.
+   - Incluye acceso directo para **editar** el contacto.
+   - Permite **eliminar** el contacto con un diálogo de confirmación de seguridad.
 
-En `data/local/ContactoEntity.kt` definimos las dos entidades y sus funciones de mapeo con el modelo de dominio:
+3. **Pantalla de Formulario (`FormularioContactoScreen`)**:
+   - Sirve tanto para **crear** un contacto nuevo como para **editar** uno existente.
+   - Valida los campos localmente antes de enviar (correo válido, longitudes mínimas y obligatoriedad).
+   - Configura el teclado virtual adecuado para cada campo (correo, teléfono, mayúsculas automáticas).
+   - Recibe y muestra errores específicos del servidor (como formato no válido o correo duplicado).
+   - Vuelve automáticamente a la pantalla anterior al guardar con éxito.
+
+## La arquitectura general: MVVM y capas
+
+La aplicación sigue estrictamente la arquitectura recomendada por Google para Android, estructurada en tres capas bien diferenciadas:
+
+```mermaid
+flowchart TD
+    subgraph UI[Capa de Interfaz (UI)]
+        Screen[Composables / Screens]
+        VM[ViewModels]
+    end
+
+    subgraph Data[Capa de Datos (Data)]
+        Repo[ContactosRepositoryImpl]
+    end
+
+    subgraph Sources[Fuentes de Datos]
+        Remote[API REST / Retrofit]
+        Local[Base de Datos / Room]
+    end
+
+    Screen -->|Eventos de usuario| VM
+    VM -->|UiState (StateFlow)| Screen
+    VM -->|Llamadas suspend / Flow| Repo
+    Repo -->|ContactApi| Remote
+    Repo -->|DAOs| Local
+```
+
+### 1. Capa de Interfaz (*UI Layer*)
+- **Composables**: declaran cómo se ve la interfaz a partir de un estado inmutable (`UiState`). No toman decisiones de negocio ni hacen llamadas de red directamente.
+- **ViewModels**: gestionan el estado de la pantalla (`StateFlow`), manejan la lógica de presentación y ejecutan coroutines en `viewModelScope`. Están anotados con `@HiltViewModel`.
+
+### 2. Capa de Dominio / Modelo (*Domain Layer*)
+- Define las estructuras de datos que representan el negocio de la app (`Contacto`, `DatosContacto`), limpias de anotaciones de bibliotecas externas (sin anotaciones de serialización ni de Room).
+- Modela los posibles errores de la aplicación mediante la clase sellada `ErrorDatos`.
+
+### 3. Capa de Datos (*Data Layer*)
+- **Repositorio (`ContactosRepository`)**: es la única fuente de verdad para los ViewModels. Oculta la complejidad de sincronizar la API REST con la base de datos Room.
+- **Fuente Remota**: cliente Retrofit (`ContactApi`), DTOs serializables con `kotlinx.serialization` y funciones de mapeo.
+- **Fuente Local**: base de datos SQLite administrada por Room (`ContactosDatabase`, `ContactoEntity`, `FavoritoEntity`), que almacena en caché los contactos y guarda localmente los favoritos.
+
+> [!NOTE]Nota
+> El ViewModel solo conoce la interfaz `ContactosRepository`. No sabe ni le importa si los contactos provienen de una caché en memoria, de Room o de una llamada HTTP.
+
+## El modelo de dominio
+
+En `model/Contacto.kt` definimos las clases de datos puras que viajarán entre el repositorio, los ViewModels y la interfaz de usuario:
 
 ```kotlin
-package com.ejemplo.miscontactos.data.local
+package com.ejemplo.miscontactos.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.ejemplo.miscontactos.model.Contacto
-
-/** Copia local de un contacto, usada como caché para trabajar sin conexión. */
-@Entity(tableName = "contactos")
-data class ContactoEntity(
-    @PrimaryKey val id: Int,
+data class Contacto(
+    val id: Int,
     val nombre: String,
     val apellido: String,
     val email: String,
-    val telefono: String?,
-    val direccion: String?,
-    val ciudad: String?,
-    val orden: Int
+    val telefono: String? = null,
+    val direccion: String? = null,
+    val ciudad: String? = null
+) {
+    val nombreCompleto: String
+        get() = "$nombre $apellido"
+
+    val iniciales: String
+        get() = "${nombre.firstOrNull() ?: ""}${apellido.firstOrNull() ?: ""}".uppercase()
+}
+
+/** Datos que el usuario escribe para crear o editar un contacto (todavía sin id). */
+data class DatosContacto(
+    val nombre: String,
+    val apellido: String,
+    val email: String,
+    val telefono: String? = null,
+    val direccion: String? = null,
+    val ciudad: String? = null
 )
 
-/** Un contacto marcado como favorito. Es un dato que solo existe en el dispositivo. */
-@Entity(tableName = "favoritos")
-data class FavoritoEntity(
-    @PrimaryKey val contactoId: Int
-)
-
-fun ContactoEntity.aDominio(): Contacto = Contacto(
-    id = id,
-    nombre = nombre,
-    apellido = apellido,
-    email = email,
-    telefono = telefono,
-    direccion = direccion,
-    ciudad = ciudad
-)
-
-fun Contacto.aEntity(orden: Int): ContactoEntity = ContactoEntity(
-    id = id,
-    nombre = nombre,
-    apellido = apellido,
-    email = email,
-    telefono = telefono,
-    direccion = direccion,
-    ciudad = ciudad,
-    orden = orden
-)
-```
-
-Fíjate en el campo `orden: Int` en `ContactoEntity`. Cuando la API devuelve contactos paginados y ordenados, guardamos ese índice numérico para poder recuperarlos de SQLite exactamente en el mismo orden mediante `ORDER BY orden`.
-
-## Los DAOs: operaciones locales
-
-### 1. `ContactoDao` para gestionar la caché
-
-En `data/local/ContactoDao.kt` definimos las operaciones de lectura y actualización masiva de contactos:
-
-```kotlin
-package com.ejemplo.miscontactos.data.local
-
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Transaction
-
-@Dao
-interface ContactoDao {
-
-    @Query("SELECT * FROM contactos ORDER BY orden")
-    suspend fun obtenerTodos(): List<ContactoEntity>
-
-    @Query("SELECT * FROM contactos WHERE id = :id")
-    suspend fun obtenerPorId(id: Int): ContactoEntity?
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertarTodos(contactos: List<ContactoEntity>)
-
-    @Query("DELETE FROM contactos")
-    suspend fun borrarTodos()
-
-    @Query("DELETE FROM contactos WHERE id = :id")
-    suspend fun borrar(id: Int)
-
-    /** Reemplaza la caché completa en una sola transacción atómica. */
-    @Transaction
-    suspend fun reemplazarTodos(contactos: List<ContactoEntity>) {
-        borrarTodos()
-        insertarTodos(contactos)
-    }
+/** Una página de resultados, tal como la necesita la app. */
+data class PaginaContactos(
+    val contactos: List<Contacto>,
+    val pagina: Int,
+    val totalPaginas: Int,
+    val desdeCache: Boolean = false
+) {
+    val hayMas: Boolean
+        get() = pagina + 1 < totalPaginas
 }
 ```
 
-- `@Transaction suspend fun reemplazarTodos(...)`: ejecuta `borrarTodos()` y `insertarTodos(...)` dentro de una misma transacción SQLite. Si la inserción fallara, la base de datos revierte los cambios automáticamente, evitando dejar la tabla vacía o inconsistente.
+Fíjate en varios detalles de diseño:
 
-### 2. `FavoritoDao` para observar y alternar favoritos
+- **`Contacto`** incluye propiedades calculadas como `nombreCompleto` e `iniciales`. Al estar en el modelo de dominio, cualquier composable o ViewModel puede usarlas sin duplicar lógica de formato.
+- **`DatosContacto`** representa solo la información editable. Al crear un nuevo contacto, la app aún no tiene un `id`, por lo que usar una clase separada evita tener propiedades anulables innecesarias como `id: Int?`.
+- **`Contacto` no lleva un campo `esFavorito`.** Ser favorito no es un dato del contacto en sí, sino una preferencia del dispositivo: como verás en el capítulo 55, el repositorio expone los identificadores favoritos por separado, como `Flow<Set<Int>>`, y es la interfaz la que cruza esa información con la lista de contactos al momento de dibujarla.
+- **`PaginaContactos`** incluye una propiedad calculada `hayMas`, que evita que cada pantalla tenga que comparar `pagina` con `totalPaginas` por su cuenta.
 
-En `data/local/FavoritoDao.kt` gestionamos los identificadores favoritos:
+## Estructura de paquetes del proyecto
 
-```kotlin
-package com.ejemplo.miscontactos.data.local
+El código de la aplicación está organizado por responsabilidades y características dentro del paquete `com.ejemplo.miscontactos`:
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
-
-@Dao
-interface FavoritoDao {
-
-    @Query("SELECT contactoId FROM favoritos")
-    fun observarIds(): Flow<List<Int>>
-
-    @Query("SELECT EXISTS(SELECT 1 FROM favoritos WHERE contactoId = :id)")
-    suspend fun esFavorito(id: Int): Boolean
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertar(favorito: FavoritoEntity)
-
-    @Query("DELETE FROM favoritos WHERE contactoId = :id")
-    suspend fun borrar(id: Int)
-}
+```text
+com.ejemplo.miscontactos/
+├── data/
+│   ├── local/               # Room: entidades, DAOs y Database
+│   │   ├── ContactoDao.kt
+│   │   ├── ContactoEntity.kt
+│   │   ├── ContactosDatabase.kt
+│   │   ├── FavoritoDao.kt
+│   │   └── FavoritoEntity.kt
+│   ├── remote/              # Retrofit: endpoints, DTOs y errores
+│   │   ├── dto/
+│   │   │   └── ContactDto.kt
+│   │   ├── ContactApi.kt
+│   │   ├── Errores.kt
+│   │   └── Mappers.kt
+│   ├── ContactosRepository.kt       # Interfaz del repositorio
+│   └── ContactosRepositoryImpl.kt   # Implementación offline-first
+├── di/                      # Módulos de inyección de dependencias con Hilt
+│   ├── DataModule.kt
+│   ├── DatabaseModule.kt
+│   └── NetworkModule.kt
+├── model/                   # Modelos puros de dominio
+│   ├── Contacto.kt
+│   └── ErrorDatos.kt
+├── ui/                      # Interfaz de usuario con Jetpack Compose
+│   ├── componentes/         # Composables reutilizables (Avatar, Estados, Permisos)
+│   │   ├── AvatarContacto.kt
+│   │   ├── Estados.kt
+│   │   └── PermisoRedLocal.kt
+│   ├── detalle/             # Pantalla de detalle de contacto
+│   │   ├── DetalleContactoScreen.kt
+│   │   ├── DetalleContactoUiState.kt
+│   │   └── DetalleContactoViewModel.kt
+│   ├── formulario/          # Pantalla de creación y edición
+│   │   ├── ContactoForm.kt
+│   │   ├── FormularioContactoScreen.kt
+│   │   └── FormularioContactoViewModel.kt
+│   ├── lista/               # Pantalla principal con lista y búsqueda
+│   │   ├── ListaContactosScreen.kt
+│   │   ├── ListaContactosUiState.kt
+│   │   └── ListaContactosViewModel.kt
+│   ├── navigation/          # Rutas tipadas y NavHost
+│   │   ├── ContactosNavHost.kt
+│   │   └── Rutas.kt
+│   └── theme/               # Paleta de colores, tipografía y tema Material 3
+│       ├── Color.kt
+│       ├── Theme.kt
+│       └── Type.kt
+├── MainActivity.kt          # Activity única con edge-to-edge
+└── MisContactosApp.kt       # Application class con @HiltAndroidApp
 ```
 
-- `observarIds(): Flow<List<Int>>`: devuelve un `Flow` reactivo. Cada vez que se agrega o elimina un favorito en la base de datos, Room emite automáticamente la nueva lista de IDs a todos los componentes suscritos.
-- `SELECT EXISTS(...)`: comprueba eficientemente si un contacto específico es favorito devolviendo un booleano en una sola consulta.
-
-## La base de datos: `ContactosDatabase`
-
-En `data/local/ContactosDatabase.kt` declaramos la clase abstracta de Room:
-
-```kotlin
-package com.ejemplo.miscontactos.data.local
-
-import androidx.room.Database
-import androidx.room.RoomDatabase
-
-@Database(
-    entities = [ContactoEntity::class, FavoritoEntity::class],
-    version = 1
-)
-abstract class ContactosDatabase : RoomDatabase() {
-    abstract fun contactoDao(): ContactoDao
-    abstract fun favoritoDao(): FavoritoDao
-}
-```
-
-## El módulo de inyección: `DatabaseModule`
-
-En `di/DatabaseModule.kt` le indicamos a Hilt cómo construir la base de datos Room y proveer cada DAO:
-
-```kotlin
-package com.ejemplo.miscontactos.di
-
-import android.content.Context
-import androidx.room.Room
-import com.ejemplo.miscontactos.data.local.ContactoDao
-import com.ejemplo.miscontactos.data.local.ContactosDatabase
-import com.ejemplo.miscontactos.data.local.FavoritoDao
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
-
-@Module
-@InstallIn(SingletonComponent::class)
-object DatabaseModule {
-
-    @Provides
-    @Singleton
-    fun provideDatabase(@ApplicationContext context: Context): ContactosDatabase =
-        Room.databaseBuilder(
-            context,
-            ContactosDatabase::class.java,
-            "contactos.db"
-        ).build()
-
-    @Provides
-    fun provideContactoDao(database: ContactosDatabase): ContactoDao =
-        database.contactoDao()
-
-    @Provides
-    fun provideFavoritoDao(database: ContactosDatabase): FavoritoDao =
-        database.favoritoDao()
-}
-```
-
-- `@ApplicationContext`: Hilt inyecta el contexto de la aplicación para crear la base de datos sin riesgo de fugas de memoria (*memory leaks*).
-- `provideDatabase` está marcado con `@Singleton` para garantizar una única conexión abierta al archivo `contactos.db`.
-- Los métodos que devuelven DAOs no necesitan `@Singleton`, ya que Room reutiliza internamente las mismas instancias a través de `database`.
+Esta organización agrupa la interfaz por pantalla (*feature-first* en `ui/lista`, `ui/detalle`, `ui/formulario`) y los datos por origen (`data/local`, `data/remote`), facilitando encontrar cualquier archivo rápidamente.
 
 ## Resumen
 
-- Separamos el almacenamiento en dos tablas: `contactos` para la caché de red y `favoritos` para preferencias locales persistentes.
-- `ContactoEntity` guarda los datos descargados e incluye una columna `orden` para conservar la posición alfabética devuelta por la API.
-- `ContactoDao` ofrece `reemplazarTodos` anotado con `@Transaction` para actualizar la caché de forma segura.
-- `FavoritoDao` expone un `Flow<List<Int>>` que notifica reactivamente cualquier cambio en los favoritos.
-- `DatabaseModule` construye `ContactosDatabase` con Hilt como un `@Singleton`.
+- «Mis Contactos» es una app completa que integra **Compose**, **MVVM**, **Hilt**, **Retrofit** y **Room**.
+- Consta de tres pantallas: **Lista** (búsqueda, paginación, favoritos), **Detalle** (visualización y borrado seguro) y **Formulario** (creación y edición con validación).
+- Sigue una arquitectura limpia por capas: la interfaz solo observa el `UiState` del `ViewModel`, el `ViewModel` consume el `ContactosRepository`, y el repositorio coordina la API remota y la base de datos local.
+- El modelo de dominio (`Contacto`, `DatosContacto`) está completamente desacoplado de las bibliotecas de red y persistencia.
 
-En el próximo capítulo implementaremos el **repositorio**, coordinando la API remota de Retrofit y la base de datos local de Room bajo una estrategia *offline-first*.
+En el próximo capítulo configuraremos el proyecto, los permisos necesarios y el punto de entrada de la aplicación.

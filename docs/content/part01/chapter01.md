@@ -140,7 +140,7 @@ Como el objetivo final de este curso es desarrollar aplicaciones móviles, segur
 
 La razón es pedagógica: **primero conviene dominar el lenguaje Kotlin** con una herramienta liviana y directa, y recién después entrar al mundo de Android, que agrega muchos conceptos nuevos (Gradle, el `AndroidManifest`, el ciclo de vida de una `Activity`, la interfaz con Compose, etcétera). Mezclar todo desde el inicio suele abrumar.
 
-Por eso, la instalación de Android Studio, la creación de tu primer proyecto Android y el recorrido por su interfaz los veremos en la **Parte VI (Capítulo 25)**. Cuando lleguemos ahí, todo lo que aprendiste en IntelliJ IDEA te resultará familiar, porque Android Studio se basa en el mismo motor.
+Por eso, la instalación de Android Studio, la creación de tu primer proyecto Android y el recorrido por su interfaz los veremos en la **Parte VI (Capítulo 26)**. Cuando lleguemos ahí, todo lo que aprendiste en IntelliJ IDEA te resultará familiar, porque Android Studio se basa en el mismo motor.
 
 ## Resumen
 

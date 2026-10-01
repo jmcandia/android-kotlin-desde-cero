@@ -1,311 +1,338 @@
-# Capítulo 47: Persistencia local con Room
+# Capítulo 47: Serialización JSON y modelos de datos (DTO)
 
 ## Introducción
 
-Hasta ahora, los datos de tus apps vivían en memoria o en un servidor. Los de memoria se pierden cuando Android cierra la app; los del servidor necesitan conexión. Muchas apps necesitan una tercera opción: **guardar datos en el propio teléfono**, para que sigan ahí la próxima vez que se abra la app, con o sin internet.
+En el capítulo anterior exploraste la API de contactos y viste que todas sus respuestas son **texto JSON**. Pero tu app no trabaja con texto: trabaja con objetos de Kotlin. Antes de conectarte a la red, necesitas resolver cómo se convierte uno en otro. Ese proceso se llama **serialización**.
 
-Android trae de serie una base de datos, **SQLite**. Usarla directamente obliga a escribir mucho código repetitivo y propenso a errores. **Room** es la biblioteca oficial que la envuelve: tú describes tus datos con clases de Kotlin y anotaciones, y Room genera el código que habla con SQLite.
+En este capítulo aprenderás a describir el JSON con clases de Kotlin usando **`kotlinx.serialization`**, a resolver los casos difíciles que ya encontraste en Swagger (claves que sobran, claves que faltan, nombres incómodos, objetos anidados) y a organizar esas clases con un patrón importante: los **DTOs**, que separan los datos tal como vienen de la API de los modelos que tu app realmente usa.
 
-En este capítulo verás las tres piezas de Room (**entidad**, **DAO** y **base de datos**), cómo configurarlo en el proyecto y cómo conectarlo **detrás de un repositorio**, sin que el `ViewModel` ni la interfaz se enteren del cambio. Usaremos como ejemplo una pequeña app de **notas**.
+Todo se practica **sin red**, con textos JSON copiados de Swagger. Así, cuando en el próximo capítulo conectes Retrofit, la conversión ya estará resuelta y probada.
 
-## Las tres piezas de Room
+## Serialización y deserialización
 
-```mermaid
-flowchart LR
-    Repo["Repositorio"] --> DAO["<b>DAO</b><br/>consultas"]
-    DAO --> DB["<b>Base de datos</b><br/>@Database"]
-    DB --> Tabla["<b>Entidad</b><br/>tabla «notas»"]
-```
+Son dos conceptos, uno el inverso del otro:
 
-- Una **entidad** (`@Entity`) es una `data class` que representa una **tabla**. Cada propiedad es una columna y cada objeto es una fila.
-- Un **DAO** (*Data Access Object*, `@Dao`) es una **interfaz** con las operaciones sobre esa tabla: consultar, insertar, actualizar, eliminar.
-- La **base de datos** (`@Database`) es la clase que reúne las entidades y da acceso a los DAO.
+- **Serializar** es convertir un objeto en un formato de texto para enviarlo o guardarlo; por ejemplo, un objeto de Kotlin → un texto JSON.
+- **Deserializar** es lo contrario: tomar ese texto y reconstruir el objeto; un texto JSON → un objeto de Kotlin.
 
-Tú escribes las tres con anotaciones; Room genera, al compilar, las clases que las implementan.
+Tu app hará las dos cosas: **deserializar** las respuestas de la API (la lista, el detalle, los errores) y **serializar** los datos de un contacto nuevo para enviarlos en el cuerpo de un `POST`. Por costumbre, se suele llamar «serialización» a todo el tema.
 
-## Configurar el proyecto
+## Configurar `kotlinx.serialization`
 
-Room genera código mediante **KSP** (*Kotlin Symbol Processing*), un procesador que lee tus anotaciones al compilar. Si usas Hilt, ya lo tienes configurado; si no, hay que agregarlo. Estos son los cambios, empezando por el catálogo de versiones `gradle/libs.versions.toml`:
+**`kotlinx.serialization`** es la biblioteca oficial de Kotlin para esto. Tiene dos partes: un **plugin del compilador**, que genera el código de conversión de cada clase, y una **biblioteca** con el formato JSON. En el catálogo `gradle/libs.versions.toml`:
 
 ```toml
 [versions]
-ksp = "2.3.12"
-room = "2.8.5"
+kotlinxSerialization = "1.11.0"
 
 [libraries]
-androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
-androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
-androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 
 [plugins]
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-room = { id = "androidx.room", version.ref = "room" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ```
 
-En el `build.gradle.kts` de la **raíz** del proyecto, declara los plugins sin aplicarlos:
+Fíjate en que el plugin usa la versión de **Kotlin** (`version.ref = "kotlin"`), la misma que el plugin de Compose que ya tiene tu proyecto: el plugin es parte del compilador y debe coincidir con él.
+
+En el `build.gradle.kts` de la raíz:
 
 ```kotlin
 plugins {
     // ... los que ya tenías
-    alias(libs.plugins.ksp) apply false
-    alias(libs.plugins.room) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
 }
 ```
 
-Y en el `build.gradle.kts` del módulo **`app`**, aplícalos y agrega las dependencias:
+Y en el del módulo `app`:
 
 ```kotlin
 plugins {
     // ... los que ya tenías
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.room)
-}
-
-android {
-    // ...
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
+    alias(libs.plugins.kotlin.serialization)
 }
 
 dependencies {
-    // ...
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
+    // ... las que ya tenías
+    implementation(libs.kotlinx.serialization.json)
 }
 ```
 
-Fíjate en que el compilador de Room se agrega con **`ksp(...)`**, no con `implementation(...)`: no forma parte de tu app, solo se usa al compilar. El bloque `room { schemaDirectory(...) }` le pide a Room que guarde una descripción de la estructura de la base de datos en la carpeta `schemas/`; la necesitarás el día que cambies esa estructura.
+Pulsa **Sync Now**.
 
-> [!WARNING]Advertencia
-> Las versiones de KSP, Room y Kotlin deben ser compatibles entre sí. Si al sincronizar Gradle aparece un error de versiones, revisa la documentación de Room y usa las versiones que indique. Las de este capítulo son las que se usaron para probar los ejemplos del curso.
+## Modelar el JSON con `@Serializable`
 
-## La entidad: la tabla
+Recuerda la respuesta de `GET /api/contact/1`, sin el objeto `_links` por ahora:
 
-Una nota tiene un identificador, un título, un contenido y la fecha en que se creó:
+```json
+{
+  "id": 1,
+  "firstName": "Miguel Ángel",
+  "lastName": "Ramos",
+  "email": "miguel.ramos@gmail.com",
+  "phone": "+56969878505",
+  "address": "Parcela Eva Meraz 8721",
+  "city": "Estación Central"
+}
+```
+
+Para que `kotlinx.serialization` sepa convertirla, se escribe una `data class` marcada con **`@Serializable`**, con una propiedad por cada clave y **con el mismo nombre**:
 
 ```kotlin
-@Entity(tableName = "notas")
-data class NotaEntity(
-    @PrimaryKey val id: String,
-    val titulo: String,
-    val contenido: String,
-    val creadaEn: Long
+@Serializable
+data class ContactDto(
+    val id: Int,
+    val firstName: String,
+    val lastName: String,
+    val email: String,
+    val phone: String? = null,
+    val address: String? = null,
+    val city: String? = null
 )
 ```
 
-- `@Entity(tableName = "notas")` indica que esta clase es una tabla llamada `notas`.
-- `@PrimaryKey` marca la **clave primaria**: la columna que identifica cada fila sin repetirse.
-- Las demás propiedades son columnas. Room sabe guardar los tipos básicos (`String`, `Int`, `Long`, `Boolean`…). Para guardar una fecha, lo más simple es un `Long` con los milisegundos.
-
-Igual que con los DTO del capítulo 44, la entidad es un modelo **de la capa de datos**: describe cómo se guarda, no cómo lo usa la app. Por eso conviene mantenerla separada del modelo de dominio y convertir entre ambos con funciones de extensión:
+Y para convertir, se usa el objeto `Json`:
 
 ```kotlin
-data class Nota(val id: String, val titulo: String, val contenido: String)
-
-fun NotaEntity.aDominio(): Nota =
-    Nota(id = id, titulo = titulo, contenido = contenido)
-
-fun Nota.aEntity(creadaEn: Long = System.currentTimeMillis()): NotaEntity =
-    NotaEntity(id = id, titulo = titulo, contenido = contenido, creadaEn = creadaEn)
+val contacto = Json.decodeFromString<ContactDto>(textoJson)
+println(contacto.firstName)   // Miguel Ángel
 ```
 
-Así, si mañana cambias cómo se guarda una nota, el resto de la app no se entera.
-
-## El DAO: las operaciones
-
-El DAO es una interfaz. Cada función declara **qué** hacer y Room genera **cómo**:
-
-```kotlin
-@Dao
-interface NotaDao {
-
-    @Query("SELECT * FROM notas ORDER BY creadaEn DESC")
-    fun observarTodas(): Flow<List<NotaEntity>>
-
-    @Query("SELECT * FROM notas WHERE id = :id")
-    suspend fun buscarPorId(id: String): NotaEntity?
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertar(nota: NotaEntity)
-
-    @Update
-    suspend fun actualizar(nota: NotaEntity)
-
-    @Query("DELETE FROM notas WHERE id = :id")
-    suspend fun eliminar(id: String)
-}
-```
-
-Hay dos tipos de funciones, y la diferencia es importante:
-
-- **Las que devuelven un `Flow`** (como `observarTodas`) no son `suspend`. Devuelven un flujo que emite la lista actual **y vuelve a emitir cada vez que la tabla cambia**. Si insertas una nota, quien esté recolectando `observarTodas()` recibe la lista nueva automáticamente.
-- **Las operaciones puntuales** (`buscarPorId`, `insertar`, `actualizar`, `eliminar`) son **`suspend`**. Room las ejecuta en un hilo de fondo, así que puedes llamarlas desde una coroutine del `ViewModel` sin bloquear la interfaz.
-
-Sobre las anotaciones:
-
-- `@Query` recibe una consulta **SQL**. Los parámetros de la función se usan en la consulta con dos puntos: `:id`. Room **comprueba la consulta al compilar**: si escribes mal el nombre de una columna, el proyecto no compila.
-- `@Insert`, `@Update` y `@Delete` generan la operación sin que escribas SQL. `onConflict = OnConflictStrategy.REPLACE` indica qué hacer si ya existe una fila con la misma clave primaria: reemplazarla.
+`decodeFromString` lee el texto, empareja cada clave con la propiedad del mismo nombre y crea el objeto. El tipo entre `< >` le dice qué clase construir. Los tipos también se comprueban: si `id` viniera como texto, la conversión fallaría.
 
 > [!NOTE]Nota
-> No necesitas saber SQL a fondo para usar Room. Para la mayoría de las apps basta con `SELECT * FROM tabla`, un `WHERE` para filtrar y un `ORDER BY` para ordenar, como en el ejemplo.
+> Las propiedades están en inglés porque deben llamarse igual que las claves del JSON. Es una excepción deliberada a la costumbre del curso de nombrar en español, y un primer indicio de que esta clase le pertenece a la API, no a tu app. Volveremos sobre esto al hablar de los DTOs.
 
-## La base de datos
+## Las claves que sobran: `ignoreUnknownKeys`
 
-La clase de la base de datos es **abstracta** y hereda de `RoomDatabase`. Enumera sus entidades, declara su versión y expone sus DAO:
+La respuesta real, sin embargo, trae además el objeto `_links` del formato HAL, que `ContactDto` no declara. Si intentas convertirla tal cual, falla:
+
+```text
+JsonDecodingException: Unexpected JSON token at offset 6:
+Encountered an unknown key '_links' at path: $
+```
+
+Por defecto, `kotlinx.serialization` es estricto: una clave desconocida podría ser un error de escritura en tu clase, y prefiere avisarte. Con una API que no controlas, en cambio, lo normal es que traiga más datos de los que te interesan, y que agregue campos nuevos con el tiempo. Por eso se crea una instancia de `Json` configurada para **ignorar** las claves desconocidas:
 
 ```kotlin
-@Database(entities = [NotaEntity::class], version = 1)
-abstract class NotasDatabase : RoomDatabase() {
-    abstract fun notaDao(): NotaDao
+val json = Json { ignoreUnknownKeys = true }
+
+val contacto = json.decodeFromString<ContactDto>(textoJson)
+```
+
+`Json { ... }` es una lambda con receptor, como las del capítulo 22: dentro de las llaves se configuran las opciones. Usa siempre esta instancia, no el `Json` sin configurar. Es un ajuste casi obligatorio al consumir APIs.
+
+## Las claves que faltan: valores por defecto
+
+En el paso 5 de la práctica con Swagger creaste un contacto sin teléfono, dirección ni ciudad, y la respuesta **no traía esas claves**:
+
+```json
+{ "id": 51, "firstName": "Ana", "lastName": "Rojas", "email": "ana.rojas@example.com" }
+```
+
+Por eso, en `ContactDto`, esas tres propiedades son anulables **y tienen un valor por defecto**: `val phone: String? = null`. Con esa respuesta, el resultado es:
+
+```text
+ContactDto(id=51, firstName=Ana, lastName=Rojas, email=ana.rojas@example.com, phone=null, address=null, city=null)
+```
+
+Las dos partes son necesarias. El `?` permite que la propiedad sea `null`, pero no le dice a `kotlinx.serialization` qué hacer si la clave no aparece. Sin el `= null`, la conversión falla:
+
+```text
+MissingFieldException: Field 'phone' is required for type with serial name 'ContactDto', but it was missing
+```
+
+La regla es simple: si una clave **puede no venir**, dale un valor por defecto. Si **siempre viene** (como `id` o `email`), no se lo des: así, si algún día faltara, te enterarías de inmediato.
+
+## Nombres incómodos y objetos anidados: `@SerialName`
+
+La respuesta de la lista paginada es más compleja. Recuerda su forma:
+
+```json
+{
+  "_embedded": {
+    "contactResponseList": [
+      { "id": 24, "firstName": "Adriana", "...": "..." },
+      { "id": 7, "firstName": "Alejandro", "...": "..." }
+    ]
+  },
+  "_links": { "...": "..." },
+  "page": { "number": 0, "size": 2, "totalElements": 50, "totalPages": 25 }
 }
 ```
 
-No escribes la implementación: Room la genera. Para obtener una instancia se usa `Room.databaseBuilder`, indicando el nombre del archivo en el que se guardará:
+Cada objeto JSON se modela con su propia clase, y las clases se anidan igual que los objetos:
 
 ```kotlin
-val database = Room.databaseBuilder(
-    context,
-    NotasDatabase::class.java,
-    "notas.db"
-).build()
+@Serializable
+data class ContactPageDto(
+    @SerialName("_embedded") val embedded: ContactEmbeddedDto? = null,
+    val page: PageInfoDto
+)
+
+@Serializable
+data class ContactEmbeddedDto(
+    @SerialName("contactResponseList") val contacts: List<ContactDto> = emptyList()
+)
+
+@Serializable
+data class PageInfoDto(
+    val number: Int,
+    val size: Int,
+    val totalElements: Int,
+    val totalPages: Int
+)
 ```
 
-Abrir una base de datos es costoso, así que debe existir **una sola instancia** en toda la app. Es el caso perfecto para Hilt.
+- Un arreglo JSON se convierte en una `List`: `List<ContactDto>`.
+- **`@SerialName`** conecta una propiedad con una clave de **otro nombre**. `_embedded` no es un nombre cómodo en Kotlin, así que la propiedad se llama `embedded`, y `@SerialName("_embedded")` indica cómo se llama en el JSON. Lo mismo con `contactResponseList`, que en Kotlin se llama simplemente `contacts`. También lo encontrarás para APIs que usan `snake_case` (`first_name`) cuando en Kotlin prefieres `camelCase`.
+- `embedded` es anulable y tiene `= null` porque, como viste al buscar `zzzz`, **la clave `_embedded` no aparece** cuando no hay resultados. Con esa respuesta, el resultado es un `ContactPageDto` con `embedded = null` y `totalElements = 0`, sin errores.
+- `_links` no se declara: `ignoreUnknownKeys` lo descarta.
 
-### Crear la base de datos con Hilt: `@Provides`
+## Los errores también son JSON
 
-La base de datos no se crea con un constructor que Hilt pueda llamar: se crea con `Room.databaseBuilder`. Es el mismo caso que Retrofit en el capítulo 45, y se resuelve igual: con una función **`@Provides`** en un módulo, que le enseña a Hilt **cómo construir** el objeto.
+Los errores de la API tienen siempre la misma forma, así que también se modelan:
 
 ```kotlin
-@Module
-@InstallIn(SingletonComponent::class)
-object DatabaseModule {
-
-    @Provides
-    @Singleton
-    fun provideDatabase(@ApplicationContext context: Context): NotasDatabase =
-        Room.databaseBuilder(context, NotasDatabase::class.java, "notas.db").build()
-
-    @Provides
-    fun provideNotaDao(database: NotasDatabase): NotaDao = database.notaDao()
-}
+@Serializable
+data class ApiErrorDto(
+    val status: Int? = null,
+    val error: String? = null,
+    val message: String? = null,
+    val errors: List<String> = emptyList()
+)
 ```
 
-- El módulo es un `object` porque sus funciones no necesitan estado.
-- `@Singleton` hace que Hilt cree la base de datos **una sola vez** y la reutilice.
-- `@ApplicationContext` le pide a Hilt el `Context` de la aplicación, que Room necesita para ubicar el archivo.
-- La segunda función le enseña a Hilt a obtener el DAO a partir de la base de datos. Así, cualquier clase puede pedir un `NotaDao` en su constructor.
+Aquí todo tiene valor por defecto, porque un error puede venir incompleto (y no queremos que convertir un error provoque **otro** error). `errors` solo viene en los `400`; en los demás casos queda como lista vacía. En el capítulo 49 usarás esta clase para mostrar mensajes útiles.
 
-## Room detrás del repositorio
+## Serializar: el cuerpo de un `POST`
 
-Aquí está la recompensa de haber dependido de una abstracción en el capítulo 41. El `ViewModel` depende de una **interfaz** de repositorio:
+Para crear un contacto hay que enviar un JSON con sus datos. Se modela igual, con una clase propia, porque no tiene `id` (lo asigna el servidor):
 
 ```kotlin
-interface NotasRepository {
-    val notas: Flow<List<Nota>>
-    suspend fun agregar(nota: Nota)
-    suspend fun eliminar(id: String)
-}
+@Serializable
+data class ContactRequestDto(
+    val firstName: String,
+    val lastName: String,
+    val email: String,
+    val phone: String? = null,
+    val address: String? = null,
+    val city: String? = null
+)
 ```
 
-Guardar las notas en Room es solo **otra implementación** de esa interfaz:
+Y se convierte en texto con `encodeToString`:
 
 ```kotlin
-class NotasRepositoryRoom @Inject constructor(
-    private val dao: NotaDao
-) : NotasRepository {
+val nuevo = ContactRequestDto(firstName = "Ana", lastName = "Rojas", email = "ana.rojas@example.com")
+println(json.encodeToString(nuevo))
+// {"firstName":"Ana","lastName":"Rojas","email":"ana.rojas@example.com"}
+```
 
-    override val notas: Flow<List<Nota>> =
-        dao.observarTodas().map { entidades -> entidades.map { it.aDominio() } }
+Las propiedades que tienen su valor por defecto (aquí, los tres `null`) **no se escriben**: el JSON queda igual al que enviaste a mano desde Swagger. Si agregas `city = "Temuco"`, esa clave sí aparece.
 
-    override suspend fun agregar(nota: Nota) {
-        dao.insertar(nota.aEntity())
+En la app no llamarás a `encodeToString` ni a `decodeFromString` directamente: Retrofit lo hará por ti en cada petición, usando esta misma instancia de `Json`. Pero entender qué ocurre te permitirá diagnosticar los errores de conversión cuando aparezcan.
+
+## Pruébalo sin red
+
+Las conversiones son funciones puras: reciben un texto y devuelven un objeto. Son perfectas para una prueba unitaria como las del tutorial 4, que se ejecuta en segundos. En `src/test/` de tu proyecto, crea `ContactDtoTest.kt`:
+
+```kotlin
+class ContactDtoTest {
+
+    private val json = Json { ignoreUnknownKeys = true }
+
+    @Test
+    fun convierteUnContactoSinDatosOpcionales() {
+        val texto = """{"id": 51, "firstName": "Ana", "lastName": "Rojas", "email": "ana.rojas@example.com"}"""
+
+        val contacto = json.decodeFromString<ContactDto>(texto)
+
+        assertEquals("Ana", contacto.firstName)
+        assertNull(contacto.phone)
     }
 
-    override suspend fun eliminar(id: String) {
-        dao.eliminar(id)
+    @Test
+    fun convierteUnaBusquedaSinResultados() {
+        val texto = """{"page": {"number": 0, "size": 20, "totalElements": 0, "totalPages": 0}}"""
+
+        val pagina = json.decodeFromString<ContactPageDto>(texto)
+
+        assertNull(pagina.embedded)
+        assertEquals(0, pagina.page.totalElements)
     }
 }
 ```
 
-El repositorio recibe el DAO por constructor (gracias al `@Provides` de antes), traduce entre entidades y modelos de dominio con `map` y delega cada operación en el DAO. Para empezar a usarlo, basta con cambiar una línea en el módulo de Hilt que asocia la interfaz con su implementación:
+El texto va entre **triples comillas** (`"""`), las *raw strings* de Kotlin, que permiten escribir comillas dobles sin escaparlas. Copia en otras pruebas las respuestas reales que obtuviste en Swagger: el detalle con `_links`, la lista paginada y los errores `400` y `409`.
+
+## DTOs: separar los datos de la API de tu modelo
+
+Fíjate en que todas estas clases terminan en **`Dto`**. No es casual: indica que son **DTOs** (*Data Transfer Objects*, «objetos de transferencia de datos»), clases cuyo único propósito es **reflejar la forma del JSON** de la API.
+
+¿Por qué no usar `ContactDto` directamente en toda la app? Por dos razones:
+
+- La forma en que la API entrega los datos no siempre es la más cómoda para tu aplicación: nombres en otro idioma, listas anidadas dos niveles dentro de `_embedded`, datos que no necesitas.
+- Si la API **cambia** (por ejemplo, renombra `phone` a `mobile`), no quieres que ese cambio se propague por todas tus pantallas.
+
+Por eso es buena práctica **separar** los DTOs de tus **modelos de dominio**: las clases limpias que tu app realmente usa, con los nombres y la forma que le convienen. Para los contactos:
 
 ```kotlin
-@Binds
-abstract fun bindNotasRepository(impl: NotasRepositoryRoom): NotasRepository
+// Modelo de dominio: lo que usa la app
+data class Contacto(
+    val id: Int,
+    val nombre: String,
+    val apellido: String,
+    val email: String,
+    val telefono: String? = null,
+    val direccion: String? = null,
+    val ciudad: String? = null
+) {
+    val nombreCompleto: String
+        get() = "$nombre $apellido"
+}
+
+// Mapeo de DTO a modelo de dominio
+fun ContactDto.aDominio(): Contacto = Contacto(
+    id = id,
+    nombre = firstName,
+    apellido = lastName,
+    email = email,
+    telefono = phone,
+    direccion = address,
+    ciudad = city
+)
 ```
 
-El `ViewModel` no cambia: sigue pidiendo un `NotasRepository`, y sigue observando `notas` y llamando a `agregar` y `eliminar`. La interfaz tampoco cambia. Pero ahora las notas **sobreviven al cierre de la app**.
+- `Contacto` **no** es `@Serializable`: no sabe nada de JSON. Puede tener propiedades calculadas, como `nombreCompleto`, que la API no conoce.
+- El mapeo es una **función de extensión** (capítulo 21). Verás el mismo patrón en el capítulo 50 con Room: cada fuente de datos tiene sus propias clases, y se traducen al modelo de dominio en el borde de la capa de datos.
 
-## Del disco a la pantalla
+Así, si mañana la API renombra un campo, solo ajustas el DTO y su mapeo; el resto de la app, que trabaja con `Contacto`, ni se entera.
 
-Como el DAO devuelve un `Flow`, la cadena completa es reactiva de punta a punta:
+## El flujo completo
+
+Reuniendo las piezas, el recorrido de un dato desde la API hasta tu app será:
 
 ```mermaid
-sequenceDiagram
-    participant UI as Interfaz
-    participant VM as ViewModel
-    participant R as Repositorio
-    participant DB as Room
-    UI->>VM: agregar("Comprar pan")
-    VM->>R: agregar(nota)
-    R->>DB: insertar(entidad)
-    Note over DB: La tabla «notas» cambió
-    DB-->>R: nueva lista (Flow)
-    R-->>VM: nueva lista de Nota
-    VM-->>UI: nuevo estado
-    Note over UI: Se redibuja con la nota nueva
+flowchart LR
+    J["JSON<br/>(respuesta de la API)"] -- "deserializa" --> D["DTO<br/>(refleja el JSON)"]
+    D -- "mapea" --> M["Modelo de dominio<br/>(lo que usa la app)"]
 ```
 
-Fíjate en que el `ViewModel`, después de pedir que se agregue la nota, **no actualiza la lista a mano**. Room avisa del cambio a través del `Flow` y la nueva lista llega sola hasta la pantalla. La base de datos es la **única fuente de verdad**.
+- Retrofit hará la petición y recibirá el **JSON** (próximo capítulo).
+- `kotlinx.serialization` lo **deserializa** en un **DTO**, con la instancia de `Json` que configuraste.
+- El repositorio **mapea** el DTO a un **modelo de dominio**.
+- El `ViewModel` y la interfaz trabajan solo con ese modelo limpio.
 
-En el `ViewModel`, ese `Flow` se convierte en el estado de la pantalla con `stateIn`, que transforma un `Flow` en un `StateFlow`:
-
-```kotlin
-@HiltViewModel
-class NotasViewModel @Inject constructor(
-    private val repository: NotasRepository
-) : ViewModel() {
-
-    val uiState: StateFlow<List<Nota>> = repository.notas
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = emptyList()
-        )
-
-    fun agregar(titulo: String, contenido: String) {
-        viewModelScope.launch {
-            repository.agregar(
-                Nota(id = UUID.randomUUID().toString(), titulo = titulo, contenido = contenido)
-            )
-        }
-    }
-}
-```
-
-- `scope = viewModelScope`: el flujo vive mientras viva el `ViewModel`.
-- `started = SharingStarted.WhileSubscribed(5_000)`: la consulta a la base de datos se mantiene activa mientras la interfaz esté observando, y se detiene 5 segundos después de que deje de hacerlo. Esos segundos evitan reiniciar la consulta en una rotación.
-- `initialValue`: el valor que se muestra antes de que llegue la primera lista desde Room.
-
-## Cuando la estructura cambia
-
-La anotación `@Database` declara `version = 1`. Si más adelante agregas una columna o una tabla, la estructura guardada en los teléfonos de tus usuarios ya no coincide con la nueva, y Room no abrirá la base de datos. Hay que subir la versión y decirle a Room cómo pasar de la estructura vieja a la nueva: una **migración**. Room puede generar las migraciones sencillas a partir de los esquemas que guarda en la carpeta `schemas/`.
-
-Mientras desarrollas y los datos no importan, existe un atajo: `fallbackToDestructiveMigration(true)` en el `databaseBuilder` **borra** la base de datos y la crea de nuevo cuando cambia la versión.
-
-> [!WARNING]Advertencia
-> Nunca publiques una app con `fallbackToDestructiveMigration` si los datos del usuario importan: cada actualización de la estructura borraría todo lo que guardó.
+Cada capa recibe los datos en la forma que le conviene, y los detalles de la API quedan contenidos en un solo lugar.
 
 ## Resumen
 
-- **Room** es la biblioteca oficial para guardar datos en una base de datos **SQLite** del teléfono. Genera el código a partir de tus anotaciones, mediante **KSP**.
-- Una **entidad** (`@Entity`) es una tabla; su `@PrimaryKey` identifica cada fila. Mantenla separada del modelo de dominio y conviértela con funciones como `aDominio()`.
-- Un **DAO** (`@Dao`) declara las operaciones. Las consultas que devuelven **`Flow`** emiten de nuevo cada vez que la tabla cambia; las operaciones puntuales son **`suspend`** y Room las ejecuta fuera del hilo principal. Las consultas `@Query` se comprueban al compilar.
-- La **base de datos** (`@Database`) reúne entidades y DAO. Debe existir una sola instancia: con Hilt, se crea con una función **`@Provides`** y **`@Singleton`**.
-- Room es solo **otra implementación del repositorio**: el `ViewModel` y la interfaz no cambian. Con `stateIn`, el `Flow` de Room se convierte en el estado de la pantalla, y la base de datos pasa a ser la única fuente de verdad.
-- Si cambias la estructura, sube la `version` y define una **migración**.
+- **Serializar** es objeto → texto (JSON); **deserializar** es texto → objeto. Tu app deserializa respuestas y serializa los cuerpos de `POST` y `PUT`.
+- **`kotlinx.serialization`** necesita un plugin del compilador (con la versión de Kotlin) y la biblioteca `kotlinx-serialization-json`.
+- Las clases se marcan con **`@Serializable`**, con propiedades del mismo nombre que las claves. `decodeFromString` y `encodeToString` hacen la conversión.
+- Usa una instancia `Json { ignoreUnknownKeys = true }` para que las claves que sobran (como `_links`) no provoquen errores.
+- Si una clave **puede faltar**, la propiedad necesita un **valor por defecto** (`String? = null`), no solo el `?`. Al serializar, las propiedades con su valor por defecto no se escriben.
+- **`@SerialName`** conecta una propiedad con una clave de otro nombre (`_embedded`). Los objetos anidados se modelan con clases anidadas, y los arreglos con `List`.
+- Un **DTO** refleja el JSON de la API; el **modelo de dominio** es lo que usa la app. Se traducen con funciones de extensión como `aDominio()`, para que los cambios de la API no afecten a toda la app.
 
-En el tutorial que sigue aplicarás todo esto a **Mi lista de tareas**: sus tareas pasarán a guardarse con Room y sobrevivirán al cierre de la app.
+En el próximo capítulo conectarás todo esto a la red con **Retrofit**: pedirás la lista de contactos a la API en ejecución y la verás llegar convertida en objetos.

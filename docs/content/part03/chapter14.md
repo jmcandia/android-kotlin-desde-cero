@@ -1,4 +1,4 @@
-# Capítulo 14a: Manejo de excepciones: `try`, `catch` y `finally`
+# Capítulo 14: Manejo de excepciones: `try`, `catch` y `finally`
 
 ## Introducción
 
