@@ -19,7 +19,7 @@ El curso avanza por partes, de lo más básico a lo más avanzado:
 - **Parte III · Colecciones y código robusto** — listas, mapas, operaciones funcionales, *null safety* y excepciones.
 - **Parte IV · Programación orientada a objetos** — clases, herencia, `data class`, `object`, `sealed class`, genéricos y lambdas.
 - **Parte V · Asincronía con Coroutines** — hilos, `suspend`, `launch`, `Flow` y `StateFlow`.
-- **Parte VI · Android y arquitectura de aplicaciones** — Android Studio, ciclo de vida de una `Activity`, cómo se organiza una app.
+- **Parte VI · Android y arquitectura de aplicaciones** — Android Studio, ciclo de vida de una `Activity`, cómo se organiza una app, arquitectura MVVM.
 - **Parte VII · Jetpack Compose y construcción de interfaces** — composables, `Modifier`, Material 3, estado, `Scaffold`/`LazyColumn`, formularios y navegación.
 - **Parte VIII · Estado y arquitectura con MVVM** — `ViewModel`, `UiState`, efectos y eventos, repositorio, inyección de dependencias.
 - **Parte IX · Datos: API REST y persistencia local** — HTTP y JSON, Retrofit, estados de red y persistencia local con Room.

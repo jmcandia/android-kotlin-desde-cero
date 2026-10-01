@@ -75,7 +75,7 @@ A lo largo del curso, cada zona tendrá su pieza concreta de Android:
 | Estado y lógica | **`ViewModel`** | Parte VIII |
 | Datos | **Repositorio** que usa una fuente: en memoria, una API REST o una base de datos local | Partes VIII y IX |
 
-Esta organización tiene nombre: **MVVM** (*Model-View-ViewModel*), la arquitectura que recomienda Android. No necesitas recordarlo ahora. En la Parte VII construirás la lista de tareas con todo dentro de la interfaz, y comprobarás en primera persona que las tareas se pierden al girar el teléfono. En la Parte VIII moverás cada trabajo a su zona.
+Esta organización tiene nombre: **MVVM** (*Model-View-ViewModel*), la arquitectura que recomienda Android. En el próximo capítulo la verás en detalle, junto con el árbol de carpetas que usarás durante el resto del curso. Más adelante, en la Parte VII, construirás la lista de tareas con todo dentro de la interfaz, y comprobarás en primera persona que las tareas se pierden al girar el teléfono; recién en la Parte VIII moverás cada trabajo a su zona.
 
 > [!IMPORTANT]
 > Estas tres zonas son **responsabilidades**, no carpetas. Una app pequeña puede tener todo en unos pocos archivos y respetar igualmente el flujo de datos. Lo que importa es quién decide, quién muestra y quién guarda; cómo organices después los archivos es una decisión aparte, que verás en la Parte VIII.
@@ -88,4 +88,4 @@ Esta organización tiene nombre: **MVVM** (*Model-View-ViewModel*), la arquitect
 - El **estado baja** y los **eventos suben** (flujo de datos unidireccional); las **dependencias apuntan hacia los datos**.
 - En el curso, esas zonas serán **Compose**, el **`ViewModel`** y el **repositorio**: la arquitectura **MVVM**. Son responsabilidades, no carpetas.
 
-En la próxima parte empezarás por la primera zona: la **interfaz**, con Jetpack Compose.
+En el próximo capítulo conocerás en detalle esta arquitectura y el árbol de carpetas que la acompaña. Luego, en la Parte VII, empezarás por la primera zona: la **interfaz**, con Jetpack Compose.

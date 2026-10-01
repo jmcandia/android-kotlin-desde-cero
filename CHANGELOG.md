@@ -14,6 +14,8 @@ Este archivo resume los cambios de alto nivel del contenido del curso. Para el d
 
 - Se eliminaron los sufijos con letras introduciendo una numeración estrictamente secuencial en cascada, llevando el total del curso a 61 capítulos.
 - Se dividieron capítulos densos (Excepciones y Result; Navegación Compose) en capítulos separados más manejables.
+- El capítulo conceptual de MVVM (antes 41, al final de la Parte VII) se trasladó a la Parte VI como capítulo 29, justo después de «Cómo se organiza una app», e incorpora el árbol de carpetas propuesto del proyecto con una referencia al capítulo futuro donde se construye cada parte. Los capítulos 29–40 de la Parte VII se renumeraron a 30–41 para dar espacio al traslado.
+- Los capítulos de las Partes VII, VIII y IX, y los tutoriales de «Mi lista de tareas», ahora conectan explícitamente su contenido con los conceptos de MVVM introducidos en el capítulo 29, en vez de presentar la arquitectura recién en la Parte VIII.
 
 ## 2026-09-29
 

@@ -313,7 +313,7 @@ Ejecuta la app y prueba el flujo completo:
 
 ## Resumen
 
-En este tutorial construiste tu primera interfaz completa combinando lo aprendido en los capítulos 26 a 34:
+En este tutorial construiste tu primera interfaz completa combinando lo aprendido en los capítulos 26 a 28 y 30 a 35:
 
 - Creaste el proyecto y reutilizaste el **tema por defecto** que genera Android Studio, sin personalizarlo todavía.
 - Le diste a la app un **ícono propio** con el asistente de Image Asset, y declaraste sus textos en `strings.xml`, leyéndolos con `stringResource` en lugar de escribirlos directamente en el código.

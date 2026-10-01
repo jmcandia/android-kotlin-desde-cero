@@ -301,7 +301,7 @@ En el proyecto final (capítulo 52) escribirás un composable que pide este perm
 
 ## Usar la API desde el repositorio
 
-La interfaz de Retrofit encaja en la capa de datos que construiste en la Parte VIII. El repositorio la recibe por su constructor, gracias al `@Provides`, y traduce los DTOs a modelos de dominio con los mapeos del capítulo anterior:
+La interfaz de Retrofit encaja en la capa de datos que construiste en la Parte VIII, dentro del subpaquete `data/remote/` que anticipaste en el capítulo 29. El repositorio la recibe por su constructor, gracias al `@Provides`, y traduce los DTOs a modelos de dominio con los mapeos del capítulo anterior:
 
 ```kotlin
 class ContactosRepositoryImpl @Inject constructor(

@@ -48,9 +48,9 @@ Estas fueron las grandes etapas que recorriste:
 ```mermaid
 flowchart LR
     K["Partes I-IV\nKotlin: sintaxis, POO,\ncolecciones, null safety"] --> C["Parte V\nCoroutines y Flow"]
-    C --> A["Parte VI\nAndroid: Activity,\nciclo de vida"]
+    C --> A["Parte VI\nAndroid: Activity,\nciclo de vida, MVVM"]
     A --> J["Parte VII\nJetpack Compose:\nUI declarativa"]
-    J --> M["Parte VIII\nMVVM: ViewModel,\nUiState, Hilt"]
+    J --> M["Parte VIII\nViewModel, UiState,\nRepository, Hilt"]
     M --> R["Parte IX\nRetrofit + Room:\nred y persistencia"]
     R --> P["Parte X\nProyecto final:\nMis Contactos"]
 ```
@@ -62,9 +62,10 @@ Cada parte no fue un tema aislado: la **Parte X** es, literalmente, la combinaci
 | `sealed interface`/`sealed class` para `UiState` y `ErrorDatos` | Parte IV (cap. 20) |
 | `suspend`, `viewModelScope.launch`, `Job`, cancelación | Parte V (cap. 23–24) |
 | `StateFlow`, `SharedFlow`, `.update {}` | Parte V (cap. 25) |
-| Composables con y sin estado, `LazyColumn`, `Scaffold` | Parte VII (cap. 29–34) |
+| MVVM: Vista, ViewModel y Modelo como concepto | Parte VI (cap. 29) |
+| Composables con y sin estado, `LazyColumn`, `Scaffold` | Parte VII (cap. 30–35) |
 | `LaunchedEffect` y el patrón evento-como-estado | Parte VIII (cap. 43) |
-| `ViewModel` + `UiState` + `Repository` + Hilt | Parte VIII (cap. 41–45) |
+| `ViewModel` + `UiState` + `Repository` + Hilt | Parte VIII (cap. 42–45) |
 | DTOs, Retrofit, serialización JSON, estados de red | Parte IX (cap. 46–49) |
 | Room, entidades, DAOs, caché offline | Parte IX (cap. 50) |
 
@@ -84,7 +85,7 @@ Si alguna fila te resulta borrosa, es una señal legítima de que vale la pena r
 Con esta base, algunas direcciones razonables para seguir creciendo como desarrollador Android:
 
 1. **Agrega pruebas automatizadas** a `ListaContactosViewModel` o `FormularioContactoViewModel`: son los más ricos en lógica (debounce, validación, paginación) y los que más se benefician de una red de seguridad ante futuros cambios.
-2. **Extiende «Mis Contactos»** con una funcionalidad nueva de punta a punta: por ejemplo, ordenar la lista por distintos criterios, o agrupar contactos por la primera letra del apellido (algo similar a lo que ya viste con `LazyColumn` en el capítulo 34). Repetir el ciclo completo (`UiState` → `ViewModel` → `Repository` → capa remota/local si aplica) sobre un caso nuevo es la mejor forma de consolidar la arquitectura.
+2. **Extiende «Mis Contactos»** con una funcionalidad nueva de punta a punta: por ejemplo, ordenar la lista por distintos criterios, o agrupar contactos por la primera letra del apellido (algo similar a lo que ya viste con `LazyColumn` en el capítulo 35). Repetir el ciclo completo (`UiState` → `ViewModel` → `Repository` → capa remota/local si aplica) sobre un caso nuevo es la mejor forma de consolidar la arquitectura.
 3. **Explora Compose Multiplatform** si te interesa compartir lógica de negocio (ViewModels, repositorios) entre Android, iOS y escritorio; los conceptos de `StateFlow` y `UiState` de este curso se trasladan casi sin cambios.
 4. **Revisa la documentación oficial de Android** (developer.android.com) sobre los temas que quedaron fuera de alcance: es el lugar correcto para profundizar en `WorkManager`, módulos multi-Gradle o testing avanzado, ahora que ya tienes el vocabulario y los conceptos de este curso como base.
 

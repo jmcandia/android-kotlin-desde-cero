@@ -1,84 +1,93 @@
-# Capítulo 35: Formularios y validación en la interfaz
+# Capítulo 35: Estructura de pantalla: `Scaffold` y `LazyColumn`
 
 ## Introducción
 
-Ya conoces los componentes con estado —`TextField`, `Checkbox`, `Switch`— y sabes elevar el estado al composable padre. Un **formulario** los combina: pide varios datos al usuario, comprueba que sean válidos y explica cómo corregirlos. En este capítulo verás cómo organizarlo para que siga siendo claro a medida que crece.
+Ya sabes organizar composables con `Column`, `Row` y `Box`, y darles estado. Pero la mayoría de las pantallas comparten una estructura —una barra superior, el contenido, quizás una barra inferior o un botón flotante— y muchas muestran **listas largas** de datos. En este capítulo aprenderás a montar el **esqueleto** de una pantalla con `Scaffold`, a organizarla por **jerarquías** de composables y a mostrar listas de forma eficiente con `LazyColumn`.
 
-## Componentes, modelo y validación
+## `Scaffold`: el esqueleto de una pantalla
 
-Un formulario no es solo una columna de campos. Es un pequeño flujo de datos con tres responsabilidades que conviene distinguir:
+La mayoría de las pantallas comparten una estructura: una barra arriba, el contenido en el medio, quizás una barra abajo o un botón flotante. En lugar de armar eso a mano, Material ofrece el **`Scaffold`** ("andamio"), un composable que provee **espacios** (*slots*) para cada una de esas partes:
 
-1. **Componentes**: `TextField`, `Checkbox`, `Switch`, `Button` y, cuando corresponda, `DropdownMenu` o `RadioButton`.
-2. **Modelo**: una clase que representa los datos que el formulario recopila, sin depender de Compose.
-3. **Validación**: reglas que determinan si esos datos se pueden enviar y mensajes que explican cómo corregirlos.
+![Scaffold](../../assets/images/chapter33/scaffold.svg)
 
-Por ejemplo, el modelo de un contacto puede vivir en un archivo normal de Kotlin:
+Un uso típico, con una barra superior y el contenido:
 
 ```kotlin
-data class ContactoForm(
-    val nombre: String = "",
-    val correo: String = "",
-    val aceptaTerminos: Boolean = false
-)
+Scaffold(
+    topBar = {
+        TopAppBar(title = { Text("Mi aplicación") })
+    }
+) { innerPadding ->
+    Column(modifier = Modifier.padding(innerPadding)) {
+        // el contenido de la pantalla
+    }
+}
 ```
 
-El composable puede mantener el estado editable y elevar el resultado al contenedor, siguiendo el *state hoisting* del capítulo 33:
+Fíjate en el `innerPadding`: el `Scaffold` te entrega el espacio que ocupan las barras para que **apartes** el contenido y no quede tapado por ellas. Por eso se lo pasas como `padding` al composable de contenido. (Ya habías visto este patrón en el `MainActivity` que generó Android Studio.) Ese contenido normalmente es un layout, como `Column`, o una lista con `LazyColumn`, que verás a continuación.
+
+> [!NOTE]Nota
+> Algunos componentes de Material 3, como `TopAppBar`, están marcados todavía como *experimentales*, lo que obliga a añadir la anotación `@OptIn(ExperimentalMaterial3Api::class)` sobre la función que los usa. Android Studio te avisa y la agrega por ti.
+
+## `LazyColumn`: listas eficientes
+
+Un `Column` dibuja **todos** sus hijos de una vez. Eso está bien para unos pocos elementos, pero ¿y si tienes una lista de cientos o miles de elementos? Dibujarlos todos a la vez sería lento y desperdiciaría memoria, sobre todo porque la mayoría ni siquiera caben en la pantalla.
+
+Para eso está el **`LazyColumn`**: una columna con desplazamiento (*scroll*) que solo compone los elementos **visibles** en cada momento, y los va reutilizando a medida que te desplazas. Así puede mostrar listas enormes sin problemas.
+
+En vez de escribir cada hijo a mano, le pasas la lista con la función `items`:
+
+```kotlin
+val nombres = listOf("Ana", "Diego", "Elena")
+
+LazyColumn {
+    items(nombres) { nombre ->
+        Text(nombre)
+    }
+}
+```
+
+`items(nombres)` recorre la lista y, por cada elemento, ejecuta la lambda que describe cómo mostrarlo (aquí, un `Text` con su nombre). El desplazamiento funciona automáticamente. También existe `LazyRow`, su equivalente horizontal.
+
+> [!NOTE]Nota
+> Si vienes del desarrollo Android tradicional, `LazyColumn` cumple el papel del antiguo `RecyclerView`, pero con muchísimo menos código: no necesitas adaptadores ni *view holders*.
+
+Este es, precisamente, el componente que sueles poner dentro del contenido de un `Scaffold` para mostrar listas largas de datos: un `LazyColumn` con un `items` que recorre los elementos, recibiendo el `innerPadding` que viste al principio del capítulo.
+
+## Diseñar por jerarquías
+
+Una pantalla mantenible no se construye como una única función enorme. Conviene organizarla en una jerarquía: una raíz que decide la estructura general, secciones que agrupan contenido relacionado y componentes pequeños que muestran un dato o emiten un evento.
 
 ```kotlin
 @Composable
-fun ContactoForm(
-    formulario: ContactoForm,
-    errores: Map<String, String>,
-    onFormularioChange: (ContactoForm) -> Unit,
-    onEnviar: () -> Unit
-) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        OutlinedTextField(
-            value = formulario.nombre,
-            onValueChange = { onFormularioChange(formulario.copy(nombre = it)) },
-            label = { Text("Nombre") },
-            isError = errores.containsKey("nombre"),
-            supportingText = { errores["nombre"]?.let { Text(it) } }
-        )
-        OutlinedTextField(
-            value = formulario.correo,
-            onValueChange = { onFormularioChange(formulario.copy(correo = it)) },
-            label = { Text("Correo electrónico") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-            isError = errores.containsKey("correo"),
-            supportingText = { errores["correo"]?.let { Text(it) } }
-        )
-        Button(
-            onClick = onEnviar,
-            enabled = errores.isEmpty() && formulario.aceptaTerminos
-        ) {
-            Text("Guardar")
+fun ContactosScreen() {
+    Scaffold(
+        topBar = { ContactosTopBar() },
+        bottomBar = { ContactosBottomBar() }
+    ) { innerPadding ->
+        ContactosContent(modifier = Modifier.padding(innerPadding))
+    }
+}
+
+@Composable
+private fun ContactosContent(modifier: Modifier = Modifier) {
+    LazyColumn(modifier = modifier) {
+        item { ContactosHeader() }
+        items(contactos, key = { it.id }) { contacto ->
+            ContactoItem(contacto = contacto)
         }
     }
 }
 ```
 
-La validación no debería depender de que el usuario pulse el botón. Puedes validar al salir de un campo para ofrecer una corrección temprana, y volver a validar al enviar para no confiar únicamente en el estado visual. Una función pura resulta fácil de probar:
-
-```kotlin
-fun validarContacto(formulario: ContactoForm): Map<String, String> = buildMap {
-    if (formulario.nombre.isBlank()) put("nombre", "Escribe un nombre")
-    if (!formulario.correo.contains("@")) put("correo", "Escribe un correo válido")
-    if (!formulario.aceptaTerminos) put("terminos", "Debes aceptar los términos")
-}
-```
-
-En una pantalla real, el contenedor conserva `ContactoForm` y los errores, y decide cuándo llamar a `validarContacto`. El composable del formulario solo muestra valores, errores y eventos. Para formularios largos, usa `rememberSaveable` para conservar lo escrito durante una recreación de la `Activity`; la validación definitiva y el envío deberán pasar después a un `ViewModel`, como se verá en la Parte VIII.
-
-> [!WARNING]Advertencia
-> `isError` cambia el aspecto del campo, pero no sustituye al texto del error ni a una validación real. Tampoco valides solo en la interfaz: la capa que guarda o envía los datos debe volver a comprobar sus reglas.
+Esta separación ayuda a que cada pieza tenga una responsabilidad clara y permite previsualizar una sección con datos de ejemplo. La raíz conoce la estructura de la pantalla; los hijos reciben datos y callbacks. El estado compartido no debe esconderse en cada fila, sino vivir en el nivel más bajo que necesite coordinarlo, o en el `ViewModel` cuando la pantalla tenga lógica de negocio.
 
 ## Resumen
 
-En este capítulo aprendiste a construir formularios:
+En este capítulo aprendiste a construir la estructura de una pantalla completa:
 
-- Un formulario combina **componentes**, un **modelo independiente de Compose** y una **validación** que produce errores comprensibles.
-- El estado se eleva al contenedor; el composable del formulario recibe valores, errores y eventos.
-- `isError` y `supportingText` muestran los errores junto a cada campo, pero no reemplazan la validación de la capa que guarda o envía los datos.
+- El **`Scaffold`** ofrece la estructura básica de una pantalla, con espacios para la barra superior (`TopAppBar`), el contenido, una barra inferior y un botón flotante.
+- **`LazyColumn`** muestra listas con desplazamiento de forma eficiente, componiendo solo los elementos visibles; se llena con la función `items`. Su versión horizontal es `LazyRow`.
+- Una pantalla se organiza mejor por **jerarquías**: la raíz coordina la estructura y los componentes hijos reciben datos y eventos.
 
-En el próximo capítulo aprenderás a moverte entre distintas pantallas de tu app con **Navigation Compose**.
+Ya tienes todas las piezas para una primera app completa. En el tutorial que sigue construirás **Mi lista de tareas** con lo aprendido en esta parte.

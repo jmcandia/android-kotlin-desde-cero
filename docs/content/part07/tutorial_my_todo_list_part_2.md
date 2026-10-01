@@ -7,7 +7,7 @@ En la primera parte construiste una lista de tareas funcional con una sola panta
 - toda la interfaz vive en una única pantalla;
 - usa los colores y la tipografía que Android Studio generó por defecto.
 
-En esta segunda parte vas a aplicar lo aprendido en los capítulos 36 y 39 para mejorarla sin volver a empezar. Al terminar, tu app tendrá:
+En esta segunda parte vas a aplicar lo aprendido en los capítulos 37 y 40 para mejorarla sin volver a empezar. Al terminar, tu app tendrá:
 
 - una pantalla de lista y una pantalla de detalle;
 - navegación entre ambas con **Navigation Compose**;
@@ -214,7 +214,7 @@ fun App() {
 }
 ```
 
-Todavía falta declarar el destino del detalle; lo haremos en el paso 8. Observa mientras tanto el cambio importante: `App` posee la lista y las acciones, y `ListaTareasScreen` recibirá datos y funciones. Es el mismo *state hoisting* del capítulo 33, aplicado ahora a más de una pantalla.
+Todavía falta declarar el destino del detalle; lo haremos en el paso 8. Observa mientras tanto el cambio importante: `App` posee la lista y las acciones, y `ListaTareasScreen` recibirá datos y funciones. Es el mismo *state hoisting* del capítulo 34, aplicado ahora a más de una pantalla.
 
 ## Paso 7: Convertir la lista en un composable sin estado
 

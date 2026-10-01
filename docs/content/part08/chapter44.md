@@ -75,27 +75,18 @@ Cada capa tiene un trabajo claro, y ninguna se mete en el de las demás. Esto ha
 
 ## La estructura del proyecto en carpetas
 
-Estas capas no son solo un concepto: se reflejan en **cómo organizas las carpetas** (los *paquetes*) de tu proyecto. Una forma habitual y ordenada es agrupar el código **por capa**:
+Estas capas no son solo un concepto: se reflejan en **cómo organizas las carpetas** (los *paquetes*) de tu proyecto, tal como adelantaste en el capítulo 29. Ahora que tienes el repositorio, puedes llenar la zona de datos con sus archivos concretos:
 
 ```text
-com.ejemplo.miapp/
-├── data/                      # capa de datos
-│   ├── DatosRepository.kt          # la interfaz del repositorio
-│   └── DatosRepositoryImpl.kt      # su implementación
-├── model/                     # modelos de dominio (las clases que usa la app)
-│   └── Usuario.kt
-├── ui/                        # capa de interfaz
-│   ├── PantallaUsuarios.kt         # composables (la Vista)
-│   ├── UsuariosViewModel.kt        # el ViewModel
-│   ├── UiState.kt                  # el estado de la interfaz
-│   └── theme/                      # el tema de Material (generado por Android Studio)
-└── MainActivity.kt            # el punto de entrada
+data/                      # capa de datos
+├── DatosRepository.kt          # la interfaz del repositorio
+└── DatosRepositoryImpl.kt      # su implementación
 ```
 
 La idea es simple: cada archivo vive en el paquete de la capa a la que pertenece. Un `ViewModel` va en `ui/`; el repositorio, en `data/`; los modelos que la app usa, en `model/`. Así, con solo mirar la ubicación de un archivo, sabes cuál es su responsabilidad.
 
 > [!NOTE]Nota
-> Esta estructura irá creciendo con el curso. En el próximo capítulo añadiremos un paquete `di/` para la inyección de dependencias, y al llegar a Retrofit sumaremos, dentro de `data/`, un subpaquete `remote/` con el acceso a la red y los DTOs.
+> Esta estructura irá creciendo según el mapa del capítulo 29. En el próximo capítulo llenaremos el paquete `di/` para la inyección de dependencias, y al llegar a Retrofit llenaremos, dentro de `data/`, el subpaquete `remote/` con el acceso a la red y los DTOs.
 
 Existen otras maneras de organizar un proyecto —por ejemplo, **por funcionalidad**, agrupando en un mismo paquete todo lo relacionado con una pantalla—, pero organizar **por capas** es claro y más que suficiente para empezar.
 

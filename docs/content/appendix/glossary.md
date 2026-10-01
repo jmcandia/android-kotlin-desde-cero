@@ -11,9 +11,9 @@ Cada entrada incluye una definición breve y un enlace al capítulo donde el té
 
 ## Términos
 
-**`@Composable`** — Anotación que marca una función como un *composable*, es decir, una pieza de interfaz de Jetpack Compose que describe qué mostrar en función de su estado. Ver el [capítulo 29](../part07/chapter29.md).
+**`@Composable`** — Anotación que marca una función como un *composable*, es decir, una pieza de interfaz de Jetpack Compose que describe qué mostrar en función de su estado. Ver el [capítulo 30](../part07/chapter30.md).
 
-**`@Preview`** — Anotación que permite visualizar un composable en Android Studio sin ejecutar la app en un dispositivo. Ver el [capítulo 29](../part07/chapter29.md).
+**`@Preview`** — Anotación que permite visualizar un composable en Android Studio sin ejecutar la app en un dispositivo. Ver el [capítulo 30](../part07/chapter30.md).
 
 **`Activity`** — Componente de Android que representa una pantalla con la que el usuario interactúa. Tiene un ciclo de vida propio (creación, pausa, reanudación, destrucción) que debes respetar. Ver el [capítulo 27](../part06/chapter27.md).
 
@@ -35,7 +35,7 @@ Cada entrada incluye una definición breve y un enlace al capítulo donde el té
 
 **`enum class`** — Tipo que representa un conjunto fijo y conocido de valores posibles (por ejemplo, los días de la semana). Ver el [capítulo 20](../part04/chapter20.md).
 
-**Estado y recomposición** — En Compose, el *estado* son los datos que la interfaz observa; cuando el estado cambia, Compose vuelve a ejecutar (recompone) las funciones afectadas para reflejar el nuevo valor. Ver el [capítulo 33](../part07/chapter33.md).
+**Estado y recomposición** — En Compose, el *estado* son los datos que la interfaz observa; cuando el estado cambia, Compose vuelve a ejecutar (recompone) las funciones afectadas para reflejar el nuevo valor. Ver el [capítulo 34](../part07/chapter34.md).
 
 **`Flow`** — Flujo asíncrono de Kotlin que emite una secuencia de valores a lo largo del tiempo, de forma similar a una lista que se produce poco a poco. Ver el [capítulo 25](../part05/chapter25.md).
 
@@ -57,15 +57,15 @@ Cada entrada incluye una definición breve y un enlace al capítulo donde el té
 
 **`launch`** — Constructor de corrutinas que inicia una tarea concurrente sin devolver un resultado; se usa para trabajo de tipo "dispara y olvida". Ver el [capítulo 24](../part05/chapter24.md).
 
-**`LazyColumn`** — Lista vertical de Compose que solo compone los elementos visibles, ideal para colecciones largas. Ver el [capítulo 34](../part07/chapter34.md).
+**`LazyColumn`** — Lista vertical de Compose que solo compone los elementos visibles, ideal para colecciones largas. Ver el [capítulo 35](../part07/chapter35.md).
 
-**Material 3** — Sistema de diseño de Google que ofrece componentes de interfaz listos para usar y una guía de color, tipografía y forma coherente. Ver el [capítulo 32](../part07/chapter32.md) (componentes) y el [capítulo 39](../part07/chapter39.md) (tema).
+**Material 3** — Sistema de diseño de Google que ofrece componentes de interfaz listos para usar y una guía de color, tipografía y forma coherente. Ver el [capítulo 33](../part07/chapter33.md) (componentes) y el [capítulo 40](../part07/chapter40.md) (tema).
 
-**`Modifier`** — Objeto de Compose que ajusta la apariencia y el comportamiento de un composable (tamaño, relleno, fondo, clics, etc.) mediante llamadas encadenadas. Ver el [capítulo 30](../part07/chapter30.md).
+**`Modifier`** — Objeto de Compose que ajusta la apariencia y el comportamiento de un composable (tamaño, relleno, fondo, clics, etc.) mediante llamadas encadenadas. Ver el [capítulo 31](../part07/chapter31.md).
 
-**MVVM (*Model-View-ViewModel*)** — Patrón de arquitectura que separa la interfaz (*View*) de la lógica de presentación (*ViewModel*) y de los datos (*Model*). Ver el [capítulo 41](../part08/chapter41.md).
+**MVVM (*Model-View-ViewModel*)** — Patrón de arquitectura que separa la interfaz (*View*) de la lógica de presentación (*ViewModel*) y de los datos (*Model*). Ver el [capítulo 29](../part06/chapter29.md).
 
-**Navigation Compose (`NavController` / `NavHost`)** — Biblioteca para navegar entre pantallas en Compose; el `NavController` gestiona la pila de navegación y el `NavHost` define las rutas disponibles. Ver el [capítulo 36](../part07/chapter36.md).
+**Navigation Compose (`NavController` / `NavHost`)** — Biblioteca para navegar entre pantallas en Compose; el `NavController` gestiona la pila de navegación y el `NavHost` define las rutas disponibles. Ver el [capítulo 37](../part07/chapter37.md).
 
 **Null safety** — Sistema de tipos de Kotlin que distingue entre valores que pueden ser nulos (`T?`) y los que no (`T`), evitando en tiempo de compilación muchos errores por referencias nulas. Ver el [capítulo 13](../part03/chapter13.md).
 
@@ -75,7 +75,7 @@ Cada entrada incluye una definición breve y un enlace al capítulo donde el té
 
 **`object` / `companion object`** — `object` declara un singleton (una única instancia); `companion object` asocia miembros a una clase sin necesitar una instancia, similar a los miembros estáticos de Java. Ver el [capítulo 19](../part04/chapter19.md).
 
-**`remember` / `mutableStateOf`** — En Compose, `mutableStateOf` crea un estado observable y `remember` lo conserva entre recomposiciones para que no se reinicie en cada ejecución. Ver el [capítulo 33](../part07/chapter33.md).
+**`remember` / `mutableStateOf`** — En Compose, `mutableStateOf` crea un estado observable y `remember` lo conserva entre recomposiciones para que no se reinicie en cada ejecución. Ver el [capítulo 34](../part07/chapter34.md).
 
 **Repositorio** — Capa que centraliza el acceso a los datos (red, base de datos local) y oculta al resto de la app de dónde provienen. Ver el [capítulo 44](../part08/chapter44.md).
 
@@ -87,13 +87,13 @@ Cada entrada incluye una definición breve y un enlace al capítulo donde el té
 
 **Ruta tipada** — Enfoque de navegación en el que cada destino se representa con un tipo de Kotlin en lugar de una cadena de texto, aprovechando el compilador para evitar errores. Ver el [capítulo 59](../part10/chapter59.md).
 
-**`Scaffold`** — Composable que provee la estructura básica de una pantalla Material (barra superior, contenido, barra inferior, botón flotante). Ver el [capítulo 34](../part07/chapter34.md).
+**`Scaffold`** — Composable que provee la estructura básica de una pantalla Material (barra superior, contenido, barra inferior, botón flotante). Ver el [capítulo 35](../part07/chapter35.md).
 
 **`sealed class`** — Clase que restringe sus subtipos a un conjunto conocido y cerrado, lo que permite que `when` verifique de forma exhaustiva todos los casos. Ver el [capítulo 20](../part04/chapter20.md).
 
 **Serialización JSON** — Proceso de convertir objetos de Kotlin a texto JSON y viceversa, necesario para enviar y recibir datos de una API. Ver el [capítulo 47](../part09/chapter47.md).
 
-**State hoisting (elevación de estado)** — Técnica de Compose que consiste en mover el estado fuera de un composable hacia su llamador, dejando el composable sin estado y más reutilizable y comprobable. Ver el [capítulo 33](../part07/chapter33.md).
+**State hoisting (elevación de estado)** — Técnica de Compose que consiste en mover el estado fuera de un composable hacia su llamador, dejando el composable sin estado y más reutilizable y comprobable. Ver el [capítulo 34](../part07/chapter34.md).
 
 **`StateFlow`** — Variante de `Flow` que siempre tiene un valor actual y emite las actualizaciones a sus observadores; se usa habitualmente para exponer el estado de la interfaz desde un `ViewModel`. Ver el [capítulo 25](../part05/chapter25.md).
 
@@ -103,4 +103,4 @@ Cada entrada incluye una definición breve y un enlace al capítulo donde el té
 
 **`ViewModel`** — Componente que conserva y gestiona el estado de la interfaz, sobrevive a los cambios de configuración (como girar la pantalla) y mantiene la lógica de presentación fuera de la vista. Ver el [capítulo 42](../part08/chapter42.md).
 
-**Window Size Classes** — Categorías (compacto, medio, expandido) que clasifican el tamaño de la ventana disponible para adaptar el diseño a teléfonos, tablets y pantallas grandes. Ver el [capítulo 40](../part07/chapter40.md).
+**Window Size Classes** — Categorías (compacto, medio, expandido) que clasifican el tamaño de la ventana disponible para adaptar el diseño a teléfonos, tablets y pantallas grandes. Ver el [capítulo 41](../part07/chapter41.md).

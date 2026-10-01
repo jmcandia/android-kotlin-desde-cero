@@ -260,7 +260,7 @@ fun DetalleContactoContent(
 
 Los botones de la barra superior (favorito, editar, eliminar) solo se dibujan **cuando `contenido != null`**: no tiene sentido ofrecer acciones sobre un contacto que todavía se está cargando o que falló al cargar.
 
-El ícono de eliminar no borra directamente: solo cambia `confirmarEliminar` a `true`, lo que hace aparecer un `AlertDialog` de Material 3. Únicamente si el usuario toca el botón de confirmación dentro del diálogo se llama a `onEliminar()`. `confirmarEliminar` vive en `rememberSaveable` (capítulo 33) para sobrevivir a un cambio de configuración, como la rotación de pantalla, sin volver a preguntar innecesariamente ni perder la confirmación en curso.
+El ícono de eliminar no borra directamente: solo cambia `confirmarEliminar` a `true`, lo que hace aparecer un `AlertDialog` de Material 3. Únicamente si el usuario toca el botón de confirmación dentro del diálogo se llama a `onEliminar()`. `confirmarEliminar` vive en `rememberSaveable` (capítulo 34) para sobrevivir a un cambio de configuración, como la rotación de pantalla, sin volver a preguntar innecesariamente ni perder la confirmación en curso.
 
 El segundo `LaunchedEffect`, con clave `errorAccion`, muestra un snackbar cuando `alternarFavorito()` o `eliminar()` fallan, y llama a `onErrorAccionMostrado()` para limpiar el error una vez mostrado — el mismo patrón de "consumir el evento" que ya usaste en el capítulo 43.
 

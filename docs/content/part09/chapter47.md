@@ -267,7 +267,7 @@ El texto va entre **triples comillas** (`"""`), las *raw strings* de Kotlin, que
 
 ## DTOs: separar los datos de la API de tu modelo
 
-Fíjate en que todas estas clases terminan en **`Dto`**. No es casual: indica que son **DTOs** (*Data Transfer Objects*, «objetos de transferencia de datos»), clases cuyo único propósito es **reflejar la forma del JSON** de la API.
+Fíjate en que todas estas clases terminan en **`Dto`**. No es casual: indica que son **DTOs** (*Data Transfer Objects*, «objetos de transferencia de datos»), clases cuyo único propósito es **reflejar la forma del JSON** de la API. Son, justamente, lo que vive en el subpaquete `data/remote/` que anticipaste en el árbol de carpetas del capítulo 29.
 
 ¿Por qué no usar `ContactDto` directamente en toda la app? Por dos razones:
 

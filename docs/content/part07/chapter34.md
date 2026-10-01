@@ -1,93 +1,220 @@
-# Capítulo 34: Estructura de pantalla: `Scaffold` y `LazyColumn`
+# Capítulo 34: Estado en Compose: recomposición, `remember`, `mutableStateOf` y *state hoisting*
 
 ## Introducción
 
-Ya sabes organizar composables con `Column`, `Row` y `Box`, y darles estado. Pero la mayoría de las pantallas comparten una estructura —una barra superior, el contenido, quizás una barra inferior o un botón flotante— y muchas muestran **listas largas** de datos. En este capítulo aprenderás a montar el **esqueleto** de una pantalla con `Scaffold`, a organizarla por **jerarquías** de composables y a mostrar listas de forma eficiente con `LazyColumn`.
+Hasta ahora tus composables muestran siempre lo mismo. Pero una interfaz real **cambia**: un contador que aumenta, un campo de texto que se llena, una casilla que se marca. En este capítulo verás cómo Compose actualiza la pantalla cuando cambian los datos —la **recomposición**— y cómo se declaran esos datos que, al cambiar, la disparan: el **estado** (*state*).
 
-## `Scaffold`: el esqueleto de una pantalla
+Aprenderás a crear estado con `mutableStateOf`, a conservarlo entre recomposiciones con `remember`, a mantenerlo incluso al girar el dispositivo con `rememberSaveable`, a usarlo con componentes interactivos como `TextField`, `Checkbox` y `Switch`, y una técnica fundamental para organizar bien tu interfaz: el ***state hoisting*** o "elevación del estado".
 
-La mayoría de las pantallas comparten una estructura: una barra arriba, el contenido en el medio, quizás una barra abajo o un botón flotante. En lugar de armar eso a mano, Material ofrece el **`Scaffold`** ("andamio"), un composable que provee **espacios** (*slots*) para cada una de esas partes:
+## La recomposición
 
-![Scaffold](../../assets/images/chapter33/scaffold.svg)
+Aquí está la idea central de Compose. En la interfaz tradicional, cuando un dato cambiaba, tenías que buscar el elemento de pantalla y actualizarlo tú a mano. En Compose no: cuando cambian los datos que un composable **lee**, Compose **vuelve a ejecutar** ese composable con los datos nuevos y actualiza lo que se muestra. A ese "volver a ejecutar" se le llama **recomposición**.
 
-Un uso típico, con una barra superior y el contenido:
+Piénsalo así: un composable no es un dibujo fijo, sino una **descripción** de cómo debe verse la interfaz *para unos datos dados*. Si los datos cambian, Compose recalcula la descripción y redibuja solo lo necesario.
 
-```kotlin
-Scaffold(
-    topBar = {
-        TopAppBar(title = { Text("Mi aplicación") })
-    }
-) { innerPadding ->
-    Column(modifier = Modifier.padding(innerPadding)) {
-        // el contenido de la pantalla
-    }
-}
+```mermaid
+flowchart TD
+    A["Cambian los datos"] --> B["Compose vuelve a ejecutar<br/>el composable (recomposición)"]
+    B --> C["El composable describe la interfaz<br/>con los datos nuevos"]
+    C --> D["La pantalla se actualiza"]
 ```
 
-Fíjate en el `innerPadding`: el `Scaffold` te entrega el espacio que ocupan las barras para que **apartes** el contenido y no quede tapado por ellas. Por eso se lo pasas como `padding` al composable de contenido. (Ya habías visto este patrón en el `MainActivity` que generó Android Studio.) Ese contenido normalmente es un layout, como `Column`, o una lista con `LazyColumn`, que verás a continuación.
+Esto es justo lo que anticipamos al hablar de `StateFlow`: la interfaz **observa** los datos y **reacciona** a sus cambios, sin que tengas que actualizarla manualmente. En el resto de este capítulo verás cómo se declaran esos datos que, al cambiar, provocan la recomposición: el **estado**.
 
-> [!NOTE]Nota
-> Algunos componentes de Material 3, como `TopAppBar`, están marcados todavía como *experimentales*, lo que obliga a añadir la anotación `@OptIn(ExperimentalMaterial3Api::class)` sobre la función que los usa. Android Studio te avisa y la agrega por ti.
+> [!IMPORTANT]
+> Como un composable puede ejecutarse muchas veces (una por cada recomposición) y en cualquier orden, no debes poner dentro de él acciones con efectos secundarios (como modificar una variable externa o escribir en un archivo). Un composable solo debería **describir** la interfaz a partir de los datos que recibe.
 
-## `LazyColumn`: listas eficientes
+## El problema: una variable normal no basta
 
-Un `Column` dibuja **todos** sus hijos de una vez. Eso está bien para unos pocos elementos, pero ¿y si tienes una lista de cientos o miles de elementos? Dibujarlos todos a la vez sería lento y desperdiciaría memoria, sobre todo porque la mayoría ni siquiera caben en la pantalla.
-
-Para eso está el **`LazyColumn`**: una columna con desplazamiento (*scroll*) que solo compone los elementos **visibles** en cada momento, y los va reutilizando a medida que te desplazas. Así puede mostrar listas enormes sin problemas.
-
-En vez de escribir cada hijo a mano, le pasas la lista con la función `items`:
-
-```kotlin
-val nombres = listOf("Ana", "Diego", "Elena")
-
-LazyColumn {
-    items(nombres) { nombre ->
-        Text(nombre)
-    }
-}
-```
-
-`items(nombres)` recorre la lista y, por cada elemento, ejecuta la lambda que describe cómo mostrarlo (aquí, un `Text` con su nombre). El desplazamiento funciona automáticamente. También existe `LazyRow`, su equivalente horizontal.
-
-> [!NOTE]Nota
-> Si vienes del desarrollo Android tradicional, `LazyColumn` cumple el papel del antiguo `RecyclerView`, pero con muchísimo menos código: no necesitas adaptadores ni *view holders*.
-
-Este es, precisamente, el componente que sueles poner dentro del contenido de un `Scaffold` para mostrar listas largas de datos: un `LazyColumn` con un `items` que recorre los elementos, recibiendo el `innerPadding` que viste al principio del capítulo.
-
-## Diseñar por jerarquías
-
-Una pantalla mantenible no se construye como una única función enorme. Conviene organizarla en una jerarquía: una raíz que decide la estructura general, secciones que agrupan contenido relacionado y componentes pequeños que muestran un dato o emiten un evento.
+Intentemos algo sencillo: un contador que aumenta cada vez que tocas un botón. Con lo que sabes, podrías intentar una variable normal:
 
 ```kotlin
 @Composable
-fun ContactosScreen() {
-    Scaffold(
-        topBar = { ContactosTopBar() },
-        bottomBar = { ContactosBottomBar() }
-    ) { innerPadding ->
-        ContactosContent(modifier = Modifier.padding(innerPadding))
-    }
-}
+fun Contador() {
+    var contador = 0
 
-@Composable
-private fun ContactosContent(modifier: Modifier = Modifier) {
-    LazyColumn(modifier = modifier) {
-        item { ContactosHeader() }
-        items(contactos, key = { it.id }) { contacto ->
-            ContactoItem(contacto = contacto)
-        }
+    Button(onClick = { contador++ }) {
+        Text("Has tocado $contador veces")
     }
 }
 ```
 
-Esta separación ayuda a que cada pieza tenga una responsabilidad clara y permite previsualizar una sección con datos de ejemplo. La raíz conoce la estructura de la pantalla; los hijos reciben datos y callbacks. El estado compartido no debe esconderse en cada fila, sino vivir en el nivel más bajo que necesite coordinarlo, o en el `ViewModel` cuando la pantalla tenga lógica de negocio.
+Pero esto **no funciona**: por más que toques el botón, el número no cambia en pantalla. Y hay dos razones:
+
+1. Compose **no sabe** que `contador` cambió, así que no recompone: la interfaz nunca se entera de la actualización.
+2. Aunque recompusiera, `contador` es una variable normal que se **reinicia a 0** cada vez que la función se vuelve a ejecutar.
+
+Necesitamos algo que Compose pueda **observar** y que, además, **sobreviva** a las recomposiciones. Esas dos necesidades las resuelven `mutableStateOf` y `remember`.
+
+> [!NOTE]Nota
+> `Button` es un componente de Material, que veremos en detalle más adelante. Por ahora basta con saber que su parámetro `onClick` recibe la acción que se ejecuta al tocarlo.
+
+## `mutableStateOf` y `remember`
+
+La solución tiene dos partes que trabajan juntas.
+
+**`mutableStateOf`** crea un valor **observable**: un contenedor de estado que Compose vigila. Cuando su contenido cambia, Compose recompone los composables que lo leen.
+
+**`remember`** le dice a Compose que **recuerde** ese valor entre recomposiciones, en lugar de recrearlo cada vez.
+
+Combinándolos:
+
+```kotlin
+@Composable
+fun Contador() {
+    val contador = remember { mutableStateOf(0) }
+
+    Button(onClick = { contador.value++ }) {
+        Text("Has tocado ${contador.value} veces")
+    }
+}
+```
+
+Ahora sí funciona. Al leer `contador.value` dentro del `Text`, Compose registra que ese texto **depende** de ese estado. Cuando tocas el botón y haces `contador.value++`, el estado cambia, Compose recompone y el texto se actualiza con el nuevo número. Y gracias a `remember`, el valor no se pierde entre recomposiciones.
+
+## La sintaxis `by`
+
+Escribir `.value` cada vez es un poco engorroso. Kotlin ofrece una forma más limpia mediante una **propiedad delegada**, con la palabra clave `by`:
+
+```kotlin
+@Composable
+fun Contador() {
+    var contador by remember { mutableStateOf(0) }
+
+    Button(onClick = { contador++ }) {
+        Text("Has tocado $contador veces")
+    }
+}
+```
+
+Con `by`, usas `contador` directamente, como si fuera una variable normal: lo lees sin `.value` y lo modificas con `contador++`. Por detrás sigue siendo el mismo estado observable. Fíjate en que ahora se declara con `var`, porque lo vas a modificar. Esta es la forma que verás con más frecuencia.
+
+> [!NOTE]Nota
+> Esta sintaxis necesita importar `getValue` y `setValue` de Compose; Android Studio agrega esos imports por ti automáticamente.
+
+## Sobrevivir a la rotación: `rememberSaveable`
+
+¿Recuerdas que, al girar el dispositivo, Android **destruye y recrea** la `Activity`, perdiendo su estado? Ese problema también afecta a `remember`: como la recreación empieza todo de cero, el valor guardado con `remember` se **pierde** al rotar.
+
+Para esos casos existe **`rememberSaveable`**, que funciona igual que `remember`, pero **guarda** el estado y lo **restaura** tras una recreación por cambio de configuración:
+
+```kotlin
+var contador by rememberSaveable { mutableStateOf(0) }
+```
+
+Con este simple cambio, tu contador conserva su valor aunque gires el teléfono. Úsalo cuando quieras que un estado sobreviva a la rotación (por ejemplo, lo que el usuario escribió en un formulario).
+
+## Componentes con estado: `TextField`, `Checkbox` y `Switch`
+
+Con `remember` y `mutableStateOf` ya puedes usar los componentes de Material 3 que el usuario **modifica**. Todos siguen el mismo patrón.
+
+### `TextField`: la base de los formularios
+
+Un **`TextField`** es un campo de texto editable: el componente con el que construirás prácticamente **todos los formularios** del curso (inicio de sesión, búsqueda, alta de un contacto…).
+
+| Parámetro | Qué hace |
+| :--- | :--- |
+| `value` | El texto que se muestra **ahora mismo** en el campo. Es obligatorio. |
+| `onValueChange` | La función que se ejecuta cada vez que el usuario escribe algo. Es obligatorio. |
+| `label` | Una etiqueta que identifica el campo (por ejemplo, "Correo electrónico"). |
+| `placeholder` | Un texto de ejemplo que se ve cuando el campo está vacío. |
+
+```kotlin
+var nombre by remember { mutableStateOf("") }
+
+TextField(
+    value = nombre,
+    onValueChange = { nombre = it },
+    label = { Text("Nombre") },
+    placeholder = { Text("Ingresa tu nombre") }
+)
+```
+
+Fíjate en el patrón: `value` le dice a `TextField` **qué mostrar**, y `onValueChange` recibe el texto nuevo cada vez que el usuario teclea, para que tú lo guardes (aquí, en `nombre`). Si solo pasaras `value` sin actualizarlo en `onValueChange`, el campo se vería "congelado" y no dejaría escribir, por la misma razón que viste con `Button`: la interfaz no cambia si nadie actualiza el estado que lee. Un formulario real simplemente combina **varios** `TextField` como este, uno por cada dato que pidas.
+
+### `Checkbox` y `Switch`
+
+Un **`Checkbox`** es una casilla de verificación; un **`Switch`** es un interruptor de encendido/apagado. Ambos comparten los mismos parámetros:
+
+| Parámetro | Qué hace |
+| :--- | :--- |
+| `checked` | Si está marcado o activado. Es obligatorio. |
+| `onCheckedChange` | La función que se ejecuta cuando el usuario lo toca, con el nuevo valor. Es obligatorio. |
+
+```kotlin
+var aceptaTerminos by remember { mutableStateOf(false) }
+
+Row(verticalAlignment = Alignment.CenterVertically) {
+    Checkbox(
+        checked = aceptaTerminos,
+        onCheckedChange = { aceptaTerminos = it }
+    )
+    Text("Acepto los términos y condiciones")
+}
+```
+
+Para un `Switch`, el uso es idéntico: solo cambia el componente.
+
+```kotlin
+var notificacionesActivas by remember { mutableStateOf(true) }
+
+Switch(
+    checked = notificacionesActivas,
+    onCheckedChange = { notificacionesActivas = it }
+)
+```
+
+Fíjate en el patrón que se repite en los tres: cada componente interactivo recibe los **datos a mostrar** (`value`, `checked`) y una **función de devolución de llamada** (`onValueChange`, `onCheckedChange`) para reaccionar a la interacción del usuario, igual que viste con `Button` y su `onClick`. Es el mismo patrón que acabas de ver con `remember` y `mutableStateOf`: el componente no guarda nada por sí mismo; muestra el estado que recibe y avisa cuando el usuario quiere cambiarlo.
+
+## State hoisting: elevar el estado
+
+Hasta ahora, nuestro `Contador` guarda su propio estado dentro de sí mismo. Funciona, pero tiene inconvenientes: nadie desde fuera puede conocer el valor actual ni controlarlo, y el composable es difícil de reutilizar y de previsualizar con distintos valores.
+
+La solución es el ***state hoisting*** ("elevación del estado"): **sacar el estado del composable y moverlo hacia quien lo llama**. El composable queda **sin estado** (*stateless*): recibe el valor a mostrar y una **función** para avisar de los cambios.
+
+```kotlin
+@Composable
+fun Contador(valor: Int, onIncrementar: () -> Unit) {
+    Button(onClick = onIncrementar) {
+        Text("Has tocado $valor veces")
+    }
+}
+```
+
+Ahora `Contador` no guarda nada: solo muestra el `valor` que recibe y, al tocarlo, invoca `onIncrementar`. El estado vive en el composable **padre**:
+
+```kotlin
+@Composable
+fun Pantalla() {
+    var contador by remember { mutableStateOf(0) }
+
+    Contador(
+        valor = contador,
+        onIncrementar = { contador++ }
+    )
+}
+```
+
+Fíjate en el patrón: el **estado baja** (el padre le pasa `valor` al hijo) y los **eventos suben** (el hijo avisa al padre con `onIncrementar`). A este flujo en una sola dirección se le llama **flujo de datos unidireccional**:
+
+```mermaid
+flowchart TD
+    P["Composable padre<br/>(tiene el estado)"] -- "el estado baja: valor" --> H["Composable hijo<br/>(sin estado)"]
+    H -- "los eventos suben: onIncrementar" --> P
+```
+
+Este patrón trae grandes ventajas: el composable `Contador` es **reutilizable** (sirve con cualquier valor y cualquier acción), fácil de **previsualizar** (le pasas un valor fijo) y hay una **única fuente de verdad** para el estado. Es, además, la misma idea que viste en el capítulo 29 sobre la arquitectura MVVM, aplicada ahora a un solo composable en vez de a toda la pantalla: el estado vive en un solo lugar, la interfaz lo observa y le comunica los eventos.
 
 ## Resumen
 
-En este capítulo aprendiste a construir la estructura de una pantalla completa:
+En este capítulo aprendiste a manejar el estado en Compose:
 
-- El **`Scaffold`** ofrece la estructura básica de una pantalla, con espacios para la barra superior (`TopAppBar`), el contenido, una barra inferior y un botón flotante.
-- **`LazyColumn`** muestra listas con desplazamiento de forma eficiente, componiendo solo los elementos visibles; se llena con la función `items`. Su versión horizontal es `LazyRow`.
-- Una pantalla se organiza mejor por **jerarquías**: la raíz coordina la estructura y los componentes hijos reciben datos y eventos.
+- La **recomposición** es el mecanismo por el que Compose **vuelve a ejecutar** un composable cuando cambian los datos que lee. Un composable describe la UI para unos datos dados y no debe tener efectos secundarios.
+- El **estado** son los datos que, al cambiar, provocan la recomposición.
+- **`mutableStateOf`** crea un valor **observable** por Compose; **`remember`** lo **conserva** entre recomposiciones. Juntos: `remember { mutableStateOf(...) }`.
+- La sintaxis **`by`** te deja usar el estado como una variable normal, sin `.value`.
+- **`rememberSaveable`** conserva el estado también tras una recreación por cambio de configuración (como girar el dispositivo).
+- Los componentes interactivos (`TextField`, `Checkbox`, `Switch`) reciben el **valor a mostrar** y una **función** que se ejecuta cuando el usuario lo cambia.
+- El ***state hoisting*** consiste en **elevar el estado** al composable padre, dejando al hijo **sin estado**: recibe el valor y una función para los eventos. Esto sigue el **flujo de datos unidireccional** (el estado baja, los eventos suben) y hace tus composables reutilizables.
 
-Ya tienes todas las piezas para una primera app completa. En el tutorial que sigue construirás **Mi lista de tareas** con lo aprendido en esta parte.
+En el próximo capítulo montarás el esqueleto de una pantalla completa con `Scaffold` y mostrarás listas largas con `LazyColumn`.

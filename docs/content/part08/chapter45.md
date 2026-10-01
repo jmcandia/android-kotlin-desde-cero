@@ -4,7 +4,7 @@
 
 En el capítulo anterior quedó una pregunta abierta: si el `ViewModel` recibe el repositorio por su constructor, **¿quién crea el repositorio y se lo entrega?** La respuesta es la **inyección de dependencias** (*dependency injection*, o DI).
 
-En este capítulo entenderás qué es la inyección de dependencias, cómo hacerla **a mano**, y cómo **Hilt** —la herramienta recomendada para Android— la automatiza. Con esto cierras la parte de arquitectura.
+En este capítulo entenderás qué es la inyección de dependencias, cómo hacerla **a mano**, y cómo **Hilt** —la herramienta recomendada para Android— la automatiza. Con esto cierras la parte de arquitectura, y llenas el paquete `di/` que adelantaste en el árbol de carpetas del capítulo 29.
 
 ## ¿Qué es la inyección de dependencias?
 

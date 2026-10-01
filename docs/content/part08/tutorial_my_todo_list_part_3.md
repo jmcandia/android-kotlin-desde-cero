@@ -2,7 +2,7 @@
 
 ## Qué vamos a construir
 
-Al terminar la segunda parte, **Mi lista de tareas** tenía dos pantallas, navegación y un tema propio. Pero su estado seguía viviendo en un composable: la lista de tareas estaba guardada con `remember` dentro de `App`. En el capítulo 28 adelantamos qué problema trae eso, y en los capítulos 41 a 43 viste cómo resolverlo.
+Al terminar la segunda parte, **Mi lista de tareas** tenía dos pantallas, navegación y un tema propio. Pero su estado seguía viviendo en un composable: la lista de tareas estaba guardada con `remember` dentro de `App`. En el capítulo 28 adelantamos qué problema trae eso, y en el capítulo 29 y los capítulos 42 y 43 viste cómo resolverlo.
 
 En esta tercera parte vas a aplicar MVVM a la app sin cambiar lo que el usuario ve. Al terminar, tu app tendrá:
 
@@ -212,7 +212,7 @@ fun FormularioNuevaTarea(
 }
 ```
 
-El texto que se está escribiendo sigue siendo estado **local** de la interfaz, con `rememberSaveable`: nadie más lo necesita y no tiene sentido llevarlo al `ViewModel`. El botón ahora se deshabilita con `enabled` mientras el campo está vacío, como viste en el capítulo 35, en lugar de ignorar el toque en silencio.
+El texto que se está escribiendo sigue siendo estado **local** de la interfaz, con `rememberSaveable`: nadie más lo necesita y no tiene sentido llevarlo al `ViewModel`. El botón ahora se deshabilita con `enabled` mientras el campo está vacío, como viste en el capítulo 36, en lugar de ignorar el toque en silencio.
 
 ## Paso 7: La pantalla recibe el `UiState`
 

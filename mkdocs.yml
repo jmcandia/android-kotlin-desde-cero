@@ -109,23 +109,23 @@ nav:
       - "27. Ciclo de vida de una <code>Activity</code>": content/part06/chapter27.md
       - "28. Cómo se organiza una app: responsabilidades y flujo de datos": content/part06/chapter28.md
       - "Ejercicios de repaso": content/part06/exercises.md
+      - "29. Qué es MVVM y por qué usarlo": content/part06/chapter29.md
   - "Parte VII · Jetpack Compose y construcción de interfaces":
-      - "29. Tu primer composable: <code>@Composable</code>, <code>@Preview</code> y parámetros": content/part07/chapter29.md
-      - "30. <code>Modifier</code> y layouts: <code>Column</code>, <code>Row</code> y <code>Box</code>": content/part07/chapter30.md
-      - "31. Gestión de recursos: imágenes, íconos y cadenas de texto": content/part07/chapter31.md
-      - "32. Material 3: componentes listos para usar": content/part07/chapter32.md
-      - "33. Estado en Compose: recomposición, <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>": content/part07/chapter33.md
-      - "34. Estructura de pantalla: <code>Scaffold</code> y <code>LazyColumn</code>": content/part07/chapter34.md
+      - "30. Tu primer composable: <code>@Composable</code>, <code>@Preview</code> y parámetros": content/part07/chapter30.md
+      - "31. <code>Modifier</code> y layouts: <code>Column</code>, <code>Row</code> y <code>Box</code>": content/part07/chapter31.md
+      - "32. Gestión de recursos: imágenes, íconos y cadenas de texto": content/part07/chapter32.md
+      - "33. Material 3: componentes listos para usar": content/part07/chapter33.md
+      - "34. Estado en Compose: recomposición, <code>remember</code>, <code>mutableStateOf</code> y <em>state hoisting</em>": content/part07/chapter34.md
       - "Tutorial: Mi lista de tareas (parte 1)": content/part07/tutorial_my_todo_list_part_1.md
-      - "35. Formularios y validación en la interfaz": content/part07/chapter35.md
-      - "36. Navegación con Navigation Compose (fundamentos)": content/part07/chapter36.md
-      - "37. Navegación avanzada: rutas modeladas y paso de datos": content/part07/chapter37.md
-      - "38. Barras de navegación y destinos principales": content/part07/chapter38.md
-      - "39. Material 3: tema, color y tipografía": content/part07/chapter39.md
+      - "35. Estructura de pantalla: <code>Scaffold</code> y <code>LazyColumn</code>": content/part07/chapter35.md
+      - "36. Formularios y validación en la interfaz": content/part07/chapter36.md
+      - "37. Navegación con Navigation Compose (fundamentos)": content/part07/chapter37.md
+      - "38. Navegación avanzada: rutas modeladas y paso de datos": content/part07/chapter38.md
+      - "39. Barras de navegación y destinos principales": content/part07/chapter39.md
+      - "40. Material 3: tema, color y tipografía": content/part07/chapter40.md
       - "Tutorial: Mi lista de tareas (parte 2)": content/part07/tutorial_my_todo_list_part_2.md
-      - "40. Diseño adaptable con <em>Window Size Classes</em> (opcional)": content/part07/chapter40.md
+      - "41. Diseño adaptable con <em>Window Size Classes</em> (opcional)": content/part07/chapter41.md
   - "Parte VIII · Estado y arquitectura con MVVM":
-      - "41. Qué es MVVM y por qué usarlo": content/part08/chapter41.md
       - "42. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)": content/part08/chapter42.md
       - "43. Efectos y eventos puntuales: <code>LaunchedEffect</code>, Snackbar y navegación": content/part08/chapter43.md
       - "Tutorial: Mi lista de tareas (parte 3)": content/part08/tutorial_my_todo_list_part_3.md
