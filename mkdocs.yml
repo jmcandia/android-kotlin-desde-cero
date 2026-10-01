@@ -87,7 +87,8 @@ nav:
       - "11. Colecciones I: <code>List</code>, <code>Set</code> y <code>Map</code>": content/part03/chapter11.md
       - "12. Colecciones II: operaciones funcionales (<code>map</code>, <code>filter</code> y <code>forEach</code>)": content/part03/chapter12.md
       - "13. Null safety: manejo seguro de valores nulos": content/part03/chapter13.md
-      - "14. Manejo de excepciones: <code>try</code>, <code>catch</code> y <code>Result</code>": content/part03/chapter14.md
+      - "14a. Manejo de excepciones: <code>try</code>, <code>catch</code> y <code>finally</code>": content/part03/chapter14a.md
+      - "14b. <code>Result</code>: manejo funcional de éxito y fallo": content/part03/chapter14b.md
       - "Ejercicios de repaso": content/part03/exercises.md
   - "Parte IV · Programación orientada a objetos":
       - "15. Clases, propiedades y constructores": content/part04/chapter15.md
@@ -102,10 +103,12 @@ nav:
       - "22. ¿Por qué asincronía? El hilo principal": content/part05/chapter22.md
       - "23. <code>suspend</code>, <code>launch</code>, <code>async</code>, scopes y dispatchers": content/part05/chapter23.md
       - "24. <code>Flow</code>, <code>StateFlow</code> y <code>SharedFlow</code>": content/part05/chapter24.md
+      - "Ejercicios de repaso": content/part05/exercises.md
   - "Parte VI · Android y arquitectura de aplicaciones":
       - "25. Android Studio y anatomía de un proyecto": content/part06/chapter25.md
       - "26. Ciclo de vida de una <code>Activity</code>": content/part06/chapter26.md
       - "27. Cómo se organiza una app: responsabilidades y flujo de datos": content/part06/chapter27.md
+      - "Ejercicios de repaso": content/part06/exercises.md
   - "Parte VII · Jetpack Compose y construcción de interfaces":
       - "28. Tu primer composable: <code>@Composable</code>, <code>@Preview</code> y parámetros": content/part07/chapter28.md
       - "29. <code>Modifier</code> y layouts: <code>Column</code>, <code>Row</code> y <code>Box</code>": content/part07/chapter29.md
@@ -115,7 +118,9 @@ nav:
       - "33. Estructura de pantalla: <code>Scaffold</code> y <code>LazyColumn</code>": content/part07/chapter33.md
       - "Tutorial: Mi lista de tareas (parte 1)": content/part07/tutorial_my_todo_list_part_1.md
       - "34. Formularios y validación en la interfaz": content/part07/chapter34.md
-      - "35. Navegación con Navigation Compose": content/part07/chapter35.md
+      - "35a. Navegación con Navigation Compose (fundamentos)": content/part07/chapter35a.md
+      - "35b. Navegación avanzada: rutas modeladas y paso de datos": content/part07/chapter35b.md
+      - "35c. Barras de navegación y destinos principales": content/part07/chapter35c.md
       - "36. Material 3: tema, color y tipografía": content/part07/chapter36.md
       - "Tutorial: Mi lista de tareas (parte 2)": content/part07/tutorial_my_todo_list_part_2.md
       - "37. Diseño adaptable con <em>Window Size Classes</em> (opcional)": content/part07/chapter37.md
@@ -146,8 +151,10 @@ nav:
       - "56. Navegación con rutas tipadas": content/part10/chapter56.md
       - "57. Componentes compartidos y tema visual": content/part10/chapter57.md
       - "58. Cierre del proyecto y próximos pasos": content/part10/chapter58.md
+      - "Ejercicio de cierre": content/part10/exercises.md
   - Anexos:
       - "A. Principios de diseño (SOLID, DRY y KISS)": content/appendix/design-principle.md
       - "B. De Java a Kotlin: equivalencias y <code>Scanner</code>": content/appendix/java-scanner.md
       - "C. Cómo elegir el SDK de un proyecto Android": content/appendix/android-sdk-criteria.md
       - "D. Formato de cadenas con <code>String.format</code>": content/appendix/string-format.md
+      - "E. Glosario de términos": content/appendix/glossary.md

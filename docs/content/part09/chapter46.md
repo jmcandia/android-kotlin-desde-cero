@@ -63,7 +63,7 @@ class ContactosViewModel @Inject constructor(
 
 ## Por qué el repositorio devuelve `Result`
 
-En el capítulo 14 viste `Result`: un valor que representa un éxito (con un dato) o un fallo (con una excepción), y `runCatching` para obtenerlo. Si el repositorio lanzara las excepciones de Retrofit hacia arriba, cada `ViewModel` tendría que envolver cada llamada en un `try`/`catch`, y conocer `HttpException`, que es un detalle de Retrofit. En cambio, si devuelve un `Result`, el contrato lo dice claramente: **esta operación puede fallar**, y quien la llama está obligado a pensar en los dos casos.
+En el capítulo 14b viste `Result`: un valor que representa un éxito (con un dato) o un fallo (con una excepción), y `runCatching` para obtenerlo. Si el repositorio lanzara las excepciones de Retrofit hacia arriba, cada `ViewModel` tendría que envolver cada llamada en un `try`/`catch`, y conocer `HttpException`, que es un detalle de Retrofit. En cambio, si devuelve un `Result`, el contrato lo dice claramente: **esta operación puede fallar**, y quien la llama está obligado a pensar en los dos casos.
 
 Además de `getOrNull()` y `getOrDefault()`, un `Result` tiene tres funciones que usarás mucho:
 

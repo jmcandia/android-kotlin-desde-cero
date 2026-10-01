@@ -154,6 +154,9 @@ Una vez que el usuario escriba `"fin"`, el programa mostrará, usando operacione
 
 Si no se introdujo ningún número válido, muestra el mensaje `"No se introdujo ningún número válido."` y termina.
 
+> [!IMPORTANT]Aviso
+> Este ejercicio usa `String.format("%.2f", ...)` para mostrar el promedio con dos decimales. Esa función **no se explica en los capítulos del curso**, sino en el **Anexo D: Formato de cadenas con `String.format`**. Lee ese anexo antes de resolver este ejercicio.
+
 ### Requisitos
 
 - Usa `try/catch` para atrapar la excepción que lanza `toInt()` ante una entrada inválida.

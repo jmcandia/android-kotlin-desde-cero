@@ -5,7 +5,7 @@
 
 ## Introducción
 
-Hasta ahora has diseñado pantallas pensando en un teléfono en vertical. En este capítulo verás cómo una misma app puede cambiar su **estructura** según el espacio disponible, apoyándose en lo que ya conoces: `Scaffold`, `Row`, `weight` y las barras de navegación del capítulo 35.
+Hasta ahora has diseñado pantallas pensando en un teléfono en vertical. En este capítulo verás cómo una misma app puede cambiar su **estructura** según el espacio disponible, apoyándose en lo que ya conoces: `Scaffold`, `Row`, `weight` y las barras de navegación del capítulo 35c.
 
 ## Adaptar el diseño al espacio disponible
 

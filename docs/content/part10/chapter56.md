@@ -2,7 +2,7 @@
 
 ## Introducción
 
-En el capítulo 35 aprendiste Navigation Compose con **rutas de texto**: cada pantalla se identificaba con una cadena como `"detalle/{id}"`, y para navegar armabas otra cadena a mano, como `"detalle/42"`. Funciona, pero tiene un problema que probablemente ya intuiste: el compilador no puede verificar que `"detalle/{id}"` y `"detalle/42"` sean, en efecto, compatibles. Un error de tipeo en cualquiera de las dos cadenas —o un argumento del tipo equivocado— **solo se revela en tiempo de ejecución**, a veces con un `crash`.
+En el capítulo 35b aprendiste Navigation Compose con **rutas de texto**: cada pantalla se identificaba con una cadena como `"detalle/{id}"`, y para navegar armabas otra cadena a mano, como `"detalle/42"`. Funciona, pero tiene un problema que probablemente ya intuiste: el compilador no puede verificar que `"detalle/{id}"` y `"detalle/42"` sean, en efecto, compatibles. Un error de tipeo en cualquiera de las dos cadenas —o un argumento del tipo equivocado— **solo se revela en tiempo de ejecución**, a veces con un `crash`.
 
 «Mis Contactos» usa un enfoque más moderno y seguro: **rutas tipadas** (*type-safe navigation*), donde cada ruta es una clase de Kotlin serializable en lugar de una cadena de texto. En este capítulo veremos `Rutas.kt` y `ContactosNavHost.kt`, y compararemos ambos enfoques directamente.
 
@@ -30,7 +30,7 @@ Cada pantalla de la app tiene su propia clase de ruta, anotada con `@Serializabl
 - **`FormularioContactoRuta`** es una `data class` con un `id: Int? = null` **opcional**: la misma pantalla sirve para crear (sin `id`) y editar (con `id`), como viste en el capítulo 55.
 
 > [!NOTE]Nota
-> Compara esto con el capítulo 35: allí, la ruta `"detalle/{id}"` codificaba el argumento *dentro de la cadena*, y tenías que declarar por separado el `navArgument` con su tipo. Aquí, el argumento simplemente **es una propiedad de la clase**, con su tipo declarado una sola vez.
+> Compara esto con el capítulo 35b: allí, la ruta `"detalle/{id}"` codificaba el argumento *dentro de la cadena*, y tenías que declarar por separado el `navArgument` con su tipo. Aquí, el argumento simplemente **es una propiedad de la clase**, con su tipo declarado una sola vez.
 
 ## El grafo de navegación: `ContactosNavHost.kt`
 
@@ -69,7 +69,7 @@ fun ContactosNavHost() {
 }
 ```
 
-La estructura general —`rememberNavController()`, `NavHost`, `composable { }`, `popBackStack()`— es la misma que ya conoces del capítulo 35. Lo que cambia es la forma de declarar cada destino y de navegar hacia él:
+La estructura general —`rememberNavController()`, `NavHost`, `composable { }`, `popBackStack()`— es la misma que ya conoces del capítulo 35a. Lo que cambia es la forma de declarar cada destino y de navegar hacia él:
 
 | | Rutas de texto (cap. 35) | Rutas tipadas (esta app) |
 |---|---|---|
@@ -79,7 +79,7 @@ La estructura general —`rememberNavController()`, `NavHost`, `composable { }`,
 | Argumento con tipo incorrecto | Falla en tiempo de ejecución | No compila |
 | Ruta mal escrita | Falla en tiempo de ejecución (o navega a nada) | No compila |
 
-Con `navController.navigate(DetalleContactoRuta(id))`, el compilador exige que `id` sea un `Int` — si intentaras pasar un `String` o simplemente olvidaras el argumento, el proyecto no compilaría. Con la cadena `"detalle/$id"` del capítulo 35, en cambio, cualquier valor se puede interpolar sin que el compilador detecte el error.
+Con `navController.navigate(DetalleContactoRuta(id))`, el compilador exige que `id` sea un `Int` — si intentaras pasar un `String` o simplemente olvidaras el argumento, el proyecto no compilaría. Con la cadena `"detalle/$id"` del capítulo 35b, en cambio, cualquier valor se puede interpolar sin que el compilador detecte el error.
 
 `composable<DetalleContactoRuta>` usa un **parámetro de tipo reificado** (capítulo 20) para asociar ese bloque de composición con la clase `DetalleContactoRuta`, en lugar de compararla con un patrón de texto como `"detalle/{id}"`.
 
@@ -100,7 +100,7 @@ class DetalleContactoViewModel @Inject constructor(
 }
 ```
 
-`savedStateHandle.toRoute<DetalleContactoRuta>()` **reconstruye la instancia completa** de `DetalleContactoRuta` a partir de lo que guardó `NavHost`, usando la misma serialización con la que se navegó. Como `DetalleContactoRuta` es una `data class` con un único `Int`, el resultado es equivalente a leer ese entero directamente, pero **con el tipo verificado en tiempo de compilación**: si `DetalleContactoRuta` tuviera dos o tres campos, `toRoute<DetalleContactoRuta>()` te devolvería los tres ya tipados, sin tener que leer cada uno por separado con `getInt`/`getString` como en el capítulo 35.
+`savedStateHandle.toRoute<DetalleContactoRuta>()` **reconstruye la instancia completa** de `DetalleContactoRuta` a partir de lo que guardó `NavHost`, usando la misma serialización con la que se navegó. Como `DetalleContactoRuta` es una `data class` con un único `Int`, el resultado es equivalente a leer ese entero directamente, pero **con el tipo verificado en tiempo de compilación**: si `DetalleContactoRuta` tuviera dos o tres campos, `toRoute<DetalleContactoRuta>()` te devolvería los tres ya tipados, sin tener que leer cada uno por separado con `getInt`/`getString` como en el capítulo 35b.
 
 En `FormularioContactoViewModel`, el mismo mecanismo lee el `id` **opcional**:
 
@@ -129,14 +129,14 @@ Nota que ni `DetalleContactoScreen` ni `FormularioContactoScreen` reciben el `Na
 Ambos estilos coexisten en el ecosistema de Compose, y es útil saber cuándo preferir cada uno:
 
 - **Rutas tipadas** (esta app): la opción recomendada por Google para proyectos nuevos. Detecta errores en tiempo de compilación, evita construir cadenas a mano, y hace explícitos los argumentos de cada pantalla como propiedades de una clase.
-- **Rutas de texto** (capítulo 35): sigue siendo válida y útil para entender los fundamentos de cómo funciona un grafo de navegación —el `NavHost`, la pila de destinos, `popBackStack()`— sin la capa adicional de serialización. También es la única opción si necesitas interoperar con código que ya define rutas como cadenas (por ejemplo, *deep links* heredados de una app antigua).
+- **Rutas de texto** (capítulo 35b): sigue siendo válida y útil para entender los fundamentos de cómo funciona un grafo de navegación —el `NavHost`, la pila de destinos, `popBackStack()`— sin la capa adicional de serialización. También es la única opción si necesitas interoperar con código que ya define rutas como cadenas (por ejemplo, *deep links* heredados de una app antigua).
 
 ## Resumen
 
-- Las rutas tipadas reemplazan las cadenas de texto del capítulo 35 por clases `@Serializable`: `ListaContactosRuta` (`data object`, sin argumentos), `DetalleContactoRuta` (`id: Int` obligatorio), `FormularioContactoRuta` (`id: Int? = null` opcional).
+- Las rutas tipadas reemplazan las cadenas de texto del capítulo 35b por clases `@Serializable`: `ListaContactosRuta` (`data object`, sin argumentos), `DetalleContactoRuta` (`id: Int` obligatorio), `FormularioContactoRuta` (`id: Int? = null` opcional).
 - `composable<Ruta> { ... }` declara un destino asociado a una clase; `navController.navigate(Ruta(argumentos))` navega pasando una instancia real, no una cadena armada a mano.
 - `savedStateHandle.toRoute<Ruta>()` reconstruye la instancia completa dentro del `ViewModel`, con cada argumento ya tipado, sin `getInt`/`getString` manuales.
-- La ventaja central sobre el capítulo 35: los errores de ruta o de tipo de argumento se detectan **en tiempo de compilación**, no en tiempo de ejecución.
+- La ventaja central sobre el capítulo 35b: los errores de ruta o de tipo de argumento se detectan **en tiempo de compilación**, no en tiempo de ejecución.
 - Las Screens siguen sin conocer el `NavController`: reciben funciones simples (`onVolver`, `onEditar`) que `ContactosNavHost` conecta con la navegación real.
 
 En el próximo capítulo revisaremos los componentes compartidos entre pantallas —`AvatarContacto`, los estados reutilizables de carga/error/vacío— y el tema visual de la aplicación.
