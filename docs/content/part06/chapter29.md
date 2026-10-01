@@ -70,9 +70,10 @@ Cada zona de MVVM también se refleja en cómo organizas las carpetas (los *paqu
 ```text
 com.ejemplo.miapp/
 ├── data/                      # capa de datos (Parte VIII, cap. 44)
+│   ├── local/                      # caché con Room (Parte IX, cap. 50)
+│   ├── remote/                     # acceso a la red y DTOs (Parte IX, cap. 47-48)
 │   ├── DatosRepository.kt          # la interfaz del repositorio
 │   └── DatosRepositoryImpl.kt      # su implementación
-│   └── remote/                     # acceso a la red y DTOs (Parte IX, cap. 47-48)
 ├── model/                     # modelos de dominio, a medida que los definas
 │   └── Usuario.kt
 ├── ui/                        # capa de interfaz
@@ -86,6 +87,9 @@ com.ejemplo.miapp/
 
 La idea de fondo es la misma que ya conoces: cada archivo vive en el paquete de la capa a la que pertenece, así que con solo mirar la ubicación de un archivo sabes cuál es su responsabilidad.
 
+> [!NOTE]Nota
+> Este árbol no es "la" estructura oficial de MVVM en Android: es la que construirás en este curso. Vas a encontrar otras organizaciones igual de válidas —por ejemplo, con `viewmodels/` como paquete propio en vez de junto a cada pantalla dentro de `ui/`, con `navigation/` separado de `ui/`, o con una capa `domain/` explícita (`domain/model/`, `domain/usecase/`) en proyectos más grandes—. Lo que importa no es cómo se llaman las carpetas, sino que se respete la lógica del patrón: separar los modelos de la lógica de presentación, mantener la Vista como una capa reactiva que solo consume estado (sin lógica propia) y agrupar con claridad la navegación, el tema, las validaciones o el acceso a servicios externos. Dicho de otro modo, la clave está en quién hace qué, no en los nombres exactos.
+
 ## Resumen
 
 En este capítulo profundizaste en la arquitectura que nombró el capítulo anterior:
@@ -94,6 +98,6 @@ En este capítulo profundizaste en la arquitectura que nombró el capítulo ante
 - Sigue un **flujo de datos unidireccional**: el estado baja (del ViewModel a la Vista) y los eventos suben (de la Vista al ViewModel), la misma idea que verás pronto como *state hoisting* a nivel de un solo composable.
 - Sus ventajas: separación de responsabilidades, testabilidad, supervivencia a los cambios de configuración y una única fuente de verdad.
 - MVVM reúne piezas que ya conoces (`StateFlow`, `sealed class`, `viewModelScope`) con otras que verás pronto (*state hoisting*, composables, `ViewModel`).
-- El proyecto se organiza en carpetas que reflejan estas capas (`data/`, `model/`, `ui/`, `di/`); iniciarás a construirlas en la Parte VII y las irás completando hasta la Parte IX.
+- El proyecto se organiza en carpetas que reflejan estas capas (`data/`, `model/`, `ui/`, `di/`); iniciarás a construirlas en la Parte VII y las irás completando hasta la Parte IX. Los nombres exactos pueden variar de un proyecto a otro: lo que no cambia es la separación de responsabilidades que hay detrás.
 
 En el próximo capítulo empieza la construcción: crearás tu primer **composable**, la primera pieza de la Vista.

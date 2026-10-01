@@ -195,7 +195,7 @@ com.ejemplo.miscontactos/
 └── MisContactosApp.kt       # Application class con @HiltAndroidApp
 ```
 
-Esta organización agrupa la interfaz por pantalla (*feature-first* en `ui/lista`, `ui/detalle`, `ui/formulario`) y los datos por origen (`data/local`, `data/remote`), facilitando encontrar cualquier archivo rápidamente.
+Esta organización agrupa la interfaz por pantalla (*feature-first* en `ui/lista`, `ui/detalle`, `ui/formulario`) y los datos por origen (`data/local`, `data/remote`), facilitando encontrar cualquier archivo rápidamente. Es más granular que el adelanto del capítulo 29 —no agrupaba por pantalla ni separaba `local` de `remote`—, pero responde a la misma lógica: cada carpeta agrupa una responsabilidad clara, sin importar que los nombres exactos cambien de un proyecto a otro.
 
 ## Resumen
 
