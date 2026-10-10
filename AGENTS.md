@@ -15,7 +15,7 @@ Each project builds/tests on its own; there is no aggregate build.
 ## Docs (content) — the part agents get wrong
 
 - `mkdocs.yml` `nav:` is the source of truth for the table of contents. **A new/renamed chapter file does not appear in the site until it is added there in order.**
-- Chapter files are `docs/content/partNN/chapterNN.md` where the number is the **global, strictly sequential chapter number (1–61)**, not per-part. The H1 must be `# Capítulo N` matching the filename number — this drifts after renumbering, so check both.
+- Chapter files are `docs/content/partNN/chapterNN.md` where the number is the **global, strictly sequential chapter number (1–62)**, not per-part. The H1 must be `# Capítulo N` matching the filename number — this drifts after renumbering, so check both.
 - Renumbering is a cascade: `git mv` **descending** order (so you don't overwrite targets), then fix every cross-reference (`capítulo N`, `cap. N`, `chapterNN.md`, ranges) and the `nav:`.
 - Content, headings and UI strings are in Spanish.
 - Prefer the enabled extensions over ad-hoc formatting: admonitions/callouts use the `> [!NOTE]Nota` / `> [!TIP]Sugerencia` / `> [!WARNING]Advertencia` / `> [!IMPORTANT]` form (`mkdocs-callouts`), plus `pymdownx` superfences (incl. `mermaid`), details, and highlight.

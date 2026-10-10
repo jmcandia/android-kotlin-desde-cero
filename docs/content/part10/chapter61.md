@@ -1,117 +1,214 @@
-# Capítulo 61: Cierre del proyecto y próximos pasos
+# Capítulo 61: Componentes compartidos y tema visual
 
 > [!TIP]Antes de empezar, recupera lo que ya sabes
 > Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
 >
-> 1. ¿En qué dos niveles se valida el formulario de contacto y por qué?
-> 2. ¿Por qué la estrategia *offline-first* de esta app solo cubre la lectura y no la escritura?
-> 3. ¿Qué distingue a un evento (como `eliminado`) de un estado persistente dentro de un `UiState`?
+> 1. ¿Por qué conviene extraer a un archivo compartido un composable que usan varias pantallas?
+> 2. ¿Cómo accede cualquier composable a los colores y la tipografía del tema Material 3?
+> 3. ¿Para qué sirve el parámetro `modifier: Modifier = Modifier` que exponen los composables?
 
 ## Introducción
 
-Has terminado «Mis Contactos»: una aplicación Android completa, con arquitectura MVVM, persistencia offline-first, navegación tipada y una interfaz construida enteramente con Jetpack Compose. En este último capítulo repasamos cómo probarla manualmente antes de darla por terminada, revisamos el mapa completo de lo que aprendiste a lo largo del curso, y sugerimos hacia dónde seguir.
+A lo largo de los capítulos 57 a 59 usamos varios composables sin detenernos en ellos: `AvatarContacto`, `EstadoCargando`, `EstadoError`, `EstadoVacio`, `mensajeDe`. Son piezas **reutilizadas por las tres pantallas** de la aplicación, y vivir en `ui/componentes/` en vez de duplicarse en cada pantalla es lo que evita, por ejemplo, que la lista y el detalle dibujen el avatar de forma ligeramente distinta.
 
-## Pruebas manuales sugeridas
+En este capítulo cerramos la interfaz de «Mis Contactos» revisando esos componentes compartidos y el tema visual (`Theme.kt`, `Color.kt`) que los envuelve a todos.
 
-Antes de considerar cualquier funcionalidad "terminada", conviene recorrerla a mano al menos una vez, verificando tanto el camino feliz como los casos límite. Esta lista te sirve como *checklist* final para «Mis Contactos» — ejecútala con la API (`code/contact-list-api/`) corriendo en `http://localhost:8080` y la app instalada en un dispositivo o emulador con suficiente memoria disponible:
+## El avatar: `AvatarContacto`
 
-**Lista de contactos**
+```kotlin
+package com.ejemplo.miscontactos.ui.componentes
 
-- [ ] Al abrir la app, se ve un indicador de carga y luego la primera página de contactos.
-- [ ] Escribir en el buscador no dispara una petición por cada letra (revisa el *log* de la API): solo una, unos 400 ms después de dejar de escribir.
-- [ ] Bajar hasta el final de la lista carga automáticamente la página siguiente, sin necesidad de un botón.
-- [ ] Deslizar hacia abajo desde arriba de la lista (*pull-to-refresh*) vuelve a traer la primera página.
-- [ ] Tocar el ícono de favorito en un contacto lo marca de inmediato, sin esperar respuesta de red (es una operación local).
-- [ ] Activar el filtro de "solo favoritos" oculta el resto sin volver a pedir datos al servidor.
-- [ ] Detener el servidor de la API y recargar (deslizando hacia abajo): la lista muestra los contactos guardados en caché con el aviso de "datos guardados localmente".
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
+import com.ejemplo.miscontactos.model.Contacto
 
-**Detalle de contacto**
-
-- [ ] Tocar un contacto abre su ficha completa, con los campos opcionales mostrando "sin información" cuando corresponde.
-- [ ] Marcar o desmarcar favorito desde el detalle se refleja también en la lista al volver atrás.
-- [ ] Tocar eliminar muestra un diálogo de confirmación; cancelar no borra nada.
-- [ ] Confirmar la eliminación borra el contacto y vuelve automáticamente a la lista, que ya no lo muestra.
-
-**Formulario**
-
-- [ ] Crear un contacto dejando el nombre vacío muestra el error "obligatorio" sin llegar a llamar a la API.
-- [ ] Escribir un correo sin `@` muestra "correo inválido" apenas se intenta guardar.
-- [ ] Crear un contacto con un correo que ya existe en la API muestra el error de conflicto en el campo de correo.
-- [ ] Guardar con éxito vuelve automáticamente a la pantalla anterior (a la lista si era nuevo, al detalle si era una edición).
-- [ ] Editar un contacto precarga sus datos actuales en el formulario.
-
-**Generales**
-
-- [ ] Rotar la pantalla en cualquier momento (formulario a medio llenar, diálogo de confirmación abierto) no pierde el estado en curso.
-- [ ] Sin permiso de red local concedido (Android 17+), la app pide el permiso antes de mostrar cualquier pantalla.
-
-> [!TIP]Sugerencia
-> Cada ítem de esta lista corresponde a una decisión de diseño que tomamos en algún capítulo de esta parte: el *debounce* del capítulo 56, el evento-como-estado de los capítulos 57 y 58, la estrategia *offline-first* del capítulo 55, la validación en dos niveles del capítulo 58. Si alguno falla, ese es el capítulo al que conviene volver.
-
-## El mapa completo del curso
-
-Estas fueron las grandes etapas que recorriste:
-
-```mermaid
-flowchart LR
-    K["Partes I-IV\nKotlin: sintaxis, POO,\ncolecciones, null safety"] --> C["Parte V\nCoroutines y Flow"]
-    C --> A["Parte VI\nAndroid: Activity,\nciclo de vida, MVVM"]
-    A --> J["Parte VII\nJetpack Compose:\nUI declarativa"]
-    J --> M["Parte VIII\nViewModel, UiState,\nRepository, Hilt"]
-    M --> R["Parte IX\nRetrofit + Room:\nred y persistencia"]
-    R --> P["Parte X\nProyecto final:\nMis Contactos"]
+@Composable
+fun AvatarContacto(contacto: Contacto, modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier
+            .size(48.dp)
+            .clip(CircleShape),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = contacto.iniciales,
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onPrimaryContainer
+        )
+        AsyncImage(
+            model = "https://i.pravatar.cc/300?u=contacto-${contacto.id}",
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.size(48.dp)
+        )
+    }
+}
 ```
 
-Cada parte no fue un tema aislado: la **Parte X** es, literalmente, la combinación de todas las anteriores en una sola aplicación real. Repasa esta correspondencia:
+`AsyncImage` viene de **Coil 3** (`coil3.compose.AsyncImage`), la biblioteca de carga de imágenes que ya se declaró en las dependencias del capítulo 53. Su trabajo es descargar la foto, guardarla en caché y dibujarla, todo con una sola función composable, sin que tengas que gestionar hilos ni bitmaps manualmente.
 
-| En «Mis Contactos»... | ...se apoya en |
-|---|---|
-| `sealed interface`/`sealed class` para `UiState` y `ErrorDatos` | Parte IV (cap. 20) |
-| `suspend`, `viewModelScope.launch`, `Job`, cancelación | Parte V (cap. 23–24) |
-| `StateFlow`, `SharedFlow`, `.update {}` | Parte V (cap. 25) |
-| MVVM: Vista, ViewModel y Modelo como concepto | Parte VI (cap. 29) |
-| Composables con y sin estado, `LazyColumn`, `Scaffold` | Parte VII (cap. 30–35) |
-| `LaunchedEffect` y el patrón evento-como-estado | Parte VIII (cap. 43) |
-| `ViewModel` + `UiState` + `Repository` + Hilt | Parte VIII (cap. 42–45) |
-| DTOs, Retrofit, serialización JSON, estados de red | Parte IX (cap. 46–49) |
-| Room, entidades, DAOs, caché offline | Parte IX (cap. 50) |
+Fíjate en el orden de los dos elementos dentro del `Box`: primero el `Text` con las iniciales, **luego** la `AsyncImage` encima. Mientras la imagen todavía no termina de descargarse (o si la URL falla), el texto de iniciales queda visible detrás; en cuanto `AsyncImage` completa la carga, la tapa por completo. Es un *fallback* simple, sin necesidad de observar el estado de carga de Coil explícitamente.
 
-Si alguna fila te resulta borrosa, es una señal legítima de que vale la pena repasar ese capítulo antes de construir tu propio proyecto — no hace falta que domines todo perfectamente antes de seguir, pero sí que sepas *dónde volver a buscarlo* cuando lo necesites.
+`contentScale = ContentScale.Crop` recorta la imagen para llenar el círculo sin deformarla, igual que harías con un `object-fit: cover` en CSS.
 
-## Qué no cubrimos (a propósito)
+## Estados reutilizables: `Estados.kt`
 
-«Mis Contactos» es una aplicación completa, pero deliberadamente **acotada**, para mantener el foco en los conceptos centrales del curso. Quedaron fuera del alcance, a propósito:
+Las tres pantallas necesitan mostrar, en algún momento, "está cargando", "algo falló" o "no hay nada que mostrar". En lugar de que cada una redibuje su propia versión, `Estados.kt` centraliza estos tres casos:
 
-- **Pruebas automatizadas** (unitarias de ViewModels con `Turbine`/`kotlinx-coroutines-test`, de UI con `ComposeTestRule`): son el siguiente paso natural una vez que te sientes cómodo con la arquitectura, pero introducir *testing* junto con MVVM, coroutines y Compose de una sola vez habría sido demasiado para un curso desde cero.
-- **Sincronización en segundo plano** (`WorkManager`) para reintentar operaciones creadas sin conexión: la estrategia *offline-first* de este curso solo cubre **lectura** offline (capítulo 55); escribir sin conexión y sincronizar después es un problema considerablemente más complejo.
-- **Módulos de Gradle múltiples** (separar `:data`, `:domain`, `:ui` en módulos independientes): útil en proyectos grandes de equipo, pero innecesario en una app de este tamaño, y habría añadido complejidad de configuración sin aportar a los conceptos centrales.
-- **Inyección de dependencias sin Hilt** (Koin u otras alternativas): el curso eligió Hilt por ser la recomendación oficial de Google para Android, pero los principios de inyección de dependencias del capítulo 45 aplican igual con cualquier framework.
+```kotlin
+@Composable
+fun EstadoCargando(modifier: Modifier = Modifier) {
+    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        CircularProgressIndicator()
+    }
+}
 
-## Próximos pasos sugeridos
+@Composable
+fun EstadoError(
+    error: ErrorDatos,
+    onReintentar: (() -> Unit)?,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.fillMaxSize().padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Icon(
+            Icons.Default.ErrorOutline,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.error,
+            modifier = Modifier.size(48.dp)
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(mensajeDe(error), textAlign = TextAlign.Center)
+        if (onReintentar != null) {
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(onClick = onReintentar) { Text(stringResource(R.string.reintentar)) }
+        }
+    }
+}
 
-Con esta base, algunas direcciones razonables para seguir creciendo como desarrollador Android:
+@Composable
+fun EstadoVacio(mensaje: String, modifier: Modifier = Modifier) {
+    Box(modifier = modifier.fillMaxSize().padding(24.dp), contentAlignment = Alignment.Center) {
+        Text(mensaje, textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}
+```
 
-1. **Agrega pruebas automatizadas** a `ListaContactosViewModel` o `FormularioContactoViewModel`: son los más ricos en lógica (debounce, validación, paginación) y los que más se benefician de una red de seguridad ante futuros cambios.
-2. **Extiende «Mis Contactos»** con una funcionalidad nueva de punta a punta: por ejemplo, ordenar la lista por distintos criterios, o agrupar contactos por la primera letra del apellido (algo similar a lo que ya viste con `LazyColumn` en el capítulo 35). Repetir el ciclo completo (`UiState` → `ViewModel` → `Repository` → capa remota/local si aplica) sobre un caso nuevo es la mejor forma de consolidar la arquitectura.
-3. **Explora Compose Multiplatform** si te interesa compartir lógica de negocio (ViewModels, repositorios) entre Android, iOS y escritorio; los conceptos de `StateFlow` y `UiState` de este curso se trasladan casi sin cambios.
-4. **Revisa la documentación oficial de Android** (developer.android.com) sobre los temas que quedaron fuera de alcance: es el lugar correcto para profundizar en `WorkManager`, módulos multi-Gradle o testing avanzado, ahora que ya tienes el vocabulario y los conceptos de este curso como base.
+`EstadoError` recibe `onReintentar: (() -> Unit)?` como **función opcional**: cuando es `null` (como en la pantalla de detalle del capítulo 58, donde reintentar simplemente recargaría de nuevo el mismo `id` sin que tenga mucho sentido exponer un botón separado), el botón de reintentar no se dibuja. Es el mismo principio de "el estado decide qué mostrar" que ya aplicaste con `contactosVisibles` en el capítulo 57, llevado a un parámetro de función en vez de a una propiedad.
+
+`EstadoVacio` recibe el mensaje ya armado como `String`, en lugar de un recurso, precisamente porque —como viste en el capítulo 57— ese mensaje cambia según el contexto (favoritos vacíos, búsqueda sin resultados, lista realmente vacía), y es la pantalla que lo llama quien decide cuál de los tres aplica.
+
+### `mensajeDe`: traducir errores a texto
+
+```kotlin
+@Composable
+fun mensajeDe(error: ErrorDatos): String = when (error) {
+    is ErrorDatos.SinConexion -> stringResource(R.string.error_sin_conexion)
+    is ErrorDatos.NoEncontrado -> stringResource(R.string.error_no_encontrado)
+    is ErrorDatos.Conflicto -> error.message ?: stringResource(R.string.error_desconocido)
+    is ErrorDatos.Validacion -> stringResource(R.string.error_validacion)
+    is ErrorDatos.Desconocido -> stringResource(R.string.error_desconocido)
+}
+```
+
+Esta función ya la mencionamos en el capítulo 49: como `ErrorDatos` es una `sealed class`, el `when` es **exhaustivo** — si en el futuro se agrega una nueva variante de error, el compilador obliga a manejarla aquí también, evitando que un caso quede sin traducción. Se usa tanto en `EstadoError` como directamente en los `Snackbar` de las pantallas de detalle y formulario (capítulos 58 y 59).
+
+## El permiso de red local: `PermisoRedLocal`
+
+Ya viste este composable completo en el capítulo 53, pero vale la pena recordar por qué vive en `ui/componentes/` junto a los demás: aunque solo se usa una vez (envolviendo todo `ContactosNavHost` desde `MainActivity`), es un componente genérico —no conoce contactos ni pantallas específicas— y encaja mejor junto al resto de piezas reutilizables que dentro de una carpeta de una sola pantalla.
+
+## El tema visual: `Theme.kt` y `Color.kt`
+
+```kotlin
+// Color.kt
+val Azul = Color(0xFF1E5AA8)
+val AzulClaro = Color(0xFFB8D0F0)
+val Turquesa = Color(0xFF00897B)
+val TurquesaClaro = Color(0xFF80CBC4)
+val Error = Color(0xFFBA1A1A)
+val ErrorClaro = Color(0xFFFFDAD6)
+```
+
+```kotlin
+// Theme.kt
+private val LightColorScheme = lightColorScheme(
+    primary = Azul,
+    primaryContainer = AzulClaro,
+    secondary = Turquesa,
+    secondaryContainer = TurquesaClaro,
+    error = Error,
+    errorContainer = ErrorClaro
+)
+
+private val DarkColorScheme = darkColorScheme(
+    primary = AzulClaro,
+    secondary = TurquesaClaro,
+    error = ErrorClaro
+)
+
+@Composable
+fun MisContactosTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    dynamicColor: Boolean = false,
+    content: @Composable () -> Unit
+) {
+    val colorScheme = when {
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+            val context = LocalContext.current
+            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        }
+        darkTheme -> DarkColorScheme
+        else -> LightColorScheme
+    }
+
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = Typography,
+        content = content
+    )
+}
+```
+
+Este es el mismo patrón de tema Material 3 que estudiaste en el capítulo 40: una paleta de colores propia de la app (`LightColorScheme`/`DarkColorScheme`, construidas a partir de las constantes de `Color.kt`) y, opcionalmente, **color dinámico** en Android 12 (API 31, `Build.VERSION_CODES.S`) en adelante, que deriva la paleta del fondo de pantalla del usuario en lugar de usar los colores fijos de la marca. Aquí `dynamicColor` tiene su valor por defecto en `false`: «Mis Contactos» prioriza su identidad visual propia (azul y turquesa) sobre adaptarse al *wallpaper* de cada dispositivo, pero deja la puerta abierta a activarlo con un simple cambio de parámetro.
+
+`MainActivity` envuelve toda la interfaz en `MisContactosTheme { ... }`, por lo que cualquier composable de la app —`ContactoItem`, `FichaContacto`, `CampoTexto`, etc.— accede a estos colores simplemente a través de `MaterialTheme.colorScheme`, sin tener que recibirlos como parámetro.
 
 ## Resumen
 
-- Antes de dar por terminada una funcionalidad, recórrela manualmente cubriendo tanto el camino feliz como los casos límite (validación, sin conexión, rotación de pantalla).
-- «Mis Contactos» integra, en una sola app, todo lo enseñado en las Partes I a IX: Kotlin, coroutines, Compose, MVVM y la capa de datos con Retrofit y Room.
-- El curso dejó fuera, a propósito, pruebas automatizadas, sincronización en segundo plano y módulos múltiples de Gradle, para mantener el foco en los fundamentos.
-- El camino natural desde aquí es agregar pruebas, extender la app con una funcionalidad propia, y profundizar en la documentación oficial de Android para los temas avanzados que quedaron pendientes.
-
-Gracias por recorrer este curso completo, desde tu primera línea de Kotlin hasta una aplicación Android real y funcional. El código de «Mis Contactos» queda en `code/contact-list-app/` como referencia para revisar, modificar y seguir aprendiendo.
+- `ui/componentes/` reúne las piezas que usa más de una pantalla: `AvatarContacto` (foto con Coil 3 sobre iniciales de respaldo), `Estados.kt` (`EstadoCargando`/`EstadoError`/`EstadoVacio`/`mensajeDe`) y `PermisoRedLocal` (capítulo 53).
+- `AvatarContacto` superpone `AsyncImage` sobre un `Text` de iniciales: mientras la imagen no carga, las iniciales quedan visibles como *fallback*.
+- `EstadoError` acepta un `onReintentar` **opcional**, dejando que cada pantalla decida si ofrece o no un botón de reintento.
+- `mensajeDe(error: ErrorDatos)` centraliza, con un `when` exhaustivo, la traducción de cada variante de error a un texto localizado.
+- El tema (`Theme.kt`/`Color.kt`) sigue el patrón Material 3 del capítulo 40: paleta propia por defecto, con soporte opcional para color dinámico desde Android 12.
 
 ## Para cerrar
 
-Quieres añadir una pantalla de "Acerca de" con un texto estático y un botón que abre una URL. Antes de escribir código, decide qué capas de la arquitectura necesitas de verdad: ¿te hace falta un `ViewModel`, un `UiState` y un repositorio?
+Para reutilizar el estado de error en la pantalla de detalle (donde no quieres botón) y en la de lista (donde sí), un compañero define el componente sin opcionalidad:
+
+```kotlin
+fun EstadoError(error: ErrorDatos, onReintentar: () -> Unit) { ... }
+```
+
+¿Qué problema tendrá al usarlo en el detalle? ¿Cómo lo arreglarías?
 
 Responde antes de mirar la respuesta.
 
 ??? success "Ver respuesta y razonamiento"
-    No: basta un composable sin estado dentro de `ui/`. No hay datos que cargar, estado que gestionar ni reglas de negocio, así que añadir `UiState`, `ViewModel` o repositorio sería complejidad vacía.
+    Al no ser opcional, el detalle estaría **obligado** a pasar una lambda (aunque fuera vacía) y el botón de reintentar se dibujaría siempre, incluso cuando no tiene sentido.
 
-    La arquitectura por capas se usa **cuando aporta**: datos, lógica de presentación o coordinación entre fuentes. Error común: aplicar MVVM "por reflejo" a pantallas puramente estáticas; el objetivo no es tener siempre las tres capas, sino separar responsabilidades cuando realmente existen.
+    La firma de `Estados.kt` usa `onReintentar: (() -> Unit)?` y dibuja el botón solo si no es `null` (`if (onReintentar != null)`), de modo que cada pantalla decide si ofrece reintento. Error común: usar "booleanos bandera" o lambdas vacías en lugar de un parámetro anulable para modelar una capacidad opcional.
+
+Con esto completamos el recorrido por la interfaz de «Mis Contactos». En el capítulo final cerraremos el proyecto con una revisión general, algunas pruebas manuales sugeridas y los próximos pasos sugeridos para seguir aprendiendo.

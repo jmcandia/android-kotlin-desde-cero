@@ -146,19 +146,20 @@ nav:
       - "49. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>": content/part09/chapter49.md
       - "50. Persistencia local con Room": content/part09/chapter50.md
       - "Tutorial: Mi lista de tareas (parte 5)": content/part09/tutorial_my_todo_list_part_5.md
+      - "51. Preferencias con DataStore": content/part09/chapter51.md
       - "Ejercicios de repaso": content/part09/exercises.md
   - "Parte X · Proyecto final: contactos":
-      - "51. Presentación y arquitectura de «Mis Contactos»": content/part10/chapter51.md
-      - "52. Configuración del proyecto y permisos": content/part10/chapter52.md
-      - "53. La capa remota: DTOs, Retrofit y módulo de red": content/part10/chapter53.md
-      - "54. La capa local: Room para caché y favoritos": content/part10/chapter54.md
-      - "55. El repositorio: estrategia <em>offline-first</em>": content/part10/chapter55.md
-      - "56. Pantalla de lista: búsqueda, paginación y favoritos": content/part10/chapter56.md
-      - "57. Pantalla de detalle: eliminación segura con evento como estado": content/part10/chapter57.md
-      - "58. Pantalla de formulario: validación local y del servidor": content/part10/chapter58.md
-      - "59. Navegación con rutas tipadas": content/part10/chapter59.md
-      - "60. Componentes compartidos y tema visual": content/part10/chapter60.md
-      - "61. Cierre del proyecto y próximos pasos": content/part10/chapter61.md
+      - "52. Presentación y arquitectura de «Mis Contactos»": content/part10/chapter52.md
+      - "53. Configuración del proyecto y permisos": content/part10/chapter53.md
+      - "54. La capa remota: DTOs, Retrofit y módulo de red": content/part10/chapter54.md
+      - "55. La capa local: Room para caché y favoritos": content/part10/chapter55.md
+      - "56. El repositorio: estrategia <em>offline-first</em>": content/part10/chapter56.md
+      - "57. Pantalla de lista: búsqueda, paginación y favoritos": content/part10/chapter57.md
+      - "58. Pantalla de detalle: eliminación segura con evento como estado": content/part10/chapter58.md
+      - "59. Pantalla de formulario: validación local y del servidor": content/part10/chapter59.md
+      - "60. Navegación con rutas tipadas": content/part10/chapter60.md
+      - "61. Componentes compartidos y tema visual": content/part10/chapter61.md
+      - "62. Cierre del proyecto y próximos pasos": content/part10/chapter62.md
       - "Ejercicio de cierre": content/part10/exercises.md
   - Anexos:
       - "A. Principios de diseño (SOLID, DRY y KISS)": content/appendix/design-principle.md

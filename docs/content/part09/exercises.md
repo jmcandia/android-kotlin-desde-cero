@@ -1,6 +1,6 @@
 # Ejercicios: Parte IX
 
-Estos ejercicios te permitirán aplicar lo aprendido en la Parte IX: HTTP/REST, serialización JSON, Retrofit, estados de red y persistencia local con Room. El repaso acumulativo combina todo lo anterior.
+Estos ejercicios te permitirán aplicar lo aprendido en la Parte IX: HTTP/REST, serialización JSON, Retrofit, estados de red, persistencia local con Room y preferencias con DataStore. El repaso acumulativo combina todo lo anterior.
 
 ---
 
@@ -163,7 +163,7 @@ Diseña el repositorio de una app del clima con estrategia ***offline-first***: 
     - Olvidar `onConflict = OnConflictStrategy.REPLACE`: guardar la misma ciudad lanzaría un conflicto de clave primaria.
     - Intercambiar los papeles del DAO: la consulta que devuelve `Flow` **no** es `suspend`, y la operación puntual de respaldo **sí** lo es (capítulo 50).
 
-    **Para ir más allá.** Añade un parámetro `forzarRecarga: Boolean = false`: si es `true`, salta la caché e intenta siempre la red (útil para un botón "actualizar"). Pregúntate qué devolvería el repositorio si la red falla *y* la caché está vacía, y cómo podría la interfaz distinguir unos datos recién descargados de unos recuperados de la caché (en la app final, el capítulo 55 resuelve esto con un indicador `desdeCache`).
+    **Para ir más allá.** Añade un parámetro `forzarRecarga: Boolean = false`: si es `true`, salta la caché e intenta siempre la red (útil para un botón "actualizar"). Pregúntate qué devolvería el repositorio si la red falla *y* la caché está vacía, y cómo podría la interfaz distinguir unos datos recién descargados de unos recuperados de la caché (en la app final, el capítulo 56 resuelve esto con un indicador `desdeCache`).
 
 ---
 
@@ -177,6 +177,7 @@ Marca cada afirmación que puedas hacer **sin mirar los apuntes**. Si alguna te 
 - [ ] Modelo los estados de red (cargando, éxito, error) de forma exhaustiva. *(cap. 49)*
 - [ ] Explico por qué nunca debo atrapar una `CancellationException`. *(cap. 49)*
 - [ ] Persisto y observo datos con Room usando `Flow`. *(cap. 50)*
+- [ ] Guardo preferencias simples con DataStore y las expongo como `Flow`. *(cap. 51)*
 - [ ] Combino red y caché en un repositorio con `Result` e inyección de dependencias. *(Partes VIII–IX)*
 
 Si puedes con todo, tienes las piezas para construir la app final «Mis Contactos» en la Parte X.

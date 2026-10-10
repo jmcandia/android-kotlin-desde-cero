@@ -8,6 +8,19 @@ Este archivo resume los cambios de alto nivel del contenido del curso. Para el d
 
 ### Añadido
 
+- **Capítulo 51 «Preferencias con DataStore»** (Parte IX), capítulo nuevo tras Room: elección entre Room y DataStore, SharedPreferences frente a DataStore, configuración Gradle, delegado `preferencesDataStore`, lectura con `Flow`/`catch`/`map`, escritura con `edit`, repositorio con Hilt y pantalla de ajustes. La Parte X se renumeró en cascada de 51–61 a **52–62**.
+- **Sección «Animar cambios de estado»** en el capítulo 34: `animateColorAsState`, `animateDpAsState`, `AnimatedVisibility` y un ejemplo completo, con foco en animar a partir de cambios de estado.
+
+### Cambiado
+
+- Renumeración en cascada de la Parte X (capítulos 51–61 → **52–62**), con H1, `nav` de `mkdocs.yml` y todas las referencias cruzadas actualizadas.
+- Glosario: nueva entrada «DataStore»; «Lo que aprenderás» y el hito «Comprueba tu avance» de la Parte IX mencionan DataStore; blurb de la Parte IX en `docs/index.md` actualizado.
+- `AGENTS.md`: el rango de capítulos globales pasa de 1–61 a 1–62.
+
+## 2026-10-10
+
+### Añadido
+
 - **Orientación de entrada**: `docs/index.md` reescrito con perfil del estudiante, requisitos previos, tres rutas (desde cero / ya programo / repaso de Kotlin) y una autoevaluación inicial sin calificación.
 - **Recuperación activa y cierre por capítulo**: los 61 capítulos incorporan un recuadro «Antes de empezar, recupera lo que ya sabes» y una sección «Para cerrar» con una tarea de aplicación y su respuesta razonada (plegable).
 - **Repasos acumulativos** al final de las Partes III, V, VII y IX, con retos que combinan partes anteriores, pistas graduadas y solución comentada; se crearon los archivos de ejercicios de las Partes VII y VIII (esta última con dos ejercicios de repaso).

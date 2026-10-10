@@ -304,7 +304,7 @@ Desde **Android 17 (API 37)**, conectarse a una dirección de la **red local** �
 
 A diferencia de `INTERNET`, es un **permiso de ejecución**: declararlo no basta, el usuario tiene que concederlo mientras la app está en uso, como el de la cámara o la ubicación. Si no está concedido, la conexión no llega a establecerse y OkHttp termina con una `SocketTimeoutException` después de esperar varios segundos, un error que no da ninguna pista de la causa real.
 
-En el proyecto final (capítulo 52) escribirás un composable que pide este permiso al abrir la app. Mientras tanto, para probar los ejemplos de este capítulo en un emulador con API 37, concédelo a mano: mantén presionado el ícono de la app, elige **Información de la app** → **Permisos** y activa el de red local. En emuladores con una API anterior a la 37, este permiso no existe y no hace falta.
+En el proyecto final (capítulo 53) escribirás un composable que pide este permiso al abrir la app. Mientras tanto, para probar los ejemplos de este capítulo en un emulador con API 37, concédelo a mano: mantén presionado el ícono de la app, elige **Información de la app** → **Permisos** y activa el de red local. En emuladores con una API anterior a la 37, este permiso no existe y no hace falta.
 
 ## Usar la API desde el repositorio
 

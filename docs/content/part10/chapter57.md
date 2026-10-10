@@ -1,59 +1,60 @@
-# Capítulo 57: Pantalla de detalle: eliminación segura con evento como estado
+# Capítulo 57: Pantalla de lista: búsqueda, paginación y favoritos
 
 > [!TIP]Antes de empezar, recupera lo que ya sabes
 > Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
 >
-> 1. ¿Por qué el ViewModel no debería llamar directamente al `NavController` para navegar?
-> 2. ¿Qué hace un `LaunchedEffect(clave)` y cuándo se vuelve a ejecutar?
-> 3. ¿Qué diferencia hay entre `remember` y `rememberSaveable`?
+> 1. ¿Cuándo conviene modelar el `UiState` como una `data class` y cuándo como una `sealed`?
+> 2. ¿Qué ventaja ofrece `LazyColumn` frente a una `Column` con scroll para listas largas?
+> 3. ¿Cómo observa un composable el `StateFlow` de un ViewModel?
 
 ## Introducción
 
-La pantalla de detalle muestra la información completa de un contacto y permite marcarlo como favorito, editarlo o eliminarlo. Es más simple que la lista en cuanto a datos que maneja, pero introduce un problema nuevo: **eliminar un contacto es una acción destructiva** que necesita confirmación del usuario y, una vez completada, debe **navegar hacia atrás automáticamente**. Resolveremos esto con el patrón "evento como estado" del capítulo 43.
+Con el repositorio listo, construimos la primera pantalla real de la aplicación: la **lista de contactos**. Es la pantalla más compleja de las tres, porque combina varias técnicas que estudiaste por separado a lo largo del curso: búsqueda con `debounce`, scroll infinito, actualización mediante deslizamiento (*pull-to-refresh*) y un filtro de favoritos, todo coordinado desde un único `UiState`.
 
-## El estado de la pantalla: `DetalleContactoUiState`
+En este capítulo construiremos `ListaContactosUiState`, `ListaContactosViewModel` y `ListaContactosScreen`.
 
-A diferencia de la lista, esta pantalla sí puede modelarse con una `sealed interface`, porque sus posibilidades son mutuamente excluyentes: o todavía no hay datos (cargando), o falló la carga (error), o hay un contacto que mostrar (contenido):
+## El estado de la pantalla: `ListaContactosUiState`
+
+A diferencia del `UiState` con `sealed class`/`sealed interface` que usaste en capítulos anteriores (cap. 42, cap. 49), esta pantalla necesita mostrar **varias cosas a la vez**: una lista de contactos, si se está cargando más, si hay un error, y el texto de búsqueda actual. Como anticipaba la nota del capítulo 42, aquí `UiState` se modela como una **`data class`**:
 
 ```kotlin
-package com.ejemplo.miscontactos.ui.detalle
+package com.ejemplo.miscontactos.ui.lista
 
 import com.ejemplo.miscontactos.model.Contacto
 import com.ejemplo.miscontactos.model.ErrorDatos
 
-sealed interface DetalleContactoUiState {
-    data object Cargando : DetalleContactoUiState
-
-    data class Error(val error: ErrorDatos) : DetalleContactoUiState
-
-    data class Contenido(
-        val contacto: Contacto,
-        val esFavorito: Boolean = false,
-        val eliminando: Boolean = false,
-        val eliminado: Boolean = false,
-        val errorAccion: ErrorDatos? = null
-    ) : DetalleContactoUiState
+data class ListaContactosUiState(
+    val contactos: List<Contacto> = emptyList(),
+    val busqueda: String = "",
+    val favoritos: Set<Int> = emptySet(),
+    val soloFavoritos: Boolean = false,
+    val cargando: Boolean = false,
+    val cargandoMas: Boolean = false,
+    val hayMas: Boolean = false,
+    val desdeCache: Boolean = false,
+    val error: ErrorDatos? = null
+) {
+    /** Lo que realmente se muestra: todos los contactos cargados o solo los favoritos. */
+    val contactosVisibles: List<Contacto>
+        get() = if (soloFavoritos) contactos.filter { it.id in favoritos } else contactos
 }
 ```
 
-Dentro de `Contenido` sí usamos una `data class` con varios campos, porque una vez que hay un contacto cargado, la pantalla vuelve a necesitar mostrar varias cosas simultáneamente: si se está favoriteando, si se está eliminando, si la eliminación ya terminó, o si una acción (favorito o borrado) falló.
+Fíjate en la propiedad calculada `contactosVisibles`: en lugar de que cada composable repita la lógica del filtro de favoritos, el propio `UiState` decide qué lista mostrar. Es el mismo principio de "la Vista solo dibuja" que viste en el capítulo 28: toda decisión vive en el estado, no en la interfaz.
 
-Fíjate especialmente en **`eliminado: Boolean`**: no es un dato del contacto, es un **evento**. Cuando pasa a `true`, la pantalla debe reaccionar navegando hacia atrás, tal como estudiaste en el capítulo 43 con el ejemplo de guardar y volver.
-
-## El ViewModel: `DetalleContactoViewModel`
+## El ViewModel: `ListaContactosViewModel`
 
 ```kotlin
-package com.ejemplo.miscontactos.ui.detalle
+package com.ejemplo.miscontactos.ui.lista
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.toRoute
 import com.ejemplo.miscontactos.data.ContactosRepository
 import com.ejemplo.miscontactos.model.comoErrorDatos
-import com.ejemplo.miscontactos.ui.navigation.DetalleContactoRuta
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -61,266 +62,369 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class DetalleContactoViewModel @Inject constructor(
-    private val repository: ContactosRepository,
-    savedStateHandle: SavedStateHandle
+class ListaContactosViewModel @Inject constructor(
+    private val repository: ContactosRepository
 ) : ViewModel() {
 
-    private val id: Int = savedStateHandle.toRoute<DetalleContactoRuta>().id
+    private val _uiState = MutableStateFlow(ListaContactosUiState())
+    val uiState: StateFlow<ListaContactosUiState> = _uiState.asStateFlow()
 
-    private val _uiState = MutableStateFlow<DetalleContactoUiState>(DetalleContactoUiState.Cargando)
-    val uiState: StateFlow<DetalleContactoUiState> = _uiState.asStateFlow()
+    private var paginaActual = 0
+    private var cargaJob: Job? = null
 
     init {
         viewModelScope.launch {
-            repository.favoritos.collect { favoritos ->
-                actualizarContenido { it.copy(esFavorito = id in favoritos) }
+            repository.favoritos.collect { ids ->
+                _uiState.update { it.copy(favoritos = ids) }
             }
         }
         viewModelScope.launch {
-            repository.cambios.collect { cargar() }
+            repository.cambios.collect { recargar() }
         }
-        cargar()
+        recargar()
     }
 
-    // ... (cargar, alternarFavorito, eliminar, errorAccionMostrado, actualizarContenido)
+    // ... (recargar, cargarMas, cambiarBusqueda, alternarSoloFavoritos, alternarFavorito, cargarPagina)
 }
 ```
 
-El `id` del contacto no llega como parámetro de función: se lee del `SavedStateHandle` mediante `savedStateHandle.toRoute<DetalleContactoRuta>().id`, la forma de leer argumentos de navegación tipados que veremos en detalle en el capítulo 59. Como en la pantalla de lista, el `init` se suscribe tanto a `favoritos` como a `cambios`, manteniendo el detalle sincronizado si el contacto se edita desde otra pantalla.
+En el bloque `init` lanzamos **dos coroutines independientes** que se ejecutan durante toda la vida del `ViewModel`, además de disparar la primera carga:
 
-### Cargar el contacto
+1. La primera se suscribe a `repository.favoritos` y mantiene el `UiState` sincronizado con los favoritos guardados en Room, sin importar qué otra pantalla los haya modificado.
+2. La segunda se suscribe a `repository.cambios`: cada vez que se crea, edita o elimina un contacto (en el formulario o en el detalle), esta pantalla se refresca sola llamando a `recargar()`.
+
+> [!NOTE]Nota
+> Dos coroutines dentro de un mismo `init` no se bloquean entre sí: `viewModelScope.launch` lanza cada una en su propia tarea. La primera queda "escuchando" `favoritos` indefinidamente, mientras la segunda hace lo mismo con `cambios`, y ambas conviven con la carga inicial.
+
+### Cargar y recargar
 
 ```kotlin
-private fun cargar() {
-    viewModelScope.launch {
-        _uiState.update { DetalleContactoUiState.Cargando }
-        repository.obtenerContacto(id)
-            .onSuccess { contacto ->
-                _uiState.update {
-                    DetalleContactoUiState.Contenido(contacto = contacto)
-                }
-            }
-            .onFailure { error ->
-                _uiState.update { DetalleContactoUiState.Error(error.comoErrorDatos()) }
-            }
-    }
+/** Vuelve a pedir la primera página (al iniciar, al reintentar o al deslizar para actualizar). */
+fun recargar() {
+    cargaJob?.cancel()
+    cargaJob = viewModelScope.launch { cargarPagina(0) }
+}
+
+fun cargarMas() {
+    val estado = _uiState.value
+    if (estado.cargando || estado.cargandoMas || !estado.hayMas) return
+    cargaJob = viewModelScope.launch { cargarPagina(paginaActual + 1) }
 }
 ```
 
-Nota que `cargar()` siempre **reemplaza** el estado desde cero, incluso si ya había un `Contenido` visible: al recargar tras un cambio externo (por ejemplo, se editó el contacto desde el formulario), es correcto volver a mostrar `Cargando` brevemente y luego el contenido actualizado.
+`cargaJob` guarda una referencia al `Job` de la carga en curso (capítulo 24). Antes de lanzar una nueva carga desde `recargar()`, **cancelamos** la anterior: si el usuario desliza para refrescar mientras la lista todavía estaba cargando la página inicial, no queremos que ambas peticiones compitan por escribir el mismo estado.
 
-### Alternar favorito y eliminar
+`cargarMas()` incluye una **guarda** de tres condiciones: no vuelve a pedir otra página si ya hay una carga en curso (`cargando` o `cargandoMas`) o si no quedan más páginas (`!hayMas`). Sin esta comprobación, el scroll infinito podría disparar la misma petición varias veces.
+
+### Búsqueda con `debounce`
 
 ```kotlin
-fun alternarFavorito() {
+/** Cada tecla reinicia la espera: solo se busca cuando el usuario deja de escribir. */
+fun cambiarBusqueda(texto: String) {
+    _uiState.update { it.copy(busqueda = texto) }
+    cargaJob?.cancel()
+    cargaJob = viewModelScope.launch {
+        delay(ESPERA_BUSQUEDA_MS)
+        cargarPagina(0)
+    }
+}
+
+private companion object {
+    const val ESPERA_BUSQUEDA_MS = 400L
+}
+```
+
+Si lanzáramos una búsqueda a la API por cada letra que el usuario escribe, generaríamos una petición de red por tecla. En cambio, cada llamada a `cambiarBusqueda` **cancela** la coroutine de búsqueda anterior (`cargaJob?.cancel()`) y lanza una nueva que espera 400 milisegundos (`delay`) antes de disparar la petición real. Si el usuario sigue escribiendo antes de que se cumplan esos 400 ms, la espera se cancela y se reinicia. Esta técnica se llama ***debounce***, y es el mismo patrón de cancelación que viste con `Job` en el capítulo 24.
+
+### Favoritos: local e inmediato
+
+```kotlin
+fun alternarSoloFavoritos() {
+    _uiState.update { it.copy(soloFavoritos = !it.soloFavoritos) }
+}
+
+fun alternarFavorito(id: Int) {
     viewModelScope.launch { repository.alternarFavorito(id) }
 }
+```
 
-fun eliminar() {
-    viewModelScope.launch {
-        actualizarContenido { it.copy(eliminando = true, errorAccion = null) }
-        repository.eliminar(id)
-            .onSuccess {
-                actualizarContenido { it.copy(eliminando = false, eliminado = true) }
-            }
-            .onFailure { error ->
-                actualizarContenido {
-                    it.copy(eliminando = false, errorAccion = error.comoErrorDatos())
-                }
-            }
+`alternarSoloFavoritos` es puramente local: cambia el filtro sin tocar la red ni la base de datos, y la propiedad `contactosVisibles` del `UiState` se encarga de recalcular la lista. `alternarFavorito(id)` delega en el repositorio; como el `UiState` ya está suscrito a `repository.favoritos` desde el `init`, el cambio se refleja automáticamente, sin necesidad de actualizar `_uiState` manualmente aquí.
+
+### Cargar una página
+
+```kotlin
+private suspend fun cargarPagina(pagina: Int) {
+    _uiState.update {
+        if (pagina == 0) it.copy(cargando = true, error = null)
+        else it.copy(cargandoMas = true, error = null)
     }
-}
 
-fun errorAccionMostrado() {
-    actualizarContenido { it.copy(errorAccion = null) }
+    val busqueda = _uiState.value.busqueda.trim().ifBlank { null }
+    repository.obtenerPagina(pagina, busqueda)
+        .onSuccess { resultado ->
+            paginaActual = resultado.pagina
+            _uiState.update { estado ->
+                estado.copy(
+                    contactos = if (pagina == 0) {
+                        resultado.contactos
+                    } else {
+                        estado.contactos + resultado.contactos
+                    },
+                    hayMas = resultado.hayMas,
+                    desdeCache = resultado.desdeCache,
+                    cargando = false,
+                    cargandoMas = false
+                )
+            }
+        }
+        .onFailure { error ->
+            _uiState.update {
+                it.copy(cargando = false, cargandoMas = false, error = error.comoErrorDatos())
+            }
+        }
 }
 ```
 
-`eliminar()` sigue el mismo patrón de tres pasos que ya usaste en los capítulos 42 y 49: marca `eliminando = true` antes de la llamada, y según el resultado, marca `eliminado = true` (el evento que disparará la navegación) o guarda el error en `errorAccion` para mostrarlo en un snackbar. `errorAccionMostrado()` lo limpia después de mostrarlo, evitando que se repita en una recomposición.
+Si `pagina == 0`, **reemplazamos** la lista completa (una nueva búsqueda o un refresco). Si es una página siguiente, **concatenamos** los nuevos contactos a los que ya había (`estado.contactos + resultado.contactos`), preservando el orden. `cargando` distingue la carga inicial (que suele mostrar un indicador a pantalla completa) de `cargandoMas` (un indicador pequeño al final de la lista).
 
-### El ayudante `actualizarContenido`
+## La pantalla: `ListaContactosScreen`
 
-```kotlin
-private inline fun actualizarContenido(
-    transformar: (DetalleContactoUiState.Contenido) -> DetalleContactoUiState.Contenido
-) {
-    _uiState.update { estado ->
-        if (estado is DetalleContactoUiState.Contenido) transformar(estado) else estado
-    }
-}
-```
-
-Como varias funciones (`alternarFavorito`, `eliminar`, la suscripción a `favoritos`) solo tienen sentido cuando el estado ya es `Contenido`, centralizamos esa comprobación en `actualizarContenido`: si el estado actual es `Cargando` o `Error`, la actualización simplemente se ignora. Esto evita repetir un `if (estado is Contenido)` en cada función.
-
-## La pantalla: `DetalleContactoScreen`
+Siguiendo el patrón de separar la versión "con estado" de la versión "sin estado" que ya usaste en tutoriales anteriores, dividimos el composable en dos:
 
 ```kotlin
+/** Versión con estado: obtiene el ViewModel y conecta sus funciones con la pantalla. */
 @Composable
-fun DetalleContactoScreen(
-    onEditar: (Int) -> Unit,
-    onVolver: () -> Unit,
-    viewModel: DetalleContactoViewModel = hiltViewModel()
+fun ListaContactosScreen(
+    onVerContacto: (Int) -> Unit,
+    onNuevoContacto: () -> Unit,
+    viewModel: ListaContactosViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    val eliminado = (uiState as? DetalleContactoUiState.Contenido)?.eliminado ?: false
-    LaunchedEffect(eliminado) {
-        if (eliminado) onVolver()
-    }
-
-    DetalleContactoContent(
+    ListaContactosContent(
         uiState = uiState,
+        onBusquedaChange = viewModel::cambiarBusqueda,
+        onAlternarSoloFavoritos = viewModel::alternarSoloFavoritos,
         onAlternarFavorito = viewModel::alternarFavorito,
-        onEliminar = viewModel::eliminar,
-        onErrorAccionMostrado = viewModel::errorAccionMostrado,
-        onEditar = onEditar,
-        onVolver = onVolver
+        onRecargar = viewModel::recargar,
+        onCargarMas = viewModel::cargarMas,
+        onVerContacto = onVerContacto,
+        onNuevoContacto = onNuevoContacto
     )
 }
 ```
 
-Este `LaunchedEffect(eliminado)` es exactamente el patrón "evento como estado" del capítulo 43: en lugar de que el `ViewModel` llame directamente a una función de navegación (que no debería conocer), expone un booleano en el `UiState`, y es la Screen quien observa ese booleano y decide navegar. Como la clave del efecto es `eliminado`, solo se ejecuta cuando ese valor cambia de `false` a `true`, nunca en cada recomposición.
-
-### Confirmación con `AlertDialog`
+`ListaContactosContent` es la versión sin estado, la que realmente dibuja la pantalla y la que se puede previsualizar y probar de forma aislada:
 
 ```kotlin
 @Composable
-fun DetalleContactoContent(
-    uiState: DetalleContactoUiState,
-    onAlternarFavorito: () -> Unit,
-    onEliminar: () -> Unit,
-    onErrorAccionMostrado: () -> Unit,
-    onEditar: (Int) -> Unit,
-    onVolver: () -> Unit
+fun ListaContactosContent(
+    uiState: ListaContactosUiState,
+    onBusquedaChange: (String) -> Unit,
+    onAlternarSoloFavoritos: () -> Unit,
+    onAlternarFavorito: (Int) -> Unit,
+    onRecargar: () -> Unit,
+    onCargarMas: () -> Unit,
+    onVerContacto: (Int) -> Unit,
+    onNuevoContacto: () -> Unit
 ) {
-    var confirmarEliminar by rememberSaveable { mutableStateOf(false) }
-    val snackbarHostState = remember { SnackbarHostState() }
-    val contenido = uiState as? DetalleContactoUiState.Contenido
-
-    val errorAccion = contenido?.errorAccion
-    LaunchedEffect(errorAccion) {
-        if (errorAccion != null) {
-            snackbarHostState.showSnackbar(mensajeDe(errorAccion))
-            onErrorAccionMostrado()
-        }
-    }
-
     Scaffold(
-        snackbarHost = { SnackbarHost(snackbarHostState) },
-        topBar = {
-            TopAppBar(
-                title = { Text(stringResource(R.string.titulo_detalle)) },
-                navigationIcon = {
-                    IconButton(onClick = onVolver) {
-                        Icon(Icons.AutoMirrored.Default.ArrowBack, contentDescription = null)
-                    }
-                },
-                actions = {
-                    if (contenido != null) {
-                        IconToggleButton(checked = contenido.esFavorito, onCheckedChange = { onAlternarFavorito() }) {
-                            Icon(
-                                imageVector = if (contenido.esFavorito) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                                contentDescription = null
-                            )
-                        }
-                        IconButton(onClick = { onEditar(contenido.contacto.id) }) {
-                            Icon(Icons.Default.Edit, contentDescription = stringResource(R.string.editar_contacto))
-                        }
-                        IconButton(onClick = { confirmarEliminar = true }) {
-                            Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.eliminar_contacto))
-                        }
-                    }
-                }
-            )
+        topBar = { TopAppBar(title = { Text(stringResource(R.string.titulo_lista)) }) },
+        floatingActionButton = {
+            FloatingActionButton(onClick = onNuevoContacto) {
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.nuevo_contacto))
+            }
         }
     ) { innerPadding ->
-        Box(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
-            when (uiState) {
-                is DetalleContactoUiState.Cargando -> EstadoCargando()
-                is DetalleContactoUiState.Error -> EstadoError(error = uiState.error, onReintentar = null)
-                is DetalleContactoUiState.Contenido -> FichaContacto(contacto = uiState.contacto)
+        Column(modifier = Modifier.padding(innerPadding)) {
+            BarraBusqueda(
+                busqueda = uiState.busqueda,
+                soloFavoritos = uiState.soloFavoritos,
+                onBusquedaChange = onBusquedaChange,
+                onAlternarSoloFavoritos = onAlternarSoloFavoritos
+            )
+
+            if (uiState.desdeCache) {
+                AvisoDatosGuardados()
+            }
+
+            val error = uiState.error
+            when {
+                uiState.cargando && uiState.contactos.isEmpty() -> EstadoCargando()
+                error != null && uiState.contactos.isEmpty() ->
+                    EstadoError(error = error, onReintentar = onRecargar)
+                else -> PullToRefreshBox(
+                    isRefreshing = uiState.cargando,
+                    onRefresh = onRecargar,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    ListaContactos(
+                        uiState = uiState,
+                        onAlternarFavorito = onAlternarFavorito,
+                        onCargarMas = onCargarMas,
+                        onVerContacto = onVerContacto
+                    )
+                }
             }
         }
     }
+}
+```
 
-    if (confirmarEliminar) {
-        AlertDialog(
-            onDismissRequest = { confirmarEliminar = false },
-            title = { Text(stringResource(R.string.confirmar_eliminar_titulo)) },
-            text = { Text(stringResource(R.string.confirmar_eliminar_mensaje)) },
-            confirmButton = {
-                TextButton(onClick = {
-                    confirmarEliminar = false
-                    onEliminar()
-                }) { Text(stringResource(R.string.eliminar_contacto)) }
-            },
-            dismissButton = {
-                TextButton(onClick = { confirmarEliminar = false }) {
-                    Text(stringResource(R.string.cancelar))
-                }
-            }
+Observa el `when` que decide qué dibujar:
+- Si está cargando **y** todavía no hay ningún contacto (la primera carga), muestra `EstadoCargando()` a pantalla completa.
+- Si hay un error **y** la lista está vacía, muestra `EstadoError` con un botón de reintentar.
+- En cualquier otro caso —incluida una recarga con datos ya visibles— envuelve la lista en `PullToRefreshBox`, que dibuja el indicador circular de "deslizar para actualizar" sincronizado con `uiState.cargando`.
+
+`AvisoDatosGuardados()` es una franja de color que se muestra únicamente cuando `desdeCache` es `true`, avisando al usuario de que estos contactos no son la versión más reciente del servidor:
+
+```kotlin
+@Composable
+private fun AvisoDatosGuardados() {
+    Surface(
+        color = MaterialTheme.colorScheme.tertiaryContainer,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(
+            text = stringResource(R.string.aviso_datos_guardados),
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onTertiaryContainer,
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
         )
     }
 }
 ```
 
-Los botones de la barra superior (favorito, editar, eliminar) solo se dibujan **cuando `contenido != null`**: no tiene sentido ofrecer acciones sobre un contacto que todavía se está cargando o que falló al cargar.
-
-El ícono de eliminar no borra directamente: solo cambia `confirmarEliminar` a `true`, lo que hace aparecer un `AlertDialog` de Material 3. Únicamente si el usuario toca el botón de confirmación dentro del diálogo se llama a `onEliminar()`. `confirmarEliminar` vive en `rememberSaveable` (capítulo 34) para sobrevivir a un cambio de configuración, como la rotación de pantalla, sin volver a preguntar innecesariamente ni perder la confirmación en curso.
-
-El segundo `LaunchedEffect`, con clave `errorAccion`, muestra un snackbar cuando `alternarFavorito()` o `eliminar()` fallan, y llama a `onErrorAccionMostrado()` para limpiar el error una vez mostrado — el mismo patrón de "consumir el evento" que ya usaste en el capítulo 43.
-
-### La ficha del contacto
+## Scroll infinito con `LazyColumn`
 
 ```kotlin
 @Composable
-private fun FichaContacto(contacto: Contacto, modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier.fillMaxSize().padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        AvatarContacto(contacto = contacto, modifier = Modifier.size(96.dp))
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(contacto.nombreCompleto, style = MaterialTheme.typography.headlineSmall)
+private fun ListaContactos(
+    uiState: ListaContactosUiState,
+    onAlternarFavorito: (Int) -> Unit,
+    onCargarMas: () -> Unit,
+    onVerContacto: (Int) -> Unit
+) {
+    val contactos = uiState.contactosVisibles
 
-        Spacer(modifier = Modifier.height(24.dp))
-        DatoContacto(icono = Icons.Default.Email, valor = contacto.email)
-        DatoContacto(icono = Icons.Default.Phone, valor = contacto.telefono)
-        DatoContacto(icono = Icons.Default.Home, valor = contacto.direccion)
-        DatoContacto(icono = Icons.Default.LocationCity, valor = contacto.ciudad)
+    if (contactos.isEmpty() && !uiState.cargando) {
+        val mensaje = when {
+            uiState.soloFavoritos -> stringResource(R.string.favoritos_vacios)
+            uiState.busqueda.isNotBlank() ->
+                stringResource(R.string.busqueda_sin_resultados, uiState.busqueda)
+            else -> stringResource(R.string.lista_vacia)
+        }
+        // LazyColumn para que "deslizar para actualizar" funcione también con la lista vacía.
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+            item { EstadoVacio(mensaje = mensaje) }
+        }
+        return
     }
-}
 
-@Composable
-private fun DatoContacto(icono: ImageVector, valor: String?, modifier: Modifier = Modifier) {
-    Row(modifier = modifier.fillMaxWidth().padding(vertical = 8.dp)) {
-        Icon(icono, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
-        Spacer(modifier = Modifier.width(12.dp))
-        Text(valor ?: stringResource(R.string.sin_informacion))
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
+        items(contactos, key = { it.id }) { contacto ->
+            ContactoItem(
+                contacto = contacto,
+                esFavorito = contacto.id in uiState.favoritos,
+                onAlternarFavorito = { onAlternarFavorito(contacto.id) },
+                onClick = { onVerContacto(contacto.id) }
+            )
+            HorizontalDivider()
+        }
+
+        // Al llegar al final de la lista, se pide la página siguiente.
+        if (uiState.hayMas && !uiState.soloFavoritos) {
+            item {
+                LaunchedEffect(contactos.size) { onCargarMas() }
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
+            }
+        }
     }
 }
 ```
 
-`DatoContacto` recibe un `valor: String?` porque, como recordarás del modelo de dominio (capítulo 51), `telefono`, `direccion` y `ciudad` son opcionales: cuando son `null`, se muestra el texto `sin_informacion` en lugar de dejar la fila vacía o esconderla, dándole al usuario una señal consistente de "este dato no se cargó" en vez de un hueco silencioso.
+El truco del scroll infinito está en este fragmento:
+
+```kotlin
+if (uiState.hayMas && !uiState.soloFavoritos) {
+    item {
+        LaunchedEffect(contactos.size) { onCargarMas() }
+        // ...un indicador de carga...
+    }
+}
+```
+
+Cuando quedan más páginas por cargar, agregamos un último elemento a la `LazyColumn` que contiene un `LaunchedEffect(contactos.size)` (capítulo 43). Como Compose solo dibuja los elementos visibles de una lista perezosa, este ítem **entra en composición justo cuando el usuario llega al final** de lo que ya está cargado, y en ese momento su `LaunchedEffect` se dispara y llama a `onCargarMas()`. La clave `contactos.size` asegura que el efecto se relance cada vez que llega una nueva página (el tamaño de la lista cambia), y no se repita mientras el tamaño se mantiene igual.
+
+También nota el `soloFavoritos` en la condición: cuando el filtro de favoritos está activo, no tiene sentido seguir pidiendo más páginas al servidor, porque el filtrado ocurre sobre los contactos ya cargados.
+
+## El ítem de la lista: `ContactoItem`
+
+```kotlin
+@Composable
+fun ContactoItem(
+    contacto: Contacto,
+    esFavorito: Boolean,
+    onAlternarFavorito: () -> Unit,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    ListItem(
+        headlineContent = { Text(contacto.nombreCompleto) },
+        supportingContent = { Text(contacto.email) },
+        leadingContent = { AvatarContacto(contacto = contacto) },
+        trailingContent = {
+            IconToggleButton(checked = esFavorito, onCheckedChange = { onAlternarFavorito() }) {
+                Icon(
+                    imageVector = if (esFavorito) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                    contentDescription = stringResource(
+                        if (esFavorito) R.string.quitar_favorito else R.string.marcar_favorito
+                    ),
+                    tint = if (esFavorito) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        },
+        modifier = modifier.clickable(onClick = onClick)
+    )
+}
+```
+
+`ListItem` de Material 3 organiza el contenido en tres zonas (principal, secundaria y final), y `IconToggleButton` cambia de ícono y color según `esFavorito`, ofreciendo una descripción de accesibilidad distinta en cada estado (`marcar_favorito` / `quitar_favorito`).
 
 ## Resumen
 
-- `DetalleContactoUiState` vuelve a ser una `sealed interface` (`Cargando` / `Error` / `Contenido`) porque sus tres posibilidades son mutuamente excluyentes, pero `Contenido` es una `data class` porque, una vez con datos, hay varias cosas que coexisten (favorito, eliminando, eliminado, error de acción).
-- El `id` del contacto se obtiene con `savedStateHandle.toRoute<DetalleContactoRuta>().id`, el mecanismo de argumentos tipados que se explica a fondo en el capítulo 59.
-- `eliminar()` es un ejemplo más del patrón "evento como estado" (capítulo 43): el `ViewModel` no navega; expone `eliminado = true` en el `UiState`, y un `LaunchedEffect(eliminado)` en la Screen decide volver atrás.
-- La eliminación se confirma con un `AlertDialog` antes de llamar a `onEliminar()`, y su estado de visibilidad se guarda con `rememberSaveable` para sobrevivir a la rotación.
-- El ayudante privado `actualizarContenido` evita repetir la comprobación `is Contenido` en cada función del `ViewModel`.
+- `ListaContactosUiState` es una `data class` (no una `sealed class`) porque muestra varias cosas a la vez; centraliza la decisión de qué mostrar en la propiedad calculada `contactosVisibles`.
+- El `ViewModel` se suscribe en el `init` a `repository.favoritos` y `repository.cambios`, manteniéndose sincronizado con el resto de la app.
+- La búsqueda usa ***debounce***: cada tecla cancela la espera anterior y lanza una nueva de 400 ms antes de pedir datos.
+- El scroll infinito se logra con un ítem final en la `LazyColumn` cuyo `LaunchedEffect(contactos.size)` dispara `cargarMas()` al hacerse visible.
+- `PullToRefreshBox` conecta el gesto de deslizar hacia abajo con `uiState.cargando` y `onRecargar`.
+- Un aviso visual (`desdeCache`) le informa al usuario cuando está viendo datos guardados localmente, coherente con la estrategia *offline-first* del capítulo 56.
 
 ## Para cerrar
 
-Quieres avisar con un snackbar "Contacto actualizado" cuando una acción del detalle termina bien. Tienes dos opciones: llamar a `snackbarHostState.showSnackbar(...)` directamente en el cuerpo del composable, o exponer un booleano en el `UiState`, observarlo con `LaunchedEffect` y limpiarlo después. ¿Cuál eliges y por qué?
+Estás aplicando el mismo truco de scroll infinito a una lista de productos, pero escribes el último ítem así:
+
+```kotlin
+if (hayMas) {
+    item {
+        LaunchedEffect(Unit) { onCargarMas() }
+        CircularProgressIndicator()
+    }
+}
+```
+
+El usuario llega al final y se carga la página siguiente, pero al seguir bajando no se piden más páginas. ¿Por qué?
 
 Responde antes de mirar la respuesta.
 
 ??? success "Ver respuesta y razonamiento"
-    La segunda: exponer la señal en el `UiState` y consumirla con `LaunchedEffect` (el patrón "evento como estado"). Llamar a `showSnackbar` directamente en el cuerpo lo dispararía en **cada recomposición**, mostrando el mensaje repetidamente, y además mezclaría efectos con el dibujado.
+    Con la clave `Unit`, el `LaunchedEffect` se ejecuta **una sola vez**, cuando ese ítem entra en composición por primera vez. Como el ítem permanece en la lista, el efecto no se relanza aunque lleguen datos nuevos.
 
-    Al modelarlo como estado (`eliminado`, `errorAccion`), la Screen reacciona una sola vez al cambio y luego limpia la señal con una función como `errorAccionMostrado()`. Error común: disparar efectos directamente en el cuerpo del composable en vez de dentro de un `LaunchedEffect`.
+    La solución de la pantalla de lista usa `LaunchedEffect(contactos.size)`: cada vez que arriba una página nueva, el tamaño de la lista cambia, la clave cambia y el efecto vuelve a lanzarse, disparando `cargarMas()` otra vez. Error común: creer que `LaunchedEffect(Unit)` "se repite en cada recomposición"; en realidad solo depende de su clave.
 
-En el próximo capítulo construiremos la pantalla de formulario, la más exigente en validación: campos obligatorios, formato de correo, y errores que pueden venir tanto del cliente como del servidor.
+En el próximo capítulo construiremos la pantalla de detalle, con el patrón de "evento como estado" para eliminar un contacto de forma segura.

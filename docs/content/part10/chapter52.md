@@ -1,379 +1,234 @@
-# Capítulo 52: Configuración del proyecto y permisos
+# Capítulo 52: Presentación y arquitectura de «Mis Contactos»
+
+> [!NOTE]Lo que aprenderás en esta parte
+> Al terminar la **Parte X** podrás:
+>
+> - Explicar la arquitectura por capas de «Mis Contactos».
+> - Construir la capa remota (Retrofit) y la local (Room) detrás de un repositorio *offline-first*.
+> - Implementar las pantallas de lista, detalle y formulario con sus `ViewModel`.
+> - Navegar entre pantallas con rutas tipadas y reutilizar componentes compartidos.
+> - Transferir el patrón completo (MVVM + red + persistencia) a una funcionalidad nueva.
 
 > [!TIP]Antes de empezar, recupera lo que ya sabes
 > Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
 >
-> 1. ¿Para qué sirve el catálogo `gradle/libs.versions.toml` en lugar de escribir las versiones directamente en `build.gradle.kts`?
-> 2. ¿Qué se declara en el `AndroidManifest.xml` y para qué sirve?
-> 3. ¿Qué diferencia hay entre `compileSdk` y `minSdk`?
+> 1. ¿Qué tres componentes forman el patrón MVVM y qué responsabilidad tiene cada uno?
+> 2. ¿Qué papel cumple un repositorio entre el ViewModel y las fuentes de datos?
+> 3. ¿Qué diferencia hay entre una fuente de datos remota y una local?
 
 ## Introducción
 
-Para construir «Mis Contactos» necesitamos configurar las dependencias del proyecto en Gradle, registrar los permisos en el manifiesto y preparar el punto de entrada de la aplicación. Además, nos enfrentaremos a un requisito fundamental introducido en **Android 17 (API 37)**: el permiso en tiempo de ejecución para acceder a la **red local** (`ACCESS_LOCAL_NETWORK`), indispensable para que el emulador se comunique con la API que corre en tu computador (`10.0.2.2`).
+Has llegado a la última parte del curso. A lo largo de los capítulos anteriores fuiste aprendiendo cada pieza por separado: la sintaxis moderna de Kotlin, la asincronía con coroutines y flujos, el diseño de interfaces declarativas con Jetpack Compose, la arquitectura MVVM con `ViewModel` y `StateFlow`, la inyección de dependencias con Hilt, la comunicación de red con Retrofit y la serialización JSON, y la persistencia en base de datos local con Room.
 
-En este capítulo configuraremos el catálogo de versiones, los archivos Gradle, los permisos del sistema, la clase `Application` con Hilt y la `MainActivity`.
+Ahora unirás todas esas piezas en una **aplicación completa, profesional y real**: **«Mis Contactos»**. Esta app se conecta a la API REST que exploraste en el capítulo 46 (`code/contact-list-api/`), guarda una copia local en Room para funcionar sin conexión, permite gestionar contactos con validación estricta de formularios y ofrece una experiencia de usuario fluida con búsqueda en tiempo real, scroll infinito y soporte para favoritos.
 
-## Catálogo de versiones y dependencias
+En este capítulo conocerás la aplicación en detalle, su arquitectura general por capas, el modelo de dominio y la organización de paquetes del proyecto.
 
-Todas las bibliotecas utilizadas en la app se declaran en el catálogo `gradle/libs.versions.toml`:
+## ¿Qué hace la aplicación «Mis Contactos»?
 
-```toml
-[versions]
-agp = "9.4.1"
-kotlin = "2.4.20"
-ksp = "2.3.12"
-coreKtx = "1.19.0"
-activityCompose = "1.13.0"
-composeBom = "2026.09.00"
-lifecycle = "2.11.0"
-navigationCompose = "2.10.1"
-materialIcons = "1.7.8"
-hilt = "2.60.1"
-hiltLifecycleViewmodelCompose = "1.4.0"
-retrofit = "3.0.0"
-okhttp = "4.12.0"
-kotlinxSerialization = "1.11.0"
-room = "2.8.5"
-coil = "3.6.3"
-coroutines = "1.11.0"
-junit = "4.13.2"
-androidxJunit = "1.3.0"
+«Mis Contactos» es un gestor de libreta de direcciones estructurado en tres pantallas principales:
 
-[libraries]
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
-androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
-androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
-androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
-androidx-compose-material-icons-core = { group = "androidx.compose.material", name = "material-icons-core", version.ref = "materialIcons" }
-androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
-androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
-androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }
-androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
-androidx-hilt-lifecycle-viewmodel-compose = { group = "androidx.hilt", name = "hilt-lifecycle-viewmodel-compose", version.ref = "hiltLifecycleViewmodelCompose" }
-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
-retrofit-kotlinx-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
-okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
-kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
-androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
-androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
-androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
-coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
-coil-network-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunit" }
-
-[plugins]
-android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-room = { id = "androidx.room", version.ref = "room" }
+```mermaid
+graph LR
+    Lista[Pantalla de Lista] -->|Tocar contacto| Detalle[Pantalla de Detalle]
+    Lista -->|Botón +| FormNuevo[Formulario: Nuevo]
+    Detalle -->|Botón Editar| FormEditar[Formulario: Editar]
+    Detalle -->|Eliminar| Lista
+    FormNuevo -->|Guardar| Lista
+    FormEditar -->|Guardar| Detalle
 ```
 
-En el archivo `app/build.gradle.kts` activamos los plugins y agregamos las dependencias:
+1. **Pantalla de Lista (`ListaContactosScreen`)**:
+   - Muestra los contactos ordenados alfabéticamente por nombre.
+   - Permite **buscar en tiempo real** por nombre o apellido con filtrado reactivo.
+   - Ofrece un filtro rápido para ver solo **favoritos**.
+   - Carga contactos bajo demanda mediante **scroll infinito** (paginación).
+   - Permite refrescar la lista deslizando hacia abajo (*pull-to-refresh*).
+   - Muestra fotos de perfil con avatar dinámico (mediante la biblioteca Coil) e iniciales de respaldo.
+   - Permite marcar o desmarcar favoritos con un solo toque.
 
-```kotlin
-plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.room)
-}
+2. **Pantalla de Detalle (`DetalleContactoScreen`)**:
+   - Muestra la información completa del contacto (nombre, apellido, correo, teléfono, dirección, ciudad).
+   - Permite cambiar el estado de favorito.
+   - Incluye acceso directo para **editar** el contacto.
+   - Permite **eliminar** el contacto con un diálogo de confirmación de seguridad.
 
-android {
-    namespace = "com.ejemplo.miscontactos"
-    compileSdk {
-        version = release(37)
-    }
+3. **Pantalla de Formulario (`FormularioContactoScreen`)**:
+   - Sirve tanto para **crear** un contacto nuevo como para **editar** uno existente.
+   - Valida los campos localmente antes de enviar (correo válido, longitudes mínimas y obligatoriedad).
+   - Configura el teclado virtual adecuado para cada campo (correo, teléfono, mayúsculas automáticas).
+   - Recibe y muestra errores específicos del servidor (como formato no válido o correo duplicado).
+   - Vuelve automáticamente a la pantalla anterior al guardar con éxito.
 
-    defaultConfig {
-        applicationId = "com.ejemplo.miscontactos"
-        minSdk = 24
-        targetSdk = 37
-        versionCode = 1
-        versionName = "1.0"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
+## La arquitectura general: MVVM y capas
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    buildFeatures {
-        compose = true
-    }
-}
+La aplicación sigue estrictamente la arquitectura recomendada por Google para Android, estructurada en tres capas bien diferenciadas:
 
-room {
-    schemaDirectory("$projectDir/schemas")
-}
+```mermaid
+flowchart TD
+    subgraph UI[Capa de Interfaz (UI)]
+        Screen[Composables / Screens]
+        VM[ViewModels]
+    end
 
-dependencies {
-    // Compose y ciclo de vida
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material.icons.core)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.navigation.compose)
+    subgraph Data[Capa de Datos (Data)]
+        Repo[ContactosRepositoryImpl]
+    end
 
-    // Inyección de dependencias (Hilt)
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
-    implementation(libs.androidx.hilt.lifecycle.viewmodel.compose)
+    subgraph Sources[Fuentes de Datos]
+        Remote[API REST / Retrofit]
+        Local[Base de Datos / Room]
+    end
 
-    // Red (Retrofit + OkHttp + Serialización)
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.kotlinx.serialization)
-    implementation(libs.okhttp.logging.interceptor)
-    implementation(libs.kotlinx.serialization.json)
-
-    // Persistencia local (Room)
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
-
-    // Carga de imágenes remotas (Coil 3)
-    implementation(libs.coil.compose)
-    implementation(libs.coil.network.okhttp)
-}
+    Screen -->|Eventos de usuario| VM
+    VM -->|UiState (StateFlow)| Screen
+    VM -->|Llamadas suspend / Flow| Repo
+    Repo -->|ContactApi| Remote
+    Repo -->|DAOs| Local
 ```
+
+### 1. Capa de Interfaz (*UI Layer*)
+- **Composables**: declaran cómo se ve la interfaz a partir de un estado inmutable (`UiState`). No toman decisiones de negocio ni hacen llamadas de red directamente.
+- **ViewModels**: gestionan el estado de la pantalla (`StateFlow`), manejan la lógica de presentación y ejecutan coroutines en `viewModelScope`. Están anotados con `@HiltViewModel`.
+
+### 2. Capa de Dominio / Modelo (*Domain Layer*)
+- Define las estructuras de datos que representan el negocio de la app (`Contacto`, `DatosContacto`), limpias de anotaciones de bibliotecas externas (sin anotaciones de serialización ni de Room).
+- Modela los posibles errores de la aplicación mediante la clase sellada `ErrorDatos`.
+
+### 3. Capa de Datos (*Data Layer*)
+- **Repositorio (`ContactosRepository`)**: es la única fuente de verdad para los ViewModels. Oculta la complejidad de sincronizar la API REST con la base de datos Room.
+- **Fuente Remota**: cliente Retrofit (`ContactApi`), DTOs serializables con `kotlinx.serialization` y funciones de mapeo.
+- **Fuente Local**: base de datos SQLite administrada por Room (`ContactosDatabase`, `ContactoEntity`, `FavoritoEntity`), que almacena en caché los contactos y guarda localmente los favoritos.
 
 > [!NOTE]Nota
-> Usamos `androidx.hilt:hilt-lifecycle-viewmodel-compose` para la función `hiltViewModel()`, ya que la antigua dependencia `hilt-navigation-compose` quedó obsoleta.
+> El ViewModel solo conoce la interfaz `ContactosRepository`. No sabe ni le importa si los contactos provienen de una caché en memoria, de Room o de una llamada HTTP.
 
-## Manifiesto y seguridad de red
+## El modelo de dominio
 
-En `app/src/main/AndroidManifest.xml` declaramos la clase de aplicación, el tema, la configuración de red y los dos permisos necesarios:
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!-- Permiso estándar para realizar peticiones de red -->
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- Android 17 (API 37): necesario para comunicarse con la red local (10.0.2.2) -->
-    <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
-
-    <application
-        android:name=".MisContactosApp"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.MisContactos">
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.MisContactos"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
-
-</manifest>
-```
-
-Observa tres detalles clave:
-1. `android:name=".MisContactosApp"` conecta la clase `Application` que inicializa Hilt.
-2. `android:windowSoftInputMode="adjustResize"` permite que la pantalla se desplace automáticamente cuando se abre el teclado virtual en los formularios.
-3. `android:networkSecurityConfig="@xml/network_security_config"` apunta al archivo `app/src/main/res/xml/network_security_config.xml`:
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<network-security-config>
-    <!-- Permite HTTP sin cifrar solo hacia la API local del curso (10.0.2.2) -->
-    <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="false">10.0.2.2</domain>
-    </domain-config>
-</network-security-config>
-```
-
-## La clase Application con Hilt
-
-Creamos `MisContactosApp.kt` anotada con `@HiltAndroidApp`. Como aprendiste en el capítulo 45, esta clase es el disparador del árbol de dependencias de Hilt a nivel de toda la aplicación:
+En `model/Contacto.kt` definimos las clases de datos puras que viajarán entre el repositorio, los ViewModels y la interfaz de usuario:
 
 ```kotlin
-package com.ejemplo.miscontactos
+package com.ejemplo.miscontactos.model
 
-import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
-
-/**
- * Punto de entrada de la aplicación para Hilt.
- * Genera el componente raíz a nivel de SingletonComponent.
- */
-@HiltAndroidApp
-class MisContactosApp : Application()
-```
-
-## Permiso de red local en tiempo de ejecución (Android 17+)
-
-A partir de Android 17 (API 37), el sistema exige que el usuario conceda explícitamente el permiso `ACCESS_LOCAL_NETWORK` para comunicarse con servidores locales (como `10.0.2.2`). Sin él, OkHttp falla con un `SocketTimeoutException` silencioso.
-
-Para manejarlo limpiamente creamos un composable en `ui/componentes/PermisoRedLocal.kt`:
-
-```kotlin
-package com.ejemplo.miscontactos.ui.componentes
-
-import android.Manifest
-import android.content.pm.PackageManager
-import android.os.Build
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
-import com.ejemplo.miscontactos.R
-
-/**
- * En Android 17 (API 37)+, pide el permiso de red local si todavía no fue concedido.
- * En versiones anteriores no hace nada y muestra el contenido directamente.
- */
-@Composable
-fun PermisoRedLocal(
-    contenido: @Composable () -> Unit
+data class Contacto(
+    val id: Int,
+    val nombre: String,
+    val apellido: String,
+    val email: String,
+    val telefono: String? = null,
+    val direccion: String? = null,
+    val ciudad: String? = null
 ) {
-    val context = LocalContext.current
-    val permiso = Manifest.permission.ACCESS_LOCAL_NETWORK
+    val nombreCompleto: String
+        get() = "$nombre $apellido"
 
-    val necesitaPermiso = Build.VERSION.SDK_INT >= 37
-    var concedido by remember {
-        mutableStateOf(
-            !necesitaPermiso ||
-                ContextCompat.checkSelfPermission(context, permiso) == PackageManager.PERMISSION_GRANTED
-        )
-    }
+    val iniciales: String
+        get() = "${nombre.firstOrNull() ?: ""}${apellido.firstOrNull() ?: ""}".uppercase()
+}
 
-    val launcher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission()
-    ) { resultado ->
-        concedido = resultado
-    }
+/** Datos que el usuario escribe para crear o editar un contacto (todavía sin id). */
+data class DatosContacto(
+    val nombre: String,
+    val apellido: String,
+    val email: String,
+    val telefono: String? = null,
+    val direccion: String? = null,
+    val ciudad: String? = null
+)
 
-    if (concedido) {
-        contenido()
-    } else {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(32.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = stringResource(R.string.permiso_red_local_texto),
-                style = MaterialTheme.typography.bodyLarge,
-                textAlign = TextAlign.Center
-            )
-            Button(onClick = { launcher.launch(permiso) }) {
-                Text(stringResource(R.string.permiso_red_local_boton))
-            }
-        }
-    }
+/** Una página de resultados, tal como la necesita la app. */
+data class PaginaContactos(
+    val contactos: List<Contacto>,
+    val pagina: Int,
+    val totalPaginas: Int,
+    val desdeCache: Boolean = false
+) {
+    val hayMas: Boolean
+        get() = pagina + 1 < totalPaginas
 }
 ```
 
-¿Cómo funciona este composable?
-1. Si el dispositivo ejecuta una versión anterior a Android 17 (`Build.VERSION.SDK_INT < 37`), `necesitaPermiso` es `false`, por lo que `concedido` inicia en `true` y muestra el contenido sin interrumpir al usuario.
-2. Si es Android 17 o superior, comprueba si ya fue otorgado con `ContextCompat.checkSelfPermission`.
-3. Si no ha sido concedido, muestra una pantalla explicativa con un botón. Al pulsar el botón, `launcher.launch(permiso)` dispara el diálogo nativo del sistema operativo mediante `rememberLauncherForActivityResult`. En cuanto el usuario pulsa «Permitir», `concedido` pasa a `true` y se dibuja el contenido principal.
+Fíjate en varios detalles de diseño:
 
-## La Activity principal
+- **`Contacto`** incluye propiedades calculadas como `nombreCompleto` e `iniciales`. Al estar en el modelo de dominio, cualquier composable o ViewModel puede usarlas sin duplicar lógica de formato.
+- **`DatosContacto`** representa solo la información editable. Al crear un nuevo contacto, la app aún no tiene un `id`, por lo que usar una clase separada evita tener propiedades anulables innecesarias como `id: Int?`.
+- **`Contacto` no lleva un campo `esFavorito`.** Ser favorito no es un dato del contacto en sí, sino una preferencia del dispositivo: como verás en el capítulo 56, el repositorio expone los identificadores favoritos por separado, como `Flow<Set<Int>>`, y es la interfaz la que cruza esa información con la lista de contactos al momento de dibujarla.
+- **`PaginaContactos`** incluye una propiedad calculada `hayMas`, que evita que cada pantalla tenga que comparar `pagina` con `totalPaginas` por su cuenta.
 
-En `MainActivity.kt` anotamos con `@AndroidEntryPoint` para que Hilt pueda inyectar dependencias en cualquier composable dentro de la jerarquía, activamos el soporte de pantalla completa (*edge-to-edge*) y envolvemos la navegación dentro de `PermisoRedLocal`:
+## Estructura de paquetes del proyecto
 
-```kotlin
-package com.ejemplo.miscontactos
+El código de la aplicación está organizado por responsabilidades y características dentro del paquete `com.ejemplo.miscontactos`:
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import com.ejemplo.miscontactos.ui.componentes.PermisoRedLocal
-import com.ejemplo.miscontactos.ui.navigation.ContactosNavHost
-import com.ejemplo.miscontactos.ui.theme.MisContactosTheme
-import dagger.hilt.android.AndroidEntryPoint
-
-@AndroidEntryPoint
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            MisContactosTheme {
-                PermisoRedLocal {
-                    ContactosNavHost()
-                }
-            }
-        }
-    }
-}
+```text
+com.ejemplo.miscontactos/
+├── data/
+│   ├── local/               # Room: entidades, DAOs y Database
+│   │   ├── ContactoDao.kt
+│   │   ├── ContactoEntity.kt
+│   │   ├── ContactosDatabase.kt
+│   │   ├── FavoritoDao.kt
+│   │   └── FavoritoEntity.kt
+│   ├── remote/              # Retrofit: endpoints, DTOs y errores
+│   │   ├── dto/
+│   │   │   └── ContactDto.kt
+│   │   ├── ContactApi.kt
+│   │   ├── Errores.kt
+│   │   └── Mappers.kt
+│   ├── ContactosRepository.kt       # Interfaz del repositorio
+│   └── ContactosRepositoryImpl.kt   # Implementación offline-first
+├── di/                      # Módulos de inyección de dependencias con Hilt
+│   ├── DataModule.kt
+│   ├── DatabaseModule.kt
+│   └── NetworkModule.kt
+├── model/                   # Modelos puros de dominio
+│   ├── Contacto.kt
+│   └── ErrorDatos.kt
+├── ui/                      # Interfaz de usuario con Jetpack Compose
+│   ├── componentes/         # Composables reutilizables (Avatar, Estados, Permisos)
+│   │   ├── AvatarContacto.kt
+│   │   ├── Estados.kt
+│   │   └── PermisoRedLocal.kt
+│   ├── detalle/             # Pantalla de detalle de contacto
+│   │   ├── DetalleContactoScreen.kt
+│   │   ├── DetalleContactoUiState.kt
+│   │   └── DetalleContactoViewModel.kt
+│   ├── formulario/          # Pantalla de creación y edición
+│   │   ├── ContactoForm.kt
+│   │   ├── FormularioContactoScreen.kt
+│   │   └── FormularioContactoViewModel.kt
+│   ├── lista/               # Pantalla principal con lista y búsqueda
+│   │   ├── ListaContactosScreen.kt
+│   │   ├── ListaContactosUiState.kt
+│   │   └── ListaContactosViewModel.kt
+│   ├── navigation/          # Rutas tipadas y NavHost
+│   │   ├── ContactosNavHost.kt
+│   │   └── Rutas.kt
+│   └── theme/               # Paleta de colores, tipografía y tema Material 3
+│       ├── Color.kt
+│       ├── Theme.kt
+│       └── Type.kt
+├── MainActivity.kt          # Activity única con edge-to-edge
+└── MisContactosApp.kt       # Application class con @HiltAndroidApp
 ```
+
+Esta organización agrupa la interfaz por pantalla (*feature-first* en `ui/lista`, `ui/detalle`, `ui/formulario`) y los datos por origen (`data/local`, `data/remote`), facilitando encontrar cualquier archivo rápidamente. Es más granular que el adelanto del capítulo 29 —no agrupaba por pantalla ni separaba `local` de `remote`—, pero responde a la misma lógica: cada carpeta agrupa una responsabilidad clara, sin importar que los nombres exactos cambien de un proyecto a otro.
 
 ## Resumen
 
-- Centralizamos las versiones y dependencias en `libs.versions.toml` y `app/build.gradle.kts` (Compose BOM, Navigation, Hilt, Retrofit, Room y Coil).
-- `MisContactosApp` con `@HiltAndroidApp` inicializa el contenedor de inyección de dependencias en el arranque.
-- Configuramos `network_security_config.xml` para habilitar tráfico HTTP sin cifrar exclusivamente hacia la IP especial del emulador (`10.0.2.2`).
-- Creamos el composable `PermisoRedLocal` que solicita dinámicamente el permiso de red local en Android 17 (API 37) antes de iniciar la navegación.
-- `MainActivity` configura la vista de borde a borde (*edge-to-edge*) y monta `ContactosNavHost`.
+- «Mis Contactos» es una app completa que integra **Compose**, **MVVM**, **Hilt**, **Retrofit** y **Room**.
+- Consta de tres pantallas: **Lista** (búsqueda, paginación, favoritos), **Detalle** (visualización y borrado seguro) y **Formulario** (creación y edición con validación).
+- Sigue una arquitectura limpia por capas: la interfaz solo observa el `UiState` del `ViewModel`, el `ViewModel` consume el `ContactosRepository`, y el repositorio coordina la API remota y la base de datos local.
+- El modelo de dominio (`Contacto`, `DatosContacto`) está completamente desacoplado de las bibliotecas de red y persistencia.
 
 ## Para cerrar
 
-Un compañero añade el permiso de red local al manifiesto así:
-
-```xml
-<uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
-```
-
-Ejecuta la app en un emulador Android 17 y observa que nunca aparece el diálogo del sistema y que las llamadas a `10.0.2.2` fallan con `SocketTimeoutException`. ¿Cuál es el error?
+Un compañero quiere añadir una clase nueva `data class Producto(val id: Int, val nombre: String, val precio: Double)` y duda en qué carpeta ponerla. ¿Pertenece a `model/`, a `data/remote/` o a `ui/`? ¿Cambiaría tu respuesta si decidiera anotarla con `@Serializable`?
 
 Responde antes de mirar la respuesta.
 
 ??? success "Ver respuesta y razonamiento"
-    Declarar el permiso en el manifiesto es necesario, pero **no basta**: en Android 17 (API 37) `ACCESS_LOCAL_NETWORK` es un permiso en tiempo de ejecución, y hay que solicitarlo explícitamente con `rememberLauncherForActivityResult` y `ActivityResultContracts.RequestPermission()`, como hace el composable `PermisoRedLocal`.
+    Pertenece a `model/`: es un modelo de dominio puro, sin dependencias de bibliotecas externas, igual que `Contacto` o `DatosContacto`.
 
-    Sin esa solicitud, el sistema nunca lo concede y OkHttp falla con un timeout silencioso. Error común: confundir un permiso que solo se declara en el manifiesto con uno de tiempo de ejecución, que se declara **y** se pide al usuario.
+    Si la anotas con `@Serializable`, deja de ser un modelo de dominio limpio: pasa a depender de `kotlinx.serialization`, así que ese rol correspondería a un DTO en la capa remota (`data/remote/dto`), con su función de mapeo hacia el modelo. Error común: creer que cualquier `data class` debe llevar la anotación de serialización "por si acaso"; en esta arquitectura, el dominio se mantiene ajeno a las bibliotecas de red y persistencia.
 
-En el próximo capítulo implementaremos la capa remota: DTOs, la interfaz de Retrofit y el módulo de red de Hilt.
+En el próximo capítulo configuraremos el proyecto, los permisos necesarios y el punto de entrada de la aplicación.

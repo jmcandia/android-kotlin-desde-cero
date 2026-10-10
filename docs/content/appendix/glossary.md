@@ -25,6 +25,8 @@ Cada entrada incluye una definición breve y un enlace al capítulo donde el té
 
 **DAO (*Data Access Object*)** — Interfaz de Room que declara las operaciones de acceso a la base de datos (consultas, inserciones, borrados) mediante anotaciones. Ver el [capítulo 50](../part09/chapter50.md).
 
+**DataStore** — Biblioteca de Android para guardar datos clave-valor (por ejemplo, preferencias del usuario) de forma asíncrona y basada en `Flow`, pensada para reemplazar a `SharedPreferences`. Ver el [capítulo 51](../part09/chapter51.md).
+
 **Delegación (`by`)** — Mecanismo de Kotlin para delegar la implementación de una propiedad o interfaz a otro objeto, evitando código repetitivo. Ver el [capítulo 22](../part04/chapter22.md).
 
 **Dispatcher** — Componente que decide en qué hilo o grupo de hilos se ejecuta una corrutina (por ejemplo, `Dispatchers.IO` para operaciones de red o disco, `Dispatchers.Main` para la interfaz). Ver el [capítulo 24](../part05/chapter24.md).
@@ -69,7 +71,7 @@ Cada entrada incluye una definición breve y un enlace al capítulo donde el té
 
 **Null safety** — Sistema de tipos de Kotlin que distingue entre valores que pueden ser nulos (`T?`) y los que no (`T`), evitando en tiempo de compilación muchos errores por referencias nulas. Ver el [capítulo 13](../part03/chapter13.md).
 
-**Offline-first** — Estrategia en la que la app funciona con datos guardados localmente y sincroniza con el servidor cuando hay red, ofreciendo una experiencia fluida sin conexión. Ver el [capítulo 55](../part10/chapter55.md).
+**Offline-first** — Estrategia en la que la app funciona con datos guardados localmente y sincroniza con el servidor cuando hay red, ofreciendo una experiencia fluida sin conexión. Ver el [capítulo 56](../part10/chapter56.md).
 
 **Operaciones funcionales (`map`, `filter`, `forEach`)** — Funciones de orden superior sobre colecciones que transforman, seleccionan o recorren elementos sin bucles explícitos. Ver el [capítulo 12](../part03/chapter12.md).
 
@@ -85,7 +87,7 @@ Cada entrada incluye una definición breve y un enlace al capítulo donde el té
 
 **Room** — Biblioteca de persistencia de Android que ofrece una capa sobre SQLite con verificación de consultas en tiempo de compilación. Ver el [capítulo 50](../part09/chapter50.md).
 
-**Ruta tipada** — Enfoque de navegación en el que cada destino se representa con un tipo de Kotlin en lugar de una cadena de texto, aprovechando el compilador para evitar errores. Ver el [capítulo 59](../part10/chapter59.md).
+**Ruta tipada** — Enfoque de navegación en el que cada destino se representa con un tipo de Kotlin en lugar de una cadena de texto, aprovechando el compilador para evitar errores. Ver el [capítulo 60](../part10/chapter60.md).
 
 **`Scaffold`** — Composable que provee la estructura básica de una pantalla Material (barra superior, contenido, barra inferior, botón flotante). Ver el [capítulo 35](../part07/chapter35.md).
 

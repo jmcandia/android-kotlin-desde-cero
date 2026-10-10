@@ -1,472 +1,326 @@
-# Capítulo 58: Pantalla de formulario: validación local y del servidor
+# Capítulo 58: Pantalla de detalle: eliminación segura con evento como estado
 
 > [!TIP]Antes de empezar, recupera lo que ya sabes
 > Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
 >
-> 1. ¿Cómo se expone desde el `ViewModel` una señal de "guardado con éxito" para que la Screen reaccione?
-> 2. ¿Por qué conviene validar en el cliente antes de enviar, si el servidor también valida?
-> 3. ¿Cómo se modela en Kotlin un valor que puede estar presente o no?
+> 1. ¿Por qué el ViewModel no debería llamar directamente al `NavController` para navegar?
+> 2. ¿Qué hace un `LaunchedEffect(clave)` y cuándo se vuelve a ejecutar?
+> 3. ¿Qué diferencia hay entre `remember` y `rememberSaveable`?
 
 ## Introducción
 
-La pantalla de formulario cumple dos roles con la misma interfaz: **crear** un contacto nuevo y **editar** uno existente. Es también la pantalla con más responsabilidades de validación: revisa los datos localmente antes de enviarlos (para dar una respuesta inmediata) y, si el servidor rechaza igualmente la petición, traduce esos errores de vuelta a los campos correspondientes.
+La pantalla de detalle muestra la información completa de un contacto y permite marcarlo como favorito, editarlo o eliminarlo. Es más simple que la lista en cuanto a datos que maneja, pero introduce un problema nuevo: **eliminar un contacto es una acción destructiva** que necesita confirmación del usuario y, una vez completada, debe **navegar hacia atrás automáticamente**. Resolveremos esto con el patrón "evento como estado" del capítulo 43.
 
-En este capítulo veremos `ContactoForm` (el modelo del formulario y sus reglas de validación), `FormularioContactoViewModel` y `FormularioContactoScreen`.
+## El estado de la pantalla: `DetalleContactoUiState`
 
-## El modelo del formulario: `ContactoForm.kt`
-
-A diferencia de `Contacto` y `DatosContacto` (capítulo 51), el formulario necesita que **todos** sus campos sean `String`, incluso los numéricos o los opcionales, porque así es como llegan desde un `TextField`. Un campo vacío se representa como `""`, no como `null`:
+A diferencia de la lista, esta pantalla sí puede modelarse con una `sealed interface`, porque sus posibilidades son mutuamente excluyentes: o todavía no hay datos (cargando), o falló la carga (error), o hay un contacto que mostrar (contenido):
 
 ```kotlin
-package com.ejemplo.miscontactos.ui.formulario
+package com.ejemplo.miscontactos.ui.detalle
 
-data class ContactoForm(
-    val nombre: String = "",
-    val apellido: String = "",
-    val email: String = "",
-    val telefono: String = "",
-    val direccion: String = "",
-    val ciudad: String = ""
-)
-```
+import com.ejemplo.miscontactos.model.Contacto
+import com.ejemplo.miscontactos.model.ErrorDatos
 
-### El enum `Campo`
+sealed interface DetalleContactoUiState {
+    data object Cargando : DetalleContactoUiState
 
-```kotlin
-enum class Campo(val nombreApi: String) {
-    NOMBRE("nombre"),
-    APELLIDO("apellido"),
-    EMAIL("email"),
-    TELEFONO("telefono"),
-    DIRECCION("direccion"),
-    CIUDAD("ciudad")
+    data class Error(val error: ErrorDatos) : DetalleContactoUiState
+
+    data class Contenido(
+        val contacto: Contacto,
+        val esFavorito: Boolean = false,
+        val eliminando: Boolean = false,
+        val eliminado: Boolean = false,
+        val errorAccion: ErrorDatos? = null
+    ) : DetalleContactoUiState
 }
 ```
 
-Cada valor del `enum` (capítulo 20) lleva asociado su `nombreApi`: el nombre exacto que usa el campo en el JSON que envía y responde el servidor. Este puente entre el nombre de la propiedad en Kotlin y el nombre del campo en la API es lo que permite, más adelante, traducir automáticamente un mensaje de error del servidor ("email: formato no válido") al campo `Campo.EMAIL` de la interfaz.
+Dentro de `Contenido` sí usamos una `data class` con varios campos, porque una vez que hay un contacto cargado, la pantalla vuelve a necesitar mostrar varias cosas simultáneamente: si se está favoriteando, si se está eliminando, si la eliminación ya terminó, o si una acción (favorito o borrado) falló.
 
-### Errores de campo: `ErrorCampo`
+Fíjate especialmente en **`eliminado: Boolean`**: no es un dato del contacto, es un **evento**. Cuando pasa a `true`, la pantalla debe reaccionar navegando hacia atrás, tal como estudiaste en el capítulo 43 con el ejemplo de guardar y volver.
 
-```kotlin
-sealed interface ErrorCampo {
-    data object Obligatorio : ErrorCampo
-    data class Longitud(val minimo: Int) : ErrorCampo
-    data class LargoMaximo(val maximo: Int) : ErrorCampo
-    data object EmailInvalido : ErrorCampo
-    data class Servidor(val mensaje: String) : ErrorCampo
-}
-```
-
-Modelar los errores como una `sealed interface` (en vez de simples cadenas de texto) permite que la Screen decida **qué texto mostrar en cada idioma** a partir del tipo de error, en lugar de que el `ViewModel` tenga que conocer cadenas de recursos (`stringResource`), algo que no está disponible fuera de un composable. `Servidor` es el único caso que sí lleva un mensaje en texto plano, porque ese mensaje ya viene redactado por la API.
-
-### Validación local: `validarContacto`
+## El ViewModel: `DetalleContactoViewModel`
 
 ```kotlin
-private val PATRON_EMAIL = Regex("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")
+package com.ejemplo.miscontactos.ui.detalle
 
-fun validarContacto(form: ContactoForm): Map<Campo, ErrorCampo> {
-    val errores = mutableMapOf<Campo, ErrorCampo>()
-
-    if (form.nombre.isBlank()) {
-        errores[Campo.NOMBRE] = ErrorCampo.Obligatorio
-    } else if (form.nombre.length < LARGO_MINIMO_NOMBRE) {
-        errores[Campo.NOMBRE] = ErrorCampo.Longitud(LARGO_MINIMO_NOMBRE)
-    }
-
-    if (form.apellido.isBlank()) {
-        errores[Campo.APELLIDO] = ErrorCampo.Obligatorio
-    } else if (form.apellido.length < LARGO_MINIMO_APELLIDO) {
-        errores[Campo.APELLIDO] = ErrorCampo.Longitud(LARGO_MINIMO_APELLIDO)
-    }
-
-    if (form.email.isBlank()) {
-        errores[Campo.EMAIL] = ErrorCampo.Obligatorio
-    } else if (!PATRON_EMAIL.matches(form.email)) {
-        errores[Campo.EMAIL] = ErrorCampo.EmailInvalido
-    }
-
-    if (form.direccion.length > LARGO_MAXIMO_DIRECCION) {
-        errores[Campo.DIRECCION] = ErrorCampo.LargoMaximo(LARGO_MAXIMO_DIRECCION)
-    }
-
-    return errores
-}
-```
-
-`validarContacto` es una **función pura**: recibe un `ContactoForm` y devuelve un `Map<Campo, ErrorCampo>` sin efectos secundarios ni dependencias externas, lo que la hace trivial de probar de forma aislada, sin necesidad de un `ViewModel` ni de Android. Solo se agrega una entrada al mapa cuando un campo falla su validación; un formulario válido produce un mapa vacío.
-
-### Errores del servidor: `erroresDelServidor`
-
-```kotlin
-fun erroresDelServidor(errores: List<String>): Map<Campo, ErrorCampo> {
-    val porCampo = mutableMapOf<Campo, ErrorCampo>()
-    for (error in errores) {
-        val (nombreCampo, mensaje) = error.split(":", limit = 2)
-            .map { it.trim() }
-            .let { it[0] to it.getOrElse(1) { it[0] } }
-        val campo = Campo.entries.find { it.nombreApi == nombreCampo }
-        if (campo != null) {
-            porCampo[campo] = ErrorCampo.Servidor(mensaje)
-        }
-    }
-    return porCampo
-}
-```
-
-Recuerda de `ErrorDatos` (capítulo 49) que `ErrorDatos.Validacion` trae una `List<String>` con mensajes en formato `"campo: descripción"`. Esta función separa cada cadena en su nombre de campo y su mensaje, busca el `Campo` de Kotlin cuyo `nombreApi` coincide, y arma el mismo tipo de mapa que produce `validarContacto`, para que la Screen los pueda mostrar de forma idéntica sin importar si el error vino del cliente o del servidor.
-
-### Mapeos entre formulario y dominio
-
-```kotlin
-fun ContactoForm.aDatos(): DatosContacto = DatosContacto(
-    nombre = nombre.trim(),
-    apellido = apellido.trim(),
-    email = email.trim(),
-    telefono = telefono.trim().ifBlank { null },
-    direccion = direccion.trim().ifBlank { null },
-    ciudad = ciudad.trim().ifBlank { null }
-)
-
-fun Contacto.aFormulario(): ContactoForm = ContactoForm(
-    nombre = nombre,
-    apellido = apellido,
-    email = email,
-    telefono = telefono.orEmpty(),
-    direccion = direccion.orEmpty(),
-    ciudad = ciudad.orEmpty()
-)
-```
-
-`aDatos()` convierte el formulario (todo `String`) al modelo de dominio `DatosContacto` (capítulo 51), donde los campos opcionales sí son `String?`: un campo en blanco se transforma en `null` con `ifBlank { null }`. `aFormulario()` hace el camino inverso al editar un contacto existente, usando `orEmpty()` para convertir un `String?` en `""` si no hay valor.
-
-## El ViewModel: `FormularioContactoViewModel`
-
-```kotlin
-data class FormularioContactoUiState(
-    val formulario: ContactoForm = ContactoForm(),
-    val errores: Map<Campo, ErrorCampo> = emptyMap(),
-    val esEdicion: Boolean = false,
-    val cargando: Boolean = false,
-    val guardando: Boolean = false,
-    val guardado: Boolean = false,
-    val errorGeneral: ErrorDatos? = null
-)
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
+import com.ejemplo.miscontactos.data.ContactosRepository
+import com.ejemplo.miscontactos.model.comoErrorDatos
+import com.ejemplo.miscontactos.ui.navigation.DetalleContactoRuta
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 @HiltViewModel
-class FormularioContactoViewModel @Inject constructor(
+class DetalleContactoViewModel @Inject constructor(
     private val repository: ContactosRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val id: Int? = savedStateHandle.toRoute<FormularioContactoRuta>().id
+    private val id: Int = savedStateHandle.toRoute<DetalleContactoRuta>().id
 
-    private val _uiState = MutableStateFlow(
-        FormularioContactoUiState(esEdicion = id != null, cargando = id != null)
-    )
-    val uiState: StateFlow<FormularioContactoUiState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow<DetalleContactoUiState>(DetalleContactoUiState.Cargando)
+    val uiState: StateFlow<DetalleContactoUiState> = _uiState.asStateFlow()
 
     init {
-        if (id != null) cargarContacto(id)
+        viewModelScope.launch {
+            repository.favoritos.collect { favoritos ->
+                actualizarContenido { it.copy(esFavorito = id in favoritos) }
+            }
+        }
+        viewModelScope.launch {
+            repository.cambios.collect { cargar() }
+        }
+        cargar()
     }
 
-    // ... (cargarContacto, cambiarCampo, guardar)
+    // ... (cargar, alternarFavorito, eliminar, errorAccionMostrado, actualizarContenido)
 }
 ```
 
-El `id` vuelve a leerse desde la ruta tipada, pero esta vez es **anulable** (`Int?`): la misma pantalla sirve para crear (`id == null`) y para editar (`id != null`). Ese único valor determina tanto `esEdicion` como si hay que mostrar un indicador de carga inicial mientras se trae el contacto a editar.
+El `id` del contacto no llega como parámetro de función: se lee del `SavedStateHandle` mediante `savedStateHandle.toRoute<DetalleContactoRuta>().id`, la forma de leer argumentos de navegación tipados que veremos en detalle en el capítulo 60. Como en la pantalla de lista, el `init` se suscribe tanto a `favoritos` como a `cambios`, manteniendo el detalle sincronizado si el contacto se edita desde otra pantalla.
 
-### Cargar el contacto a editar
+### Cargar el contacto
 
 ```kotlin
-private fun cargarContacto(id: Int) {
+private fun cargar() {
     viewModelScope.launch {
+        _uiState.update { DetalleContactoUiState.Cargando }
         repository.obtenerContacto(id)
             .onSuccess { contacto ->
-                _uiState.update { it.copy(formulario = contacto.aFormulario(), cargando = false) }
+                _uiState.update {
+                    DetalleContactoUiState.Contenido(contacto = contacto)
+                }
             }
             .onFailure { error ->
-                _uiState.update { it.copy(cargando = false, errorGeneral = error.comoErrorDatos()) }
+                _uiState.update { DetalleContactoUiState.Error(error.comoErrorDatos()) }
             }
     }
 }
 ```
 
-Cuando se crea un contacto nuevo, no hace falta esta llamada: el formulario ya nace con `ContactoForm()` (todos los campos vacíos). Solo al editar se pide el contacto por su `id` y se convierte a `ContactoForm` con `aFormulario()`.
+Nota que `cargar()` siempre **reemplaza** el estado desde cero, incluso si ya había un `Contenido` visible: al recargar tras un cambio externo (por ejemplo, se editó el contacto desde el formulario), es correcto volver a mostrar `Cargando` brevemente y luego el contenido actualizado.
 
-### Cambiar un campo y limpiar su error
+### Alternar favorito y eliminar
 
 ```kotlin
-fun cambiarCampo(campo: Campo, valor: String) {
-    _uiState.update { estado ->
-        val formulario = when (campo) {
-            Campo.NOMBRE -> estado.formulario.copy(nombre = valor)
-            Campo.APELLIDO -> estado.formulario.copy(apellido = valor)
-            Campo.EMAIL -> estado.formulario.copy(email = valor)
-            Campo.TELEFONO -> estado.formulario.copy(telefono = valor)
-            Campo.DIRECCION -> estado.formulario.copy(direccion = valor)
-            Campo.CIUDAD -> estado.formulario.copy(ciudad = valor)
-        }
-        estado.copy(formulario = formulario, errores = estado.errores - campo)
-    }
+fun alternarFavorito() {
+    viewModelScope.launch { repository.alternarFavorito(id) }
 }
-```
 
-Cada vez que el usuario modifica un campo, además de actualizar su valor, **se quita ese campo del mapa de errores** (`estado.errores - campo`, operador de colecciones del capítulo 11). Así, si el usuario ya vio el error "correo inválido" y empieza a corregirlo, el mensaje desaparece apenas empieza a escribir, en lugar de esperar a un nuevo intento de guardado.
-
-### Guardar: validar antes de llamar a la red
-
-```kotlin
-fun guardar() {
-    val formulario = _uiState.value.formulario
-    val errores = validarContacto(formulario)
-    if (errores.isNotEmpty()) {
-        _uiState.update { it.copy(errores = errores) }
-        return
-    }
-
+fun eliminar() {
     viewModelScope.launch {
-        _uiState.update { it.copy(guardando = true, errorGeneral = null) }
-        val datos = formulario.aDatos()
-        val resultado = if (id != null) repository.actualizar(id, datos) else repository.crear(datos)
-
-        resultado
+        actualizarContenido { it.copy(eliminando = true, errorAccion = null) }
+        repository.eliminar(id)
             .onSuccess {
-                _uiState.update { it.copy(guardando = false, guardado = true) }
+                actualizarContenido { it.copy(eliminando = false, eliminado = true) }
             }
-            .onFailure { excepcion ->
-                val error = excepcion.comoErrorDatos()
-                when (error) {
-                    is ErrorDatos.Validacion ->
-                        _uiState.update { it.copy(guardando = false, errores = erroresDelServidor(error.errores)) }
-                    is ErrorDatos.Conflicto ->
-                        _uiState.update {
-                            it.copy(guardando = false, errores = mapOf(Campo.EMAIL to ErrorCampo.Servidor(error.message.orEmpty())))
-                        }
-                    else ->
-                        _uiState.update { it.copy(guardando = false, errorGeneral = error) }
+            .onFailure { error ->
+                actualizarContenido {
+                    it.copy(eliminando = false, errorAccion = error.comoErrorDatos())
                 }
             }
     }
 }
+
+fun errorAccionMostrado() {
+    actualizarContenido { it.copy(errorAccion = null) }
+}
 ```
 
-`guardar()` tiene dos líneas de defensa:
+`eliminar()` sigue el mismo patrón de tres pasos que ya usaste en los capítulos 42 y 49: marca `eliminando = true` antes de la llamada, y según el resultado, marca `eliminado = true` (el evento que disparará la navegación) o guarda el error en `errorAccion` para mostrarlo en un snackbar. `errorAccionMostrado()` lo limpia después de mostrarlo, evitando que se repita en una recomposición.
 
-1. **Validación local primero**: llama a `validarContacto(formulario)` de forma síncrona, sin coroutine. Si hay errores, los publica en el estado y **retorna de inmediato**, sin llamar jamás a la red con datos que ya sabemos inválidos.
-2. **Validación del servidor como respaldo**: si la validación local pasó pero el servidor igual rechaza los datos (por ejemplo, un correo que ya existe, algo que solo el servidor puede saber), el `when` distingue tres casos:
-   - `ErrorDatos.Validacion`: errores por campo, traducidos con `erroresDelServidor`.
-   - `ErrorDatos.Conflicto`: un caso específico (correo duplicado) que se asigna directamente al campo `EMAIL`.
-   - Cualquier otro error (por ejemplo, `SinConexion`): se guarda en `errorGeneral`, porque no corresponde a ningún campo en particular.
+### El ayudante `actualizarContenido`
 
-`id != null` decide, en una sola línea, si la operación es `actualizar` o `crear` — el mismo `id` opcional que ya vimos determinar `esEdicion` al construir el estado inicial.
+```kotlin
+private inline fun actualizarContenido(
+    transformar: (DetalleContactoUiState.Contenido) -> DetalleContactoUiState.Contenido
+) {
+    _uiState.update { estado ->
+        if (estado is DetalleContactoUiState.Contenido) transformar(estado) else estado
+    }
+}
+```
 
-## La pantalla: `FormularioContactoScreen`
+Como varias funciones (`alternarFavorito`, `eliminar`, la suscripción a `favoritos`) solo tienen sentido cuando el estado ya es `Contenido`, centralizamos esa comprobación en `actualizarContenido`: si el estado actual es `Cargando` o `Error`, la actualización simplemente se ignora. Esto evita repetir un `if (estado is Contenido)` en cada función.
+
+## La pantalla: `DetalleContactoScreen`
 
 ```kotlin
 @Composable
-fun FormularioContactoScreen(
+fun DetalleContactoScreen(
+    onEditar: (Int) -> Unit,
     onVolver: () -> Unit,
-    viewModel: FormularioContactoViewModel = hiltViewModel()
+    viewModel: DetalleContactoViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    LaunchedEffect(uiState.guardado) {
-        if (uiState.guardado) onVolver()
+    val eliminado = (uiState as? DetalleContactoUiState.Contenido)?.eliminado ?: false
+    LaunchedEffect(eliminado) {
+        if (eliminado) onVolver()
     }
 
-    FormularioContactoContent(
+    DetalleContactoContent(
         uiState = uiState,
-        onCampoChange = viewModel::cambiarCampo,
-        onGuardar = viewModel::guardar,
+        onAlternarFavorito = viewModel::alternarFavorito,
+        onEliminar = viewModel::eliminar,
+        onErrorAccionMostrado = viewModel::errorAccionMostrado,
+        onEditar = onEditar,
         onVolver = onVolver
     )
 }
 ```
 
-Igual que en la pantalla de detalle, guardar con éxito es un evento (`guardado: Boolean`) observado con `LaunchedEffect(uiState.guardado)` para volver atrás — el mismo patrón, reutilizado por tercera vez en esta parte del curso.
+Este `LaunchedEffect(eliminado)` es exactamente el patrón "evento como estado" del capítulo 43: en lugar de que el `ViewModel` llame directamente a una función de navegación (que no debería conocer), expone un booleano en el `UiState`, y es la Screen quien observa ese booleano y decide navegar. Como la clave del efecto es `eliminado`, solo se ejecuta cuando ese valor cambia de `false` a `true`, nunca en cada recomposición.
 
-### El contenido: un campo por dato, con su error
+### Confirmación con `AlertDialog`
 
 ```kotlin
 @Composable
-fun FormularioContactoContent(
-    uiState: FormularioContactoUiState,
-    onCampoChange: (Campo, String) -> Unit,
-    onGuardar: () -> Unit,
+fun DetalleContactoContent(
+    uiState: DetalleContactoUiState,
+    onAlternarFavorito: () -> Unit,
+    onEliminar: () -> Unit,
+    onErrorAccionMostrado: () -> Unit,
+    onEditar: (Int) -> Unit,
     onVolver: () -> Unit
 ) {
+    var confirmarEliminar by rememberSaveable { mutableStateOf(false) }
     val snackbarHostState = remember { SnackbarHostState() }
-    val errorGeneral = uiState.errorGeneral
-    LaunchedEffect(errorGeneral) {
-        if (errorGeneral != null) snackbarHostState.showSnackbar(mensajeDe(errorGeneral))
+    val contenido = uiState as? DetalleContactoUiState.Contenido
+
+    val errorAccion = contenido?.errorAccion
+    LaunchedEffect(errorAccion) {
+        if (errorAccion != null) {
+            snackbarHostState.showSnackbar(mensajeDe(errorAccion))
+            onErrorAccionMostrado()
+        }
     }
 
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
             TopAppBar(
-                title = {
-                    Text(
-                        stringResource(
-                            if (uiState.esEdicion) R.string.titulo_editar else R.string.titulo_nuevo
-                        )
-                    )
-                },
+                title = { Text(stringResource(R.string.titulo_detalle)) },
                 navigationIcon = {
                     IconButton(onClick = onVolver) {
                         Icon(Icons.AutoMirrored.Default.ArrowBack, contentDescription = null)
+                    }
+                },
+                actions = {
+                    if (contenido != null) {
+                        IconToggleButton(checked = contenido.esFavorito, onCheckedChange = { onAlternarFavorito() }) {
+                            Icon(
+                                imageVector = if (contenido.esFavorito) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                                contentDescription = null
+                            )
+                        }
+                        IconButton(onClick = { onEditar(contenido.contacto.id) }) {
+                            Icon(Icons.Default.Edit, contentDescription = stringResource(R.string.editar_contacto))
+                        }
+                        IconButton(onClick = { confirmarEliminar = true }) {
+                            Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.eliminar_contacto))
+                        }
                     }
                 }
             )
         }
     ) { innerPadding ->
-        if (uiState.cargando) {
-            EstadoCargando(modifier = Modifier.padding(innerPadding))
-            return@Scaffold
-        }
-
-        Column(
-            modifier = Modifier
-                .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
-                .padding(16.dp)
-        ) {
-            CampoTexto(
-                etiqueta = stringResource(R.string.campo_nombre),
-                valor = uiState.formulario.nombre,
-                error = uiState.errores[Campo.NOMBRE],
-                onValueChange = { onCampoChange(Campo.NOMBRE, it) },
-                capitalizarPalabras = true
-            )
-            CampoTexto(
-                etiqueta = stringResource(R.string.campo_apellido),
-                valor = uiState.formulario.apellido,
-                error = uiState.errores[Campo.APELLIDO],
-                onValueChange = { onCampoChange(Campo.APELLIDO, it) },
-                capitalizarPalabras = true
-            )
-            CampoTexto(
-                etiqueta = stringResource(R.string.campo_email),
-                valor = uiState.formulario.email,
-                error = uiState.errores[Campo.EMAIL],
-                onValueChange = { onCampoChange(Campo.EMAIL, it) },
-                tipoTeclado = KeyboardType.Email
-            )
-            CampoTexto(
-                etiqueta = stringResource(R.string.campo_telefono),
-                valor = uiState.formulario.telefono,
-                error = uiState.errores[Campo.TELEFONO],
-                onValueChange = { onCampoChange(Campo.TELEFONO, it) },
-                tipoTeclado = KeyboardType.Phone
-            )
-            CampoTexto(
-                etiqueta = stringResource(R.string.campo_direccion),
-                valor = uiState.formulario.direccion,
-                error = uiState.errores[Campo.DIRECCION],
-                onValueChange = { onCampoChange(Campo.DIRECCION, it) },
-                capitalizarPalabras = true
-            )
-            CampoTexto(
-                etiqueta = stringResource(R.string.campo_ciudad),
-                valor = uiState.formulario.ciudad,
-                error = uiState.errores[Campo.CIUDAD],
-                onValueChange = { onCampoChange(Campo.CIUDAD, it) },
-                capitalizarPalabras = true
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = onGuardar, enabled = !uiState.guardando, modifier = Modifier.fillMaxWidth()) {
-                if (uiState.guardando) {
-                    CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp)
-                } else {
-                    Text(stringResource(R.string.guardar))
-                }
+        Box(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
+            when (uiState) {
+                is DetalleContactoUiState.Cargando -> EstadoCargando()
+                is DetalleContactoUiState.Error -> EstadoError(error = uiState.error, onReintentar = null)
+                is DetalleContactoUiState.Contenido -> FichaContacto(contacto = uiState.contacto)
             }
         }
     }
+
+    if (confirmarEliminar) {
+        AlertDialog(
+            onDismissRequest = { confirmarEliminar = false },
+            title = { Text(stringResource(R.string.confirmar_eliminar_titulo)) },
+            text = { Text(stringResource(R.string.confirmar_eliminar_mensaje)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    confirmarEliminar = false
+                    onEliminar()
+                }) { Text(stringResource(R.string.eliminar_contacto)) }
+            },
+            dismissButton = {
+                TextButton(onClick = { confirmarEliminar = false }) {
+                    Text(stringResource(R.string.cancelar))
+                }
+            }
+        )
+    }
 }
 ```
 
-Cada `CampoTexto` recibe su propio error potencial con `uiState.errores[Campo.X]` — como `errores` es un `Map`, un campo sin problemas simplemente no tiene entrada y el acceso devuelve `null`. El botón de guardar se **deshabilita** (`enabled = !uiState.guardando`) mientras la operación está en curso, y muestra un `CircularProgressIndicator` pequeño en lugar del texto, evitando que el usuario dispare guardados duplicados con toques repetidos.
+Los botones de la barra superior (favorito, editar, eliminar) solo se dibujan **cuando `contenido != null`**: no tiene sentido ofrecer acciones sobre un contacto que todavía se está cargando o que falló al cargar.
 
-### `CampoTexto`: un `OutlinedTextField` configurable
+El ícono de eliminar no borra directamente: solo cambia `confirmarEliminar` a `true`, lo que hace aparecer un `AlertDialog` de Material 3. Únicamente si el usuario toca el botón de confirmación dentro del diálogo se llama a `onEliminar()`. `confirmarEliminar` vive en `rememberSaveable` (capítulo 34) para sobrevivir a un cambio de configuración, como la rotación de pantalla, sin volver a preguntar innecesariamente ni perder la confirmación en curso.
+
+El segundo `LaunchedEffect`, con clave `errorAccion`, muestra un snackbar cuando `alternarFavorito()` o `eliminar()` fallan, y llama a `onErrorAccionMostrado()` para limpiar el error una vez mostrado — el mismo patrón de "consumir el evento" que ya usaste en el capítulo 43.
+
+### La ficha del contacto
 
 ```kotlin
 @Composable
-private fun CampoTexto(
-    etiqueta: String,
-    valor: String,
-    error: ErrorCampo?,
-    onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    tipoTeclado: KeyboardType = KeyboardType.Text,
-    capitalizarPalabras: Boolean = false
-) {
-    Column(modifier = modifier.padding(vertical = 4.dp)) {
-        OutlinedTextField(
-            value = valor,
-            onValueChange = onValueChange,
-            label = { Text(etiqueta) },
-            isError = error != null,
-            singleLine = true,
-            keyboardOptions = KeyboardOptions(
-                keyboardType = tipoTeclado,
-                capitalization = if (capitalizarPalabras) KeyboardCapitalization.Words else KeyboardCapitalization.None
-            ),
-            modifier = Modifier.fillMaxWidth()
-        )
-        if (error != null) {
-            Text(
-                text = mensajeDeCampo(error),
-                color = MaterialTheme.colorScheme.error,
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(start = 16.dp, top = 4.dp)
-            )
-        }
+private fun FichaContacto(contacto: Contacto, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier.fillMaxSize().padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        AvatarContacto(contacto = contacto, modifier = Modifier.size(96.dp))
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(contacto.nombreCompleto, style = MaterialTheme.typography.headlineSmall)
+
+        Spacer(modifier = Modifier.height(24.dp))
+        DatoContacto(icono = Icons.Default.Email, valor = contacto.email)
+        DatoContacto(icono = Icons.Default.Phone, valor = contacto.telefono)
+        DatoContacto(icono = Icons.Default.Home, valor = contacto.direccion)
+        DatoContacto(icono = Icons.Default.LocationCity, valor = contacto.ciudad)
     }
 }
 
 @Composable
-private fun mensajeDeCampo(error: ErrorCampo): String = when (error) {
-    ErrorCampo.Obligatorio -> stringResource(R.string.error_obligatorio)
-    is ErrorCampo.Longitud -> stringResource(R.string.error_longitud_minima, error.minimo)
-    is ErrorCampo.LargoMaximo -> stringResource(R.string.error_largo_maximo, error.maximo)
-    ErrorCampo.EmailInvalido -> stringResource(R.string.error_email_invalido)
-    is ErrorCampo.Servidor -> error.mensaje
+private fun DatoContacto(icono: ImageVector, valor: String?, modifier: Modifier = Modifier) {
+    Row(modifier = modifier.fillMaxWidth().padding(vertical = 8.dp)) {
+        Icon(icono, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+        Spacer(modifier = Modifier.width(12.dp))
+        Text(valor ?: stringResource(R.string.sin_informacion))
+    }
 }
 ```
 
-`keyboardOptions` es lo que le indica al teclado del sistema qué mostrar: `KeyboardType.Email` habilita la tecla `@` para el correo, `KeyboardType.Phone` cambia a un teclado numérico para el teléfono, y `KeyboardCapitalization.Words` pone en mayúscula automática la primera letra de cada palabra en campos como nombre o dirección.
-
-`mensajeDeCampo` es el `when` exhaustivo (capítulo 20) que traduce cada variante de `ErrorCampo` a un texto localizado — el mismo principio que `mensajeDe(error: ErrorDatos)` del capítulo 49: los datos deciden qué pasó, la interfaz decide cómo decirlo.
+`DatoContacto` recibe un `valor: String?` porque, como recordarás del modelo de dominio (capítulo 52), `telefono`, `direccion` y `ciudad` son opcionales: cuando son `null`, se muestra el texto `sin_informacion` en lugar de dejar la fila vacía o esconderla, dándole al usuario una señal consistente de "este dato no se cargó" en vez de un hueco silencioso.
 
 ## Resumen
 
-- `ContactoForm` guarda todos los campos como `String` (incluso los opcionales), porque así llegan desde un `TextField`; se convierte a `DatosContacto` con `aDatos()` al guardar, y desde `Contacto` con `aFormulario()` al editar.
-- `validarContacto` es una función pura que revisa el formulario localmente; `erroresDelServidor` traduce los mensajes `"campo: descripción"` de `ErrorDatos.Validacion` al mismo formato `Map<Campo, ErrorCampo>`, para que la interfaz no tenga que distinguir el origen del error.
-- `guardar()` valida localmente primero (sin red) y, si el servidor igual rechaza los datos, distingue `Validacion` (por campo), `Conflicto` (correo duplicado, asignado a `EMAIL`) y cualquier otro error (a `errorGeneral`).
-- `FormularioContactoScreen` reutiliza, por tercera vez en esta parte, el patrón "evento como estado": `guardado: Boolean` + `LaunchedEffect` para volver atrás tras guardar con éxito.
-- `CampoTexto` centraliza la configuración del teclado (`KeyboardType`, `KeyboardCapitalization`) y la presentación del error de cada campo.
+- `DetalleContactoUiState` vuelve a ser una `sealed interface` (`Cargando` / `Error` / `Contenido`) porque sus tres posibilidades son mutuamente excluyentes, pero `Contenido` es una `data class` porque, una vez con datos, hay varias cosas que coexisten (favorito, eliminando, eliminado, error de acción).
+- El `id` del contacto se obtiene con `savedStateHandle.toRoute<DetalleContactoRuta>().id`, el mecanismo de argumentos tipados que se explica a fondo en el capítulo 60.
+- `eliminar()` es un ejemplo más del patrón "evento como estado" (capítulo 43): el `ViewModel` no navega; expone `eliminado = true` en el `UiState`, y un `LaunchedEffect(eliminado)` en la Screen decide volver atrás.
+- La eliminación se confirma con un `AlertDialog` antes de llamar a `onEliminar()`, y su estado de visibilidad se guarda con `rememberSaveable` para sobrevivir a la rotación.
+- El ayudante privado `actualizarContenido` evita repetir la comprobación `is Contenido` en cada función del `ViewModel`.
 
 ## Para cerrar
 
-Quieres exigir que el teléfono, **si el usuario lo escribe**, tenga al menos 7 dígitos (es opcional, así que vacío es válido). Siguiendo el patrón de `validarContacto`, completa la condición y la línea que registra el error:
-
-```kotlin
-if ( ??? ) {
-    errores[Campo.TELEFONO] = ???
-}
-```
+Quieres avisar con un snackbar "Contacto actualizado" cuando una acción del detalle termina bien. Tienes dos opciones: llamar a `snackbarHostState.showSnackbar(...)` directamente en el cuerpo del composable, o exponer un booleano en el `UiState`, observarlo con `LaunchedEffect` y limpiarlo después. ¿Cuál eliges y por qué?
 
 Responde antes de mirar la respuesta.
 
 ??? success "Ver respuesta y razonamiento"
-    ```kotlin
-    if (form.telefono.isNotBlank() && form.telefono.length < 7) {
-        errores[Campo.TELEFONO] = ErrorCampo.Longitud(7)
-    }
-    ```
+    La segunda: exponer la señal en el `UiState` y consumirla con `LaunchedEffect` (el patrón "evento como estado"). Llamar a `showSnackbar` directamente en el cuerpo lo dispararía en **cada recomposición**, mostrando el mensaje repetidamente, y además mezclaría efectos con el dibujado.
 
-    La clave está en la primera condición: como el campo es opcional, solo validamos su longitud cuando **no** está en blanco; un teléfono vacío es válido y no debe generar error. `ErrorCampo.Longitud` ya existe para este tipo de regla, igual que en `NOMBRE` y `APELLIDO`. Error común: validar siempre con `form.telefono.length < 7`, lo que marcaría como inválido el caso perfectamente válido de "sin teléfono".
+    Al modelarlo como estado (`eliminado`, `errorAccion`), la Screen reacciona una sola vez al cambio y luego limpia la señal con una función como `errorAccionMostrado()`. Error común: disparar efectos directamente en el cuerpo del composable en vez de dentro de un `LaunchedEffect`.
 
-En el próximo capítulo veremos cómo estas tres pantallas se conectan mediante **rutas de navegación tipadas**, en lugar del patrón de cadenas de texto que usaste en el capítulo 38.
+En el próximo capítulo construiremos la pantalla de formulario, la más exigente en validación: campos obligatorios, formato de correo, y errores que pueden venir tanto del cliente como del servidor.

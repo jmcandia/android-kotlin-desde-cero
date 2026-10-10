@@ -58,7 +58,7 @@ El curso avanza por partes, de lo más básico a lo más avanzado. Al inicio de 
 - **Parte VI · Android y arquitectura de aplicaciones** — Android Studio, ciclo de vida de una `Activity`, cómo se organiza una app, arquitectura MVVM.
 - **Parte VII · Jetpack Compose y construcción de interfaces** — composables, `Modifier`, Material 3, estado, `Scaffold`/`LazyColumn`, formularios y navegación.
 - **Parte VIII · Estado y arquitectura con MVVM** — `ViewModel`, `UiState`, efectos y eventos, repositorio, inyección de dependencias.
-- **Parte IX · Datos: API REST y persistencia local** — HTTP y JSON, Retrofit, estados de red y persistencia local con Room.
+- **Parte IX · Datos: API REST y persistencia local** — HTTP y JSON, Retrofit, estados de red, persistencia local con Room y preferencias con DataStore.
 - **Parte X · Proyecto final: contactos** — «Mis Contactos» de principio a fin: arquitectura, capa remota y local, repositorio *offline-first*, las tres pantallas, navegación tipada y componentes compartidos.
 
 Al final encontrarás los **anexos** con material de referencia (principios de diseño, equivalencias Java→Kotlin y entrada estándar con `Scanner`, criterios para elegir el SDK de un proyecto Android y formato de cadenas con `String.format`).

@@ -245,3 +245,25 @@ Registro de trabajo de la reestructuración del curso «Android con Kotlin desde
 **Validación con lectores.** Revisado el repositorio: **no** hay comentarios, respuestas ni datos de pruebas de lectores (los únicos coincidentes son binarios del `venv`, que no son datos de usuarios). No se inventan resultados. Propuesta pendiente, para ejecutar **fuera del repo** con 3-5 estudiantes de distinta experiencia (sin Kotlin / con otro lenguaje / con Android): pedir que resuelvan, sin abrir la solución, el repaso de la Parte III «la caja del kiosco», el de la Parte V «el buscador de ciudades», el de la Parte IX «el clima *offline-first*» y el «Punto de decisión» del tutorial 4. **Observar:** (a) comprensión de la consigna sin abrir pistas; (b) tiempo de resolución; (c) qué nivel de pista necesitaron y en qué momento; (d) errores recurrentes. **Criterio de ajuste:** si una mayoría necesita la solución completa, reforzar la Pista 1; si casi todos resuelven sin pistas, reducir el andamiaje. No se añaden actividades nuevas como sustituto de esta validación.
 
 **Pendientes:** la validación con lectores (requiere personas y no puede completarse dentro del repositorio). Ninguno más del encargo.
+
+### 2026-10-10 — Sesión 9 — Animaciones declarativas y Preferences DataStore
+
+**Encargo:** (1) añadir una introducción práctica a las animaciones declarativas de Compose; (2) crear un capítulo de **Preferences DataStore** tras Room, con renumeración coherente, actividades/pistas y verificación.
+
+**Decisiones (confirmadas con el usuario):**
+- Las animaciones van como **sección ampliada dentro del capítulo 34** («Estado y recomposición»), no como capítulo nuevo.
+- DataStore es un **capítulo nuevo, el 51**, al final de la Parte IX (tras Room, cap. 50). La Parte X se renumera **51–61 → 52–62**. El `nav` de la Parte IX queda: 46, 47, 48, 49, 50, tutorial 5, **51 DataStore**, Ejercicios.
+
+**API verificada contra fuentes oficiales (versiones del proyecto):** `animateColorAsState` (`androidx.compose.animation`), `animateDpAsState` (`androidx.compose.animation.core`), `AnimatedVisibility` y `Modifier.animateContentSize` (`androidx.compose.animation`); todos devuelven `State<T>` y se leen con `by`. DataStore: `androidx.datastore:datastore-preferences` **1.2.1**, delegado `preferencesDataStore`, claves `*PreferencesKey`, lectura `data`/`catch`/`map`, escritura `edit`, `IOException`→`emptyPreferences()`.
+
+**Trabajo realizado:**
+- `part07/chapter34.md`: nueva sección **«Animar cambios de estado»** (subsecciones `animate*AsState`, `AnimatedVisibility`, ejemplo `AvisoDesplegable`) + bullet en el Resumen + frase en la introducción.
+- `part09/chapter51.md` (**nuevo**): capítulo «Preferencias con DataStore» (tabla y mermaid Room vs DataStore, SharedPreferences vs DataStore, Gradle, delegado y claves, leer/escribir, repositorio con `@ApplicationContext`+`@Binds`, `AjustesViewModel` con `stateIn`, `AjustesScreen` con `Switch` + mermaid, Resumen y «Para cerrar»).
+- Renumeración `git mv` **descendente** de `part10/chapter61.md`→`chapter62.md` … `chapter51.md`→`chapter52.md`; H1 de los 11 archivos actualizados (52–62).
+- `mkdocs.yml`: entrada «51. Preferencias con DataStore» tras el tutorial 5; bloque de la Parte X reescrito (52–62).
+- Referencias cruzadas corregidas (**+1**) en `appendix/glossary.md`, caps. 52–62 y `part10/exercises.md`; `part09/chapter48.md` (cap. 52→**53**) y `part09/exercises.md` (cap. 55→**56**).
+- Glosario: nueva entrada **«DataStore»** (entre DAO y Delegación). «Lo que aprenderás» y el hito de la Parte IX ampliados; `docs/index.md` (blurb de la Parte IX) y `AGENTS.md` (rango 1–62) actualizados.
+
+**Verificación:** `venv\Scripts\mkdocs.exe build --strict` → **exit 0** (solo el banner informativo de Material for MkDocs 2.0). 62/62 H1 coinciden con el número del archivo; sin referencias `capítulo`/`cap.` fuera del rango 1–62.
+
+**Decisión pendiente (código):** no se modificó `code/` ni se añadió la dependencia a los `libs.versions.toml` reales; el capítulo 51 la presenta como instrucción, igual que el cap. 50 presenta Room. Reconsiderar si el encargo exige verificar la dependencia en las apps.

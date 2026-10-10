@@ -1,430 +1,268 @@
-# Capítulo 56: Pantalla de lista: búsqueda, paginación y favoritos
+# Capítulo 56: El repositorio: estrategia *offline-first*
 
 > [!TIP]Antes de empezar, recupera lo que ya sabes
 > Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
 >
-> 1. ¿Cuándo conviene modelar el `UiState` como una `data class` y cuándo como una `sealed`?
-> 2. ¿Qué ventaja ofrece `LazyColumn` frente a una `Column` con scroll para listas largas?
-> 3. ¿Cómo observa un composable el `StateFlow` de un ViewModel?
+> 1. ¿Qué ventaja tiene que los métodos del repositorio devuelvan `Result<T>` en lugar de lanzar excepciones?
+> 2. ¿Por qué un ViewModel debería conocer solo la interfaz del repositorio y no su implementación?
+> 3. ¿Qué operador de `Flow` sirve para transformar cada valor emitido?
 
 ## Introducción
 
-Con el repositorio listo, construimos la primera pantalla real de la aplicación: la **lista de contactos**. Es la pantalla más compleja de las tres, porque combina varias técnicas que estudiaste por separado a lo largo del curso: búsqueda con `debounce`, scroll infinito, actualización mediante deslizamiento (*pull-to-refresh*) y un filtro de favoritos, todo coordinado desde un único `UiState`.
+Ya tienes las dos fuentes de datos por separado: la API remota (capítulo 54) y la base de datos local (capítulo 55). Ahora las uniremos en una sola pieza: el **repositorio**. Su trabajo es decidir, ante cada operación, si conviene usar la red, la caché local, o ambas, sin que el resto de la aplicación tenga que preocuparse por esa decisión.
 
-En este capítulo construiremos `ListaContactosUiState`, `ListaContactosViewModel` y `ListaContactosScreen`.
+En este capítulo implementaremos `ContactosRepositoryImpl`, que sigue una estrategia ***offline-first***: intenta primero la red, pero si no hay conexión, recurre a los datos guardados en Room en lugar de simplemente mostrar un error.
 
-## El estado de la pantalla: `ListaContactosUiState`
+## La interfaz del repositorio
 
-A diferencia del `UiState` con `sealed class`/`sealed interface` que usaste en capítulos anteriores (cap. 42, cap. 49), esta pantalla necesita mostrar **varias cosas a la vez**: una lista de contactos, si se está cargando más, si hay un error, y el texto de búsqueda actual. Como anticipaba la nota del capítulo 42, aquí `UiState` se modela como una **`data class`**:
+En `data/ContactosRepository.kt` definimos el contrato que el resto de la app conocerá, sin exponer detalles de Retrofit ni de Room:
 
 ```kotlin
-package com.ejemplo.miscontactos.ui.lista
+package com.ejemplo.miscontactos.data
 
 import com.ejemplo.miscontactos.model.Contacto
-import com.ejemplo.miscontactos.model.ErrorDatos
+import com.ejemplo.miscontactos.model.DatosContacto
+import com.ejemplo.miscontactos.model.PaginaContactos
+import kotlinx.coroutines.flow.Flow
 
-data class ListaContactosUiState(
-    val contactos: List<Contacto> = emptyList(),
-    val busqueda: String = "",
-    val favoritos: Set<Int> = emptySet(),
-    val soloFavoritos: Boolean = false,
-    val cargando: Boolean = false,
-    val cargandoMas: Boolean = false,
-    val hayMas: Boolean = false,
-    val desdeCache: Boolean = false,
-    val error: ErrorDatos? = null
-) {
-    /** Lo que realmente se muestra: todos los contactos cargados o solo los favoritos. */
-    val contactosVisibles: List<Contacto>
-        get() = if (soloFavoritos) contactos.filter { it.id in favoritos } else contactos
+/**
+ * Punto único de acceso a los contactos. Quien lo usa no sabe si los datos
+ * vienen de la API (Retrofit) o de la base de datos local (Room).
+ */
+interface ContactosRepository {
+
+    /** Emite un valor cada vez que se crea, edita o elimina un contacto. */
+    val cambios: Flow<Unit>
+
+    /** Ids de los contactos marcados como favoritos (dato solo local). */
+    val favoritos: Flow<Set<Int>>
+
+    suspend fun obtenerPagina(pagina: Int, busqueda: String? = null): Result<PaginaContactos>
+    suspend fun obtenerContacto(id: Int): Result<Contacto>
+    suspend fun crear(datos: DatosContacto): Result<Contacto>
+    suspend fun actualizar(id: Int, datos: DatosContacto): Result<Contacto>
+    suspend fun eliminar(id: Int): Result<Unit>
+    suspend fun alternarFavorito(id: Int)
 }
 ```
 
-Fíjate en la propiedad calculada `contactosVisibles`: en lugar de que cada composable repita la lógica del filtro de favoritos, el propio `UiState` decide qué lista mostrar. Es el mismo principio de "la Vista solo dibuja" que viste en el capítulo 28: toda decisión vive en el estado, no en la interfaz.
+Dos propiedades merecen atención antes de ver la implementación:
 
-## El ViewModel: `ListaContactosViewModel`
+- **`cambios: Flow<Unit>`**: no lleva información, solo **avisa**. Cuando se crea, edita o elimina un contacto en cualquier parte de la app, cualquier pantalla suscrita a este flujo sabe que debe refrescar sus datos. Es el mecanismo que usaremos para que, por ejemplo, la lista se actualice sola después de guardar un formulario, sin acoplar directamente esas dos pantallas.
+- **`favoritos: Flow<Set<Int>>`**: como viste en el capítulo 52, ser favorito no es parte del modelo `Contacto`; es una lista de identificadores que cualquier pantalla puede cruzar con los contactos que ya tiene cargados.
+
+## La implementación: `ContactosRepositoryImpl`
 
 ```kotlin
-package com.ejemplo.miscontactos.ui.lista
+package com.ejemplo.miscontactos.data
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.ejemplo.miscontactos.data.ContactosRepository
-import com.ejemplo.miscontactos.model.comoErrorDatos
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.ejemplo.miscontactos.data.local.ContactoDao
+import com.ejemplo.miscontactos.data.local.FavoritoDao
+import com.ejemplo.miscontactos.data.local.FavoritoEntity
+import com.ejemplo.miscontactos.data.local.aDominio
+import com.ejemplo.miscontactos.data.local.aEntity
+import com.ejemplo.miscontactos.data.remote.ContactApi
+import com.ejemplo.miscontactos.data.remote.aDominio
+import com.ejemplo.miscontactos.data.remote.aErrorDatos
+import com.ejemplo.miscontactos.data.remote.aRequest
+import com.ejemplo.miscontactos.model.Contacto
+import com.ejemplo.miscontactos.model.DatosContacto
+import com.ejemplo.miscontactos.model.ErrorDatos
+import com.ejemplo.miscontactos.model.PaginaContactos
 import javax.inject.Inject
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
+import javax.inject.Singleton
+import kotlin.coroutines.cancellation.CancellationException
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.serialization.json.Json
 
-@HiltViewModel
-class ListaContactosViewModel @Inject constructor(
-    private val repository: ContactosRepository
-) : ViewModel() {
+@Singleton
+class ContactosRepositoryImpl @Inject constructor(
+    private val api: ContactApi,
+    private val contactoDao: ContactoDao,
+    private val favoritoDao: FavoritoDao,
+    private val json: Json
+) : ContactosRepository {
 
-    private val _uiState = MutableStateFlow(ListaContactosUiState())
-    val uiState: StateFlow<ListaContactosUiState> = _uiState.asStateFlow()
+    private val _cambios = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
+    override val cambios: Flow<Unit> = _cambios.asSharedFlow()
 
-    private var paginaActual = 0
-    private var cargaJob: Job? = null
+    override val favoritos: Flow<Set<Int>> =
+        favoritoDao.observarIds().map { ids -> ids.toSet() }
 
-    init {
-        viewModelScope.launch {
-            repository.favoritos.collect { ids ->
-                _uiState.update { it.copy(favoritos = ids) }
-            }
-        }
-        viewModelScope.launch {
-            repository.cambios.collect { recargar() }
-        }
-        recargar()
+    // ... (obtenerPagina, obtenerContacto, crear, actualizar, eliminar, alternarFavorito)
+
+    companion object {
+        const val TAMANO_PAGINA = 20
     }
-
-    // ... (recargar, cargarMas, cambiarBusqueda, alternarSoloFavoritos, alternarFavorito, cargarPagina)
 }
 ```
 
-En el bloque `init` lanzamos **dos coroutines independientes** que se ejecutan durante toda la vida del `ViewModel`, además de disparar la primera carga:
+- El repositorio recibe **las cuatro dependencias** por su constructor: el cliente de red, los dos DAOs y el `Json` compartido. Gracias a Hilt (capítulos 48, 53 y 51), no tenemos que construir nada de esto manualmente.
+- `_cambios` es un `SharedFlow` mutable y privado, expuesto como un `Flow` de solo lectura, siguiendo el mismo patrón de encapsulación que ya usaste con `StateFlow` en el capítulo 42.
+- `favoritos` **transforma** el `Flow<List<Int>>` del DAO en un `Flow<Set<Int>>` con el operador `map` (capítulo 25), porque a la interfaz le conviene comprobar pertenencia (`id in favoritos`) con un `Set`, que es más eficiente que buscar en una `List`.
 
-1. La primera se suscribe a `repository.favoritos` y mantiene el `UiState` sincronizado con los favoritos guardados en Room, sin importar qué otra pantalla los haya modificado.
-2. La segunda se suscribe a `repository.cambios`: cada vez que se crea, edita o elimina un contacto (en el formulario o en el detalle), esta pantalla se refresca sola llamando a `recargar()`.
+## Obtener una página: la lógica *offline-first*
+
+Esta es la operación más interesante del repositorio, porque combina red, caché y manejo de errores:
+
+```kotlin
+override suspend fun obtenerPagina(pagina: Int, busqueda: String?): Result<PaginaContactos> {
+    val esPrimeraPaginaSinFiltro = pagina == 0 && busqueda.isNullOrBlank()
+
+    val resultado = llamarApi {
+        api.obtenerContactos(pagina = pagina, tamano = TAMANO_PAGINA, busqueda = busqueda).aDominio()
+    }
+
+    resultado.onSuccess { paginaContactos ->
+        if (esPrimeraPaginaSinFiltro) {
+            contactoDao.reemplazarTodos(
+                paginaContactos.contactos.mapIndexed { indice, contacto -> contacto.aEntity(indice) }
+            )
+        }
+    }
+
+    // Sin conexión: si pedíamos la primera página sin filtro, usamos la copia local.
+    val error = resultado.exceptionOrNull()
+    if (error is ErrorDatos.SinConexion && esPrimeraPaginaSinFiltro) {
+        val guardados = contactoDao.obtenerTodos()
+        if (guardados.isNotEmpty()) {
+            return Result.success(
+                PaginaContactos(
+                    contactos = guardados.map { it.aDominio() },
+                    pagina = 0,
+                    totalPaginas = 1,
+                    desdeCache = true
+                )
+            )
+        }
+    }
+    return resultado
+}
+```
+
+Analicemos la decisión paso a paso:
+
+1. **`esPrimeraPaginaSinFiltro`**: solo actualizamos la caché completa cuando pedimos la primera página **sin ningún término de búsqueda**. No tendría sentido, por ejemplo, que una búsqueda de "Ana" reemplazara la caché con solo los contactos que coinciden con ese filtro.
+2. **Éxito de red**: si la llamada a la API funciona y estamos en ese caso especial, `contactoDao.reemplazarTodos(...)` guarda una copia fresca en Room, usando el índice de la lista como `orden` (capítulo 55).
+3. **Fallo por falta de conexión**: revisamos si el error es específicamente `ErrorDatos.SinConexion` (capítulo 49) **y** si estábamos pidiendo esa primera página sin filtro. Si ambas condiciones se cumplen, en lugar de propagar el error, leemos `contactoDao.obtenerTodos()` y devolvemos un `Result.success` con esos datos, marcado con `desdeCache = true`.
+4. **Cualquier otro caso** (un error distinto, o una búsqueda que falló sin red): se devuelve el `resultado` original, con su error, ya que no tenemos una copia local relevante que ofrecer.
 
 > [!NOTE]Nota
-> Dos coroutines dentro de un mismo `init` no se bloquean entre sí: `viewModelScope.launch` lanza cada una en su propia tarea. La primera queda "escuchando" `favoritos` indefinidamente, mientras la segunda hace lo mismo con `cambios`, y ambas conviven con la carga inicial.
+> Fíjate en que el repositorio **nunca oculta** que los datos vienen de la caché: lo señala explícitamente con `desdeCache = true`, para que la interfaz pueda avisarle al usuario, como verás en el próximo capítulo.
 
-### Cargar y recargar
-
-```kotlin
-/** Vuelve a pedir la primera página (al iniciar, al reintentar o al deslizar para actualizar). */
-fun recargar() {
-    cargaJob?.cancel()
-    cargaJob = viewModelScope.launch { cargarPagina(0) }
-}
-
-fun cargarMas() {
-    val estado = _uiState.value
-    if (estado.cargando || estado.cargandoMas || !estado.hayMas) return
-    cargaJob = viewModelScope.launch { cargarPagina(paginaActual + 1) }
-}
-```
-
-`cargaJob` guarda una referencia al `Job` de la carga en curso (capítulo 24). Antes de lanzar una nueva carga desde `recargar()`, **cancelamos** la anterior: si el usuario desliza para refrescar mientras la lista todavía estaba cargando la página inicial, no queremos que ambas peticiones compitan por escribir el mismo estado.
-
-`cargarMas()` incluye una **guarda** de tres condiciones: no vuelve a pedir otra página si ya hay una carga en curso (`cargando` o `cargandoMas`) o si no quedan más páginas (`!hayMas`). Sin esta comprobación, el scroll infinito podría disparar la misma petición varias veces.
-
-### Búsqueda con `debounce`
+## Obtener un contacto: el mismo patrón, más simple
 
 ```kotlin
-/** Cada tecla reinicia la espera: solo se busca cuando el usuario deja de escribir. */
-fun cambiarBusqueda(texto: String) {
-    _uiState.update { it.copy(busqueda = texto) }
-    cargaJob?.cancel()
-    cargaJob = viewModelScope.launch {
-        delay(ESPERA_BUSQUEDA_MS)
-        cargarPagina(0)
+override suspend fun obtenerContacto(id: Int): Result<Contacto> {
+    val resultado = llamarApi { api.obtenerContacto(id).aDominio() }
+    if (resultado.exceptionOrNull() is ErrorDatos.SinConexion) {
+        contactoDao.obtenerPorId(id)?.let { return Result.success(it.aDominio()) }
     }
-}
-
-private companion object {
-    const val ESPERA_BUSQUEDA_MS = 400L
+    return resultado
 }
 ```
 
-Si lanzáramos una búsqueda a la API por cada letra que el usuario escribe, generaríamos una petición de red por tecla. En cambio, cada llamada a `cambiarBusqueda` **cancela** la coroutine de búsqueda anterior (`cargaJob?.cancel()`) y lanza una nueva que espera 400 milisegundos (`delay`) antes de disparar la petición real. Si el usuario sigue escribiendo antes de que se cumplan esos 400 ms, la espera se cancela y se reinicia. Esta técnica se llama ***debounce***, y es el mismo patrón de cancelación que viste con `Job` en el capítulo 24.
+Aquí no hace falta distinguir "primera página sin filtro": simplemente, si falla por falta de conexión, buscamos ese contacto específico en la caché por su `id`. Si no está guardado (por ejemplo, porque nunca se cargó esa página), se propaga el error original.
 
-### Favoritos: local e inmediato
+## Crear, actualizar y eliminar: siempre contra la red
+
+A diferencia de la lectura, las operaciones que **modifican** datos no tienen sentido sin conexión (no construimos una cola de sincronización en esta versión de la app). Cada una llama a la API y, si tiene éxito, avisa a través de `_cambios`:
 
 ```kotlin
-fun alternarSoloFavoritos() {
-    _uiState.update { it.copy(soloFavoritos = !it.soloFavoritos) }
-}
+override suspend fun crear(datos: DatosContacto): Result<Contacto> =
+    llamarApi { api.crearContacto(datos.aRequest()).aDominio() }
+        .onSuccess { _cambios.tryEmit(Unit) }
 
-fun alternarFavorito(id: Int) {
-    viewModelScope.launch { repository.alternarFavorito(id) }
-}
+override suspend fun actualizar(id: Int, datos: DatosContacto): Result<Contacto> =
+    llamarApi { api.actualizarContacto(id, datos.aRequest()).aDominio() }
+        .onSuccess { _cambios.tryEmit(Unit) }
+
+override suspend fun eliminar(id: Int): Result<Unit> =
+    llamarApi { api.eliminarContacto(id) }
+        .onSuccess {
+            contactoDao.borrar(id)
+            favoritoDao.borrar(id)
+            _cambios.tryEmit(Unit)
+        }
 ```
 
-`alternarSoloFavoritos` es puramente local: cambia el filtro sin tocar la red ni la base de datos, y la propiedad `contactosVisibles` del `UiState` se encarga de recalcular la lista. `alternarFavorito(id)` delega en el repositorio; como el `UiState` ya está suscrito a `repository.favoritos` desde el `init`, el cambio se refleja automáticamente, sin necesidad de actualizar `_uiState` manualmente aquí.
+Al eliminar, además de emitir el aviso de cambio, limpiamos ese contacto de **ambas** tablas locales: ya no debería aparecer en la caché ni seguir marcado como favorito.
 
-### Cargar una página
-
-```kotlin
-private suspend fun cargarPagina(pagina: Int) {
-    _uiState.update {
-        if (pagina == 0) it.copy(cargando = true, error = null)
-        else it.copy(cargandoMas = true, error = null)
-    }
-
-    val busqueda = _uiState.value.busqueda.trim().ifBlank { null }
-    repository.obtenerPagina(pagina, busqueda)
-        .onSuccess { resultado ->
-            paginaActual = resultado.pagina
-            _uiState.update { estado ->
-                estado.copy(
-                    contactos = if (pagina == 0) {
-                        resultado.contactos
-                    } else {
-                        estado.contactos + resultado.contactos
-                    },
-                    hayMas = resultado.hayMas,
-                    desdeCache = resultado.desdeCache,
-                    cargando = false,
-                    cargandoMas = false
-                )
-            }
-        }
-        .onFailure { error ->
-            _uiState.update {
-                it.copy(cargando = false, cargandoMas = false, error = error.comoErrorDatos())
-            }
-        }
-}
-```
-
-Si `pagina == 0`, **reemplazamos** la lista completa (una nueva búsqueda o un refresco). Si es una página siguiente, **concatenamos** los nuevos contactos a los que ya había (`estado.contactos + resultado.contactos`), preservando el orden. `cargando` distingue la carga inicial (que suele mostrar un indicador a pantalla completa) de `cargandoMas` (un indicador pequeño al final de la lista).
-
-## La pantalla: `ListaContactosScreen`
-
-Siguiendo el patrón de separar la versión "con estado" de la versión "sin estado" que ya usaste en tutoriales anteriores, dividimos el composable en dos:
+## Alternar favorito: una operación puramente local
 
 ```kotlin
-/** Versión con estado: obtiene el ViewModel y conecta sus funciones con la pantalla. */
-@Composable
-fun ListaContactosScreen(
-    onVerContacto: (Int) -> Unit,
-    onNuevoContacto: () -> Unit,
-    viewModel: ListaContactosViewModel = hiltViewModel()
-) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    ListaContactosContent(
-        uiState = uiState,
-        onBusquedaChange = viewModel::cambiarBusqueda,
-        onAlternarSoloFavoritos = viewModel::alternarSoloFavoritos,
-        onAlternarFavorito = viewModel::alternarFavorito,
-        onRecargar = viewModel::recargar,
-        onCargarMas = viewModel::cargarMas,
-        onVerContacto = onVerContacto,
-        onNuevoContacto = onNuevoContacto
-    )
-}
-```
-
-`ListaContactosContent` es la versión sin estado, la que realmente dibuja la pantalla y la que se puede previsualizar y probar de forma aislada:
-
-```kotlin
-@Composable
-fun ListaContactosContent(
-    uiState: ListaContactosUiState,
-    onBusquedaChange: (String) -> Unit,
-    onAlternarSoloFavoritos: () -> Unit,
-    onAlternarFavorito: (Int) -> Unit,
-    onRecargar: () -> Unit,
-    onCargarMas: () -> Unit,
-    onVerContacto: (Int) -> Unit,
-    onNuevoContacto: () -> Unit
-) {
-    Scaffold(
-        topBar = { TopAppBar(title = { Text(stringResource(R.string.titulo_lista)) }) },
-        floatingActionButton = {
-            FloatingActionButton(onClick = onNuevoContacto) {
-                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.nuevo_contacto))
-            }
-        }
-    ) { innerPadding ->
-        Column(modifier = Modifier.padding(innerPadding)) {
-            BarraBusqueda(
-                busqueda = uiState.busqueda,
-                soloFavoritos = uiState.soloFavoritos,
-                onBusquedaChange = onBusquedaChange,
-                onAlternarSoloFavoritos = onAlternarSoloFavoritos
-            )
-
-            if (uiState.desdeCache) {
-                AvisoDatosGuardados()
-            }
-
-            val error = uiState.error
-            when {
-                uiState.cargando && uiState.contactos.isEmpty() -> EstadoCargando()
-                error != null && uiState.contactos.isEmpty() ->
-                    EstadoError(error = error, onReintentar = onRecargar)
-                else -> PullToRefreshBox(
-                    isRefreshing = uiState.cargando,
-                    onRefresh = onRecargar,
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    ListaContactos(
-                        uiState = uiState,
-                        onAlternarFavorito = onAlternarFavorito,
-                        onCargarMas = onCargarMas,
-                        onVerContacto = onVerContacto
-                    )
-                }
-            }
-        }
+override suspend fun alternarFavorito(id: Int) {
+    if (favoritoDao.esFavorito(id)) {
+        favoritoDao.borrar(id)
+    } else {
+        favoritoDao.insertar(FavoritoEntity(contactoId = id))
     }
 }
 ```
 
-Observa el `when` que decide qué dibujar:
-- Si está cargando **y** todavía no hay ningún contacto (la primera carga), muestra `EstadoCargando()` a pantalla completa.
-- Si hay un error **y** la lista está vacía, muestra `EstadoError` con un botón de reintentar.
-- En cualquier otro caso —incluida una recarga con datos ya visibles— envuelve la lista en `PullToRefreshBox`, que dibuja el indicador circular de "deslizar para actualizar" sincronizado con `uiState.cargando`.
+Esta operación nunca toca la red: solo lee y escribe en la tabla `favoritos` de Room. Como `favoritos` es un `Flow`, cualquier pantalla suscrita se entera del cambio automáticamente, sin que `alternarFavorito` tenga que emitir nada explícitamente.
 
-`AvisoDatosGuardados()` es una franja de color que se muestra únicamente cuando `desdeCache` es `true`, avisando al usuario de que estos contactos no son la versión más reciente del servidor:
+## El ayudante `llamarApi`
 
-```kotlin
-@Composable
-private fun AvisoDatosGuardados() {
-    Surface(
-        color = MaterialTheme.colorScheme.tertiaryContainer,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Text(
-            text = stringResource(R.string.aviso_datos_guardados),
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onTertiaryContainer,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-        )
-    }
-}
-```
-
-## Scroll infinito con `LazyColumn`
+Igual que viste en el capítulo 49, centralizamos la conversión de excepciones en una función privada:
 
 ```kotlin
-@Composable
-private fun ListaContactos(
-    uiState: ListaContactosUiState,
-    onAlternarFavorito: (Int) -> Unit,
-    onCargarMas: () -> Unit,
-    onVerContacto: (Int) -> Unit
-) {
-    val contactos = uiState.contactosVisibles
-
-    if (contactos.isEmpty() && !uiState.cargando) {
-        val mensaje = when {
-            uiState.soloFavoritos -> stringResource(R.string.favoritos_vacios)
-            uiState.busqueda.isNotBlank() ->
-                stringResource(R.string.busqueda_sin_resultados, uiState.busqueda)
-            else -> stringResource(R.string.lista_vacia)
-        }
-        // LazyColumn para que "deslizar para actualizar" funcione también con la lista vacía.
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            item { EstadoVacio(mensaje = mensaje) }
-        }
-        return
+private suspend fun <T> llamarApi(bloque: suspend () -> T): Result<T> =
+    try {
+        Result.success(bloque())
+    } catch (e: CancellationException) {
+        throw e
+    } catch (e: Exception) {
+        Result.failure(e.aErrorDatos(json))
     }
-
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(contactos, key = { it.id }) { contacto ->
-            ContactoItem(
-                contacto = contacto,
-                esFavorito = contacto.id in uiState.favoritos,
-                onAlternarFavorito = { onAlternarFavorito(contacto.id) },
-                onClick = { onVerContacto(contacto.id) }
-            )
-            HorizontalDivider()
-        }
-
-        // Al llegar al final de la lista, se pide la página siguiente.
-        if (uiState.hayMas && !uiState.soloFavoritos) {
-            item {
-                LaunchedEffect(contactos.size) { onCargarMas() }
-                Box(
-                    modifier = Modifier.fillMaxWidth().padding(16.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
-                }
-            }
-        }
-    }
-}
 ```
 
-El truco del scroll infinito está en este fragmento:
+`llamarApi` es genérica (capítulo 21): funciona igual para `List<Contacto>`, `Contacto` o `Unit`. Vuelve a lanzar `CancellationException` sin atraparla, por la misma razón que se explicó en el capítulo 49: no es un error de la aplicación, es la señal de que la coroutine debe detenerse.
 
-```kotlin
-if (uiState.hayMas && !uiState.soloFavoritos) {
-    item {
-        LaunchedEffect(contactos.size) { onCargarMas() }
-        // ...un indicador de carga...
-    }
-}
+## El flujo completo: red, caché y notificación
+
+```mermaid
+sequenceDiagram
+    participant VM as ViewModel
+    participant Repo as Repositorio
+    participant API as API (Retrofit)
+    participant Room as Room (caché)
+
+    VM->>Repo: obtenerPagina(0, null)
+    Repo->>API: GET /api/contact
+    alt Con conexión
+        API-->>Repo: ContactPageDto
+        Repo->>Room: reemplazarTodos(...)
+        Repo-->>VM: Result.success(desdeCache = false)
+    else Sin conexión
+        API--xRepo: IOException
+        Repo->>Room: obtenerTodos()
+        Room-->>Repo: contactos guardados
+        Repo-->>VM: Result.success(desdeCache = true)
+    end
 ```
-
-Cuando quedan más páginas por cargar, agregamos un último elemento a la `LazyColumn` que contiene un `LaunchedEffect(contactos.size)` (capítulo 43). Como Compose solo dibuja los elementos visibles de una lista perezosa, este ítem **entra en composición justo cuando el usuario llega al final** de lo que ya está cargado, y en ese momento su `LaunchedEffect` se dispara y llama a `onCargarMas()`. La clave `contactos.size` asegura que el efecto se relance cada vez que llega una nueva página (el tamaño de la lista cambia), y no se repita mientras el tamaño se mantiene igual.
-
-También nota el `soloFavoritos` en la condición: cuando el filtro de favoritos está activo, no tiene sentido seguir pidiendo más páginas al servidor, porque el filtrado ocurre sobre los contactos ya cargados.
-
-## El ítem de la lista: `ContactoItem`
-
-```kotlin
-@Composable
-fun ContactoItem(
-    contacto: Contacto,
-    esFavorito: Boolean,
-    onAlternarFavorito: () -> Unit,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    ListItem(
-        headlineContent = { Text(contacto.nombreCompleto) },
-        supportingContent = { Text(contacto.email) },
-        leadingContent = { AvatarContacto(contacto = contacto) },
-        trailingContent = {
-            IconToggleButton(checked = esFavorito, onCheckedChange = { onAlternarFavorito() }) {
-                Icon(
-                    imageVector = if (esFavorito) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                    contentDescription = stringResource(
-                        if (esFavorito) R.string.quitar_favorito else R.string.marcar_favorito
-                    ),
-                    tint = if (esFavorito) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-        },
-        modifier = modifier.clickable(onClick = onClick)
-    )
-}
-```
-
-`ListItem` de Material 3 organiza el contenido en tres zonas (principal, secundaria y final), y `IconToggleButton` cambia de ícono y color según `esFavorito`, ofreciendo una descripción de accesibilidad distinta en cada estado (`marcar_favorito` / `quitar_favorito`).
 
 ## Resumen
 
-- `ListaContactosUiState` es una `data class` (no una `sealed class`) porque muestra varias cosas a la vez; centraliza la decisión de qué mostrar en la propiedad calculada `contactosVisibles`.
-- El `ViewModel` se suscribe en el `init` a `repository.favoritos` y `repository.cambios`, manteniéndose sincronizado con el resto de la app.
-- La búsqueda usa ***debounce***: cada tecla cancela la espera anterior y lanza una nueva de 400 ms antes de pedir datos.
-- El scroll infinito se logra con un ítem final en la `LazyColumn` cuyo `LaunchedEffect(contactos.size)` dispara `cargarMas()` al hacerse visible.
-- `PullToRefreshBox` conecta el gesto de deslizar hacia abajo con `uiState.cargando` y `onRecargar`.
-- Un aviso visual (`desdeCache`) le informa al usuario cuando está viendo datos guardados localmente, coherente con la estrategia *offline-first* del capítulo 55.
+- `ContactosRepository` expone dos flujos de aviso: `cambios` (para refrescar tras crear/editar/eliminar) y `favoritos` (los identificadores marcados localmente).
+- `obtenerPagina` sigue una estrategia *offline-first*: solo cuando la petición de la primera página sin filtro falla por falta de conexión, recurre a la caché de Room y lo señala con `desdeCache = true`.
+- `obtenerContacto` aplica el mismo respaldo, pero buscando un único contacto por `id`.
+- Crear, actualizar y eliminar dependen siempre de la red, y notifican el cambio mediante `_cambios.tryEmit(Unit)`.
+- `alternarFavorito` es una operación puramente local, sin llamadas HTTP.
+- El ayudante genérico `llamarApi` centraliza la traducción de excepciones a `ErrorDatos`, sin atrapar nunca `CancellationException`.
 
 ## Para cerrar
 
-Estás aplicando el mismo truco de scroll infinito a una lista de productos, pero escribes el último ítem así:
-
-```kotlin
-if (hayMas) {
-    item {
-        LaunchedEffect(Unit) { onCargarMas() }
-        CircularProgressIndicator()
-    }
-}
-```
-
-El usuario llega al final y se carga la página siguiente, pero al seguir bajando no se piden más páginas. ¿Por qué?
+Sin conexión, pides la **segunda** página de la lista con `obtenerPagina(pagina = 1, busqueda = null)`. El repositorio tiene guardada en caché la primera página (sin filtro). ¿Qué devuelve: los contactos en caché, una lista vacía o un error? ¿Por qué?
 
 Responde antes de mirar la respuesta.
 
 ??? success "Ver respuesta y razonamiento"
-    Con la clave `Unit`, el `LaunchedEffect` se ejecuta **una sola vez**, cuando ese ítem entra en composición por primera vez. Como el ítem permanece en la lista, el efecto no se relanza aunque lleguen datos nuevos.
+    Devuelve un **error** (`Result.failure` con `ErrorDatos.SinConexion`). El respaldo a la caché solo se aplica cuando `esPrimeraPaginaSinFiltro` es verdadero, es decir, para la página 0 y sin término de búsqueda. La caché local guarda una única copia de la lista completa, así que no puede satisfacer "la página 2" de una paginación del servidor.
 
-    La solución de la pantalla de lista usa `LaunchedEffect(contactos.size)`: cada vez que arriba una página nueva, el tamaño de la lista cambia, la clave cambia y el efecto vuelve a lanzarse, disparando `cargarMas()` otra vez. Error común: creer que `LaunchedEffect(Unit)` "se repite en cada recomposición"; en realidad solo depende de su clave.
+    Error común: pensar que cualquier fallo de red cae automáticamente a la caché. La estrategia *offline-first* de esta app es deliberadamente estrecha: solo la primera página sin filtro tiene equivalente local.
 
-En el próximo capítulo construiremos la pantalla de detalle, con el patrón de "evento como estado" para eliminar un contacto de forma segura.
+Con el repositorio terminado, ya tenemos toda la capa de datos. En el próximo capítulo construiremos la primera pantalla: la lista de contactos, con búsqueda, scroll infinito y favoritos.

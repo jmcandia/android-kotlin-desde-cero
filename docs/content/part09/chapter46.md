@@ -6,7 +6,7 @@
 > - Explicar cómo se comunican las apps con un servidor mediante HTTP, REST y JSON.
 > - Describir DTOs y consumir una API REST con Retrofit.
 > - Representar los estados de red (*loading*, *success*, *error*) y sus errores.
-> - Persistir datos localmente con Room y exponerlos como `Flow`.
+> - Persistir datos localmente con Room y guardar preferencias con DataStore, exponiéndolos como `Flow`.
 
 > [!TIP]Antes de empezar, recupera lo que ya sabes
 > Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.

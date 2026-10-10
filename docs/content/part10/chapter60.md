@@ -1,214 +1,166 @@
-# Capítulo 60: Componentes compartidos y tema visual
+# Capítulo 60: Navegación con rutas tipadas
 
 > [!TIP]Antes de empezar, recupera lo que ya sabes
 > Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
 >
-> 1. ¿Por qué conviene extraer a un archivo compartido un composable que usan varias pantallas?
-> 2. ¿Cómo accede cualquier composable a los colores y la tipografía del tema Material 3?
-> 3. ¿Para qué sirve el parámetro `modifier: Modifier = Modifier` que exponen los composables?
+> 1. ¿Cómo declarabas un destino y navegabas hacia él con rutas de texto en Navigation Compose?
+> 2. ¿Para qué sirven `rememberNavController()` y el `NavHost`?
+> 3. ¿Qué función retira la pantalla actual de la pila de navegación?
 
 ## Introducción
 
-A lo largo de los capítulos 56 a 58 usamos varios composables sin detenernos en ellos: `AvatarContacto`, `EstadoCargando`, `EstadoError`, `EstadoVacio`, `mensajeDe`. Son piezas **reutilizadas por las tres pantallas** de la aplicación, y vivir en `ui/componentes/` en vez de duplicarse en cada pantalla es lo que evita, por ejemplo, que la lista y el detalle dibujen el avatar de forma ligeramente distinta.
+En el capítulo 38 aprendiste Navigation Compose con **rutas de texto**: cada pantalla se identificaba con una cadena como `"detalle/{id}"`, y para navegar armabas otra cadena a mano, como `"detalle/42"`. Funciona, pero tiene un problema que probablemente ya intuiste: el compilador no puede verificar que `"detalle/{id}"` y `"detalle/42"` sean, en efecto, compatibles. Un error de tipeo en cualquiera de las dos cadenas —o un argumento del tipo equivocado— **solo se revela en tiempo de ejecución**, a veces con un `crash`.
 
-En este capítulo cerramos la interfaz de «Mis Contactos» revisando esos componentes compartidos y el tema visual (`Theme.kt`, `Color.kt`) que los envuelve a todos.
+«Mis Contactos» usa un enfoque más moderno y seguro: **rutas tipadas** (*type-safe navigation*), donde cada ruta es una clase de Kotlin serializable en lugar de una cadena de texto. En este capítulo veremos `Rutas.kt` y `ContactosNavHost.kt`, y compararemos ambos enfoques directamente.
 
-## El avatar: `AvatarContacto`
+## De cadenas a clases: `Rutas.kt`
 
 ```kotlin
-package com.ejemplo.miscontactos.ui.componentes
+package com.ejemplo.miscontactos.ui.navigation
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import kotlinx.serialization.Serializable
+
+@Serializable
+data object ListaContactosRuta
+
+@Serializable
+data class DetalleContactoRuta(val id: Int)
+
+@Serializable
+data class FormularioContactoRuta(val id: Int? = null)
+```
+
+Cada pantalla de la app tiene su propia clase de ruta, anotada con `@Serializable` (la misma anotación de `kotlinx.serialization` que usaste con los DTOs en el capítulo 47):
+
+- **`ListaContactosRuta`** es un `data object` (capítulo 19): no necesita ningún argumento, así que un único objeto la representa por completo, igual que harías con cualquier `object` sin estado.
+- **`DetalleContactoRuta`** es una `data class` con un `id: Int` **obligatorio**: no tiene sentido abrir el detalle sin saber de qué contacto se trata.
+- **`FormularioContactoRuta`** es una `data class` con un `id: Int? = null` **opcional**: la misma pantalla sirve para crear (sin `id`) y editar (con `id`), como viste en el capítulo 59.
+
+> [!NOTE]Nota
+> Compara esto con el capítulo 38: allí, la ruta `"detalle/{id}"` codificaba el argumento *dentro de la cadena*, y tenías que declarar por separado el `navArgument` con su tipo. Aquí, el argumento simplemente **es una propiedad de la clase**, con su tipo declarado una sola vez.
+
+## El grafo de navegación: `ContactosNavHost.kt`
+
+```kotlin
+package com.ejemplo.miscontactos.ui.navigation
+
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
-import com.ejemplo.miscontactos.model.Contacto
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.ejemplo.miscontactos.ui.detalle.DetalleContactoScreen
+import com.ejemplo.miscontactos.ui.formulario.FormularioContactoScreen
+import com.ejemplo.miscontactos.ui.lista.ListaContactosScreen
 
 @Composable
-fun AvatarContacto(contacto: Contacto, modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier
-            .size(48.dp)
-            .clip(CircleShape),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = contacto.iniciales,
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onPrimaryContainer
-        )
-        AsyncImage(
-            model = "https://i.pravatar.cc/300?u=contacto-${contacto.id}",
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.size(48.dp)
-        )
-    }
-}
-```
+fun ContactosNavHost() {
+    val navController = rememberNavController()
 
-`AsyncImage` viene de **Coil 3** (`coil3.compose.AsyncImage`), la biblioteca de carga de imágenes que ya se declaró en las dependencias del capítulo 52. Su trabajo es descargar la foto, guardarla en caché y dibujarla, todo con una sola función composable, sin que tengas que gestionar hilos ni bitmaps manualmente.
-
-Fíjate en el orden de los dos elementos dentro del `Box`: primero el `Text` con las iniciales, **luego** la `AsyncImage` encima. Mientras la imagen todavía no termina de descargarse (o si la URL falla), el texto de iniciales queda visible detrás; en cuanto `AsyncImage` completa la carga, la tapa por completo. Es un *fallback* simple, sin necesidad de observar el estado de carga de Coil explícitamente.
-
-`contentScale = ContentScale.Crop` recorta la imagen para llenar el círculo sin deformarla, igual que harías con un `object-fit: cover` en CSS.
-
-## Estados reutilizables: `Estados.kt`
-
-Las tres pantallas necesitan mostrar, en algún momento, "está cargando", "algo falló" o "no hay nada que mostrar". En lugar de que cada una redibuje su propia versión, `Estados.kt` centraliza estos tres casos:
-
-```kotlin
-@Composable
-fun EstadoCargando(modifier: Modifier = Modifier) {
-    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        CircularProgressIndicator()
-    }
-}
-
-@Composable
-fun EstadoError(
-    error: ErrorDatos,
-    onReintentar: (() -> Unit)?,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = modifier.fillMaxSize().padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Icon(
-            Icons.Default.ErrorOutline,
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.error,
-            modifier = Modifier.size(48.dp)
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(mensajeDe(error), textAlign = TextAlign.Center)
-        if (onReintentar != null) {
-            Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = onReintentar) { Text(stringResource(R.string.reintentar)) }
+    NavHost(navController = navController, startDestination = ListaContactosRuta) {
+        composable<ListaContactosRuta> {
+            ListaContactosScreen(
+                onVerContacto = { id -> navController.navigate(DetalleContactoRuta(id)) },
+                onNuevoContacto = { navController.navigate(FormularioContactoRuta()) }
+            )
+        }
+        composable<DetalleContactoRuta> {
+            DetalleContactoScreen(
+                onEditar = { id -> navController.navigate(FormularioContactoRuta(id)) },
+                onVolver = { navController.popBackStack() }
+            )
+        }
+        composable<FormularioContactoRuta> {
+            FormularioContactoScreen(onVolver = { navController.popBackStack() })
         }
     }
 }
+```
 
-@Composable
-fun EstadoVacio(mensaje: String, modifier: Modifier = Modifier) {
-    Box(modifier = modifier.fillMaxSize().padding(24.dp), contentAlignment = Alignment.Center) {
-        Text(mensaje, textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onSurfaceVariant)
-    }
+La estructura general —`rememberNavController()`, `NavHost`, `composable { }`, `popBackStack()`— es la misma que ya conoces del capítulo 37. Lo que cambia es la forma de declarar cada destino y de navegar hacia él:
+
+| | Rutas de texto (cap. 37) | Rutas tipadas (esta app) |
+|---|---|---|
+| Declarar un destino | `composable("detalle/{id}") { ... }` | `composable<DetalleContactoRuta> { ... }` |
+| Navegar | `navController.navigate("detalle/$id")` | `navController.navigate(DetalleContactoRuta(id))` |
+| Leer el argumento | `backStackEntry.arguments?.getInt("id")` | `savedStateHandle.toRoute<DetalleContactoRuta>().id` |
+| Argumento con tipo incorrecto | Falla en tiempo de ejecución | No compila |
+| Ruta mal escrita | Falla en tiempo de ejecución (o navega a nada) | No compila |
+
+Con `navController.navigate(DetalleContactoRuta(id))`, el compilador exige que `id` sea un `Int` — si intentaras pasar un `String` o simplemente olvidaras el argumento, el proyecto no compilaría. Con la cadena `"detalle/$id"` del capítulo 38, en cambio, cualquier valor se puede interpolar sin que el compilador detecte el error.
+
+`composable<DetalleContactoRuta>` usa un **parámetro de tipo reificado** (capítulo 21) para asociar ese bloque de composición con la clase `DetalleContactoRuta`, en lugar de compararla con un patrón de texto como `"detalle/{id}"`.
+
+## Leer argumentos: `SavedStateHandle.toRoute<>()`
+
+Ya viste esta función en los capítulos 58 y 59, pero conviene detenerse en cómo funciona. Dentro de un `ViewModel`, Hilt inyecta automáticamente un `SavedStateHandle` (capítulo 42) que contiene los argumentos con los que se navegó a esa pantalla:
+
+```kotlin
+@HiltViewModel
+class DetalleContactoViewModel @Inject constructor(
+    private val repository: ContactosRepository,
+    savedStateHandle: SavedStateHandle
+) : ViewModel() {
+
+    private val id: Int = savedStateHandle.toRoute<DetalleContactoRuta>().id
+
+    // ...
 }
 ```
 
-`EstadoError` recibe `onReintentar: (() -> Unit)?` como **función opcional**: cuando es `null` (como en la pantalla de detalle del capítulo 57, donde reintentar simplemente recargaría de nuevo el mismo `id` sin que tenga mucho sentido exponer un botón separado), el botón de reintentar no se dibuja. Es el mismo principio de "el estado decide qué mostrar" que ya aplicaste con `contactosVisibles` en el capítulo 56, llevado a un parámetro de función en vez de a una propiedad.
+`savedStateHandle.toRoute<DetalleContactoRuta>()` **reconstruye la instancia completa** de `DetalleContactoRuta` a partir de lo que guardó `NavHost`, usando la misma serialización con la que se navegó. Como `DetalleContactoRuta` es una `data class` con un único `Int`, el resultado es equivalente a leer ese entero directamente, pero **con el tipo verificado en tiempo de compilación**: si `DetalleContactoRuta` tuviera dos o tres campos, `toRoute<DetalleContactoRuta>()` te devolvería los tres ya tipados, sin tener que leer cada uno por separado con `getInt`/`getString` como en el capítulo 38.
 
-`EstadoVacio` recibe el mensaje ya armado como `String`, en lugar de un recurso, precisamente porque —como viste en el capítulo 56— ese mensaje cambia según el contexto (favoritos vacíos, búsqueda sin resultados, lista realmente vacía), y es la pantalla que lo llama quien decide cuál de los tres aplica.
-
-### `mensajeDe`: traducir errores a texto
+En `FormularioContactoViewModel`, el mismo mecanismo lee el `id` **opcional**:
 
 ```kotlin
-@Composable
-fun mensajeDe(error: ErrorDatos): String = when (error) {
-    is ErrorDatos.SinConexion -> stringResource(R.string.error_sin_conexion)
-    is ErrorDatos.NoEncontrado -> stringResource(R.string.error_no_encontrado)
-    is ErrorDatos.Conflicto -> error.message ?: stringResource(R.string.error_desconocido)
-    is ErrorDatos.Validacion -> stringResource(R.string.error_validacion)
-    is ErrorDatos.Desconocido -> stringResource(R.string.error_desconocido)
-}
+private val id: Int? = savedStateHandle.toRoute<FormularioContactoRuta>().id
 ```
 
-Esta función ya la mencionamos en el capítulo 49: como `ErrorDatos` es una `sealed class`, el `when` es **exhaustivo** — si en el futuro se agrega una nueva variante de error, el compilador obliga a manejarla aquí también, evitando que un caso quede sin traducción. Se usa tanto en `EstadoError` como directamente en los `Snackbar` de las pantallas de detalle y formulario (capítulos 57 y 58).
+Como `FormularioContactoRuta.id` es `Int?`, `toRoute()` simplemente propaga esa nulabilidad: si se navegó con `FormularioContactoRuta()` (sin argumento, para crear), `id` es `null`; si se navegó con `FormularioContactoRuta(id = 42)` (para editar), `id` es `42`.
 
-## El permiso de red local: `PermisoRedLocal`
+## El flujo de navegación completo
 
-Ya viste este composable completo en el capítulo 52, pero vale la pena recordar por qué vive en `ui/componentes/` junto a los demás: aunque solo se usa una vez (envolviendo todo `ContactosNavHost` desde `MainActivity`), es un componente genérico —no conoce contactos ni pantallas específicas— y encaja mejor junto al resto de piezas reutilizables que dentro de una carpeta de una sola pantalla.
-
-## El tema visual: `Theme.kt` y `Color.kt`
-
-```kotlin
-// Color.kt
-val Azul = Color(0xFF1E5AA8)
-val AzulClaro = Color(0xFFB8D0F0)
-val Turquesa = Color(0xFF00897B)
-val TurquesaClaro = Color(0xFF80CBC4)
-val Error = Color(0xFFBA1A1A)
-val ErrorClaro = Color(0xFFFFDAD6)
+```mermaid
+graph LR
+    Lista["ListaContactosRuta"] -->|"navigate(DetalleContactoRuta(id))"| Detalle["DetalleContactoRuta"]
+    Lista -->|"navigate(FormularioContactoRuta())"| FormNuevo["FormularioContactoRuta(id = null)"]
+    Detalle -->|"navigate(FormularioContactoRuta(id))"| FormEditar["FormularioContactoRuta(id)"]
+    Detalle -->|"popBackStack()"| Lista
+    FormNuevo -->|"popBackStack()"| Lista
+    FormEditar -->|"popBackStack()"| Detalle
 ```
 
-```kotlin
-// Theme.kt
-private val LightColorScheme = lightColorScheme(
-    primary = Azul,
-    primaryContainer = AzulClaro,
-    secondary = Turquesa,
-    secondaryContainer = TurquesaClaro,
-    error = Error,
-    errorContainer = ErrorClaro
-)
+Nota que ni `DetalleContactoScreen` ni `FormularioContactoScreen` reciben el `NavController` directamente: reciben funciones simples como `onVolver: () -> Unit` u `onEditar: (Int) -> Unit`, que `ContactosNavHost` conecta con `navController.navigate(...)` o `navController.popBackStack()`. Esto sigue el mismo principio de la versión "con estado"/"sin estado" que aplicaste en cada pantalla: las Screens no conocen los detalles de cómo se navega, solo declaran **qué evento ocurrió**.
 
-private val DarkColorScheme = darkColorScheme(
-    primary = AzulClaro,
-    secondary = TurquesaClaro,
-    error = ErrorClaro
-)
+## ¿Cuándo usar cada enfoque?
 
-@Composable
-fun MisContactosTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false,
-    content: @Composable () -> Unit
-) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
+Ambos estilos coexisten en el ecosistema de Compose, y es útil saber cuándo preferir cada uno:
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
-}
-```
-
-Este es el mismo patrón de tema Material 3 que estudiaste en el capítulo 40: una paleta de colores propia de la app (`LightColorScheme`/`DarkColorScheme`, construidas a partir de las constantes de `Color.kt`) y, opcionalmente, **color dinámico** en Android 12 (API 31, `Build.VERSION_CODES.S`) en adelante, que deriva la paleta del fondo de pantalla del usuario en lugar de usar los colores fijos de la marca. Aquí `dynamicColor` tiene su valor por defecto en `false`: «Mis Contactos» prioriza su identidad visual propia (azul y turquesa) sobre adaptarse al *wallpaper* de cada dispositivo, pero deja la puerta abierta a activarlo con un simple cambio de parámetro.
-
-`MainActivity` envuelve toda la interfaz en `MisContactosTheme { ... }`, por lo que cualquier composable de la app —`ContactoItem`, `FichaContacto`, `CampoTexto`, etc.— accede a estos colores simplemente a través de `MaterialTheme.colorScheme`, sin tener que recibirlos como parámetro.
+- **Rutas tipadas** (esta app): la opción recomendada por Google para proyectos nuevos. Detecta errores en tiempo de compilación, evita construir cadenas a mano, y hace explícitos los argumentos de cada pantalla como propiedades de una clase.
+- **Rutas de texto** (capítulo 38): sigue siendo válida y útil para entender los fundamentos de cómo funciona un grafo de navegación —el `NavHost`, la pila de destinos, `popBackStack()`— sin la capa adicional de serialización. También es la única opción si necesitas interoperar con código que ya define rutas como cadenas (por ejemplo, *deep links* heredados de una app antigua).
 
 ## Resumen
 
-- `ui/componentes/` reúne las piezas que usa más de una pantalla: `AvatarContacto` (foto con Coil 3 sobre iniciales de respaldo), `Estados.kt` (`EstadoCargando`/`EstadoError`/`EstadoVacio`/`mensajeDe`) y `PermisoRedLocal` (capítulo 52).
-- `AvatarContacto` superpone `AsyncImage` sobre un `Text` de iniciales: mientras la imagen no carga, las iniciales quedan visibles como *fallback*.
-- `EstadoError` acepta un `onReintentar` **opcional**, dejando que cada pantalla decida si ofrece o no un botón de reintento.
-- `mensajeDe(error: ErrorDatos)` centraliza, con un `when` exhaustivo, la traducción de cada variante de error a un texto localizado.
-- El tema (`Theme.kt`/`Color.kt`) sigue el patrón Material 3 del capítulo 40: paleta propia por defecto, con soporte opcional para color dinámico desde Android 12.
+- Las rutas tipadas reemplazan las cadenas de texto del capítulo 38 por clases `@Serializable`: `ListaContactosRuta` (`data object`, sin argumentos), `DetalleContactoRuta` (`id: Int` obligatorio), `FormularioContactoRuta` (`id: Int? = null` opcional).
+- `composable<Ruta> { ... }` declara un destino asociado a una clase; `navController.navigate(Ruta(argumentos))` navega pasando una instancia real, no una cadena armada a mano.
+- `savedStateHandle.toRoute<Ruta>()` reconstruye la instancia completa dentro del `ViewModel`, con cada argumento ya tipado, sin `getInt`/`getString` manuales.
+- La ventaja central sobre el capítulo 38: los errores de ruta o de tipo de argumento se detectan **en tiempo de compilación**, no en tiempo de ejecución.
+- Las Screens siguen sin conocer el `NavController`: reciben funciones simples (`onVolver`, `onEditar`) que `ContactosNavHost` conecta con la navegación real.
 
 ## Para cerrar
 
-Para reutilizar el estado de error en la pantalla de detalle (donde no quieres botón) y en la de lista (donde sí), un compañero define el componente sin opcionalidad:
+Un compañero, acostumbrado a las rutas de texto, navega al detalle así:
 
 ```kotlin
-fun EstadoError(error: ErrorDatos, onReintentar: () -> Unit) { ... }
+navController.navigate("detalle/42")
 ```
 
-¿Qué problema tendrá al usarlo en el detalle? ¿Cómo lo arreglarías?
+El `NavHost` de esta app declara `composable<DetalleContactoRuta> { ... }`. ¿Qué ocurre al ejecutar: funciona, falla en tiempo de compilación o falla en tiempo de ejecución? ¿Qué debería escribir?
 
 Responde antes de mirar la respuesta.
 
 ??? success "Ver respuesta y razonamiento"
-    Al no ser opcional, el detalle estaría **obligado** a pasar una lambda (aunque fuera vacía) y el botón de reintentar se dibujaría siempre, incluso cuando no tiene sentido.
+    Falla en **tiempo de ejecución**: `navigate(String)` compila (es una sobrecarga existente), pero no existe ningún destino declarado con la ruta de texto `"detalle/42"`, así que el grafo no encuentra coincidencia.
 
-    La firma de `Estados.kt` usa `onReintentar: (() -> Unit)?` y dibuja el botón solo si no es `null` (`if (onReintentar != null)`), de modo que cada pantalla decide si ofrece reintento. Error común: usar "booleanos bandera" o lambdas vacías en lugar de un parámetro anulable para modelar una capacidad opcional.
+    Con rutas tipadas hay que pasar una instancia de la clase: `navController.navigate(DetalleContactoRuta(42))`. Así el compilador verifica que la ruta y el tipo del argumento (`Int`) son correctos. Error común: colar una cadena por costumbre; con el enfoque tipado, el argumento es una **propiedad** de la clase, no un texto interpolado.
 
-Con esto completamos el recorrido por la interfaz de «Mis Contactos». En el capítulo final cerraremos el proyecto con una revisión general, algunas pruebas manuales sugeridas y los próximos pasos sugeridos para seguir aprendiendo.
+En el próximo capítulo revisaremos los componentes compartidos entre pantallas —`AvatarContacto`, los estados reutilizables de carga/error/vacío— y el tema visual de la aplicación.

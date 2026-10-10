@@ -13,6 +13,8 @@ Hasta ahora tus composables muestran siempre lo mismo. Pero una interfaz real **
 
 Aprenderás a crear estado con `mutableStateOf`, a conservarlo entre recomposiciones con `remember`, a mantenerlo incluso al girar el dispositivo con `rememberSaveable`, a usarlo con componentes interactivos como `TextField`, `Checkbox` y `Switch`, y una técnica fundamental para organizar bien tu interfaz: el ***state hoisting*** o "elevación del estado".
 
+Para terminar, verás cómo **animar** esos cambios de estado para que la interfaz no salte de un valor a otro de golpe, con las animaciones declarativas de Compose.
+
 ## La recomposición
 
 Aquí está la idea central de Compose. En la interfaz tradicional, cuando un dato cambiaba, tenías que buscar el elemento de pantalla y actualizarlo tú a mano. En Compose no: cuando cambian los datos que un composable **lee**, Compose **vuelve a ejecutar** ese composable con los datos nuevos y actualiza lo que se muestra. A ese "volver a ejecutar" se le llama **recomposición**.
@@ -212,6 +214,115 @@ flowchart TD
 
 Este patrón trae grandes ventajas: el composable `Contador` es **reutilizable** (sirve con cualquier valor y cualquier acción), fácil de **previsualizar** (le pasas un valor fijo) y hay una **única fuente de verdad** para el estado. Es, además, la misma idea que viste en el capítulo 29 sobre la arquitectura MVVM, aplicada ahora a un solo composable en vez de a toda la pantalla: el estado vive en un solo lugar, la interfaz lo observa y le comunica los eventos.
 
+## Animar cambios de estado
+
+Cada vez que cambia el estado, la interfaz **salta** de golpe al nuevo valor. Para muchas cosas está bien: un contador debe mostrar el número nuevo al instante. Pero otros cambios se sienten bruscos o desconcertantes: un color que aparece, un elemento que se muestra de repente, un tamaño que da un salto. Compose puede **interpolar** esos cambios, es decir, recorrer los valores intermedios para que el cambio se vea como una transición suave.
+
+La clave es que, igual que con el estado, **no describes la animación fotograma a fotograma**. Tú solo cambias el valor objetivo (el estado) y Compose calcula el camino. A esto se le llama **animación declarativa**: describes *a dónde* quieres llegar, no *cómo* llegar.
+
+### Animar un valor: `animate*AsState`
+
+Las funciones `animate*AsState` envuelven un valor y lo animan cuando su valor objetivo cambia. Hay una por cada tipo; las dos más útiles al principio son:
+
+- **`animateColorAsState`**: para colores.
+- **`animateDpAsState`**: para tamaños, rellenos y desplazamientos (`Dp`).
+
+Igual que `mutableStateOf`, devuelven un `State<T>`, así que se leen con `by`:
+
+```kotlin
+@Composable
+fun TarjetaSeleccionable(seleccionada: Boolean) {
+    val colorFondo by animateColorAsState(
+        targetValue = if (seleccionada) MaterialTheme.colorScheme.primaryContainer
+                      else MaterialTheme.colorScheme.surfaceVariant,
+        label = "colorFondo"
+    )
+
+    Surface(color = colorFondo, shape = MaterialTheme.shapes.medium) {
+        Text("Tócame", modifier = Modifier.padding(16.dp))
+    }
+}
+```
+
+Aquí `colorFondo` no salta de un color a otro: **recorre** los colores intermedios. Cuando `seleccionada` cambia, la animación se dispara sola; no hay que arrancarla ni detenerla a mano. El mismo patrón sirve para un tamaño:
+
+```kotlin
+val relleno by animateDpAsState(
+    targetValue = if (expandida) 24.dp else 8.dp,
+    label = "relleno"
+)
+
+Box(modifier = Modifier.padding(relleno)) { /* ... */ }
+```
+
+Por eso a estas funciones se las llama animaciones **de disparar y olvidar** (*fire-and-forget*): cambias el objetivo y ya está. El parámetro `animationSpec` permite ajustar el ritmo (por ejemplo, `tween(durationMillis = 300)` para una duración fija); si lo omites, Compose usa un `spring` (un muelle con física propia) que suele verse natural.
+
+> [!NOTE]Nota
+> El parámetro `label` es solo un nombre para distinguir esta animación de otras en las herramientas de Android Studio; no afecta al resultado. Para leer el `State<T>` con `by` necesitarás `import androidx.compose.runtime.getValue`, que Android Studio agrega por ti. `animateColorAsState` viene de `androidx.compose.animation` y `animateDpAsState` de `androidx.compose.animation.core`.
+
+### Mostrar y ocultar contenido: `AnimatedVisibility`
+
+Para animar la **aparición y desaparición** de una parte de la interfaz, en lugar de un `if`, usa `AnimatedVisibility`. Recibe un booleano `visible` y el contenido que se muestra u oculta:
+
+```kotlin
+AnimatedVisibility(visible = mostrarDetalle) {
+    Text("Detalle que aparece con una transición suave")
+}
+```
+
+Por defecto, el contenido hace un *fade* (aparece y desaparece con opacidad) y se expande o se contrae al mismo tiempo. Puedes afinar el efecto con los parámetros `enter` y `exit`, combinando transiciones con el operador `+`:
+
+```kotlin
+AnimatedVisibility(
+    visible = mostrarDetalle,
+    enter = slideInVertically() + fadeIn(),
+    exit = slideOutVertically() + fadeOut()
+) {
+    Text("Detalle que se desliza desde arriba")
+}
+```
+
+A diferencia de cambiar solo la opacidad (`Modifier.alpha`), `AnimatedVisibility` **quita el contenido de la composición** cuando termina de ocultarse, así que deja de ocupar espacio y los lectores de pantalla dejan de verlo. Por eso es la opción recomendada cuando algo debe *desaparecer* de verdad, y no solo volverse transparente.
+
+> [!TIP]Sugerencia
+> Para animar un cambio de **tamaño** sin más ceremonia, añade `Modifier.animateContentSize()` al contenedor (`androidx.compose.animation`): cuando su contenido cambia de tamaño, el contenedor crece o decrece con una animación. Es un buen primer paso antes de meterse con transiciones más elaboradas.
+
+### Un ejemplo completo
+
+Combinemos las piezas en un aviso que se despliega al tocarlo. El color y la elevación se animan con `animate*AsState`, y el contenido oculto aparece con `AnimatedVisibility`:
+
+```kotlin
+@Composable
+fun AvisoDesplegable() {
+    var expandido by remember { mutableStateOf(false) }
+    val elevacion by animateDpAsState(if (expandido) 8.dp else 0.dp, label = "elevacion")
+
+    Column {
+        Surface(
+            onClick = { expandido = !expandido },
+            shadowElevation = elevacion,
+            shape = MaterialTheme.shapes.medium
+        ) {
+            Text("Ver más", modifier = Modifier.padding(16.dp))
+        }
+        AnimatedVisibility(visible = expandido) {
+            Text(
+                "Contenido adicional que se despliega con una transición suave.",
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+    }
+}
+```
+
+Fíjate en que el estado (`expandido`) sigue siendo una variable normal con `remember { mutableStateOf(...) }`, gobernada por el patrón que ya conoces. Las animaciones **no** gestionan el estado: solo lo *presentan* de forma gradual. Si mañana mueves `expandido` a un `ViewModel`, las animaciones siguen funcionando sin cambios.
+
+> [!WARNING]Advertencia
+> La animación es un **detalle de presentación**, no un sustituto de un buen estado. Si el estado está mal organizado, una animación solo esconde el problema. Úsala para **reforzar** un cambio que el usuario ya entiende —un color que confirma una selección, un contenido que se despliega—, no para disimular que la interfaz no reacciona.
+
+> [!NOTE]Nota
+> **Accesibilidad y movimiento.** Compose respeta la escala de duración de animaciones del sistema: si el usuario reduce o desactiva las animaciones (por ejemplo, con «Eliminar animaciones» en Accesibilidad), las transiciones se acortan o desaparecen sin que tengas que hacer nada. Aun así, no dependas de una animación para comunicar información esencial: si algo importa, debe entenderse también sin movimiento.
+
 ## Resumen
 
 En este capítulo aprendiste a manejar el estado en Compose:
@@ -223,6 +334,7 @@ En este capítulo aprendiste a manejar el estado en Compose:
 - **`rememberSaveable`** conserva el estado también tras una recreación por cambio de configuración (como girar el dispositivo).
 - Los componentes interactivos (`TextField`, `Checkbox`, `Switch`) reciben el **valor a mostrar** y una **función** que se ejecuta cuando el usuario lo cambia.
 - El ***state hoisting*** consiste en **elevar el estado** al composable padre, dejando al hijo **sin estado**: recibe el valor y una función para los eventos. Esto sigue el **flujo de datos unidireccional** (el estado baja, los eventos suben) y hace tus composables reutilizables.
+- Las **animaciones declarativas** suavizan un cambio de estado sin describir fotogramas: cambias el valor objetivo y Compose interpola. `animateColorAsState`/`animateDpAsState` devuelven un `State<T>` y se leen con `by`; `AnimatedVisibility` muestra u oculta contenido quitándolo de la composición; `Modifier.animateContentSize()` anima cambios de tamaño. La animación refuerza el cambio, nunca lo sustituye.
 
 ## Para cerrar
 
