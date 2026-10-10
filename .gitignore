@@ -296,3 +296,6 @@ __marimo__/
 
 # MkDocs
 /site/
+
+# OpenCode
+.opencode.json
