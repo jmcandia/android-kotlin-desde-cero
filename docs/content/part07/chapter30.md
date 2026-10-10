@@ -1,5 +1,21 @@
 # Capítulo 30: Tu primer composable: `@Composable`, `@Preview` y parámetros
 
+> [!NOTE]Lo que aprenderás en esta parte
+> Al terminar la **Parte VII** podrás:
+>
+> - Escribir composables con parámetros y previsualizarlos con `@Preview`.
+> - Componer pantallas con `Modifier`, `Column`, `Row` y `Box`.
+> - Manejar estado con `remember` y `mutableStateOf`, aplicando *state hoisting*.
+> - Construir pantallas con Material 3, `Scaffold`, `LazyColumn` y formularios.
+> - Navegar entre pantallas con Navigation Compose y barras de navegación.
+
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué tres capas forman la arquitectura MVVM que viste en el capítulo 29 y cuál de ellas representa la interfaz de usuario?
+> 2. En Android, ¿qué papel cumple la `Activity` respecto de la pantalla y qué método suyo llama a `setContent { }`?
+> 3. ¿Cómo separa un proyecto Android el **código** de los **recursos**, y en qué carpeta viven los recursos?
+
 ## Introducción
 
 Ya sabes que `MainActivity` llama a `setContent { }` en `onCreate`, y que la `Activity` es solo el contenedor de la pantalla. En el capítulo 29 conociste MVVM y sus tres capas; en esta parte del curso construirás la primera de ellas: la **Vista**. En este capítulo escribirás lo que va **dentro** de `setContent { }`: tu primer componente de interfaz con Jetpack Compose —un `@Composable`—. Aprenderás a verlo al instante con `@Preview`, sin siquiera ejecutar la app, y a hacerlo reutilizable con **parámetros**.
@@ -104,5 +120,34 @@ En este capítulo diste tus primeros pasos con Jetpack Compose:
 - La anotación **`@Preview`** te permite ver un composable en Android Studio sin ejecutar la app.
 - En `MainActivity`, `setContent { }` recibe el composable que será la interfaz de la pantalla.
 - Los composables pueden recibir **parámetros**, lo que los hace reutilizables.
+
+## Para cerrar
+
+Completa este composable para que muestre `Adiós, Luis` cuando lo llames como `Despedida("Luis")`, y escribe una función `@Preview` que lo previsualice.
+
+```kotlin
+@Composable
+fun Despedida(nombre: String) {
+    // ...
+}
+```
+
+Responde antes de desplegar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    ```kotlin
+    @Composable
+    fun Despedida(nombre: String) {
+        Text("Adiós, $nombre")
+    }
+
+    @Preview
+    @Composable
+    fun DespedidaPreview() {
+        Despedida("Luis")
+    }
+    ```
+
+    El parámetro `nombre` se inserta en el texto con la plantilla `$nombre`, igual que en cualquier función de Kotlin. La función `@Preview` solo llama al composable con un valor de ejemplo para verlo en Android Studio. Error común: olvidar el `$` (mostraría literalmente "Adiós, nombre") o marcar la vista previa sin `@Composable`.
 
 En el próximo capítulo aprenderás a ajustar la apariencia de cada composable con **`Modifier`** y a organizar varios en pantalla con los layouts `Column`, `Row` y `Box`.

@@ -1,5 +1,21 @@
 # Capítulo 51: Presentación y arquitectura de «Mis Contactos»
 
+> [!NOTE]Lo que aprenderás en esta parte
+> Al terminar la **Parte X** podrás:
+>
+> - Explicar la arquitectura por capas de «Mis Contactos».
+> - Construir la capa remota (Retrofit) y la local (Room) detrás de un repositorio *offline-first*.
+> - Implementar las pantallas de lista, detalle y formulario con sus `ViewModel`.
+> - Navegar entre pantallas con rutas tipadas y reutilizar componentes compartidos.
+> - Transferir el patrón completo (MVVM + red + persistencia) a una funcionalidad nueva.
+
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué tres componentes forman el patrón MVVM y qué responsabilidad tiene cada uno?
+> 2. ¿Qué papel cumple un repositorio entre el ViewModel y las fuentes de datos?
+> 3. ¿Qué diferencia hay entre una fuente de datos remota y una local?
+
 ## Introducción
 
 Has llegado a la última parte del curso. A lo largo de los capítulos anteriores fuiste aprendiendo cada pieza por separado: la sintaxis moderna de Kotlin, la asincronía con coroutines y flujos, el diseño de interfaces declarativas con Jetpack Compose, la arquitectura MVVM con `ViewModel` y `StateFlow`, la inyección de dependencias con Hilt, la comunicación de red con Retrofit y la serialización JSON, y la persistencia en base de datos local con Room.
@@ -203,5 +219,16 @@ Esta organización agrupa la interfaz por pantalla (*feature-first* en `ui/lista
 - Consta de tres pantallas: **Lista** (búsqueda, paginación, favoritos), **Detalle** (visualización y borrado seguro) y **Formulario** (creación y edición con validación).
 - Sigue una arquitectura limpia por capas: la interfaz solo observa el `UiState` del `ViewModel`, el `ViewModel` consume el `ContactosRepository`, y el repositorio coordina la API remota y la base de datos local.
 - El modelo de dominio (`Contacto`, `DatosContacto`) está completamente desacoplado de las bibliotecas de red y persistencia.
+
+## Para cerrar
+
+Un compañero quiere añadir una clase nueva `data class Producto(val id: Int, val nombre: String, val precio: Double)` y duda en qué carpeta ponerla. ¿Pertenece a `model/`, a `data/remote/` o a `ui/`? ¿Cambiaría tu respuesta si decidiera anotarla con `@Serializable`?
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Pertenece a `model/`: es un modelo de dominio puro, sin dependencias de bibliotecas externas, igual que `Contacto` o `DatosContacto`.
+
+    Si la anotas con `@Serializable`, deja de ser un modelo de dominio limpio: pasa a depender de `kotlinx.serialization`, así que ese rol correspondería a un DTO en la capa remota (`data/remote/dto`), con su función de mapeo hacia el modelo. Error común: creer que cualquier `data class` debe llevar la anotación de serialización "por si acaso"; en esta arquitectura, el dominio se mantiene ajeno a las bibliotecas de red y persistencia.
 
 En el próximo capítulo configuraremos el proyecto, los permisos necesarios y el punto de entrada de la aplicación.

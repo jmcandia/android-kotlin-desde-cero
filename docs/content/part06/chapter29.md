@@ -1,5 +1,12 @@
 # Capítulo 29: Qué es MVVM y por qué usarlo
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Cuáles son los cinco trabajos de una app y en qué tres zonas se agrupan?
+> 2. En el flujo de datos unidireccional, ¿qué baja hacia la interfaz y qué sube desde ella?
+> 3. ¿Qué es un `StateFlow` y para qué lo usaste en la parte de asincronía?
+
 ## Introducción
 
 En el capítulo anterior viste que cualquier app se organiza en tres zonas —**interfaz**, **estado y lógica** y **datos**— y que esa organización tiene nombre: **MVVM**. Este capítulo profundiza en ese nombre: verás **qué** es MVVM, **por qué** conviene usarlo y, como adelanto, el árbol de carpetas que irás llenando durante el resto del curso. Es un capítulo conceptual, sin código; las piezas concretas (Compose, `ViewModel`, repositorio) las construirás en las partes siguientes.
@@ -99,5 +106,20 @@ En este capítulo profundizaste en la arquitectura que nombró el capítulo ante
 - Sus ventajas: separación de responsabilidades, testabilidad, supervivencia a los cambios de configuración y una única fuente de verdad.
 - MVVM reúne piezas que ya conoces (`StateFlow`, `sealed class`, `viewModelScope`) con otras que verás pronto (*state hoisting*, composables, `ViewModel`).
 - El proyecto se organiza en carpetas que reflejan estas capas (`data/`, `model/`, `ui/`, `di/`); iniciarás a construirlas en la Parte VII y las irás completando hasta la Parte IX. Los nombres exactos pueden variar de un proyecto a otro: lo que no cambia es la separación de responsabilidades que hay detrás.
+
+## Para cerrar
+
+Diagnostica este pseudocódigo: cuando el usuario quiere ver sus tareas, la Vista llama directamente al Modelo para que le devuelva los datos y los pinta. ¿Qué regla de MVVM rompe y cuál sería el recorrido correcto? Anótalo antes de comprobar.
+
+```text
+Vista -> Modelo: dame las tareas
+Modelo -> Vista: aquí están
+Vista: (las dibuja)
+```
+
+??? success "Ver respuesta y razonamiento"
+    Rompe la regla de que **la Vista nunca habla directamente con el Modelo**. El recorrido correcto es: la Vista **envía un evento** al ViewModel, el ViewModel le **pide los datos al Modelo**, actualiza el estado y lo expone; la Vista **observa** ese estado (`StateFlow`) y se redibuja sola.
+
+    Razonamiento: el flujo es unidireccional —estado baja, eventos suben— y las dependencias apuntan hacia los datos. Si la Vista accede al Modelo, se salta la lógica y la única fuente de verdad. Error común: permitir a la Vista leer datos directamente "porque es más corto", lo que rompe la separación de responsabilidades y la testabilidad.
 
 En el próximo capítulo empieza la construcción: crearás tu primer **composable**, la primera pieza de la Vista.

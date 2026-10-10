@@ -1,5 +1,14 @@
 # Capítulo 1: El Entorno de Desarrollo Integrado (IDE)
 
+> [!NOTE]Lo que aprenderás en esta parte
+> Al terminar la **Parte I** podrás:
+>
+> - Instalar y configurar tu entorno de trabajo para escribir programas en Kotlin.
+> - Escribir y ejecutar tus primeros programas y leer sus resultados en la consola.
+> - Declarar variables con `val` y `var` y elegir el tipo de dato adecuado.
+> - Combinar valores con operadores aritméticos, de comparación y lógicos.
+> - Leer datos del usuario y construir mensajes con plantillas de cadena.
+
 ## Introducción
 
 Escribir un solo programa implica toda una serie de tareas: escribes el código, localizas y corriges los errores que inevitablemente surgen, y luego hay que compilar, ejecutar y documentar el código. Y adivina qué: todo esto hay que hacerlo una y otra vez. Con programas pequeños como **Hola Mundo**, puedes realizar estas tareas utilizando un sencillo editor de texto para escribir el código fuente y un conjunto de herramientas para compilar y ejecutar los programas. Algunos editores de texto pueden incluso resaltar la sintaxis, lo que simplifica el proceso de escritura, pero esto puede no ser suficiente para trabajar en algo más grande y complejo.
@@ -151,3 +160,28 @@ En este capítulo preparaste tu entorno para programar en Kotlin:
 - Creaste tu primer proyecto y ejecutaste un "¡Hola, mundo!".
 - Para experimentos rápidos sin instalar nada, tienes el **Kotlin Playground**.
 - **Android Studio** (el IDE oficial de Android) lo instalaremos más adelante, en la Parte VI, cuando empecemos a desarrollar la aplicación.
+
+## Para cerrar
+
+Imagina que creas un archivo `Main.kt` con este contenido y lo ejecutas en IntelliJ IDEA:
+
+```kotlin
+fun main() {
+    println("Primer programa")
+    println("Segundo programa")
+}
+```
+
+¿Cuántas líneas aparecen en la ventana *Run* y en qué orden? Anota tu respuesta antes de continuar.
+
+??? success "Ver respuesta y razonamiento"
+    Aparecen **dos líneas**, en el mismo orden en que están escritas:
+
+    ```plaintext
+    Primer programa
+    Segundo programa
+    ```
+
+    Cada `println` imprime su texto y un salto de línea, y el programa ejecuta las instrucciones de arriba abajo, una tras otra.
+
+    **Error común:** creer que hay que invocar `main` a mano o que su nombre puede variar. En Kotlin el punto de entrada es siempre la función `main`, y el IDE la ejecuta por ti al pulsar el botón de *play*.

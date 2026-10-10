@@ -1,5 +1,20 @@
 # Capítulo 42: `ViewModel` y el estado de la interfaz (`UiState`)
 
+> [!NOTE]Lo que aprenderás en esta parte
+> Al terminar la **Parte VIII** podrás:
+>
+> - Crear un `ViewModel` que expone su estado a la interfaz con `StateFlow`.
+> - Modelar el estado de una pantalla con `UiState`.
+> - Gestionar efectos puntuales (un *snackbar*, una navegación) sin repetirlos.
+> - Separar el acceso a datos en un repositorio e inyectarlo con Hilt.
+
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. Cuando el dispositivo gira y la `Activity` se recrea, ¿qué le pasa al estado que la pantalla guardaba directamente en un composable?
+> 2. ¿Qué diferencia hay entre un `StateFlow` y un `MutableStateFlow`, y para qué sirve `viewModelScope`?
+> 3. ¿Qué significa «elevar» (*hoisting*) el estado en Compose?
+
 ## Introducción
 
 En el capítulo 29 conociste MVVM en teoría, y durante toda la Parte VII construiste su primera capa, la Vista, con Jetpack Compose. Ahora retomas la teoría para ponerla en práctica construyendo la segunda capa: el **`ViewModel`**, la clase que guarda el estado de la pantalla y ejecuta su lógica. Aprenderás a crear uno, a **exponer** su estado de forma segura con `StateFlow`, a **actualizarlo** y a **conectarlo** con la interfaz. Aquí se juntan, por fin, el `StateFlow`, el `UiState` y el `viewModelScope` que fuiste viendo por separado.
@@ -178,5 +193,25 @@ En este capítulo construiste el corazón de MVVM:
 - Si la pantalla necesita datos desde el principio, se cargan en el bloque **`init`**: se ejecuta una sola vez por `ViewModel`, y no se repite al girar la pantalla.
 - La Vista obtiene el `ViewModel` con `viewModel()`, recolecta su estado con **`collectAsStateWithLifecycle()`** y decide qué mostrar con un `when` sobre el `UiState`.
 - La Vista solo muestra el estado y avisa de eventos (invocando funciones del `ViewModel`); toda la lógica queda en el `ViewModel`.
+
+## Para cerrar
+
+Un compañero escribe este `ViewModel` para un contador. Describe qué ocurre al girar la pantalla y qué dos problemas de diseño tiene el estado tal como está expuesto.
+
+```kotlin
+class ContadorViewModel : ViewModel() {
+    val uiState = MutableStateFlow(0)
+
+    fun incrementar() {
+        uiState.value = uiState.value + 1
+    }
+}
+```
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    El valor **sí se conserva** al girar: el `ViewModel` vive más que la `Activity`, así que el contador no vuelve a cero. Pero el estado está mal expuesto por dos motivos. Primero, `uiState` es un `MutableStateFlow` **público**, así que cualquier composable podría modificarlo y romper la encapsulación (lo correcto es un `_uiState` privado y un `uiState` de solo lectura con `asStateFlow()`). Segundo, usa asignación directa (`uiState.value = ...`) en vez de `update { }`, de modo que si dos coroutines incrementan a la vez, una actualización puede perderse.
+    Un error común es creer que basta con que la propiedad no tenga un *setter* explícito; en un `MutableStateFlow` el método `.value` es público y escribible, así que exponerlo ya permite cambiarlo desde fuera.
 
 En el próximo capítulo verás cómo manejar lo que **ocurre una vez** en lugar de dibujarse mientras dura un estado: mostrar un mensaje o navegar después de una acción.

@@ -115,6 +115,14 @@ Su import es `dagger.hilt.android.AndroidEntryPoint`.
 > [!WARNING]Advertencia
 > Si olvidas el `android:name` del manifiesto, la app compila pero se cierra al abrirse, con un error que dice que la `Activity` no está conectada a Hilt. Es el descuido más común al configurar Hilt.
 
+> [!TIP]Punto de decisión
+> Antes de escribir el repositorio, piensa en su contrato: ¿debería exponer las tareas como una `List<Tarea>` o como un `Flow<List<Tarea>>`? ¿Y las operaciones de escritura, deberían ser funciones normales o `suspend`? Justifica ambas decisiones.
+
+??? success "Ver respuesta"
+    `Flow<List<Tarea>>`: así quien lo observe recibe cada cambio solo, sin tener que volver a preguntar.
+    Operaciones `suspend`: guardar en memoria es instantáneo, pero en disco o en red no lo es.
+    Al declararlas `suspend` desde ya, el mismo contrato servirá para cualquier implementación futura.
+
 ## Paso 3: El contrato del repositorio
 
 Crea un paquete `data` dentro del paquete principal: en la vista **Project**, clic derecho sobre `com.ejemplo.milistadetareas` → **New > Package** → escribe `data`. Ahí vivirá la capa de datos.

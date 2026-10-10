@@ -1,5 +1,12 @@
 # Capítulo 32: Gestión de recursos: imágenes, íconos y cadenas de texto
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Cómo separa un proyecto Android el **código** de los **recursos**, y para qué sirve la clase `R`? (capítulo 26)
+> 2. ¿Con qué herramienta ajustas el tamaño, el espaciado o el fondo de un composable? (capítulo 31)
+> 3. ¿Qué anotación te permite ver un composable sin ejecutar la aplicación? (capítulo 30)
+
 ## Introducción
 
 En el capítulo 26 viste que un proyecto Android separa el **código** (`kotlin+java/`) de los **recursos** (`res/`): imágenes, el ícono de la app, textos, entre otros. Hasta ahora no necesitabas mirar esa carpeta de cerca, pero para seguir avanzando —y, en particular, para usar `Image` en el próximo capítulo— conviene entender cómo Android organiza esos recursos y cómo se referencian desde tu código.
@@ -97,5 +104,18 @@ En este capítulo aprendiste a organizar los recursos de tu app:
 - Para íconos y logos simples, preferirás un **Vector Drawable**: escala sin perder calidad y no necesita una copia por densidad de pantalla.
 - El **ícono de la app** vive en `mipmap/`, no en `drawable/`, porque debe estar disponible en todas las densidades; se genera y reemplaza con el asistente **Image Asset** de Android Studio, y hoy en día suele ser un **ícono adaptativo** (una capa de fondo y una de primer plano).
 - Los **textos** deberían declararse en `res/values/strings.xml` y leerse con `stringResource`, para reutilizarlos y facilitar la traducción a otros idiomas.
+
+## Para cerrar
+
+Encuentra el error en este recurso declarado en `strings.xml` y escribe cómo leerlo desde un `Text`.
+
+```xml
+<string name="tituloPantalla">Mis tareas</string>
+```
+
+Responde antes de desplegar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    El nombre `tituloPantalla` usa mayúsculas, pero los recursos solo admiten minúsculas, números y guion bajo (*snake_case*). Lo correcto sería `<string name="titulo_pantalla">`, y se lee con `Text(stringResource(id = R.string.titulo_pantalla))`. Error común: usar *camelCase* en el nombre del recurso; Android Studio lo rechaza porque el nombre no es válido.
 
 En el próximo capítulo retomarás los componentes de Material 3 —`Text`, `Image`, `Button`, `Card`— ahora que ya sabes de dónde salen las imágenes que les vas a pasar.

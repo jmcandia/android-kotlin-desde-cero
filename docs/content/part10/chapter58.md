@@ -1,5 +1,12 @@
 # Capítulo 58: Pantalla de formulario: validación local y del servidor
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Cómo se expone desde el `ViewModel` una señal de "guardado con éxito" para que la Screen reaccione?
+> 2. ¿Por qué conviene validar en el cliente antes de enviar, si el servidor también valida?
+> 3. ¿Cómo se modela en Kotlin un valor que puede estar presente o no?
+
 ## Introducción
 
 La pantalla de formulario cumple dos roles con la misma interfaz: **crear** un contacto nuevo y **editar** uno existente. Es también la pantalla con más responsabilidades de validación: revisa los datos localmente antes de enviarlos (para dar una respuesta inmediata) y, si el servidor rechaza igualmente la petición, traduce esos errores de vuelta a los campos correspondientes.
@@ -440,5 +447,26 @@ private fun mensajeDeCampo(error: ErrorCampo): String = when (error) {
 - `guardar()` valida localmente primero (sin red) y, si el servidor igual rechaza los datos, distingue `Validacion` (por campo), `Conflicto` (correo duplicado, asignado a `EMAIL`) y cualquier otro error (a `errorGeneral`).
 - `FormularioContactoScreen` reutiliza, por tercera vez en esta parte, el patrón "evento como estado": `guardado: Boolean` + `LaunchedEffect` para volver atrás tras guardar con éxito.
 - `CampoTexto` centraliza la configuración del teclado (`KeyboardType`, `KeyboardCapitalization`) y la presentación del error de cada campo.
+
+## Para cerrar
+
+Quieres exigir que el teléfono, **si el usuario lo escribe**, tenga al menos 7 dígitos (es opcional, así que vacío es válido). Siguiendo el patrón de `validarContacto`, completa la condición y la línea que registra el error:
+
+```kotlin
+if ( ??? ) {
+    errores[Campo.TELEFONO] = ???
+}
+```
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    ```kotlin
+    if (form.telefono.isNotBlank() && form.telefono.length < 7) {
+        errores[Campo.TELEFONO] = ErrorCampo.Longitud(7)
+    }
+    ```
+
+    La clave está en la primera condición: como el campo es opcional, solo validamos su longitud cuando **no** está en blanco; un teléfono vacío es válido y no debe generar error. `ErrorCampo.Longitud` ya existe para este tipo de regla, igual que en `NOMBRE` y `APELLIDO`. Error común: validar siempre con `form.telefono.length < 7`, lo que marcaría como inválido el caso perfectamente válido de "sin teléfono".
 
 En el próximo capítulo veremos cómo estas tres pantallas se conectan mediante **rutas de navegación tipadas**, en lugar del patrón de cadenas de texto que usaste en el capítulo 38.

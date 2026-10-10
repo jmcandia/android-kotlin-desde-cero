@@ -1,5 +1,20 @@
 # Capítulo 26: Android Studio y anatomía de un proyecto Android
 
+> [!NOTE]Lo que aprenderás en esta parte
+> Al terminar la **Parte VI** podrás:
+>
+> - Instalar Android Studio y orientarte en la anatomía de un proyecto Android.
+> - Describir el ciclo de vida de una `Activity` y sus implicaciones al girar la pantalla.
+> - Explicar las tres zonas de una app y el flujo de datos unidireccional.
+> - Explicar con tus palabras qué es MVVM y por qué Android lo recomienda.
+
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Con qué herramienta escribiste y ejecutaste tus programas de Kotlin hasta ahora?
+> 2. En Kotlin, ¿qué significa que una clase herede de otra, y para qué sirve la palabra `override`?
+> 3. ¿Qué es un bloque `init` en una clase y cuándo se ejecuta?
+
 ## Introducción
 
 ¡Llegó el gran momento! Con toda la base de Kotlin dominada, en esta parte del curso empezamos a construir aplicaciones Android de verdad. Pero un proyecto Android es bastante más que un archivo `.kt` con una función `main`: tiene una estructura propia, herramientas de construcción y archivos de configuración que conviene entender antes de escribir código.
@@ -180,5 +195,21 @@ En este capítulo diste tus primeros pasos en el desarrollo Android:
 - El **`AndroidManifest.xml`** declara la app, su pantalla de inicio y sus permisos (como el de internet, que necesitaremos).
 - **`MainActivity`** es el punto de entrada: una `Activity` que hereda de `ComponentActivity`, cuyo `setContent { }` contendrá la interfaz.
 - **Gradle** construye la app y gestiona sus dependencias, cuyas versiones se centralizan en el **catálogo de versiones** (`libs.versions.toml`).
+
+## Para cerrar
+
+Tu app compila e instala sin errores, pero su ícono no aparece en el lanzador y no hay forma de abrirla. Mira este fragmento del Manifest y di qué le falta y por qué impide lanzarla. Escríbelo antes de comprobar.
+
+```xml
+<activity
+    android:name=".MainActivity"
+    android:exported="true">
+</activity>
+```
+
+??? success "Ver respuesta y razonamiento"
+    Le falta el bloque `<intent-filter>` con `android.intent.action.MAIN` y `android.intent.category.LAUNCHER`. Ese bloque es precisamente lo que marca a `MainActivity` como la **pantalla de inicio**: sin él, el sistema no sabe qué `Activity` abrir al tocar el ícono. Por eso la app existe y se instala, pero no tiene punto de entrada visible.
+
+    Error común: creer que `android:exported="true"` basta para que la pantalla sea lanzable, o atribuir el problema a Gradle o a las dependencias. La clave está en el `<intent-filter>`, no en la exportación.
 
 En el próximo capítulo empezaremos a llenar ese `setContent { }`: conocerás el ciclo de vida de una `Activity` y escribirás tu primer componente con Jetpack Compose.

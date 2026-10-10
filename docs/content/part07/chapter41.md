@@ -1,5 +1,12 @@
 # Capítulo 41: Diseño adaptable con *Window Size Classes*
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué composable provee la estructura básica de una pantalla, con espacios para sus barras? (capítulo 35)
+> 2. ¿Cómo repartes el espacio disponible entre los elementos de un `Row`? (capítulo 31)
+> 3. ¿Qué barras de navegación de Material 3 conoces y para qué contexto sirve cada una? (capítulo 39)
+
 > [!NOTE]Capítulo opcional
 > Este capítulo es de ampliación. No es necesario para continuar con la Parte VIII ni con el proyecto final; vuelve a él cuando quieras que tu app aproveche tabletas, pantallas plegables o ventanas redimensionables.
 
@@ -164,3 +171,20 @@ El nombre de algunas APIs puede variar según la versión de Compose. El princip
 - Las **Window Size Classes** permiten elegir entre una composición compacta, intermedia o expandida según el espacio real de la ventana, haciendo posible un diseño adaptable para móviles, tabletas y ventanas redimensionadas.
 - `Compact`, `Medium` y `Expanded` son clases de ancho y de alto basadas en `dp`; para el ancho, los puntos de referencia habituales son `600.dp` y `840.dp`. No representan modelos de dispositivo, sino el espacio que la app tiene disponible.
 - La pantalla decide su composición; los composables internos, el estado y la navegación se comparten entre las variantes.
+
+## Para cerrar
+
+Esta pantalla decide su estructura según el ancho de la ventana. Si el usuario gira un móvil y el ancho pasa a `700.dp`, ¿qué composable se muestra y por qué?
+
+```kotlin
+when (windowWidth) {
+    WindowWidthSizeClass.Compact -> ContactosSinglePane()
+    WindowWidthSizeClass.Medium -> ContactosWithRail()
+    WindowWidthSizeClass.Expanded -> ContactosTwoPane()
+}
+```
+
+Responde antes de desplegar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Se muestra `ContactosWithRail()`, porque `700.dp` cae en la clase `Medium` (desde `600.dp` hasta menos de `840.dp`). La clase se calcula por el **espacio disponible en `dp`**, no por el modelo del dispositivo. Error común: asociar cada clase a un aparato concreto ("Compact = teléfono"); un mismo móvil puede pasar de `Compact` a `Medium` al girarse o redimensionarse.

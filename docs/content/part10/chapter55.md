@@ -1,5 +1,12 @@
 # Capítulo 55: El repositorio: estrategia *offline-first*
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué ventaja tiene que los métodos del repositorio devuelvan `Result<T>` en lugar de lanzar excepciones?
+> 2. ¿Por qué un ViewModel debería conocer solo la interfaz del repositorio y no su implementación?
+> 3. ¿Qué operador de `Flow` sirve para transformar cada valor emitido?
+
 ## Introducción
 
 Ya tienes las dos fuentes de datos por separado: la API remota (capítulo 53) y la base de datos local (capítulo 54). Ahora las uniremos en una sola pieza: el **repositorio**. Su trabajo es decidir, ante cada operación, si conviene usar la red, la caché local, o ambas, sin que el resto de la aplicación tenga que preocuparse por esa decisión.
@@ -246,5 +253,16 @@ sequenceDiagram
 - Crear, actualizar y eliminar dependen siempre de la red, y notifican el cambio mediante `_cambios.tryEmit(Unit)`.
 - `alternarFavorito` es una operación puramente local, sin llamadas HTTP.
 - El ayudante genérico `llamarApi` centraliza la traducción de excepciones a `ErrorDatos`, sin atrapar nunca `CancellationException`.
+
+## Para cerrar
+
+Sin conexión, pides la **segunda** página de la lista con `obtenerPagina(pagina = 1, busqueda = null)`. El repositorio tiene guardada en caché la primera página (sin filtro). ¿Qué devuelve: los contactos en caché, una lista vacía o un error? ¿Por qué?
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Devuelve un **error** (`Result.failure` con `ErrorDatos.SinConexion`). El respaldo a la caché solo se aplica cuando `esPrimeraPaginaSinFiltro` es verdadero, es decir, para la página 0 y sin término de búsqueda. La caché local guarda una única copia de la lista completa, así que no puede satisfacer "la página 2" de una paginación del servidor.
+
+    Error común: pensar que cualquier fallo de red cae automáticamente a la caché. La estrategia *offline-first* de esta app es deliberadamente estrecha: solo la primera página sin filtro tiene equivalente local.
 
 Con el repositorio terminado, ya tenemos toda la capa de datos. En el próximo capítulo construiremos la primera pantalla: la lista de contactos, con búsqueda, scroll infinito y favoritos.

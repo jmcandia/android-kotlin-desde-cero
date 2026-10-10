@@ -1,5 +1,12 @@
 # Capítulo 36: Formularios y validación en la interfaz
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Cómo le dices a un `TextField` qué mostrar y dónde guardas lo que escribe el usuario? (capítulo 34)
+> 2. ¿Qué ventaja tiene elevar el estado al contenedor en lugar de guardarlo en cada campo? (capítulo 34)
+> 3. ¿Cómo colocas varios campos uno debajo de otro con espacio entre ellos? (`Column`, `Arrangement.spacedBy`, capítulo 31)
+
 ## Introducción
 
 Ya conoces los componentes con estado —`TextField`, `Checkbox`, `Switch`— y sabes elevar el estado al composable padre. Un **formulario** los combina: pide varios datos al usuario, comprueba que sean válidos y explica cómo corregirlos. En este capítulo verás cómo organizarlo para que siga siendo claro a medida que crece.
@@ -80,5 +87,23 @@ En este capítulo aprendiste a construir formularios:
 - Un formulario combina **componentes**, un **modelo independiente de Compose** y una **validación** que produce errores comprensibles.
 - El estado se eleva al contenedor; el composable del formulario recibe valores, errores y eventos.
 - `isError` y `supportingText` muestran los errores junto a cada campo, pero no reemplazan la validación de la capa que guarda o envía los datos.
+
+## Para cerrar
+
+Completa la condición para que el botón solo se habilite cuando no haya errores **y** el usuario haya aceptado los términos.
+
+```kotlin
+Button(
+    onClick = onEnviar,
+    enabled = errores.isEmpty() && /* ... */
+) {
+    Text("Guardar")
+}
+```
+
+Responde antes de desplegar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Falta `formulario.aceptaTerminos`, es decir `enabled = errores.isEmpty() && formulario.aceptaTerminos`. El modelo `ContactoForm` es la fuente de verdad de lo que el usuario escribió y marcó, así que su estado debe condicionar el envío. Error común: depender solo de `isError` en los campos para habilitar el botón; el estado de los campos vive en el modelo, y el botón debe leerlo de ahí.
 
 En el próximo capítulo aprenderás a moverte entre distintas pantallas de tu app con **Navigation Compose**.

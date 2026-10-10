@@ -1,5 +1,12 @@
 # Capítulo 17: Herencia, interfaces y clases abstractas
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Cómo defines una clase con constructor primario y qué diferencia hay entre declarar una propiedad con `val` y con `var`?
+> 2. ¿Cómo se accede a las propiedades y a los métodos de un objeto con la notación de punto?
+> 3. Si la variable que guarda un objeto es `val`, ¿puede cambiar el estado interno de ese objeto? ¿Por qué?
+
 ## Introducción
 
 En el capítulo anterior aprendiste a crear clases. Pero, en un programa real, las clases rara vez viven aisladas: suelen estar **relacionadas** entre sí. Un `Estudiante` es una `Persona` con algunas cosas más; un `Círculo` y un `Cuadrado` son dos tipos de `Figura`.
@@ -263,5 +270,30 @@ En este capítulo desarrollaste los pilares de la herencia y el polimorfismo:
 - Una **clase abstracta** (`abstract`) no se instancia y puede tener miembros abstractos (que las subclases deben implementar) y concretos.
 - Una **interfaz** define un contrato de capacidades; una clase puede implementar **varias** interfaces, y estas pueden incluir métodos por defecto.
 - Usa una clase abstracta para "es un" con base compartida; una interfaz para "es capaz de".
+
+## Para cerrar
+
+Predice la salida de este programa antes de ejecutarlo:
+
+```kotlin
+abstract class Figura {
+    abstract fun area(): Double
+    fun resumen() = "Área = ${area()}"
+}
+
+class Cuadrado(val lado: Double) : Figura() {
+    override fun area() = lado * lado
+}
+
+val f: Figura = Cuadrado(3.0)
+println(f.resumen())
+```
+
+Intenta responder antes de comprobar.
+
+??? success "Ver respuesta y razonamiento"
+    La salida es `Área = 9.0`.
+
+    Razonamiento: `Figura` es abstracta y no puede instanciarse, pero una variable de tipo `Figura` sí puede **contener** un `Cuadrado`. Al llamar a `resumen()`, este usa `area()`, que se resuelve en la implementación de `Cuadrado` por **polimorfismo**. Un error habitual es pensar que no se puede declarar una variable de tipo abstracto: lo que no se puede es escribir `Figura()`, no usarla como tipo de una variable.
 
 En el próximo capítulo verás las **`data class`**, una forma concisa de crear clases pensadas para guardar datos, que usaremos mucho en la aplicación.

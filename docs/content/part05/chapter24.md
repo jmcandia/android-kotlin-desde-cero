@@ -1,5 +1,12 @@
 # Capítulo 24: `suspend`, `launch`, `async`, scopes y dispatchers
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué es una lambda y en qué se diferencia de una función declarada con `fun`?
+> 2. ¿Qué tipo devuelve una función a la que no le pusiste tipo de retorno explícito?
+> 3. ¿Qué permite una función de orden superior?
+
 ## Introducción
 
 En el capítulo anterior entendiste el problema: no podemos bloquear el hilo principal con tareas lentas, y los enfoques tradicionales para evitarlo eran engorrosos. Ahora conocerás la solución de Kotlin: las **coroutines**.
@@ -147,5 +154,25 @@ En este capítulo empezaste a escribir código asíncrono con coroutines:
 - **`launch`** lanza una coroutine sin esperar su resultado ("dispara y olvida"); **`async`** + **`await`** lanzan una coroutine y obtienen su valor, ideal para ejecutar tareas en paralelo.
 - Toda coroutine vive en un **scope**, que controla su ciclo de vida y cancela sus coroutines cuando ya no se necesitan (concurrencia estructurada). En Android usarás scopes como `viewModelScope`.
 - Un **dispatcher** decide en qué hilo corre la coroutine: `Main` para la interfaz, `IO` para red y disco, `Default` para cálculos. Con `withContext` cambias de hilo para un bloque.
+
+## Para cerrar
+
+El siguiente programa intenta llamar a una función `suspend` desde `main`. ¿Se compila? Si no, ¿por qué y cómo lo arreglarías?
+
+```kotlin
+suspend fun descargar(): String {
+    delay(1000)
+    return "datos"
+}
+
+fun main() {
+    println(descargar())
+}
+```
+
+Responde antes de mirar la solución.
+
+??? success "Ver respuesta y razonamiento"
+    **No se compila.** Una función `suspend` solo puede llamarse desde otra función `suspend` o desde dentro de una coroutine; `main`, tal como está, es una función normal y no puede invocarla. La solución es crear un scope con `runBlocking`: `fun main() = runBlocking { println(descargar()) }`. Error común: creer que basta con marcar `main` como `suspend`; eso no compila tampoco, porque alguien tiene que **iniciar** la primera coroutine, y para eso sirve `runBlocking` (o un scope real en una app).
 
 En el próximo capítulo verás `Flow`, `StateFlow` y `SharedFlow`: la forma de trabajar con **secuencias de valores asíncronos** que van llegando con el tiempo, la base para que la interfaz reaccione automáticamente a los cambios de datos.

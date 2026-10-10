@@ -1,5 +1,12 @@
 # Capítulo 57: Pantalla de detalle: eliminación segura con evento como estado
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Por qué el ViewModel no debería llamar directamente al `NavController` para navegar?
+> 2. ¿Qué hace un `LaunchedEffect(clave)` y cuándo se vuelve a ejecutar?
+> 3. ¿Qué diferencia hay entre `remember` y `rememberSaveable`?
+
 ## Introducción
 
 La pantalla de detalle muestra la información completa de un contacto y permite marcarlo como favorito, editarlo o eliminarlo. Es más simple que la lista en cuanto a datos que maneja, pero introduce un problema nuevo: **eliminar un contacto es una acción destructiva** que necesita confirmación del usuario y, una vez completada, debe **navegar hacia atrás automáticamente**. Resolveremos esto con el patrón "evento como estado" del capítulo 43.
@@ -304,5 +311,16 @@ private fun DatoContacto(icono: ImageVector, valor: String?, modifier: Modifier 
 - `eliminar()` es un ejemplo más del patrón "evento como estado" (capítulo 43): el `ViewModel` no navega; expone `eliminado = true` en el `UiState`, y un `LaunchedEffect(eliminado)` en la Screen decide volver atrás.
 - La eliminación se confirma con un `AlertDialog` antes de llamar a `onEliminar()`, y su estado de visibilidad se guarda con `rememberSaveable` para sobrevivir a la rotación.
 - El ayudante privado `actualizarContenido` evita repetir la comprobación `is Contenido` en cada función del `ViewModel`.
+
+## Para cerrar
+
+Quieres avisar con un snackbar "Contacto actualizado" cuando una acción del detalle termina bien. Tienes dos opciones: llamar a `snackbarHostState.showSnackbar(...)` directamente en el cuerpo del composable, o exponer un booleano en el `UiState`, observarlo con `LaunchedEffect` y limpiarlo después. ¿Cuál eliges y por qué?
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    La segunda: exponer la señal en el `UiState` y consumirla con `LaunchedEffect` (el patrón "evento como estado"). Llamar a `showSnackbar` directamente en el cuerpo lo dispararía en **cada recomposición**, mostrando el mensaje repetidamente, y además mezclaría efectos con el dibujado.
+
+    Al modelarlo como estado (`eliminado`, `errorAccion`), la Screen reacciona una sola vez al cambio y luego limpia la señal con una función como `errorAccionMostrado()`. Error común: disparar efectos directamente en el cuerpo del composable en vez de dentro de un `LaunchedEffect`.
 
 En el próximo capítulo construiremos la pantalla de formulario, la más exigente en validación: campos obligatorios, formato de correo, y errores que pueden venir tanto del cliente como del servidor.

@@ -1,5 +1,12 @@
 # Capítulo 20: `enum` y `sealed class`
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Cómo se usa un `when` y cuándo hace falta la rama `else`?
+> 2. ¿Qué garantiza una `data class` al comparar dos objetos con los mismos datos?
+> 3. ¿Cuándo conviene usar una `data class` en lugar de una clase normal?
+
 ## Introducción
 
 En los capítulos anteriores modelaste cosas con clases. Pero hay situaciones en las que un valor solo puede ser **una de un conjunto fijo de opciones**: los días de la semana, los puntos cardinales, el color de un semáforo, el estado de una descarga.
@@ -164,5 +171,28 @@ En este capítulo aprendiste a modelar conjuntos fijos de opciones:
 - Con `when` y el operador `is`, manejas una `sealed class` de forma exhaustiva y con *smart cast* (accedes a los datos de cada caso sin conversiones).
 - Usa `enum` para opciones con la misma forma y `sealed class` para opciones que cargan datos distintos.
 - Este patrón es la base para modelar los **estados de una interfaz** (cargando, éxito, error).
+
+## Para cerrar
+
+Este `when` sobre un enum intenta devolver la dirección opuesta. Antes de ejecutarlo, encuentra el problema:
+
+```kotlin
+enum class Direccion { NORTE, SUR, ESTE, OESTE }
+
+fun opuesta(d: Direccion) = when (d) {
+    Direccion.NORTE -> Direccion.SUR
+    Direccion.SUR -> Direccion.NORTE
+    Direccion.ESTE -> Direccion.OESTE
+}
+
+println(opuesta(Direccion.ESTE))
+```
+
+Intenta responder antes de comprobar.
+
+??? success "Ver respuesta y razonamiento"
+    El código **no compila**. Falta la rama `Direccion.OESTE` y no hay `else`.
+
+    Razonamiento: cuando un `when` se usa como **expresión** (aquí devuelve un valor), Kotlin exige que sea **exhaustivo**. Como `Direccion` es un `enum` con cuatro valores y solo se cubren tres, el compilador da error. Un error habitual es creer que basta con cubrir los casos que "se usan": en un enum debes cubrir **todos** los valores (o añadir `else`), aunque no los vayas a probar todos.
 
 Con esto casi cierras la parte de POO. En el próximo capítulo verás tres herramientas que hacen tu código más expresivo y reutilizable: los **genéricos**, las **funciones de extensión** y las **lambdas** (que ya usaste con las colecciones y que ahora estudiarás a fondo).

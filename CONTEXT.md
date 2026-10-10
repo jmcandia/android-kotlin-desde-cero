@@ -162,3 +162,86 @@ Registro de trabajo de la reestructuración del curso «Android con Kotlin desde
 - **Barrido mecánico de referencias cruzadas** (`capítulo N`, `cap. N`, rangos, rutas `chapterNN.md`) sobre todo `docs/content` con el mapa antiguo→nuevo. Casos con rango no contiguo (cruzando el antiguo 29–41) resueltos a mano en los tutoriales 1 y 3. Se encontraron y corrigieron referencias desfasadas en `part10/chapter57.md` (cap. 33→34), `chapter58.md` (cap. 37→38), `chapter59.md` (cap. 37→38 y cap. 36→37, en ese orden para evitar sustitución en cascada) y `chapter60.md` (cap. 39→40).
 - **`mkdocs.yml`**: se trasladó la entrada "41. Qué es MVVM..." al final del bloque de la Parte VI como "29.", se renumeraron las entradas 29–40 de la Parte VII a 30–41, y las entradas 42–45 de la Parte VIII quedaron con su número intacto.
 - **Verificación**: `mkdocs build --strict` pasa sin errores; chequeo cruzado archivo↔H1 sobre los 61 capítulos sin discrepancias (números 1–61 completos, sin duplicados ni H1 dobles); greps dirigidos confirmaron el cap. 42 citando el cap. 29 explícitamente, el diagrama/tabla del cap. 61 separando concepto (cap. 29) de implementación (cap. 42–45), el enlace del glosario, y los blurbs de `docs/index.md` para las Partes VI y VIII.
+
+### 2026-10-10 — Sesión 8 · Plan de mejora pedagógica (orientación, recuperación activa y transferencia)
+
+**Fase 0 — Correcciones previas**
+
+- **Discontinuidad 28→30:** se verificó que el **capítulo 29 existe** (`part06/chapter29.md`, «Qué es MVVM y por qué usarlo») y que sus referencias cruzadas son correctas (el 28 cierra apuntando al 29; el 29 apunta al 30). El problema era de **navegación**: en `mkdocs.yml` la entrada «Ejercicios de repaso» de la Parte VI estaba colocada **entre** los capítulos 28 y 29. Se movió **después** del 29, de modo que la Parte VI termina, como las demás, con sus ejercicios. El `nav` de la Parte VI queda: 26, 27, 28, 29, Ejercicios.
+- **Referencias del ejercicio de cierre (Parte X):** corregidas tres referencias desactualizadas en `part10/exercises.md` (pista «El orden de las capas»): repositorio `52`→**55**, `ViewModel`/`UiState` `39`→**42**, pantalla `53`→**56**. El resto del archivo ya apuntaba bien (53 = capa remota, 59 = rutas, 60 = componentes, 15 = `Result`).
+
+**Fase 1 — Orientación y rutas de entrada**
+
+- `docs/index.md` reescrito: «¿Para quién es este curso?» (perfil y requisitos previos, sin exigir experiencia previa), tres rutas diferenciadas (**A** empiezo desde cero, **B** ya programo en otro lenguaje, **C** solo necesito Kotlin/repasar), **autoevaluación inicial** de 6 preguntas sin calificación con guía para elegir ruta, sección «Cómo aprovechar el curso» y nota de que cada parte abre con «Lo que aprenderás» y cierra con «Comprueba tu avance».
+- Añadido el recuadro `> [!NOTE]Lo que aprenderás en esta parte` (3–5 resultados observables) al inicio del primer capítulo de cada una de las 10 partes: caps. 1, 8, 11, 16, 23, 26, 30, 42, 46 y 51.
+- `mkdocs build --strict` pasa tras estos cambios.
+
+**Fase 2 — Recuperación activa y cierre por capítulo**
+
+- En los 61 capítulos se añadió un recuadro `> [!TIP]Antes de empezar, recupera lo que ya sabes` (2–3 preguntas que activan lo aprendido antes) justo tras el H1 y antes de «Introducción»; en el capítulo 1 se omitió (no hay conocimiento previo). En el primer capítulo de cada parte el recuadro va después de «Lo que aprenderás en esta parte».
+- Se añadió una sección `## Para cerrar` (tarea de predicción / detección de error / explicación, con respuesta plegable en `??? success` y su razonamiento) antes del párrafo de transición final de cada capítulo (o al final del capítulo si no hay transición).
+- **Repasos acumulativos** al final de las Partes III, V, VII y IX: el de la III se añadió a `part03/exercises.md`; el de la V a `part05/exercises.md`; y se **crearon** `part07/exercises.md` y `part09/exercises.md` (nuevos, con entrada en el `nav` al cierre de cada parte), cada uno con un reto que combina partes anteriores, pistas graduadas y solución comentada.
+
+**Fase 3 — Ayudas graduadas en ejercicios**
+
+- Se añadió un bloque `??? tip "Pista"` a los ejercicios que no lo tenían en `part01` (2), `part02` (3), `part04` (4) y `part06` (3). Las soluciones ya incluían razonamiento; los repasos acumulativos nuevos incorporan «Por qué funciona» y «Errores comunes».
+
+**Fase 4 — Progresión a Android y transferencia**
+
+- Se añadió un `> [!TIP]Punto de decisión` con respuesta plegable (`??? success`) en cada uno de los 5 tutoriales (`part07` partes 1 y 2, `part08` partes 3 y 4, `part09` parte 5), en un paso donde el estudiante debe anticipar una decisión de diseño (cómo modelar la tarea, dónde vive el estado, por qué `data class` para el `UiState`, repositorio con `Flow` vs `List`, qué cambia al pasar a la base de datos).
+
+**Fase 5 — Hitos por parte y reflexión de cierre**
+
+- Se añadió `## Hito: comprueba tu avance (Parte N)` a las 10 partes (listas de comprobación `- [ ]` con puntero al capítulo). En las Partes I–VI y X va al final de su `exercises.md`; en las Partes VII–IX, en los nuevos `exercises.md`. Se **creó** además `part08/exercises.md` (dos ejercicios de repaso + hito, con entrada en el `nav`) para mantener uniforme la estructura.
+- Se añadió una `## Reflexión final` al final de `part10/exercises.md` (flujo de datos, un caso límite, cómo probar una funcionalidad nueva).
+
+**Verificación:** `mkdocs build --strict` pasa tras todas las fases (solo aparece el aviso informativo de Material for MkDocs 2.0). Comprobados por grep: 5 «Punto de decisión», 10 «Hito: comprueba tu avance» y las pistas por parte (2/3/4/3).
+
+**Nota sobre el `nav`:** las Partes VII, VIII y IX ahora terminan también con «Ejercicios de repaso» (antes no los tenían), de modo que las 10 partes cierran con ese apartado.
+
+### 2026-10-10 — Sesión 8 (continuación) — Revisión y corrección de contenidos
+
+**Encargo:** corregir el repaso acumulativo de la Parte IX, auditar las ayudas graduadas (Partes I–X), revisar las actividades de recuperación/cierre, los repasos y los hitos, revisar los «Puntos de decisión» de los 5 tutoriales, verificar enlaces/referencias y registrar todo aquí. Sin ampliar el curso con actividades nuevas salvo que fuera necesario.
+
+**1. Ejercicio de repaso de la Parte IX (`part09/exercises.md`) reescrito.** El reto de clima estaba desalineado con el patrón *offline-first* que el propio curso enseña. Ahora usa el ayudante genérico `llamarApi` que **relanza `CancellationException`** y traduce `IOException`→`ErrorDatos.SinConexion` y el resto→`ErrorDatos.Desconocido` (cap. 49); el respaldo a Room se dispara **solo** ante `ErrorDatos.SinConexion`; `observar` devuelve `Flow<Clima?>` mapeando entidad→dominio con extensiones (cap. 50); el repositorio se inyecta con `@Inject`/`@Singleton`. Se actualizaron pistas, «Por qué funciona», «Errores comunes» y «Para ir más allá» (referencia al indicador `desdeCache` del cap. 55). El hito de la Parte IX incorpora un ítem sobre `CancellationException`.
+
+**2. Auditoría de ayudas graduadas.** Cobertura inicial desigual: faltaban pistas en `part03` (Ej. 1–3), `part05` (Ej. 1–3) y `part08` (Ej. 1–2). Añadidas en estilo:
+- `part03`: pista en Ej. 1 (`filter`+`map`) y Ej. 2 (distinguir contacto inexistente de sin teléfono); Ej. 3 (el más difícil) con dos niveles (**Pista 1** conceptual + **Pista 2** fragmento parcial con la estructura del bucle).
+- `part05`: pista en Ej. 1 (serie vs `async`/`await` + `measureTimeMillis`), Ej. 2 (`flow { }`+`take`) y Ej. 3 (elección de dispatcher).
+- `part08`: pista en Ej. 1 (clasificación interfaz/`ViewModel`/repositorio) y Ej. 2 (dos olores: estado mutable público y actualización no atómica).
+- `part04`: Ej. 3 (jerarquía de figuras, el código más complejo) reforzado con **Pista 2** (esqueleto parcial de `Figura`/`Rectangulo` con los métodos y el tipo `List<Figura>`).
+- Resultado: cada sección de ejercicio tiene al menos una pista; los repasos acumulativos y los ejercicios combinados más difíciles llevan ayuda de dos niveles. No se eliminó ninguna solución existente.
+
+**3. Revisión de los «Puntos de decisión» (5 tutoriales).** Revisados uno a uno: cada uno plantea una decisión de diseño genuina con respuesta razonada y alineada con el material del momento (data class/`UUID`, *state hoisting*, `data class` vs `sealed` para el `UiState`, contrato del repositorio `Flow`/`suspend`, cambio de implementación con `@Binds` en Hilt). No requirieron cambios.
+
+**4. Revisión de recuperación/cierre/repasos/hitos.** Comprobación estructural: los 61 capítulos tienen su recuadro «Antes de empezar, recupera lo que ya sabes» (salvo el cap. 1) y su sección `## Para cerrar`; 10 hitos de parte; los repasos de Partes III, V, VII, VIII y IX y la reflexión final de la Parte X están presentes y en el `nav`.
+
+**Verificación (Task 5):**
+- `mkdocs build --strict` pasa (solo el aviso informativo de Material for MkDocs 2.0).
+- H1 ↔ archivo: 61/61 `# Capítulo N` coinciden con el número del archivo. Sin H1 dobles ni duplicados.
+- `nav`: los 61 capítulos y los 10 `exercises.md` están referenciados (con las Partes VII, VIII y IX al cierre de su parte).
+- Referencias cruzadas: sin `capítulo`/`cap.` fuera del rango 1–61 ni menciones a «Parte XI+».
+
+**Pendientes:** ninguno abierto del encargo. Sin cambios en `code/` (los tres subproyectos no se tocaron).
+
+### 2026-10-10 — Sesión 8 (cierre) — Pulido técnico del repaso de la Parte IX y validación
+
+**Archivos modificados:** `docs/content/part09/exercises.md` (contenido) y este `CONTEXT.md`. Sin cambios en `code/`.
+
+**Revisión del repaso «el clima *offline-first*» (Parte IX).** Contrastado con `part09/chapter49.md`, `part09/chapter50.md` y la implementación real del proyecto final (`code/contact-list-app/.../data/ContactosRepositoryImpl.kt` y `.../data/remote/Errores.kt`). Cambios y decisiones:
+
+1. **Defecto corregido (inconsistencia de código).** La solución llamaba `dto.aDominio()` sobre un `ClimaDto`, pero solo se definían `ClimaDto.aEntity()` y `ClimaEntity.aDominio()`: `ClimaDto.aDominio()` no existía. Se añadió `fun ClimaDto.aDominio(): Clima` (patrón DTO→dominio del cap. 49) y se reflejó en los requisitos, la Pista 2 y la solución.
+2. **Alineación con el patrón del curso.** `llamarApi` traducía a mano (`catch (IOException)`→`SinConexion`, `catch (Exception)`→`Desconocido`), lo que divergía del cap. 49 y de `ContactosRepositoryImpl`. Ahora **relanza `CancellationException`** y traduce el resto con `aErrorDatos(json)` (cap. 49), inyectando `Json` por constructor (igual que el cap. 49 y la app final). Justificación: reutilizar el patrón documentado en vez de introducir uno propio, y no perder la distinción `IOException`/`HttpException`.
+3. **Confirmaciones pedidas.** `CancellationException` se relanza **antes** del resto de capturas; la caché solo se consulta con `ErrorDatos.SinConexion`; un error HTTP (`HttpException`) se traduce a su caso correspondiente y **no** activa el respaldo ni se presenta como falta de conexión; `observar` expone `Flow<Clima?>` y convierte la entidad de Room al dominio con `aDominio()`.
+4. **Corrección editorial.** Requisito: «que sea una clase de Kotlin normal, probable en aislamiento» → «...normal **que pueda probarse de forma aislada**».
+5. **Errores comunes** ampliados con una advertencia sobre no re-traducir excepciones a mano (usar `aErrorDatos(json)`).
+
+**Referencias y enlaces.** Verificado que los capítulos citados existen y corresponden a su tema: 45 (DI), 46 (HTTP/REST/JSON), 47 (DTO), 48 (Retrofit), 49 (estados de red/`ErrorDatos`), 50 (Room) y 55 (offline-first final). El archivo no contiene enlaces Markdown (usa referencias textuales), así que no había enlaces que comprobar en él. No se reescribió nada más de `docs/` (no se encontraron otros defectos concretos).
+
+**Verificación ejecutada en esta tarea.**
+- `venv\Scripts\mkdocs.exe build --strict` reproducida ahora: termina con `Documentation built` y **código de salida 0**. Solo aparece el banner informativo de Material for MkDocs 2.0 (no es un warning de MkDocs; no aborta la compilación estricta).
+- Comprobación de los títulos H1 de los caps. 45/46/47/48/49/50/55 contra el tema citado: coinciden.
+
+**Validación con lectores.** Revisado el repositorio: **no** hay comentarios, respuestas ni datos de pruebas de lectores (los únicos coincidentes son binarios del `venv`, que no son datos de usuarios). No se inventan resultados. Propuesta pendiente, para ejecutar **fuera del repo** con 3-5 estudiantes de distinta experiencia (sin Kotlin / con otro lenguaje / con Android): pedir que resuelvan, sin abrir la solución, el repaso de la Parte III «la caja del kiosco», el de la Parte V «el buscador de ciudades», el de la Parte IX «el clima *offline-first*» y el «Punto de decisión» del tutorial 4. **Observar:** (a) comprensión de la consigna sin abrir pistas; (b) tiempo de resolución; (c) qué nivel de pista necesitaron y en qué momento; (d) errores recurrentes. **Criterio de ajuste:** si una mayoría necesita la solución completa, reforzar la Pista 1; si casi todos resuelven sin pistas, reducir el andamiaje. No se añaden actividades nuevas como sustituto de esta validación.
+
+**Pendientes:** la validación con lectores (requiere personas y no puede completarse dentro del repositorio). Ninguno más del encargo.

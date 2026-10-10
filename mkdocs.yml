@@ -36,6 +36,8 @@ theme:
     - search.suggest
     - search.highlight
     - content.code.copy
+    - content.code.annotate
+    - content.diagrams.mermaid
 
 extra_css:
   - assets/css/custom.css
@@ -66,6 +68,9 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:pymdownx.emoji.gemoji
       emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.tasklist:
+      custom_checkbox: true
+      clickable_checkbox: true
 
 nav:
   - Inicio: index.md
@@ -108,8 +113,8 @@ nav:
       - "26. Android Studio y anatomía de un proyecto": content/part06/chapter26.md
       - "27. Ciclo de vida de una <code>Activity</code>": content/part06/chapter27.md
       - "28. Cómo se organiza una app: responsabilidades y flujo de datos": content/part06/chapter28.md
-      - "Ejercicios de repaso": content/part06/exercises.md
       - "29. Qué es MVVM y por qué usarlo": content/part06/chapter29.md
+      - "Ejercicios de repaso": content/part06/exercises.md
   - "Parte VII · Jetpack Compose y construcción de interfaces":
       - "30. Tu primer composable: <code>@Composable</code>, <code>@Preview</code> y parámetros": content/part07/chapter30.md
       - "31. <code>Modifier</code> y layouts: <code>Column</code>, <code>Row</code> y <code>Box</code>": content/part07/chapter31.md
@@ -125,6 +130,7 @@ nav:
       - "40. Material 3: tema, color y tipografía": content/part07/chapter40.md
       - "Tutorial: Mi lista de tareas (parte 2)": content/part07/tutorial_my_todo_list_part_2.md
       - "41. Diseño adaptable con <em>Window Size Classes</em> (opcional)": content/part07/chapter41.md
+      - "Ejercicios de repaso": content/part07/exercises.md
   - "Parte VIII · Estado y arquitectura con MVVM":
       - "42. <code>ViewModel</code> y el estado de la interfaz (<code>UiState</code>)": content/part08/chapter42.md
       - "43. Efectos y eventos puntuales: <code>LaunchedEffect</code>, Snackbar y navegación": content/part08/chapter43.md
@@ -132,6 +138,7 @@ nav:
       - "44. Repositorio y separación de capas": content/part08/chapter44.md
       - "45. Inyección de dependencias (manual y con Hilt)": content/part08/chapter45.md
       - "Tutorial: Mi lista de tareas (parte 4)": content/part08/tutorial_my_todo_list_part_4.md
+      - "Ejercicios de repaso": content/part08/exercises.md
   - "Parte IX · Datos: API REST y persistencia local":
       - "46. HTTP, REST y JSON: cómo se comunican las apps con un servidor": content/part09/chapter46.md
       - "47. Serialización JSON y modelos de datos (DTO)": content/part09/chapter47.md
@@ -139,6 +146,7 @@ nav:
       - "49. Estados de red: <em>loading</em>, <em>success</em> y <em>error</em>": content/part09/chapter49.md
       - "50. Persistencia local con Room": content/part09/chapter50.md
       - "Tutorial: Mi lista de tareas (parte 5)": content/part09/tutorial_my_todo_list_part_5.md
+      - "Ejercicios de repaso": content/part09/exercises.md
   - "Parte X · Proyecto final: contactos":
       - "51. Presentación y arquitectura de «Mis Contactos»": content/part10/chapter51.md
       - "52. Configuración del proyecto y permisos": content/part10/chapter52.md

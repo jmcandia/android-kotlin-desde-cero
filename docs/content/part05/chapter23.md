@@ -1,5 +1,20 @@
 # Capítulo 23: ¿Por qué asincronía? El hilo principal
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿En qué orden se ejecutan las instrucciones de un programa: todas a la vez o una tras otra?
+> 2. ¿Qué función se ejecuta primero al arrancar un programa de Kotlin?
+> 3. Cuando llamas a una función, ¿el programa sigue con la línea siguiente o espera a que esa función termine?
+
+> [!NOTE]Lo que aprenderás en esta parte
+> Al terminar la **Parte V** podrás:
+>
+> - Explicar por qué una operación larga en el hilo principal congela una aplicación.
+> - Escribir código asíncrono con `suspend`, `launch`, `async` y *dispatchers*.
+> - Cancelar trabajo y agruparlo en un *scope* sin dejar tareas sueltas.
+> - Observar flujos de datos que cambian en el tiempo con `Flow` y `StateFlow`.
+
 ## Introducción
 
 Con el capítulo anterior completaste el lenguaje Kotlin. A partir de aquí, el curso empieza a mirar hacia **Android**. Pero antes de escribir una sola pantalla, necesitas entender un desafío que enfrenta **toda** aplicación: algunas tareas **toman tiempo**.
@@ -90,5 +105,14 @@ En este capítulo, más conceptual, entendiste por qué necesitamos la asincron�
 - Ejecutar una tarea **lenta** (como una descarga) en el hilo principal lo **bloquea**: la app se congela y puede aparecer el aviso de "no responde" (ANR).
 - La **asincronía** resuelve esto haciendo el trabajo lento **en segundo plano** y actualizando la interfaz al terminar.
 - Los enfoques tradicionales (*callbacks*) eran engorrosos; las **coroutines** de Kotlin son la solución moderna, y son el tema de los próximos capítulos.
+
+## Para cerrar
+
+Un botón lanza una descarga que tarda 3 segundos y, al terminar, muestra «Datos listos» en pantalla. Si esa descarga se ejecuta directamente en el **hilo principal**, ¿qué verá el usuario durante esos 3 segundos y qué ocurre al final? Explica el porqué.
+
+Responde antes de mirar la solución.
+
+??? success "Ver respuesta y razonamiento"
+    Durante los 3 segundos la app se **congela**: el hilo principal está ocupado con la descarga, así que no redibuja la pantalla ni responde a los toques, y si el bloqueo se alarga puede aparecer el aviso ANR. Al terminar, muestra «Datos listos» y vuelve a responder. El razonamiento: el hilo principal es **uno solo** y debe encargarse de dibujar y atender al usuario; cualquier tarea lenta que corra en él lo deja sin hacer su trabajo. Error común: pensar que «solo será un momento» o que la pantalla se actualizará mientras tanto; no, permanece bloqueada hasta que la tarea acaba.
 
 En el próximo capítulo empezarás a escribir código asíncrono de verdad con las coroutines: `suspend`, `launch`, `async` y los conceptos que las rodean.

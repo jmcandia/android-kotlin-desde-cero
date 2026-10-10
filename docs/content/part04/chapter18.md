@@ -1,5 +1,12 @@
 # Capítulo 18: `data class`, `copy` y desestructuración
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Cómo se declara el constructor primario de una clase y qué declara cada parámetro precedido de `val`?
+> 2. ¿Cómo recorres con un `for` los pares clave–valor de un `Map`?
+> 3. ¿Qué diferencia hay entre una propiedad `val` y una `var` a la hora de modificar un objeto?
+
 ## Introducción
 
 En los capítulos anteriores creaste clases con datos y comportamiento. Pero muy a menudo necesitarás clases cuyo **único propósito** es **guardar datos**: un usuario con su nombre y su correo, un punto con sus coordenadas, un producto con su precio. No tienen lógica compleja; solo agrupan información.
@@ -125,5 +132,34 @@ En este capítulo conociste una de las herramientas más prácticas de Kotlin:
 - `copy()` crea un objeto nuevo con algunas propiedades cambiadas, sin modificar el original: ideal para datos inmutables (`val`).
 - La **desestructuración** (`val (a, b) = objeto`) reparte las propiedades en variables, en el orden del constructor.
 - Usa `data class` para clases que principalmente contienen datos.
+
+## Para cerrar
+
+Predice exactamente la salida de este programa:
+
+```kotlin
+data class Punto(val x: Int, val y: Int)
+
+val a = Punto(1, 2)
+val b = a.copy(y = 5)
+val c = Punto(1, 2)
+
+println(a)
+println(a == c)
+println(b == c)
+```
+
+Intenta responder antes de comprobar.
+
+??? success "Ver respuesta y razonamiento"
+    La salida es:
+
+    ```plaintext
+    Punto(x=1, y=2)
+    true
+    false
+    ```
+
+    Razonamiento: en una `data class`, `toString()` muestra las propiedades y `==` compara el **contenido**, no la referencia. `a` y `c` tienen los mismos datos, así que son iguales; `b` cambió su `y` a 5 y ya no coincide con `c`. Un error habitual es creer que `copy()` modifica el objeto original: `a` sigue intacto; `copy()` devuelve uno **nuevo**.
 
 En el próximo capítulo verás `object` y `companion object`, que te permitirán crear objetos únicos (*singletons*) y agrupar funciones y constantes ligadas a una clase.

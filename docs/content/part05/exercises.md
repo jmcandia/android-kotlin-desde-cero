@@ -36,6 +36,9 @@ Tiempo en paralelo: 1504 ms
 ¡En paralelo fue 1.8 veces más rápido!
 ```
 
+??? tip "Pista"
+    En serie, un `forEach` que llame a la función `suspend` una descarga tras otra. En paralelo, lanza cada descarga con `async { }` y guarda los `Deferred`; luego `await()` a todos para esperar al conjunto. Mide cada bloque con `measureTimeMillis { }`.
+
 ### Solución propuesta
 
 ??? example "Ver solución"
@@ -105,6 +108,9 @@ Recibido: 5
 Fin del flujo
 ```
 
+??? tip "Pista"
+    El constructor `flow { }` deja que `emit(i)` emita valores y `delay(1000)` los espacie. Para la versión infinita, usa un `while (true)` dentro del `flow { }` y encadena `take(5)` antes de `collect` para detener la recolección.
+
 ### Solución propuesta
 
 ??? example "Ver solución"
@@ -169,6 +175,9 @@ Cada tarea debe lanzarse con el **dispatcher** que le corresponde según su tipo
 - Lanza cada tarea con `launch(dispatcher) { ... }`.
 - Imprime el nombre del hilo dentro de cada tarea.
 
+??? tip "Pista"
+    Asocia cada tarea a su dispatcher: cálculo de CPU con `Dispatchers.Default`, red o disco con `Dispatchers.IO` y la interfaz con `Dispatchers.Main` (en consola puedes omitirlo y heredar el contexto). Lanza cada tarea con `launch(dispatcher) { ... }` e imprime `Thread.currentThread().name` dentro.
+
 ### Solución propuesta
 
 ??? example "Ver solución"
@@ -197,3 +206,146 @@ Cada tarea debe lanzarse con el **dispatcher** que le corresponde según su tipo
 
     > [!NOTE]Nota
     > `Dispatchers.IO` está pensado para operaciones que **esperan** (red, disco) y puede usar muchos hilos; `Dispatchers.Default` está pensado para trabajo **de CPU** y usa tantos hilos como núcleos. En una app Android real, `Dispatchers.Main` es el hilo de la interfaz: nunca lances ahí trabajo pesado.
+
+---
+
+## Repaso acumulativo (Partes I–V): el buscador de ciudades
+
+Este reto no es de una sola parte: reúne **colecciones** y `String` (Parte III), una **jerarquía sellada** y `data class` (Parte IV) y **corrutinas con `Flow`** (Parte V). Intenta resolverlo sin mirar la solución.
+
+### Enunciado
+
+Escribe un programa de consola que simule el buscador de ciudades de una app de viajes. Al buscar debe mostrar un estado de **carga** mientras "consulta al servidor" y, al terminar, distinguir tres desenlaces: **resultados** (que pueden estar vacíos) y **fallo** (por ejemplo, si la consulta viene vacía).
+
+### Requisitos
+
+- Modela cada ciudad con una `data class Ciudad(nombre, pais)`.
+- Modela el estado con una `sealed interface EstadoBusqueda` y tres casos: `Cargando`, `Resultados(ciudades)` y `Fallo(mensaje)`.
+- Implementa `buscar(consulta: String): Flow<EstadoBusqueda>` con el constructor `flow { }`: emite `Cargando`, espera con `delay` y luego emite el desenlace.
+- Filtra un catálogo en memoria con `filter` y `contains(..., ignoreCase = true)`.
+- Consume el flujo con `collect` dentro de `runBlocking` y trata los tres estados con un `when` **exhaustivo** (sin `else`).
+- Prueba al menos una consulta que coincida, una vacía y una sin resultados.
+
+### Ejemplo de ejecución
+
+```plaintext
+>> Buscar: "mad"
+   Buscando…
+   Madrid, España
+   Madrid, Estados Unidos
+
+>> Buscar: ""
+   Buscando…
+   Error: La búsqueda no puede estar vacía
+
+>> Buscar: "zzz"
+   Buscando…
+   Sin resultados
+```
+
+### Pistas
+
+??? tip "Pista 1 — Qué concepto usar en cada parte"
+    - **Parte III**: `filter` para quedarte con las coincidencias, `isEmpty()` para el caso "sin resultados" y funciones de `String` como `isBlank()` y `contains(..., ignoreCase = true)`.
+    - **Parte IV**: un `sealed interface` con tres implementaciones te obliga a cubrir los tres casos en el `when`; la `data class` te da `toString` y comparación sin escribirlos.
+    - **Parte V**: un `Flow` puede emitir **varios** valores a lo largo del tiempo, así que emites `Cargando` primero y el desenlace después. El constructor `flow { }`, `emit` y `delay` viven en `kotlinx.coroutines.flow`.
+
+??? tip "Pista 2 — Estructura del programa (fragmento parcial)"
+    ```kotlin
+    sealed interface EstadoBusqueda {
+        // Cargando
+        // Resultados(ciudades)
+        // Fallo(mensaje)
+    }
+
+    fun buscar(consulta: String): Flow<EstadoBusqueda> = flow {
+        // 1) emite el estado de carga
+        // 2) simula la espera de red con delay
+        // 3) si la consulta está en blanco, emite Fallo y termina el flujo
+        // 4) si no, filtra el catálogo y emite Resultados
+    }
+
+    fun main() = runBlocking {
+        // para cada consulta de prueba: collect y un when exhaustivo
+    }
+    ```
+
+??? success "Ver solución comentada"
+    ```kotlin
+    import kotlinx.coroutines.*
+    import kotlinx.coroutines.flow.*
+
+    data class Ciudad(val nombre: String, val pais: String)
+
+    sealed interface EstadoBusqueda {
+        data object Cargando : EstadoBusqueda
+        data class Resultados(val ciudades: List<Ciudad>) : EstadoBusqueda
+        data class Fallo(val mensaje: String) : EstadoBusqueda
+    }
+
+    val catalogo = listOf(
+        Ciudad("Madrid", "España"),
+        Ciudad("Medellín", "Colombia"),
+        Ciudad("Morelia", "México"),
+        Ciudad("Madrid", "Estados Unidos")
+    )
+
+    fun buscar(consulta: String): Flow<EstadoBusqueda> = flow {
+        emit(EstadoBusqueda.Cargando)
+        delay(1200)
+        if (consulta.isBlank()) {
+            emit(EstadoBusqueda.Fallo("La búsqueda no puede estar vacía"))
+            return@flow
+        }
+        val encontradas = catalogo.filter {
+            it.nombre.contains(consulta, ignoreCase = true)
+        }
+        emit(EstadoBusqueda.Resultados(encontradas))
+    }
+
+    fun main() = runBlocking {
+        for (consulta in listOf("mad", "", "zzz")) {
+            println(">> Buscar: \"$consulta\"")
+            buscar(consulta).collect { estado ->
+                when (estado) {
+                    EstadoBusqueda.Cargando -> println("   Buscando…")
+                    is EstadoBusqueda.Resultados ->
+                        if (estado.ciudades.isEmpty()) {
+                            println("   Sin resultados")
+                        } else {
+                            estado.ciudades.forEach {
+                                println("   ${it.nombre}, ${it.pais}")
+                            }
+                        }
+                    is EstadoBusqueda.Fallo ->
+                        println("   Error: ${estado.mensaje}")
+                }
+            }
+            println()
+        }
+    }
+    ```
+
+    **Por qué funciona.** El `Flow` expresa el paso del tiempo: emites `Cargando`, esperas con `delay` y después emites el desenlace. Como `EstadoBusqueda` es sellado, el `when` exhaustivo obliga a tratar los tres casos y el compilador avisa si olvidas uno (Parte IV). El filtrado reutiliza colecciones y funciones de `String` (Parte III) y `runBlocking` (Parte V) permite consumir el flujo desde un `main` de consola.
+
+    **Errores comunes.**
+    - Devolver un valor único en lugar de un `Flow`: pierdes el estado `Cargando`, justo lo que una pantalla necesita para mostrar el indicador de progreso.
+    - Olvidar el `return@flow` tras emitir `Fallo`: el flujo continuaría y emitiría también resultados.
+    - Comparar con `==` en vez de `contains(..., ignoreCase = true)`: una búsqueda parcial ("mad") no encontraría "Madrid".
+    - Usar `else` en el `when`: funciona, pero anula la ventaja del tipo sellado; deja que el compilador te exija cubrir cada caso.
+
+    **Para ir más allá.** Sustituye el `delay(1200)` por una lista que simule errores de red (por ejemplo, emite `Fallo` si la consulta es "error") y añade un caso `Vacio` separado de `Resultados`. Pregúntate cuándo conviene un caso propio para "sin resultados" y cuándo basta con una lista vacía.
+
+---
+
+## Hito: comprueba tu avance (Parte V)
+
+Marca cada afirmación que puedas hacer **sin mirar los apuntes**. Si alguna te resulta difícil, repasa el capítulo indicado antes de continuar.
+
+- [ ] Explico por qué una operación lenta en el hilo principal congela la interfaz. *(cap. 23)*
+- [ ] Distingo cuándo usar `launch` y cuándo `async`/`await`. *(cap. 24)*
+- [ ] Elijo el dispatcher adecuado para red, cálculo y trabajo de interfaz. *(cap. 24)*
+- [ ] Describo la diferencia entre un `Flow` frío y un `StateFlow`. *(cap. 25)*
+- [ ] Combino corrutinas con colecciones, tipos sellados y `when` exhaustivo para modelar el estado de una pantalla. *(Partes III–V)*
+
+Si puedes con todo, ya tienes las bases para llevar este mismo modelo de estado a un `ViewModel` en la Parte VI.

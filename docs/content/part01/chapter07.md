@@ -1,5 +1,11 @@
 # Capítulo 7: Trabajar con cadenas
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Con qué símbolo insertas el valor de una variable dentro de una cadena?
+> 2. ¿Qué tipo de dato devuelve la función `readln()`?
+
 ## Introducción
 
 Como ya sabes, Kotlin cuenta con numerosos tipos de datos, como `String`, `Int` y `Double`. En los capítulos anteriores usaste cadenas muchas veces: para mostrar mensajes, leer datos y construir plantillas. En este capítulo nos centraremos en el tipo `String` y aprenderemos a **trabajar** con él más de cerca: medir su longitud, unir cadenas entre sí y repetirlas.
@@ -209,3 +215,22 @@ En este capítulo trabajaste de cerca con el tipo `String`:
 - La **concatenación** con `+` une cadenas (y otros valores) en una cadena nueva; el orden importa, y para varias variables suelen ser más claras las plantillas de cadena.
 - La función `repeat` repite una cadena varias veces.
 - Las **cadenas sin formato** (comillas triples `"""`) permiten texto multilínea y caracteres especiales sin escaparlos, y `.trimIndent()` recorta la sangría común.
+
+## Para cerrar
+
+¿Qué imprime este programa?
+
+```kotlin
+val palabra = "Kotlin"
+println(palabra.length)
+println("ab".repeat(3) + palabra)
+```
+
+Escribe tu respuesta antes de abrir la solución.
+
+??? success "Ver respuesta y razonamiento"
+    Imprime primero `6` y luego `abababKotlin`.
+
+    `.length` es una **propiedad** que devuelve el número de caracteres de `"Kotlin"`. La función `repeat(3)` crea la cadena `"ababab"`, y el operador `+` la concatena con `palabra`.
+
+    **Error común:** escribir `.length()` con paréntesis. No es una función, sino una propiedad; si la invocas como función, el código no compila.

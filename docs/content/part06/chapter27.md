@@ -1,5 +1,12 @@
 # Capítulo 27: Ciclo de vida de una `Activity`
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué es una `Activity` y cuál es la de inicio en un proyecto Android?
+> 2. ¿Qué se hace dentro de `onCreate` y qué papel cumple la llamada a `setContent { }`?
+> 3. En el `AndroidManifest`, ¿cómo se marca cuál es la pantalla que se abre al tocar el ícono?
+
 ## Introducción
 
 En el capítulo anterior conociste `MainActivity` y viste que su método `onCreate` contiene una llamada a `setContent { }`, donde vive la interfaz. Antes de construir esa interfaz, conviene entender el objeto que la contiene.
@@ -54,5 +61,14 @@ En este capítulo conociste el contenedor de las pantallas de Android:
 - Una **`Activity`** es una pantalla que Android **crea y destruye** según el uso; tu código no controla del todo cuándo.
 - El **ciclo de vida** son los estados por los que pasa una `Activity`, con métodos como `onCreate`, `onStart`, `onResume`, `onPause`, `onStop` y `onDestroy` que puedes sobrescribir para reaccionar a cada momento.
 - Un **cambio de configuración** (como girar el dispositivo) **destruye y recrea** la `Activity`, lo que hace perder su estado; por eso más adelante usaremos un `ViewModel`.
+
+## Para cerrar
+
+Imagina una pantalla con un contador que muestra el número de toques. El contador es una variable guardada dentro de la `Activity`. Predice qué ocurre al girar el teléfono: ¿qué callbacks del ciclo de vida se ejecutan, en qué orden, y qué le pasa al valor del contador? Anótalo antes de comprobar.
+
+??? success "Ver respuesta y razonamiento"
+    Girar provoca un **cambio de configuración**: Android llama a `onPause()` → `onStop()` → `onDestroy()` para destruir la `Activity`, y luego crea una nueva con `onCreate()` → `onStart()` → `onResume()`. Como es una instancia nueva, la variable del contador **se reinicia a cero**.
+
+    Razonamiento: el estado vive dentro de la `Activity`, y esta no sobrevive al cambio de configuración. Por eso el contador se pierde. Error común: creer que solo se ejecuta `onResume()` al girar (como si la `Activity` solo pasara a primer plano) o pensar que la instancia se conserva.
 
 Antes de construir la interfaz que va dentro de `setContent { }`, el próximo capítulo te dará un mapa de cómo se organiza una app: qué trabajos hace y por qué no conviene ponerlos todos en la `Activity`.

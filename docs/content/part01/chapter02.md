@@ -1,5 +1,11 @@
 # Capítulo 2: Un primer vistazo a Kotlin
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué es un IDE y qué herramientas reúne en un solo programa?
+> 2. ¿Cómo se llama la función que actúa como punto de entrada de un programa en Kotlin?
+
 ## Introducción
 
 En el capítulo anterior conociste el entorno de desarrollo que utilizarás durante el curso y realizaste la configuración necesaria para comenzar a programar. Ahora es momento de dar el siguiente paso: aprender el lenguaje que utilizarás para desarrollar aplicaciones móviles modernas para Android.
@@ -71,3 +77,14 @@ En este capítulo conociste el lenguaje que usarás durante todo el curso:
 - Nació en 2011 y hoy es el lenguaje preferido para el desarrollo Android (*Kotlin-first*, desde 2019).
 - Es **interoperable con Java**, lo que facilita mucho la transición desde ese lenguaje.
 - Funciona en múltiples plataformas (JVM, Android, JavaScript, nativo y multiplataforma) y admite varios paradigmas de programación.
+
+## Para cerrar
+
+Un compañero afirma: «Kotlin es un lenguaje que solo sirve para hacer apps de Android». Explícalo en pocas líneas: ¿es correcta esa afirmación y por qué? Menciona al menos dos plataformas distintas.
+
+??? success "Ver respuesta y razonamiento"
+    La afirmación es **incorrecta**. Kotlin es un lenguaje de propósito general que puede ejecutarse en varias plataformas: **JVM**, **Android**, **JavaScript**, **nativo** y **multiplataforma** (compartiendo código entre Android e iOS).
+
+    Es cierto que Android es hoy su uso más popular (desde 2019 es *Kotlin-first*), pero eso no lo limita a esa plataforma.
+
+    **Error común:** confundir «el uso más habitual» con «el único uso». Que Android sea el destino más frecuente no convierte a Kotlin en un lenguaje exclusivo de Android.

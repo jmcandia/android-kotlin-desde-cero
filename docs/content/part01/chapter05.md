@@ -1,5 +1,11 @@
 # Capítulo 5: Operadores
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué palabra clave crea una variable de solo lectura y cuál una que puede cambiar?
+> 2. ¿Qué función usarías para convertir el texto `"25"` en un número entero?
+
 ## Introducción
 
 En los capítulos anteriores aprendiste a declarar variables y conociste los distintos tipos de datos que ofrece Kotlin. Pero un programa no se limita a guardar valores: los **combina**, los **calcula** y los **compara**. Para todo eso existen los **operadores**.
@@ -67,7 +73,7 @@ val promedio = puntos.toDouble() / jugadores
 println(promedio) // 3.5
 ```
 
-> [!WARNING]
+> [!WARNING] Advertencia
 > Dividir un número entero por cero (`7 / 0`) detiene el programa con un error. Antes de dividir, asegúrate de que el divisor no pueda ser cero.
 
 ### El operador módulo (`%`)
@@ -280,5 +286,26 @@ En este capítulo conociste las tres grandes familias de operadores de Kotlin:
 - Los de **asignación** (`=`, `+=`, `++`, `--`…) actualizan el valor de una variable de forma breve.
 - Los de **comparación** (`==`, `!=`, `>`, `<`, `>=`, `<=`) comparan valores y producen un `Boolean`.
 - Los **lógicos** (`&&`, `||`, `!`) combinan valores `Boolean` para expresar condiciones más ricas.
+
+## Para cerrar
+
+¿Qué imprime este programa? Fíjate bien en el **tipo** de los operandos.
+
+```kotlin
+val segundos = 125
+val minutos = segundos / 60
+val resto = segundos % 60
+println(minutos)
+println(resto)
+```
+
+Responde antes de desplegar la solución.
+
+??? success "Ver respuesta y razonamiento"
+    Imprime `2` y luego `5`.
+
+    `125 / 60` es una **división entera** (ambos operandos son `Int`), así que descarta la parte decimal y da `2`. El operador `%` devuelve el **resto** de esa división, que es `5`.
+
+    **Error común:** esperar `2.08` en la primera línea. Para obtener decimales, al menos un operando debe ser decimal, por ejemplo `segundos / 60.0`.
 
 Los operadores de comparación y lógicos serán especialmente importantes en el próximo tema, porque son la base de las **estructuras de control** (`if`, `when`), que le permiten a un programa **tomar decisiones**.

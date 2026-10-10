@@ -30,7 +30,7 @@ mvnw.cmd spring-boot:run
 
 La API quedará disponible en `http://localhost:8080`.
 
-> [!WARNING]
+> [!WARNING] Advertencia
 > Al usar H2 en memoria, la base de datos se crea vacía en cada arranque y los datos se pierden al detener la aplicación.
 
 ## Documentación interactiva (Swagger)

@@ -62,6 +62,14 @@ En lugar de escribir los textos de la interfaz directamente en el código, decl�
 
 Vamos a ir usando cada uno de estos textos, con `stringResource`, a medida que construyamos la pantalla en los pasos siguientes.
 
+> [!TIP]Punto de decisión
+> Antes de escribir código, detente a pensar en los datos: ¿cómo modelarías una tarea? Necesitas poder distinguir dos tareas con el mismo texto y saber si una está completada. ¿Qué herramienta de Kotlin usarías y qué campos le pondrías?
+
+??? success "Ver respuesta"
+    Una `data class` con un `id` único, el `texto` y un booleano `completada`.
+    El `id` (generado con `UUID.randomUUID()`) es lo que te permite distinguir dos tareas con el mismo texto.
+    La `data class` además te regala `copy()`, que usarás para actualizar una tarea sin mutar la original.
+
 ## Paso 3: Modelar una tarea
 
 Antes de dibujar nada, pensemos en los **datos**. Una tarea tiene un identificador único, un texto y un estado (si está completada o no). Como ya sabes de la Parte IV, esto es un caso perfecto para una `data class`:

@@ -1,5 +1,12 @@
 # Capítulo 54: La capa local: Room para caché y favoritos
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué anotaciones marcan en Room una tabla y su clave primaria?
+> 2. ¿Qué diferencia hay entre una función DAO `suspend` y una que devuelve `Flow`?
+> 3. ¿Para qué sirve `OnConflictStrategy` en una operación de inserción?
+
 ## Introducción
 
 Una aplicación móvil moderna debe ser resistente a la falta de conectividad. Si el usuario abre «Mis Contactos» en el metro o en un ascensor, no debería encontrarse con una pantalla en blanco o un error inmediato: la aplicación debe mostrar los últimos contactos descargados. Además, hay preferencias que pertenecen exclusivamente al usuario del teléfono y que la API compartida no almacena, como la lista de contactos marcados como **favoritos**.
@@ -234,5 +241,23 @@ object DatabaseModule {
 - `ContactoDao` ofrece `reemplazarTodos` anotado con `@Transaction` para actualizar la caché de forma segura.
 - `FavoritoDao` expone un `Flow<List<Int>>` que notifica reactivamente cualquier cambio en los favoritos.
 - `DatabaseModule` construye `ContactosDatabase` con Hilt como un `@Singleton`.
+
+## Para cerrar
+
+Tienes este DAO:
+
+```kotlin
+@Query("SELECT * FROM favoritos")
+fun observarTodos(): Flow<List<FavoritoEntity>>
+```
+
+Un compañero llama a `observarTodos()` una sola vez al abrir la pantalla y espera ver los favoritos nuevos sin volver a llamar a la función. ¿Funciona? ¿Por qué?
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Sí funciona. Al devolver un `Flow`, Room observa la tabla `favoritos` y **reejecuta la consulta automáticamente** cada vez que una fila cambia, emitiendo la lista nueva a quien esté suscrito. Es el mismo comportamiento de `observarIds()`: no hay que volver a consultar a mano.
+
+    En cambio, una función `suspend fun observarTodos(): List<...>` devolvería una foto fija y habría que llamarla otra vez para ver los cambios. Error común: creer que el `Flow` "actualiza la variable" sin que nadie lo recolecte; la reactividad solo llega a quien hace `collect`.
 
 En el próximo capítulo implementaremos el **repositorio**, coordinando la API remota de Retrofit y la base de datos local de Room bajo una estrategia *offline-first*.

@@ -1,5 +1,12 @@
 # Capítulo 19: `object`, `companion object` y singletons
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Cómo se crea un objeto a partir de una clase en Kotlin y qué palabra clave **no** se usa (a diferencia de Java)?
+> 2. ¿Cómo se accede a una propiedad o a un método de un objeto?
+> 3. ¿Qué es una función miembro y qué acceso tiene a las propiedades del objeto?
+
 ## Introducción
 
 Hasta ahora, a partir de una clase creabas **muchos** objetos: varias personas, varios usuarios. Pero a veces necesitas justo lo contrario: **un único objeto** que exista para todo el programa. Piensa en la configuración de una aplicación, un registro de eventos (*logger*) o un gestor de conexión: tiene sentido que haya **uno solo**, compartido por todos.
@@ -88,5 +95,36 @@ En este capítulo aprendiste a crear objetos únicos:
 - La palabra clave **`object`** crea un singleton directamente: no tiene constructor ni se instancia; accedes a sus miembros por su nombre (`Configuracion.idioma`).
 - El **`companion object`** es un objeto único dentro de una clase, para miembros que pertenecen a la clase y no a sus instancias (constantes, funciones de fábrica). Se accede por el nombre de la clase (`Usuario.EDAD_MINIMA`).
 - El `companion object` es el reemplazo de Kotlin para los miembros `static` de Java.
+
+## Para cerrar
+
+Observa estas dos formas de contar. Predice las dos salidas:
+
+```kotlin
+object Contador {
+    var total = 0
+    fun sumar() { total++ }
+}
+
+class Marcador {
+    var total = 0
+    fun sumar() { total++ }
+}
+
+Contador.sumar()
+Contador.sumar()
+println(Contador.total)
+
+val m = Marcador()
+m.sumar()
+println(m.total)
+```
+
+Intenta responder antes de comprobar.
+
+??? success "Ver respuesta y razonamiento"
+    Las salidas son `2` y `1`.
+
+    Razonamiento: `Contador` es un `object`, es decir, un **singleton**: existe una única instancia, así que las dos llamadas a `Contador.sumar()` acumulan en el mismo `total` (2). `Marcador` es una clase normal: `m` es un objeto nuevo con su propio `total`, y una sola llamada lo deja en 1. Un error habitual es intentar `Contador()` o `Marcador.sumar()`: al `object` no se le ponen paréntesis, y a los miembros de una clase se accede a través de una **instancia**, no del nombre de la clase.
 
 En el próximo capítulo verás dos herramientas muy útiles para modelar datos con un conjunto limitado de opciones: los `enum` y las `sealed class`.

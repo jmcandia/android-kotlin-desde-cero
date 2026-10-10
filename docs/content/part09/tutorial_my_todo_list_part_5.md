@@ -243,6 +243,14 @@ Implementa la misma interfaz que el repositorio en memoria, y cada operación de
 
 A diferencia de `TareasRepositoryEnMemoria`, esta clase no necesita `@Singleton`: no guarda nada. Los datos están en la base de datos, que sí es única.
 
+> [!TIP]Punto de decisión
+> Ya tienes `TareasRepositoryRoom` implementando el mismo contrato que el repositorio en memoria. Para que la app pase a guardar en la base de datos, ¿qué hay que cambiar: las pantallas, el `ViewModel` o la configuración de Hilt? ¿Dónde exactamente?
+
+??? success "Ver respuesta"
+    Solo la línea `@Binds` de `DataModule`, cambiando `TareasRepositoryEnMemoria` por `TareasRepositoryRoom`.
+    El `ViewModel` pide la interfaz `TareasRepository`, así que no sabe —ni necesita saber— qué implementación recibe.
+    Por eso ni las pantallas ni las pruebas cambian.
+
 ## Paso 7: Cambiar una línea
 
 Abre `di/DataModule.kt`. Ahí está la única línea del proyecto que decide qué implementación del repositorio se usa. Cámbiala:

@@ -1,5 +1,20 @@
 # Capítulo 11: Colecciones I: `List`, `Set` y `Map`
 
+> [!NOTE]Lo que aprenderás en esta parte
+> Al terminar la **Parte III** podrás:
+>
+> - Guardar y recorrer grupos de datos con `List`, `Set` y `Map`, eligiendo el adecuado.
+> - Transformar y filtrar colecciones con `map`, `filter` y `forEach`.
+> - Evitar los errores más comunes por valores nulos con el sistema de *null safety*.
+> - Manejar errores con `try`/`catch`/`finally` y con el tipo `Result`.
+
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Cuál es la diferencia entre declarar una variable con `val` y con `var`?
+> 2. ¿Cómo escribirías un `for` que recorra los números del 1 al 5?
+> 3. ¿Qué devuelve la expresión `3 in 1..5`?
+
 ## Introducción
 
 Hasta ahora, cada variable guardaba **un solo valor**: un número, un texto, un booleano. Pero muchas veces necesitas manejar **muchos** valores relacionados: los nombres de tus contactos, los productos de un carrito de compras, las puntuaciones de una partida.
@@ -28,7 +43,7 @@ println(frutas[1]) // pera
 println(frutas[2]) // naranja
 ```
 
-> [!WARNING]
+> [!WARNING] Advertencia
 > Como los índices empiezan en 0, en una lista de 3 elementos las posiciones válidas son 0, 1 y 2. Si pides un índice que no existe (por ejemplo, `frutas[5]`), el programa se detiene con un error.
 
 Para saber cuántos elementos tiene una lista, usa la propiedad `.size`:
@@ -191,5 +206,27 @@ En este capítulo conociste las colecciones básicas de Kotlin:
 - Un **mapa** (`Map`) asocia claves únicas con valores.
 - Cada colección tiene una versión de solo lectura y una mutable. Un `val` con una colección mutable no se puede reasignar, pero su contenido sí puede cambiar.
 - Puedes recorrer cualquier colección con un `for` y comprobar la pertenencia con `in`.
+
+## Para cerrar
+
+Sin ejecutar el código, **predice** qué imprime y explica por qué:
+
+```kotlin
+val lista = mutableListOf("rojo", "verde")
+lista.add("rojo")
+val conjunto = setOf("rojo", "verde", "rojo")
+println(lista.size)
+println(conjunto.size)
+```
+
+Intenta resolverlo por tu cuenta. Consulta la respuesta solo después de haber escrito tu predicción y tu razonamiento.
+
+??? success "Ver respuesta y razonamiento"
+    Imprime `3` y luego `2`.
+
+    - La **lista** admite duplicados: al agregar `"rojo"` por segunda vez, ahora tiene tres elementos (`"rojo"`, `"verde"`, `"rojo"`).
+    - El **conjunto** descarta los duplicados al construirse: solo conserva `"rojo"` y `"verde"`.
+
+    **Error común:** creer que agregar a una lista un elemento que ya existe "no hace nada". Eso es cierto en un `Set`, pero no en una `List`. Si quieres evitar duplicados, elige la colección por su comportamiento (conjunto), no confíes en la lista.
 
 En el próximo capítulo daremos un gran salto: aprenderás a **transformar y filtrar** colecciones con operaciones como `map` y `filter`, que hacen el código mucho más expresivo.

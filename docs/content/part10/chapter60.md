@@ -1,5 +1,12 @@
 # Capítulo 60: Componentes compartidos y tema visual
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Por qué conviene extraer a un archivo compartido un composable que usan varias pantallas?
+> 2. ¿Cómo accede cualquier composable a los colores y la tipografía del tema Material 3?
+> 3. ¿Para qué sirve el parámetro `modifier: Modifier = Modifier` que exponen los composables?
+
 ## Introducción
 
 A lo largo de los capítulos 56 a 58 usamos varios composables sin detenernos en ellos: `AvatarContacto`, `EstadoCargando`, `EstadoError`, `EstadoVacio`, `mensajeDe`. Son piezas **reutilizadas por las tres pantallas** de la aplicación, y vivir en `ui/componentes/` en vez de duplicarse en cada pantalla es lo que evita, por ejemplo, que la lista y el detalle dibujen el avatar de forma ligeramente distinta.
@@ -186,5 +193,22 @@ Este es el mismo patrón de tema Material 3 que estudiaste en el capítulo 40: u
 - `EstadoError` acepta un `onReintentar` **opcional**, dejando que cada pantalla decida si ofrece o no un botón de reintento.
 - `mensajeDe(error: ErrorDatos)` centraliza, con un `when` exhaustivo, la traducción de cada variante de error a un texto localizado.
 - El tema (`Theme.kt`/`Color.kt`) sigue el patrón Material 3 del capítulo 40: paleta propia por defecto, con soporte opcional para color dinámico desde Android 12.
+
+## Para cerrar
+
+Para reutilizar el estado de error en la pantalla de detalle (donde no quieres botón) y en la de lista (donde sí), un compañero define el componente sin opcionalidad:
+
+```kotlin
+fun EstadoError(error: ErrorDatos, onReintentar: () -> Unit) { ... }
+```
+
+¿Qué problema tendrá al usarlo en el detalle? ¿Cómo lo arreglarías?
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Al no ser opcional, el detalle estaría **obligado** a pasar una lambda (aunque fuera vacía) y el botón de reintentar se dibujaría siempre, incluso cuando no tiene sentido.
+
+    La firma de `Estados.kt` usa `onReintentar: (() -> Unit)?` y dibuja el botón solo si no es `null` (`if (onReintentar != null)`), de modo que cada pantalla decide si ofrece reintento. Error común: usar "booleanos bandera" o lambdas vacías en lugar de un parámetro anulable para modelar una capacidad opcional.
 
 Con esto completamos el recorrido por la interfaz de «Mis Contactos». En el capítulo final cerraremos el proyecto con una revisión general, algunas pruebas manuales sugeridas y los próximos pasos sugeridos para seguir aprendiendo.

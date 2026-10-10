@@ -1,5 +1,12 @@
 # Capítulo 47: Serialización JSON y modelos de datos (DTO)
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué genera automáticamente una `data class` que una clase normal no tiene?
+> 2. ¿Qué significa que un tipo sea anulable (`String?`) y qué operadores usas para trabajar con un valor que puede ser `null` sin riesgo de fallar?
+> 3. ¿Qué es una función de extensión y por qué es útil para agregar comportamiento a una clase que no controlas?
+
 ## Introducción
 
 En el capítulo anterior exploraste la API de contactos y viste que todas sus respuestas son **texto JSON**. Pero tu app no trabaja con texto: trabaja con objetos de Kotlin. Antes de conectarte a la red, necesitas resolver cómo se convierte uno en otro. Ese proceso se llama **serialización**.
@@ -334,5 +341,37 @@ Cada capa recibe los datos en la forma que le conviene, y los detalles de la API
 - Si una clave **puede faltar**, la propiedad necesita un **valor por defecto** (`String? = null`), no solo el `?`. Al serializar, las propiedades con su valor por defecto no se escriben.
 - **`@SerialName`** conecta una propiedad con una clave de otro nombre (`_embedded`). Los objetos anidados se modelan con clases anidadas, y los arreglos con `List`.
 - Un **DTO** refleja el JSON de la API; el **modelo de dominio** es lo que usa la app. Se traducen con funciones de extensión como `aDominio()`, para que los cambios de la API no afecten a toda la app.
+
+## Para cerrar
+
+Otra API devuelve esta respuesta. Escribe las clases `@Serializable` que la representen, usando los nombres `etiquetas` y `nombre`:
+
+```json
+{
+  "items": [
+    { "tag_name": "kotlin", "usos": 12 }
+  ]
+}
+```
+
+¿Alguna propiedad necesita un valor por defecto? ¿Por qué?
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    ```kotlin
+    @Serializable
+    data class EtiquetasDto(
+        @SerialName("items") val etiquetas: List<EtiquetaDto> = emptyList()
+    )
+
+    @Serializable
+    data class EtiquetaDto(
+        @SerialName("tag_name") val nombre: String,
+        val usos: Int
+    )
+    ```
+    `@SerialName` conecta cada propiedad con una clave de **otro nombre**: en el JSON la lista se llama `items` y la clave es `tag_name`, nombres que en Kotlin no usarías. `etiquetas` lleva `= emptyList()` porque una respuesta sin resultados podría no traer la clave `items`; si una clave **puede faltar**, la propiedad necesita un valor por defecto. `nombre` y `usos` siempre vienen, así que no lo llevan.
+    El error típico es nombrar la propiedad igual que la clave del JSON (`tag_name`) o dar un valor por defecto a todo «por si acaso»: ponerlo en una clave que **siempre** viene oculta los errores si algún día falta.
 
 En el próximo capítulo conectarás todo esto a la red con **Retrofit**: pedirás la lista de contactos a la API en ejecución y la verás llegar convertida en objetos.

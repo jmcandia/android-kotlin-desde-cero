@@ -1,5 +1,12 @@
 # Capítulo 53: La capa remota: DTOs, Retrofit y módulo de red
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Por qué conviene usar DTOs en lugar de serializar directamente el modelo de dominio?
+> 2. ¿Qué anotación de Retrofit marca el cuerpo de una petición y cuál un parámetro de la URL?
+> 3. ¿Para qué sirve `@InstallIn(SingletonComponent::class)` en un módulo de Hilt?
+
 ## Introducción
 
 La aplicación «Mis Contactos» se comunica con la API REST a través de la capa remota. Esta capa se encarga de convertir las respuestas JSON del servidor en objetos de transferencia de datos (DTOs), ofrecer una interfaz tipada mediante **Retrofit** y traducir cualquier fallo de red en un `ErrorDatos` que el resto de la aplicación pueda entender sin depender de bibliotecas externas.
@@ -271,5 +278,24 @@ Cada método `@Provides` tiene ámbito `@Singleton`, garantizando que en toda la
 - Las funciones de extensión en `Mappers.kt` aíslan los DTOs de red del modelo de dominio `Contacto`.
 - `aErrorDatos` convierte excepciones de red y códigos HTTP en variantes de la clase sellada `ErrorDatos`.
 - `NetworkModule` provee las dependencias de red (`Json`, `OkHttpClient`, `Retrofit`, `ContactApi`) mediante `@Provides` y `@Singleton`.
+
+## Para cerrar
+
+Quieres añadir a `ContactApi` una función que busque contactos solo por ciudad, reutilizando el endpoint existente `GET api/contact` con un parámetro de consulta `city`. Completa la firma `suspend`:
+
+```kotlin
+@GET("api/contact")
+suspend fun obtenerPorCiudad( ??? ): ContactPageDto
+```
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    ```kotlin
+    @GET("api/contact")
+    suspend fun obtenerPorCiudad(@Query("city") ciudad: String): ContactPageDto
+    ```
+
+    Un parámetro que forma parte de la cadena de consulta (`?city=...`) se declara con `@Query`, igual que `search`, `page` o `sort` en `obtenerContactos`. `@Path` se reserva para los segmentos de la ruta, como el `{id}` de `obtenerContacto`. Error común: usar `@Path` para lo que en realidad es un `@Query` (o al revés), lo que produce una URL con el formato equivocado.
 
 En el próximo capítulo construiremos la capa local con **Room** para almacenar contactos en caché y guardar la lista de favoritos.

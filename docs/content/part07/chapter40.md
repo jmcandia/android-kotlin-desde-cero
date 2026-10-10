@@ -1,5 +1,12 @@
 # Capítulo 40: Material 3: tema, color y tipografía
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué componentes de Material 3 usaste para mostrar texto, imágenes, botones y tarjetas? (capítulo 33)
+> 2. ¿Cómo ajustas el tamaño, el espaciado y el fondo de un componente? (capítulo 31)
+> 3. ¿Dónde se declaran los textos visibles para el usuario y cómo se leen con `stringResource`? (capítulo 32)
+
 ## Introducción
 
 Ya sabes construir pantallas completas con componentes de Material 3, organizarlos con layouts, darles estado y navegar entre ellas. Pero tu interfaz todavía usa el estilo por defecto que trae el proyecto: es hora de hacerla **tuya**. En este capítulo verás cómo funciona el **tema** de Material 3 por dentro, cómo definir un esquema de **colores** y cómo aplicar una **tipografía** consistente. Con esto cierras la parte de interfaz con Jetpack Compose.
@@ -63,6 +70,20 @@ En este capítulo le diste estilo final a la interfaz con Material 3:
 
 - El **tema** (`MaterialTheme`, envuelto en el `NombreAppTheme` de tu proyecto) le da a toda la app un **esquema de colores**, una **tipografía** y unas **formas** coherentes.
 - Accedes a los colores por su **rol** (`MaterialTheme.colorScheme.primary`) y a los estilos de texto por su nombre (`MaterialTheme.typography.titleLarge`), lo que hace que la app se adapte sola a modo claro u oscuro y mantenga la jerarquía visual.
+
+## Para cerrar
+
+Quieres que un texto use el color de marca de tu app y que un título use un estilo destacado. Completa los huecos con el **rol** de color y el **estilo** de tipografía.
+
+```kotlin
+Text("Hola", color = MaterialTheme.colorScheme.______)
+Text("Título", style = MaterialTheme.typography.______)
+```
+
+Responde antes de desplegar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    El color de marca es `MaterialTheme.colorScheme.primary` y el estilo puede ser cualquiera de los predefinidos, por ejemplo `MaterialTheme.typography.titleLarge` o `headlineMedium`. Se usan **roles** (no colores fijos como `Color.Red`) porque el tema cambia sus valores según el modo claro u oscuro y el color de marca. Error común: fijar colores o tamaños concretos en cada `Text`, lo que rompe la coherencia y complica el modo oscuro.
 
 Con esto cierras la parte de **interfaz con Jetpack Compose**. En la próxima parte del curso darás un paso clave hacia las apps profesionales: la **arquitectura MVVM**, que organiza tu código separando la interfaz, la lógica y los datos.
 

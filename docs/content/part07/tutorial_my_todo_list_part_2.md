@@ -167,6 +167,14 @@ El parámetro `isSystemInDarkTheme()` hace que la app siga la preferencia del di
 > [!WARNING]Advertencia
 > No pongas `Color(0xFF...)` directamente en cada `Text`, `Card` o `Button`. Si usas los roles de `MaterialTheme`, el modo oscuro y los cambios futuros de diseño serán mucho más sencillos.
 
+> [!TIP]Punto de decisión
+> Ahora habrá dos pantallas que consultan y modifican la misma lista. ¿Dónde debería vivir el estado `tareas`: una copia dentro de cada pantalla, o en un composable contenedor por encima de las dos? ¿Qué problema evitas con tu elección?
+
+??? success "Ver respuesta"
+    En un composable contenedor por encima de las pantallas —aquí, `App`—, que les pasa los datos y las acciones.
+    Es el *state hoisting* de siempre: una sola fuente de verdad para toda la app.
+    Si cada pantalla guardara su propia copia, la lista y el detalle podrían quedar desincronizados.
+
 ## Paso 6: Elevar el estado al nivel de la app
 
 En la primera parte, `ListaTareasScreen` guardaba `tareas` y `textoNuevaTarea`. Ahora habrá dos pantallas que necesitan consultar o modificar la misma lista. Si cada pantalla tuviera su propia copia, la lista y el detalle podrían quedar desincronizados.

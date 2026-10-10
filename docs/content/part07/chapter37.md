@@ -1,5 +1,12 @@
 # Capítulo 37: Navegación con Navigation Compose (fundamentos)
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué patrón hace que un composable reciba los datos a mostrar y una función para avisar de los cambios? (capítulo 34)
+> 2. ¿Cómo le pasas un valor a un composable, como en `Saludo("Ana")`? (capítulo 30)
+> 3. ¿Qué estado conserva Compose entre recomposiciones y con qué funciones lo declaras? (capítulo 34)
+
 ## Introducción
 
 Hasta ahora, tu app ha vivido en una sola pantalla. Pero las aplicaciones reales tienen **varias**: una lista y su detalle, una pantalla de ajustes, un formulario… y el usuario se mueve entre ellas. En este capítulo aprenderás a hacer esa **navegación** entre pantallas con **Navigation Compose**, la biblioteca oficial para ello.
@@ -303,5 +310,24 @@ En este capítulo aprendiste los fundamentos de Navigation Compose:
 - El **`NavHost`** es donde se muestran los destinos: declara qué composable se dibuja para cada ruta.
 - `composable("ruta")` **declara** un destino; `navigate("ruta")` **navega** hacia él.
 - El ***back stack*** registra las pantallas visitadas y permite que el botón de retroceso funcione automáticamente.
+
+## Para cerrar
+
+Con esta navegación, ¿qué pantalla ve el usuario al abrir la app? ¿Y si luego llama a `navController.navigate("inicio")`, qué se muestra?
+
+```kotlin
+NavHost(
+    navController = navController,
+    startDestination = "favoritos"
+) {
+    composable("inicio") { PantallaInicio() }
+    composable("favoritos") { PantallaFavoritos() }
+}
+```
+
+Responde antes de desplegar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Al abrir, se muestra `PantallaFavoritos`, porque `startDestination = "favoritos"` es el destino inicial; al navegar a `"inicio"`, se muestra `PantallaInicio`. Importante: se muestra la ruta indicada en `startDestination`, **no** la primera declarada en el `NavHost`. Error común: asumir que el primer `composable(...)` es el inicio.
 
 En el **próximo capítulo** verás cómo modelar rutas y destinos de forma más robusta, cómo pasar datos entre pantallas con argumentos en las rutas, y buenas prácticas para mantener tus pantallas desacopladas de la navegación.

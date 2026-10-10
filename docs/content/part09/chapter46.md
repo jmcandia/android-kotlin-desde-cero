@@ -1,5 +1,20 @@
 # Capítulo 46: HTTP, REST y JSON: cómo se comunican las apps con un servidor
 
+> [!NOTE]Lo que aprenderás en esta parte
+> Al terminar la **Parte IX** podrás:
+>
+> - Explicar cómo se comunican las apps con un servidor mediante HTTP, REST y JSON.
+> - Describir DTOs y consumir una API REST con Retrofit.
+> - Representar los estados de red (*loading*, *success*, *error*) y sus errores.
+> - Persistir datos localmente con Room y exponerlos como `Flow`.
+
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué indica la palabra clave `suspend` en una función, y por qué una operación que puede tardar no debe ejecutarse en el hilo principal?
+> 2. ¿Cómo representaste en el capítulo 15 una operación que podía salir bien o fallar, y qué función usaste para obtenerla?
+> 3. ¿Qué es una `data class` y qué métodos genera automáticamente?
+
 ## Introducción
 
 Las aplicaciones rara vez trabajan aisladas. La mayoría obtienen sus datos de un **servidor** a través de internet: la lista de publicaciones de una red social, el clima de tu ciudad, el catálogo de una tienda. Antes de aprender a hacer eso con Retrofit, necesitas entender **cómo** se comunican una app y un servidor.
@@ -242,5 +257,16 @@ En este capítulo, más conceptual, entendiste cómo se comunican las apps con u
 - **REST** es el estilo más común de API: expone **recursos** con su **URL** (*endpoint*), sobre los que operas según el método HTTP. Los **parámetros de consulta** (`?search=ana&page=0`) filtran y paginan.
 - **JSON** es el formato habitual de los datos: **objetos** (`{ }`, clave-valor) y **arreglos** (`[ ]`, listas), que se parecen mucho a las `data class` y `List` de Kotlin.
 - La **API de contactos** del curso se ejecuta con `./mvnw spring-boot:run` y se explora en **Swagger UI** (`/swagger-ui.html`). Entrega los contactos por páginas en formato HAL, y sus errores tienen siempre la misma forma, con una lista `errors` en los `400`.
+
+## Para cerrar
+
+Un compañero quiere crear un contacto nuevo y escribe una petición `GET /api/contact` con los datos del contacto en el cuerpo. ¿Qué método HTTP debería usar y por qué? ¿Qué código de estado esperaría recibir si todo sale bien?
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Debe usar **`POST /api/contact`**, porque el método dice **qué** se hace, y crear un recurso nuevo es `POST`; el `GET` solo **obtiene** datos. Si todo sale bien, la respuesta sería un **`201 Created`** con el contacto ya creado (incluido su `id`).
+
+    El error típico es creer que el método es un detalle secundario y que basta con cambiar la URL, o intentar enviar el cuerpo con `GET`. La idea clave de REST es que la **URL dice sobre qué** actúas y el **método dice qué haces**: esos mismos datos con `GET` no crean nada.
 
 En el próximo capítulo verás cómo convertir ese JSON en objetos de Kotlin con **`kotlinx.serialization`**, todavía sin conectarte a la red.

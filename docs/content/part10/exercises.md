@@ -43,10 +43,43 @@ Antes de dar por terminado el ejercicio, verifica:
     Empieza por la API: abre `ContactController.java`, mira cómo está implementado el listado paginado existente y agrega el filtro por ciudad como parámetro opcional del mismo endpoint. No necesitas un endpoint nuevo si el listado ya lo puedes filtrar; decide tú cuál opción queda más limpia y justifícala.
 
 ??? tip "Pista 2 — El orden de las capas"
-    Sigue el orden del proyecto: primero el DTO y la interfaz de Retrofit (capítulo 53), después el repositorio (52), después el `ViewModel` con su `UiState` (39), y al final la pantalla (53). Si intentas empezar por la pantalla, no tendrás nada que mostrar.
+    Sigue el orden del proyecto: primero el DTO y la interfaz de Retrofit (capítulo 53), después el repositorio (capítulo 55), después el `ViewModel` con su `UiState` (capítulo 42), y al final la pantalla (capítulo 56). Si intentas empezar por la pantalla, no tendrás nada que mostrar.
 
 ??? tip "Pista 3 — El debounce"
     En el capítulo 56 el buscador por nombre ya implementa *debounce* con un `Flow` y `debounce()`. La búsqueda por ciudad puede reutilizar exactamente el mismo mecanismo, cambiando la función que consulta el repositorio.
 
 > [!NOTE]Nota
-> Si terminaste los cuatro puntos sin necesidad de leer las pistas, has logrado el objetivo del curso: transferir de forma autónoma un patrón arquitectónico completo a un caso nuevo. Ese salto —de seguir una guía a trabajar sin ella— es exactamente lo que distinguirá tu próximo proyecto personal.
+    > Si terminaste los cuatro puntos sin necesidad de leer las pistas, has logrado el objetivo del curso: transferir de forma autónoma un patrón arquitectónico completo a un caso nuevo. Ese salto —de seguir una guía a trabajar sin ella— es exactamente lo que distinguirá tu próximo proyecto personal.
+
+---
+
+## Hito: comprueba tu avance (Parte X)
+
+Última lista de comprobación del curso. Marca cada afirmación que puedas hacer **sin mirar los apuntes**; si alguna te resulta difícil, repasa el capítulo indicado.
+
+- [ ] Explico la arquitectura por capas de «Mis Contactos». *(cap. 51)*
+- [ ] Configuro el proyecto y sus permisos (INTERNET, red en claro y acceso a red local). *(cap. 52)*
+- [ ] Implemento la capa remota con Retrofit y DTOs. *(cap. 53)*
+- [ ] Implemento la caché local con Room. *(cap. 54)*
+- [ ] Combino red y caché en un repositorio *offline-first*. *(cap. 55)*
+- [ ] Construyo lista, detalle y formulario a partir de un `UiState`. *(caps. 56–58)*
+- [ ] Navego con rutas tipadas y reutilizo componentes y tema. *(caps. 59–60)*
+
+Este es el hito final del curso. Si puedes marcar todo, has recorrido el camino completo: de «Hola, mundo» a una app Android con arquitectura por capas, capaz de leer datos de internet, guardarlos y mostrarlos sin bloquear la interfaz.
+
+---
+
+## Reflexión final: cómo seguir pensando como desarrollador
+
+Antes de cerrar, tómate unos minutos con tres preguntas. No hay una única respuesta correcta; lo importante es que las respondas con lo que has construido.
+
+**1. El flujo de datos de una app.**
+En «Mis Contactos», sigue el recorrido de un toque en «favorito»: el evento sube desde la interfaz hasta el `ViewModel`; este pide al repositorio; el repositorio decide entre red y caché; Room (o la API) cambia; un `Flow` emite el nuevo valor y la interfaz se vuelve a dibujar. Escribe ese mismo recorrido, con tus palabras, para una acción distinta (por ejemplo, eliminar un contacto). Si puedes narrarlo sin mirar el código, has entendido la arquitectura, no solo los archivos.
+
+**2. Un caso límite.**
+¿Qué debería pasar si el usuario pulsa «recargar» sin conexión y la caché está vacía? ¿Y si pulsa dos veces seguidas? ¿Y si la respuesta del servidor llegara *después* de que la pantalla se cerrara? Elige un caso, decide el comportamiento que quieres y describe cómo lo probarías. Los casos límite son donde una app se vuelve fiable.
+
+**3. Cómo probarías algo nuevo.**
+Imagina que mañana añades una pantalla «Ajustes». Anota: ¿necesita `ViewModel`? ¿necesita repositorio? ¿qué mostraría su `UiState`? Decidirlo *antes* de escribir código es una de las habilidades más valiosas que te llevas del curso.
+
+Cuando puedas responder a estas tres preguntas sobre un proyecto que aún no existe, ya no sigues un curso: estás diseñando software.

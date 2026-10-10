@@ -33,6 +33,9 @@ Introduce tu nota (0-100): 75
 Tu nota es 75 → Notable
 ```
 
+??? tip "Pista"
+    Piensa en `when` como una **expresión** que devuelve el texto de la rama que corresponde, en lugar de una cadena de `if`/`else`. Cada rama puede comprobar si el valor cae dentro de un rango con `in`. Como solo cubrirás los casos válidos, necesitarás una rama `else` para los valores fuera de 0–100.
+
 ### Solución propuesta
 
 ??? example "Ver solución"
@@ -92,6 +95,9 @@ Tabla de multiplicar del 7:
 7 × 9  = 63
 7 × 10 = 70
 ```
+
+??? tip "Pista"
+    Un único bucle `for` sobre el rango del 1 al 10 genera las diez multiplicaciones; usa el contador como segundo factor. Recuerda que para interpolar una operación dentro de la plantilla de cadena necesitas llaves (`${...}`), no solo `$`.
 
 ### Solución propuesta
 
@@ -154,6 +160,9 @@ Máximo:             30
 Mínimo:             5
 ```
 
+??? tip "Pista"
+    Usa un `while` que lea números hasta que aparezca el 0, acumulando la suma y contando cuántos van. Para el máximo y el mínimo, actualiza cada uno dentro del bucle comparándolo con el valor leído, y piensa con qué valores iniciales conviene arrancar. Separa el cálculo del promedio y la impresión del resumen en funciones, tal como pide el enunciado.
+
 ### Solución propuesta
 
 ??? example "Ver solución"
@@ -206,3 +215,15 @@ Mínimo:             5
 
     > [!NOTE]Nota
     > Observa que `calcularPromedio` se invoca **desde dentro** de `mostrarResumen`. Esto es perfectamente válido: una función puede llamar a otra, siempre que ambas estén definidas en el mismo ámbito. También podrías haberla llamado antes y pasado el resultado como parámetro; cualquiera de las dos opciones es correcta.
+
+---
+
+## Hito: comprueba tu avance (Parte II)
+
+Marca cada afirmación que puedas hacer **sin mirar los apuntes**. Si alguna te resulta difícil, repasa el capítulo indicado antes de continuar.
+
+- [ ] Uso `if` y `when` como expresiones que devuelven un valor. *(cap. 8)*
+- [ ] Elijo el bucle adecuado: `for`, `while` o `do-while`. *(cap. 9)*
+- [ ] Uso `break` y `continue` con criterio. *(cap. 9)*
+- [ ] Defino funciones con parámetros y valor de retorno. *(cap. 10)*
+- [ ] Divido un problema en funciones reutilizables en lugar de repetir código. *(cap. 10)*

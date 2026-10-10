@@ -1,5 +1,11 @@
 # Capítulo 3: Conceptos básicos de Kotlin
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué IDE recomendado para Kotlin conociste en el primer capítulo y qué edición gratuita es suficiente para este curso?
+> 2. Menciona dos plataformas sobre las que puede ejecutarse Kotlin.
+
 ## Introducción
 
 En el capítulo anterior conociste qué es Kotlin, cuál es su historia y por qué se ha convertido en uno de los lenguajes más utilizados para el desarrollo de aplicaciones Android. Ahora ha llegado el momento de comenzar a escribir nuestros primeros programas y aprender los conceptos fundamentales que utilizarás a lo largo de todo el curso.
@@ -238,7 +244,7 @@ val `buen nombre` = 5
 val mal nombre = 2 // no funcionará
 ```
 
-> [!WARNING]
+> [!WARNING] Advertencia
 > Si incumples estas reglas, tu programa no compilará.
 
 Ejemplos de nombres **válidos**:
@@ -476,3 +482,22 @@ En este capítulo diste tus primeros pasos escribiendo código Kotlin:
 - `const val` declara constantes cuyo valor se conoce en tiempo de compilación.
 - Sigue las **convenciones de nomenclatura** (`camelCase` para variables, `SCREAMING_SNAKE_CASE` para constantes) y evita los números mágicos.
 - Escribiste y analizaste el programa **"¡Hola, mundo!"**.
+
+## Para cerrar
+
+Este fragmento **no compila**. Encuentra el error y explica por qué:
+
+```kotlin
+val anio = 2024
+anio = 2025
+println(anio)
+```
+
+Escribe tu respuesta antes de abrir la solución.
+
+??? success "Ver respuesta y razonamiento"
+    El error está en `anio = 2025`: `anio` se declaró con `val`, que crea una variable de **solo lectura**. El compilador muestra `Val cannot be reassigned` ("no se puede reasignar un val").
+
+    Si el valor debe cambiar, la declaración correcta sería `var anio = 2024`. Y si nunca cambia, `val` es la elección adecuada, precisamente para proteger el dato.
+
+    **Error común:** pensar que `val` significa "constante conocida al compilar". No: `const val` es lo que exige conocerse en tiempo de compilación. `val` solo prohíbe reasignar; su valor todavía podría calcularse mientras el programa se ejecuta.

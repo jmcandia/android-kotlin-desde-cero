@@ -1,5 +1,19 @@
 # Capítulo 8: Control de flujo: `if` y `when` como expresión
 
+> [!NOTE]Lo que aprenderás en esta parte
+> Al terminar la **Parte II** podrás:
+>
+> - Tomar decisiones con `if` y `when`, usándolos como expresiones que devuelven un valor.
+> - Repetir acciones con `for`, `while` y `do-while`, y elegir el bucle adecuado.
+> - Definir funciones con parámetros y valor de retorno.
+> - Dividir un problema en funciones reutilizables en lugar de repetir código.
+
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué tipo de valor produce una comparación como `nota >= 90`?
+> 2. ¿Qué operador lógico es `true` solo cuando ambos operandos son `true`?
+
 ## Introducción
 
 En el capítulo de operadores aprendiste a escribir **condiciones**: expresiones que dan como resultado `true` o `false`, como `edad >= 18`. Hasta ahora, sin embargo, nuestros programas ejecutaban todas sus instrucciones en orden, de arriba abajo, sin excepción.
@@ -163,5 +177,28 @@ En este capítulo aprendiste a que tu programa tome decisiones:
 - La instrucción `if` ejecuta un bloque cuando una condición es verdadera. Con `else` añades la alternativa, y con `else if`, más casos.
 - En Kotlin, `if` y `when` además son **expresiones**: devuelven un valor que puedes guardar en una variable (por eso el lenguaje no necesita un operador ternario). Al usarlos como expresión, el `else` es obligatorio.
 - `when` es ideal cuando comparas un mismo valor contra muchas opciones y, en su forma sin argumento, cuando tienes varias condiciones distintas.
+
+## Para cerrar
+
+¿Qué imprime este programa? Justifica qué rama entra en juego.
+
+```kotlin
+val x = 5
+val tipo = when {
+    x < 0 -> "negativo"
+    x == 0 -> "cero"
+    else -> "positivo"
+}
+println(tipo)
+```
+
+Responde antes de ver la solución.
+
+??? success "Ver respuesta y razonamiento"
+    Imprime `positivo`.
+
+    Es un `when` **sin argumento**: cada rama es una condición `Boolean` y se ejecuta la **primera** que sea verdadera. `x < 0` es falsa y `x == 0` también, así que cae en el `else`.
+
+    **Error común:** creer que un `when` usado como expresión puede quedarse sin `else`. Igual que el `if`, el `when` debe cubrir todos los casos, y por eso el `else` es obligatorio cuando se usa como expresión.
 
 En el próximo capítulo veremos cómo **repetir** instrucciones con los bucles. Ahí aparecerán los **rangos** (como `1..10`), que más adelante también podrás usar dentro de un `when` para comprobar si un valor cae dentro de un intervalo.

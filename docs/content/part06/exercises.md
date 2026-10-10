@@ -21,6 +21,9 @@ Además, responde:
 - ¿En qué callback guardarías datos que deben sobrevivir al giro de la pantalla, y por qué `onCreate` **no** es el lugar adecuado para el estado de la interfaz tras una rotación?
 - ¿Por qué una operación costosa en `onResume` puede hacer que la app "se sienta pesada" al volver del segundo plano?
 
+??? tip "Pista"
+    Repasa qué hace cada callback y cuándo se dispara: los de creación solo cuando nace la instancia y los de visibilidad cada vez que la pantalla entra o sale. Distingue volver a una instancia viva (`onRestart`) de una recreación completa, como ocurre al girar. Piensa también por qué `onResume` debe mantenerse ligero.
+
 ### Solución propuesta
 
 ??? example "Ver solución"
@@ -74,6 +77,9 @@ suspend fun guardar(tarea: Tarea)
 
 Después responde: ¿cuáles de estos fragmentos podrías reutilizar sin cambios si la app migrara de teléfono a tableta? ¿Por qué?
 
+??? tip "Pista"
+    Clasifica cada fragmento por la acción que realiza: mostrar, reaccionar, decidir, obtener o guardar. Luego ubícalo en la capa correspondiente (interfaz, lógica de presentación o datos). Los fragmentos que no dependen del tamaño ni del diseño de la pantalla son los que sobrevivirían sin cambios a una migración a tableta.
+
 ### Solución propuesta
 
 ??? example "Ver solución"
@@ -124,6 +130,9 @@ class MainActivity : Activity() {
 
 Enumera **todos los problemas** que este código tiene respecto a: (a) el hilo principal, (b) el ciclo de vida y el giro de pantalla, (c) la separación de responsabilidades y (d) la testabilidad. Para cada problema, propón la corrección (basta con nombrar la herramienta o capa adecuada, sin escribir el código completo).
 
+??? tip "Pista"
+    Analiza el `onCreate` buscando tres olores concretos: operaciones bloqueantes que deberían ir en segundo plano, estado guardado en un objeto que no sobrevive a los cambios de configuración, y trabajos de capas distintas mezclados en un mismo método. Para cada problema, basta con nombrar la herramienta o capa que lo resolvería (coroutines, `ViewModel`, repositorio).
+
 ### Solución propuesta
 
 ??? example "Ver solución"
@@ -149,3 +158,14 @@ Enumera **todos los problemas** que este código tiene respecto a: (a) el hilo p
 
     > [!NOTE]Nota
     > Este es el diagnóstico completo en una sola frase: la actividad hace **los cinco trabajos a la vez, en el hilo equivocado, guardando el estado en el objeto equivocado**. Las tres partes siguientes del curso (Compose, MVVM y la capa de datos) existen precisamente para resolver cada uno de esos puntos, uno por uno.
+
+---
+
+## Hito: comprueba tu avance (Parte VI)
+
+Marca cada afirmación que puedas hacer **sin mirar los apuntes**. Si alguna te resulta difícil, repasa el capítulo indicado antes de continuar.
+
+- [ ] Reconozco las piezas de un proyecto Android (manifiesto, Gradle, código y recursos). *(cap. 26)*
+- [ ] Describo el ciclo de vida de una `Activity` y qué ocurre al girar la pantalla. *(cap. 27)*
+- [ ] Separo responsabilidades entre interfaz, lógica y datos. *(cap. 28)*
+- [ ] Explico las tres capas de MVVM y el flujo unidireccional. *(cap. 29)*

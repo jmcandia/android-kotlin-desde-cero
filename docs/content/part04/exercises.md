@@ -32,6 +32,9 @@ Precio total del catálogo: $689.93
 Producto más caro: Monitor
 ```
 
+??? tip "Pista"
+    Encadena operaciones funcionales sobre la lista: `filter` para quedarte con una categoría, `sortedBy` para ordenarla por precio, `sumOf` para el total y `maxByOrNull` para el más caro. Como `maxByOrNull` devuelve un `Producto?`, accede al nombre con el operador de llamada segura. Recuerda que el enunciado pide no usar bucles `for` ni `while`.
+
 ### Solución propuesta
 
 ??? example "Ver solución"
@@ -97,6 +100,9 @@ OTOÑO — Hojas de colores y lluvia.
 INVIERNO — Frío, nieve y noches largas.
   Consejo: Abrígate bien con capas.
 ```
+
+??? tip "Pista"
+    Un `enum class` puede declarar un constructor con parámetros, de modo que cada valor lleve su propia `descripcion`. En el `when` de `consejo`, cubrir los cuatro valores evita la rama `else`; para recorrerlos en `main` usa `enumValues<EstacionDelAno>()` dentro de un `for`.
 
 ### Solución propuesta
 
@@ -166,6 +172,27 @@ Triángulo rectángulo — Área: 24,00 | Perímetro: 19,21
 Figura con mayor área: Círculo
 Figuras con área > 20: 3
 ```
+
+??? tip "Pista"
+    Haz que `Figura` sea `abstract` con `area()` y `perimetro()` abstractos, y deja `describir()` como método concreto que heredan las subclases. Al guardar objetos de distintos tipos en una `List<Figura>` y llamar a sus métodos aprovechas el polimorfismo. Para el círculo y la hipotenusa del triángulo, apóyate en `kotlin.math` (`PI`, `sqrt`), y usa `companion object` para las funciones `crear()`.
+
+??? tip "Pista 2 — Esqueleto de la jerarquía (fragmento parcial)"
+    ```kotlin
+    abstract class Figura(val nombre: String) {
+        abstract fun area(): Double
+        abstract fun perimetro(): Double
+        fun describir() { /* imprime "$nombre — Área: ... | Perímetro: ..." con 2 decimales */ }
+    }
+
+    class Rectangulo(val ancho: Double, val alto: Double) : Figura("Rectángulo") {
+        override fun area() = ancho * alto
+        // falta perimetro() y el companion object con crear()
+    }
+
+    // Circulo y TrianguloRectangulo siguen el mismo patrón que Rectangulo
+    // Reúne objetos de los tres tipos en una lista del tipo base:
+    val figuras: List<Figura> = listOf(Rectangulo(3.0, 5.0) /*, Circulo(...), TrianguloRectangulo(...) */)
+    ```
 
 ### Solución propuesta
 
@@ -280,6 +307,9 @@ Reprobados:   2
 Sin evaluar:  2
 ```
 
+??? tip "Pista"
+    Al ser `sealed`, el `when` sobre los tres casos de `ResultadoEvaluacion` queda completo sin rama `else`. Dentro de `evaluar`, envuelve la conversión a `Double` en `try/catch` para las entradas de texto inválidas y usa el operador Elvis para el caso sin nota. En `main`, transforma la lista de alumnos con `map` y cuenta cada tipo con `count` y una lambda.
+
 ### Solución propuesta
 
 ??? example "Ver solución"
@@ -338,3 +368,17 @@ Sin evaluar:  2
 
     > [!NOTE]Nota
     > Dentro del `when` se usa `is` para hacer una **comprobación de tipo** (*smart cast*): al escribir `is ResultadoEvaluacion.Aprobado`, Kotlin sabe que dentro de esa rama `resultado` es de ese tipo concreto, y por eso puedes acceder directamente a `resultado.nota` sin ninguna conversión adicional.
+
+---
+
+## Hito: comprueba tu avance (Parte IV)
+
+Marca cada afirmación que puedas hacer **sin mirar los apuntes**. Si alguna te resulta difícil, repasa el capítulo indicado antes de continuar.
+
+- [ ] Defino clases con constructor y propiedades. *(cap. 16)*
+- [ ] Uso herencia, interfaces y clases abstractas. *(cap. 17)*
+- [ ] Modelo datos inmutables con `data class`, `copy` y desestructuración. *(cap. 18)*
+- [ ] Uso `object` y `companion object` para singletons y fábricas. *(cap. 19)*
+- [ ] Modelo alternativas con `enum` y `sealed class`, cubriéndolas con `when`. *(cap. 20)*
+- [ ] Escribo funciones de extensión y genéricos básicos. *(cap. 21)*
+- [ ] Uso lambdas, funciones de alcance y delegación. *(cap. 22)*

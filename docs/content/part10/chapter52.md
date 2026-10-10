@@ -1,5 +1,12 @@
 # Capítulo 52: Configuración del proyecto y permisos
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Para qué sirve el catálogo `gradle/libs.versions.toml` en lugar de escribir las versiones directamente en `build.gradle.kts`?
+> 2. ¿Qué se declara en el `AndroidManifest.xml` y para qué sirve?
+> 3. ¿Qué diferencia hay entre `compileSdk` y `minSdk`?
+
 ## Introducción
 
 Para construir «Mis Contactos» necesitamos configurar las dependencias del proyecto en Gradle, registrar los permisos en el manifiesto y preparar el punto de entrada de la aplicación. Además, nos enfrentaremos a un requisito fundamental introducido en **Android 17 (API 37)**: el permiso en tiempo de ejecución para acceder a la **red local** (`ACCESS_LOCAL_NETWORK`), indispensable para que el emulador se comunique con la API que corre en tu computador (`10.0.2.2`).
@@ -351,5 +358,22 @@ class MainActivity : ComponentActivity() {
 - Configuramos `network_security_config.xml` para habilitar tráfico HTTP sin cifrar exclusivamente hacia la IP especial del emulador (`10.0.2.2`).
 - Creamos el composable `PermisoRedLocal` que solicita dinámicamente el permiso de red local en Android 17 (API 37) antes de iniciar la navegación.
 - `MainActivity` configura la vista de borde a borde (*edge-to-edge*) y monta `ContactosNavHost`.
+
+## Para cerrar
+
+Un compañero añade el permiso de red local al manifiesto así:
+
+```xml
+<uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
+```
+
+Ejecuta la app en un emulador Android 17 y observa que nunca aparece el diálogo del sistema y que las llamadas a `10.0.2.2` fallan con `SocketTimeoutException`. ¿Cuál es el error?
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Declarar el permiso en el manifiesto es necesario, pero **no basta**: en Android 17 (API 37) `ACCESS_LOCAL_NETWORK` es un permiso en tiempo de ejecución, y hay que solicitarlo explícitamente con `rememberLauncherForActivityResult` y `ActivityResultContracts.RequestPermission()`, como hace el composable `PermisoRedLocal`.
+
+    Sin esa solicitud, el sistema nunca lo concede y OkHttp falla con un timeout silencioso. Error común: confundir un permiso que solo se declara en el manifiesto con uno de tiempo de ejecución, que se declara **y** se pide al usuario.
 
 En el próximo capítulo implementaremos la capa remota: DTOs, la interfaz de Retrofit y el módulo de red de Hilt.

@@ -1,5 +1,12 @@
 # Capítulo 31: `Modifier` y layouts: `Column`, `Row` y `Box`
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué anotación convierte una función de Kotlin en un composable, y para qué sirve `@Preview`? (capítulo 30)
+> 2. ¿Qué es una lambda en Kotlin y cómo se pasa una función como argumento a otra?
+> 3. ¿Cuándo usas `val` y cuándo `var` al declarar una variable en Kotlin?
+
 ## Introducción
 
 En el capítulo anterior escribiste composables que muestran un texto. Pero una interfaz real necesita dos cosas más: **ajustar** cada elemento (darle espacio, tamaño, un fondo, que responda a un toque) y **organizar** varios elementos en pantalla (uno debajo de otro, en fila o superpuestos).
@@ -171,5 +178,21 @@ En este capítulo aprendiste a ajustar y organizar composables:
 - Sin un layout, los composables se **superponen**. Los tres layouts básicos son `Column` (vertical), `Row` (horizontal) y `Box` (apilados).
 - `Column` y `Row` controlan la **distribución** (`Arrangement`) en su eje principal y la **alineación** (`Alignment`) en el eje cruzado.
 - El modificador **`weight`**, dentro de un `Row` o `Column`, reparte el espacio disponible de forma proporcional.
+
+## Para cerrar
+
+Sin ejecutar nada, ¿qué proporción del ancho ocupa cada texto en este `Row`?
+
+```kotlin
+Row {
+    Text("A", modifier = Modifier.weight(1f))
+    Text("B", modifier = Modifier.weight(3f))
+}
+```
+
+Responde antes de desplegar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    El texto `A` ocupa **1/4** del ancho y el texto `B`, **3/4**: se reparten el espacio en proporción a sus pesos (1 a 3). `weight` no fija un tamaño, sino una *parte* del espacio disponible. Error común: creer que `weight(3f)` significa "tres veces el ancho total" o que cada `f` es una unidad absoluta; en realidad el reparto es relativo a la suma de los pesos.
 
 En el próximo capítulo verás cómo Android organiza sus **recursos** (imágenes, el ícono de la app, textos), algo que necesitarás antes de sacarles todo el provecho a los componentes de Material 3.

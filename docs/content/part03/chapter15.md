@@ -1,5 +1,12 @@
 # Capítulo 15: `Result<T>`: manejo funcional de éxito y fallo
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué diferencia hay entre lanzar una excepción con `throw` y devolver un valor?
+> 2. ¿Cuándo se ejecuta el bloque `finally`?
+> 3. Al mirar la firma de una función, ¿cómo sabes si puede fallar? (Piensa en qué añade `Result<T>` a la respuesta.)
+
 ## Introducción
 
 En el capítulo anterior aprendiste a manejar errores con el enfoque clásico: excepciones con `try`/`catch` y `throw`. Lanzar excepciones funciona bien cuando quieres interrumpir el flujo y forzar al código que llama a reaccionar. Pero a veces prefieres que **el fallo sea parte del contrato** de la función: la función devuelve un resultado que puede ser exitoso o fallido, y quien la llama decide qué hacer.
@@ -181,5 +188,25 @@ En este capítulo aprendiste el enfoque funcional para manejar errores:
 - `Result` como tipo de retorno **declara explícitamente** que la función puede fallar, comunicando el contrato en la firma.
 - **`runCatching`** ejecuta código que puede lanzar excepciones y convierte el resultado en un `Result`.
 - **`throw`** se usa para errores inesperados o internos; **`Result`** se usa para operaciones que pueden fallar legítimamente como parte de su comportamiento normal.
+
+## Para cerrar
+
+**Predice** qué imprime este fragmento y explica por qué **no** se cae aunque la conversión falle:
+
+```kotlin
+val doble = runCatching { "7".toInt() * 2 }
+println(doble.getOrNull())
+println(runCatching { "x".toInt() }.getOrDefault(-1))
+```
+
+Escribe tu predicción y tu explicación antes de consultar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Imprime `14` y luego `-1`.
+
+    - `runCatching { "7".toInt() * 2 }` convierte a `7`, lo multiplica por 2 y envuelve el éxito en un `Result`: `getOrNull()` devuelve `14`.
+    - `runCatching { "x".toInt() }` **captura** la `NumberFormatException` (no la relanza) y produce un `Result` fallido; `getOrDefault(-1)` devuelve el valor por defecto `-1`.
+
+    **Error común:** creer que `runCatching` deja escapar la excepción o que `getOrNull()` falla en vez de devolver `null`. `runCatching` es exactamente un `try`/`catch` que devuelve un valor: la excepción se vuelve un `Result` fallido que **tú** decides cómo manejar.
 
 Con esto cierras la parte de código robusto de Kotlin. El siguiente anexo trata el formateo avanzado de cadenas con `String.format`; y a partir de ahí entrarás de lleno en la **programación orientada a objetos**, donde crearás tus propias clases.

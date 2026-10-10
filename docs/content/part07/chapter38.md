@@ -1,5 +1,12 @@
 # Capítulo 38: Navegación avanzada: rutas modeladas y paso de datos
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué diferencia hay entre **declarar** un destino con `composable("ruta")` y **navegar** con `navigate("ruta")`? (capítulo 37)
+> 2. ¿Qué papel cumplen el `NavController` y el `NavHost` en la navegación? (capítulo 37)
+> 3. ¿Cómo pasa un composable padre una función al hijo para comunicar eventos? (capítulo 34)
+
 ## Introducción
 
 En el capítulo anterior aprendiste los fundamentos de Navigation Compose: el `NavController`, el `NavHost` y el *back stack*. Hasta ahora usaste rutas como cadenas de texto simples (`"inicio"`, `"favoritos"`). En este capítulo verás cómo modelar rutas y destinos de forma más robusta, cómo **pasar datos** entre pantallas con argumentos, y buenas prácticas para mantener tus pantallas desacopladas de la navegación.
@@ -101,5 +108,21 @@ En este capítulo profundizaste en la navegación con Navigation Compose:
 - Los **argumentos** de la ruta llegan como texto; conviértelos con `toInt()` si necesitas un número.
 - No pases **objetos grandes** dentro de una ruta; pasa un identificador y recupera el objeto desde el estado o el repositorio.
 - Como buena práctica, pasa **funciones** de navegación a las pantallas en vez del `NavController`, para mantenerlas desacopladas (misma idea del *state hoisting*).
+
+## Para cerrar
+
+Si el usuario navega con `navController.navigate("detalle/7")`, ¿qué recibe `id` en este composable y cómo lo convertirías a número?
+
+```kotlin
+composable("detalle/{id}") { backStackEntry ->
+    val id = backStackEntry.arguments?.getString("id")
+    PantallaDetalle(id = id)
+}
+```
+
+Responde antes de desplegar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    `id` recibe el `String` `"7"`; para obtener un entero, conviértelo con `id?.toInt()`. Los argumentos de una ruta siempre llegan como texto, por eso hay que transformar los que representen números. Error común: esperar un `Int` directamente del argumento y no convertirlo, lo que provoca errores de tipo o comparaciones equivocadas.
 
 En el **próximo capítulo** verás las barras de navegación de Material 3 —los controles visibles con los que el usuario se mueve por la app— y cómo integrarlas con todo lo que aprendiste aquí.

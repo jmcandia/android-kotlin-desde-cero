@@ -1,5 +1,11 @@
 # Capítulo 10: Funciones: definición, parámetros y valores de retorno
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué bucle conviene usar cuando no sabes de antemano cuántas veces repetir?
+> 2. ¿Qué instrucción termina un bucle de inmediato y cuál salta a la siguiente vuelta?
+
 ## Introducción
 
 Ya has usado varias funciones sin detenerte a pensarlo: `println`, `readln`, `toInt`. Una **función** es un bloque de código con nombre que realiza una tarea concreta. La invocas por su nombre cuando la necesitas, y hace su trabajo.
@@ -339,5 +345,36 @@ En este capítulo aprendiste a trabajar con funciones:
 - Las variables declaradas dentro de una función son **locales**: solo existen dentro de su ámbito.
 - Las **lambdas** (funciones anónimas) son funciones sin nombre que se pueden guardar en variables y pasar como valores.
 - Las **funciones de orden superior** reciben otras funciones como parámetros o las devuelven como resultado, lo que permite escribir código flexible y reutilizable.
+
+## Para cerrar
+
+Este fragmento **no compila**. Encuentra el error y corrígelo de dos formas distintas:
+
+```kotlin
+fun doble(n: Int): Int {
+    n * 2
+}
+```
+
+Escribe primero qué rechaza el compilador y por qué.
+
+??? success "Ver respuesta y razonamiento"
+    La función declara que devuelve un `Int` (`: Int`), pero su cuerpo **no devuelve nada**: falta `return`. La expresión `n * 2` se calcula y se descarta. El compilador exige que toda función con tipo de retorno entregue un valor.
+
+    Dos correcciones válidas:
+
+    ```kotlin
+    fun doble(n: Int): Int {
+        return n * 2
+    }
+    ```
+
+    ```kotlin
+    fun doble(n: Int) = n * 2
+    ```
+
+    La segunda es una **función de una sola expresión**, que infiere el tipo de retorno.
+
+    **Error común:** pensar que la última línea de un cuerpo con llaves se devuelve sola. Eso solo ocurre en las funciones de una sola expresión (`= ...`); en un cuerpo entre llaves hay que usar `return`.
 
 Con las funciones completas los fundamentos de la programación en Kotlin. En la próxima parte del curso empezarás a trabajar con **colecciones**, que te permitirán manejar conjuntos de datos como listas de elementos.

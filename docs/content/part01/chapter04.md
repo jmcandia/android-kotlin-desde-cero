@@ -1,5 +1,11 @@
 # Capítulo 4: Tipos de datos básicos
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué diferencia hay entre declarar una variable con `val` y con `var`?
+> 2. ¿Cómo se escriben, respectivamente, un carácter y una cadena (qué comillas usa cada uno)?
+
 ## Introducción
 
 En los capítulos anteriores aprendiste a configurar el entorno de desarrollo y a escribir tu primer programa en Kotlin. También conociste conceptos fundamentales como las variables, las constantes y las convenciones de programación. Ahora es momento de profundizar en uno de los pilares de cualquier lenguaje de programación: los **tipos de datos**.
@@ -432,3 +438,23 @@ En este capítulo profundizaste en cómo Kotlin representa la información:
 - La **conversión de tipos** se hace con funciones como `toInt()`, `toDouble()` o `toString()`, y hay que hacerla siempre, incluso hacia tipos más grandes.
 - Convertir de un tipo mayor a uno menor puede truncar el valor (**desbordamiento**).
 - En una expresión con tipos distintos, Kotlin aplica la **coerción** hacia el tipo más amplio (con `Byte` y `Short` como excepción, que pasan a `Int`).
+
+## Para cerrar
+
+¿Qué imprime este programa y de qué tipo es la variable `resultado`?
+
+```kotlin
+val a: Int = 3
+val b: Double = 1.5
+val resultado = a + b
+println(resultado)
+```
+
+Decide tu respuesta antes de comprobarla.
+
+??? success "Ver respuesta y razonamiento"
+    Imprime `4.5` y `resultado` es de tipo **`Double`**.
+
+    Al mezclar un `Int` con un `Double`, Kotlin aplica **coerción**: convierte el `Int` al tipo más amplio de la expresión (`Double`) antes de sumar. El resultado no pierde información.
+
+    **Error común:** creer que operar con tipos distintos es un error de incompatibilidad. La incompatibilidad aparece al **asignar** (por ejemplo, guardar un `Double` en una variable `Int`), no al combinar operandos dentro de una expresión.

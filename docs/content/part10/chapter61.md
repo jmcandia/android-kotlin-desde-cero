@@ -1,5 +1,12 @@
 # Capítulo 61: Cierre del proyecto y próximos pasos
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿En qué dos niveles se valida el formulario de contacto y por qué?
+> 2. ¿Por qué la estrategia *offline-first* de esta app solo cubre la lectura y no la escritura?
+> 3. ¿Qué distingue a un evento (como `eliminado`) de un estado persistente dentro de un `UiState`?
+
 ## Introducción
 
 Has terminado «Mis Contactos»: una aplicación Android completa, con arquitectura MVVM, persistencia offline-first, navegación tipada y una interfaz construida enteramente con Jetpack Compose. En este último capítulo repasamos cómo probarla manualmente antes de darla por terminada, revisamos el mapa completo de lo que aprendiste a lo largo del curso, y sugerimos hacia dónde seguir.
@@ -97,3 +104,14 @@ Con esta base, algunas direcciones razonables para seguir creciendo como desarro
 - El camino natural desde aquí es agregar pruebas, extender la app con una funcionalidad propia, y profundizar en la documentación oficial de Android para los temas avanzados que quedaron pendientes.
 
 Gracias por recorrer este curso completo, desde tu primera línea de Kotlin hasta una aplicación Android real y funcional. El código de «Mis Contactos» queda en `code/contact-list-app/` como referencia para revisar, modificar y seguir aprendiendo.
+
+## Para cerrar
+
+Quieres añadir una pantalla de "Acerca de" con un texto estático y un botón que abre una URL. Antes de escribir código, decide qué capas de la arquitectura necesitas de verdad: ¿te hace falta un `ViewModel`, un `UiState` y un repositorio?
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    No: basta un composable sin estado dentro de `ui/`. No hay datos que cargar, estado que gestionar ni reglas de negocio, así que añadir `UiState`, `ViewModel` o repositorio sería complejidad vacía.
+
+    La arquitectura por capas se usa **cuando aporta**: datos, lógica de presentación o coordinación entre fuentes. Error común: aplicar MVVM "por reflejo" a pantallas puramente estáticas; el objetivo no es tener siempre las tres capas, sino separar responsabilidades cuando realmente existen.

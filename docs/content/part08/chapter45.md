@@ -1,5 +1,12 @@
 # Capítulo 45: Inyección de dependencias (manual y con Hilt)
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Cómo declara una clase de Kotlin que recibe un valor al crearse, y para qué sirve un constructor?
+> 2. ¿Qué garantiza declarar algo con `object` en Kotlin (el patrón *singleton*)?
+> 3. ¿Qué es una interfaz de repositorio y por qué conviene programar contra ella en lugar de una clase concreta?
+
 ## Introducción
 
 En el capítulo anterior quedó una pregunta abierta: si el `ViewModel` recibe el repositorio por su constructor, **¿quién crea el repositorio y se lo entrega?** La respuesta es la **inyección de dependencias** (*dependency injection*, o DI).
@@ -109,5 +116,21 @@ En este capítulo aprendiste a conectar todas las piezas de tu arquitectura:
 - **Hilt** es la herramienta recomendada para Android: con anotaciones, arma y entrega automáticamente el grafo de dependencias.
 - Anotaciones esenciales: `@HiltAndroidApp` (en la `Application`), `@AndroidEntryPoint` (en la `Activity`), `@Inject constructor` (cómo crear una clase), `@Module` + `@Binds` (qué implementación usar para una interfaz) y `@HiltViewModel` (para los ViewModels).
 - En el composable, obtienes el `ViewModel` con `hiltViewModel()`, ya con sus dependencias inyectadas.
+
+## Para cerrar
+
+Hilt no sabe cómo construir este repositorio y falla al compilar el grafo. ¿Qué anotación le falta?
+
+```kotlin
+class DatosRepositoryImpl() : DatosRepository {
+    override suspend fun obtenerDatos(): List<String> = emptyList()
+}
+```
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Le falta anotar el constructor: `class DatosRepositoryImpl @Inject constructor() : DatosRepository`. Hilt solo sabe construir una clase si su constructor lleva `@Inject` (o si un módulo la provee con `@Provides`); si no, no encuentra la pieza del grafo y el error salta al compilar.
+    El error común es creer que basta con anotar el `ViewModel` con `@HiltViewModel` o declarar un `@Module`: cada clase que Hilt deba crear necesita ser construible, es decir, tener su constructor marcado con `@Inject`.
 
 Con esto **cierras la arquitectura MVVM**: interfaz, ViewModel, repositorio y las dependencias que los conectan. En el tutorial que sigue aplicarás las dos ideas a **Mi lista de tareas**: sus datos pasarán a un repositorio, Hilt se lo entregará al `ViewModel` y podrás probar ese `ViewModel` sin emulador. Después, en la próxima parte del curso, aprenderás a traer datos reales desde internet con **Retrofit**, la pieza que faltaba en la capa de datos.

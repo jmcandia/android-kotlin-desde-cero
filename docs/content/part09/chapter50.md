@@ -1,5 +1,12 @@
 # Capítulo 50: Persistencia local con Room
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué es un `Flow` y con qué operación obtienes los valores que emite a lo largo del tiempo?
+> 2. ¿Por qué conviene que el `ViewModel` dependa de una **interfaz** de repositorio y no de una implementación concreta?
+> 3. ¿Qué es una función de extensión y para qué la usaste al convertir entre modelos?
+
 ## Introducción
 
 Hasta ahora, los datos de tus apps vivían en memoria o en un servidor. Los de memoria se pierden cuando Android cierra la app; los del servidor necesitan conexión. Muchas apps necesitan una tercera opción: **guardar datos en el propio teléfono**, para que sigan ahí la próxima vez que se abra la app, con o sin internet.
@@ -307,5 +314,26 @@ Mientras desarrollas y los datos no importan, existe un atajo: `fallbackToDestru
 - La **base de datos** (`@Database`) reúne entidades y DAO. Debe existir una sola instancia: con Hilt, se crea con una función **`@Provides`** y **`@Singleton`**.
 - Room es solo **otra implementación del repositorio**: el `ViewModel` y la interfaz no cambian. Con `stateIn`, el `Flow` de Room se convierte en el estado de la pantalla, y la base de datos pasa a ser la única fuente de verdad.
 - Si cambias la estructura, sube la `version` y define una **migración**.
+
+## Para cerrar
+
+Quieres que la pantalla se actualice **sola** cada vez que se inserta una nota. Este DAO no lo consigue. ¿Qué le cambiarías y qué pasa con `suspend`?
+
+```kotlin
+@Query("SELECT * FROM notas ORDER BY creadaEn DESC")
+suspend fun observarTodas(): List<NotaEntity>
+```
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Debe devolver un **`Flow`** en lugar de una `List`, y al hacerlo **deja de ser `suspend`**: las consultas que devuelven `Flow` no son funciones suspend.
+
+    ```kotlin
+    @Query("SELECT * FROM notas ORDER BY creadaEn DESC")
+    fun observarTodas(): Flow<List<NotaEntity>>
+    ```
+    La razón es que un `Flow` **no entrega una sola lectura**: emite la lista actual y **vuelve a emitir cada vez que la tabla cambia**, así que la pantalla se redibuja sin que nadie vuelva a consultar. Una función `suspend` que devuelve una `List`, en cambio, lee una vez y ya no se entera de los cambios posteriores.
+    El error típico es dejar `suspend` junto a `Flow` (no compila) o creer que hay que pedir la lista de nuevo a mano tras insertar; con `Flow`, Room avisa solo y la base de datos es la única fuente de verdad.
 
 En el tutorial que sigue aplicarás todo esto a **Mi lista de tareas**: sus tareas pasarán a guardarse con Room y sobrevivirán al cierre de la app.

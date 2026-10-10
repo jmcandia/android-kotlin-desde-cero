@@ -31,6 +31,9 @@ Altura: 1.65 m
 En 72 años cumplirás 100 años.
 ```
 
+??? tip "Pista"
+    Lee cada dato con `readln()` y conviértelo al tipo adecuado solo cuando vayas a usarlo: `.toInt()` para la edad y `.toDouble()` para la altura. Para los años restantes hasta 100, piensa qué operación aritmética relaciona la edad actual con ese objetivo. Repasa el capítulo de variables, tipos de datos y plantillas de cadena.
+
 ### Solución propuesta
 
 ??? example "Ver solución"
@@ -89,6 +92,9 @@ Introduce el alto del rectángulo (en cm): 8
 Perímetro: 46 cm
 ```
 
+??? tip "Pista"
+    Traslada cada fórmula literalmente a Kotlin: el área multiplica ancho por alto, y el perímetro suma ambos lados antes de multiplicar por 2. Cuidado con la prioridad de los operadores y con convertir los valores leídos con `readln()` al tipo numérico adecuado. Revisa cómo interpolar variables y unidades en una plantilla de cadena.
+
 ### Solución propuesta
 
 ??? example "Ver solución"
@@ -112,3 +118,16 @@ Perímetro: 46 cm
 
     > [!NOTE]Nota
     > Si introduces valores decimales como `15.5`, el programa fallará porque `.toInt()` no sabe cómo convertir ese texto. Para admitir decimales, bastaría con cambiar el tipo a `Double` y usar `.toDouble()` en la lectura. ¿Te animas a probar esa variante?
+
+---
+
+## Hito: comprueba tu avance (Parte I)
+
+Marca cada afirmación que puedas hacer **sin mirar los apuntes**. Si alguna te resulta difícil, repasa el capítulo indicado antes de continuar.
+
+- [ ] Escribo y ejecuto un programa mínimo en Kotlin. *(caps. 1–2)*
+- [ ] Declaro variables con `val` y `var` y elijo la correcta. *(cap. 3)*
+- [ ] Uso los tipos básicos (`Int`, `Double`, `Boolean`, `String`, `Char`) sin confundirlos. *(cap. 4)*
+- [ ] Aplico operadores aritméticos, de comparación y lógicos. *(cap. 5)*
+- [ ] Leo datos con `readln()` y compongo cadenas con plantillas `$`. *(cap. 6)*
+- [ ] Trabajo con la longitud, la concatenación y `repeat` de cadenas. *(cap. 7)*

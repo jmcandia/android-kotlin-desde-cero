@@ -1,5 +1,12 @@
 # Capítulo 49: Estados de red: *loading*, *success* y *error*
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué es una `sealed class` (o una `sealed interface`) y qué garantiza un `when` sobre sus casos?
+> 2. ¿Cómo creas un `Result` con éxito y con fallo, y con qué función conviertes sus dos casos en un solo valor?
+> 3. ¿Qué es un `StateFlow` y en qué se diferencia de una variable que solo guarda el valor actual?
+
 ## Introducción
 
 En el capítulo anterior hiciste tu primera petición con Retrofit. Mientras la API esté en marcha y todo salga bien, funciona. Pero una petición de red tiene dos características que no puedes ignorar: **toma tiempo** y **puede fallar**. El servidor puede estar apagado, el teléfono sin conexión, el contacto puede haber sido eliminado por otra persona o el formulario puede traer un correo repetido.
@@ -317,5 +324,22 @@ Cada capa tiene un trabajo claro frente a los errores. **Retrofit** lanza excepc
 - La capa de datos **traduce** esas excepciones a un tipo propio, la clase sellada **`ErrorDatos`**, para que el `ViewModel` y la interfaz no dependan de Retrofit.
 - Nunca atrapes una **`CancellationException`** sin volver a lanzarla: es el mecanismo con el que se detiene una coroutine cancelada.
 - La interfaz decide qué mostrar con un `when` exhaustivo y traduce cada tipo de error a un mensaje de `strings.xml`, con un botón para reintentar.
+
+## Para cerrar
+
+Quieres traducir cada error a un texto. Este `when` no compila, ¿por qué y cómo lo arreglas?
+
+```kotlin
+fun mensaje(error: ErrorDatos): String = when (error) {
+    is ErrorDatos.SinConexion -> "Sin conexión"
+    is ErrorDatos.NoEncontrado -> "Ya no existe"
+}
+```
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    `ErrorDatos` es una **clase sellada** con cinco casos (`SinConexion`, `NoEncontrado`, `Conflicto`, `Validacion` y `Desconocido`), y un `when` sobre ella debe ser **exhaustivo**: hay que cubrirlos todos. Faltan `Conflicto`, `Validacion` y `Desconocido`. La corrección es agregar esas ramas.
+    La razón de ser de la clase sellada es justamente esta: si mañana agregas un caso nuevo a `ErrorDatos`, este `when` **dejará de compilar** hasta que le des un mensaje, así que nunca lo olvidarás. El error típico es añadir un `else` genérico para callar el aviso: compila, pero pierdes esa red de seguridad.
 
 Ya tienes la arquitectura completa para trabajar con un servidor. Falta una última fuente de datos: el **propio teléfono**. En el próximo capítulo aprenderás a guardar datos localmente con **Room**, detrás del mismo repositorio.

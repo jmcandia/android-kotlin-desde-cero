@@ -1,5 +1,21 @@
 # Capítulo 16: Clases, propiedades y constructores
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿En qué se diferencian una variable declarada con `val` y una declarada con `var`?
+> 2. ¿Cómo puedes darle un valor por defecto a un parámetro de una función y llamarla omitiendo ese argumento?
+> 3. ¿Cómo accedes a un elemento concreto de una `List` y cómo la recorres entera con un `for`?
+
+> [!NOTE]Lo que aprenderás en esta parte
+> Al terminar la **Parte IV** podrás:
+>
+> - Modelar datos con clases, propiedades y constructores.
+> - Reutilizar y extender comportamiento con herencia, interfaces y clases abstractas.
+> - Crear objetos de valor con `data class`, `copy` y desestructuración.
+> - Elegir entre `object`, `companion object`, `enum` y `sealed class` según el caso.
+> - Escribir código reutilizable con genéricos, funciones de extensión y lambdas.
+
 ## Introducción
 
 Hasta ahora, cuando querías representar algo con varios datos —una persona con su nombre, su edad y su correo—, tenías que usar variables sueltas:
@@ -244,5 +260,29 @@ En este capítulo diste tus primeros pasos en la programación orientada a objet
 - Los parámetros del constructor admiten **valores por defecto**, y el bloque **`init`** ejecuta código al crear el objeto (por ejemplo, para validar).
 - Las **funciones miembro** (métodos) definen el comportamiento y tienen acceso directo a las propiedades.
 - Una propiedad o variable `val` no se puede **reasignar**, pero el objeto al que apunta sí puede cambiar por dentro (sus propiedades `var`). Para que un objeto sea inmutable, todas sus propiedades deben ser `val`.
+
+## Para cerrar
+
+Este código intenta cambiar el titular de una cuenta. Antes de ejecutarlo, predice qué ocurre y dónde está el problema:
+
+```kotlin
+class Cuenta(val titular: String, var saldo: Int = 0) {
+    fun depositar(cantidad: Int) {
+        saldo += cantidad
+    }
+}
+
+val c = Cuenta("Ana")
+c.depositar(50)
+c.titular = "Elena"
+println("${c.titular}: ${c.saldo}")
+```
+
+Intenta responder antes de comprobar.
+
+??? success "Ver respuesta y razonamiento"
+    El programa **no compila**. La línea `c.titular = "Elena"` da error porque `titular` es una propiedad `val`: no puede reasignarse. Si la eliminaras, la salida sería `Ana: 50`.
+
+    Razonamiento: `val` impide reasignar la **propiedad**, pero no impide modificar el objeto por dentro. Por eso `c.saldo` sí cambia (es `var`). Un error habitual es creer que declarar `val c = Cuenta(...)` congela por completo el objeto: solo congela la reasignación de `c`, no el estado de sus propiedades `var`.
 
 En el próximo capítulo verás cómo las clases pueden **relacionarse entre sí** mediante la herencia, las interfaces y las clases abstractas.

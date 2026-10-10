@@ -1,5 +1,11 @@
 # Capítulo 6: Entrada y salida estándar y plantillas de cadena
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué operador devuelve el resto de una división entera y para qué suele usarse?
+> 2. ¿Cómo convertirías a `Int` un valor de tipo `String`?
+
 ## Introducción
 
 Hasta ahora has aprendido a declarar variables, trabajar con distintos tipos de datos, usar operadores y escribir programas sencillos en Kotlin. Sin embargo, un programa que siempre produce el mismo resultado tiene una utilidad limitada. Para que una aplicación sea realmente útil, debe ser capaz de recibir información, procesarla y generar una respuesta.
@@ -358,3 +364,22 @@ En este capítulo aprendiste a comunicar tu programa con el usuario:
 - La **entrada estándar** se lee con `readln()`, que devuelve un `String`.
 - Para trabajar con otros tipos, conviertes lo leído con `toInt()`, `toDouble()`, `toBoolean()`, etc.
 - Para un control más avanzado de la lectura, existe la clase `Scanner` de Java (Anexo B).
+
+## Para cerrar
+
+¿Qué muestra este programa?
+
+```kotlin
+val a = 4
+val b = 9
+println("Producto: $a * $b = ${a * b}")
+```
+
+Anota tu respuesta antes de comprobarla.
+
+??? success "Ver respuesta y razonamiento"
+    Muestra: `Producto: 4 * 9 = 36`.
+
+    `$a` y `$b` insertan los valores de las variables (4 y 9). La parte `${a * b}` es una **expresión** entre llaves, así que Kotlin primero calcula `4 * 9` y luego inserta `36`.
+
+    **Error común:** escribir `$a * $b` esperando que se multipliquen. Con el símbolo `$` solo, Kotlin inserta el valor de la variable y deja el `*` como texto literal; para evaluar una operación hay que usar `${...}`.

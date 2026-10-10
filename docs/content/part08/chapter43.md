@@ -1,5 +1,12 @@
 # Capítulo 43: Efectos y eventos puntuales: `LaunchedEffect`, Snackbar y navegación
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Por qué el cuerpo de un composable no debería ejecutar tareas con efectos secundarios?
+> 2. ¿Para qué sirve `remember` en un composable?
+> 3. ¿Por qué la carga inicial de los datos de una pantalla conviene hacerla en el bloque `init` del `ViewModel` y no en el composable?
+
 ## Introducción
 
 Con el `ViewModel` del capítulo anterior, la interfaz muestra un estado y avisa de los eventos del usuario. Pero hay cosas que no encajan del todo en «mostrar un estado»:
@@ -237,5 +244,23 @@ Así, el `ViewModel` sigue sin saber nada de pantallas, la pantalla sigue sin sa
 - Si el mensaje lo dispara un toque, usa **`rememberCoroutineScope()`** dentro del callback. Si lo decide el `ViewModel`, usa un `LaunchedEffect`.
 - Los eventos que nacen en el `ViewModel` se **modelan como estado** (`mensaje: Mensaje?`, `guardado: Boolean`): la interfaz los atiende con un `LaunchedEffect` y avisa cuando terminó, para que el `ViewModel` los borre. Así no se pierden al girar la pantalla.
 - El `ViewModel` no navega: marca que la acción terminó, y la pantalla llama a la función de navegación que recibió.
+
+## Para cerrar
+
+Analiza este composable. ¿Qué problema tiene y cómo lo corregirías?
+
+```kotlin
+@Composable
+fun Pantalla(snackbarHostState: SnackbarHostState) {
+    val scope = rememberCoroutineScope()
+    scope.launch { snackbarHostState.showSnackbar("Hola") }
+}
+```
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Llamar a `scope.launch` **en el cuerpo** del composable lo ejecuta en cada recomposición, así que el Snackbar aparecería una y otra vez. `rememberCoroutineScope()` está pensado para usarse **dentro de callbacks** (por ejemplo `onClick`); lo que `remember` guarda es el *scope*, no la llamada. Si el mensaje debe mostrarse una sola vez al entrar en la pantalla, la herramienta correcta es `LaunchedEffect(Unit)`.
+    El error típico es pensar que `rememberCoroutineScope` «recuerda» la ejecución y evita repetirla; en realidad solo conserva el *scope* entre recomposiciones, y el `launch` vuelve a dispararse cada vez.
 
 En el tutorial que sigue aplicarás todo esto a **Mi lista de tareas**: moverás su estado a un `TareasViewModel`, las tareas sobrevivirán al giro de pantalla y eliminar una tarea mostrará un Snackbar con «Deshacer».

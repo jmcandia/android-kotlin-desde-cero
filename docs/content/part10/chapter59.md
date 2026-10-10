@@ -1,5 +1,12 @@
 # Capítulo 59: Navegación con rutas tipadas
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Cómo declarabas un destino y navegabas hacia él con rutas de texto en Navigation Compose?
+> 2. ¿Para qué sirven `rememberNavController()` y el `NavHost`?
+> 3. ¿Qué función retira la pantalla actual de la pila de navegación?
+
 ## Introducción
 
 En el capítulo 38 aprendiste Navigation Compose con **rutas de texto**: cada pantalla se identificaba con una cadena como `"detalle/{id}"`, y para navegar armabas otra cadena a mano, como `"detalle/42"`. Funciona, pero tiene un problema que probablemente ya intuiste: el compilador no puede verificar que `"detalle/{id}"` y `"detalle/42"` sean, en efecto, compatibles. Un error de tipeo en cualquiera de las dos cadenas —o un argumento del tipo equivocado— **solo se revela en tiempo de ejecución**, a veces con un `crash`.
@@ -138,5 +145,22 @@ Ambos estilos coexisten en el ecosistema de Compose, y es útil saber cuándo pr
 - `savedStateHandle.toRoute<Ruta>()` reconstruye la instancia completa dentro del `ViewModel`, con cada argumento ya tipado, sin `getInt`/`getString` manuales.
 - La ventaja central sobre el capítulo 38: los errores de ruta o de tipo de argumento se detectan **en tiempo de compilación**, no en tiempo de ejecución.
 - Las Screens siguen sin conocer el `NavController`: reciben funciones simples (`onVolver`, `onEditar`) que `ContactosNavHost` conecta con la navegación real.
+
+## Para cerrar
+
+Un compañero, acostumbrado a las rutas de texto, navega al detalle así:
+
+```kotlin
+navController.navigate("detalle/42")
+```
+
+El `NavHost` de esta app declara `composable<DetalleContactoRuta> { ... }`. ¿Qué ocurre al ejecutar: funciona, falla en tiempo de compilación o falla en tiempo de ejecución? ¿Qué debería escribir?
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Falla en **tiempo de ejecución**: `navigate(String)` compila (es una sobrecarga existente), pero no existe ningún destino declarado con la ruta de texto `"detalle/42"`, así que el grafo no encuentra coincidencia.
+
+    Con rutas tipadas hay que pasar una instancia de la clase: `navController.navigate(DetalleContactoRuta(42))`. Así el compilador verifica que la ruta y el tipo del argumento (`Int`) son correctos. Error común: colar una cadena por costumbre; con el enfoque tipado, el argumento es una **propiedad** de la clase, no un texto interpolado.
 
 En el próximo capítulo revisaremos los componentes compartidos entre pantallas —`AvatarContacto`, los estados reutilizables de carga/error/vacío— y el tema visual de la aplicación.

@@ -1,5 +1,11 @@
 # Capítulo 28: Cómo se organiza una app: responsabilidades y flujo de datos
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué le pasa al estado guardado en una `Activity` cuando giras el dispositivo, y por qué?
+> 2. En la Parte IV viste que cada clase debería tener una única responsabilidad. ¿Por qué conviene separarlas?
+
 ## Introducción
 
 Antes de escribir tu primera pantalla, conviene tener un **mapa** del terreno. En este capítulo no escribirás código: verás qué trabajos tiene que hacer cualquier app, por qué no conviene hacerlos todos en el mismo lugar y en qué dirección se mueven los datos. Es un capítulo corto, y su objetivo es que, cuando lleguen las piezas concretas, sepas dónde encaja cada una.
@@ -87,5 +93,14 @@ Esta organización tiene nombre: **MVVM** (*Model-View-ViewModel*), la arquitect
 - Se agrupan en tres zonas: **interfaz**, **estado y lógica** y **datos**.
 - El **estado baja** y los **eventos suben** (flujo de datos unidireccional); las **dependencias apuntan hacia los datos**.
 - En el curso, esas zonas serán **Compose**, el **`ViewModel`** y el **repositorio**: la arquitectura **MVVM**. Son responsabilidades, no carpetas.
+
+## Para cerrar
+
+En esta pantalla de lista de tareas, la interfaz hace tres cosas por su cuenta: dibuja la lista, comprueba si el texto está vacío para decidir si agrega la tarea, y lee las tareas directamente del almacenamiento. Di qué responsabilidades (de las tres zonas) está invadiendo la interfaz y en qué zona debería vivir cada una. Responder antes de comprobar.
+
+??? success "Ver respuesta y razonamiento"
+    La interfaz **invade la zona de estado y lógica** al *decidir* si el texto está vacío, y **la zona de datos** al *leer* directamente del almacenamiento. La interfaz solo debería **mostrar** el estado que recibe y **avisar** de los eventos; "decidir" pertenece a la lógica y "obtener/guardar" a la zona de datos.
+
+    Razonamiento: cada zona hace un trabajo, y las dependencias apuntan hacia los datos (la interfaz conoce a la lógica, no al revés). Al mezclarlas, un cambio en cómo se guardan las tareas obligaría a tocar el código que dibuja la pantalla. Error común: pensar que "hacer todo en la interfaz" es más simple y no tiene coste.
 
 En el próximo capítulo conocerás en detalle esta arquitectura y el árbol de carpetas que la acompaña. Luego, en la Parte VII, empezarás por la primera zona: la **interfaz**, con Jetpack Compose.

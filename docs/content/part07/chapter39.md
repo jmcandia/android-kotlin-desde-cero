@@ -1,5 +1,12 @@
 # Capítulo 39: Barras de navegación y destinos principales
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué es el *back stack* y qué componente de la navegación lo mantiene? (capítulo 37)
+> 2. ¿Cómo obtienes el destino actual y cómo declaras un destino en el `NavHost`? (capítulos 37 y 38)
+> 3. ¿Qué composable te da espacios para la barra superior y la barra inferior de una pantalla? (capítulo 35)
+
 ## Introducción
 
 Hasta ahora has visto cómo declarar destinos con `NavHost`, controlar la navegación con `NavController`, y moverte entre pantallas con `navigate()`. Pero en una aplicación real, el usuario no escribe rutas a mano: toca botones, íconos o elementos de una lista.
@@ -315,5 +322,14 @@ En este capítulo aprendiste a construir los controles de navegación de la app:
 - Los **destinos principales** aparecen en la barra de navegación; los **destinos secundarios** se alcanzan desde ellos.
 - Usa `currentBackStackEntryAsState()` para sincronizar el elemento seleccionado de la barra con el destino actual.
 - Usa `popUpTo`, `launchSingleTop` y `restoreState` para evitar acumular destinos duplicados en la pila: entre destinos principales el usuario espera saltar, no apilar.
+
+## Para cerrar
+
+Al tocar un destino principal de la barra, cada ítem hace `navController.navigate(ruta)`. Explica por qué se añaden `popUpTo(startDestinationId)`, `launchSingleTop` y `restoreState`, y qué ocurriría si solo hicieras `navigate("inicio")` cada vez.
+
+Responde antes de desplegar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Esas opciones "aplanan" la pila: `popUpTo` deja solo el destino de inicio y guarda su estado, `launchSingleTop` evita apilar el mismo destino en la cima y `restoreState` recupera el estado anterior al volver. Sin ellas, tocar Inicio, Favoritos, Perfil e Inicio dejaría la pila como `Inicio → Favoritos → Perfil → Inicio`, y el usuario tendría que pulsar retroceso varias veces para salir. Error común: creer que el retroceso solo cierra la app; entre destinos principales el usuario espera **saltar**, no **apilar**.
 
 Ya sabes construir y conectar pantallas completas. En el próximo capítulo cerrarás la parte de Compose dándole a la interfaz su **estilo final** con Material 3: el tema, los colores y la tipografía.

@@ -1,5 +1,12 @@
 # Capítulo 14: Manejo de excepciones: `try`, `catch` y `finally`
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué es el *smart cast* y en qué situación se aplica?
+> 2. ¿Qué operador usas para dar un valor por defecto cuando algo puede ser `null`?
+> 3. ¿Por qué la conversión `"abc".toInt()` puede fallar aunque el código compile?
+
 ## Introducción
 
 En el capítulo 13 aprendiste a proteger tu código de los valores nulos con null safety. Pero hay otro tipo de problema que ocurre **en tiempo de ejecución**, incluso cuando tu código compila perfectamente: los **errores** que interrumpen el flujo normal de un programa, como dividir por cero, acceder a un índice inexistente de una lista o convertir un texto que no es un número.
@@ -111,5 +118,28 @@ En este capítulo aprendiste a manejar los errores en tiempo de ejecución con e
 - `try` / `catch` te permite manejar la excepción y seguir adelante. `finally` ejecuta código pase lo que pase.
 - Puedes capturar tipos **específicos** de excepción (como `NumberFormatException`) para reaccionar con precisión.
 - Con **`throw`** lanzas tus propias excepciones cuando detectas una situación inválida. `throw` **interrumpe** la ejecución inmediatamente; el código posterior no se ejecuta.
+
+## Para cerrar
+
+**Predice** qué imprime este programa (enumera las letras en orden) y explica qué se ejecuta y por qué:
+
+```kotlin
+try {
+    val n = "12a".toInt()
+    println("A")
+} catch (e: NumberFormatException) {
+    println("B")
+} finally {
+    println("C")
+}
+println("D")
+```
+
+Razona tu predicción antes de consultar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Imprime `B`, `C` y `D`, en ese orden. `"12a"` no es un número, así que `toInt()` lanza `NumberFormatException`; la línea `A` nunca se ejecuta. El bloque `catch` imprime `B` y el programa **continúa**. El bloque `finally` se ejecuta **siempre** (haya habido error o no), así que imprime `C`, y luego sigue el flujo normal con `D`.
+
+    **Error común:** creer que `finally` solo se ejecuta cuando hay una excepción, o que después de capturar el error el programa se detiene. Ninguna de las dos es cierta: `catch` te permite seguir, y `finally` está pensado justo para lo que debe ocurrir "pase lo que pase" (por ejemplo, cerrar un recurso).
 
 En el **próximo capítulo** verás un enfoque alternativo y más funcional para manejar errores: el tipo `Result<T>`, que convierte el fallo en un valor que puedes inspeccionar y transformar, en lugar de interrumpir el flujo con excepciones.

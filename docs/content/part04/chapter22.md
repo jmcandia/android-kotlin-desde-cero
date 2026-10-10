@@ -1,5 +1,12 @@
 # Capítulo 22: Lambdas a fondo: receptores, funciones de alcance y delegación
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué es una lambda y cómo se pasa como argumento a una función de orden superior?
+> 2. Cuando una lambda tiene un solo parámetro, ¿con qué nombre implícito puedes referirte a él?
+> 3. ¿Qué es una función de extensión y qué representa `this` dentro de ella?
+
 ## Introducción
 
 Ya conoces las lambdas. En el capítulo 10 viste que una lambda es una función sin nombre que se puede guardar en una variable, que tiene un **tipo de función** como `(Int) -> Int` y que una **función de orden superior** recibe otras funciones como parámetro. En el capítulo 12 las usaste a diario con `map`, `filter` y `forEach`.
@@ -312,5 +319,31 @@ En este capítulo profundizaste en las lambdas:
 - Una **lambda con receptor** (`T.() -> Unit`) se ejecuta sobre un objeto, al que accede como `this`. Así funcionan `buildString` y el contenido de `Row` y `Column` en Compose.
 - Las **funciones de alcance** ejecutan un bloque sobre un objeto: `let` (sobre todo con `?.`), `apply` (configurar), `also` (paso adicional), `run` y `with` (calcular un valor).
 - **`by`** delega: en propiedades (`by lazy`, `by remember`) y en interfaces (`: Registro by registro`).
+
+## Para cerrar
+
+Predice las dos líneas que imprime este programa:
+
+```kotlin
+val lista = mutableListOf(3, 1, 2).apply {
+    sort()
+}
+val copia = lista.also {
+    println("Original: $it")
+}
+println(lista == copia)
+```
+
+Intenta responder antes de comprobar.
+
+??? success "Ver respuesta y razonamiento"
+    La salida es:
+
+    ```plaintext
+    Original: [1, 2, 3]
+    true
+    ```
+
+    Razonamiento: `apply` ejecuta el bloque con la lista como receptor (`this`) y devuelve **el propio objeto** ya ordenado por `sort()`. `also` recibe ese mismo objeto como `it`, imprime su contenido y también devuelve el objeto. Como `lista` y `copia` apuntan al **mismo objeto**, `==` da `true`. Un error habitual es creer que `apply` devuelve el resultado del bloque (`sort()` devuelve `Unit`) o que `also` crea una copia: ninguna de las dos cosas ocurre.
 
 Con esto **completas la programación orientada a objetos** y las características del lenguaje que necesitas para Android. En la próxima parte darás un salto importante: la **asincronía con coroutines**, imprescindible para que una app pueda pedir datos a internet sin congelarse.

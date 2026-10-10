@@ -1,5 +1,12 @@
 # Capítulo 48: Retrofit: configuración, interfaces y endpoints
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Qué es una interfaz en Kotlin y a qué se compromete una clase que la implementa?
+> 2. ¿Cómo le pide una clase a Hilt sus dependencias cuando marca su constructor con `@Inject`, y para qué sirve `@Singleton`?
+> 3. ¿Qué hace una función `suspend` distinto de una función normal, y en qué hilo conviene ejecutarla?
+
 ## Introducción
 
 Ya conoces la API de contactos desde fuera (capítulo 46) y sabes convertir su JSON en objetos de Kotlin (capítulo 47). Falta el paso del medio: **hacer la petición** desde la app. Hacerlo a mano —abrir la conexión, construir la petición, esperar la respuesta, leer el cuerpo— sería tedioso y propenso a errores.
@@ -338,5 +345,25 @@ La primera es la petición; la segunda, el código de la respuesta y cuánto tar
 - La instancia se crea con `Retrofit.Builder`: `baseUrl` (terminada en `/`), un cliente de OkHttp con interceptor de registro y el convertidor con **tu** instancia de `Json`.
 - Con Hilt, los objetos que se construyen con código se proveen con funciones **`@Provides`** en un módulo `object`, marcadas con `@Singleton` para compartir una sola instancia.
 - Para llegar a la API local desde el emulador: la dirección **`10.0.2.2`**, el permiso **`INTERNET`**, un **`network_security_config.xml`** que permita HTTP solo hacia esa dirección y, desde Android 17, el permiso de ejecución **`ACCESS_LOCAL_NETWORK`**.
+
+## Para cerrar
+
+Este *endpoint* no funciona. Encuentra sus tres errores y escribe la versión correcta:
+
+```kotlin
+@GET("/api/contact/{id}")
+fun obtenerContacto(@Query("id") id: Int): ContactDto
+```
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Los tres errores son: (1) la ruta **no debe empezar con `/`**, porque se concatena con la `baseUrl`, que ya termina en `/`; (2) `{id}` es un hueco de la **ruta**, así que su parámetro se marca con **`@Path("id")`**, no con `@Query`; (3) la función debe ser **`suspend`** para no bloquear el hilo principal mientras espera.
+
+    ```kotlin
+    @GET("api/contact/{id}")
+    suspend fun obtenerContacto(@Path("id") id: Int): ContactDto
+    ```
+    El error más frecuente es confundir `@Path` con `@Query`: `@Path` rellena un hueco `{...}` dentro de la ruta (identifica **un** recurso), mientras que `@Query` agrega un parámetro después del `?` (filtra u ordena). Olvidar `suspend` es el segundo tropiezo: una llamada de red sin él bloquearía la interfaz.
 
 En el próximo capítulo verás qué hacer cuando la petición **tarda** y cuando **falla**: los estados de red y los tipos de error.

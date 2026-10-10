@@ -31,6 +31,9 @@ DESARROLLO
 CÓDIGO
 ```
 
+??? tip "Pista"
+    Encadena dos operaciones sobre `palabras`: primero `filter` para quedarte con las que tienen más de 4 caracteres (`it.length > 4`) y luego `map` para pasarlas a mayúsculas (`it.uppercase()`). El resultado es una lista nueva; recórrela con `forEach` para imprimirla.
+
 ### Solución propuesta
 
 ??? example "Ver solución"
@@ -98,6 +101,9 @@ Contacto no encontrado.
 Escribe un nombre (o "salir" para terminar): salir
 ¡Hasta luego!
 ```
+
+??? tip "Pista"
+    Guarda `agenda[nombre]` en una variable: será `null` tanto si el contacto no existe como si existe sin teléfono. Para distinguirlos, comprueba primero `nombre !in agenda`. Extrae esa lógica a una función que reciba la agenda y el nombre, y devuelva un `String` con el mensaje.
 
 ### Solución propuesta
 
@@ -187,6 +193,22 @@ Números pares:        [14, 8, 10]
 De mayor a menor:     [27, 14, 10, 8, 3]
 ```
 
+??? tip "Pista 1 — Qué necesitas"
+    Acumula los números válidos en una `MutableList<Int>`. Para cada entrada, intenta `entrada.toInt()` dentro de un `try` y captura `NumberFormatException` para avisar **sin** detener el bucle. Al terminar, usa operaciones funcionales: `sum()`, `filter { it % 2 == 0 }` y `sortedDescending()`.
+
+??? tip "Pista 2 — Estructura del programa (fragmento parcial)"
+    ```kotlin
+    fun main() {
+        val numeros = mutableListOf<Int>()
+        while (true) {
+            val entrada = readln()
+            if (entrada == "fin") break
+            // intenta convertir a Int; si falla, muestra el aviso y continúa
+        }
+        // si `numeros` está vacío, avisa; si no, calcula y muestra el resumen
+    }
+    ```
+
 ### Solución propuesta
 
 ??? example "Ver solución"
@@ -235,3 +257,103 @@ De mayor a menor:     [27, 14, 10, 8, 3]
 
     > [!NOTE]Nota
     > `sortedDescending()` devuelve una **lista nueva** con los elementos ordenados de mayor a menor; no modifica la lista original. Si quisieras ordenar la lista en su sitio (sin crear una copia), usarías `sortDescending()` sobre una `MutableList`.
+
+---
+
+## Repaso acumulativo (Partes I–III)
+
+Este reto no introduce nada nuevo: **combina** lo aprendido a lo largo de las tres primeras partes. Espera tener que volver a algún capítulo; eso es parte del repaso. Intenta resolverlo de memoria antes de desplegar las pistas o la solución.
+
+### Reto: la caja del kiosco
+
+Un kiosco registra sus ventas del día como una lista de textos; algunas líneas tienen errores de tipeo:
+
+```kotlin
+val ventas = listOf("1500", "800", "abc", "2300", "1200", "12x", "900", "3000")
+```
+
+Escribe un programa que produzca un resumen con:
+
+1. Cuántos montos son **válidos** y cuántos **inválidos** (los que no se pueden convertir a número).
+2. La **suma** de los válidos y los montos **mayores a 1000**.
+3. Una **clasificación del total** con un `when`: menos de 5000 → `"día flojo"`; entre 5000 y 15000 → `"día normal"`; más de 15000 → `"día excelente"`.
+
+### Pistas graduadas
+
+Ábrelas solo si te atascas; cada una revela un poco más que la anterior.
+
+??? tip "Pista 1 — Qué piezas necesitas"
+    - Un bucle para recorrer la lista (Parte II) y `try`/`catch` para intentar la conversión (Parte III).
+    - Una `MutableList<Int>` para juntar los válidos.
+    - Operaciones funcionales (`filter`, `count`, `sum`) para los cálculos (Parte III).
+    - Una función con un parámetro para clasificar el total según rangos, usando `when` (Parte II).
+
+??? tip "Pista 2 — Estructura del programa (fragmento parcial)"
+    ```kotlin
+    fun main() {
+        val ventas = listOf("1500", "800", "abc", "2300", "1200", "12x", "900", "3000")
+
+        val validos = mutableListOf<Int>()
+        var invalidos = 0
+
+        for (texto in ventas) {
+            // intenta convertir `texto` a Int;
+            // si falla, cuenta un inválido
+        }
+
+        // usa `validos` con operaciones funcionales para la suma,
+        // los mayores a 1000 y la cantidad
+        // clasifica el total y muestra el resumen
+    }
+    ```
+
+??? success "Ver solución comentada"
+    ```kotlin
+    fun clasificar(total: Int): String = when {
+        total < 5000 -> "día flojo"
+        total <= 15000 -> "día normal"
+        else -> "día excelente"
+    }
+
+    fun main() {
+        val ventas = listOf("1500", "800", "abc", "2300", "1200", "12x", "900", "3000")
+
+        val validos = mutableListOf<Int>()
+        var invalidos = 0
+
+        for (texto in ventas) {
+            try {
+                validos.add(texto.toInt())
+            } catch (e: NumberFormatException) {
+                invalidos++
+            }
+        }
+
+        val total = validos.sum()
+        val mayoresA1000 = validos.filter { it > 1000 }
+
+        println("Válidos: ${validos.size} · Inválidos: $invalidos")
+        println("Total: $total")
+        println("Mayores a 1000: $mayoresA1000")
+        println("Clasificación: ${clasificar(total)}")
+    }
+    ```
+
+    **Por qué funciona.** El `for` y el `try`/`catch` (Partes II y III) separan los montos que se pueden leer de los que no; una `MutableList` acumula los válidos, y luego las operaciones funcionales (`sum`, `filter`) y la función `clasificar` (con un `when` de rangos) producen el resumen.
+
+    **Errores comunes.**
+    - Capturar `Exception` en lugar de `NumberFormatException`: funciona aquí, pero esconde errores que **no** esperabas. Sé específico con el tipo.
+    - Clasificar con un `if`/`else if` encadenado cuando un `when` de rangos se lee mejor.
+    - Olvidar el caso del total justo en un límite (`5000` o `15000`): revisa si tus comparaciones usan `<`, `<=`, `>` o `>=` y decide si el límite entra en un rango u otro.
+
+---
+
+## Hito: comprueba tu avance (Parte III)
+
+Marca cada afirmación que puedas hacer **sin mirar los apuntes**. Si alguna te resulta difícil, repasa el capítulo indicado antes de continuar.
+
+- [ ] Elijo entre `List`, `Set` y `Map` según el problema. *(cap. 11)*
+- [ ] Transformo y filtro colecciones con `map`, `filter` y `forEach`. *(cap. 12)*
+- [ ] Manejo valores nulos con `?.`, `?:` y `!!` solo cuando es seguro. *(cap. 13)*
+- [ ] Capturo excepciones con `try`/`catch`/`finally`. *(cap. 14)*
+- [ ] Uso `Result` para representar éxito o fallo sin propagar excepciones. *(cap. 15)*

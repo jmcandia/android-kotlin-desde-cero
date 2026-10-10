@@ -1,5 +1,12 @@
 # Capítulo 44: Repositorio y separación de capas
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿En qué tres zonas recomendaba el capítulo 29 organizar un proyecto Android, y qué va en cada una?
+> 2. ¿Qué ventaja ofrece el tipo `Result` de Kotlin al representar una operación que puede fallar?
+> 3. Según el capítulo 42, ¿cuál es la única responsabilidad de un `ViewModel`?
+
 ## Introducción
 
 En el capítulo 42, el `ViewModel` llamaba a una función `obtenerDatos()`, pero no dijimos **de dónde** salían esos datos. Ahí quedó un cabo suelto que este capítulo viene a resolver.
@@ -129,5 +136,23 @@ En este capítulo separaste tu código en capas:
 - Estas capas se reflejan en la **estructura de carpetas**: se organiza el código por capa (`data/`, `model/`, `ui/`), de modo que la ubicación de cada archivo revela su responsabilidad.
 - Siguiendo el principio **DIP**, el `ViewModel` depende de una **interfaz** de repositorio, no de una clase concreta, lo que mejora la testabilidad y la flexibilidad.
 - El repositorio llega al `ViewModel` por su **constructor**; quién lo crea y lo entrega es el trabajo de la inyección de dependencias.
+
+## Para cerrar
+
+Un compañero quiere que el `ViewModel` cree su propio repositorio:
+
+```kotlin
+class MiViewModel : ViewModel() {
+    private val repository = DatosRepositoryImpl()
+}
+```
+
+¿Qué desventajas tiene esto frente a recibir el repositorio por el constructor? Menciona dos.
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Al instanciar `DatosRepositoryImpl()` dentro del `ViewModel`, este queda **acoplado** a esa implementación concreta: cambiar de origen de datos (de la red a una base de datos) obligaría a editar el `ViewModel`. Además pierdes **testabilidad**, porque no puedes pasarle un repositorio falso que devuelva datos de prueba. Recibirlo por el constructor (idealmente como la interfaz `DatosRepository`) desacopla y permite sustituirlo.
+    El error común es creer que basta con marcar la propiedad como `private val`: eso oculta la dependencia hacia fuera, pero no elimina el acoplamiento ni la dificultad de probarla.
 
 En el próximo capítulo verás precisamente eso: la **inyección de dependencias** con **Hilt**, que arma y conecta todas estas piezas por ti.

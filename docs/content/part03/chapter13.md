@@ -1,5 +1,12 @@
 # Capítulo 13: Null safety: manejo seguro de valores nulos
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. Si accedes a un mapa con una clave que no existe, ¿qué obtienes?
+> 2. ¿Qué devuelve `find` si ningún elemento cumple la condición?
+> 3. ¿Qué es `Unit` y cuándo aparece?
+
 ## Introducción
 
 A lo largo del curso hemos mencionado varias veces la "ausencia de un valor". Ha llegado el momento de abordarla de frente.
@@ -155,5 +162,30 @@ En este capítulo aprendiste a manejar la ausencia de valores de forma segura:
   - `!!`: fuerza el valor como no nulo, pero se cae si era `null` (úsalo con cuidado).
 
 El null safety es una de las grandes ventajas de Kotlin: convierte una fuente clásica de errores en algo que el compilador te ayuda a controlar.
+
+## Para cerrar
+
+Este fragmento **no compila**. Encuentra el error y arréglalo **sin usar `!!`** (que ocultaría el problema en lugar de resolverlo):
+
+```kotlin
+fun longitudNombre(nombre: String?): Int {
+    return nombre.length
+}
+```
+
+Escribe primero qué crees que rechaza el compilador y por qué; luego propón al menos una solución segura.
+
+??? success "Ver respuesta y razonamiento"
+    `nombre` es de tipo `String?` (puede ser `null`), así que el compilador no permite acceder a `nombre.length` directamente: podría fallar en ejecución. Una solución segura:
+
+    ```kotlin
+    fun longitudNombre(nombre: String?): Int {
+        return nombre?.length ?: 0
+    }
+    ```
+
+    La **llamada segura** `?.` solo accede si no es `null`, y el **Elvis** `?:` sustituye el `null` por `0`. También valdría comprobar con `if (nombre != null)`.
+
+    **Error común:** recurrir a `!!`. Compila, sí, pero si el valor es `null` el programa se cae en tiempo de ejecución: precisamente lo que el null safety intenta evitar. Que el tipo sea `String?` es la señal de que debes decidir qué hacer con la ausencia de valor.
 
 En el próximo capítulo veremos cómo reaccionar ante situaciones inesperadas con el **manejo de excepciones** (`try`, `catch`).

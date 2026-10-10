@@ -1,5 +1,11 @@
 # Capítulo 9: Bucles: `for`, `while` y `do-while`
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Para qué sirve la rama `else` cuando usas `if` o `when` como expresión?
+> 2. ¿Qué operador combina dos condiciones exigiendo que se cumplan ambas?
+
 ## Introducción
 
 En el capítulo anterior aprendiste a que tu programa **tome decisiones** con `if` y `when`. Ahora aprenderá a hacer algo igual de importante: **repetir** instrucciones.
@@ -96,7 +102,7 @@ while (contador <= 5) {
 
 Antes de cada vuelta se evalúa la condición. Cuando `contador` llega a `6`, la condición `contador <= 5` es falsa y el bucle termina.
 
-> [!WARNING]
+> [!WARNING] Advertencia
 > Dentro del `while` debe haber algo que, tarde o temprano, haga que la condición se vuelva falsa (en el ejemplo, `contador++`). Si lo olvidas, la condición nunca cambia y el programa se queda repitiendo para siempre: es lo que se conoce como **bucle infinito**.
 
 ## El bucle `do-while`
@@ -164,5 +170,27 @@ En este capítulo aprendiste a repetir instrucciones:
 - El bucle `while` repite mientras una condición sea verdadera (cuidado con los bucles infinitos).
 - El bucle `do-while` funciona como `while`, pero ejecuta el bloque al menos una vez.
 - `break` termina el bucle y `continue` salta a la siguiente vuelta.
+
+## Para cerrar
+
+¿Qué imprime este programa?
+
+```kotlin
+var suma = 0
+for (i in 1..5) {
+    if (i == 3) continue
+    suma += i
+}
+println(suma)
+```
+
+Calcula el resultado antes de desplegar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Imprime `12`.
+
+    El bucle recorre `1, 2, 3, 4, 5`. Cuando `i` vale `3`, `continue` **salta** esa vuelta, así que el 3 no se suma. La suma es `1 + 2 + 4 + 5 = 12`.
+
+    **Error común:** confundir `continue` con `break`. `break` habría terminado el bucle en `i == 3` y la suma sería `1 + 2 = 3`; `continue` solo evita esa vuelta y sigue con las demás.
 
 En el próximo capítulo daremos un paso importante para organizar y reutilizar tu código: aprenderás a crear tus propias **funciones**.

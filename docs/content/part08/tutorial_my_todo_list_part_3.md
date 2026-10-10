@@ -65,6 +65,14 @@ Agrega en `strings.xml` los textos del resumen y del Snackbar:
 
 `%1$d` y `%2$d` son marcadores para dos números enteros: el primer y el segundo argumento que le pasarás a `stringResource`. Es el mismo formato del anexo D.
 
+> [!TIP]Punto de decisión
+> Esta pantalla siempre muestra una lista (vacía o no) y, a veces, un mensaje; no hay un momento de *cargando* ni de *error*. ¿Conviene modelar su estado con el `sealed class` de *cargando/éxito/error* del capítulo 42, o de otra forma? ¿Por qué?
+
+??? success "Ver respuesta"
+    Con una `data class` que tiene una propiedad por cada dato (`tareas` y `mensaje`).
+    El `sealed class` sirve cuando solo uno de varios estados puede estar activo a la vez; aquí la pantalla muestra varios datos **juntos**.
+    Una `data class` los agrupa y admite una propiedad calculada como `pendientes`.
+
 ## Paso 4: El estado de la pantalla: `TareasUiState`
 
 En el capítulo 42 viste un `UiState` como `sealed class`, con un estado distinto para *cargando*, *éxito* y *error*. Esta pantalla no carga nada: siempre muestra una lista (vacía o no) y, a veces, un mensaje. Cuando la pantalla muestra **varios datos a la vez**, el estado se modela mejor con una **`data class`**, con una propiedad por cada dato.

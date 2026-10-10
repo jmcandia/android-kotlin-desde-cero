@@ -1,5 +1,12 @@
 # Capítulo 21: Genéricos y funciones de extensión
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Cómo se declara una función, con sus parámetros y su tipo de retorno?
+> 2. ¿Qué es una `List<String>` y qué indica ese `<...>`?
+> 3. ¿Qué representa `this` dentro de una función miembro de una clase?
+
 ## Introducción
 
 Has recorrido un largo camino: dominas los fundamentos de Kotlin y la programación orientada a objetos. Para cerrar esta parte, verás dos herramientas que hacen tu código mucho más **expresivo y reutilizable**, y que aparecen por todas partes en el desarrollo Android moderno:
@@ -70,5 +77,32 @@ En este capítulo conociste dos herramientas que hacen tu código más expresivo
 
 - Los **genéricos** (`<T>`) permiten escribir clases y funciones que trabajan con cualquier tipo, manteniendo la seguridad de tipos. Así funcionan `List<T>` y las demás colecciones.
 - Las **funciones de extensión** añaden funciones nuevas a tipos existentes (`fun Int.esPar()`), y dentro de ellas `this` es el objeto receptor. Se leen de forma natural: `numero.esPar()`.
+
+## Para cerrar
+
+Predice la salida de este programa:
+
+```kotlin
+fun <T> List<T>.segundo(): T = this[1]
+
+fun String.gritar(): String = this.uppercase() + "!"
+
+fun main() {
+    println(listOf(10, 20, 30).segundo())
+    println("hola".gritar())
+}
+```
+
+Intenta responder antes de comprobar.
+
+??? success "Ver respuesta y razonamiento"
+    La salida es:
+
+    ```plaintext
+    20
+    HOLA!
+    ```
+
+    Razonamiento: `segundo()` es una función de **extensión genérica** sobre `List<T>`; dentro de ella `this` es la lista receptora y `T` se concreta con el tipo de sus elementos (aquí `Int`), así que devuelve `20`. `gritar()` extiende `String` y usa `this` como el texto receptor. Un error habitual es pensar que una función de extensión **modifica** la clase original: en realidad no le añade nada por dentro; solo permite llamarla como si fuera un método.
 
 En el próximo capítulo, el último de esta parte, volverás a las **lambdas** para verlas a fondo: lambdas con receptor, funciones de alcance y delegación con `by`. Son la base sobre la que se construye Jetpack Compose.

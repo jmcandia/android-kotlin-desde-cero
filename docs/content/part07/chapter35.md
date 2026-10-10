@@ -1,5 +1,12 @@
 # Capítulo 35: Estructura de pantalla: `Scaffold` y `LazyColumn`
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Cómo organizas varios composables uno debajo de otro, en fila o superpuestos? (`Column`, `Row`, `Box`, capítulo 31)
+> 2. ¿Cómo conservas un valor entre recomposiciones y qué función de Compose lo declara observable? (capítulo 34)
+> 3. ¿En qué consiste el *state hoisting* y por qué conviene aplicarlo? (capítulo 34)
+
 ## Introducción
 
 Ya sabes organizar composables con `Column`, `Row` y `Box`, y darles estado. Pero la mayoría de las pantallas comparten una estructura —una barra superior, el contenido, quizás una barra inferior o un botón flotante— y muchas muestran **listas largas** de datos. En este capítulo aprenderás a montar el **esqueleto** de una pantalla con `Scaffold`, a organizarla por **jerarquías** de composables y a mostrar listas de forma eficiente con `LazyColumn`.
@@ -89,5 +96,24 @@ En este capítulo aprendiste a construir la estructura de una pantalla completa:
 - El **`Scaffold`** ofrece la estructura básica de una pantalla, con espacios para la barra superior (`TopAppBar`), el contenido, una barra inferior y un botón flotante.
 - **`LazyColumn`** muestra listas con desplazamiento de forma eficiente, componiendo solo los elementos visibles; se llena con la función `items`. Su versión horizontal es `LazyRow`.
 - Una pantalla se organiza mejor por **jerarquías**: la raíz coordina la estructura y los componentes hijos reciben datos y eventos.
+
+## Para cerrar
+
+Observa este `Scaffold`. ¿Qué problema tendrá el contenido al mostrarse? ¿Cómo lo arreglarías?
+
+```kotlin
+Scaffold(
+    topBar = { TopAppBar(title = { Text("Tareas") }) }
+) {
+    Column {
+        Text("Contenido")
+    }
+}
+```
+
+Responde antes de desplegar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    El bloque de contenido ignora el `innerPadding`, así que el contenido puede quedar tapado por la barra superior. La firma del bloque recibe ese espacio y hay que aplicarlo: `) { innerPadding -> Column(modifier = Modifier.padding(innerPadding)) { ... } }`. Error común: pensar que `Scaffold` aparta el contenido solo; es responsabilidad tuya pasar el `innerPadding` como `padding`.
 
 Ya tienes todas las piezas para una primera app completa. En el tutorial que sigue construirás **Mi lista de tareas** con lo aprendido en esta parte.

@@ -1,5 +1,12 @@
 # Capítulo 56: Pantalla de lista: búsqueda, paginación y favoritos
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Cuándo conviene modelar el `UiState` como una `data class` y cuándo como una `sealed`?
+> 2. ¿Qué ventaja ofrece `LazyColumn` frente a una `Column` con scroll para listas largas?
+> 3. ¿Cómo observa un composable el `StateFlow` de un ViewModel?
+
 ## Introducción
 
 Con el repositorio listo, construimos la primera pantalla real de la aplicación: la **lista de contactos**. Es la pantalla más compleja de las tres, porque combina varias técnicas que estudiaste por separado a lo largo del curso: búsqueda con `debounce`, scroll infinito, actualización mediante deslizamiento (*pull-to-refresh*) y un filtro de favoritos, todo coordinado desde un único `UiState`.
@@ -397,5 +404,27 @@ fun ContactoItem(
 - El scroll infinito se logra con un ítem final en la `LazyColumn` cuyo `LaunchedEffect(contactos.size)` dispara `cargarMas()` al hacerse visible.
 - `PullToRefreshBox` conecta el gesto de deslizar hacia abajo con `uiState.cargando` y `onRecargar`.
 - Un aviso visual (`desdeCache`) le informa al usuario cuando está viendo datos guardados localmente, coherente con la estrategia *offline-first* del capítulo 55.
+
+## Para cerrar
+
+Estás aplicando el mismo truco de scroll infinito a una lista de productos, pero escribes el último ítem así:
+
+```kotlin
+if (hayMas) {
+    item {
+        LaunchedEffect(Unit) { onCargarMas() }
+        CircularProgressIndicator()
+    }
+}
+```
+
+El usuario llega al final y se carga la página siguiente, pero al seguir bajando no se piden más páginas. ¿Por qué?
+
+Responde antes de mirar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Con la clave `Unit`, el `LaunchedEffect` se ejecuta **una sola vez**, cuando ese ítem entra en composición por primera vez. Como el ítem permanece en la lista, el efecto no se relanza aunque lleguen datos nuevos.
+
+    La solución de la pantalla de lista usa `LaunchedEffect(contactos.size)`: cada vez que arriba una página nueva, el tamaño de la lista cambia, la clave cambia y el efecto vuelve a lanzarse, disparando `cargarMas()` otra vez. Error común: creer que `LaunchedEffect(Unit)` "se repite en cada recomposición"; en realidad solo depende de su clave.
 
 En el próximo capítulo construiremos la pantalla de detalle, con el patrón de "evento como estado" para eliminar un contacto de forma segura.

@@ -1,5 +1,12 @@
 # Capítulo 12: Colecciones II: operaciones funcionales
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. Con una lista llamada `frutas`, ¿cómo compruebas si `"kiwi"` está dentro?
+> 2. ¿Qué propiedad de una colección te dice cuántos elementos tiene?
+> 3. ¿Qué es una lambda y qué convención permite pasarla como último argumento de una función?
+
 ## Introducción
 
 En el capítulo anterior aprendiste a guardar varios valores en colecciones y a recorrerlos con un bucle `for`. Pero recorrer una colección es solo el principio: muy a menudo querrás **transformar** sus elementos (por ejemplo, aplicarles un descuento) o **seleccionar** solo algunos (los que cumplen cierta condición).
@@ -118,5 +125,19 @@ En este capítulo aprendiste a trabajar con colecciones de forma expresiva:
 - Puedes **encadenar** operaciones para expresar transformaciones complejas paso a paso.
 
 Casi todas estas operaciones crean colecciones **nuevas** (o devuelven un valor), sin modificar la original. Las volverás a usar constantemente al trabajar con datos.
+
+## Para cerrar
+
+Dada la lista `val numeros = listOf(3, 8, 1, 5, 2)`, **escribe** una expresión que devuelva los números **mayores que 3 multiplicados por 10**, y **predice** el resultado. Muestra tu respuesta antes de comprobarla.
+
+??? success "Ver respuesta y razonamiento"
+    ```kotlin
+    val resultado = numeros.filter { it > 3 }.map { it * 10 }
+    // [80, 50]
+    ```
+
+    Primero `filter` conserva `8` y `5` (los que superan 3); después `map` los multiplica por 10.
+
+    **Error común:** invertir el orden (`map` y luego `filter`). Al transformar antes de filtrar, la condición se aplica sobre los valores ya multiplicados y el resultado cambia. El orden de las operaciones encadenadas es parte de lo que estás expresando: léelo de arriba abajo.
 
 En el próximo capítulo aprenderás sobre el **null safety** de Kotlin: cómo el lenguaje te ayuda a manejar de forma segura la *ausencia de un valor*, ese concepto que hemos ido mencionando a lo largo del curso.

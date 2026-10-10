@@ -1,5 +1,12 @@
 # Capítulo 33: Material 3: componentes listos para usar
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Cómo organizas varios composables en vertical, en fila o superpuestos? (capítulo 31)
+> 2. ¿Dónde se guardan las imágenes de un proyecto y cómo se referencian desde el código? (capítulo 32)
+> 3. ¿Cómo le pasas un valor a un composable, como en `Saludo("Ana")`? (capítulo 30)
+
 ## Introducción
 
 En los capítulos anteriores escribiste tu primer `@Composable`, conociste `Modifier` y aprendiste a organizar los recursos de tu app (imágenes, ícono, textos). Las apps reales se construyen con **componentes de interfaz** ya conocidos: textos, imágenes, botones, tarjetas… En este capítulo conocerás **Material 3**, el sistema de diseño que trae Compose, y los **componentes** más habituales que usarás para construir tus pantallas, junto con sus parámetros más comunes.
@@ -131,5 +138,20 @@ En este capítulo conociste los componentes de Material 3:
 - **`Button`** ejecuta una acción en `onClick` al tocarlo; por sí solo no actualiza la pantalla, eso requiere **estado**, que verás en el próximo capítulo.
 - Componentes como `Text`, `Button` o `Card` también admiten parámetros propios de apariencia (`color`, `fontSize`, `colors`, `shape`…); son válidos, pero el capítulo de tema te mostrará la forma recomendada de aplicarlos de forma coherente en toda la app.
 - **`Icon`** dibuja íconos vectoriales, dentro de botones, barras o junto a un texto.
+
+## Para cerrar
+
+Este botón no compila. ¿Qué le falta y por qué?
+
+```kotlin
+Button {
+    Text("Enviar")
+}
+```
+
+Responde antes de desplegar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    Falta el parámetro **`onClick`**, que es el único obligatorio de `Button`: sin él, el botón no sabe qué hacer al tocarse. Lo correcto sería `Button(onClick = { /* acción */ }) { Text("Enviar") }`. Error común: pensar que el contenido (`Text("Enviar")`) sustituye a `onClick`; son cosas distintas, uno es lo que se ve y el otro lo que ocurre al pulsar.
 
 Hay componentes que el usuario **modifica**: campos de texto, casillas, interruptores. Para usarlos necesitas **estado**, el tema del próximo capítulo.

@@ -1,5 +1,12 @@
 # Capítulo 34: Estado en Compose: recomposición, `remember`, `mutableStateOf` y *state hoisting*
 
+> [!TIP]Antes de empezar, recupera lo que ya sabes
+> Responde de memoria; no importa acertar, se trata de activar lo que ya sabes. Vuelve a estas preguntas al terminar el capítulo.
+>
+> 1. ¿Cuál es la diferencia entre `val` y `var` en Kotlin, y cuándo usarías cada uno?
+> 2. ¿Qué es una función lambda y cómo se pasa como argumento (por ejemplo, a `onClick`)?
+> 3. ¿Qué componente de Material 3 ejecuta una acción al tocarlo y cómo se llama el parámetro que recibe esa acción? (capítulo 33)
+
 ## Introducción
 
 Hasta ahora tus composables muestran siempre lo mismo. Pero una interfaz real **cambia**: un contador que aumenta, un campo de texto que se llena, una casilla que se marca. En este capítulo verás cómo Compose actualiza la pantalla cuando cambian los datos —la **recomposición**— y cómo se declaran esos datos que, al cambiar, la disparan: el **estado** (*state*).
@@ -216,5 +223,25 @@ En este capítulo aprendiste a manejar el estado en Compose:
 - **`rememberSaveable`** conserva el estado también tras una recreación por cambio de configuración (como girar el dispositivo).
 - Los componentes interactivos (`TextField`, `Checkbox`, `Switch`) reciben el **valor a mostrar** y una **función** que se ejecuta cuando el usuario lo cambia.
 - El ***state hoisting*** consiste en **elevar el estado** al composable padre, dejando al hijo **sin estado**: recibe el valor y una función para los eventos. Esto sigue el **flujo de datos unidireccional** (el estado baja, los eventos suben) y hace tus composables reutilizables.
+
+## Para cerrar
+
+¿Qué se ve en el campo cuando el usuario escribe en él? ¿Qué pasaría si borraras la línea que actualiza el estado?
+
+```kotlin
+@Composable
+fun Campo() {
+    val texto = remember { mutableStateOf("") }
+    TextField(
+        value = texto.value,
+        onValueChange = { texto.value = it }
+    )
+}
+```
+
+Responde antes de desplegar la respuesta.
+
+??? success "Ver respuesta y razonamiento"
+    El campo se actualiza con cada tecla: `onValueChange` guarda el texto nuevo en el estado y Compose **recompone** con ese valor. Si quitaras la línea `texto.value = it`, el campo quedaría "congelado": recibiría siempre `""` como `value` y no dejaría escribir. Error común: pensar que `TextField` guarda el texto por sí solo; en Compose el estado vive fuera y el componente solo lo muestra.
 
 En el próximo capítulo montarás el esqueleto de una pantalla completa con `Scaffold` y mostrarás listas largas con `LazyColumn`.
